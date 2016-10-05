@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Yii2-advanced-start',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
     	'db' => [
