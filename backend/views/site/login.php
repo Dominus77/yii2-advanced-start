@@ -11,7 +11,7 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<p class="login-box-msg">Sign in to start your session</p>
+<p class="login-box-msg"><?= Yii::t('app', 'Sign in to start your session'); ?></p>
 
 <?php $form = ActiveForm::begin([
     'id' => 'login-form'
@@ -19,9 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="form-group has-feedback">
     <?= $form->field($model, 'username')->textInput([
-        'autofocus' => true,
         'class' => 'form-control',
-        'placeholder' => 'Username'
+        'placeholder' => Yii::t('app','Username')
     ])->label(false); ?>
     <span class="glyphicon glyphicon-user form-control-feedback"></span>
 </div>
@@ -29,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-group has-feedback">
     <?= $form->field($model, 'password')->passwordInput([
         'class' => 'form-control',
-        'placeholder' => 'Password'
+        'placeholder' => Yii::t('app','Password')
     ])->label(false); ?>
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </div>
@@ -37,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-xs-8">
         <div class="checkbox icheck">
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
+            <?= $form->field($model, 'rememberMe')->checkbox(); ?>
         </div>
     </div>
     <div class="col-xs-4">
-        <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Sign In'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
     </div>
 </div>
 
