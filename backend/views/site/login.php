@@ -10,26 +10,39 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+<p class="login-box-msg">Sign in to start your session</p>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+<?php $form = ActiveForm::begin([
+    'id' => 'login-form'
+]); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+<div class="form-group has-feedback">
+    <?= $form->field($model, 'username')->textInput([
+        'autofocus' => true,
+        'class' => 'form-control',
+        'placeholder' => 'Username'
+    ])->label(false); ?>
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+</div>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+<div class="form-group has-feedback">
+    <?= $form->field($model, 'password')->passwordInput([
+        'class' => 'form-control',
+        'placeholder' => 'Password'
+    ])->label(false); ?>
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+</div>
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+<div class="row">
+    <div class="col-xs-8">
+        <div class="checkbox icheck">
+            <?= $form->field($model, 'rememberMe')->checkbox() ?>
         </div>
     </div>
+    <div class="col-xs-4">
+        <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+    </div>
 </div>
+
+<?php ActiveForm::end(); ?>

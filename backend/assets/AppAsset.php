@@ -18,6 +18,13 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'backend\assets\FontAwesomeAsset',
+        'backend\assets\IonIconsAsset',
+        'backend\assets\AdminLTE\AdminLteAsset',
+        //'backend\assets\AdminLTE\iCheckAsset',
+
+        'backend\assets\Html5ShivAsset',
+        'backend\assets\RespondAsset'
     ];
 }
