@@ -10,7 +10,7 @@ use yii\web\View;
  */
 class iCheckAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/assets/AdminLTE/plugins/iCheck';
+    public $sourcePath = '@adminlte/plugins/iCheck';
     public $css;
     public $js;
 

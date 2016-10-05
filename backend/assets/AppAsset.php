@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
         'backend\assets\FontAwesomeAsset',
         'backend\assets\IonIconsAsset',
         'backend\assets\AdminLTE\AdminLteAsset',
-        //'backend\assets\AdminLTE\iCheckAsset',
+        'backend\assets\AdminLTE\SkinsAsset',
 
         'backend\assets\Html5ShivAsset',
         'backend\assets\RespondAsset'

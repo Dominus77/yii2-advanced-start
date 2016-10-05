@@ -12,9 +12,25 @@ return [
     'NAV_LOGOUT ({:UserName})' => 'Выход ({:UserName})',
 
     /* Login page */
+    'Login' => 'Авторизация',
     'Sign in to start your session' => 'Войдите на сайт, чтобы начать сеанс',
     'Username' => 'Имя пользователя',
     'Password' => 'Пароль',
     'Remember Me' => 'Запомни меня',
     'Sign In' => 'Войти',
+
+    /*Backend*/
+    'Sign out' => 'Выйти',
+    'Profile' => 'Профиль',
+    'Online' => 'В сети',
+    'Offline' => 'Не в сети',
+    'Search...' => 'Поиск...',
+    'HEADER' => 'Панель управления',
+    'Home' => 'Главная',
+    'All rights reserved.' => 'Все права защищены.',
+
+    /*Right panel*/
+    'Recent Activity' => 'Ближайшие события',
+    'Tasks Progress' => 'Процесс задач',
+    'General Settings' => 'Общие настройки',
 ];
