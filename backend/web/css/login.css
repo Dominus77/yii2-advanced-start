@@ -1,3 +1,7 @@
 .radio label, .checkbox label {
     padding-left: 0;
 }
+.login-box-footer {
+    margin-top: 20px;
+    text-align: center;
+}

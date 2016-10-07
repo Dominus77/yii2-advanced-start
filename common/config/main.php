@@ -3,16 +3,22 @@ return [
     'name' => 'Yii2-advanced-start',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
-    	'db' => [
+        'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=nameDb',
             'username' => 'username',
             'password' => 'password',
             'charset' => 'utf8',
-            'tablePrefix' => 'tbl_',            
+            'tablePrefix' => 'tbl_',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],        
+        ],
+        'mailer' => [
+            'useFileTransport' => false,
+        ],
     ],
 ];

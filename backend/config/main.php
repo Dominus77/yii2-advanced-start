@@ -47,5 +47,8 @@ return [
             ],
         ],
     ],
+    'as afterAction' => [
+        'class' => '\common\components\behavior\LastVisitBehavior',
+    ],
     'params' => $params,
 ];

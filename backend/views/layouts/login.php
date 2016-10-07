@@ -5,6 +5,7 @@
 
 use backend\assets\LoginAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 LoginAsset::register($this);
 ?>
@@ -29,6 +30,9 @@ LoginAsset::register($this);
     </div>
     <div class="login-box-body">
         <?= $content ?>
+    </div>
+    <div class="login-box-footer">
+        <a href="<?= Url::to('/'); ?>"><?= Yii::t('app', 'Go to Frontend'); ?></a>
     </div>
 </div>
 
