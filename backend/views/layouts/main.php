@@ -259,7 +259,7 @@ AppAsset::register($this);
 
         <?= Alert::widget([
             'options' => [
-                'style' => 'position:absolute; z-index:999999; opacity:0.8;',
+                //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
             ]
         ]) ?>
 

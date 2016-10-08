@@ -18,6 +18,7 @@ return [
     'Password' => 'Password',
     'Remember Me' => 'Remember Me',
     'Sign In' => 'Sign In',
+    'You are denied access!' => 'You are denied access!',
 
     /*Backend*/
     'Sign out' => 'Sign out',

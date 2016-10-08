@@ -11,5 +11,12 @@ namespace backend\components\rbac;
 
 class Rbac
 {
+    // Разрешения для доступа к Backend
     const PERMISSION_BACKEND = 'permBackend';
+
+    // Разрешения для User Manager
+    const PERMISSION_BACKEND_USER_CREATE = 'permCreateUser';
+    const PERMISSION_BACKEND_USER_UPDATE = 'permUpdateUser';
+    const PERMISSION_BACKEND_USER_VIEW = 'permViewUser';
+    const PERMISSION_BACKEND_USER_DELETE = 'permDeleteUser';
 }

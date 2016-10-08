@@ -78,12 +78,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'created_at' => Yii::t('app', 'USER_CREATED'),
-            'updated_at' => Yii::t('app', 'USER_UPDATED'),
-            'last_visit' => Yii::t('app', 'USER_LAST_VISIT'),
-            'username' => Yii::t('app', 'USER_USERNAME'),
-            'email' => Yii::t('app', 'USER_EMAIL'),
-            'status' => Yii::t('app', 'USER_STATUS'),
+            'created_at' => Yii::t('app', 'CREATED'),
+            'updated_at' => Yii::t('app', 'UPDATED'),
+            'last_visit' => Yii::t('app', 'LAST_VISIT'),
+            'username' => Yii::t('app', 'USERNAME'),
+            'email' => Yii::t('app', 'EMAIL'),
+            'status' => Yii::t('app', 'STATUS'),
         ];
     }
 
@@ -126,7 +126,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatusLabelName()
     {
         $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span',self::getStatusName(),['class' => 'label label-'.$name]);
+        return Html::tag('span', self::getStatusName(), ['class' => 'label label-' . $name]);
     }
 
     /**
@@ -165,7 +165,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsernameOrEmail($username)
     {
         return static::find()
-            ->where(['or', ['username' => $username],['email' => $username]])
+            ->where(['or', ['username' => $username], ['email' => $username]])
             ->one();
     }
 
@@ -201,7 +201,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 

@@ -18,6 +18,7 @@ return [
     'Password' => 'Пароль',
     'Remember Me' => 'Запомни меня',
     'Sign In' => 'Войти',
+    'You are denied access!' => 'Вам отказано в доступе!',
 
     /*Backend*/
     'Sign out' => 'Выйти',
