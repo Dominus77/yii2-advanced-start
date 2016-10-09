@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\VarDumper;
 
 /**
  * User model
@@ -30,6 +31,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
+
+    const RBAC_DEFAULT_ROLE = 'user';
+
+    public $role;
 
     /**
      * @inheritdoc
@@ -84,6 +89,8 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => Yii::t('app', 'USERNAME'),
             'email' => Yii::t('app', 'EMAIL'),
             'status' => Yii::t('app', 'STATUS'),
+            //'password' => Yii::t('app', 'PASSWORD'),
+            'role' => Yii::t('app', 'ROLE'),
         ];
     }
 
@@ -127,6 +134,17 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
         return Html::tag('span', self::getStatusName(), ['class' => 'label label-' . $name]);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUserRole()
+    {
+        if ($role = Yii::$app->authManager->getRolesByUser($this->id))
+            foreach ($role as $key => $object)
+                return $object->description;
+        return null;
     }
 
     /**
@@ -300,6 +318,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Действия перед сохранением
      * @inheritdoc
      */
     public function beforeSave($insert)
@@ -311,5 +330,38 @@ class User extends ActiveRecord implements IdentityInterface
             return true;
         }
         return false;
+    }
+
+    /**
+     * Действия после сохранения
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            // Привязываем нового пользователя к роли user
+            if (!$this->role) {
+                $authManager = Yii::$app->getAuthManager();
+                $role = $authManager->getRole(self::RBAC_DEFAULT_ROLE);
+                $authManager->assign($role, $this->id);
+            }
+        }
+    }
+
+    /**
+     * Действия перед удалением
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        parent::beforeDelete();
+        // Отвязываем пользователя от всех ролей
+        $authManager = Yii::$app->getAuthManager();
+        if ($authManager->getRolesByUser($this->id)) {
+            $authManager->revokeAll($this->id);
+        }
+        return true;
     }
 }

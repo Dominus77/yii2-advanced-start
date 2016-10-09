@@ -1,6 +1,7 @@
 <?php
 return [
     'name' => 'Yii2-advanced-start',
+    'timeZone' => 'Europe/Moscow',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'db' => [

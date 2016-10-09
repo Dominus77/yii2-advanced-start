@@ -34,4 +34,44 @@ return [
     'Recent Activity' => 'Recent Activity',
     'Tasks Progress' => 'Tasks Progress',
     'General Settings' => 'General Settings',
+
+    /*Users*/
+    'Create User' => 'Create User',
+    'New User' => 'New User',
+    'Update' => 'Update',
+    'Update User: ' => 'Update User: ',
+    'View User' => 'View User',
+    'Delete' => 'Delete',
+    'Users' => 'Users',
+    'CREATED' => 'Created',
+    'UPDATED' => 'Updated',
+    'LAST_VISIT' => 'Last Visit',
+    'USERNAME' => 'Username',
+    'EMAIL' => 'Email',
+    'STATUS' => 'Status',
+    'PASSWORD' => 'Password',
+    'ROLE' => 'Role',
+    'USER_NEW_PASSWORD' => 'New password',
+    'USER_REPEAT_PASSWORD' => 'Repeat password',
+
+    '- All -' => '- Все -',
+    'Select a status ...' => 'Select a status ...',
+
+    'VIEW' => 'View',
+    'CREATE' => 'Create',
+    'UPDATE' => 'Update',
+    'SAVE' => 'Save',
+    'DELETE' => 'Delete',
+
+    'STATUS_BLOCKED' => 'Blocked',
+    'STATUS_ACTIVE' => 'Active',
+    'STATUS_WAIT' => 'Wait',
+
+    'CONFIRM_DELETE' => 'Are you sure you want to delete the record?',
+
+    'Error Page' => 'Error Page',
+    'Oops!' => 'Oops!',
+    'Meanwhile, you may {:Link} or try using the search form.' => 'Meanwhile, you may {:Link} or try using the search form.',
+    'return to dashboard' => 'return to dashboard',
+    'Search' => 'Search',
 ];

@@ -34,4 +34,45 @@ return [
     'Recent Activity' => 'Ближайшие события',
     'Tasks Progress' => 'Процесс задач',
     'General Settings' => 'Общие настройки',
+
+    /*Users*/
+    'Create User' => 'Создать пользователя',
+    'New User' => 'Новый пользователь',
+    'Update' => 'Изменить',
+    'Update User: ' => 'Изменить пользователя: ',
+    'View User' => 'Просмотр пользователя',
+    'Delete' => 'Удалить',
+    'Users' => 'Пользователи',
+    'CREATED' => 'Создано',
+    'UPDATED' => 'Обновлено',
+    'LAST_VISIT' => 'Последний визит',
+    'USERNAME' => 'Имя пользователя',
+    'EMAIL' => 'Email',
+    'STATUS' => 'Статус',
+    'PASSWORD' => 'Пароль',
+    'ROLE' => 'Права',
+    'USER_NEW_PASSWORD' => 'Новый пароль',
+    'USER_REPEAT_PASSWORD' => 'Повторить пароль',
+
+
+    '- All -' => '- Все -',
+    'Select a status ...' => 'Выберите статус ...',
+
+    'VIEW' => 'Просмотр',
+    'CREATE' => 'Создать',
+    'UPDATE' => 'Редактировать',
+    'SAVE' => 'Сохранить',
+    'DELETE' => 'Удалить',
+
+    'STATUS_BLOCKED' => 'Заблокирован',
+    'STATUS_ACTIVE' => 'Активно',
+    'STATUS_WAIT' => 'Ожидает',
+
+    'CONFIRM_DELETE' => 'Вы действительно хотите удалить запись?',
+
+    'Error Page' => 'Ошибка страницы',
+    'Oops!' => 'Упс!',
+    'Meanwhile, you may {:Link} or try using the search form.' => 'Вы можете вернуться на {:Link} или воспользоваться формой поиска.',
+    'return to dashboard' => 'главную страницу',
+    'Search' => 'Поиск',
 ];

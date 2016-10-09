@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "fortawesome/font-awesome": "^4.6",
-        "driftyco/ionicons": "^2.0"
+        "driftyco/ionicons": "^2.0",
+        "kartik-v/yii2-widgets": "*"
 
     },
     "require-dev": {

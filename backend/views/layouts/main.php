@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use backend\components\rbac\Rbac as BackendRbac;
 
 AppAsset::register($this);
 ?>
@@ -203,6 +204,11 @@ AppAsset::register($this);
                     'options' => ['class' => 'header',],
                 ],
                 [
+                    'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
+                    'url' => ['users/index'],
+                    'visible' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER),
+                ],
+                [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Link') . '</span>',
                     'url' => ['site/index'],
                 ],
@@ -246,22 +252,21 @@ AppAsset::register($this);
 
     <div class="content-wrapper">
         <section class="content-header">
+            <?= Alert::widget([
+                'options' => [
+                    //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
+                ]
+            ]) ?>
             <h1>
                 <?= Html::encode($this->title) ?>
                 <br>
             </h1>
             <?= Breadcrumbs::widget([
-                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['/admin/site/index'])],
+                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['site/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false,
             ]) ?>
         </section>
-
-        <?= Alert::widget([
-            'options' => [
-                //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
-            ]
-        ]) ?>
 
         <section class="content">
             <?= $content ?>

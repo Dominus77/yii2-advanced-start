@@ -41,10 +41,10 @@ class RolesController extends Controller
         $roleName = $this->select(
             Console::convertEncoding(Yii::t('app', 'Role:')), ArrayHelper::merge(
             ['all' => Console::convertEncoding(Yii::t('app', 'All Roles'))],
-                Console::convertEncoding(
-                    ArrayHelper::map(Yii::$app->authManager->getRolesByUser($user->id), 'name', 'description')
-                )
+            Console::convertEncoding(
+                ArrayHelper::map(Yii::$app->authManager->getRolesByUser($user->id), 'name', 'description')
             )
+        )
         );
         $authManager = Yii::$app->getAuthManager();
         if ($roleName == 'all') {

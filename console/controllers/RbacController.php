@@ -50,7 +50,7 @@ class RbacController extends Controller
         // ------------------------- //
 
         // Роли
-        $userManager = $auth->createRole('userManager');
+        $userManager = $auth->createRole(BackendRbac::PERMISSION_BACKEND_USER_MANAGER);
         $userManager->description = Yii::t('app', 'User Manager');
         $auth->add($userManager);
 
