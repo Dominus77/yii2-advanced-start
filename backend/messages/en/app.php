@@ -56,6 +56,8 @@ return [
 
     '- All -' => '- Все -',
     'Select a status ...' => 'Select a status ...',
+    'Start date' => 'Start date',
+    'End date' => 'End date',
 
     'VIEW' => 'View',
     'CREATE' => 'Create',

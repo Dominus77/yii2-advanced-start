@@ -57,6 +57,8 @@ return [
 
     '- All -' => '- Все -',
     'Select a status ...' => 'Выберите статус ...',
+    'Start date' => 'От',
+    'End date' => 'До',
 
     'VIEW' => 'Просмотр',
     'CREATE' => 'Создать',

@@ -5,14 +5,16 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\User;
 
 /**
- * UserSearch represents the model behind the search form about `common\models\User`.
+ * UserSearch represents the model behind the search form about `backend\models\User`.
  */
 class UserSearch extends User
 {
     private $_pageSize = 15;
+
+    public $date_from;
+    public $date_to;
 
     /**
      * @inheritdoc
@@ -20,8 +22,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'last_visit', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'email', 'role'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['username', 'email', 'role', 'date_from', 'date_to'], 'safe'],
         ];
     }
 
@@ -46,10 +48,16 @@ class UserSearch extends User
         $query = User::find();
 
         // add conditions that should always apply here
-        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
+        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id')
+            ->orderBy([
+                'user_id' => SORT_ASC
+            ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC],
+            ],
             'pagination' => [
                 'pageSize' => $this->_pageSize,
             ],
@@ -59,7 +67,7 @@ class UserSearch extends User
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            $query->where('0=1');
             return $dataProvider;
         }
 
@@ -67,14 +75,13 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'last_visit' => $this->last_visit,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'item_name', $this->role]);
+            ->andFilterWhere(['like', 'item_name', $this->role])
+            ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
+            ->andFilterWhere(['<=', 'last_visit', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
 
         $dataProvider->pagination->totalCount = $query->count();
         return $dataProvider;

@@ -7,7 +7,8 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\Select2;
-use yii\helpers\VarDumper;
+use kartik\widgets\DatePicker;
+
 //use backend\assets\AdminLTE\Select2Asset;
 
 //Select2Asset::register($this);
@@ -26,12 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 
             <div class="box-tools pull-right">
-                <!--<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                    <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                    <i class="fa fa-times"></i></button>-->
+
             </div>
         </div>
         <div class="box-body">
@@ -59,8 +55,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                    'username',
+                    [
+                        'attribute' => 'username',
+                        'label' => Yii::t('app', 'Users'),
+                        'format' => 'raw'
+                    ],
                     'email:email',
                     [
                         'attribute' => 'status',
@@ -107,10 +106,24 @@ $this->params['breadcrumbs'][] = $this->title;
                             'style' => 'width:200px',
                         ],
                     ],
-                    'last_visit:datetime',
-                    // 'created_at',
-                    // 'updated_at',
-
+                    [
+                        'attribute' => 'last_visit',
+                        'format' => 'datetime',
+                        'filter' => DatePicker::widget([
+                            'language' => 'ru',
+                            'model' => $searchModel,
+                            'attribute' => 'date_from',
+                            'attribute2' => 'date_to',
+                            'options' => ['placeholder' => Yii::t('app', 'Start date')],
+                            'options2' => ['placeholder' => Yii::t('app', 'End date')],
+                            'type' => DatePicker::TYPE_RANGE,
+                            'separator' => '<i class="glyphicon glyphicon-resize-horizontal"></i>',
+                            'pluginOptions' => [
+                                'format' => 'dd-mm-yyyy',
+                                'autoclose' => true,
+                            ]
+                        ])
+                    ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'contentOptions' => [
@@ -150,12 +163,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
-            <?php
-            //$roleUser = Yii::$app->authManager->getRolesByUser(31);
-            //$roleUser = Yii::$app->authManager->getAssignments(31);
-            //$roleUser = Yii::$app->authManager->getRolesByUser(31);
-            //VarDumper::dump($roleUser['user'], 10, 1);
-            ?>
         </div>
         <div class="box-footer">
             <?= LinkPager::widget([

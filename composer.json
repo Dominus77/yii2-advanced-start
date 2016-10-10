@@ -20,8 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "fortawesome/font-awesome": "^4.6",
         "driftyco/ionicons": "^2.0",
-        "kartik-v/yii2-widgets": "*"
-
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-field-range": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
