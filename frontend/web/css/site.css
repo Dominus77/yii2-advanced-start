@@ -109,3 +109,8 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+div.required label:after {
+    content: " *";
+    color: red;
+}

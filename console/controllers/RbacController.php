@@ -32,6 +32,10 @@ class RbacController extends Controller
         // ------------------------- //
 
         // Разрешения для User Manager
+        $userManager = $auth->createPermission(BackendRbac::PERMISSION_BACKEND_USER_MANAGER);
+        $userManager->description = Yii::t('app', 'User Manager');
+        $auth->add($userManager);
+
         $backendUserCreate = $auth->createPermission(BackendRbac::PERMISSION_BACKEND_USER_CREATE);
         $backendUserCreate->description = Yii::t('app', 'Create User');
         $auth->add($backendUserCreate);
@@ -50,10 +54,6 @@ class RbacController extends Controller
         // ------------------------- //
 
         // Роли
-        $userManager = $auth->createRole(BackendRbac::PERMISSION_BACKEND_USER_MANAGER);
-        $userManager->description = Yii::t('app', 'User Manager');
-        $auth->add($userManager);
-
         $user = $auth->createRole('user');
         $user->description = Yii::t('app', 'User');
         $auth->add($user);
@@ -71,12 +71,11 @@ class RbacController extends Controller
         $auth->add($admin);
         // ------------------------ //
 
-        // Привязка разрешений Управление пользователями к роли User Manager
+        // Привязка прав Управление пользователями к праву User Manager
         $auth->addChild($userManager, $backendUserCreate);
         $auth->addChild($userManager, $backendUserUpdate);
         $auth->addChild($userManager, $backendUserView);
         $auth->addChild($userManager, $backendUserDelete);
-        // ------------------------ //
 
         // Привязка разрешений Backend
         $auth->addChild($moder, $backend); // к роли Manager
@@ -86,7 +85,7 @@ class RbacController extends Controller
         $auth->addChild($moder, $user);
         // Наследование для роли Manager (Manager можно всё что можно Moder)
         $auth->addChild($manager, $moder);
-        $auth->addChild($manager, $userManager); // Разрешаем Manager управление пользователями
+        $auth->addChild($manager, $userManager); // наследование для роли Manager права User Manager (Разрешаем управлять пользователями)
         // Наследование для роли Admin (админу можно всё)
         $auth->addChild($admin, $manager); // Наследуем роль Manager
         // ------------------------ //

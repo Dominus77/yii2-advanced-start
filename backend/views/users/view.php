@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'role',
                         'format' => 'raw',
-                        'value' => $model->userRole,
+                        'value' => $model->userRoleName,
                     ],
                     [
                         'attribute' => 'status',

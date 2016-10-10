@@ -50,7 +50,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+            ],
         ];
     }
 
@@ -73,6 +75,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
+            [['role'], 'safe'],
         ];
     }
 
@@ -91,6 +95,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => Yii::t('app', 'STATUS'),
             //'password' => Yii::t('app', 'PASSWORD'),
             'role' => Yii::t('app', 'ROLE'),
+            'userRoleName' => Yii::t('app', 'ROLE'),
         ];
     }
 
@@ -137,13 +142,32 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return null|string
+     * @return mixed|null
      */
-    public function getUserRole()
+    public function getUserRoleName()
     {
         if ($role = Yii::$app->authManager->getRolesByUser($this->id))
-            foreach ($role as $key => $object)
-                return $object->description;
+            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                foreach ($role as $key => $value) {
+                    return $value->description;
+                }
+                return null;
+            });
+        return null;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getUserRoleValue()
+    {
+        if ($role = Yii::$app->authManager->getRolesByUser($this->id))
+            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                foreach ($role as $key => $value) {
+                    return $value->name;
+                }
+                return null;
+            });
         return null;
     }
 
@@ -326,6 +350,25 @@ class User extends ActiveRecord implements IdentityInterface
         if (parent::beforeSave($insert)) {
             if ($insert) {
                 $this->generateAuthKey();
+            } else {
+                // Если изменена роль, выполняем требуемые действия
+                // получаем текущую роль пользователя
+                if($roleValue = self::getUserRoleValue()) {
+                    // сравниваем с пришедшей в $this->role
+                    if ($this->role && ($roleValue != $this->role)) {
+                        // если отличаются, отвязываем текущую роль
+                        $authManager = Yii::$app->getAuthManager();
+                        $role = $authManager->getRole($roleValue);
+                        $authManager->revoke($role, $this->id);
+                        // привязываем из $this->role
+                        $role = $authManager->getRole($this->role);
+                        $authManager->assign($role, $this->id);
+                    }
+                } else {
+                    $authManager = Yii::$app->getAuthManager();
+                    $role = $this->role ? $authManager->getRole($this->role) : $authManager->getRole(self::RBAC_DEFAULT_ROLE);
+                    $authManager->assign($role, $this->id);
+                }
             }
             return true;
         }
@@ -341,12 +384,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-            // Привязываем нового пользователя к роли user
-            if (!$this->role) {
-                $authManager = Yii::$app->getAuthManager();
-                $role = $authManager->getRole(self::RBAC_DEFAULT_ROLE);
-                $authManager->assign($role, $this->id);
-            }
+            // Привязываем нового пользователя к роли
+            $authManager = Yii::$app->getAuthManager();
+            $role = $this->role ? $authManager->getRole($this->role) : $authManager->getRole(self::RBAC_DEFAULT_ROLE);
+            $authManager->assign($role, $this->id);
         }
     }
 

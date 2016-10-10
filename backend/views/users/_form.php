@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -28,8 +29,25 @@ use kartik\widgets\Select2;
         </div>
 
         <div class="form-group">
+            <?= $form->field($model, 'role')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description'),
+                'language' => 'ru',
+                'theme' => Select2::THEME_DEFAULT,
+                'options' => [
+                    'placeholder' => Yii::t('app', 'Select a role ...'),
+                    'class' => 'form-control',
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]); ?>
+        </div>
+
+        <div class="form-group">
             <?= $form->field($model, 'status')->widget(Select2::classname(), [
                 'data' => $model->statusesArray,
+                'language' => 'ru',
+                'theme' => Select2::THEME_DEFAULT,
                 'options' => [
                     'placeholder' => Yii::t('app', 'Select a status ...'),
                     'class' => 'form-control',
@@ -43,10 +61,10 @@ use kartik\widgets\Select2;
 
     <div class="box-footer">
         <div class="pull-right">
-        <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Yii::t('app', 'CREATE') : '<span class="fa fa-floppy-o"></span> ' . Yii::t('app', 'SAVE'), [
-            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-            'name' => 'submit-button',
-        ]) ?>
+            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Yii::t('app', 'CREATE') : '<span class="fa fa-floppy-o"></span> ' . Yii::t('app', 'SAVE'), [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                'name' => 'submit-button',
+            ]) ?>
         </div>
     </div>
 

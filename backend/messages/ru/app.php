@@ -43,6 +43,7 @@ return [
     'View User' => 'Просмотр пользователя',
     'Delete' => 'Удалить',
     'Users' => 'Пользователи',
+    'All Users' => 'Все пользователи',
     'CREATED' => 'Создано',
     'UPDATED' => 'Обновлено',
     'LAST_VISIT' => 'Последний визит',
@@ -54,11 +55,12 @@ return [
     'USER_NEW_PASSWORD' => 'Новый пароль',
     'USER_REPEAT_PASSWORD' => 'Повторить пароль',
 
-
-    '- All -' => '- Все -',
-    'Select a status ...' => 'Выберите статус ...',
-    'Start date' => 'От',
-    'End date' => 'До',
+    '- Input text -' => '- текст -',
+    '- All -' => '- все -',
+    'Select a role ...' => 'выберите роль ...',
+    'Select a status ...' => 'выберите статус ...',
+    'Start date' => ' - от -',
+    'End date' => ' - до -',
 
     'VIEW' => 'Просмотр',
     'CREATE' => 'Создать',

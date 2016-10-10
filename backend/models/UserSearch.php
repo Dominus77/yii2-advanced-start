@@ -11,10 +11,16 @@ use yii\data\ActiveDataProvider;
  */
 class UserSearch extends User
 {
-    private $_pageSize = 15;
-
+    public $userRoleName;
     public $date_from;
     public $date_to;
+    private $_pageSize;
+
+    public function init()
+    {
+        parent::init();
+        $this->_pageSize = Yii::$app->params['user.pageSize'];
+    }
 
     /**
      * @inheritdoc
@@ -23,7 +29,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status'], 'integer'],
-            [['username', 'email', 'role', 'date_from', 'date_to'], 'safe'],
+            [['username', 'email', 'role', 'userRoleName', 'date_from', 'date_to'], 'safe'],
         ];
     }
 
@@ -48,19 +54,32 @@ class UserSearch extends User
         $query = User::find();
 
         // add conditions that should always apply here
-        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id')
-            ->orderBy([
-                'user_id' => SORT_ASC
-            ]);
+        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['id' => SORT_DESC],
+                'defaultOrder' => ['id' => SORT_ASC],
             ],
             'pagination' => [
                 'pageSize' => $this->_pageSize,
             ],
+        ]);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'username',
+                'email',
+                'status',
+                'userRoleName' => [
+                    'asc' => ['item_name' => SORT_ASC],
+                    'desc' => ['item_name' => SORT_DESC],
+                    'default' => SORT_ASC,
+                    'label' => 'Role Name',
+                ],
+                'last_visit'
+            ]
         ]);
 
         $this->load($params);
@@ -79,7 +98,7 @@ class UserSearch extends User
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'item_name', $this->role])
+            ->andFilterWhere(['like', 'item_name', $this->userRoleName])
             ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'last_visit', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
 

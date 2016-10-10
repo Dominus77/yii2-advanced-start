@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box">
         <?php Pjax::begin(['enablePushState' => false]); ?>
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+            <h3 class="box-title"><?= Html::encode(Yii::t('app', 'All Users')) ?></h3>
 
             <div class="box-tools pull-right">
 
@@ -57,16 +57,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     [
                         'attribute' => 'username',
+                        'filter' => Html::activeInput('text', $searchModel, 'username', ['class' => 'form-control', 'placeholder' => Yii::t('app', '- Input text -')]),
                         'label' => Yii::t('app', 'Users'),
                         'format' => 'raw'
                     ],
-                    'email:email',
+                    [
+                        'attribute' => 'email',
+                        'filter' => Html::activeInput('text', $searchModel, 'email', ['class' => 'form-control', 'placeholder' => Yii::t('app', '- Input text -')]),
+                        'format' => 'email'
+                    ],
                     [
                         'attribute' => 'status',
                         'filter' => Select2::widget([
                             'model' => $searchModel,
                             'attribute' => 'status',
                             'data' => $searchModel->statusesArray,
+                            'language' => 'ru',
+                            'theme' => Select2::THEME_DEFAULT,
                             'options' => [
                                 'class' => 'form-control',
                                 'placeholder' => Yii::t('app', '- All -')
@@ -85,11 +92,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                     [
-                        'attribute' => 'role',
+                        'attribute' => 'userRoleName',
                         'filter' => Select2::widget([
                             'model' => $searchModel,
-                            'attribute' => 'role',
+                            'attribute' => 'userRoleName',
                             'data' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description'),
+                            'language' => 'ru',
+                            'theme' => Select2::THEME_DEFAULT,
                             'options' => [
                                 'class' => 'form-control',
                                 'placeholder' => Yii::t('app', '- All -')
@@ -100,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) {
-                            return $data->userRole;
+                            return $data->userRoleName;
                         },
                         'contentOptions' => [
                             'style' => 'width:200px',

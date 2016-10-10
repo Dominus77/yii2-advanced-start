@@ -43,6 +43,7 @@ return [
     'View User' => 'View User',
     'Delete' => 'Delete',
     'Users' => 'Users',
+    'All Users' => 'All Users',
     'CREATED' => 'Created',
     'UPDATED' => 'Updated',
     'LAST_VISIT' => 'Last Visit',
@@ -54,7 +55,9 @@ return [
     'USER_NEW_PASSWORD' => 'New password',
     'USER_REPEAT_PASSWORD' => 'Repeat password',
 
+    '- Input text -' => '- Input text -',
     '- All -' => '- Все -',
+    'Select a role ...' => 'Select a role ...',
     'Select a status ...' => 'Select a status ...',
     'Start date' => 'Start date',
     'End date' => 'End date',
