@@ -39,4 +39,30 @@ return [
     'CURRENT_PASSWORD' => 'Текущий пароль',
     'NEW_PASSWORD' => 'Новый пароль',
     'REPEAT_PASSWORD' => 'Повторить пароль',
+
+    'FLASH_PASSWORD_CHANGE_SUCCESS' => 'Пароль успешно изменён.',
+
+    'Signup' => 'Зарегестрироваться',
+    'Submit' => 'Отправить',
+    'Login' => 'Войти',
+    'Send' => 'Выслать',
+    'Save' => 'Сохранить',
+
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.',
+    'Name' => 'Имя',
+    'Email' => 'Email',
+    'Subject' => 'Тема',
+    'Body' => 'Сообщение',
+    'Verification Code' => 'Проверочный код',
+
+    'Please fill out the following fields to signup:' => 'Пожалуйста, заполните следующую форму, чтобы зарегистрироваться:',
+    'User Name' => 'Имя пользователя',
+    'Password' => 'Пароль',
+    'Remember Me' => 'Запомнить меня',
+    'If you forgot your password you can {:Link}' => 'Если вы забыли пароль, воспользуйтесь {:Link}',
+    'reset it' => 'формой сброса',
+    'Please fill out the following fields to login:' => 'Пожалуйста, заполните следующие поля для входа:',
+
+    'Request password reset' => 'Сброс пароля',
+    'Please fill out your email. A link to reset password will be sent there.' => 'Пожалуйста, укажите Ваш email который был использован при регистрации и мы вышлем на него инструкцию по дальнейшиму восстановлению.',
 ];

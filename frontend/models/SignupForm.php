@@ -14,6 +14,9 @@ class SignupForm extends Model
     public $email;
     public $password;
 
+    const LENGTH_STRING_PASSWORD_MIN = 6;
+    const LENGTH_STRING_PASSWORD_MAX = 16;
+
 
     /**
      * @inheritdoc
@@ -33,7 +36,19 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'User Name'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password'),
         ];
     }
 

@@ -4,8 +4,8 @@ use yii\widgets\DetailView;
 ?>
 
 <p>
-    <?= Html::a('<i class="fa fa-pencil"></i> '.Yii::t('app', 'UPDATE_DATA'), ['update'], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('<i class="fa fa-user-secret"></i> '.Yii::t('app', 'PASSWORD_CHANGE'), ['password-change'], ['class' => 'btn btn-warning']) ?>
+    <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> '.Yii::t('app', 'UPDATE_DATA'), ['update'], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('<i class="glyphicon glyphicon-lock"></i> '.Yii::t('app', 'PASSWORD_CHANGE'), ['password-change'], ['class' => 'btn btn-warning']) ?>
 </p>
 
 <?= DetailView::widget([

@@ -59,6 +59,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionPasswordChange()
     {
         $user = $this->findModel();

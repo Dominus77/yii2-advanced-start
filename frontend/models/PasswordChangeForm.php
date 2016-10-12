@@ -15,6 +15,9 @@ class PasswordChangeForm extends Model
     public $newPassword;
     public $newPasswordRepeat;
 
+    const LENGTH_STRING_PASSWORD_MIN = 6;
+    const LENGTH_STRING_PASSWORD_MAX = 16;
+
     /**
      * @var User
      */
@@ -38,7 +41,7 @@ class PasswordChangeForm extends Model
         return [
             [['currentPassword', 'newPassword', 'newPasswordRepeat'], 'required'],
             ['currentPassword', 'validatePassword'],
-            ['newPassword', 'string', 'min' => 6],
+            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
         ];
     }
