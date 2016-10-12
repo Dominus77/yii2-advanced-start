@@ -1,0 +1,1 @@
+<?phpnamespace common\assets;use yii\web\AssetBundle;class IonIconsAsset extends AssetBundle{    public $sourcePath = '@vendor/driftyco/ionicons';    public $css;    public function init()    {        parent::init();        $min = YII_ENV_DEV ? '' : '.min';        $this->css = ['css/ionicons' . $min . '.css'];    }}

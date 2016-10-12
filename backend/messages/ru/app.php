@@ -79,4 +79,7 @@ return [
     'Meanwhile, you may {:Link} or try using the search form.' => 'Вы можете вернуться на {:Link} или воспользоваться формой поиска.',
     'return to dashboard' => 'главную страницу',
     'Search' => 'Поиск',
+
+    'Collapse' => 'Свернуть',
+    'Remove' => 'Скрыть',
 ];

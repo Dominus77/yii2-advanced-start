@@ -204,13 +204,13 @@ AppAsset::register($this);
                     'options' => ['class' => 'header',],
                 ],
                 [
+                    'label' => '<i class="fa fa-dashboard"></i> <span>' . Yii::t('app', 'Home') . '</span>',
+                    'url' => ['site/index'],
+                ],
+                [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
                     'url' => ['users/index'],
                     'visible' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER),
-                ],
-                [
-                    'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Link') . '</span>',
-                    'url' => ['site/index'],
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',

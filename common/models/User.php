@@ -63,8 +63,8 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
+            //['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            //['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
@@ -199,15 +199,27 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by username or email
+     * Finds user by email
      *
-     * @param string $username
+     * @param string $email
      * @return static|null
      */
-    public static function findByUsernameOrEmail($username)
+    public static function findByUsernameEmail($email)
+    {
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by username or email
+     *
+     * @param string $string
+     * @return static|null
+     */
+    public static function findByUsernameOrEmail($string)
     {
         return static::find()
-            ->where(['or', ['username' => $username], ['email' => $username]])
+            ->where(['or', ['username' => $string], ['email' => $string]])
+            ->andWhere(['status' => self::STATUS_ACTIVE])
             ->one();
     }
 

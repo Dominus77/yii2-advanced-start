@@ -18,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ]); ?>
 
 <div class="form-group has-feedback">
-    <?= $form->field($model, 'username')->textInput([
+    <?= $form->field($model, 'email')->textInput([
         'class' => 'form-control',
-        'placeholder' => Yii::t('app','Username')
+        'placeholder' => Yii::t('app','Email')
     ])->label(false); ?>
-    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 </div>
 
 <div class="form-group has-feedback">

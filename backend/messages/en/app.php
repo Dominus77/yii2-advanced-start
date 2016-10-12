@@ -79,4 +79,7 @@ return [
     'Meanwhile, you may {:Link} or try using the search form.' => 'Meanwhile, you may {:Link} or try using the search form.',
     'return to dashboard' => 'return to dashboard',
     'Search' => 'Search',
+
+    'Collapse' => 'Collapse',
+    'Remove' => 'Remove',
 ];

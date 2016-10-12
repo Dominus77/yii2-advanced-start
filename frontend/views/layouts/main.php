@@ -19,7 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Yii::$app->name . ' | ' . Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -43,18 +43,19 @@ AppAsset::register($this);
         $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/site/signup']];
         $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                Yii::t('app', 'NAV_LOGOUT ({:UserName})', [':UserName' => Yii::$app->user->identity->username]),
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = [
+            'label' => Yii::t('app', 'NAV_MY_MENU'),
+            'items' => [
+                ['label' => '<i class="fa fa-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/user/index']],
+                ['label' => '<i class="fa fa-sign-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+            ],
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
+        'activateParents' => true,
+        'encodeLabels' => false,
+        'items' => array_filter($menuItems),
     ]);
     NavBar::end();
     ?>
@@ -70,7 +71,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

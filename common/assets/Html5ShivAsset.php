@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\assets;
+namespace common\assets;
 
 use yii\web\AssetBundle;
 use yii\web\View;
 
-class RespondAsset extends AssetBundle
+class Html5ShivAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/respond/dest';
+    public $sourcePath = '@bower/html5shiv/dist';
     public $js = [
-        'respond.min.js',
+        'html5shiv.min.js',
     ];
     public $jsOptions = [
         'condition' => 'lt IE 9',

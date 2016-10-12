@@ -19,12 +19,12 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'backend\assets\FontAwesomeAsset',
-        'backend\assets\IonIconsAsset',
+        'common\assets\FontAwesomeAsset',
+        'common\assets\IonIconsAsset',
         'backend\assets\AdminLTE\AdminLteAsset',
         'backend\assets\AdminLTE\SkinsAsset',
 
-        'backend\assets\Html5ShivAsset',
-        'backend\assets\RespondAsset'
+        'common\assets\Html5ShivAsset',
+        'common\assets\RespondAsset'
     ];
 }

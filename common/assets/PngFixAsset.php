@@ -1,13 +1,13 @@
 <?php
 
-namespace backend\assets;
+namespace common\assets;
 
 use yii\web\AssetBundle;
 use yii\web\View;
 
 class PngFixAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/assets/src/pngfix';
+    public $sourcePath = '@common/assets/src/pngfix';
     public $js = [
         'jquery.ifixpng.js',
         'script.js'
