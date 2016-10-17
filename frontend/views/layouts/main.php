@@ -35,19 +35,19 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => Yii::t('app', 'NAV_HOME'), 'url' => ['/site/index']],
-        ['label' => Yii::t('app', 'NAV_ABOUT'), 'url' => ['/site/about']],
-        ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/site/contact']],
+        ['label' => Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']],
+        ['label' => Yii::t('app', 'NAV_ABOUT'), 'url' => ['/main/default/about']],
+        ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/default/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/main/default/signup']];
+        $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/main/default/login']];
     } else {
         $menuItems[] = [
             'label' => Yii::t('app', 'NAV_MY_MENU'),
             'items' => [
                 ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/user/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/main/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];
     }

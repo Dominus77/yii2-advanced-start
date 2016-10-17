@@ -25,6 +25,17 @@ class RbacController extends Controller
         $auth->removeAll();
         // ------------------------- //
 
+        // Правила
+        $rule = new \backend\components\rbac\rules\AuthorRule; // Только свои посты
+        $auth->add($rule);
+
+        // Добавляем правило Можно редактировать только свои посты
+        $updateOwnPost = $auth->createPermission(BackendRbac::RULE_UPDATE_OWN_POST);
+        $updateOwnPost->description = Yii::t('app', 'Update own post');
+        $updateOwnPost->ruleName = $rule->name;
+        $auth->add($updateOwnPost);
+        // -------------------------- //
+
         // Разрешения для доступа к Backend
         $backend = $auth->createPermission(BackendRbac::PERMISSION_BACKEND);
         $backend->description = Yii::t('app', 'Backend');
@@ -54,38 +65,40 @@ class RbacController extends Controller
         // ------------------------- //
 
         // Роли
-        $user = $auth->createRole('user');
+        $user = $auth->createRole(BackendRbac::ROLE_USER);
         $user->description = Yii::t('app', 'User');
         $auth->add($user);
 
-        $moder = $auth->createRole('moder');
+        $moder = $auth->createRole(BackendRbac::ROLE_MODERATOR);
         $moder->description = Yii::t('app', 'Moderator');
         $auth->add($moder);
 
-        $manager = $auth->createRole('manager');
+        $manager = $auth->createRole(BackendRbac::ROLE_MANAGER);
         $manager->description = Yii::t('app', 'Manager');
         $auth->add($manager);
 
-        $admin = $auth->createRole('admin');
+        $admin = $auth->createRole(BackendRbac::ROLE_ADMINISTRATOR);
         $admin->description = Yii::t('app', 'Administrator');
         $auth->add($admin);
         // ------------------------ //
+
+        // Привязываем правило к редактированию профиля
+        // "updateOwnPost" will be post from "updatePost"
+        //$auth->addChild($updateOwnPost, $backendPostUpdate); // Можно редактировать только свой профиль
 
         // Привязка прав Управление пользователями к праву User Manager
         $auth->addChild($userManager, $backendUserCreate);
         $auth->addChild($userManager, $backendUserUpdate);
         $auth->addChild($userManager, $backendUserView);
         $auth->addChild($userManager, $backendUserDelete);
-
-        // Привязка разрешений Backend
-        $auth->addChild($moder, $backend); // к роли Manager
         // ------------------------ //
 
-        // Наследование для роли Moder (Moder можно всё что можно User)
-        $auth->addChild($moder, $user);
-        // Наследование для роли Manager (Manager можно всё что можно Moder)
-        $auth->addChild($manager, $moder);
-        $auth->addChild($manager, $userManager); // наследование для роли Manager права User Manager (Разрешаем управлять пользователями)
+        // Формируем роль Модератор
+        $auth->addChild($moder, $backend); // Модератору разрешаем доступ к админке
+        $auth->addChild($moder, $user); // Модератор наследует Пользователя
+        // Формируем роль Manager
+        $auth->addChild($manager, $moder); // Менеджер наследует модератора
+        $auth->addChild($manager, $userManager); // Менеджеру разрешаем управление пользователями
         // Наследование для роли Admin (админу можно всё)
         $auth->addChild($admin, $manager); // Наследуем роль Manager
         // ------------------------ //

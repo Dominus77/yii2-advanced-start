@@ -29,11 +29,16 @@ return [
     'Update User' => 'Update User',
     'View User' => 'View User',
     'Delete User' => 'Delete User',
+
+    'Update own post' => 'Update own post',
+
     'Role:' => 'Role:',
     'All Roles' => 'All Roles',
     'User Manager' => 'User Manager',
     'User' => 'User',
+    'Author' => 'Author',
     'Moderator' => 'Moderator',
     'Manager' => 'Manager',
     'Administrator' => 'Administrator',
+    'Super administrator' => 'Super administrator',
 ];

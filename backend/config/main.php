@@ -11,18 +11,23 @@ return [
     'language'=>'ru_RU',
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'main/default/index',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'main' => [
+            'isBackend' => true,
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'modules\main\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'loginUrl' => ['/main/default/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -38,12 +43,14 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'main/default/error',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'main/default/index',
+                '<_a:[\w\-]+>' => 'main/default/<_a>',
             ],
         ],
     ],

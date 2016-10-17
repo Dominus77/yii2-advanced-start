@@ -12,14 +12,14 @@ return [
     'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'main/default/index',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'modules\main\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -37,14 +37,14 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'main/default/error',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
-                '<_a:[\w\-]+>' => 'site/<_a>',
+                '' => 'main/default/index',
+                '<_a:[\w\-]+>' => 'main/default/<_a>',
             ],
         ],
     ],

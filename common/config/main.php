@@ -3,6 +3,11 @@ return [
     'name' => 'Yii2-advanced-start',
     'timeZone' => 'Europe/Moscow',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'modules' => [
+        'main' => [
+            'class' => 'modules\main\Module',
+        ],
+    ],
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',

@@ -158,7 +158,7 @@ AppAsset::register($this);
                                     <a href="#" class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="<?= Url::to('/admin/site/logout'); ?>" data-method="post"
+                                    <a href="<?= Url::to('/admin/main/default/logout'); ?>" data-method="post"
                                        class="btn btn-default btn-flat"><?= Yii::t('app', 'Sign out'); ?></a>
                                 </div>
                             </li>
@@ -205,11 +205,11 @@ AppAsset::register($this);
                 ],
                 [
                     'label' => '<i class="fa fa-dashboard"></i> <span>' . Yii::t('app', 'Home') . '</span>',
-                    'url' => ['site/index'],
+                    'url' => ['/main/default/index'],
                 ],
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
-                    'url' => ['users/index'],
+                    'url' => ['/main/users/index'],
                     'visible' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER),
                 ],
                 [
@@ -252,23 +252,22 @@ AppAsset::register($this);
 
     <div class="content-wrapper">
         <section class="content-header">
-            <?= Alert::widget([
-                'options' => [
-                    //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
-                ]
-            ]) ?>
             <h1>
                 <?= Html::encode($this->title) ?>
                 <br>
             </h1>
             <?= Breadcrumbs::widget([
-                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['site/index'])],
+                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['/main/default/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false,
             ]) ?>
         </section>
-
         <section class="content">
+            <?= Alert::widget([
+                'options' => [
+                    //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
+                ]
+            ]) ?>
             <?= $content ?>
         </section>
 

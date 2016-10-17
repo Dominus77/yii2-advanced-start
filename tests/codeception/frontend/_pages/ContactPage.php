@@ -3,7 +3,7 @@
 namespace tests\codeception\frontend\_pages;
 
 use yii\codeception\BasePage;
-use frontend\models\ContactForm;
+use modules\main\models\frontend\ContactForm;
 
 /**
  * Represents contact page

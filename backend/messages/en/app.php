@@ -82,4 +82,10 @@ return [
 
     'Collapse' => 'Collapse',
     'Remove' => 'Remove',
+
+    'Go to Frontend' => 'Go to Frontend',
+
+    'You are not allowed.' => 'You are not allowed.',
+    'You are not allowed to edit the profile.' => 'You are not allowed to edit the profile.',
+    'You can not remove the Administrator profile.' => 'You can not remove the Administrator profile.',
 ];
