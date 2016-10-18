@@ -3,7 +3,7 @@
 namespace tests\codeception\frontend\_pages;
 
 use yii\codeception\BasePage;
-use modules\main\models\frontend\SignupForm;
+use modules\user\models\frontend\SignupForm;
 
 /**
  * Represents signup page

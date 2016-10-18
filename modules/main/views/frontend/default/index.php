@@ -1,7 +1,10 @@
 <?php
+
 /* @var $this yii\web\View */
 
-$this->title = Yii::t('app', 'NAV_HOME');
+use modules\main\Module;
+
+$this->title = Module::t('frontend', 'HOME');
 ?>
 <div class="main-default-index">
     <div class="jumbotron">

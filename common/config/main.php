@@ -7,6 +7,9 @@ return [
         'main' => [
             'class' => 'modules\main\Module',
         ],
+        'users' => [
+            'class' => 'modules\users\Module',
+        ],
     ],
     'components' => [
         'db' => [

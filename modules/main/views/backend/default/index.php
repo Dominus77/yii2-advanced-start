@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app', 'Home');
 ?>
-<div class="site-index">
+<div class="main-backend-default-index">
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Html::encode($this->title) ?></h3>

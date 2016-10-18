@@ -14,7 +14,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')); ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,14 +40,14 @@ AppAsset::register($this);
         ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/default/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/main/default/signup']];
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/main/default/login']];
+        $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/users/default/signup']];
+        $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/users/default/login']];
     } else {
         $menuItems[] = [
             'label' => Yii::t('app', 'NAV_MY_MENU'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/user/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/main/default/logout'], 'linkOptions' => ['data-method' => 'post']],
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/user/default/index']],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];
     }

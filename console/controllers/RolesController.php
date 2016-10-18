@@ -12,7 +12,7 @@ use Yii;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\helpers\ArrayHelper;
-use modules\main\models\User;
+use modules\user\models\User;
 use console\components\helpers\Console;
 
 class RolesController extends Controller
@@ -59,7 +59,7 @@ class RolesController extends Controller
     /**
      * @param string $username
      * @throws \yii\console\Exception
-     * @return User the loaded model
+     * @return \modules\user\models\User the loaded model
      */
     private function findModel($username)
     {

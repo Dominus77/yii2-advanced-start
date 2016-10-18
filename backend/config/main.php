@@ -8,13 +8,20 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'language'=>'ru_RU',
+    'language'=>'ru-RU',
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'main/default/index',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'modules\main\Bootstrap',
+        'modules\users\Bootstrap',
+    ],
     'modules' => [
         'main' => [
+            'isBackend' => true,
+        ],
+        'users' => [
             'isBackend' => true,
         ],
     ],
@@ -24,10 +31,10 @@ return [
             'baseUrl' => '/admin',
         ],
         'user' => [
-            'identityClass' => 'modules\main\models\User',
+            'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-            'loginUrl' => ['/main/default/login'],
+            'loginUrl' => ['/users/default/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -43,19 +50,17 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'main/default/error',
+            'errorAction' => 'backend/error',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                '' => 'main/default/index',
-                '<_a:[\w\-]+>' => 'main/default/<_a>',
-            ],
+            'enableStrictParsing' => true,
+            'rules' => [],
         ],
     ],
     'as afterAction' => [
-        'class' => '\common\components\behavior\LastVisitBehavior',
+        'class' => '\modules\users\components\behavior\LastVisitBehavior',
     ],
     'params' => $params,
 ];

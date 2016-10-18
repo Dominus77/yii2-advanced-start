@@ -15,7 +15,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')); ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -158,7 +158,7 @@ AppAsset::register($this);
                                     <a href="#" class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="<?= Url::to('/admin/main/default/logout'); ?>" data-method="post"
+                                    <a href="<?= Url::to(['/users/default/logout']); ?>" data-method="post"
                                        class="btn btn-default btn-flat"><?= Yii::t('app', 'Sign out'); ?></a>
                                 </div>
                             </li>
@@ -209,7 +209,7 @@ AppAsset::register($this);
                 ],
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
-                    'url' => ['/main/users/index'],
+                    'url' => ['/users/default/index'],
                     'visible' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER),
                 ],
                 [

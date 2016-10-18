@@ -4,7 +4,7 @@ namespace tests\codeception\frontend\unit\models;
 
 use tests\codeception\frontend\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;
-use modules\main\models\frontend\ResetPasswordForm;
+use modules\user\models\frontend\ResetPasswordForm;
 
 class ResetPasswordFormTest extends DbTestCase
 {
@@ -27,7 +27,7 @@ class ResetPasswordFormTest extends DbTestCase
 
     public function testResetCorrectToken()
     {
-        $form = new \modules\main\models\frontend\ResetPasswordForm($this->user[0]['password_reset_token']);
+        $form = new \modules\user\models\frontend\ResetPasswordForm($this->user[0]['password_reset_token']);
         expect('password should be resetted', $form->resetPassword())->true();
     }
 

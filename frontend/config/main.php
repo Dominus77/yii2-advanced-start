@@ -8,10 +8,14 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
-    'language'=>'ru_RU',
+    'language'=>'ru-RU',
     'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'modules\main\Bootstrap',
+        'modules\users\Bootstrap',
+    ],
     'defaultRoute' => 'main/default/index',
     'components' => [
         'request' => [
@@ -19,9 +23,10 @@ return [
             'baseUrl' => '',
         ],
         'user' => [
-            'identityClass' => 'modules\main\models\User',
+            'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'loginUrl' => ['/users/default/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -37,19 +42,17 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'main/default/error',
+            'errorAction' => 'frontend/error',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                '' => 'main/default/index',
-                '<_a:[\w\-]+>' => 'main/default/<_a>',
-            ],
+            'enableStrictParsing' => true,
+            'rules' => [],
         ],
     ],
     'as afterAction' => [
-        'class' => '\common\components\behavior\LastVisitBehavior',
+        'class' => '\modules\users\components\behavior\LastVisitBehavior',
     ],
     'params' => $params,
 ];

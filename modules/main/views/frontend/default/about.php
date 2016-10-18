@@ -3,8 +3,9 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use modules\main\Module;
 
-$this->title = Yii::t('app', 'NAV_ABOUT');
+$this->title = Module::t('frontend', 'ABOUT');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-default-about">
