@@ -44,16 +44,7 @@ return [
     'Delete' => 'Удалить',
     'Users' => 'Пользователи',
     'All Users' => 'Все пользователи',
-    'CREATED' => 'Создано',
-    'UPDATED' => 'Обновлено',
-    'LAST_VISIT' => 'Последний визит',
-    'USERNAME' => 'Имя пользователя',
-    'EMAIL' => 'Email',
-    'STATUS' => 'Статус',
-    'PASSWORD' => 'Пароль',
-    'ROLE' => 'Права',
-    'USER_NEW_PASSWORD' => 'Новый пароль',
-    'USER_REPEAT_PASSWORD' => 'Повторить пароль',
+
 
     '- Input text -' => '- текст -',
     '- All -' => '- все -',

@@ -12,7 +12,7 @@ use Yii;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\helpers\ArrayHelper;
-use modules\user\models\User;
+use modules\users\models\User;
 use console\components\helpers\Console;
 
 class RolesController extends Controller

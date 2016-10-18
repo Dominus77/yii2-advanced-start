@@ -44,16 +44,7 @@ return [
     'Delete' => 'Delete',
     'Users' => 'Users',
     'All Users' => 'All Users',
-    'CREATED' => 'Created',
-    'UPDATED' => 'Updated',
-    'LAST_VISIT' => 'Last Visit',
-    'USERNAME' => 'Username',
-    'EMAIL' => 'Email',
-    'STATUS' => 'Status',
-    'PASSWORD' => 'Password',
-    'ROLE' => 'Role',
-    'USER_NEW_PASSWORD' => 'New password',
-    'USER_REPEAT_PASSWORD' => 'Repeat password',
+    
 
     '- Input text -' => '- Input text -',
     '- All -' => '- Все -',

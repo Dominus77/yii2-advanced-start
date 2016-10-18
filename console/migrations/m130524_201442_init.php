@@ -25,6 +25,9 @@ class m130524_201442_init extends Migration
             'last_visit' => $this->integer()->comment('Last Visit'),
             'created_at' => $this->integer()->notNull()->comment('Created'),
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
+
+            'first_name' => $this->string(45)->comment('First Name'),
+            'last_name' => $this->string(45)->comment('Last Name'),
         ], $tableOptions);
     }
 

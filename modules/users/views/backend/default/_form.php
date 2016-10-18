@@ -19,6 +19,12 @@ use backend\components\rbac\Rbac as BackendRbac;
             <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
         </div>
         <div class="form-group">
+            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
+        </div>
+        <div class="form-group">
             <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
         </div>
         <div class="form-group">

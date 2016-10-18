@@ -13,7 +13,6 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use backend\components\rbac\Rbac as BackendRbac;
 
 /**
  * Default controller for the `users` module
@@ -33,12 +32,13 @@ class DefaultController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'request-password-reset', 'reset-password'],
                         'allow' => true,
+                        'roles' => ['?'],
                     ],
                     [
+                        'actions' => ['logout'],
                         'allow' => true,
-                        'roles' => [BackendRbac::ROLE_USER],
+                        'roles' => ['@'],
                     ],
                 ],
             ],

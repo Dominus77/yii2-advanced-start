@@ -83,13 +83,17 @@ class DefaultController extends Controller
         $model = new User();
         $model->role = $model::RBAC_DEFAULT_ROLE;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()) {
+                $authManager = Yii::$app->getAuthManager();
+                $role = $authManager->getRole($model->role);
+                $authManager->assign($role, $model->id);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -102,21 +106,26 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         $model->role = $model->getUserRoleValue();
-        // Профиль Администратора может редактировать только администратор
-        /*if ($model->getUserRoleValue($model->id) == BackendRbac::ROLE_ADMINISTRATOR &&
-            !Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR)
-        ) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
-            return $this->redirect(['index']);
-        }*/
+        $_role = $model->role;
+
         if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE)) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
             return $this->redirect(['index']);
         }
 
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            // Если изменена роль
+            if($_role != $model->role) {
+                // Отвязываем старую роль
+                $authManager = Yii::$app->getAuthManager();
+                $role = $authManager->getRole($_role);
+                $authManager->revoke($role, $model->id);
+                // Привязываем новую
+                $role = $authManager->getRole($model->role);
+                $authManager->assign($role, $model->id);
+            }
+            if($model->save())
+                return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

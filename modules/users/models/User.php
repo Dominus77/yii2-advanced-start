@@ -9,6 +9,7 @@ use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use backend\components\rbac\Rbac as BackendRbac;
+use modules\users\Module;
 use yii\helpers\VarDumper;
 
 /**
@@ -26,6 +27,8 @@ use yii\helpers\VarDumper;
  * @property string $password write-only password
  * @property integer $last_visit
  * @property string $email_confirm_token
+ * @property string $first_name
+ * @property string $last_name
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -77,6 +80,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
+            [['first_name', 'last_name'], 'string', 'max' => 45],
+
             [['role'], 'safe'],
         ];
     }
@@ -88,15 +93,16 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'created_at' => Yii::t('app', 'CREATED'),
-            'updated_at' => Yii::t('app', 'UPDATED'),
-            'last_visit' => Yii::t('app', 'LAST_VISIT'),
-            'username' => Yii::t('app', 'USERNAME'),
-            'email' => Yii::t('app', 'EMAIL'),
-            'status' => Yii::t('app', 'STATUS'),
-            //'password' => Yii::t('app', 'PASSWORD'),
-            'role' => Yii::t('app', 'ROLE'),
-            'userRoleName' => Yii::t('app', 'ROLE'),
+            'created_at' => Module::t('backend', 'CREATED'),
+            'updated_at' => Module::t('backend', 'UPDATED'),
+            'last_visit' => Module::t('backend', 'LAST_VISIT'),
+            'username' => Module::t('backend', 'USERNAME'),
+            'email' => Module::t('backend', 'EMAIL'),
+            'status' => Module::t('backend', 'STATUS'),
+            'role' => Module::t('backend', 'ROLE'),
+            'userRoleName' => Module::t('backend', 'ROLE'),
+            'first_name' => Module::t('backend', 'FIRST_NAME'),
+            'last_name' => Module::t('backend', 'LAST_NAME'),
         ];
     }
 
@@ -404,26 +410,6 @@ class User extends ActiveRecord implements IdentityInterface
         if (parent::beforeSave($insert)) {
             if ($insert) {
                 $this->generateAuthKey();
-            } else {
-                // Если изменена роль, выполняем требуемые действия
-                // получаем текущую роль пользователя
-                $roleValue = self::getUserRoleValue();
-                if($roleValue) {
-                    // сравниваем с пришедшей в $this->role
-                    if ($this->role && ($roleValue != $this->role)) {
-                        // если отличаются, отвязываем текущую роль
-                        $authManager = Yii::$app->getAuthManager();
-                        $role = $authManager->getRole($roleValue);
-                        $authManager->revoke($role, $this->id);
-                        // привязываем из $this->role
-                        $role = $authManager->getRole($this->role);
-                        $authManager->assign($role, $this->id);
-                    }
-                } else {
-                    $authManager = Yii::$app->getAuthManager();
-                    $role = $this->role ? $authManager->getRole($this->role) : $authManager->getRole(self::RBAC_DEFAULT_ROLE);
-                    $authManager->assign($role, $this->id);
-                }
             }
             return true;
         }
@@ -439,10 +425,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-            // Привязываем нового пользователя к роли
-            $authManager = Yii::$app->getAuthManager();
-            $role = $this->role ? $authManager->getRole($this->role) : $authManager->getRole(self::RBAC_DEFAULT_ROLE);
-            $authManager->assign($role, $this->id);
+
         }
     }
 
