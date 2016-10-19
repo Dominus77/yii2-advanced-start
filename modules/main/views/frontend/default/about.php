@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 use modules\main\Module;
 
-$this->title = Module::t('frontend', 'ABOUT');
+$this->title = Module::t('frontend', 'TITLE_ABOUT');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-default-about">

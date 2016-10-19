@@ -10,14 +10,14 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use modules\main\Module;
 
-$this->title = Module::t('frontend', 'CONTACT');
+$this->title = Module::t('frontend', 'TITLE_CONTACT');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-default-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Yii::t('app', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'); ?>
+        <?= Module::t('frontend', 'TEXT_CONTACT'); ?>
     </p>
 
     <div class="row">
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' . Module::t('frontend', 'SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' . Module::t('frontend', 'BUTTON_SUBMIT'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

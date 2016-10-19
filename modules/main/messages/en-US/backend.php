@@ -5,4 +5,9 @@
  * Date: 18.10.16
  * Time: 9:11
  */
-return [];
+return [
+    'TITLE_HOME' => 'Home',
+
+    'BUTTON_COLLAPSE' => 'Collapse',
+    'BUTTON_REMOVE' => 'Remove',
+];
