@@ -59,10 +59,6 @@ return [
     'SAVE' => 'Save',
     'DELETE' => 'Delete',
 
-    'STATUS_BLOCKED' => 'Blocked',
-    'STATUS_ACTIVE' => 'Active',
-    'STATUS_WAIT' => 'Wait',
-
     'CONFIRM_DELETE' => 'Are you sure you want to delete the record?',
 
     'Error Page' => 'Error Page',

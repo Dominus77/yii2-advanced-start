@@ -2,25 +2,25 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\Select2;
 use kartik\widgets\DatePicker;
+use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel modules\users\models\backend\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Module::t('backend', 'TITLE_USERS');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-backend-default-index">
     <div class="box">
         <?php Pjax::begin(['enablePushState' => false]); ?>
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode(Yii::t('app', 'All Users')) ?></h3>
+            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 
             <div class="box-tools pull-right">
 
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'btn btn-block btn-success',
                         'data' => [
                             'toggle' => 'tooltip',
-                            'original-title' => Yii::t('app', 'CREATE'),
+                            'original-title' => Module::t('backend', 'BUTTON_CREATE'),
                             'pjax' => 0,
                         ],
                     ]) ?>
@@ -53,13 +53,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     [
                         'attribute' => 'username',
-                        'filter' => Html::activeInput('text', $searchModel, 'username', ['class' => 'form-control', 'placeholder' => Yii::t('app', '- Input text -')]),
-                        'label' => Yii::t('app', 'Users'),
+                        'filter' => Html::activeInput('text', $searchModel, 'username', [
+                            'class' => 'form-control',
+                            'placeholder' => Module::t('backend', 'SELECT_TEXT')
+                        ]),
+                        'label' => Module::t('backend', 'TITLE_USERS'),
                         'format' => 'raw'
                     ],
                     [
                         'attribute' => 'email',
-                        'filter' => Html::activeInput('text', $searchModel, 'email', ['class' => 'form-control', 'placeholder' => Yii::t('app', '- Input text -')]),
+                        'filter' => Html::activeInput('text', $searchModel, 'email', [
+                            'class' => 'form-control',
+                            'placeholder' => Module::t('backend', 'SELECT_TEXT')
+                        ]),
                         'format' => 'email'
                     ],
                     [
@@ -68,11 +74,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $searchModel,
                             'attribute' => 'status',
                             'data' => $searchModel->statusesArray,
-                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '_')),
+                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
                             'theme' => Select2::THEME_DEFAULT,
                             'options' => [
                                 'class' => 'form-control',
-                                'placeholder' => Yii::t('app', '- All -')
+                                'placeholder' => Module::t('backend', 'SELECT_ALL')
                             ],
                             'pluginOptions' => [
                                 'allowClear' => true,
@@ -92,12 +98,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filter' => Select2::widget([
                             'model' => $searchModel,
                             'attribute' => 'userRoleName',
-                            'data' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description'),
-                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '_')),
+                            'data' => $searchModel->rolesArray,
+                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
                             'theme' => Select2::THEME_DEFAULT,
                             'options' => [
                                 'class' => 'form-control',
-                                'placeholder' => Yii::t('app', '- All -')
+                                'placeholder' => Module::t('backend', 'SELECT_ALL')
                             ],
                             'pluginOptions' => [
                                 'allowClear' => true,
@@ -115,12 +121,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'last_visit',
                         'format' => 'datetime',
                         'filter' => DatePicker::widget([
-                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '_')),
+                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
                             'model' => $searchModel,
                             'attribute' => 'date_from',
                             'attribute2' => 'date_to',
-                            'options' => ['placeholder' => Yii::t('app', 'Start date')],
-                            'options2' => ['placeholder' => Yii::t('app', 'End date')],
+                            'options' => ['placeholder' => Module::t('backend', 'SELECT_START_DATE')],
+                            'options2' => ['placeholder' => Module::t('backend', 'SELECT_END_DATE')],
                             'type' => DatePicker::TYPE_RANGE,
                             'separator' => '<i class="glyphicon glyphicon-resize-horizontal"></i>',
                             'pluginOptions' => [
@@ -140,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'VIEW'),
+                                        'original-title' => Module::t('backend', 'BUTTON_VIEW'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -149,7 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'UPDATE'),
+                                        'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -158,9 +164,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'DELETE'),
+                                        'original-title' => Module::t('backend', 'BUTTON_DELETE'),
                                         'method' => 'post',
-                                        'confirm' => Yii::t('app', 'CONFIRM_DELETE'),
+                                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
                                     ]
                                 ]);
                             },

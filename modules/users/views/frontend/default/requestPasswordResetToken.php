@@ -8,13 +8,13 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
-$this->title = Module::t('frontend', 'REQUEST_PASSWORD_RESET');
+$this->title = Module::t('frontend', 'TITLE_REQUEST_PASSWORD_RESET');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-default-request-password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Yii::t('app', 'Please fill out your email. A link to reset password will be sent there.'); ?></p>
+    <p><?= Module::t('frontend', 'TEXT_REQUEST_PASSWORD_RESET'); ?></p>
 
     <div class="row">
         <div class="col-lg-5">

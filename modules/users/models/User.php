@@ -112,9 +112,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getStatusesArray()
     {
         return [
-            self::STATUS_BLOCKED => Yii::t('app', 'STATUS_BLOCKED'),
-            self::STATUS_ACTIVE => Yii::t('app', 'STATUS_ACTIVE'),
-            self::STATUS_WAIT => Yii::t('app', 'STATUS_WAIT'),
+            self::STATUS_BLOCKED => Module::t('backend', 'STATUS_BLOCKED'),
+            self::STATUS_ACTIVE => Module::t('backend', 'STATUS_ACTIVE'),
+            self::STATUS_WAIT => Module::t('backend', 'STATUS_WAIT'),
         ];
     }
 
@@ -154,28 +154,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getRolesArray()
     {
         return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
-    }
-
-    public function getRolesSelectArray()
-    {
-        $roles = self::getRolesArray();
-        $userRole = self::getUserRoleValue(Yii::$app->user->identity->getId());
-        $array = [];
-        foreach($roles as $key => $value)
-        {
-            // Роли для Менеджера
-            /*if($userRole == BackendRbac::ROLE_MANAGER) {
-                if ($key == BackendRbac::ROLE_USER || $key == BackendRbac::ROLE_MODERATOR)
-                    $array[$key] = $value;
-            }
-            // Роли для администратора
-            if($userRole == BackendRbac::ROLE_ADMINISTRATOR){
-                if ($key == BackendRbac::ROLE_USER || $key == BackendRbac::ROLE_MODERATOR || $key == BackendRbac::ROLE_MANAGER)
-                    $array[$key] = $value;
-            }*/
-            $array[$key] = $value;
-        }
-        return $array;
     }
 
     /**

@@ -9,13 +9,13 @@ use yii\bootstrap\ActiveForm;
 use modules\users\components\widgets\passfield\Passfield;
 use modules\users\Module;
 
-$this->title = Module::t('frontend', 'SIGN_UP');
+$this->title = Module::t('frontend', 'TITLE_SIGN_UP');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-default-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Yii::t('app', 'Please fill out the following fields to signup:'); ?></p>
+    <p><?= Module::t('frontend', 'TEXT_FOLLOWING_FIELDS_SIGN_UP'); ?></p>
 
     <div class="row">
         <div class="col-md-5">

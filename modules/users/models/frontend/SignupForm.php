@@ -18,7 +18,6 @@ class SignupForm extends Model
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 
-
     /**
      * @inheritdoc
      */
@@ -73,7 +72,7 @@ class SignupForm extends Model
                 Yii::$app->mailer->compose(['text' => '@modules/users/mail/emailConfirm'], ['user' => $user])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo($this->email)
-                    ->setSubject('Email confirmation for ' . Yii::$app->name)
+                    ->setSubject(Module::t('frontend', 'EMAIL_CONFIRMATION') . ' ' . Yii::$app->name)
                     ->send();
             }
             return $user;

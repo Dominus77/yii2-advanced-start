@@ -17,7 +17,6 @@ class LoginForm extends Model
 
     private $_user;
 
-
     /**
      * @inheritdoc
      */
@@ -89,7 +88,6 @@ class LoginForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findByUsernameEmail($this->email);
         }
-
         return $this->_user;
     }
 }

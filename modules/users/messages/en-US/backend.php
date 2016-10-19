@@ -18,4 +18,33 @@ return [
     'ROLE' => 'Role',
     'USER_NEW_PASSWORD' => 'New password',
     'USER_REPEAT_PASSWORD' => 'Repeat password',
+
+    'STATUS_BLOCKED' => 'Blocked',
+    'STATUS_ACTIVE' => 'Active',
+    'STATUS_WAIT' => 'Wait',
+
+    'TITLE_LOGIN' => 'Login',
+    'TITLE_VIEW_USER' => 'View User',
+    'TITLE_USERS' => 'Users',
+    'TITLE_UPDATE' => 'Update',
+    'TITLE_UPDATE_USER' => 'Update User',
+    'TITLE_CREATE_USER' => 'New User',
+
+    'TEXT_LOGIN_START_SESSION' => 'Sign in to start your session',
+
+    'BUTTON_CREATE' => 'Create',
+    'BUTTON_VIEW' => 'View',
+    'BUTTON_UPDATE' => 'Update',
+    'BUTTON_SAVE' => 'Save',
+    'BUTTON_DELETE' => 'Delete',
+    'BUTTON_SIGN_IN' => 'Sign In',
+
+    'SELECT_ALL' => '- All -',
+    'SELECT_TEXT' => '- Input text -',
+    'SELECT_START_DATE' => '- start -',
+    'SELECT_END_DATE' => '- end -',
+    'SELECT_ROLE' => 'Select a role ...',
+    'SELECT_STATUS' => 'Select a status ...',
+
+    'CONFIRM_DELETE' => 'Are you sure you want to delete the record?',
 ];

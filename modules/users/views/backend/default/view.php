@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Yii::t('app', 'View User');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = Module::t('backend', 'TITLE_VIEW_USER');
+$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'TITLE_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-backend-default-view">
@@ -42,11 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-footer">
             <div class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update', 'id' => $model->id], [
+                    'class' => 'btn btn-primary'
+                ]) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
                         'method' => 'post',
                     ],
                 ]) ?>
