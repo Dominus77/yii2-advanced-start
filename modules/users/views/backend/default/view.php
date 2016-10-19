@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use backend\components\rbac\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -43,16 +44,18 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-footer">
             <div class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update', 'id' => $model->id], [
-                    'class' => 'btn btn-primary'
-                ]) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
-                        'method' => 'post',
-                    ],
-                ]) ?>
+                <?php if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) : ?>
+                    <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update', 'id' => $model->id], [
+                        'class' => 'btn btn-primary'
+                    ]) ?>
+                    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                            'method' => 'post',
+                        ],
+                    ]) ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

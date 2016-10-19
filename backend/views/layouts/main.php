@@ -126,7 +126,7 @@ AppAsset::register($this);
                             <img
                                 src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@adminlte/dist') . '/img/user2-160x160.jpg' ?>"
                                 class="user-image" alt="User Image">
-                            <span class="hidden-xs"><?= Yii::$app->user->identity->username; ?></span>
+                            <span class="hidden-xs"><?= Yii::$app->user->identity->getUserFullName(); ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
@@ -135,7 +135,7 @@ AppAsset::register($this);
                                     class="img-circle" alt="User Image">
 
                                 <p>
-                                    <?= Yii::$app->user->identity->username; ?> - Web Developer
+                                    <?= Yii::$app->user->identity->getUserFullName(); ?> - <?= Yii::$app->user->identity->getUserRoleName(); ?>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -183,7 +183,7 @@ AppAsset::register($this);
                         class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p><?= Yii::$app->user->identity->username; ?></p>
+                    <p><?= Yii::$app->user->identity->getUserFullName(); ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online'); ?></a>
                 </div>
             </div>
@@ -210,7 +210,7 @@ AppAsset::register($this);
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    'visible' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER),
+                    'visible' => Yii::$app->user->can(BackendRbac::ROLE_MODERATOR),
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',

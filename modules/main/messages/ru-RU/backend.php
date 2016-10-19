@@ -10,4 +10,6 @@ return [
 
     'BUTTON_COLLAPSE' => 'Свернуть/Развернуть',
     'BUTTON_REMOVE' => 'Удалить',
+
+    'MSG_YOU_NOT_ALLOWED' => 'У вас не достаточно прав, доступ запрещён.',
 ];

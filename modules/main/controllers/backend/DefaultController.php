@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use backend\components\rbac\Rbac as BackendRbac;
+use modules\main\Module;
 
 /**
  * Site controller
@@ -38,7 +39,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND)) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed.'));
+            Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
             return $this->goHome();
         }
         return $this->render('index');

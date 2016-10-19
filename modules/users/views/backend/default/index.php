@@ -7,6 +7,7 @@ use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\Select2;
 use kartik\widgets\DatePicker;
+use backend\components\rbac\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -30,16 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <div class="pull-right">
-                <p>
-                    <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
-                        'class' => 'btn btn-block btn-success',
-                        'data' => [
-                            'toggle' => 'tooltip',
-                            'original-title' => Module::t('backend', 'BUTTON_CREATE'),
-                            'pjax' => 0,
-                        ],
-                    ]) ?>
-                </p>
+                <?php if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) : ?>
+                    <p>
+                        <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
+                            'class' => 'btn btn-block btn-success',
+                            'data' => [
+                                'toggle' => 'tooltip',
+                                'original-title' => Module::t('backend', 'BUTTON_CREATE'),
+                                'pjax' => 0,
+                            ],
+                        ]) ?>
+                    </p>
+                <?php endif; ?>
             </div>
             <?= GridView::widget([
                 'id' => 'grid-users',
@@ -152,23 +155,29 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
-                                    'data' => [
-                                        'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
-                                        'pjax' => 0,
-                                    ]
-                                ]);
+                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) {
+                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
+                                        'data' => [
+                                            'toggle' => 'tooltip',
+                                            'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
+                                            'pjax' => 0,
+                                        ]
+                                    ]);
+                                }
+                                return '<span class="glyphicon glyphicon-pencil text-muted"></span>';
                             },
                             'delete' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
-                                    'data' => [
-                                        'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'BUTTON_DELETE'),
-                                        'method' => 'post',
-                                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
-                                    ]
-                                ]);
+                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) {
+                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
+                                        'data' => [
+                                            'toggle' => 'tooltip',
+                                            'original-title' => Module::t('backend', 'BUTTON_DELETE'),
+                                            'method' => 'post',
+                                            'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                                        ]
+                                    ]);
+                                }
+                                return '<span class="glyphicon glyphicon-trash text-muted"></span>';
                             },
                         ]
                     ],

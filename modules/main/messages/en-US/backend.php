@@ -10,4 +10,6 @@ return [
 
     'BUTTON_COLLAPSE' => 'Collapse',
     'BUTTON_REMOVE' => 'Remove',
+
+    'MSG_YOU_NOT_ALLOWED' => 'You do not have rights, access is denied.',
 ];

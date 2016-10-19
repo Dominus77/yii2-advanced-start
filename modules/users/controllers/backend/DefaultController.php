@@ -2,6 +2,7 @@
 
 namespace modules\users\controllers\backend;
 
+use backend\components\rbac\Rbac;
 use Yii;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
@@ -11,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\components\rbac\Rbac as BackendRbac;
+use modules\users\Module;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -36,8 +38,15 @@ class DefaultController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
+                        'roles' => ['?']
                     ],
                     [
+                        'actions' => ['logout', 'index', 'view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create','update','delete'],
                         'allow' => true,
                         'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER],
                     ],
@@ -126,11 +135,10 @@ class DefaultController extends Controller
             }
             if($model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -187,7 +195,7 @@ class DefaultController extends Controller
             // и перебрасываем на страницу входа
             if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND)) {
                 Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', Yii::t('app', 'You are denied access!'));
+                Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
                 return $this->goHome();
             }
             return $this->goBack();

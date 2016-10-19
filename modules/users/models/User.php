@@ -67,13 +67,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required'],
-            //['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            //['username', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_USERNAME_EXISTS')],
+            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            ['username', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'USERNAME_UNIQUE')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::className(), 'message' => Yii::t('app', 'ERROR_EMAIL_EXISTS')],
+            ['email', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'EMAIL_UNIQUE')],
             ['email', 'string', 'max' => 255],
 
             ['status', 'integer'],
@@ -177,7 +177,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getUserRoleValue($user_id = null)
     {
-        if($user_id) {
+        if ($user_id) {
             if ($role = Yii::$app->authManager->getRolesByUser($user_id))
                 return ArrayHelper::getValue($role, function ($role, $defaultValue) {
                     foreach ($role as $key => $value) {
@@ -195,6 +195,26 @@ class User extends ActiveRecord implements IdentityInterface
                 });
         }
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserFullName()
+    {
+        if(Yii::$app->getUser()) {
+            if ($this->first_name && $this->last_name) {
+                $fullName = $this->first_name . ' ' . $this->last_name;
+            } else if ($this->first_name) {
+                $fullName = $this->first_name;
+            } else if ($this->last_name) {
+                $fullName = $this->last_name;
+            } else {
+                $fullName = $this->username;
+            }
+            return Html::encode($fullName);
+        }
+        return false;
     }
 
     /**

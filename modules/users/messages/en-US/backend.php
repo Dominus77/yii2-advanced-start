@@ -47,4 +47,6 @@ return [
     'SELECT_STATUS' => 'Select a status ...',
 
     'CONFIRM_DELETE' => 'Are you sure you want to delete the record?',
+
+    'MSG_YOU_NOT_ALLOWED' => 'You do not have rights, access is denied.',
 ];

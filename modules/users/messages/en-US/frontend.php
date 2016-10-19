@@ -15,6 +15,7 @@ return [
 
     'TITLE_SIGN_UP' => 'Sign Up',
     'EMAIL_UNIQUE' => 'This email address has already been taken.',
+    'USERNAME_UNIQUE' => 'This user name is already in use.',
     'BUTTON_SIGN_UP' => 'Sign Up',
 
     'RESET_PASSWORD' => 'Reset Password',
