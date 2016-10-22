@@ -2,7 +2,6 @@
 
 namespace modules\users\controllers\backend;
 
-use backend\components\rbac\Rbac;
 use Yii;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
@@ -11,7 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /**
@@ -125,10 +124,10 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // Если изменена роль
             if($_role != $model->role) {
-                // Отвязываем старую роль
                 $authManager = Yii::$app->getAuthManager();
-                $role = $authManager->getRole($_role);
-                $authManager->revoke($role, $model->id);
+                // Отвязываем старую роль если она существует
+                if($role = $authManager->getRole($_role))
+                    $authManager->revoke($role, $model->id);
                 // Привязываем новую
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
@@ -183,11 +182,10 @@ class DefaultController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = '//login';
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $this->layout = '//login';
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -199,11 +197,10 @@ class DefaultController extends Controller
                 return $this->goHome();
             }
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -214,7 +211,6 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }

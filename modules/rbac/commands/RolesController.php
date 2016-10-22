@@ -6,7 +6,7 @@
  * Time: 5:48
  */
 
-namespace console\controllers;
+namespace modules\rbac\commands;
 
 use Yii;
 use yii\console\Controller;
@@ -59,7 +59,7 @@ class RolesController extends Controller
     /**
      * @param string $username
      * @throws \yii\console\Exception
-     * @return \modules\user\models\User the loaded model
+     * @return \modules\users\models\User the loaded model
      */
     private function findModel($username)
     {

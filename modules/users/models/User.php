@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 use yii\helpers\VarDumper;
 

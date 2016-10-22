@@ -1,8 +1,10 @@
 <?php
 
+namespace modules\users\migrations;
+
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m161022_180040_create_table_user extends Migration
 {
     public function up()
     {

@@ -7,7 +7,7 @@ use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\Select2;
 use kartik\widgets\DatePicker;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */

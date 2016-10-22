@@ -16,6 +16,7 @@ return [
         'log',
         'modules\main\Bootstrap',
         'modules\users\Bootstrap',
+        'modules\rbac\Bootstrap',
     ],
     'modules' => [
         'main' => [

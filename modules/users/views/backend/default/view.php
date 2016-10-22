@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */

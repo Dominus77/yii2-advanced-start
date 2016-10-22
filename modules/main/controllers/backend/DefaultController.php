@@ -4,7 +4,7 @@ namespace modules\main\controllers\backend;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use modules\main\Module;
 
 /**

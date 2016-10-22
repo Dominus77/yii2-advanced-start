@@ -15,6 +15,7 @@ return [
         'log',
         'modules\main\Bootstrap',
         'modules\users\Bootstrap',
+        'modules\rbac\Bootstrap',
     ],
     'defaultRoute' => 'main/default/index',
     'components' => [

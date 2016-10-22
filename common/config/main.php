@@ -10,6 +10,9 @@ return [
         'users' => [
             'class' => 'modules\users\Module',
         ],
+        'rbac' => [
+            'class' => 'modules\rbac\Module',
+        ],
     ],
     'components' => [
         'db' => [

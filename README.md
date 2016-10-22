@@ -97,13 +97,13 @@ INSTALLATION AND INITIALIZATION
 php yii migrate
 
 Инициализируем RBAC
-php yii rbac/init
+php yii rbac/rbac/init
 
 Добавляем пользователя
-php yii user/create
+php yii users/user/create
 
 Присваиваем пользователю роль Администратора
-php yii roles/assign
+php yii rbac/roles/assign
 
 Теперь у нас есть пользователь с ролью Администратора и мы можем зайти в Backend и добавлять пользователей через вэб интерфейс.
 

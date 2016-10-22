@@ -6,7 +6,7 @@
  * Time: 5:57
  */
 
-namespace backend\components\rbac;
+namespace modules\rbac\models;
 
 
 class Rbac

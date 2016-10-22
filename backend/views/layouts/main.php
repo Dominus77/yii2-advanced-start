@@ -9,7 +9,7 @@ use yii\helpers\Url;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 
 AppAsset::register($this);
 ?>

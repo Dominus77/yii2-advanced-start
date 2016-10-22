@@ -3,20 +3,20 @@
  * Created by PhpStorm.
  * User: Alexey Shevchenko <ivanovosity@gmail.com>
  * Date: 12.10.16
- * Time: 14:59
+ * Time: 16:56
  */
 
-namespace backend\components\rbac\rules;
+namespace modules\rbac\rules;
 
-use Yii;
 use yii\rbac\Rule;
 
-class UserManagerRule extends Rule
+class AuthorRule extends Rule
 {
     /**
      * @inheritdoc
      */
-    public $name = 'userOneProfile';
+    public $name = 'isAuthor';
+
     /**
      * @inheritdoc
      */

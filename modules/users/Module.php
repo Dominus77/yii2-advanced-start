@@ -3,6 +3,7 @@
 namespace modules\users;
 
 use Yii;
+use yii\console\Application as ConsoleApplication;
 
 /**
  * users module definition class
@@ -33,6 +34,9 @@ class Module extends \yii\base\Module
             $this->setViewPath('@modules/users/views/backend');
         } else {
             $this->setViewPath('@modules/users/views/frontend');
+            if (Yii::$app instanceof ConsoleApplication) {
+                $this->controllerNamespace = 'modules\users\commands';
+            }
         }
     }
 

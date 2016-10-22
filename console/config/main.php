@@ -12,6 +12,16 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                'console\migrations',
+                'modules\rbac\migrations',
+                'modules\users\migrations',
+            ],
+        ],
+    ],
     'components' => [
         'log' => [
             'targets' => [

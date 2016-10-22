@@ -1,13 +1,16 @@
 <?php
 
+namespace modules\rbac\migrations;
+
+use Yii;
 use yii\db\Migration;
 use yii\base\InvalidConfigException;
 use yii\rbac\DbManager;
 
-class m161011_040754_rbac_init extends Migration
+class m161022_182149_create_tables_rbac_init extends Migration
 {
     /**
-     * @throws yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @return DbManager
      */
     protected function getAuthManager()

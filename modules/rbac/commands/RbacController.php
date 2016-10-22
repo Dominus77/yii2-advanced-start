@@ -1,10 +1,10 @@
 <?php
 
-namespace console\controllers;
+namespace modules\rbac\commands;
 
 use Yii;
 use yii\console\Controller;
-use backend\components\rbac\Rbac as BackendRbac;
+use modules\rbac\models\Rbac as BackendRbac;
 use console\components\helpers\Console;
 
 /**
@@ -26,7 +26,7 @@ class RbacController extends Controller
         // ------------------------- //
 
         // Правила
-        $rule = new \backend\components\rbac\rules\AuthorRule; // Только свои посты
+        $rule = new \modules\rbac\rules\AuthorRule; // Только свои посты
         $auth->add($rule);
 
         // Добавляем правило Можно редактировать только свои посты
