@@ -1,47 +1,85 @@
-Yii 2 Advanced Project Template
+Yii 2 Advanced Start Project Template
 ===============================
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+The application is built using advanced pattern and has a modular structure.
+Backend part uses AdminLTE template
+Available console user management commands and RBAC system. All available commands can be found by following in the console: php yii
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+- [Web page](http://dominus77.github.io/yii2-advanced-start)
+- [github.com](https://github.com/Dominus77/yii2-advanced-start)
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+Base components
+------
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+Pages (backend)
+- Home
+- Users
+- Login
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
+Pages (frontend)
+- Home
+- Contact
+- Sign Up
+- Login
+
+Modules
+- main
+- rbac
+- users
+
+Functional
+- Reset password
+- Confirmation by email
+- Last visit
+- Registration Type
+
+System
+- RBAC (DbManager)
+- Manage users
+- Console commands
+- i18n
+
+Requirements
+------
+
+The minimum requirement by this project template that your Web server supports PHP 5.4.0.
 
 DIRECTORY STRUCTURE
 -------------------
 
 ```
 common
+    assets/              contains application assets such as JavaScript and CSS
+    components/          contains components frontend, backend and console
     config/              contains shared configurations
-    mail/                contains view files for e-mails
+    mail/                contains layouts files for e-mails
+    messages/            contains i18n backend frontend
     models/              contains model classes used in both backend and frontend
+    widgets/             contains widgets backend and frontend
 console
+    components/          contains console components
     config/              contains console configurations
     controllers/         contains console controllers (commands)
+    messages/            contains i18n console
     migrations/          contains database migrations
     models/              contains console-specific model classes
     runtime/             contains files generated during runtime
 backend
     assets/              contains application assets such as JavaScript and CSS
+    components/          contains backend components
     config/              contains backend configurations
     controllers/         contains Web controller classes
+    messages/            contains i18n backend
     models/              contains backend-specific model classes
     runtime/             contains files generated during runtime
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
+    widgets/             contains backend widgets
 frontend
     assets/              contains application assets such as JavaScript and CSS
     config/              contains frontend configurations
     controllers/         contains Web controller classes
+    messages/            contains i18n frontend
     models/              contains frontend-specific model classes
     runtime/             contains files generated during runtime
     views/               contains view files for the Web application
@@ -51,66 +89,117 @@ vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
 tests                    contains various tests for the advanced application
     codeception/         contains tests developed with Codeception PHP Testing Framework
+modules/
+    main/               contains module main
+        controllers/    contains module Web controller classes
+            backend/    contains module backend Web controller classes
+            frontend/   contains module frontend Web controller classes
+        messages/       contains i18n module
+        models/         contains module-specific model classes
+            backend/    contains module backend-specific model classes
+            frontend/   contains module frontend-specific model classes
+        views/          contains module view files for the Web application
+            backend/    contains module backend view files for the Web application
+            frontend/   contains module frontend view files for the Web application
+        Bootstrap.php   File autoload module settings app components (urlManager)
+        Module.php      General Module class
+    rbac/               contains module rbac
+        commands/       contains console controllers (commands)
+        controllers/    contains module Web controller classes
+            backend/    contains module backend Web controller classes
+        migrations/     contains database migrations module
+        models/         contains module-specific model classes
+        rules/          contains rbac specific rules
+        views/          contains module view files for the Web application
+            backend/    contains module backend view files for the Web application
+        Bootstrap.php   File autoload module settings app components (urlManager)
+        Module.php      General Module class
+    users/              contains module users
+        commands/       contains console controllers (commands)
+        components/     contains module components
+        controllers/    contains module Web controller classes
+            backend/    contains module backend Web controller classes
+            frontend/   contains module frontend Web controller classes
+        mail/           contains module view files for e-mails
+        messages/       contains i18n module
+        migrations/     contains database migrations module
+        models/         contains module-specific model classes
+            backend/    contains module backend-specific model classes
+            frontend/   contains module frontend-specific model classes
+        views/          contains module view files for the Web application
+            backend/    contains module backend view files for the Web application
+            frontend/   contains module frontend view files for the Web application
+        Bootstrap.php   File autoload module settings app components (urlManager)
+        Module.php      General Module class
 ```
 
-ОПИСАНИЕ
---------
-Приложение построено с использованием шаблона advanced и имеет frontend и backend части.
-Так же добавлена система RBAC
-Доступны консольные команды управления пользователями и системой RBAC. Все доступные команды можно узнать выполнив в консоли: php yii
-
-По умолчанию в систему RBAC добавлено 4 роли:
-
-admin - Администратор,
-manager - Менеджер,
-moder - Модератор
-user - Зарегестрированые пользователи.
-
-Структура RBAC настроеная по умолчанию имеет следующую древовидную структуру:
-
-Администратор
-    Менеджер -------------------------- Управление пользователями
-        Модератор --------------------- Backend
-            Пользователь
-
-Разрешения:
------------
-Backend (Доступ к Backend)
-Управления пользователями
-    Создание
-    Редактирование
-    Просмотр
-    Удаление
-
-Роли и разрешения наследуются.
-При регистрации нового пользователя, по умолчанию присваивается роль user
-Настройка ролей и разрешений производится в console/controllers/RbacController.php
-После изменения и вступления в силу новых ролей и правил, необходимо выполнить php yii rbac/init и пройзвести привязку пользователей к ролям
-php yii roles/assign
-Через консоль достаточно создать одного пользователя и дать ему права администратора, чтобы получить доступ к backend.
-Остальных пользователей можно добавлять и назначать им права через вэб интерфейс.
-
-INSTALLATION AND INITIALIZATION
+INSTALLATION
 ------------
 
-После стандартной установки и настройки конфигурационных файлов, выполняем миграции:
+Create a project:
+~~~
+composer global require "fxp/composer-asset-plugin:~1.2.0"
+composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start advanced-project
+or clone the repository for `pull` command availability:
+
+~~~
+git clone https://github.com/Dominus77/yii2-advanced-start.git advanced-project
+cd advanced-project
+composer global require "fxp/composer-asset-plugin:~1.2.0"
+composer install
+~~~
+
+Init an environment:
+
+~~~
+php init
+~~~
+
+Create a database, default configure: yii2-advanced-start
+
+Apply migration:
+
+~~~
 php yii migrate
+~~~
 
-Инициализируем RBAC
+See all available commands:
+
+~~~
+php yii
+~~~
+
+Initialization RBAC:
+
+~~~
 php yii rbac/rbac/init
+~~~
 
-Добавляем пользователя
+Create user, enter the command and follow the instructions:
+
+~~~
 php yii users/user/create
+~~~
 
-Присваиваем пользователю роль Администратора
+- Username: set username (admin);
+- Email: set email username (admin@example.com);
+- Password: set password username (min 6 symbol);
+- Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
+
+Assign role admin:
+
+~~~
 php yii rbac/roles/assign
+~~~
 
-Теперь у нас есть пользователь с ролью Администратора и мы можем зайти в Backend и добавлять пользователей через вэб интерфейс.
+- Username: set username (admin);
+- Role: set role (admin, manager, moder, user, ? - Help);
 
-Если производится установка на сервере в папку public_html, на сервере с Apache необходимо настроить перенаправления.
-В корне папки public_html создаем .hitaccess со следующим содержимым:
 
-###
+If you are installing the server into the public_html folder on the server with Apache, you must configure redirection.
+At the root folder, create a public_html .hitaccess with the following content:
+
+~~~
 Options FollowSymLinks
 AddDefaultCharset utf-8
 
@@ -145,17 +234,17 @@ AddDefaultCharset utf-8
     RewriteCond %{REQUEST_URI} \.(htaccess|htpasswd|svn|git)
     RewriteRule \.(htaccess|htpasswd|svn|git) - [F]
 </IfModule>
-###
+~~~
 
-В папку web, backend и frontend частях, так же добавляем .hitaccess
+The web folder, the backend and frontend parts also add .hitaccess:
 
-###
+~~~
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
-###
+~~~
 
-Теперь frontend доступен по адресу http://mysite.ru, а backend по адресу http://mysite.ru/admin
+Now frontend is available at http://advanced-project.com, and backend at http://advanced-project.com/admin
 
 

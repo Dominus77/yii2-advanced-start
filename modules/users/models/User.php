@@ -29,6 +29,7 @@ use yii\helpers\VarDumper;
  * @property string $email_confirm_token
  * @property string $first_name
  * @property string $last_name
+ * @property string $registration_type
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -82,7 +83,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
 
-            [['role'], 'safe'],
+            [['role', 'registration_type'], 'safe'],
         ];
     }
 
@@ -103,6 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
             'userRoleName' => Module::t('backend', 'ROLE'),
             'first_name' => Module::t('backend', 'FIRST_NAME'),
             'last_name' => Module::t('backend', 'LAST_NAME'),
+            'registration_type' => Module::t('backend', 'REGISTRATION_TYPE'),
         ];
     }
 
@@ -116,6 +118,19 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_ACTIVE => Module::t('backend', 'STATUS_ACTIVE'),
             self::STATUS_WAIT => Module::t('backend', 'STATUS_WAIT'),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistrationType()
+    {
+        if($this->registration_type > 0) {
+            if (($model = User::findOne($this->registration_type)) !== null) {
+                return $model->username;
+            }
+        }
+        return Module::t('backend', 'SYSTEM');
     }
 
     /**

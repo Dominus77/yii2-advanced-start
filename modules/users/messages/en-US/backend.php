@@ -18,10 +18,13 @@ return [
     'ROLE' => 'Role',
     'USER_NEW_PASSWORD' => 'New password',
     'USER_REPEAT_PASSWORD' => 'Repeat password',
+    'REGISTRATION_TYPE' => 'Registration Type',
 
     'STATUS_BLOCKED' => 'Blocked',
     'STATUS_ACTIVE' => 'Active',
     'STATUS_WAIT' => 'Wait',
+
+    'SYSTEM' => 'System',
 
     'TITLE_LOGIN' => 'Login',
     'TITLE_VIEW_USER' => 'View User',

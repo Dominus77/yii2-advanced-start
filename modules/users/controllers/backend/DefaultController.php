@@ -90,6 +90,7 @@ class DefaultController extends Controller
     {
         $model = new User();
         $model->role = $model::RBAC_DEFAULT_ROLE;
+        $model->registration_type = Yii::$app->user->identity->getId();
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->save()) {

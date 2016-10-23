@@ -30,6 +30,8 @@ class m161022_180040_create_table_user extends Migration
 
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
+
+            'registration_type' => $this->integer()->defaultValue(0)->comment('Type Registration'),
         ], $tableOptions);
     }
 

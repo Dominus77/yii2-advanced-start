@@ -18,10 +18,13 @@ return [
     'ROLE' => 'Права',
     'USER_NEW_PASSWORD' => 'Новый пароль',
     'USER_REPEAT_PASSWORD' => 'Повторить пароль',
+    'REGISTRATION_TYPE' => 'Тип регистрации',
 
     'STATUS_BLOCKED' => 'Заблокирован',
     'STATUS_ACTIVE' => 'Активно',
     'STATUS_WAIT' => 'Ожидает',
+
+    'SYSTEM' => 'Система',
 
     'TITLE_LOGIN' => 'Авторизация',
     'TITLE_VIEW_USER' => 'Просмотр пользователя',

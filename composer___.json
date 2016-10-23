@@ -1,11 +1,16 @@
 {
-    "name": "dominus77/yii2-advanced-start",
-    "description": "Yii 2 Advanced start template on Yii2",
-    "homepage": "http://dominus77.github.io/yii2-advanced-start",
+    "name": "yiisoft/yii2-app-advanced",
+    "description": "Yii 2 Advanced Project Template",
+    "keywords": ["yii2", "framework", "advanced", "project template"],
+    "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/Dominus77/yii2-advanced-start"
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
     },
     "minimum-stability": "stable",
     "require": {

@@ -39,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'last_visit:datetime',
                     'created_at:datetime',
                     'updated_at:datetime',
+                    [
+                        'attribute' => 'registration_type',
+                        'format' => 'raw',
+                        'value' => $model->registrationType,
+                    ],
                 ],
             ]) ?>
         </div>
