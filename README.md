@@ -3,7 +3,10 @@ Yii 2 Advanced Start Project Template
 
 The application is built using advanced pattern and has a modular structure.
 Backend part uses AdminLTE template
-Available console user management commands and RBAC system. All available commands can be found by following in the console: php yii
+Available console user management commands and RBAC system. All available commands can be found by following in the console:
+~~~
+php yii
+~~~
 
 - [Web page](http://dominus77.github.io/yii2-advanced-start)
 - [github.com](https://github.com/Dominus77/yii2-advanced-start)
