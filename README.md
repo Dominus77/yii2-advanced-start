@@ -184,7 +184,7 @@ php yii users/user/create
 ~~~
 
 - Username: set username (admin);
-- Email: set email username (admin@example.com);
+- Email: set email (admin@example.com);
 - Password: set password (min 6 symbol);
 - Status: set status (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
