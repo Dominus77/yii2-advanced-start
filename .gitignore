@@ -31,5 +31,3 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
-
-/composer___.json

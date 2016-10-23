@@ -157,7 +157,7 @@ Init an environment:
 php init
 ~~~
 
-Create a database, default configure: yii2-advanced-start
+Create a database, default configure: advanced_project
 
 Apply migration:
 
