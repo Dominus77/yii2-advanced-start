@@ -14,7 +14,7 @@ Base components
 Pages (backend AdminLTE template)
 - Home
 - Users
-- Login
+- Login and Logout
 
 Pages (frontend)
 - Home
