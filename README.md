@@ -11,7 +11,7 @@ Available console user management commands and RBAC system. All available comman
 Base components
 ------
 
-Pages (backend)
+Pages (backend AdminLTE template)
 - Home
 - Users
 - Login
