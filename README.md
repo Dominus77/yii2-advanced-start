@@ -140,6 +140,8 @@ Create a project:
 ~~~
 composer global require "fxp/composer-asset-plugin:~1.2.0"
 composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start advanced-project
+~~~
+
 or clone the repository for `pull` command availability:
 
 ~~~
