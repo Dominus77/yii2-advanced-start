@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'form-control',
                             'placeholder' => Module::t('backend', 'SELECT_TEXT'),
                             'data' => [
-                                'pjax' => 0,
+                                'pjax' => true,
                             ],
                         ]),
                         'label' => Module::t('backend', 'TITLE_USERS'),
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'form-control',
                             'placeholder' => Module::t('backend', 'SELECT_TEXT'),
                             'data' => [
-                                'pjax' => 0,
+                                'pjax' => true,
                             ],
                         ]),
                         'format' => 'email'
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'form-control',
                             'prompt' => Module::t('backend', 'SELECT_ALL'),
                             'data' => [
-                                'pjax' => 0,
+                                'pjax' => true,
                             ],
                         ]),
                         'format' => 'raw',
@@ -104,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'form-control',
                             'prompt' => Module::t('backend', 'SELECT_ALL'),
                             'data' => [
-                                'pjax' => 0,
+                                'pjax' => true,
                             ],
                         ]),
                         'format' => 'raw',
