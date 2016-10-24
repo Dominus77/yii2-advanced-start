@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\Select2;
 use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
@@ -36,34 +35,16 @@ use modules\users\Module;
         </div>
 
         <div class="form-group">
-            <?= $form->field($model, 'role')->widget(Select2::classname(), [
-                'data' => $model->rolesArray,
-                'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
-                'theme' => Select2::THEME_DEFAULT,
-                'options' => [
-                    'placeholder' => Module::t('backend', 'SELECT_ROLE'),
-                    'class' => 'form-control',
-                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
-                ],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]); ?>
+            <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
+                'class' => 'form-control',
+                'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            ]) ?>
         </div>
 
         <div class="form-group">
-            <?= $form->field($model, 'status')->widget(Select2::classname(), [
-                'data' => $model->statusesArray,
-                'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
-                'theme' => Select2::THEME_DEFAULT,
-                'options' => [
-                    'placeholder' => Module::t('backend', 'SELECT_STATUS'),
-                    'class' => 'form-control',
-                ],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]); ?>
+            <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
+                'class' => 'form-control',
+            ]) ?>
         </div>
     </div>
 

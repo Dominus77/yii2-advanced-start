@@ -5,7 +5,6 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
-use kartik\widgets\Select2;
 use kartik\widgets\DatePicker;
 use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
@@ -58,7 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'SELECT_TEXT')
+                            'placeholder' => Module::t('backend', 'SELECT_TEXT'),
+                            'data' => [
+                                'pjax' => 0,
+                            ],
                         ]),
                         'label' => Module::t('backend', 'TITLE_USERS'),
                         'format' => 'raw'
@@ -67,24 +69,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'email',
                         'filter' => Html::activeInput('text', $searchModel, 'email', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'SELECT_TEXT')
+                            'placeholder' => Module::t('backend', 'SELECT_TEXT'),
+                            'data' => [
+                                'pjax' => 0,
+                            ],
                         ]),
                         'format' => 'email'
                     ],
                     [
                         'attribute' => 'status',
-                        'filter' => Select2::widget([
-                            'model' => $searchModel,
-                            'attribute' => 'status',
-                            'data' => $searchModel->statusesArray,
-                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
-                            'theme' => Select2::THEME_DEFAULT,
-                            'options' => [
-                                'class' => 'form-control',
-                                'placeholder' => Module::t('backend', 'SELECT_ALL')
-                            ],
-                            'pluginOptions' => [
-                                'allowClear' => true,
+                        'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray,[
+                            'class' => 'form-control',
+                            'prompt' => Module::t('backend', 'SELECT_ALL'),
+                            'data' => [
+                                'pjax' => 0,
                             ],
                         ]),
                         'format' => 'raw',
@@ -98,18 +96,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'userRoleName',
-                        'filter' => Select2::widget([
-                            'model' => $searchModel,
-                            'attribute' => 'userRoleName',
-                            'data' => $searchModel->rolesArray,
-                            'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
-                            'theme' => Select2::THEME_DEFAULT,
-                            'options' => [
-                                'class' => 'form-control',
-                                'placeholder' => Module::t('backend', 'SELECT_ALL')
-                            ],
-                            'pluginOptions' => [
-                                'allowClear' => true,
+                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $searchModel->rolesArray,[
+                            'class' => 'form-control',
+                            'prompt' => Module::t('backend', 'SELECT_ALL'),
+                            'data' => [
+                                'pjax' => 0,
                             ],
                         ]),
                         'format' => 'raw',
