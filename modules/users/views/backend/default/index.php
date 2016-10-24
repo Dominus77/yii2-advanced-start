@@ -28,7 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+            <div class="pull-left">
+                <?= $this->render('_pageSize',[
+                    'model' => $searchModel,
+                ]) ?>
+            </div>
             <div class="pull-right">
                 <?php if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) : ?>
                     <p>
@@ -47,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'grid-users',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'layout' => "{items}", // {summary}\n{items}\n{pager}
+                'layout' => "{items}", // {summary}\n{sorter}\n{items}\n{pager}
                 'tableOptions' => [
                     'class' => 'table table-bordered table-hover',
                 ],
@@ -78,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'status',
-                        'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray,[
+                        'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray, [
                             'class' => 'form-control',
                             'prompt' => Module::t('backend', 'SELECT_ALL'),
                             'data' => [
@@ -96,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'userRoleName',
-                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $searchModel->rolesArray,[
+                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $searchModel->rolesArray, [
                             'class' => 'form-control',
                             'prompt' => Module::t('backend', 'SELECT_ALL'),
                             'data' => [
