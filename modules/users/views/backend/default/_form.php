@@ -25,7 +25,11 @@ use modules\users\Module;
         </div>
 
         <div class="form-group">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
+            <?= $form->field($model, 'username')->textInput([
+                'maxlength' => true,
+                'class' => 'form-control',
+                'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            ]) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
@@ -34,7 +38,11 @@ use modules\users\Module;
             <?= $form->field($model, 'last_name')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
         </div>
         <div class="form-group">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
+            <?= $form->field($model, 'email')->textInput([
+                'maxlength' => true,
+                'class' => 'form-control',
+                //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            ]) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model, 'newPassword')->passwordInput(['maxlength' => true, 'class' => 'form-control']) ?>
@@ -53,6 +61,7 @@ use modules\users\Module;
         <div class="form-group">
             <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
                 'class' => 'form-control',
+                'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
             ]) ?>
         </div>
     </div>

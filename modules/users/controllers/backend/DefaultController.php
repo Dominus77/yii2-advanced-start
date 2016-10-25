@@ -42,12 +42,17 @@ class DefaultController extends Controller
                         'roles' => ['?']
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view'],
+                        'actions' => ['logout', 'index', 'view', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    /*[
+                        'actions' => ['update', 'upload'],
+                        'allow' => true,
+                        'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER, BackendRbac::RULE_UPDATE_OWN_POST],
+                    ],*/
                     [
-                        'actions' => ['create', 'update', 'upload', 'delete'],
+                        'actions' => ['create', 'delete'],
                         'allow' => true,
                         'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER],
                     ],
@@ -127,7 +132,7 @@ class DefaultController extends Controller
         $model->role = $model->getUserRoleValue();
         $_role = $model->role;
 
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE)) {
+        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
             return $this->redirect(['index']);
         }
@@ -144,10 +149,14 @@ class DefaultController extends Controller
                 $authManager->assign($role, $model->id);
             }
 
-            $uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if($uploadModel->upload($model->id)) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
+                $uploadModel->upload($model->id);
+            } else {
+                $model->save();
             }
+
+            return $this->redirect(['view', 'id' => $model->id]);
+
         }
         return $this->render('update', [
             'model' => $model,

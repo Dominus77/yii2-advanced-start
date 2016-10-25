@@ -84,7 +84,7 @@ class RbacController extends Controller
 
         // Привязываем правило к редактированию профиля
         // "updateOwnPost" will be post from "updatePost"
-        //$auth->addChild($updateOwnPost, $backendPostUpdate); // Можно редактировать только свой профиль
+        $auth->addChild($updateOwnPost, $backendUserUpdate); // Можно редактировать только свой профиль
 
         // Привязка прав Управление пользователями к праву User Manager
         $auth->addChild($userManager, $backendUserCreate);
@@ -93,9 +93,12 @@ class RbacController extends Controller
         $auth->addChild($userManager, $backendUserDelete);
         // ------------------------ //
 
+        // Формируем роль Пользователя
+        //$auth->addChild($user, $updateOwnPost);
         // Формируем роль Модератор
         $auth->addChild($moder, $backend); // Модератору разрешаем доступ к админке
         $auth->addChild($moder, $user); // Модератор наследует Пользователя
+        $auth->addChild($moder, $updateOwnPost); // Только свои данные
         // Формируем роль Manager
         $auth->addChild($manager, $moder); // Менеджер наследует модератора
         $auth->addChild($manager, $userManager); // Менеджеру разрешаем управление пользователями

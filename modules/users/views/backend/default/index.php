@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'update' => function ($url, $model) {
-                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) {
+                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
                                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
                                         'data' => [
                                             'toggle' => 'tooltip',
