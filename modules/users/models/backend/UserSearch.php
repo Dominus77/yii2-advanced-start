@@ -99,7 +99,10 @@ class UserSearch extends User
             ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'last_visit', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
 
-        $dataProvider->pagination->pageSize = $this->pageSize;
+        if($this->pageSize) {
+            $dataProvider->pagination->pageSize = $this->pageSize;
+        }
+
         $dataProvider->pagination->totalCount = $query->count();
         return $dataProvider;
     }

@@ -19,6 +19,7 @@ return [
     'USER_NEW_PASSWORD' => 'New password',
     'USER_REPEAT_PASSWORD' => 'Repeat password',
     'REGISTRATION_TYPE' => 'Registration Type',
+    'AVATAR' => 'Avatar',
 
     'STATUS_BLOCKED' => 'Blocked',
     'STATUS_ACTIVE' => 'Active',
@@ -32,6 +33,7 @@ return [
     'TITLE_UPDATE' => 'Update',
     'TITLE_UPDATE_USER' => 'Update User',
     'TITLE_CREATE_USER' => 'New User',
+    'TITLE_UPLOAD' => 'Upload Form',
 
     'TEXT_LOGIN_START_SESSION' => 'Sign in to start your session',
 
@@ -41,6 +43,7 @@ return [
     'BUTTON_SAVE' => 'Save',
     'BUTTON_DELETE' => 'Delete',
     'BUTTON_SIGN_IN' => 'Sign In',
+    'BUTTON_UPLOAD' => 'Upload',
 
     'SELECT_ALL' => '- All -',
     'SELECT_TEXT' => '- Input text -',

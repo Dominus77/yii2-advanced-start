@@ -2,5 +2,5 @@
 return [
     'adminEmail' => '',
     'supportEmail' => '',
-    'user.pageSize' => 10,
+    'user.pageSize' => 25,
 ];

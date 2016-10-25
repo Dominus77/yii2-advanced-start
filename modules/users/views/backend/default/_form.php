@@ -7,13 +7,22 @@ use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
+/* @var $uploadModel modules\users\models\UploadForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="users-backend-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype' => 'multipart/form-data'
+        ]
+    ]); ?>
     <div class="box-body">
+
+        <div class="form-group">
+            <?= $form->field($model, 'imageFile')->fileInput() ?>
+        </div>
 
         <div class="form-group">
             <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'class' => 'form-control']) ?>

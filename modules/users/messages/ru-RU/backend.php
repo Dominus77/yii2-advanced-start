@@ -19,6 +19,7 @@ return [
     'USER_NEW_PASSWORD' => 'Новый пароль',
     'USER_REPEAT_PASSWORD' => 'Повторить пароль',
     'REGISTRATION_TYPE' => 'Тип регистрации',
+    'AVATAR' => 'Аватар',
 
     'STATUS_BLOCKED' => 'Заблокирован',
     'STATUS_ACTIVE' => 'Активно',
@@ -32,6 +33,7 @@ return [
     'TITLE_UPDATE' => 'Редактирование',
     'TITLE_UPDATE_USER' => 'Редактирование пользователя',
     'TITLE_CREATE_USER' => 'Новый пользователь',
+    'TITLE_UPLOAD' => 'Форма загрузки',
 
     'TEXT_LOGIN_START_SESSION' => 'Войдите на сайт, чтобы начать сеанс',
 
@@ -41,6 +43,7 @@ return [
     'BUTTON_SAVE' => 'Сохранить',
     'BUTTON_DELETE' => 'Удалить',
     'BUTTON_SIGN_IN' => 'Войти',
+    'BUTTON_UPLOAD' => 'Загрузить',
 
     'SELECT_ALL' => '- все -',
     'SELECT_TEXT' => '- текст -',

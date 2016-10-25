@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
+                    'avatar',
                     'username',
                     'first_name',
                     'last_name',

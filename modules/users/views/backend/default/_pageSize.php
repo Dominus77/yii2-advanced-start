@@ -1,6 +1,7 @@
 <?php
 
 use yii\widgets\ActiveForm;
+use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\backend\UserSearch */
@@ -27,9 +28,10 @@ $this->registerJs($script, yii\web\View::POS_BEGIN);
             10 => 10,
             25 => 25,
             50 => 50,
-            100 => 100,
+            100 => 100
         ], [
             'class' => 'form-control',
+            'prompt' => Module::t('backend', 'SELECT_ALL'),
             'onchange' => 'submitForm()',
         ])->label(false) ?>
     </div>

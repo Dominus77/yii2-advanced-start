@@ -6,6 +6,8 @@ use Yii;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
 use modules\users\models\backend\UserSearch;
+use modules\users\models\UploadForm;
+use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,7 +47,7 @@ class DefaultController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['create','update','delete'],
+                        'actions' => ['create', 'update', 'upload', 'delete'],
                         'allow' => true,
                         'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER],
                     ],
@@ -89,15 +91,20 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $uploadModel = new UploadForm();
+
         $model->role = $model::RBAC_DEFAULT_ROLE;
         $model->status = $model::STATUS_WAIT;
         $model->registration_type = Yii::$app->user->identity->getId();
 
         if ($model->load(Yii::$app->request->post())) {
+            $uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if($model->save()) {
                 $authManager = Yii::$app->getAuthManager();
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
+
+                $uploadModel->upload($model->id);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -115,6 +122,8 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $uploadModel = new UploadForm();
+
         $model->role = $model->getUserRoleValue();
         $_role = $model->role;
 
@@ -134,8 +143,11 @@ class DefaultController extends Controller
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
             }
-            if($model->save())
+
+            $uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if($uploadModel->upload($model->id)) {
                 return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
         return $this->render('update', [
             'model' => $model,

@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 use yii\helpers\VarDumper;
@@ -27,6 +28,7 @@ use yii\helpers\VarDumper;
  * @property string $password write-only password
  * @property integer $last_visit
  * @property string $email_confirm_token
+ * @property string $avatar
  * @property string $first_name
  * @property string $last_name
  * @property string $registration_type
@@ -40,6 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
     const RBAC_DEFAULT_ROLE = BackendRbac::ROLE_USER;
 
     public $role;
+    public $imageFile;
 
     /**
      * @inheritdoc
@@ -83,7 +86,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
 
-            [['role', 'registration_type'], 'safe'],
+            [['role', 'registration_type', 'avatar', 'imageFile'], 'safe'],
         ];
     }
 
@@ -102,9 +105,11 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => Module::t('backend', 'STATUS'),
             'role' => Module::t('backend', 'ROLE'),
             'userRoleName' => Module::t('backend', 'ROLE'),
+            'avatar' => Module::t('backend', 'AVATAR'),
             'first_name' => Module::t('backend', 'FIRST_NAME'),
             'last_name' => Module::t('backend', 'LAST_NAME'),
             'registration_type' => Module::t('backend', 'REGISTRATION_TYPE'),
+            'imageFile' => Module::t('backend', 'AVATAR'),
         ];
     }
 
@@ -453,6 +458,19 @@ class User extends ActiveRecord implements IdentityInterface
         $authManager = Yii::$app->getAuthManager();
         if ($authManager->getRolesByUser($this->id)) {
             $authManager->revokeAll($this->id);
+        }
+        // Удаляем аватарку
+        if ($this->avatar) {
+            $upload = Yii::$app->getModule('users')->uploads;
+            $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $this->id);
+            $file = $path . DIRECTORY_SEPARATOR . $this->avatar;
+            if (file_exists($file)) {
+                unlink($file);
+                // и папку пользователя
+                if (is_dir($path)) {
+                    @rmdir($path);
+                }
+            }
         }
         return true;
     }
