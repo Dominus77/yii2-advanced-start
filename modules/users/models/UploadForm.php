@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
 use yii\helpers\url;
+use yii\helpers\ArrayHelper;
 use yii\imagine\Image;
 
 class UploadForm extends Model
@@ -14,6 +15,17 @@ class UploadForm extends Model
      * @var UploadedFile
      */
     public $imageFile;
+    public $imageSize = [100 ,100];
+    private $module;
+
+    public function init()
+    {
+        parent::init();
+        $this->module = Yii::$app->getModule('users');
+        if($this->module->imageSize) {
+            $this->imageSize = ArrayHelper::merge($this->module->imageSize, $this->imageSize);
+        }
+    }
 
     public function rules()
     {
@@ -52,7 +64,7 @@ class UploadForm extends Model
             $tmp = '_' . $name;
             if ($file->saveAs($path . '/' . $tmp)) {
                 $model->avatar = $name;
-                Image::thumbnail($path . '/' . $tmp, 100, 100)
+                Image::thumbnail($path . '/' . $tmp, $this->imageSize[0], $this->imageSize[1])
                     ->save($path . '/' . $model->avatar, ['quality' => 80]);
                 if (file_exists($path . '/' . $tmp))
                     unlink($path . '/' . $tmp);
@@ -83,7 +95,7 @@ class UploadForm extends Model
      */
     public function getUserDirectory($user_id)
     {
-        $upload = Yii::$app->getModule('users')->uploads;
+        $upload = $this->module->uploads;
         $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $user_id);
         if (!file_exists($path)) {
             mkdir($path, 0700, true);

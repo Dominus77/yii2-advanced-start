@@ -114,6 +114,19 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return string
+     */
+    public function getAvatarPath()
+    {
+        if ($this->avatar != null) {
+            $upload = Yii::$app->getModule('users')->uploads;
+            $path = Yii::$app->params['domainFrontend'] . '/' . $upload . '/' . $this->id . '/' . $this->avatar;
+            return $path;
+        }
+        return null;
+    }
+
+    /**
      * @return array
      */
     public static function getStatusesArray()
@@ -130,7 +143,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getRegistrationType()
     {
-        if($this->registration_type > 0) {
+        if ($this->registration_type > 0) {
             if (($model = User::findOne($this->registration_type)) !== null) {
                 return $model->username;
             }
@@ -222,7 +235,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getUserFullName()
     {
-        if(Yii::$app->getUser()) {
+        if (Yii::$app->getUser()) {
             if ($this->first_name && $this->last_name) {
                 $fullName = $this->first_name . ' ' . $this->last_name;
             } else if ($this->first_name) {

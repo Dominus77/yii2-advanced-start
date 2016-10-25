@@ -58,14 +58,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     [
-                        'attribute' => 'avatar',
-                        'filter' => false,
-                        'format' => 'raw',
-                        'value' => function($data) {
-                            return 'image.jpg';
-                        }
-                    ],
-                    [
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
                             'class' => 'form-control',
@@ -75,7 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]),
                         'label' => Module::t('backend', 'TITLE_USERS'),
-                        'format' => 'raw'
+                        'format' => 'raw',
+                        'value' => function($data) {
+                            return $this->render('avatar_column', ['model' => $data]);
+                        }
                     ],
                     [
                         'attribute' => 'email',

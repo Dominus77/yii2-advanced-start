@@ -22,8 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'avatar',
-                    'username',
+                    [
+                        'attribute' => 'avatar',
+                        'format' => 'raw',
+                        'value' => $this->render('avatar_column', ['model' => $model]),
+                    ],
                     'first_name',
                     'last_name',
                     'email:email',
