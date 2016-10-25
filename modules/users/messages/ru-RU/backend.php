@@ -20,6 +20,7 @@ return [
     'USER_REPEAT_PASSWORD' => 'Повторить пароль',
     'REGISTRATION_TYPE' => 'Тип регистрации',
     'AVATAR' => 'Аватар',
+    'DELETE_AVATAR' => 'Удалить аватар',
 
     'STATUS_BLOCKED' => 'Заблокирован',
     'STATUS_ACTIVE' => 'Активно',

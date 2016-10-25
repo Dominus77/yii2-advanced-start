@@ -3,6 +3,7 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
+use yii\helpers\Url;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
 use modules\users\models\backend\UserSearch;
@@ -96,6 +97,8 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
+
         $uploadModel = new UploadForm();
 
         $model->role = $model::RBAC_DEFAULT_ROLE;
@@ -127,6 +130,9 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+        $avatar = $model->avatar;
+
         $uploadModel = new UploadForm();
 
         $model->role = $model->getUserRoleValue();
@@ -147,6 +153,17 @@ class DefaultController extends Controller
                 // Привязываем новую
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
+            }
+
+            if($model->isDel) {
+                if ($avatar) {
+                    $upload = Yii::$app->getModule('users')->uploads;
+                    $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
+                    $avatar = $path . '/' . $avatar;
+                    if (file_exists($avatar))
+                        unlink($avatar);
+                    $model->avatar = null;
+                }
             }
 
             if($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {

@@ -43,6 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $role;
     public $imageFile;
+    public $isDel;
 
     /**
      * @inheritdoc
@@ -86,7 +87,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
 
-            [['role', 'registration_type', 'avatar', 'imageFile'], 'safe'],
+            [['role', 'registration_type', 'avatar', 'imageFile', 'isDel'], 'safe'],
         ];
     }
 
@@ -110,6 +111,7 @@ class User extends ActiveRecord implements IdentityInterface
             'last_name' => Module::t('backend', 'LAST_NAME'),
             'registration_type' => Module::t('backend', 'REGISTRATION_TYPE'),
             'imageFile' => Module::t('backend', 'AVATAR'),
+            'isDel' => Module::t('backend', 'DELETE_AVATAR'),
         ];
     }
 

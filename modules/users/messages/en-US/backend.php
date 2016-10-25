@@ -20,6 +20,7 @@ return [
     'USER_REPEAT_PASSWORD' => 'Repeat password',
     'REGISTRATION_TYPE' => 'Registration Type',
     'AVATAR' => 'Avatar',
+    'DELETE_AVATAR' => 'Remove Avatar',
 
     'STATUS_BLOCKED' => 'Blocked',
     'STATUS_ACTIVE' => 'Active',

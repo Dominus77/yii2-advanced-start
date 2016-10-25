@@ -6,7 +6,7 @@ use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
+/* @var $model modules\users\models\backend\User */
 /* @var $uploadModel modules\users\models\UploadForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
@@ -20,6 +20,19 @@ use modules\users\Module;
     ]); ?>
     <div class="box-body">
 
+        <?php if ($model->scenario == $model::SCENARIO_ADMIN_UPDATE) : ?>
+            <div class="row">
+                <div class="col-md-4">
+                    <?= $this->render('avatar_column', ['model' => $model]); ?>
+                    <?php if($model->avatar) : ?>
+                    <div class="form-group icheck">
+                        <?= $form->field($model, 'isDel')->checkbox() ?>
+                    </div>
+                    <?php endif; ?>
+                    <hr>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="form-group">
             <?= $form->field($model, 'imageFile')->fileInput() ?>
         </div>
