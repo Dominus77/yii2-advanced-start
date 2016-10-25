@@ -11,20 +11,20 @@ use yii\helpers\Html;
 
 <?php if ($path = $model->avatarPath) : ?>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-7  text-center">
             <div class="col-md-12">
                 <?= Html::img($model->avatarPath, ['class' => 'img-circle img-responsive center-block', 'alt' => 'avatar_' . $model->username]); ?>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12">
                 <?= $model->username; ?>
             </div>
         </div>
     </div>
 <?php else : ?>
     <div class="row">
-        <div class="col-md-9 text-center">
+        <div class="col-md-7 text-center">
             <div class="col-md-12">
-                <i style="color:#b9b9b9;" class="fa fa-user-circle fa-5x"></i>
+                <i style="color:#b9b9b9;" class="fa fa-user-circle fa-4x"></i>
             </div>
             <div class="col-md-12">
                 <?= $model->username; ?>

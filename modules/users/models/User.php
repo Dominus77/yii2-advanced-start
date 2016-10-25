@@ -481,10 +481,10 @@ class User extends ActiveRecord implements IdentityInterface
             $file = $path . DIRECTORY_SEPARATOR . $this->avatar;
             if (file_exists($file)) {
                 unlink($file);
-                // и папку пользователя
-                if (is_dir($path)) {
-                    @rmdir($path);
-                }
+            }
+            // и папку пользователя
+            if (is_dir($path)) {
+                @rmdir($path);
             }
         }
         return true;

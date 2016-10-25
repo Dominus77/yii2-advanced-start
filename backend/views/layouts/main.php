@@ -10,6 +10,7 @@ use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use modules\rbac\models\Rbac as BackendRbac;
+use modules\users\components\widgets\AvatarWidget;
 
 AppAsset::register($this);
 ?>
@@ -123,17 +124,28 @@ AppAsset::register($this);
                     </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img
-                                src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@adminlte/dist') . '/img/user2-160x160.jpg' ?>"
-                                class="user-image" alt="User Image">
+                            <?= AvatarWidget::widget([
+                                'defaultOptions' => [
+                                    'class' => 'fa fa-user-circle',
+                                    'style' => 'color:#b9b9b9',
+                                ],
+                                'imageOtions' => [
+                                    'class' => 'user-image',
+                                ],
+                            ]); ?>
                             <span class="hidden-xs"><?= Yii::$app->user->identity->getUserFullName(); ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img
-                                    src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@adminlte/dist') . '/img/user2-160x160.jpg' ?>"
-                                    class="img-circle" alt="User Image">
-
+                                <?= AvatarWidget::widget([
+                                    'defaultOptions' => [
+                                        'class' => 'fa fa-user-circle fa-5x',
+                                        'style' => 'color:#b9b9b9',
+                                    ],
+                                    'imageOtions' => [
+                                        'class' => 'img-circle',
+                                    ],
+                                ]); ?>
                                 <p>
                                     <?= Yii::$app->user->identity->getUserFullName(); ?> - <?= Yii::$app->user->identity->getUserRoleName(); ?>
                                     <small>Member since Nov. 2012</small>
@@ -178,9 +190,15 @@ AppAsset::register($this);
 
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img
-                        src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@adminlte/dist') . '/img/user2-160x160.jpg' ?>"
-                        class="img-circle" alt="User Image">
+                    <?= AvatarWidget::widget([
+                        'defaultOptions' => [
+                            'class' => 'fa fa-user-circle fa-3x',
+                            'style' => 'color:#b9b9b9',
+                        ],
+                        'imageOtions' => [
+                            'class' => 'img-circle',
+                        ],
+                    ]); ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= Yii::$app->user->identity->getUserFullName(); ?></p>

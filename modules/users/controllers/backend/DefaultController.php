@@ -135,7 +135,8 @@ class DefaultController extends Controller
 
         $uploadModel = new UploadForm();
 
-        $model->role = $model->getUserRoleValue();
+        $user_role = $model->getUserRoleValue();
+        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
         $_role = $model->role;
 
         if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
