@@ -2,7 +2,7 @@ Yii 2 Advanced Start Project Template
 ===============================
 
 The application is built using advanced pattern and has a modular structure.
-Backend part uses AdminLTE template
+Backend part uses [AdminLTE](https://almsaeedstudio.com) template
 Available console user management commands and RBAC system.
 
 - [Web page](http://dominus77.github.io/yii2-advanced-start)
