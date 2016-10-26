@@ -19,8 +19,8 @@ return [
     'USER_NEW_PASSWORD' => 'New password',
     'USER_REPEAT_PASSWORD' => 'Repeat password',
     'REGISTRATION_TYPE' => 'Registration Type',
-    'AVATAR' => 'Avatar',
-    'DELETE_AVATAR' => 'Remove Avatar',
+    'AVATAR' => 'Photo',
+    'DELETE_AVATAR' => 'Remove Photo',
 
     'STATUS_BLOCKED' => 'Blocked',
     'STATUS_ACTIVE' => 'Active',
@@ -35,6 +35,9 @@ return [
     'TITLE_UPDATE_USER' => 'Update User',
     'TITLE_CREATE_USER' => 'New User',
     'TITLE_UPLOAD' => 'Upload Form',
+    'TITLE_PROFILE' => 'Profile',
+    'TITLE_PASSWORD' => 'Password',
+    'TITLE_PHOTO' => 'Photo',
 
     'TEXT_LOGIN_START_SESSION' => 'Sign in to start your session',
 

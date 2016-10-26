@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-xs-8">
         <div class="checkbox icheck">
-            <?= $form->field($model, 'rememberMe')->checkbox(); ?>
+            <?= $form->field($model, 'rememberMe')->checkbox(['class' => 'iCheck']); ?>
         </div>
     </div>
     <div class="col-xs-4">

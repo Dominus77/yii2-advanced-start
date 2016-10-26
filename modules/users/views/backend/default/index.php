@@ -70,7 +70,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'value' => function($data) {
                             return $this->render('avatar_column', ['model' => $data]);
-                        }
+                        },
+                        'headerOptions' => ['width' => '100'],
                     ],
                     [
                         'attribute' => 'email',

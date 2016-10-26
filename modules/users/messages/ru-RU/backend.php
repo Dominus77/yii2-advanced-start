@@ -9,7 +9,7 @@ return [
     'CREATED' => 'Создано',
     'UPDATED' => 'Обновлено',
     'LAST_VISIT' => 'Последний визит',
-    'USERNAME' => 'Имя пользователя',
+    'USERNAME' => 'Пользователь',
     'EMAIL' => 'Email',
     'STATUS' => 'Статус',
     'FIRST_NAME' => 'Имя',
@@ -19,8 +19,8 @@ return [
     'USER_NEW_PASSWORD' => 'Новый пароль',
     'USER_REPEAT_PASSWORD' => 'Повторить пароль',
     'REGISTRATION_TYPE' => 'Тип регистрации',
-    'AVATAR' => 'Аватар',
-    'DELETE_AVATAR' => 'Удалить аватар',
+    'AVATAR' => 'Фото',
+    'DELETE_AVATAR' => 'Удалить фото',
 
     'STATUS_BLOCKED' => 'Заблокирован',
     'STATUS_ACTIVE' => 'Активно',
@@ -35,6 +35,9 @@ return [
     'TITLE_UPDATE_USER' => 'Редактирование пользователя',
     'TITLE_CREATE_USER' => 'Новый пользователь',
     'TITLE_UPLOAD' => 'Форма загрузки',
+    'TITLE_PROFILE' => 'Профиль',
+    'TITLE_PASSWORD' => 'Пароль',
+    'TITLE_PHOTO' => 'Фото',
 
     'TEXT_LOGIN_START_SESSION' => 'Войдите на сайт, чтобы начать сеанс',
 
