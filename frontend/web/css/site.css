@@ -114,3 +114,17 @@ div.required label:after {
     content: " *";
     color: red;
 }
+
+.nav-tabs-custom > .tab-content {
+    background: #fff none repeat scroll 0 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 10px;
+}
+
+.profile-user-img {
+    border: 3px solid #d2d6de;
+    margin: 0 auto;
+    padding: 3px;
+    width: 100px;
+}

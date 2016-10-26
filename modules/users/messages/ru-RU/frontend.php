@@ -12,6 +12,15 @@ return [
     'USERNAME' => 'Имя пользователя',
     'PASSWORD' => 'Пароль',
     'REMEMBER_ME' => 'Запомни меня',
+    'CURRENT_PASSWORD' => 'Текущий пароль',
+    'NEW_PASSWORD' => 'Новый пароль',
+    'REPEAT_PASSWORD' => 'Повторить пароль',
+
+    'TITLE_MY_PROFILE' => 'Мой профиль',
+    'TITLE_PROFILE' => 'Профиль',
+    'TITLE_UPDATE' => 'Редактирование',
+    'TITLE_PASSWORD' => 'Пароль',
+    'TITLE_PHOTO' => 'Фото',
 
     'TITLE_SIGN_UP' => 'Регистрация',
     'EMAIL_UNIQUE' => 'Этот адрес уже используется.',
@@ -22,11 +31,15 @@ return [
     'BUTTON_SAVE' => 'Сохранить',
     'TITLE_REQUEST_PASSWORD_RESET' => 'Сброс пароля',
     'BUTTON_SEND' => 'Отправить',
+    'BUTTON_UPDATE' => 'Редактировать',
+    'BUTTON_DELETE' => 'Удалить',
 
     'EMAIL_CONFIRMATION' => 'Электронное письмо с подтверждением',
     'PASSWORD_RESET_FOR' => 'Восстановление пароля для',
 
     'MSG_NOT_USERS_FOR_EMAIL' => 'Нет ни одного пользователя с такой электронной почтой.',
+    'MSG_INPUT_CURRENT_PASSWORD' => 'Укажите текущий пароль.',
+    'MSG_INCORRECT_CURRENT_PASSWORD' => 'Текущий пароль указан не верно.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'Если вы забыли пароль, воспользуйтесь {:Link}',
     'TEXT_RESET_IT' => 'формой сброса',

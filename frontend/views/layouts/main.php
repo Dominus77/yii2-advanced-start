@@ -46,7 +46,7 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => Yii::t('app', 'NAV_MY_MENU'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/user/default/index']],
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/users/default/index']],
                 ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];

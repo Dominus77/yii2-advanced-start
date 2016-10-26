@@ -38,6 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
+    const STATUS_DELETE = 3;
 
     const RBAC_DEFAULT_ROLE = BackendRbac::ROLE_USER;
 
@@ -137,6 +138,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => Module::t('backend', 'STATUS_BLOCKED'),
             self::STATUS_ACTIVE => Module::t('backend', 'STATUS_ACTIVE'),
             self::STATUS_WAIT => Module::t('backend', 'STATUS_WAIT'),
+            self::STATUS_DELETE => Module::t('backend', 'STATUS_DELETE'),
         ];
     }
 
@@ -162,6 +164,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => 'default',
             self::STATUS_ACTIVE => 'success',
             self::STATUS_WAIT => 'warning',
+            self::STATUS_DELETE => 'danger',
         ];
     }
 

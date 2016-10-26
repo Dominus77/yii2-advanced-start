@@ -25,6 +25,7 @@ return [
     'STATUS_BLOCKED' => 'Blocked',
     'STATUS_ACTIVE' => 'Active',
     'STATUS_WAIT' => 'Wait',
+    'STATUS_DELETE' => 'Delete',
 
     'SYSTEM' => 'System',
 

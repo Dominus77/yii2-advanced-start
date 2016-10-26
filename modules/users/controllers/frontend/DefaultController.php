@@ -3,7 +3,11 @@
 namespace modules\users\controllers\frontend;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
+use modules\users\models\frontend\User;
+use modules\users\models\UploadForm;
+use yii\web\UploadedFile;
 use modules\users\models\frontend\SignupForm;
 use modules\users\models\LoginForm;
 use modules\users\models\frontend\EmailConfirmForm;
@@ -13,6 +17,9 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
+use yii\bootstrap\ActiveForm;
+use yii\web\Response;
 
 /**
  * Default controller for the `users` module
@@ -26,6 +33,7 @@ class DefaultController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'delete' => ['post'],
                 ],
             ],
             'access' => [
@@ -36,13 +44,83 @@ class DefaultController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
         ];
+    }
+
+    /**
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionIndex()
+    {
+        return $this->render('index', [
+            'model' => $this->findModel(),
+        ]);
+    }
+
+    /**
+     * @return array|string|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
+        $avatar = $model->avatar;
+
+        $uploadModel = new UploadForm();
+
+        $user_role = $model->getUserRoleValue();
+        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->isDel) {
+                if ($avatar) {
+                    $upload = Yii::$app->getModule('users')->uploads;
+                    $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
+                    $avatar = $path . '/' . $avatar;
+                    if (file_exists($avatar))
+                        unlink($avatar);
+                    $model->avatar = null;
+                }
+            }
+
+            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
+                $uploadModel->upload($model->id);
+            } else {
+                $model->save();
+            }
+            return $this->redirect(['index']);
+        }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Deletes an existing User model.
+     * This delete set status blocked, is successful, logout and the browser will be redirected to the 'home' page.
+     * @return mixed
+     */
+    public function actionDelete()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PROFILE_DELETE;
+        $model->status = $model::STATUS_DELETE;
+        if($model->save())
+            Yii::$app->user->logout();
+        return $this->goHome();
     }
 
     /**
@@ -167,5 +245,21 @@ class DefaultController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel()
+    {
+        $id = Yii::$app->user->identity->getId();
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

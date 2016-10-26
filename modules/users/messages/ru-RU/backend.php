@@ -25,6 +25,7 @@ return [
     'STATUS_BLOCKED' => 'Заблокирован',
     'STATUS_ACTIVE' => 'Активно',
     'STATUS_WAIT' => 'Ожидает',
+    'STATUS_DELETE' => 'Удален',
 
     'SYSTEM' => 'Система',
 

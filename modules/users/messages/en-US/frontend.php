@@ -12,6 +12,13 @@ return [
     'USERNAME' => 'Username',
     'PASSWORD' => 'Password',
     'REMEMBER_ME' => 'Remember Me',
+    'CURRENT_PASSWORD' => 'Current Password',
+    'NEW_PASSWORD' => 'New Password',
+    'REPEAT_PASSWORD' => 'Repeat Password',
+
+    'TITLE_MY_PROFILE' => 'My Profile',
+    'TITLE_PROFILE' => 'Profile',
+    'TITLE_UPDATE' => 'Update',
 
     'TITLE_SIGN_UP' => 'Sign Up',
     'EMAIL_UNIQUE' => 'This email address has already been taken.',
@@ -22,11 +29,15 @@ return [
     'BUTTON_SAVE' => 'Save',
     'TITLE_REQUEST_PASSWORD_RESET' => 'Request password reset',
     'BUTTON_SEND' => 'Send',
+    'BUTTON_UPDATE' => 'Update',
+    'BUTTON_DELETE' => 'Delete',
 
     'EMAIL_CONFIRMATION' => 'Email confirmation for',
     'PASSWORD_RESET_FOR' => 'Password reset for',
 
     'MSG_NOT_USERS_FOR_EMAIL' => 'There is no user with such email.',
+    'MSG_INPUT_CURRENT_PASSWORD' => 'Enter your current password.',
+    'MSG_INCORRECT_CURRENT_PASSWORD' => 'Incorrect current password.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'If you forgot your password you can {:Link}',
     'TEXT_RESET_IT' => 'reset it',

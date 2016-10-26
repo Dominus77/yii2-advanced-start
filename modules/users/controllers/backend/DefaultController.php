@@ -107,7 +107,7 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if($model->save()) {
+            if ($model->save()) {
                 $authManager = Yii::$app->getAuthManager();
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
@@ -146,17 +146,17 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             // Если изменена роль
-            if($_role != $model->role) {
+            if ($_role != $model->role) {
                 $authManager = Yii::$app->getAuthManager();
                 // Отвязываем старую роль если она существует
-                if($role = $authManager->getRole($_role))
+                if ($role = $authManager->getRole($_role))
                     $authManager->revoke($role, $model->id);
                 // Привязываем новую
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
             }
 
-            if($model->isDel) {
+            if ($model->isDel) {
                 if ($avatar) {
                     $upload = Yii::$app->getModule('users')->uploads;
                     $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
@@ -167,7 +167,7 @@ class DefaultController extends Controller
                 }
             }
 
-            if($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
+            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
                 $uploadModel->upload($model->id);
             } else {
                 $model->save();
