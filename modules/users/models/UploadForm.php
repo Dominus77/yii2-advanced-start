@@ -15,14 +15,14 @@ class UploadForm extends Model
      * @var UploadedFile
      */
     public $imageFile;
-    public $imageSize = [100 ,100];
+    public $imageSize = [100, 100];
     private $module;
 
     public function init()
     {
         parent::init();
         $this->module = Yii::$app->getModule('users');
-        if($this->module->imageSize) {
+        if ($this->module->imageSize) {
             $this->imageSize = ArrayHelper::merge($this->module->imageSize, $this->imageSize);
         }
     }
@@ -69,12 +69,11 @@ class UploadForm extends Model
                 if (file_exists($path . '/' . $tmp))
                     unlink($path . '/' . $tmp);
                 $model->save();
+                return true;
             }
-
-            return true;
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     /**

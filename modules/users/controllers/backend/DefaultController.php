@@ -172,7 +172,6 @@ class DefaultController extends Controller
             } else {
                 $model->save();
             }
-
             return $this->redirect(['view', 'id' => $model->id]);
 
         }

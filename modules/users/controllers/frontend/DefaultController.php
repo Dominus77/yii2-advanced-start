@@ -4,6 +4,7 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use modules\users\models\frontend\User;
 use modules\users\models\UploadForm;
@@ -85,6 +86,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
+
             if ($model->isDel) {
                 if ($avatar) {
                     $upload = Yii::$app->getModule('users')->uploads;
@@ -97,10 +99,11 @@ class DefaultController extends Controller
             }
 
             if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
-                $uploadModel->upload($model->id);
+                $uploadModel->upload();
             } else {
                 $model->save();
             }
+
             return $this->redirect(['index']);
         }
         return $this->render('update', [

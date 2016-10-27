@@ -40,6 +40,7 @@ return [
     'MSG_NOT_USERS_FOR_EMAIL' => 'Нет ни одного пользователя с такой электронной почтой.',
     'MSG_INPUT_CURRENT_PASSWORD' => 'Укажите текущий пароль.',
     'MSG_INCORRECT_CURRENT_PASSWORD' => 'Текущий пароль указан не верно.',
+    'MSG_INCORRECT_EMAIL_OR_PASSWORD' => 'Не правильный пароль или email.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'Если вы забыли пароль, воспользуйтесь {:Link}',
     'TEXT_RESET_IT' => 'формой сброса',

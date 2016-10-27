@@ -17,9 +17,6 @@ class User extends \modules\users\models\User
     const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
     const SCENARIO_PROFILE_DELETE = 'profileDelete';
 
-    const LENGTH_STRING_PASSWORD_MIN = 6;
-    const LENGTH_STRING_PASSWORD_MAX = 16;
-
     public $currentPassword;
     public $newPassword;
     public $newPasswordRepeat;

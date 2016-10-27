@@ -40,6 +40,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     const STATUS_DELETE = 3;
 
+    const LENGTH_STRING_PASSWORD_MIN = 6;
+    const LENGTH_STRING_PASSWORD_MAX = 16;
+
     const RBAC_DEFAULT_ROLE = BackendRbac::ROLE_USER;
 
     public $role;

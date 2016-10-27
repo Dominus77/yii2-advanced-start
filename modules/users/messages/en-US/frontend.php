@@ -38,6 +38,7 @@ return [
     'MSG_NOT_USERS_FOR_EMAIL' => 'There is no user with such email.',
     'MSG_INPUT_CURRENT_PASSWORD' => 'Enter your current password.',
     'MSG_INCORRECT_CURRENT_PASSWORD' => 'Incorrect current password.',
+    'MSG_INCORRECT_EMAIL_OR_PASSWORD' => 'Incorrect email or password.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'If you forgot your password you can {:Link}',
     'TEXT_RESET_IT' => 'reset it',

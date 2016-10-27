@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use modules\users\models\frontend\User;
 use modules\users\components\widgets\passfield\Passfield;
 use modules\users\Module;
 
@@ -41,8 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'showWarn' => true,
                         'showTip' => true,
                         'length' => [
-                            'min' => $model::LENGTH_STRING_PASSWORD_MIN,
-                            'max' => $model::LENGTH_STRING_PASSWORD_MAX,
+                            'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                            'max' => User::LENGTH_STRING_PASSWORD_MAX,
                         ]
                     ],
                 ]); ?>

@@ -40,9 +40,9 @@ use modules\users\Module;
                     'format' => 'raw',
                     'value' => $model->statusLabelName,
                 ],
-                'last_visit:datetime',
                 'created_at:datetime',
                 'updated_at:datetime',
+                'last_visit:datetime',
                 [
                     'attribute' => 'registration_type',
                     'format' => 'raw',

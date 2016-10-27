@@ -3,7 +3,6 @@ namespace modules\users\models\frontend;
 
 use Yii;
 use yii\base\Model;
-use modules\users\models\User;
 use modules\users\Module;
 
 /**
@@ -15,9 +14,6 @@ class SignupForm extends Model
     public $email;
     public $password;
 
-    const LENGTH_STRING_PASSWORD_MIN = 6;
-    const LENGTH_STRING_PASSWORD_MAX = 16;
-
     /**
      * @inheritdoc
      */
@@ -26,17 +22,18 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            //['username', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            ['username', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('frontend', 'USERNAME_UNIQUE')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t('frontend', 'EMAIL_UNIQUE')],
+            ['email', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('frontend', 'EMAIL_UNIQUE')],
 
             ['password', 'required'],
-            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            ['password', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
         ];
     }
 

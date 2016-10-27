@@ -59,7 +59,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, Module::t('frontend', 'MSG_INCORRECT_EMAIL_OR_PASSWORD'));
             }
         }
     }
