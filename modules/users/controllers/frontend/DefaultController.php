@@ -106,8 +106,6 @@ class DefaultController extends Controller
     public function actionUpdateProfile()
     {
         $model = $this->findModel();
-        //$model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-
         $user_role = $model->getUserRoleValue();
         $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
 
