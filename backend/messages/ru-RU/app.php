@@ -29,6 +29,7 @@ return [
     'HEADER' => 'Панель управления',
     'Home' => 'Главная',
     'All rights reserved.' => 'Все права защищены.',
+    'Member since' => 'Регистрация',
 
     /*Right panel*/
     'Recent Activity' => 'Ближайшие события',

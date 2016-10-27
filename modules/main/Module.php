@@ -9,6 +9,15 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
+    public function behaviors()
+    {
+        return [
+            'rateLimiter' => [
+                'class' => \yii\filters\RateLimiter::className(),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

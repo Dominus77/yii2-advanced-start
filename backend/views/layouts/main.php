@@ -147,8 +147,9 @@ AppAsset::register($this);
                                     ],
                                 ]); ?>
                                 <p>
-                                    <?= Yii::$app->user->identity->getUserFullName(); ?> - <?= Yii::$app->user->identity->getUserRoleName(); ?>
-                                    <small>Member since Nov. 2012</small>
+                                    <?= Yii::$app->user->identity->getUserFullName(); ?>
+                                    - <?= Yii::$app->user->identity->getUserRoleName(); ?>
+                                    <small><?= Yii::t('app', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -167,7 +168,8 @@ AppAsset::register($this);
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
+                                    <a href="<?= Url::to(['/users/default/view', 'id' => Yii::$app->user->identity->getId()]); ?>"
+                                       class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="<?= Url::to(['/users/default/logout']); ?>" data-method="post"

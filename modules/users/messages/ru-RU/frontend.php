@@ -46,6 +46,8 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Пароль успешно изменён.',
     'MSG_INCORRECT_INPUT_FIELDS' => 'Не все поля заполнены корректно.',
 
+    'CONFIRM_PROFILE_DELETE' => 'Вы действительно хотите удалить профиль?',
+
     'TEXT_FORGOT_PASSWORD {:Link}' => 'Если вы забыли пароль, воспользуйтесь {:Link}',
     'TEXT_RESET_IT' => 'формой сброса',
     'TEXT_FOLLOWING_FIELDS_SIGN_UP' => 'Пожалуйста, заполните следующую форму, чтобы зарегистрироваться:',

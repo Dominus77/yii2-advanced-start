@@ -44,6 +44,8 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
     'MSG_INCORRECT_INPUT_FIELDS' => 'Not all fields are filled in correctly.',
 
+    'CONFIRM_PROFILE_DELETE' => 'Are you sure you want to delete the profile?',
+
     'TEXT_FORGOT_PASSWORD {:Link}' => 'If you forgot your password you can {:Link}',
     'TEXT_RESET_IT' => 'reset it',
     'TEXT_FOLLOWING_FIELDS_SIGN_UP' => 'Please fill out the following fields to sign up:',

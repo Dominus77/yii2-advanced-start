@@ -1,6 +1,7 @@
 <?php
 
 use modules\users\Module;
+use yii\bootstrap\Tabs;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
@@ -12,27 +13,30 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-backend-default-update">
     <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-            <li  class="active"><a href="#profile" data-toggle="tab"><?= Module::t('backend', 'TITLE_PROFILE'); ?></a></li>
-            <li><a href="#password" data-toggle="tab"><?= Module::t('backend', 'TITLE_PASSWORD'); ?></a></li>
-            <li><a href="#photo" data-toggle="tab"><?= Module::t('backend', 'TITLE_PHOTO'); ?></a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="active tab-pane" id="profile">
-                <?= $this->render('update/_profile', [
-                    'model' => $model,
-                ]); ?>
-            </div>
-            <div class="tab-pane" id="password">
-                <?= $this->render('update/_password', [
-                    'model' => $model,
-                ]); ?>
-            </div>
-            <div class="tab-pane" id="photo">
-                <?= $this->render('update/_photo', [
-                    'model' => $model,
-                ]); ?>
-            </div>
-        </div>
+        <?= Tabs::widget([
+            'items' => [
+                [
+                    'label' => Module::t('backend', 'TITLE_PROFILE'),
+                    'content' => $this->render('update/_profile', [
+                        'model' => $model,
+                    ]),
+                    'active' => (Yii::$app->request->get('tab') == 'profile') ? true : false,
+                ],
+                [
+                    'label' => Module::t('backend', 'TITLE_PASSWORD'),
+                    'content' => $this->render('update/_password', [
+                        'model' => $model,
+                    ]),
+                    'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
+                ],
+                [
+                    'label' => Module::t('backend', 'TITLE_PHOTO'),
+                    'content' => $this->render('update/_photo', [
+                        'model' => $model,
+                    ]),
+                    'active' => (Yii::$app->request->get('tab') == 'avatar') ? true : false,
+                ],
+            ]
+        ]); ?>
     </div>
 </div>

@@ -29,6 +29,7 @@ return [
     'HEADER' => 'Dashboard',
     'Home' => 'Home',
     'All rights reserved.' => 'All rights reserved.',
+    'Member since' => 'Member since',
 
     /*Right panel*/
     'Recent Activity' => 'Recent Activity',

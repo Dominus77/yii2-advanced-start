@@ -56,7 +56,7 @@ use modules\users\Module;
         <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('frontend', 'BUTTON_DELETE'), ['delete'], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                'confirm' => Module::t('frontend', 'CONFIRM_PROFILE_DELETE'),
                 'method' => 'post',
             ],
         ]) ?>
