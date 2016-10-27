@@ -39,6 +39,10 @@ return [
     'MSG_INPUT_CURRENT_PASSWORD' => 'Enter your current password.',
     'MSG_INCORRECT_CURRENT_PASSWORD' => 'Incorrect current password.',
     'MSG_INCORRECT_EMAIL_OR_PASSWORD' => 'Incorrect email or password.',
+    'MSG_PROFILE_SAVE_SUCCESS' => 'Profile successfully save.',
+    'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
+    'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
+    'MSG_INCORRECT_INPUT_FIELDS' => 'Not all fields are filled in correctly.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'If you forgot your password you can {:Link}',
     'TEXT_RESET_IT' => 'reset it',

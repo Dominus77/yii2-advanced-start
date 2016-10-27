@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use modules\users\components\widgets\passfield\Passfield;
 use modules\users\Module;
@@ -12,7 +13,10 @@ use modules\users\Module;
 ?>
 
 <div class="users-backend-default-update">
-    <?php $form = ActiveForm::begin([
+    <?php
+    $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+    $form = ActiveForm::begin([
+        'action' => Url::to(['update-password']),
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [
@@ -21,7 +25,8 @@ use modules\users\Module;
                 'wrapper' => 'col-sm-10',
             ],
         ],
-    ]); ?>
+    ]);
+    ?>
 
     <?= Passfield::widget([
         'form' => $form,

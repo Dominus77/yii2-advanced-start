@@ -15,6 +15,8 @@ use modules\users\Module;
 class User extends \modules\users\models\User
 {
     const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
+    const SCENARIO_AVATAR_UPDATE = 'avatarUpdate';
+    const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
     const SCENARIO_PROFILE_DELETE = 'profileDelete';
 
     public $currentPassword;
@@ -27,7 +29,8 @@ class User extends \modules\users\models\User
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            [['newPassword', 'newPasswordRepeat', 'currentPassword'], 'required', 'on' => self::SCENARIO_PASSWORD_UPDATE],
+            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
             ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false],
         ]);
@@ -46,6 +49,8 @@ class User extends \modules\users\models\User
             } else {
                 $this->addError($attribute, Module::t('frontend', 'MSG_INPUT_CURRENT_PASSWORD'));
             }
+        } else {
+            $this->addError($attribute, Module::t('frontend', 'MSG_INCORRECT_INPUT_FIELDS'));
         }
     }
 
@@ -55,7 +60,9 @@ class User extends \modules\users\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['avatar', 'isDel', 'email', 'currentPassword', 'newPassword', 'newPasswordRepeat', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_AVATAR_UPDATE] = ['isDel'];
+        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
         return $scenarios;
     }
@@ -80,6 +87,7 @@ class User extends \modules\users\models\User
         if (parent::beforeSave($insert)) {
             if (!empty($this->newPassword)) {
                 $this->setPassword($this->newPassword);
+                Yii::$app->session->setFlash('success', Module::t('frontend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
             }
             return true;
         }

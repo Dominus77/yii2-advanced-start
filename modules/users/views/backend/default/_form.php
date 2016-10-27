@@ -27,25 +27,12 @@ use modules\users\Module;
         ]
     ]); ?>
     <div class="box-body">
-        <?= $form->field($model, 'imageFile')->fileInput() ?>
 
         <?= $form->field($model, 'username')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
             'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
             'placeholder' => Module::t('backend', 'USERNAME'),
-        ]) ?>
-
-        <?= $form->field($model, 'first_name')->textInput([
-            'maxlength' => true,
-            'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'FIRST_NAME'),
-        ]) ?>
-
-        <?= $form->field($model, 'last_name')->textInput([
-            'maxlength' => true,
-            'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'LAST_NAME'),
         ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
@@ -65,6 +52,20 @@ use modules\users\Module;
             'maxlength' => true,
             'class' => 'form-control',
             'placeholder' => Module::t('backend', 'USER_REPEAT_PASSWORD'),
+        ]) ?>
+
+        <?= $form->field($model, 'imageFile')->fileInput() ?>
+
+        <?= $form->field($model, 'first_name')->textInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => Module::t('backend', 'FIRST_NAME'),
+        ]) ?>
+
+        <?= $form->field($model, 'last_name')->textInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => Module::t('backend', 'LAST_NAME'),
         ]) ?>
 
         <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [

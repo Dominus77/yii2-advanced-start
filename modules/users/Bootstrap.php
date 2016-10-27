@@ -26,6 +26,9 @@ class Bootstrap implements BootstrapInterface
                 'users/create' => 'users/default/create',
                 'users/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
                 'user/update' => 'users/default/update',
+                'user/update-profile' => 'users/default/update-profile',
+                'user/update-avatar' => 'users/default/update-avatar',
+                'user/update-password' => 'users/default/update-password',
                 'user/delete' => 'users/default/delete',
             ]
         );

@@ -1,17 +1,20 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\users\models\backend\User */
+/* @var $model modules\users\models\frontend\User */
 /* @var $uploadModel modules\users\models\UploadForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="users-backend-default-update">
-    <?php $form = ActiveForm::begin([
+    <?php
+    $form = ActiveForm::begin([
+        'action' => Url::to(['update-avatar']),
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [
@@ -20,7 +23,7 @@ use modules\users\Module;
                 'wrapper' => 'col-sm-10',
             ],
         ],
-    ]); ?>
+    ]);?>
     <?php if ($model->avatar) : ?>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

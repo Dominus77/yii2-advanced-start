@@ -4,7 +4,6 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use modules\users\models\frontend\User;
 use modules\users\models\UploadForm;
@@ -21,6 +20,8 @@ use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
+use modules\users\Module;
+use yii\helpers\VarDumper;
 
 /**
  * Default controller for the `users` module
@@ -45,7 +46,7 @@ class DefaultController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'update', 'delete'],
+                        'actions' => ['logout', 'index', 'update', 'update-profile', 'update-avatar', 'update-password', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -72,21 +73,60 @@ class DefaultController extends Controller
     public function actionUpdate()
     {
         $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-        $avatar = $model->avatar;
-
-        $uploadModel = new UploadForm();
-
         $user_role = $model->getUserRoleValue();
         $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return array|string|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdatePassword()
+    {
+        $model = $this->findModel();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-
         if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+        }
+        return $this->redirect(['update', 'tab' => 'password']);
+    }
 
+    /**
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateProfile()
+    {
+        $model = $this->findModel();
+        //$model->scenario = $model::SCENARIO_PROFILE_UPDATE;
+
+        $user_role = $model->getUserRoleValue();
+        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('frontend', 'MSG_PROFILE_SAVE_SUCCESS'));
+        }
+        return $this->redirect(['update', 'tab' => 'profile']);
+    }
+
+    /**
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateAvatar()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
+        $avatar = $model->avatar;
+        if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
             if ($model->isDel) {
                 if ($avatar) {
                     $upload = Yii::$app->getModule('users')->uploads;
@@ -95,20 +135,14 @@ class DefaultController extends Controller
                     if (file_exists($avatar))
                         unlink($avatar);
                     $model->avatar = null;
+                    $model->save();
                 }
             }
-
-            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
+            $uploadModel = new UploadForm();
+            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
                 $uploadModel->upload();
-            } else {
-                $model->save();
-            }
-
-            return $this->redirect(['index']);
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->redirect(['update', 'tab' => 'avatar']);
     }
 
     /**
@@ -121,7 +155,7 @@ class DefaultController extends Controller
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_DELETE;
         $model->status = $model::STATUS_DELETE;
-        if($model->save())
+        if ($model->save())
             Yii::$app->user->logout();
         return $this->goHome();
     }

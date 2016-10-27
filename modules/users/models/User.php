@@ -91,7 +91,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
 
-            [['role', 'registration_type', 'avatar', 'imageFile', 'isDel'], 'safe'],
+            [['role', 'registration_type'], 'safe'],
         ];
     }
 

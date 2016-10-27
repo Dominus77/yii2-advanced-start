@@ -16,6 +16,7 @@ class UploadForm extends Model
      */
     public $imageFile;
     public $imageSize = [100, 100];
+    public $ext = 'png, jpg';
     private $module;
 
     public function init()
@@ -25,12 +26,15 @@ class UploadForm extends Model
         if ($this->module->imageSize) {
             $this->imageSize = ArrayHelper::merge($this->module->imageSize, $this->imageSize);
         }
+        if ($this->module->ext) {
+            $this->ext = $this->module->ext ? $this->module->ext : $this->ext;
+        }
     }
 
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => $this->ext],
         ];
     }
 

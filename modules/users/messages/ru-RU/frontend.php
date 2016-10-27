@@ -41,6 +41,10 @@ return [
     'MSG_INPUT_CURRENT_PASSWORD' => 'Укажите текущий пароль.',
     'MSG_INCORRECT_CURRENT_PASSWORD' => 'Текущий пароль указан не верно.',
     'MSG_INCORRECT_EMAIL_OR_PASSWORD' => 'Не правильный пароль или email.',
+    'MSG_PROFILE_SAVE_SUCCESS' => 'Профиль успешно сохранён.',
+    'MSG_PROFILE_UPDATE_SUCCESS' => 'Профиль успешно изменён.',
+    'MSG_PASSWORD_UPDATE_SUCCESS' => 'Пароль успешно изменён.',
+    'MSG_INCORRECT_INPUT_FIELDS' => 'Не все поля заполнены корректно.',
 
     'TEXT_FORGOT_PASSWORD {:Link}' => 'Если вы забыли пароль, воспользуйтесь {:Link}',
     'TEXT_RESET_IT' => 'формой сброса',
