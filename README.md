@@ -210,6 +210,7 @@ AddDefaultCharset utf-8
 
     # the main rewrite rule for the frontend application
     RewriteCond %{REQUEST_URI} !^/(backend/web|admin)
+    RewriteCond %{REQUEST_URI} !^/(api/web|api)
     RewriteRule !^frontend/web /frontend/web%{REQUEST_URI} [L]
 
     # redirect to the page without a trailing slash (uncomment if necessary)
@@ -218,6 +219,13 @@ AddDefaultCharset utf-8
     # the main rewrite rule for the backend application
     RewriteCond %{REQUEST_URI} ^/admin
     RewriteRule ^admin(.*) /backend/web/$1 [L]
+
+    # redirect to the page without a trailing slash (uncomment if necessary)
+    #RewriteCond %{REQUEST_URI} ^/api/$
+    #RewriteRule ^(api)/ /$1 [L,R=301]
+    # the main rewrite rule for the api application
+    RewriteCond %{REQUEST_URI} ^/api
+    RewriteRule ^api(.*) /api/web/$1 [L]
 
     # if a directory or a file of the frontend application exists, use the request directly
     RewriteCond %{REQUEST_URI} ^/frontend/web
@@ -233,12 +241,19 @@ AddDefaultCharset utf-8
     # otherwise forward the request to index.php
     RewriteRule . /backend/web/index.php [L]
 
+    # if a directory or a file of the api application exists, use the request directly
+    RewriteCond %{REQUEST_URI} ^/api/web
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # otherwise forward the request to index.php
+    RewriteRule . /api/web/index.php [L]
+
     RewriteCond %{REQUEST_URI} \.(htaccess|htpasswd|svn|git)
     RewriteRule \.(htaccess|htpasswd|svn|git) - [F]
 </IfModule>
 ~~~
 
-The web folder, the backend and frontend parts also add .hitaccess:
+The web folder, the backend, frontend and api parts also add .hitaccess:
 
 ~~~
 RewriteEngine On
