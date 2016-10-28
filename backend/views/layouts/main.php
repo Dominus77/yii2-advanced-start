@@ -271,6 +271,19 @@ AppAsset::register($this);
     </aside>
 
     <div class="content-wrapper">
+        <?= Alert::widget([
+            'options' => [
+                'style' => 'padding: 20px 30px; z-index: 999999; font-size: 16px; font-weight: 600;',
+            ],
+            'closeButton' => [
+                'style' => 'color: rgb(255, 255, 255); font-size: 20px;',
+                'data' => [
+                    'toggle' => 'tooltip',
+                    'placement' => 'left',
+                    'original-title' => Yii::t('app', 'Close'),
+                ],
+            ],
+        ]) ?>
         <section class="content-header">
             <h1>
                 <?= Html::encode($this->title) ?>
@@ -283,11 +296,6 @@ AppAsset::register($this);
             ]) ?>
         </section>
         <section class="content">
-            <?= Alert::widget([
-                'options' => [
-                    //'style' => 'position:absolute; z-index:999999; opacity:0.8;',
-                ]
-            ]) ?>
             <?= $content ?>
         </section>
 

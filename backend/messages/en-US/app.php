@@ -30,6 +30,7 @@ return [
     'Home' => 'Home',
     'All rights reserved.' => 'All rights reserved.',
     'Member since' => 'Member since',
+    'Close' => 'Close',
 
     /*Right panel*/
     'Recent Activity' => 'Recent Activity',

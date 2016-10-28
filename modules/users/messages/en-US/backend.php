@@ -60,4 +60,7 @@ return [
     'CONFIRM_DELETE' => 'Are you sure you want to delete the record?',
 
     'MSG_YOU_NOT_ALLOWED' => 'You do not have rights, access is denied.',
+    'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
+    'MSG_PROFILE_SAVE_SUCCESS' => 'Profile successfully save.',
+    'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
 ];

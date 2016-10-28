@@ -40,9 +40,21 @@ use modules\users\Module;
                     'format' => 'raw',
                     'value' => $model->statusLabelName,
                 ],
-                'created_at:datetime',
-                'updated_at:datetime',
-                'last_visit:datetime',
+                [
+                    'attribute' => 'created_at',
+                    'format' => 'raw',
+                    'value' => Yii::$app->formatter->asDatetime($model->created_at, 'd LLL yyyy, H:mm:ss'),
+                ],
+                [
+                    'attribute' => 'updated_at',
+                    'format' => 'raw',
+                    'value' => Yii::$app->formatter->asDatetime($model->updated_at, 'd LLL yyyy, H:mm:ss'),
+                ],
+                [
+                    'attribute' => 'last_visit',
+                    'format' => 'raw',
+                    'value' => Yii::$app->formatter->asDatetime($model->last_visit, 'd LLL yyyy, H:mm:ss'),
+                ],
                 [
                     'attribute' => 'registration_type',
                     'format' => 'raw',

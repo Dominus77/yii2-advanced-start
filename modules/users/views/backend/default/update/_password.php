@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
+use modules\users\components\widgets\passfield\Passfield;
+use modules\users\models\backend\User;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -11,7 +14,10 @@ use modules\users\Module;
 ?>
 
 <div class="users-backend-default-update">
-    <?php $form = ActiveForm::begin([
+    <?php
+    $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+    $form = ActiveForm::begin([
+        'action' => Url::to(['update-password', 'id' => $model->id]),
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [
@@ -22,11 +28,27 @@ use modules\users\Module;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'newPassword')->passwordInput([
-        'maxlength' => true,
-        'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'USER_NEW_PASSWORD'),
-    ]) ?>
+    <?= Passfield::widget([
+        'form' => $form,
+        'model' => $model,
+        'attribute' => 'newPassword',
+        'options' => [
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => Module::t('backend', 'USER_NEW_PASSWORD'),
+        ],
+        'config' => [
+            'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
+            'showToggle' => true,
+            'showGenerate' => true,
+            'showWarn' => true,
+            'showTip' => true,
+            'length' => [
+                'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                'max' => User::LENGTH_STRING_PASSWORD_MAX,
+            ]
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
         'maxlength' => true,

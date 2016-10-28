@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\rbac\models\Rbac as BackendRbac;
+use modules\users\components\widgets\passfield\Passfield;
+use modules\users\models\backend\User;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -31,7 +33,7 @@ use modules\users\Module;
         <?= $form->field($model, 'username')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            'disabled' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_CREATE) ? false : true,
             'placeholder' => Module::t('backend', 'USERNAME'),
         ]) ?>
 
@@ -42,11 +44,27 @@ use modules\users\Module;
             'placeholder' => Module::t('backend', 'EMAIL'),
         ]) ?>
 
-        <?= $form->field($model, 'newPassword')->passwordInput([
-            'maxlength' => true,
-            'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'PASSWORD'),
-        ]) ?>
+        <?= Passfield::widget([
+            'form' => $form,
+            'model' => $model,
+            'attribute' => 'newPassword',
+            'options' => [
+                'maxlength' => true,
+                'class' => 'form-control',
+                'placeholder' => Module::t('backend', 'PASSWORD'),
+            ],
+            'config' => [
+                'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
+                'showToggle' => true,
+                'showGenerate' => true,
+                'showWarn' => true,
+                'showTip' => true,
+                'length' => [
+                    'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                    'max' => User::LENGTH_STRING_PASSWORD_MAX,
+                ]
+            ],
+        ]); ?>
 
         <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
             'maxlength' => true,
@@ -75,7 +93,7 @@ use modules\users\Module;
 
         <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
             'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            'disabled' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_CREATE) ? false : true,
         ]) ?>
 
         <div class="form-group">

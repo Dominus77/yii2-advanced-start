@@ -16,6 +16,8 @@ class User extends \modules\users\models\User
 {
     const SCENARIO_ADMIN_CREATE = 'adminCreate';
     const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
+    const SCENARIO_PASSWORD_UPDATE = 'adminPasswordUpdate';
+    const SCENARIO_AVATAR_UPDATE = 'adminAvatarUpdate';
 
     public $newPassword;
     public $newPasswordRepeat;
@@ -26,8 +28,8 @@ class User extends \modules\users\models\User
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
-            ['newPassword', 'string', 'min' => 6],
+            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE, self::SCENARIO_PASSWORD_UPDATE]],
+            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
         ]);
     }
@@ -39,7 +41,9 @@ class User extends \modules\users\models\User
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_ADMIN_CREATE] = ['avatar', 'username', 'email', 'status', 'role', 'newPassword', 'newPasswordRepeat', 'registration_type', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['avatar', 'isDel', 'username', 'email', 'status', 'role', 'newPassword', 'newPasswordRepeat', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'role', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_AVATAR_UPDATE] = ['isDel'];
         return $scenarios;
     }
 

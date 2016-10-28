@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
@@ -12,6 +13,7 @@ use modules\users\Module;
 
 <div class="users-backend-default-update">
     <?php $form = ActiveForm::begin([
+        'action' => Url::to(['update-avatar', 'id' => $model->id]),
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [

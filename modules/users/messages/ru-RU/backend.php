@@ -60,4 +60,7 @@ return [
     'CONFIRM_DELETE' => 'Вы действительно хотите удалить запись?',
 
     'MSG_YOU_NOT_ALLOWED' => 'У вас не достаточно прав, доступ запрещён.',
+    'MSG_PASSWORD_UPDATE_SUCCESS' => 'Пароль успешно изменён.',
+    'MSG_PROFILE_SAVE_SUCCESS' => 'Профиль успешно сохранён.',
+    'MSG_PROFILE_UPDATE_SUCCESS' => 'Профиль успешно изменён.',
 ];

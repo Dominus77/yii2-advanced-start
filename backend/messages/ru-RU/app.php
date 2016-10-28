@@ -30,6 +30,7 @@ return [
     'Home' => 'Главная',
     'All rights reserved.' => 'Все права защищены.',
     'Member since' => 'Регистрация',
+    'Close' => 'Закрыть',
 
     /*Right panel*/
     'Recent Activity' => 'Ближайшие события',

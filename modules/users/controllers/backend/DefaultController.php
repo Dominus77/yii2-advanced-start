@@ -43,7 +43,7 @@ class DefaultController extends Controller
                         'roles' => ['?']
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'update'],
+                        'actions' => ['logout', 'index', 'view', 'update', 'update-profile', 'update-password', 'update-avatar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -131,18 +131,38 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
-        $avatar = $model->avatar;
-
-        $uploadModel = new UploadForm();
 
         $user_role = $model->getUserRoleValue();
         $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
-        $_role = $model->role;
 
         if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
             return $this->redirect(['index']);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateProfile($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+
+        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
+            return $this->redirect(['index']);
+        }
+
+        $user_role = $model->getUserRoleValue();
+        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+        $_role = $model->role;
 
         if ($model->load(Yii::$app->request->post())) {
             // Если изменена роль
@@ -155,7 +175,50 @@ class DefaultController extends Controller
                 $role = $authManager->getRole($model->role);
                 $authManager->assign($role, $model->id);
             }
+            if ($model->save())
+                Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_SAVE_SUCCESS'));
+        }
+        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
+    }
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdatePassword($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+
+        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
+            return $this->redirect(['index']);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
+        }
+        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateAvatar($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
+
+        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
+            return $this->redirect(['index']);
+        }
+
+        $avatar = $model->avatar;
+        if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
             if ($model->isDel) {
                 if ($avatar) {
                     $upload = Yii::$app->getModule('users')->uploads;
@@ -164,20 +227,14 @@ class DefaultController extends Controller
                     if (file_exists($avatar))
                         unlink($avatar);
                     $model->avatar = null;
+                    $model->save();
                 }
             }
-
-            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile')) {
+            $uploadModel = new UploadForm();
+            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
                 $uploadModel->upload($model->id);
-            } else {
-                $model->save();
-            }
-            return $this->redirect(['view', 'id' => $model->id]);
-
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'avatar']);
     }
 
     /**

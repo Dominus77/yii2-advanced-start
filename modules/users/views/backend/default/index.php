@@ -97,6 +97,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function ($data) {
                             return $data->statusLabelName;
                         },
+                        'headerOptions' => [
+                            'class' => 'text-center',
+                        ],
                         'contentOptions' => [
                             'class' => 'title-column',
                             'style' => 'width:150px',
@@ -121,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'last_visit',
-                        'format' => 'datetime',
+                        'format' => 'raw',
                         'filter' => DatePicker::widget([
                             'language' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
                             'model' => $searchModel,
@@ -135,7 +138,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'dd-mm-yyyy',
                                 'autoclose' => true,
                             ]
-                        ])
+                        ]),
+                        'value' => function($data) {
+                            return Yii::$app->formatter->asDatetime($data->last_visit, 'd LLL yyyy, H:mm');
+                        },
+                        'headerOptions' => [
+                            'class' => 'text-center',
+                        ],
+                        'contentOptions' => [
+                            'class' => 'text-center',
+                        ],
                     ],
                     [
                         'class' => 'yii\grid\ActionColumn',
