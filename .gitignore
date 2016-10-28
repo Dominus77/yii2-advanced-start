@@ -32,6 +32,3 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
-# RESTful API
-# /api
-

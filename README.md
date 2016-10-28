@@ -262,6 +262,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ~~~
 
-Now frontend is available at http://advanced-project.com, and backend at http://advanced-project.com/admin
+Now frontend is available at http://advanced-project.com, and backend at http://advanced-project.com/admin, and api http://advanced-project.com/api/user
 
 
