@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-api',
-    'language' => 'en-US',
+    'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -26,9 +26,11 @@ return [
             ]
         ],
         'user' => [
-            'identityClass' => 'modules\users\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
+            'identityClass' => 'api\users\models\User',
+            'enableSession' => false,
+            'loginUrl' => null,
+            //'enableAutoLogin' => true,
+            //'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -49,11 +51,22 @@ return [
                     'controller' => 'v1/user',
                     'except' => ['delete'],
                     'pluralize' => false,
-                    /*'tokens' => [
+                    'tokens' => [
                         '{id}' => '<id:\\w+>'
-                    ]*/
+                    ]
                 ],
             ],
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+            /*'class' => 'yii\caching\MemCache',
+            'servers' => [
+                [
+                    'host' => '127.0.0.1',
+                    'port' => 11211,
+                    'weight' => 100,
+                ]
+            ],*/
         ],
     ],
     'params' => $params,
