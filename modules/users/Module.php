@@ -61,7 +61,7 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public function registerTranslations()
+    public static function registerTranslations()
     {
         Yii::$app->i18n->translations['modules/users/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',

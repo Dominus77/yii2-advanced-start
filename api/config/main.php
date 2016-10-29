@@ -13,7 +13,7 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'v1' => [
-            'basePath' => '@app/modules/v1',
+            //'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'   // here is our v1 modules
         ],
     ],
@@ -29,7 +29,6 @@ return [
             'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-            //'loginUrl' => ['/users/default/login'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -50,9 +49,9 @@ return [
                     'controller' => 'v1/user',
                     'except' => ['delete'],
                     'pluralize' => false,
-                    'tokens' => [
+                    /*'tokens' => [
                         '{id}' => '<id:\\w+>'
-                    ]
+                    ]*/
                 ],
             ],
         ],
