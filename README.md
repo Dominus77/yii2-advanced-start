@@ -48,6 +48,13 @@ DIRECTORY STRUCTURE
 -------------------
 
 ```
+api
+    components/          contains components api application
+    config/              contains api application configurations
+    messages/            contains i18n api application
+    modules/             contains modules api version application
+    runtime/             contains files generated during runtime
+    web/                 contains the entry script
 common
     assets/              contains application assets such as JavaScript and CSS
     components/          contains components frontend, backend and console
