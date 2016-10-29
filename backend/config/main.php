@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'language'=>'ru-RU',
+    'language' => 'ru-RU',
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'main/default/index',
