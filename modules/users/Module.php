@@ -44,7 +44,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        $this->registerTranslations();
 
         // Это здесь для того, чтобы переключаться между frontend и backend
         if ($this->isBackend === true) {
@@ -56,22 +55,6 @@ class Module extends \yii\base\Module
                 $this->controllerNamespace = 'modules\users\commands';
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function registerTranslations()
-    {
-        Yii::$app->i18n->translations['modules/users/*'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => '@modules/users/messages',
-            'fileMap' => [
-                'modules/users/backend' => 'backend.php',
-                'modules/users/frontend' => 'frontend.php',
-                'modules/users/mail' => 'mail.php',
-            ],
-        ];
     }
 
     /**

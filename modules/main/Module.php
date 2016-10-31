@@ -34,7 +34,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        $this->registerTranslations();
 
         // Это здесь для того, чтобы переключаться между frontend и backend
         if ($this->isBackend === true) {
@@ -43,21 +42,6 @@ class Module extends \yii\base\Module
         } else {
             $this->setViewPath('@modules/main/views/frontend');
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function registerTranslations()
-    {
-        Yii::$app->i18n->translations['modules/main/*'] = [
-            'class'          => 'yii\i18n\PhpMessageSource',
-            'basePath'       => '@modules/main/messages',
-            'fileMap'        => [
-                'modules/main/backend' => 'backend.php',
-                'modules/main/frontend' => 'frontend.php',
-            ],
-        ];
     }
 
     /**

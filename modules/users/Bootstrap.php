@@ -17,6 +17,18 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        // i18n
+        $app->i18n->translations['modules/users/*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => '@modules/users/messages',
+            'fileMap' => [
+                'modules/users/backend' => 'backend.php',
+                'modules/users/frontend' => 'frontend.php',
+                'modules/users/mail' => 'mail.php',
+            ],
+        ];
+
+        // Rules
         $app->getUrlManager()->addRules(
             [
                 // объявление правил здесь
