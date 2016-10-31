@@ -36,3 +36,7 @@ div.required label:after {
     font-size: 14px;
 }
 
+.nav-tabs-custom {
+    margin-top: 10px;
+}
+

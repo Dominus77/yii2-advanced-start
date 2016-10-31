@@ -10,7 +10,12 @@ return [
     'id' => 'app-console',
     'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'modules\main\Bootstrap',
+        'modules\users\Bootstrap',
+        'modules\rbac\Bootstrap',
+    ],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'migrate' => [

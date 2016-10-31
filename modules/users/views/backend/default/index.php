@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-backend-default-index">
     <div class="box">
-        <?php Pjax::begin(['enablePushState' => false]); ?>
         <div class="box-header with-border">
             <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 
@@ -26,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
+        <?php Pjax::begin(['enablePushState' => false]); ?>
         <div class="box-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <div class="pull-left">
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'SELECT_TEXT'),
+                            'placeholder' => Module::t('backend', 'INPUT_TEXT'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'email',
                         'filter' => Html::activeInput('text', $searchModel, 'email', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'SELECT_TEXT'),
+                            'placeholder' => Module::t('backend', 'INPUT_TEXT'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -135,6 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'type' => DatePicker::TYPE_RANGE,
                             'separator' => '<i class="glyphicon glyphicon-resize-horizontal"></i>',
                             'pluginOptions' => [
+                                'todayHighlight' => true,
                                 'format' => 'dd-mm-yyyy',
                                 'autoclose' => true,
                             ]

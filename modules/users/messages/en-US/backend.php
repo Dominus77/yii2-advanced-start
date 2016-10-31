@@ -31,6 +31,7 @@ return [
 
     'TITLE_LOGIN' => 'Login',
     'TITLE_VIEW_USER' => 'View User',
+    'TITLE_VIEW' => 'Views',
     'TITLE_USERS' => 'Users',
     'TITLE_UPDATE' => 'Update',
     'TITLE_UPDATE_USER' => 'Update User',
@@ -51,7 +52,7 @@ return [
     'BUTTON_UPLOAD' => 'Upload',
 
     'SELECT_ALL' => '- All -',
-    'SELECT_TEXT' => '- Input text -',
+    'INPUT_TEXT' => '- Input text -',
     'SELECT_START_DATE' => '- start -',
     'SELECT_END_DATE' => '- end -',
     'SELECT_ROLE' => 'Select a role ...',

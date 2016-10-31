@@ -31,6 +31,7 @@ return [
 
     'TITLE_LOGIN' => 'Авторизация',
     'TITLE_VIEW_USER' => 'Просмотр пользователя',
+    'TITLE_VIEW' => 'Просмотр',
     'TITLE_USERS' => 'Пользователи',
     'TITLE_UPDATE' => 'Редактирование',
     'TITLE_UPDATE_USER' => 'Редактирование пользователя',
@@ -51,7 +52,7 @@ return [
     'BUTTON_UPLOAD' => 'Загрузить',
 
     'SELECT_ALL' => '- все -',
-    'SELECT_TEXT' => '- текст -',
+    'INPUT_TEXT' => '- текст -',
     'SELECT_START_DATE' => '- от -',
     'SELECT_END_DATE' => '- до -',
     'SELECT_ROLE' => 'Выберите роль ...',
