@@ -164,7 +164,18 @@ Init an environment:
 php init
 ~~~
 
-Create a database, default configure: advanced_project
+Create a database, default configure yii2-advanced-start in common\config\main-local.php
+
+~~~
+...
+'components' => []
+    'db' => [
+        'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start',
+        ...
+    ],
+    ...
+...
+~~~
 
 Apply migration:
 
@@ -269,6 +280,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ~~~
 
-Now frontend is available at http://advanced-project.com, and backend at http://advanced-project.com/admin, and api http://advanced-project.com/api/v1/user
+Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/user
 
 
