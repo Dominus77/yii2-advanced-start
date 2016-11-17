@@ -170,12 +170,13 @@ Create a database, default configure yii2-advanced-start in common\config\main-l
 
 ~~~
 ...
-'components' => []
+'components' => [
     'db' => [
         'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start',
         ...
     ],
     ...
+],
 ...
 ~~~
 
@@ -283,5 +284,34 @@ RewriteRule . index.php
 ~~~
 
 Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/user
+
+TESTING
+-------
+
+Create a database, default configure yii2-advanced-start in common\config\test-local.php
+
+~~~
+...
+'components' => [
+    'db' => [
+        'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start_test',
+    ],
+]
+...
+~~~
+
+Apply migration:
+
+~~~
+php yii_test migrate/up
+~~~
+
+Run in console:
+
+~~~
+codecept build
+codecept run
+~~~
+
 
 
