@@ -54,6 +54,7 @@ api
     messages/            contains i18n api application
     modules/             contains modules api version application
     runtime/             contains files generated during runtime
+    tests/               contains tests for api application
     web/                 contains the entry script
 common
     assets/              contains application assets such as JavaScript and CSS
@@ -62,6 +63,7 @@ common
     mail/                contains layouts files for e-mails
     messages/            contains i18n backend frontend
     models/              contains model classes used in both backend and frontend
+    tests/               contains tests for common classes
     widgets/             contains widgets backend and frontend
 console
     components/          contains console components
@@ -79,6 +81,7 @@ backend
     messages/            contains i18n backend
     models/              contains backend-specific model classes
     runtime/             contains files generated during runtime
+    tests/               contains tests for backend application
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
     widgets/             contains backend widgets
@@ -89,13 +92,12 @@ frontend
     messages/            contains i18n frontend
     models/              contains frontend-specific model classes
     runtime/             contains files generated during runtime
+    tests/               contains tests for frontend application
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
     widgets/             contains frontend widgets
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
-tests                    contains various tests for the advanced application
-    codeception/         contains tests developed with Codeception PHP Testing Framework
 modules/
     main/               contains module main
         controllers/    contains module Web controller classes

@@ -47,6 +47,9 @@ class DefaultController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+        if(Yii::$app->user->isGuest)
+            $model->scenario = $model::SCENARIO_GUEST;
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Thank you for contacting us. We will respond to you as soon as possible.'));
