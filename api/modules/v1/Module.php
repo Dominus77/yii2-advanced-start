@@ -3,7 +3,6 @@
 namespace api\modules\v1;
 
 use Yii;
-use modules\users\Module as ModuleUsers;
 use yii\filters\RateLimiter;
 use api\components\IpLimiter;
 
@@ -35,6 +34,5 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        ModuleUsers::registerTranslations();
     }
 }

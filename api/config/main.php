@@ -10,7 +10,10 @@ return [
     'id' => 'app-api',
     'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'modules\users\Bootstrap'
+    ],
     'modules' => [
         'v1' => [
             //'basePath' => '@app/modules/v1',
@@ -29,8 +32,6 @@ return [
             'identityClass' => 'api\users\models\User',
             'enableSession' => false,
             'loginUrl' => null,
-            //'enableAutoLogin' => true,
-            //'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -48,25 +49,16 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/user',
+                    'controller' => [
+                        'v1/user'
+                    ],
                     'except' => ['delete'],
-                    'pluralize' => false,
-                    'tokens' => [
-                        '{id}' => '<id:\\w+>'
-                    ]
+                    'pluralize' => true,
                 ],
             ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-            /*'class' => 'yii\caching\MemCache',
-            'servers' => [
-                [
-                    'host' => '127.0.0.1',
-                    'port' => 11211,
-                    'weight' => 100,
-                ]
-            ],*/
         ],
     ],
     'params' => $params,

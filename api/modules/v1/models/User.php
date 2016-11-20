@@ -33,7 +33,7 @@ class User extends \modules\users\models\User
     }
 
     /**
-     * /api/v1/user?expand=status
+     * /api/v1/users?expand=status
      * @return array
      */
     public function extraFields()
