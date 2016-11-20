@@ -3,7 +3,6 @@ namespace modules\users\models\frontend;
 
 use Yii;
 use yii\base\Model;
-use modules\users\models\User;
 use modules\users\Module;
 
 /**
@@ -23,7 +22,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => '\modules\users\models\User',
+                'targetClass' => '\modules\users\models\frontend\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
                 'message' => Module::t('frontend', 'MSG_NOT_USERS_FOR_EMAIL'),
             ],

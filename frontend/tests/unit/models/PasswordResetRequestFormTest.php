@@ -25,7 +25,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         ]);
     }
 
-    /*public function testSendMessageWithWrongEmailAddress()
+    public function testSendMessageWithWrongEmailAddress()
     {
         $model = new PasswordResetRequestForm();
         $model->email = 'not-existing-email@example.com';
@@ -38,11 +38,11 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         $model = new PasswordResetRequestForm();
         $model->email = $user['email'];
         expect_not($model->sendEmail());
-    }*/
+    }
 
-    /*public function testSendEmailSuccessfully()
+    public function testSendEmailSuccessfully()
     {
-        $userFixture = $this->tester->grabFixture('user', 0);
+        $userFixture = $this->tester->grabFixture('user', 2);
         
         $model = new PasswordResetRequestForm();
         $model->email = $userFixture['email'];
@@ -55,5 +55,5 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
         expect($emailMessage->getTo())->hasKey($model->email);
         expect($emailMessage->getFrom())->hasKey(Yii::$app->params['supportEmail']);
-    }*/
+    }
 }

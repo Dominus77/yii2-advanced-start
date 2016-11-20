@@ -3,7 +3,6 @@ namespace modules\users\models\frontend;
 
 use yii\base\Model;
 use yii\base\InvalidParamException;
-//use modules\users\models\User;
 use modules\users\Module;
 
 /**
