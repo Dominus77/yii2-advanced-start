@@ -32,5 +32,8 @@ return [
         'mailer' => [
             'useFileTransport' => false,
         ],
+        'assetManager' => [
+            'basePath' => '@app/web/assets',
+        ],
     ],
 ];
