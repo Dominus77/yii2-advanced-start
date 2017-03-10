@@ -64,4 +64,6 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Profile successfully save.',
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
+
+    'Error!' => 'Error!',
 ];

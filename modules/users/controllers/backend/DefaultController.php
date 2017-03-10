@@ -3,6 +3,7 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
@@ -21,6 +22,8 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
+    protected $jsFile;
+
     /**
      * @inheritdoc
      */
@@ -53,13 +56,27 @@ class DefaultController extends Controller
                         'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER, BackendRbac::RULE_UPDATE_OWN_POST],
                     ],*/
                     [
-                        'actions' => ['create', 'delete'],
+                        'actions' => ['create', 'delete', 'status'],
                         'allow' => true,
                         'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER],
                     ],
                 ],
             ],
         ];
+    }
+
+    public function init()
+    {
+        parent::init();
+
+        $this->jsFile = '@modules/users/views/ajax/ajax.js';
+
+        // Publish and register the required JS file
+        Yii::$app->assetManager->publish($this->jsFile);
+        $this->getView()->registerJsFile(
+            Yii::$app->assetManager->getPublishedUrl($this->jsFile),
+            ['yii\web\YiiAsset'] // depends
+        );
     }
 
     /**
@@ -143,6 +160,38 @@ class DefaultController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return array|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionStatus($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            $model = $this->findModel($id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($model->status == $model::STATUS_ACTIVE) {
+                $model->status = $model::STATUS_BLOCKED;
+            } else if ($model->status == $model::STATUS_BLOCKED) {
+                $model->status = $model::STATUS_ACTIVE;
+            } else if ($model->status == $model::STATUS_WAIT) {
+                $model->status = $model::STATUS_ACTIVE;
+            }
+            if ($model->save()) {
+                return [
+                    'body' => $model->statusLabelName,
+                    'success' => true,
+                ];
+            } else {
+                return [
+                    'body' => Html::tag('span', Module::t('backend', 'Error!'), ['class' => 'label label-danger']),
+                    'success' => false,
+                ];
+            }
+        }
+        return $this->redirect(['index']);
     }
 
     /**

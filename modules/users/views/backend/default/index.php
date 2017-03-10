@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
-        <?php Pjax::begin(['enablePushState' => false]); ?>
+        <?php Pjax::begin([
+            'enablePushState' => false,
+            'timeout' => 2000,
+        ]); ?>
         <div class="box-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <div class="pull-left">
@@ -95,7 +98,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) {
-                            return $data->statusLabelName;
+                            $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                            return ($data->id != Yii::$app->user->identity->getId()) ? Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
+                                'id' => 'status_link_' . $data->id,
+                                'data' => [
+                                    'pjax' => 0,
+                                ],
+                            ]) : $data->statusLabelName;
                         },
                         'headerOptions' => [
                             'class' => 'text-center',
