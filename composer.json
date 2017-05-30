@@ -27,6 +27,7 @@
         "yiisoft/yii2-faker": "~2.0.0",
         "bower-asset/html5shiv": "*",
         "bower-asset/respond": "*",
+        "guzzlehttp/guzzle": ">=4.1.4 <7.0",
 
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1"
@@ -35,10 +36,12 @@
         "process-timeout": 1800
     },
     "extra": {
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
+      "fxp-asset": {
+        "installer-paths": {
+          "npm-asset-library": "vendor/npm",
+          "bower-asset-library": "vendor/bower"
         }
+      }
     },
     "scripts": {
       "post-install-cmd": "php init --env=Development --overwrite=n"

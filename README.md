@@ -169,15 +169,15 @@ php init
 Create a database, default configure yii2-advanced-start in common\config\main-local.php
 
 ~~~
-...
+//...
 'components' => [
     'db' => [
         'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start',
-        ...
+        //...
     ],
-    ...
+    //...
 ],
-...
+//...
 ~~~
 
 Apply migration:
@@ -291,13 +291,13 @@ TESTING
 Create a database, default configure yii2-advanced-start in common\config\test-local.php
 
 ~~~
-...
+//...
 'components' => [
     'db' => [
         'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start_test',
     ],
 ]
-...
+//...
 ~~~
 
 Apply migration:
@@ -309,8 +309,8 @@ php yii_test migrate/up
 Run in console:
 
 ~~~
-codecept build
-codecept run
+vendor\bin\codecept build
+vendor\bin\codecept run
 ~~~
 
 
