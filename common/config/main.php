@@ -5,7 +5,7 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'modules' => [
         'main' => [
