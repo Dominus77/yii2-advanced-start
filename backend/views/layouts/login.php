@@ -3,9 +3,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\LoginAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use backend\assets\LoginAsset;
 use common\widgets\Alert;
 
 LoginAsset::register($this);
@@ -25,11 +25,11 @@ LoginAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="row">
     <div class="col-md-12">
-<?= Alert::widget([
-    'options' => [
-        'style' => 'text-align:center;',
-    ]
-]); ?>
+        <?= Alert::widget([
+            'options' => [
+                'style' => 'text-align:center;',
+            ]
+        ]); ?>
     </div>
 </div>
 <div class="login-box">
