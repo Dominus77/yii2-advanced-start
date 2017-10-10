@@ -16,7 +16,7 @@ $this->params['title']['small'] = Module::t('backend', 'TITLE_DASHBOARD');
         <div class="col-md-4">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+                    <h3 class="box-title"><?= Yii::t('app', 'Users') ?></h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
