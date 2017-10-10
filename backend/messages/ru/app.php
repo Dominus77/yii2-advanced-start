@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 05.10.16
  * Time: 5:38
  */
