@@ -103,6 +103,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'id' => 'status_link_' . $data->id,
                                 'data' => [
                                     'pjax' => 0,
+                                    'toggle' => 'tooltip',
+                                    'original-title' => Module::t('backend', 'CLICK_TO_CHANGE_STATUS'),
                                 ],
                             ]) : $data->statusLabelName;
                         },

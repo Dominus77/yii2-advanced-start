@@ -66,4 +66,6 @@ return [
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
 
     'Error!' => 'Error!',
+
+    'CLICK_TO_CHANGE_STATUS' => 'Click to change the status',
 ];

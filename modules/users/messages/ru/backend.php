@@ -66,4 +66,6 @@ return [
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Профиль успешно изменён.',
 
     'Error!' => 'Ошибка!',
+
+    'CLICK_TO_CHANGE_STATUS' => 'Клик для смены статуса',
 ];
