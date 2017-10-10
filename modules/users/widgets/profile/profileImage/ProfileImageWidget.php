@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 26.10.16
  * Time: 14:04
  */
@@ -10,7 +10,6 @@ namespace modules\users\widgets\profile\profileImage;
 
 use Yii;
 use yii\base\Widget;
-use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use modules\users\models\User;

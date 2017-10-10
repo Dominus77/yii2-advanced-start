@@ -19,7 +19,6 @@ use yii\helpers\Html;
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'width:60px',
                 'alt' => 'avatar_' . $model->username,
-                ''
             ]); ?>
             <div><?= $model->username; ?></div>
         </div>

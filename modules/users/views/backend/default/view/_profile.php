@@ -14,11 +14,14 @@ use modules\users\Module;
             <?= Html::img($model->getAvatarPath(), [
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'margin-bottom:10px; width:auto',
+                'alt' => 'avatar_' . $model->username,
             ]); ?>
         <?php else : ?>
-            <div class="col-sm-10 text-center">
-                <i class="fa fa-user-circle fa-5x" style="color:#b9b9b9; margin-bottom:10px;"></i>
-            </div>
+            <?= $model->getGravatar(null, 80, 'mm', 'g', true, [
+                'class' => 'profile-user-img img-responsive img-circle',
+                'style' => 'margin-bottom:10px; width:auto',
+                'alt' => 'avatar_' . $model->username,
+            ]); ?>
         <?php endif; ?>
     </div>
     <div class="col-sm-10">

@@ -29,6 +29,7 @@ use modules\users\Module;
                 <?= Html::img($model->getAvatarPath(), [
                     'class' => 'profile-user-img img-responsive img-circle',
                     'style' => 'margin:0; width:auto',
+                    'alt' => 'avatar_' . $model->username,
                 ]); ?>
             </div>
         </div>
@@ -36,7 +37,11 @@ use modules\users\Module;
     <?php else : ?>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <i class="fa fa-user-circle fa-5x" style="color:#b9b9b9"></i>
+                <?= $model->getGravatar(null, 80, 'mm', 'g', true, [
+                    'class' => 'profile-user-img img-responsive img-circle',
+                    'style' => 'margin:0; width:auto',
+                    'alt' => 'avatar_' . $model->username,
+                ]); ?>
             </div>
         </div>
     <?php endif; ?>
