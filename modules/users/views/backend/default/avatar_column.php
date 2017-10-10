@@ -1,12 +1,14 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 25.10.16
  * Time: 14:57
  */
 
 use yii\helpers\Html;
+
+/* @var $model modules\users\models\backend\User */
 
 ?>
 
@@ -25,8 +27,12 @@ use yii\helpers\Html;
 <?php else : ?>
     <div class="row">
         <div class="col-sm-12 text-center">
-                <i style="color:#b9b9b9; display:block;" class="fa fa-user-circle fa-4x"></i>
-                <?= $model->username; ?>
+            <?= $model->getGravatar(null, 80, 'mm', 'g', true, [
+                'class' => 'profile-user-img img-responsive img-circle',
+                'style' => 'width:60px',
+                'alt' => 'avatar_' . $model->username,
+            ]); ?>
+            <?= $model->username; ?>
         </div>
     </div>
 <?php endif; ?>
