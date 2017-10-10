@@ -4,15 +4,17 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use backend\assets\DemoAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use dominus77\sweetalert2\Alert;
 use modules\rbac\models\Rbac as BackendRbac;
-use modules\users\components\widgets\AvatarWidget;
+use modules\users\widgets\AvatarWidget;
 
 AppAsset::register($this);
+DemoAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,9 +37,13 @@ AppAsset::register($this);
             <span class="logo-mini"><b>A</b>LT</span>
             <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
-        <nav class="navbar navbar-static-top" role="navigation">
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </a>
 
             <div class="navbar-custom-menu">
@@ -55,7 +61,7 @@ AppAsset::register($this);
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img
-                                                    src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@adminlte/dist') . '/img/user2-160x160.jpg' ?>"
+                                                    src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
                                                     class="img-circle"
                                                     alt="User Image">
                                             </div>
@@ -125,11 +131,8 @@ AppAsset::register($this);
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <?= AvatarWidget::widget([
-                                'defaultOptions' => [
-                                    'class' => 'fa fa-user-circle',
-                                    'style' => 'color:#b9b9b9',
-                                ],
-                                'imageOtions' => [
+                                //'gravatar' => true, // force gravatar https://www.gravatar.com
+                                'imageOptions' => [
                                     'class' => 'user-image',
                                 ],
                             ]); ?>
@@ -137,15 +140,7 @@ AppAsset::register($this);
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <?= AvatarWidget::widget([
-                                    'defaultOptions' => [
-                                        'class' => 'fa fa-user-circle fa-5x',
-                                        'style' => 'color:#b9b9b9',
-                                    ],
-                                    'imageOtions' => [
-                                        'class' => 'img-circle',
-                                    ],
-                                ]); ?>
+                                <?= AvatarWidget::widget(); ?>
                                 <p>
                                     <?= Yii::$app->user->identity->getUserFullName(); ?>
                                     - <?= Yii::$app->user->identity->getUserRoleName(); ?>
@@ -172,8 +167,9 @@ AppAsset::register($this);
                                        class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="<?= Url::to(['/users/default/logout']); ?>" data-method="post"
-                                       class="btn btn-default btn-flat"><?= Yii::t('app', 'Sign out'); ?></a>
+                                    <?= Html::beginForm(['/users/default/logout'], 'post')
+                                    . Html::submitButton(Yii::t('app', 'Sign out'), ['class' => 'btn btn-default btn-flat logout'])
+                                    . Html::endForm(); ?>
                                 </div>
                             </li>
                         </ul>
@@ -192,15 +188,7 @@ AppAsset::register($this);
 
             <div class="user-panel">
                 <div class="pull-left image">
-                    <?= AvatarWidget::widget([
-                        'defaultOptions' => [
-                            'class' => 'fa fa-user-circle fa-3x',
-                            'style' => 'color:#b9b9b9',
-                        ],
-                        'imageOtions' => [
-                            'class' => 'img-circle',
-                        ],
-                    ]); ?>
+                    <?= AvatarWidget::widget(); ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= Yii::$app->user->identity->getUserFullName(); ?></p>
@@ -208,15 +196,8 @@ AppAsset::register($this);
                 </div>
             </div>
 
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="<?= Yii::t('app', 'Search...'); ?>">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
+            <?= \backend\widgets\search\SearchSidebar::widget(['status' => true]); ?>
+
             <?php
             $items = [
                 [
@@ -249,6 +230,7 @@ AppAsset::register($this);
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . Yii::t('app', 'Link in level 2') . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
                             'url' => ['#'],
+                            'options' => ['class' => 'treeview'],
                             'items' => [
                                 [
                                     'label' => Yii::t('app', 'Link in level 3'),
@@ -271,29 +253,18 @@ AppAsset::register($this);
     </aside>
 
     <div class="content-wrapper">
-        <?= Alert::widget([
-            'options' => [
-                'style' => 'padding: 20px 30px; z-index: 999999; font-size: 16px; font-weight: 600;',
-            ],
-            'closeButton' => [
-                'style' => 'color: rgb(255, 255, 255); font-size: 20px;',
-                'data' => [
-                    'toggle' => 'tooltip',
-                    'placement' => 'left',
-                    'original-title' => Yii::t('app', 'Close'),
-                ],
-            ],
-        ]) ?>
         <section class="content-header">
             <h1>
-                <?= Html::encode($this->title) ?>
-                <br>
+                <?php
+                $small = isset($this->params['title']['small']) ? ' ' . Html::tag('small', Html::encode($this->params['title']['small'])) : '';
+                echo Html::encode($this->title) . $small ?>
             </h1>
             <?= Breadcrumbs::widget([
                 'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['/main/default/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false,
             ]) ?>
+            <?= Alert::widget(['useSessionFlash' => true]) ?>
         </section>
         <section class="content">
             <?= $content ?>
@@ -310,74 +281,7 @@ AppAsset::register($this);
                 href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.'); ?>
     </footer>
 
-
-    <aside class="control-sidebar control-sidebar-dark">
-
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
-
-        <div class="tab-content">
-
-            <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Recent Activity'); ?></h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript::;">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-
-                <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Tasks Progress'); ?></h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript::;">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="pull-right-container">
-                                  <span class="label label-danger pull-right">70%</span>
-                                </span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-
-
-            </div>
-
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading"><?= Yii::t('app', 'General Settings'); ?></h3>
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Report panel usage
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Some information about this general settings option
-                        </p>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </aside>
-    <div class="control-sidebar-bg"></div>
+    <?= \backend\widgets\control\ControlSidebar::widget(['status' => true]) ?>
 </div>
 
 <?php $this->endBody() ?>

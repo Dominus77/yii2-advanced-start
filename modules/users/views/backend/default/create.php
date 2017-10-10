@@ -7,6 +7,8 @@ use modules\users\Module;
 /* @var $model modules\users\models\User */
 
 $this->title = Module::t('backend', 'TITLE_USERS');
+$this->params['title']['small'] = Module::t('backend', 'TITLE_CREATE_USER');
+
 $this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'TITLE_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_CREATE_USER');
 ?>

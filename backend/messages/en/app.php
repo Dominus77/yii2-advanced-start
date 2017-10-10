@@ -77,4 +77,7 @@ return [
     'You are not allowed.' => 'You are not allowed.',
     'You are not allowed to edit the profile.' => 'You are not allowed to edit the profile.',
     'You can not remove the Administrator profile.' => 'You can not remove the Administrator profile.',
+
+    'Yes, delete!' => 'Yes, delete!',
+    'No, do not delete!' => 'No, do not delete!',
 ];

@@ -441,6 +441,33 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Gravatar Service
+     * @url https://www.gravatar.com
+     *
+     * @param $email
+     * @param int $s
+     * @param string $d
+     * @param string $r
+     * @param bool $img
+     * @param array $attr
+     * @return string
+     */
+    public function getGravatar($email = null, $s = 80, $d = 'mm', $r = 'g', $img = false, $attr = [])
+    {
+        $email = empty($email) ? $this->email : $email;
+
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim($email))) . '?';
+        $url .= http_build_query([
+            's' => $s,
+            'd' => $d,
+            'r' => $r,
+        ]);
+
+        return $img ? Html::img($url, $attr) : $url;
+    }
+
+    /**
      * Действия перед сохранением
      * @inheritdoc
      */

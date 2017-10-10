@@ -8,6 +8,8 @@ use yii\helpers\Html;
 /* @var $model modules\users\models\User */
 
 $this->title = Module::t('backend', 'TITLE_USERS');
+$this->params['title']['small'] = Module::t('backend', 'TITLE_UPDATE');
+
 $this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'TITLE_USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_UPDATE');

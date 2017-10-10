@@ -75,4 +75,7 @@ return [
     'You are not allowed.' => 'Увас не достаточно прав.',
     'You are not allowed to edit the profile.' => 'У вас не достаточно прав для редактирования профиля.',
     'You can not remove the Administrator profile.' => 'Нельзя удалить профиль Администратора.',
+
+    'Yes, delete!' => 'Да, удалить!',
+    'No, do not delete!' => 'Нет, не удалять!',
 ];
