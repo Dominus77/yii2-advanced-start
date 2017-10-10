@@ -1,6 +1,5 @@
 <?php
 use backend\assets\DemoAsset;
-
 DemoAsset::register($this);
 ?>
 <aside class="control-sidebar control-sidebar-dark">
@@ -53,7 +52,6 @@ DemoAsset::register($this);
             </ul>
         </div>
 
-        <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
                 <h3 class="control-sidebar-heading"><?= Yii::t('app', 'General Settings'); ?></h3>
@@ -71,6 +69,7 @@ DemoAsset::register($this);
 
             </form>
         </div>
+
     </div>
 </aside>
 

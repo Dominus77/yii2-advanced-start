@@ -21,7 +21,7 @@ class AppAsset extends AssetBundle
     {
         parent::init();
         $this->css[] = 'css/site.css';
-        $this->js[] = 's/dashboard.js';
+        $this->js[] = 'js/dashboard.js';
 
         $message = [
             'confirmButtonText' => Yii::t('app', 'Yes, delete!'),
@@ -30,10 +30,6 @@ class AppAsset extends AssetBundle
 
         $view = \Yii::$app->getView();
         $view->registerJs(new \yii\web\JsExpression("
-            $(document).ready(function () {
-                $('.sidebar-menu').tree()
-            });
-
             yii.confirm = function (message, okCallback, cancelCallback) {
                 swal({
                     title: message,
