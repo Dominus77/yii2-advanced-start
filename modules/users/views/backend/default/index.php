@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function($data) {
                             return $this->render('avatar_column', ['model' => $data]);
                         },
-                        'headerOptions' => ['width' => '100'],
+                        'headerOptions' => ['width' => '120'],
                     ],
                     [
                         'attribute' => 'email',
