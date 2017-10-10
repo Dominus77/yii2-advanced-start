@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_VIEW');
                         'content' => $this->render('view/_profile', [
                             'model' => $model,
                         ]),
-                        'active' => (Yii::$app->request->get('tab') == 'profile') ? true : false,
+                        'options' => ['id' => 'profile'],
+                        'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                     ],
                 ]
             ]); ?>

@@ -37,6 +37,7 @@ return [
             'useFileTransport' => false,
         ],
         'assetManager' => [
+            'appendTimestamp' => true,
             'basePath' => '@app/web/assets',
         ],
     ],

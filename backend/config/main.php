@@ -31,6 +31,23 @@ return [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin',
         ],
+        'assetManager' => [
+            //'linkAssets' => true,
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist',
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => '@vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist',
+                    'js' => [
+                        YII_ENV_DEV ? 'js/bootstrap.js' : 'js/bootstrap.min.js',
+                    ]
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
