@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
-use backend\assets\DemoAsset;
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
@@ -14,7 +14,6 @@ use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\widgets\AvatarWidget;
 
 AppAsset::register($this);
-DemoAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
