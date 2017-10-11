@@ -67,13 +67,12 @@ use modules\users\Module;
     </div>
 
     <div class="col-sm-offset-2 col-sm-10">
-        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ||
-            Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_OWN_PROFILE, ['model' => $model])) : ?>
+        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
             <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update', 'id' => $model->id], [
                 'class' => 'btn btn-primary',
             ]) ?>
         <?php endif; ?>
-        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_DELETE_USERS)) : ?>
+        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
             <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [

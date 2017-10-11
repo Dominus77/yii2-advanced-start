@@ -27,7 +27,7 @@ use modules\users\Module;
     <?= $form->field($model, 'username')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
+        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS) ? false : true,
         'placeholder' => Module::t('backend', 'USERNAME'),
     ]) ?>
 
@@ -57,7 +57,7 @@ use modules\users\Module;
 
     <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
         'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
+        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS) ? false : true,
     ]) ?>
 
     <div class="form-group">
