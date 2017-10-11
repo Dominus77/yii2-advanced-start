@@ -218,7 +218,7 @@ php yii rbac/roles/assign
 ~~~
 
 - Username: set username (admin);
-- Role: set role (admin, manager, moder, user, ? - Help);
+- Role: set role (admin, manager, moder, user, ? - Help); (Example)
 
 
 If you are installing the server into the public_html folder on the server with Apache, you must configure redirection.
