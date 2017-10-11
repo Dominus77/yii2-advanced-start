@@ -115,18 +115,6 @@ class RbacInit
         // Назначаем роль super_admin пользователю с ID 1
         $auth->assign($super_admin, 1); //Это супер админ
 
-        // Назначаем роль manager пользователю с ID 2
-        //$auth->assign($manager, 2);
-
-        // Назначаем роль модератора пользователю с ID 3
-        //$auth->assign($moderator, 3);
-
-        // Назначаем роль editor пользователю с ID 4
-        //$auth->assign($editor, 4);
-
-        // Назначаем роль user пользователю с ID 5
-        //$auth->assign($default, 5);
-
         return true;
     }
 }
