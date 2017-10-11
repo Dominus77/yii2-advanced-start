@@ -98,5 +98,5 @@ php yii rbac/rbac/init
 
 Лицензия
 -----
-The BSD License (BSD). Please see [License File](https://github.com/Dominus77/yii2-advanced-start/blob/master/LICENSE.md) for more information.
+The BSD License (BSD). Please see [License File](https://github.com/Dominus77/yii2-advanced-start/blob/master/modules/rbac/LICENSE.md) for more information.
 
