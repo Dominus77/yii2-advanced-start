@@ -6,7 +6,6 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\DatePicker;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -32,23 +31,21 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <div class="pull-left">
-                <?= $this->render('_pageSize',[
+                <?= $this->render('_pageSize', [
                     'model' => $searchModel,
                 ]) ?>
             </div>
             <div class="pull-right">
-                <?php if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) : ?>
-                    <p>
-                        <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
-                            'class' => 'btn btn-block btn-success',
-                            'data' => [
-                                'toggle' => 'tooltip',
-                                'original-title' => Module::t('backend', 'BUTTON_CREATE'),
-                                'pjax' => 0,
-                            ],
-                        ]) ?>
-                    </p>
-                <?php endif; ?>
+                <p>
+                    <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
+                        'class' => 'btn btn-block btn-success',
+                        'data' => [
+                            'toggle' => 'tooltip',
+                            'original-title' => Module::t('backend', 'BUTTON_CREATE'),
+                            'pjax' => 0,
+                        ],
+                    ]) ?>
+                </p>
             </div>
             <?= GridView::widget([
                 'id' => 'grid-users',
@@ -71,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'label' => Module::t('backend', 'TITLE_USERS'),
                         'format' => 'raw',
-                        'value' => function($data) {
+                        'value' => function ($data) {
                             return $this->render('avatar_column', ['model' => $data]);
                         },
                         'headerOptions' => ['width' => '120'],
@@ -98,15 +95,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) {
-                            $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
-                            return ($data->id != Yii::$app->user->identity->getId()) ? Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
-                                'id' => 'status_link_' . $data->id,
-                                'data' => [
-                                    'pjax' => 0,
-                                    'toggle' => 'tooltip',
-                                    'original-title' => Module::t('backend', 'CLICK_TO_CHANGE_STATUS'),
-                                ],
-                            ]) : $data->statusLabelName;
+                            if ($data->id != Yii::$app->user->identity->getId()) {
+                                $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                                return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
+                                    'id' => 'status_link_' . $data->id,
+                                    'data' => [
+                                        'pjax' => 0,
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('backend', 'CLICK_TO_CHANGE_STATUS'),
+                                    ],
+                                ]);
+                            }
+                            return $data->statusLabelName;
                         },
                         'headerOptions' => [
                             'class' => 'text-center',
@@ -151,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'autoclose' => true,
                             ]
                         ]),
-                        'value' => function($data) {
+                        'value' => function ($data) {
                             return Yii::$app->formatter->asDatetime($data->last_visit, 'd LLL yyyy, H:mm');
                         },
                         'headerOptions' => [
@@ -178,29 +178,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'update' => function ($url, $model) {
-                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
-                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
-                                        'data' => [
-                                            'toggle' => 'tooltip',
-                                            'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
-                                            'pjax' => 0,
-                                        ]
-                                    ]);
-                                }
-                                return '<span class="glyphicon glyphicon-pencil text-muted"></span>';
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
+                                        'pjax' => 0,
+                                    ]
+                                ]);
                             },
                             'delete' => function ($url, $model) {
-                                if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) {
-                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
-                                        'data' => [
-                                            'toggle' => 'tooltip',
-                                            'original-title' => Module::t('backend', 'BUTTON_DELETE'),
-                                            'method' => 'post',
-                                            'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
-                                        ]
-                                    ]);
-                                }
-                                return '<span class="glyphicon glyphicon-trash text-muted"></span>';
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('backend', 'BUTTON_DELETE'),
+                                        'method' => 'post',
+                                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                                    ]
+                                ]);
+
                             },
                         ]
                     ],

@@ -27,6 +27,14 @@ return [
             ],
         ],
     ],
+    'modules' => [
+        'rbac' => [
+            'class' => 'modules\rbac\Module',
+            'params' => [
+                'userClass' => 'modules\users\models\User',
+            ]
+        ],
+    ],
     'components' => [
         'log' => [
             'targets' => [

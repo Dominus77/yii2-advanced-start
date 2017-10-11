@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Sсhevchenko <ivanovosity@gmail.com>
  * Date: 09.10.16
  * Time: 3:20
  */
@@ -64,6 +64,7 @@ class User extends \modules\users\models\User
         $scenarios[self::SCENARIO_AVATAR_UPDATE] = ['isDel'];
         $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
+        $scenarios['default'] = ['username', 'email', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
         return $scenarios;
     }
 

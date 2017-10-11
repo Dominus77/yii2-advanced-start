@@ -64,6 +64,8 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Profile successfully save.',
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
+    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Profile successfully checked deleted.',
+    'MSG_PROFILE_DELETED_SUCCESS' => 'Profile successfully delete.',
 
     'Error!' => 'Error!',
 

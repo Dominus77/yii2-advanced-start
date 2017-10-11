@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -66,11 +65,15 @@ use modules\users\Module;
             ],
         ]) ?>
     </div>
-    <?php if (Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_MANAGER)) : ?>
-        <div class="col-sm-offset-2 col-sm-10">
+
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ||
+            Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_OWN_PROFILE, ['model' => $model])) : ?>
             <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update', 'id' => $model->id], [
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-primary',
             ]) ?>
+        <?php endif; ?>
+        <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_DELETE_USERS)) : ?>
             <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
@@ -78,6 +81,7 @@ use modules\users\Module;
                     'method' => 'post',
                 ],
             ]) ?>
-        </div>
-    <?php endif; ?>
+        <?php endif; ?>
+    </div>
+
 </div>

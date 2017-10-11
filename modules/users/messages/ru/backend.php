@@ -64,6 +64,8 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Пароль успешно изменён.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Профиль успешно сохранён.',
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Профиль успешно изменён.',
+    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Профиль успешно помечен как удалённый.',
+    'MSG_PROFILE_DELETED_SUCCESS' => 'Профиль успешно удалён.',
 
     'Error!' => 'Ошибка!',
 

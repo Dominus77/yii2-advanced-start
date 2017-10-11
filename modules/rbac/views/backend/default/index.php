@@ -1,12 +1,43 @@
-<div class="rbac-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+
+/* @var $this yii\web\View */
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use modules\rbac\Module;
+
+$this->title = Module::t('module', 'RBAC');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="rbac-backend-default-index">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+
+            <div class="box-tools pull-right">
+
+            </div>
+        </div>
+        <div class="box-body">
+            <ul>
+                <li>
+                    <a href="<?= Url::to(['permissions/index']); ?>"><?= Module::t('module', 'Permissions'); ?></a>
+                </li>
+                <li><a href="<?= Url::to(['roles/index']); ?>"><?= Module::t('module', 'Roles'); ?></a></li>
+                <li><a href="<?= Url::to(['assign/index']); ?>"><?= Module::t('module', 'Assign rights'); ?></a>
+                </li>
+            </ul>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right">
+                <?= Html::a(Module::t('module', 'Reset rbac'), Url::to(['default/reset']), [
+                    'data' => [
+                        'method' => 'post',
+                        'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
+                    ]
+                ]) ?>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\components\widgets\passfield\Passfield;
 use modules\users\models\backend\User;
 use modules\users\Module;
@@ -33,14 +32,14 @@ use modules\users\Module;
         <?= $form->field($model, 'username')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_CREATE) ? false : true,
+            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
             'placeholder' => Module::t('backend', 'USERNAME'),
         ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
             'placeholder' => Module::t('backend', 'EMAIL'),
         ]) ?>
 
@@ -88,12 +87,12 @@ use modules\users\Module;
 
         <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
             'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+            'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC) ? false : true,
         ]) ?>
 
         <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
             'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_CREATE) ? false : true,
+            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_ADMIN) ? false : true,
         ]) ?>
 
         <div class="form-group">

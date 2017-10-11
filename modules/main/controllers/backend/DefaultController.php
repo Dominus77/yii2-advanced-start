@@ -4,7 +4,7 @@ namespace modules\main\controllers\backend;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use modules\rbac\models\Rbac as BackendRbac;
+use modules\rbac\models\Permission;
 use modules\main\Module;
 
 /**
@@ -24,7 +24,7 @@ class DefaultController extends Controller
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => [BackendRbac::PERMISSION_BACKEND],
+                        'roles' => [Permission::PERMISSION_VIEW_ADMIN_PAGE],
                     ],
                 ],
             ],
@@ -38,7 +38,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND)) {
+        if (!Yii::$app->user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
             Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
             return $this->goHome();
         }

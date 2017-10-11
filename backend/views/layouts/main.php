@@ -10,7 +10,6 @@ use yii\helpers\Url;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use dominus77\sweetalert2\Alert;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\widgets\AvatarWidget;
 
 AppAsset::register($this);
@@ -210,7 +209,12 @@ AppAsset::register($this);
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    'visible' => Yii::$app->user->can(BackendRbac::ROLE_MODERATOR),
+                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
+                ],
+                [
+                    'label' => '<i class="fa fa-unlock"></i> <span>' . Yii::t('app', 'RBAC') . '</span>',
+                    'url' => ['/rbac/default/index'],
+                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC),
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',

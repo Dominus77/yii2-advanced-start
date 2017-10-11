@@ -9,12 +9,12 @@ use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
 use modules\users\models\backend\UserSearch;
 use modules\users\models\UploadForm;
+use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /**
@@ -58,7 +58,7 @@ class DefaultController extends Controller
                     [
                         'actions' => ['create', 'delete', 'status'],
                         'allow' => true,
-                        'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER],
+                        'roles' => [\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS],
                     ],
                 ],
             ],
@@ -101,9 +101,12 @@ class DefaultController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if ($model = $this->findModel($id)) {
+            return $this->render('view', [
+                'model' => $model,
+            ]);
+        }
+        return $this->redirect(['index']);
     }
 
     /**
@@ -114,7 +117,6 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
 
         $uploadModel = new UploadForm();
 
@@ -133,6 +135,7 @@ class DefaultController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
+        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -146,20 +149,17 @@ class DefaultController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+        if ($model = $this->findModel($id)) {
 
-        $user_role = $model->getUserRoleValue();
-        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+            $user_role = $model->getUserRoleValue();
+            $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
 
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
-            return $this->redirect(['index']);
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->redirect(['index']);
     }
 
     /**
@@ -170,25 +170,31 @@ class DefaultController extends Controller
     public function actionStatus($id)
     {
         if (Yii::$app->request->isAjax) {
-            $model = $this->findModel($id);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if ($model->status == $model::STATUS_ACTIVE) {
-                $model->status = $model::STATUS_BLOCKED;
-            } else if ($model->status == $model::STATUS_BLOCKED) {
-                $model->status = $model::STATUS_ACTIVE;
-            } else if ($model->status == $model::STATUS_WAIT) {
-                $model->status = $model::STATUS_ACTIVE;
-            }
-            if ($model->save()) {
-                return [
-                    'body' => $model->statusLabelName,
-                    'success' => true,
-                ];
-            } else {
-                return [
-                    'body' => Html::tag('span', Module::t('backend', 'Error!'), ['class' => 'label label-danger']),
-                    'success' => false,
-                ];
+            if ($model = $this->findModel($id)) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                // Запрещаем менять статус у себя и админа
+                if ($model->id !== Yii::$app->user->identity->getId()) {
+                    if ($model->status == $model::STATUS_ACTIVE) {
+                        $model->status = $model::STATUS_BLOCKED;
+                    } else if ($model->status == $model::STATUS_BLOCKED) {
+                        $model->status = $model::STATUS_ACTIVE;
+                    } else if ($model->status == $model::STATUS_WAIT) {
+                        $model->status = $model::STATUS_ACTIVE;
+                    } else if ($model->status == $model::STATUS_DELETED) {
+                        $model->status = $model::STATUS_WAIT;
+                    }
+                    if ($model->save()) {
+                        return [
+                            'body' => $model->statusLabelName,
+                            'success' => true,
+                        ];
+                    } else {
+                        return [
+                            'body' => Html::tag('span', Module::t('backend', 'Error!'), ['class' => 'label label-danger']),
+                            'success' => false,
+                        ];
+                    }
+                }
             }
         }
         return $this->redirect(['index']);
@@ -201,31 +207,29 @@ class DefaultController extends Controller
      */
     public function actionUpdateProfile($id)
     {
-        $model = $this->findModel($id);
-        $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+        if ($model = $this->findModel($id)) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
-            return $this->redirect(['index']);
-        }
+            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
 
-        $user_role = $model->getUserRoleValue();
-        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
-        $_role = $model->role;
+            $user_role = $model->getUserRoleValue();
+            $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+            $_role = $model->role;
 
-        if ($model->load(Yii::$app->request->post())) {
-            // Если изменена роль
-            if ($_role != $model->role) {
-                $authManager = Yii::$app->getAuthManager();
-                // Отвязываем старую роль если она существует
-                if ($role = $authManager->getRole($_role))
-                    $authManager->revoke($role, $model->id);
-                // Привязываем новую
-                $role = $authManager->getRole($model->role);
-                $authManager->assign($role, $model->id);
+            if ($model->load(Yii::$app->request->post())) {
+                // Если изменена роль
+                if ($_role != $model->role) {
+                    $authManager = Yii::$app->getAuthManager();
+                    // Отвязываем старую роль если она существует
+                    if ($role = $authManager->getRole($_role))
+                        $authManager->revoke($role, $model->id);
+                    // Привязываем новую
+                    $role = $authManager->getRole($model->role);
+                    $authManager->assign($role, $model->id);
+                }
+                if ($model->save())
+                    Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_SAVE_SUCCESS'));
             }
-            if ($model->save())
-                Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_SAVE_SUCCESS'));
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
     }
@@ -237,16 +241,12 @@ class DefaultController extends Controller
      */
     public function actionUpdatePassword($id)
     {
-        $model = $this->findModel($id);
-        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+        if ($model = $this->findModel($id)) {
 
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
-            return $this->redirect(['index']);
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
+            }
+            $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
     }
@@ -258,30 +258,25 @@ class DefaultController extends Controller
      */
     public function actionUpdateAvatar($id)
     {
-        $model = $this->findModel($id);
-        $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
-
-        if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND_USER_UPDATE, ['model' => $model])) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
-            return $this->redirect(['index']);
-        }
-
-        $avatar = $model->avatar;
-        if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
-            if ($model->isDel) {
-                if ($avatar) {
-                    $upload = Yii::$app->getModule('users')->uploads;
-                    $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
-                    $avatar = $path . '/' . $avatar;
-                    if (file_exists($avatar))
-                        unlink($avatar);
-                    $model->avatar = null;
-                    $model->save();
+        if ($model = $this->findModel($id)) {
+            $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
+            $avatar = $model->avatar;
+            if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
+                if ($model->isDel) {
+                    if ($avatar) {
+                        $upload = Yii::$app->getModule('users')->uploads;
+                        $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
+                        $avatar = $path . '/' . $avatar;
+                        if (file_exists($avatar))
+                            unlink($avatar);
+                        $model->avatar = null;
+                        $model->save();
+                    }
                 }
+                $uploadModel = new UploadForm();
+                if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
+                    $uploadModel->upload($model->id);
             }
-            $uploadModel = new UploadForm();
-            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
-                $uploadModel->upload($model->id);
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'avatar']);
     }
@@ -294,14 +289,21 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        // Нельзя удалить профиль администратора
-        if (($model->getUserRoleValue($model->id) == BackendRbac::ROLE_ADMINISTRATOR)) {
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You can not remove the Administrator profile.'));
-            return $this->redirect(['index']);
+        if ($model = $this->findModel($id)) {
+            // Запрещаем удалять самого себя
+            if ($model->id !== Yii::$app->user->identity->getId()) {
+                if ($model->isDeleted()) {
+                    if ($model->delete())
+                        Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_DELETED_SUCCESS'));
+                } else {
+                    $model->status = $model::STATUS_DELETED;
+                    if ($model->save())
+                        Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_CHECKED_DELETED_SUCCESS'));
+                }
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
+            }
         }
-        $model->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -337,7 +339,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             // Если запрещен доступ к Backend сбрасываем авторизацию записываем сообщение в сессию
             // и перебрасываем на страницу входа
-            if (!Yii::$app->user->can(BackendRbac::PERMISSION_BACKEND)) {
+            if (!Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
                 Yii::$app->user->logout();
                 Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
                 return $this->goHome();

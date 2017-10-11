@@ -1,12 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 07.10.16
  * Time: 5:48
  */
 
-namespace modules\rbac\commands;
+namespace modules\rbac\console;
 
 use Yii;
 use yii\console\Controller;

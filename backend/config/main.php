@@ -25,6 +25,12 @@ return [
         'users' => [
             'isBackend' => true,
         ],
+        'rbac' => [
+            'class' => 'modules\rbac\Module',
+            'params' => [
+                'userClass' => 'modules\users\models\User',
+            ]
+        ],
     ],
     'components' => [
         'request' => [
@@ -77,8 +83,14 @@ return [
             'rules' => [],
         ],
     ],
+    // Последний визит
     'as afterAction' => [
         'class' => '\modules\users\components\behavior\LastVisitBehavior',
+    ],
+    // Доступ к админке
+    'as AccessBehavior' => [
+        'class' => '\modules\rbac\components\behavior\AccessBehavior',
+        'permission' => \modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE, // Разрешение доступа к админке
     ],
     'params' => $params,
 ];

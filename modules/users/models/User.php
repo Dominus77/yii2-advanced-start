@@ -9,7 +9,6 @@ use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 use yii\helpers\VarDumper;
 
@@ -38,12 +37,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
-    const STATUS_DELETE = 3;
+    const STATUS_DELETED = 3;
 
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 
-    const RBAC_DEFAULT_ROLE = BackendRbac::ROLE_USER;
+    const RBAC_DEFAULT_ROLE = \modules\rbac\models\Role::ROLE_DEFAULT;
 
     public $role;
     public $imageFile;
@@ -141,7 +140,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => Module::t('backend', 'STATUS_BLOCKED'),
             self::STATUS_ACTIVE => Module::t('backend', 'STATUS_ACTIVE'),
             self::STATUS_WAIT => Module::t('backend', 'STATUS_WAIT'),
-            self::STATUS_DELETE => Module::t('backend', 'STATUS_DELETE'),
+            self::STATUS_DELETED => Module::t('backend', 'STATUS_DELETE'),
         ];
     }
 
@@ -167,7 +166,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => 'default',
             self::STATUS_ACTIVE => 'success',
             self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETE => 'danger',
+            self::STATUS_DELETED => 'danger',
         ];
     }
 
@@ -206,6 +205,35 @@ class User extends ActiveRecord implements IdentityInterface
             return ArrayHelper::getValue($role, function ($role, $defaultValue) {
                 foreach ($role as $key => $value) {
                     return $value->description;
+                }
+                return null;
+            });
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoleName()
+    {
+        $auth = Yii::$app->authManager;
+        $roles = $auth->getRolesByUser($this->id);
+        $role = '';
+        foreach ($roles as $item) {
+            $role .= $item->description ? $item->description . ', ' : $item->name . ', ';
+        }
+        return chop($role, ' ,');
+    }
+
+    /**
+     * Получаем роль пользователя
+     */
+    public function getRoleUser()
+    {
+        if ($role = Yii::$app->authManager->getRolesByUser($this->id))
+            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                foreach ($role as $key => $value) {
+                    return $value->name;
                 }
                 return null;
             });
@@ -438,6 +466,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removeEmailConfirmToken()
     {
         $this->email_confirm_token = null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->status === self::STATUS_DELETED;
     }
 
     /**
