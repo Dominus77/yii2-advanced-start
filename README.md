@@ -113,12 +113,14 @@ modules/
         Bootstrap.php   File autoload module settings app components (urlManager)
         Module.php      General Module class
     rbac/               contains module rbac
-        commands/       contains console controllers (commands)
+        components/     rules and rbac init
+            behavior/   access backend behavior
+        console/        contains console controllers (commands)
         controllers/    contains module Web controller classes
             backend/    contains module backend Web controller classes
+        messages/       contains i18n module
         migrations/     contains database migrations module
         models/         contains module-specific model classes
-        rules/          contains rbac specific rules
         views/          contains module view files for the Web application
             backend/    contains module backend view files for the Web application
         Bootstrap.php   File autoload module settings app components (urlManager)
