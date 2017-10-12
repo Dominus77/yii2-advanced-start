@@ -285,7 +285,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ~~~
 
-Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/user
+Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/users
 
 TESTING
 -------
