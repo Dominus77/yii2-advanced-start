@@ -54,4 +54,9 @@ return [
     'TEXT_FOLLOWING_FIELDS_LOGIN' => 'Пожалуйста, заполните следующие поля для входа:',
     'TEXT_REQUEST_PASSWORD_RESET' => 'Пожалуйста, укажите Ваш email который был использован при регистрации и мы вышлем на него инструкцию по дальнейшиму восстановлению.',
     'TEXT_PLEASE_NEW_PASSWORD' => 'Пожалуйста, установите новый пароль:',
+
+    'Password changed successfully.' => 'Пароль успешно изменён.',
+    'Check your email for further instructions.' => 'Проверьте свою электронную почту для получения дальнейших инструкций.',
+    'Sorry, we are unable to reset password for email provided.' => 'Извените, но мы не можем сбросить пароль!',
+    'New password was saved.' => 'Новый пароль успешно сохранён.',
 ];

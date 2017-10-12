@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'content' => $this->render('index/_profile', [
                         'model' => $model,
                     ]),
-                    'active' => (Yii::$app->request->get('tab') == 'profile') ? true : false,
+                    'options' => ['id' => 'profile'],
+                    'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                 ],
             ]
         ]); ?>

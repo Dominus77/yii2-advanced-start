@@ -52,4 +52,9 @@ return [
     'TEXT_FOLLOWING_FIELDS_LOGIN' => 'Please fill out the following fields to login:',
     'TEXT_REQUEST_PASSWORD_RESET' => 'Please fill out your email. A link to reset password will be sent there.',
     'TEXT_PLEASE_NEW_PASSWORD' => 'Please choose your new password:',
+
+    'Password changed successfully.' => 'Password changed successfully.',
+    'Check your email for further instructions.' => 'Check your email for further instructions.',
+    'Sorry, we are unable to reset password for email provided.' => 'Sorry, we are unable to reset password for email provided.',
+    'New password was saved.' => 'New password was saved.',
 ];

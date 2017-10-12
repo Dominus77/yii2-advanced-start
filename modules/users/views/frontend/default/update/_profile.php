@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
-use modules\rbac\models\Rbac as BackendRbac;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -30,7 +29,7 @@ use modules\users\Module;
     <?= $form->field($model, 'username')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+        'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
         'placeholder' => Module::t('backend', 'USERNAME'),
     ]) ?>
 
@@ -55,12 +54,12 @@ use modules\users\Module;
 
     <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
         'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC) ? false : true,
     ]) ?>
 
     <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
         'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+        'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
     ]) ?>
 
     <div class="form-group">

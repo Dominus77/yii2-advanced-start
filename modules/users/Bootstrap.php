@@ -32,7 +32,7 @@ class Bootstrap implements BootstrapInterface
         $app->getUrlManager()->addRules(
             [
                 // объявление правил здесь
-                '<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'users/default/<_a>',
+                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
 
                 'users' => 'users/default/index',
                 'users/create' => 'users/default/create',

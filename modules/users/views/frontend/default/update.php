@@ -19,13 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'content' => $this->render('update/_profile', [
                         'model' => $model,
                     ]),
-                    'active' => (Yii::$app->request->get('tab') == 'profile') ? true : false,
+                    'options' => ['id' => 'profile'],
+                    'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                 ],
                 [
                     'label' => Module::t('frontend', 'TITLE_PASSWORD'),
                     'content' => $this->render('update/_password', [
                         'model' => $model,
                     ]),
+                    'options' => ['id' => 'password'],
                     'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
                 ],
                 [
@@ -33,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'content' => $this->render('update/_photo', [
                         'model' => $model,
                     ]),
+                    'options' => ['id' => 'avatar'],
                     'active' => (Yii::$app->request->get('tab') == 'avatar') ? true : false,
                 ],
             ]

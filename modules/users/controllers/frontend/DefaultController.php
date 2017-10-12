@@ -94,7 +94,8 @@ class DefaultController extends Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+            if($model->save())
+                Yii::$app->session->setFlash('success', Module::t('frontend', 'Password changed successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
     }
@@ -152,7 +153,7 @@ class DefaultController extends Controller
     {
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-        $model->status = $model::STATUS_DELETE;
+        $model->status = $model::STATUS_DELETED;
         if ($model->save())
             Yii::$app->user->logout();
         return $this->goHome();
@@ -243,11 +244,11 @@ class DefaultController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Check your email for further instructions.'));
+                Yii::$app->session->setFlash('success', Module::t('frontend', 'Check your email for further instructions.'));
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Sorry, we are unable to reset password for email provided.'));
+                Yii::$app->session->setFlash('error', Module::t('frontend', 'Sorry, we are unable to reset password for email provided.'));
             }
         }
 
@@ -272,7 +273,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'New password was saved.'));
+            Yii::$app->session->setFlash('success', Module::t('frontend', 'New password was saved.'));
 
             return $this->goHome();
         }
