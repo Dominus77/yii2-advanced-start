@@ -88,11 +88,13 @@ class DefaultController extends Controller
     public function actionUpdatePassword()
     {
         $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
+
         if ($model->load(Yii::$app->request->post())) {
             if($model->save())
                 Yii::$app->session->setFlash('success', Module::t('frontend', 'Password changed successfully.'));
@@ -109,6 +111,7 @@ class DefaultController extends Controller
         $model = $this->findModel();
         $user_role = $model->getUserRoleValue();
         $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
+        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('frontend', 'MSG_PROFILE_SAVE_SUCCESS'));
