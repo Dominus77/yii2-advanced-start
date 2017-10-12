@@ -55,6 +55,13 @@ return [
                     'except' => ['delete'],
                     'pluralize' => true,
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'v1/message'
+                    ],
+                    'pluralize' => false,
+                ],
             ],
         ],
         'cache' => [
