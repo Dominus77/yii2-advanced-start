@@ -18,6 +18,8 @@ return [
 
     'TITLE_MY_PROFILE' => 'My Profile',
     'TITLE_PROFILE' => 'Profile',
+    'TITLE_PASSWORD' => 'Password',
+    'TITLE_PHOTO' => 'Photo',
     'TITLE_UPDATE' => 'Update',
     'TITLE_PASSWORD' => 'Password',
     'TITLE_PHOTO' => 'Photo',
