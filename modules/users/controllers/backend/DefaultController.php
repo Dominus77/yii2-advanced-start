@@ -9,7 +9,6 @@ use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
 use modules\users\models\backend\UserSearch;
 use modules\users\models\UploadForm;
-use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -19,7 +18,8 @@ use modules\rbac\models\Permission;
 use modules\users\Module;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * Class DefaultController
+ * @package modules\users\controllers\backend
  */
 class DefaultController extends Controller
 {
