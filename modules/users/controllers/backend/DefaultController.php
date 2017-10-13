@@ -283,19 +283,22 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->request->post() && $model = $this->findModel($id)) {
-            // Запрещаем удалять самого себя
-            if ($model->id !== Yii::$app->user->identity->getId()) {
-                if ($model->isDeleted()) {
-                    if ($model->delete())
-                        Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
+        if (Yii::$app->request->post()) {
+            if($model = $this->findModel($id)) {
+                // Запрещаем удалять самого себя
+                if ($model->id !== Yii::$app->user->identity->getId()) {
+                    if ($model->isDeleted()) {
+                        if ($model->delete())
+                            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
+                    } else {
+                        $model->status = $model::STATUS_DELETED;
+                        if ($model->save())
+                            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully checked deleted.'));
+                    }
                 } else {
-                    $model->status = $model::STATUS_DELETED;
-                    if ($model->save())
-                        Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully checked deleted.'));
+                    Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed to edit the profile.'));
                 }
-            } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed to edit the profile.'));
+                return $this->redirect(['index']);
             }
         }
         Yii::$app->session->setFlash('error', Module::t('module', 'Not the correct query format!'));
