@@ -1,19 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 05.10.16
  * Time: 5:38
  */
 
 return [
-    'NAV_HOME' => 'Главная',
-    'NAV_ABOUT' => 'О нас',
-    'NAV_CONTACT' => 'Связь',
-    'NAV_SIGN_UP' => 'Регистрация',
-    'NAV_LOGIN' => 'Вход',
+    'My Menu' => 'Моё меню',
+
     'NAV_LOGOUT ({:UserName})' => 'Выход ({:UserName})',
-    'NAV_MY_MENU' => 'Моё меню',
     'NAV_PROFILE' => 'Профиль',
     'NAV_LOGOUT' => 'Выход',
 
