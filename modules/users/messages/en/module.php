@@ -76,7 +76,8 @@ return [
 
     'Password reset for' => 'Password reset for',
 
-    'Invalid username or password.' => 'Invalid username or password.',
+    'Invalid email or password.' => 'Invalid email or password.',
+    'You do not have rights, access is denied.' => 'You do not have rights, access is denied.',
 
     'This username already exists.' => 'This username already exists.',
     'This email already exists.' => 'This email already exists.',

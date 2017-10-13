@@ -17,10 +17,10 @@ class SignupCest
     public function signupWithEmptyFields(FunctionalTester $I)
     {
         $I->see('Sign Up', 'h1');
-        $I->see('Please fill out the following fields to sign up:');
+        $I->see('Please fill in the following fields to sign up:');
         $I->submitForm($this->formId, []);
         $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('E-mail cannot be blank.');
+        $I->seeValidationError('Email cannot be blank.');
         $I->seeValidationError('Password cannot be blank.');
 
     }
@@ -36,7 +36,7 @@ class SignupCest
         );
         $I->dontSee('Username cannot be blank.', '.help-block');
         $I->dontSee('Password cannot be blank.', '.help-block');
-        $I->see('E-mail is not a valid email address.', '.help-block');
+        $I->see('Email is not a valid email address.', '.help-block');
     }
 
     public function signupSuccessfully(FunctionalTester $I)

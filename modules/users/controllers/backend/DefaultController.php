@@ -336,7 +336,7 @@ class DefaultController extends Controller
             // и перебрасываем на страницу входа
             if (!Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
                 Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
+                Yii::$app->session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
                 return $this->goHome();
             }
             return $this->goBack();

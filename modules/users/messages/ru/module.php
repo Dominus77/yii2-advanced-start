@@ -76,7 +76,8 @@ return [
 
     'Password reset for' => 'Сброс пароля для',
 
-    'Invalid username or password.' => 'Не верные имя или пароль.',
+    'Invalid email or password.' => 'Не верные email или пароль.',
+    'You do not have rights, access is denied.' => 'У вас нет прав, доступ запрещен.',
 
     'This username already exists.' => 'Такое имя пользователя уже существует.',
     'This email already exists.' => 'Такой email уже существует.',
