@@ -98,4 +98,6 @@ return [
 
     'Reset Password' => 'Сброс пароля',
     'Create a new password' => 'Придумайте новый пароль',
+
+    'Member since' => 'Зарегистрирован с',
 ];

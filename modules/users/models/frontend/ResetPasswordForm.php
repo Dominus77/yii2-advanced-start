@@ -53,6 +53,16 @@ class ResetPasswordForm extends Model
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'password' => Module::t('module', 'New Password'),
+        ];
+    }
+
+    /**
      * Resets password.
      *
      * @return boolean if password was reset.

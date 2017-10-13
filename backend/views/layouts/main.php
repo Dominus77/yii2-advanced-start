@@ -145,7 +145,7 @@ AppAsset::register($this);
                                 <p>
                                     <?= Yii::$app->user->identity->getUserFullName(); ?>
                                     - <?= Yii::$app->user->identity->getUserRoleName(); ?>
-                                    <small><?= Yii::t('app', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
+                                    <small><?= UserModule::t('module', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -165,11 +165,11 @@ AppAsset::register($this);
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="<?= Url::to(['/users/profile/index']); ?>"
-                                       class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
+                                       class="btn btn-default btn-flat"><?= UserModule::t('module', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
                                     <?= Html::beginForm(['/users/default/logout'], 'post')
-                                    . Html::submitButton(Yii::t('app', 'Sign out'), ['class' => 'btn btn-default btn-flat logout'])
+                                    . Html::submitButton(UserModule::t('module', 'Sign Out'), ['class' => 'btn btn-default btn-flat logout'])
                                     . Html::endForm(); ?>
                                 </div>
                             </li>
@@ -266,7 +266,7 @@ AppAsset::register($this);
                 echo Html::encode($this->title) . $small ?>
             </h1>
             <?= Breadcrumbs::widget([
-                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . Yii::t('app', 'Home'), 'url' => Url::to(['/main/default/index'])],
+                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false,
             ]) ?>

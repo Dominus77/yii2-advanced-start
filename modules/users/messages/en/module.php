@@ -98,4 +98,6 @@ return [
 
     'Reset Password' => 'Reset Password',
     'Create a new password' => 'Create a new password',
+
+    'Member since' => 'Member since',
 ];
