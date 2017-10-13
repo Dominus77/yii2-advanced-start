@@ -8,7 +8,8 @@ use yii\base\Model;
 use modules\main\Module;
 
 /**
- * ContactForm is the model behind the contact form.
+ * Class ContactForm
+ * @package modules\main\models\frontend
  */
 class ContactForm extends Model
 {
@@ -49,11 +50,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Module::t('frontend', 'NAME'),
-            'email' => Module::t('frontend', 'EMAIL'),
-            'subject' => Module::t('frontend', 'SUBJECT'),
-            'body' => Module::t('frontend', 'BODY'),
-            'verifyCode' => Module::t('frontend', 'VERIFICATION_CODE'),
+            'name' => Module::t('module', 'Name'),
+            'email' => Module::t('module', 'E-mail'),
+            'subject' => Module::t('module', 'Subject'),
+            'body' => Module::t('module', 'Body'),
+            'verifyCode' => Module::t('module', 'Verification Code'),
         ];
     }
 

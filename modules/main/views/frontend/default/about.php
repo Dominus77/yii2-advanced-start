@@ -5,10 +5,10 @@
 use yii\helpers\Html;
 use modules\main\Module;
 
-$this->title = Module::t('frontend', 'TITLE_ABOUT');
+$this->title = Module::t('module', 'About');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="main-default-about">
+<div class="main-frontend-default-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>This is the About page. You may modify the following file to customize its content:</p>

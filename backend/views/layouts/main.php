@@ -11,7 +11,9 @@ use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use dominus77\sweetalert2\Alert;
 use modules\users\widgets\AvatarWidget;
+use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
+use modules\rbac\Module as RbacModule;
 
 AppAsset::register($this);
 ?>
@@ -204,7 +206,7 @@ AppAsset::register($this);
                     'options' => ['class' => 'header',],
                 ],
                 [
-                    'label' => '<i class="fa fa-dashboard"></i> <span>' . Yii::t('app', 'Home') . '</span>',
+                    'label' => '<i class="fa fa-dashboard"></i> <span>' . MainModule::t('module', 'Home') . '</span>',
                     'url' => ['/main/default/index'],
                 ],
                 [
@@ -213,7 +215,7 @@ AppAsset::register($this);
                     //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],
                 [
-                    'label' => '<i class="fa fa-unlock"></i> <span>' . Yii::t('app', 'RBAC') . '</span>',
+                    'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span>',
                     'url' => ['/rbac/default/index'],
                     'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC),
                 ],

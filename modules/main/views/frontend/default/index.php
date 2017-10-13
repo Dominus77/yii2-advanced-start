@@ -4,9 +4,9 @@
 
 use modules\main\Module;
 
-$this->title = Module::t('frontend', 'TITLE_HOME');
+$this->title = Module::t('module', 'Home');
 ?>
-<div class="main-default-index">
+<div class="main-frontend-default-index">
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
