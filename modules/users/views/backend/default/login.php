@@ -8,11 +8,11 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
-$this->title = Module::t('backend', 'Login');
+$this->title = Module::t('module', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<p class="login-box-msg"><?= Module::t('backend', 'Login to the site to start the session'); ?></p>
+<p class="login-box-msg"><?= Module::t('module', 'Login to the site to start the session'); ?></p>
 
 <?php $form = ActiveForm::begin([
     'id' => 'login-form'
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-group has-feedback">
     <?= $form->field($model, 'email')->textInput([
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'Email')
+        'placeholder' => Module::t('module', 'Email')
     ])->label(false); ?>
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 </div>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-group has-feedback">
     <?= $form->field($model, 'password')->passwordInput([
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'Password')
+        'placeholder' => Module::t('module', 'Password')
     ])->label(false); ?>
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </div>
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="col-xs-4">
-        <?= Html::submitButton(Module::t('backend', 'Sign In'), [
+        <?= Html::submitButton(Module::t('module', 'Sign In'), [
             'class' => 'btn btn-primary btn-block btn-flat',
             'name' => 'login-button'
         ]) ?>
