@@ -57,6 +57,8 @@ return [
     'TEXT_REQUEST_PASSWORD_RESET' => 'Please fill out your email. A link to reset password will be sent there.',
     'TEXT_PLEASE_NEW_PASSWORD' => 'Please choose your new password:',
 
+    'This username is already taken.' => 'This username is already taken.',
+    'This email is already taken.' => 'This email is already taken.',
     'Password changed successfully.' => 'Password changed successfully.',
     'Check your email for further instructions.' => 'Check your email for further instructions.',
     'Sorry, we are unable to reset password for email provided.' => 'Sorry, we are unable to reset password for email provided.',

@@ -7,12 +7,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Module::t('backend', 'TITLE_USERS');
-$this->params['title']['small'] = Module::t('backend', 'TITLE_UPDATE');
+$this->title = Module::t('backend', 'Update');
+$this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'TITLE_USERS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_UPDATE');
+$this->params['breadcrumbs'][] = Module::t('backend', 'Update');
 ?>
 <div class="users-backend-default-update">
     <div class="box">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_UPDATE');
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('backend', 'TITLE_PROFILE'),
+                        'label' => Module::t('backend', 'Profile'),
                         'content' => $this->render('update/_profile', [
                             'model' => $model,
                         ]),
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_UPDATE');
                         'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'TITLE_PASSWORD'),
+                        'label' => Module::t('backend', 'Password'),
                         'content' => $this->render('update/_password', [
                             'model' => $model,
                         ]),
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'TITLE_UPDATE');
                         'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'TITLE_PHOTO'),
+                        'label' => Module::t('backend', 'Photo'),
                         'content' => $this->render('update/_photo', [
                             'model' => $model,
                         ]),

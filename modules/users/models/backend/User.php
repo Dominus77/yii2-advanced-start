@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
  * Date: 09.10.16
  * Time: 3:20
  */
@@ -55,8 +55,8 @@ class User extends \modules\users\models\User
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'newPassword' => Module::t('backend', 'USER_NEW_PASSWORD'),
-            'newPasswordRepeat' => Module::t('backend', 'USER_REPEAT_PASSWORD'),
+            'newPassword' => Module::t('backend', 'New Password'),
+            'newPasswordRepeat' => Module::t('backend', 'Repeat Password'),
         ]);
     }
 

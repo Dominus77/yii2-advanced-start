@@ -50,7 +50,7 @@ use modules\users\Module;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'BUTTON_CREATE') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'BUTTON_SAVE'), [
+            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'Create') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
                 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

@@ -10,7 +10,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\users\Module;
-use yii\helpers\VarDumper;
 
 /**
  * User model
@@ -76,12 +75,12 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'USERNAME_UNIQUE')],
+            ['username', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'This username is already taken.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'EMAIL_UNIQUE')],
+            ['email', 'unique', 'targetClass' => self::className(), 'message' => Module::t('frontend', 'This email is already taken.')],
             ['email', 'string', 'max' => 255],
 
             ['status', 'integer'],
@@ -101,20 +100,20 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'created_at' => Module::t('backend', 'CREATED'),
-            'updated_at' => Module::t('backend', 'UPDATED'),
-            'last_visit' => Module::t('backend', 'LAST_VISIT'),
-            'username' => Module::t('backend', 'USERNAME'),
-            'email' => Module::t('backend', 'EMAIL'),
-            'status' => Module::t('backend', 'STATUS'),
-            'role' => Module::t('backend', 'ROLE'),
-            'userRoleName' => Module::t('backend', 'ROLE'),
-            'avatar' => Module::t('backend', 'AVATAR'),
-            'first_name' => Module::t('backend', 'FIRST_NAME'),
-            'last_name' => Module::t('backend', 'LAST_NAME'),
-            'registration_type' => Module::t('backend', 'REGISTRATION_TYPE'),
-            'imageFile' => Module::t('backend', 'AVATAR'),
-            'isDel' => Module::t('backend', 'DELETE_AVATAR'),
+            'created_at' => Module::t('backend', 'Created'),
+            'updated_at' => Module::t('backend', 'Updated'),
+            'last_visit' => Module::t('backend', 'Last Visit'),
+            'username' => Module::t('backend', 'Username'),
+            'email' => Module::t('backend', 'Email'),
+            'status' => Module::t('backend', 'Status'),
+            'role' => Module::t('backend', 'Role'),
+            'userRoleName' => Module::t('backend', 'Role'),
+            'avatar' => Module::t('backend', 'Avatar'),
+            'first_name' => Module::t('backend', 'First Name'),
+            'last_name' => Module::t('backend', 'Last Name'),
+            'registration_type' => Module::t('backend', 'Registration Type'),
+            'imageFile' => Module::t('backend', 'Avatar'),
+            'isDel' => Module::t('backend', 'Delete Avatar'),
         ];
     }
 
@@ -137,10 +136,10 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getStatusesArray()
     {
         return [
-            self::STATUS_BLOCKED => Module::t('backend', 'STATUS_BLOCKED'),
-            self::STATUS_ACTIVE => Module::t('backend', 'STATUS_ACTIVE'),
-            self::STATUS_WAIT => Module::t('backend', 'STATUS_WAIT'),
-            self::STATUS_DELETED => Module::t('backend', 'STATUS_DELETE'),
+            self::STATUS_BLOCKED => Module::t('backend', 'Blocked'),
+            self::STATUS_ACTIVE => Module::t('backend', 'Active'),
+            self::STATUS_WAIT => Module::t('backend', 'Wait'),
+            self::STATUS_DELETED => Module::t('backend', 'Deleted'),
         ];
     }
 

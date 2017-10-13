@@ -11,6 +11,7 @@ use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use dominus77\sweetalert2\Alert;
 use modules\users\widgets\AvatarWidget;
+use modules\users\Module as UserModule;
 
 AppAsset::register($this);
 ?>
@@ -207,7 +208,7 @@ AppAsset::register($this);
                     'url' => ['/main/default/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
+                    'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('backend', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
                     //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],

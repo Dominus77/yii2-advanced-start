@@ -12,7 +12,7 @@ use modules\users\Module;
 /* @var $searchModel modules\users\models\backend\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('backend', 'TITLE_USERS');
+$this->title = Module::t('backend', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-backend-default-index">
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'btn btn-block btn-success',
                         'data' => [
                             'toggle' => 'tooltip',
-                            'original-title' => Module::t('backend', 'BUTTON_CREATE'),
+                            'original-title' => Module::t('backend', 'Create'),
                             'pjax' => 0,
                         ],
                     ]) ?>
@@ -61,12 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'INPUT_TEXT'),
+                            'placeholder' => Module::t('backend', '- text -'),
                             'data' => [
                                 'pjax' => true,
                             ],
                         ]),
-                        'label' => Module::t('backend', 'TITLE_USERS'),
+                        'label' => Module::t('backend', 'Users'),
                         'format' => 'raw',
                         'value' => function ($data) {
                             return $this->render('avatar_column', ['model' => $data]);
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'email',
                         'filter' => Html::activeInput('text', $searchModel, 'email', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('backend', 'INPUT_TEXT'),
+                            'placeholder' => Module::t('backend', '- text -'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'status',
                         'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray, [
                             'class' => 'form-control',
-                            'prompt' => Module::t('backend', 'SELECT_ALL'),
+                            'prompt' => Module::t('backend', '- all -'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data' => [
                                         'pjax' => 0,
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'CLICK_TO_CHANGE_STATUS'),
+                                        'original-title' => Module::t('backend', 'Click to change status'),
                                     ],
                                 ]);
                             }
@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'userRoleName',
                         'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $searchModel->rolesArray, [
                             'class' => 'form-control',
-                            'prompt' => Module::t('backend', 'SELECT_ALL'),
+                            'prompt' => Module::t('backend', '- all -'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -141,8 +141,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $searchModel,
                             'attribute' => 'date_from',
                             'attribute2' => 'date_to',
-                            'options' => ['placeholder' => Module::t('backend', 'SELECT_START_DATE')],
-                            'options2' => ['placeholder' => Module::t('backend', 'SELECT_END_DATE')],
+                            'options' => ['placeholder' => Module::t('backend', '- start -')],
+                            'options2' => ['placeholder' => Module::t('backend', '- end -')],
                             'type' => DatePicker::TYPE_RANGE,
                             'separator' => '<i class="glyphicon glyphicon-resize-horizontal"></i>',
                             'pluginOptions' => [
@@ -172,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'BUTTON_VIEW'),
+                                        'original-title' => Module::t('backend', 'View'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -181,7 +181,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'BUTTON_UPDATE'),
+                                        'original-title' => Module::t('backend', 'Update'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -190,9 +190,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('backend', 'BUTTON_DELETE'),
+                                        'original-title' => Module::t('backend', 'Delete'),
                                         'method' => 'post',
-                                        'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                                        'confirm' => Module::t('backend', 'Are you sure you want to delete the entry?'),
                                     ]
                                 ]);
 

@@ -6,30 +6,7 @@
  * Time: 9:11
  */
 return [
-    'CREATED' => 'Created',
-    'UPDATED' => 'Updated',
-    'LAST_VISIT' => 'Last Visit',
-    'USERNAME' => 'Username',
-    'EMAIL' => 'Email',
-    'STATUS' => 'Status',
-    'FIRST_NAME' => 'First Name',
-    'LAST_NAME' => 'Last Name',
-    'PASSWORD' => 'Password',
-    'ROLE' => 'Role',
-    'USER_NEW_PASSWORD' => 'New password',
-    'USER_REPEAT_PASSWORD' => 'Repeat password',
-    'REGISTRATION_TYPE' => 'Registration Type',
-    'AVATAR' => 'Photo',
-    'DELETE_AVATAR' => 'Remove Photo',
-
-    'STATUS_BLOCKED' => 'Blocked',
-    'STATUS_ACTIVE' => 'Active',
-    'STATUS_WAIT' => 'Wait',
-    'STATUS_DELETE' => 'Delete',
-
-    'SYSTEM' => 'System',
-
-    'TITLE_LOGIN' => 'Login',
+    /*'TITLE_LOGIN' => 'Login',
     'TITLE_VIEW_USER' => 'View User',
     'TITLE_VIEW' => 'Views',
     'TITLE_USERS' => 'Users',
@@ -64,25 +41,53 @@ return [
     'MSG_PASSWORD_UPDATE_SUCCESS' => 'Password successfully changed.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Profile successfully save.',
     'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile successfully changed.',
-    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Profile successfully checked deleted.',
+    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Profile successfully checked deleted.',*/
 
-    'Profile' => 'Profile',
-    'Password' => 'Password',
-    'Photo' => 'Photo',
+    'Login' => 'Login',
+    'Login to the site to start the session' => 'Login to the site to start the session',
 
+    'Users' => 'Users',
+
+    'Created' => 'Created',
+    'Updated' => 'Updated',
+    'Last Visit' => 'Last Visit',
     'Username' => 'Username',
     'Email' => 'Email',
     'Status' => 'Status',
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',
+    'Role' => 'Role',
+    'New Password' => 'New Password',
     'Repeat Password' => 'Repeat Password',
+    'Registration Type' => 'Registration Type',
+    'Avatar' => 'Avatar',
+    'Delete Avatar' => 'Delete Avatar',
+
+    'System' => 'System',
+
+    'Blocked' => 'Blocked',
+    'Active' => 'Active',
+    'Wait' => 'Wait',
+    'Deleted' => 'Deleted',
+
+    'Profile' => 'Profile',
+    'Password' => 'Password',
+    'Photo' => 'Photo',
 
     'Create' => 'Create',
     'Save' => 'Save',
+    'View' => 'View',
     'Update' => 'Update',
     'Delete' => 'Delete',
+    'Sign In' => 'Sign In',
+
+    '- text -' => '- text -',
+    '- all -' => '- all -',
+    '- start -' => '- start -',
+    '- end -' => '- end -',
 
     'Are you sure you want to delete the record?' => 'Are you sure you want to delete the record?',
+    'Are you sure you want to delete the entry?' => 'Are you sure you want to delete the entry?',
 
     'Password changed successfully.' => 'Password changed successfully.',
     'Profile successfully changed.' => 'Profile successfully changed.',
@@ -92,5 +97,5 @@ return [
 
     'Error!' => 'Error!',
 
-    'CLICK_TO_CHANGE_STATUS' => 'Click to change the status',
+    'Click to change status' => 'Click to change the status',
 ];

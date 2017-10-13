@@ -6,30 +6,7 @@
  * Time: 9:11
  */
 return [
-    'CREATED' => 'Создано',
-    'UPDATED' => 'Обновлено',
-    'LAST_VISIT' => 'Последний визит',
-    'USERNAME' => 'Пользователь',
-    'EMAIL' => 'Email',
-    'STATUS' => 'Статус',
-    'FIRST_NAME' => 'Имя',
-    'LAST_NAME' => 'Фамилия',
-    'PASSWORD' => 'Пароль',
-    'ROLE' => 'Права',
-    'USER_NEW_PASSWORD' => 'Новый пароль',
-    'USER_REPEAT_PASSWORD' => 'Повторить пароль',
-    'REGISTRATION_TYPE' => 'Тип регистрации',
-    'AVATAR' => 'Фото',
-    'DELETE_AVATAR' => 'Удалить фото',
-
-    'STATUS_BLOCKED' => 'Заблокирован',
-    'STATUS_ACTIVE' => 'Активно',
-    'STATUS_WAIT' => 'Ожидает',
-    'STATUS_DELETE' => 'Удален',
-
-    'SYSTEM' => 'Система',
-
-    'TITLE_LOGIN' => 'Авторизация',
+    /*'TITLE_LOGIN' => 'Авторизация',
     'TITLE_VIEW_USER' => 'Просмотр пользователя',
     'TITLE_VIEW' => 'Просмотр',
     'TITLE_USERS' => 'Пользователи',
@@ -63,25 +40,53 @@ return [
     'MSG_YOU_NOT_ALLOWED' => 'У вас не достаточно прав, доступ запрещён.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Профиль успешно сохранён.',
 
-    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Профиль успешно помечен как удалённый.',
+    'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Профиль успешно помечен как удалённый.',*/
 
-    'Profile' => 'Профиль',
-    'Password' => 'Пароль',
-    'Photo' => 'Фото',
+    'Login' => 'Авторизация',
+    'Login to the site to start the session' => 'Войдите на сайт, чтобы начать сеанс',
 
+    'Users' => 'Пользователи',
+
+    'Created' => 'Создано',
+    'Updated' => 'Обновлено',
+    'Last Visit' => 'Последний визит',
     'Username' => 'Пользователь',
     'Email' => 'Email',
     'Status' => 'Статус',
     'First Name' => 'Имя',
     'Last Name' => 'Фамилия',
+    'Role' => 'Права',
+    'New Password' => 'Новый пароль',
     'Repeat Password' => 'Повторить пароль',
+    'Registration Type' => 'Тип регистрации',
+    'Avatar' => 'Фото',
+    'Delete Avatar' => 'Удалить фото',
+
+    'System' => 'Система',
+
+    'Blocked' => 'Заблокирован',
+    'Active' => 'Активно',
+    'Wait' => 'Ожидает',
+    'Deleted' => 'Удален',
+
+    'Profile' => 'Профиль',
+    'Password' => 'Пароль',
+    'Photo' => 'Фото',
 
     'Create' => 'Создать',
     'Save' => 'Сохранить',
+    'View' => 'Просмотр',
     'Update' => 'Изменить',
     'Delete' => 'Удалить',
+    'Sign In' => 'Войти',
+
+    '- text -' => '- текст -',
+    '- all -' => '- все -',
+    '- start -' => '- от -',
+    '- end -' => '- до -',
 
     'Are you sure you want to delete the record?' => 'Вы действительно хотите удалить профиль?',
+    'Are you sure you want to delete the entry?' => 'Вы действительно хотите удалить запись?',
 
     'Password changed successfully.' => 'Пароль успешно изменён.',
     'Profile successfully changed.' => 'Профиль успешно изменён.',
@@ -91,5 +96,5 @@ return [
 
     'Error!' => 'Ошибка!',
 
-    'CLICK_TO_CHANGE_STATUS' => 'Клик для смены статуса',
+    'Click to change status' => 'Клик для смены статуса',
 ];

@@ -35,7 +35,7 @@ use modules\users\Module;
         'options' => [
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'USER_NEW_PASSWORD'),
+            'placeholder' => Module::t('backend', 'New Password'),
         ],
         'config' => [
             'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -53,12 +53,12 @@ use modules\users\Module;
     <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'USER_REPEAT_PASSWORD'),
+        'placeholder' => Module::t('backend', 'Repeat Password'),
     ]) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'BUTTON_CREATE') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'BUTTON_SAVE'), [
+            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'Create') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Update'), [
                 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>
