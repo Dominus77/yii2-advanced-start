@@ -14,5 +14,7 @@ return [
     'Yes, delete!' => 'Yes, delete!',
     'No, do not delete!' => 'No, do not delete!',
 
+    'Go to Frontend' => 'Go to Frontend',
+
     'All rights reserved.' => 'All rights reserved.'
 ];
