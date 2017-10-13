@@ -18,6 +18,7 @@ class User extends \modules\users\models\User
     const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
     const SCENARIO_PASSWORD_UPDATE = 'adminPasswordUpdate';
     const SCENARIO_AVATAR_UPDATE = 'adminAvatarUpdate';
+    const SCENARIO_PROFILE_DELETE = 'adminProfileDelete';
 
     public $newPassword;
     public $newPasswordRepeat;
@@ -44,6 +45,7 @@ class User extends \modules\users\models\User
         $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'role', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_AVATAR_UPDATE] = ['isDel'];
+        $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
         return $scenarios;
     }
 
@@ -68,9 +70,9 @@ class User extends \modules\users\models\User
                 $this->setPassword($this->newPassword);
             }
             // У нас статус всегда активный
-            if ($this->id == Yii::$app->user->identity->getId()) {
+            /*if ($this->id == Yii::$app->user->identity->getId()) {
                 $this->status = self::STATUS_ACTIVE;
-            }
+            }*/
             return true;
         }
         return false;
@@ -83,9 +85,9 @@ class User extends \modules\users\models\User
     {
         parent::beforeDelete();
         // Защита от удаления самого себя
-        if ($this->id == Yii::$app->user->identity->getId()) {
+        /*if ($this->id == Yii::$app->user->identity->getId()) {
             return false;
-        }
+        }*/
         return true;
     }
 }

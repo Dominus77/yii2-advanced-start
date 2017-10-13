@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use modules\users\components\widgets\passfield\Passfield;
+use modules\users\widgets\passfield\Passfield;
 use modules\users\models\backend\User;
 use modules\users\Module;
 
@@ -33,14 +33,14 @@ use modules\users\Module;
             'maxlength' => true,
             'class' => 'form-control',
             //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
-            'placeholder' => Module::t('backend', 'USERNAME'),
+            'placeholder' => Module::t('backend', 'Username'),
         ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
             //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
-            'placeholder' => Module::t('backend', 'EMAIL'),
+            'placeholder' => Module::t('backend', 'Email'),
         ]) ?>
 
         <?= Passfield::widget([
@@ -50,7 +50,7 @@ use modules\users\Module;
             'options' => [
                 'maxlength' => true,
                 'class' => 'form-control',
-                'placeholder' => Module::t('backend', 'PASSWORD'),
+                'placeholder' => Module::t('backend', 'Password'),
             ],
             'config' => [
                 'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -65,25 +65,35 @@ use modules\users\Module;
             ],
         ]); ?>
 
+        <?/*= $form->field($model, 'newPassword')->passwordInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => Module::t('backend', 'Password'),
+        ])->label(Module::t('backend', 'Password')) */?>
+
         <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'USER_REPEAT_PASSWORD'),
+            'placeholder' => Module::t('backend', 'Repeat Password'),
         ]) ?>
+
+        <hr>
 
         <?= $form->field($model, 'imageFile')->fileInput() ?>
 
         <?= $form->field($model, 'first_name')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'FIRST_NAME'),
+            'placeholder' => Module::t('backend', 'First Name'),
         ]) ?>
 
         <?= $form->field($model, 'last_name')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'LAST_NAME'),
+            'placeholder' => Module::t('backend', 'Last Name'),
         ]) ?>
+
+        <hr>
 
         <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
             'class' => 'form-control',
@@ -97,7 +107,7 @@ use modules\users\Module;
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'BUTTON_CREATE') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'BUTTON_SAVE'), [
+                <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'Create') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
                     'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
                     'name' => 'submit-button',
                 ]) ?>

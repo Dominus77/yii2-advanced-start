@@ -61,11 +61,33 @@ return [
     'CONFIRM_DELETE' => 'Вы действительно хотите удалить запись?',
 
     'MSG_YOU_NOT_ALLOWED' => 'У вас не достаточно прав, доступ запрещён.',
-    'MSG_PASSWORD_UPDATE_SUCCESS' => 'Пароль успешно изменён.',
     'MSG_PROFILE_SAVE_SUCCESS' => 'Профиль успешно сохранён.',
-    'MSG_PROFILE_UPDATE_SUCCESS' => 'Профиль успешно изменён.',
+
     'MSG_PROFILE_CHECKED_DELETED_SUCCESS' => 'Профиль успешно помечен как удалённый.',
-    'MSG_PROFILE_DELETED_SUCCESS' => 'Профиль успешно удалён.',
+
+    'Profile' => 'Профиль',
+    'Password' => 'Пароль',
+    'Photo' => 'Фото',
+
+    'Username' => 'Пользователь',
+    'Email' => 'Email',
+    'Status' => 'Статус',
+    'First Name' => 'Имя',
+    'Last Name' => 'Фамилия',
+    'Repeat Password' => 'Повторить пароль',
+
+    'Create' => 'Создать',
+    'Save' => 'Сохранить',
+    'Update' => 'Изменить',
+    'Delete' => 'Удалить',
+
+    'Are you sure you want to delete the record?' => 'Вы действительно хотите удалить профиль?',
+
+    'Password changed successfully.' => 'Пароль успешно изменён.',
+    'Profile successfully changed.' => 'Профиль успешно изменён.',
+    'Profile successfully deleted.' => 'Профиль успешно удалён.',
+    'Not the correct query format!' => 'Не верный формат запроса!',
+    'The requested page does not exist.' => 'Запрошенная страница не существует.',
 
     'Error!' => 'Ошибка!',
 

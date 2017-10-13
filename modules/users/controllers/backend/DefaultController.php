@@ -15,6 +15,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use modules\rbac\models\Permission;
 use modules\users\Module;
 
 /**
@@ -46,19 +47,13 @@ class DefaultController extends Controller
                         'roles' => ['?']
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'update', 'update-profile', 'update-password', 'update-avatar'],
+                        'actions' => ['logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@']
                     ],
-                    /*[
-                        'actions' => ['update', 'upload'],
-                        'allow' => true,
-                        'roles' => [BackendRbac::PERMISSION_BACKEND_USER_MANAGER, BackendRbac::RULE_UPDATE_OWN_POST],
-                    ],*/
                     [
-                        'actions' => ['create', 'delete', 'status'],
                         'allow' => true,
-                        'roles' => [\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS],
+                        'roles' => [Permission::PERMISSION_MANAGER_USERS]
                     ],
                 ],
             ],

@@ -161,7 +161,7 @@ AppAsset::register($this);
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="<?= Url::to(['/users/default/view', 'id' => Yii::$app->user->identity->getId()]); ?>"
+                                    <a href="<?= Url::to(['/users/profile/index']); ?>"
                                        class="btn btn-default btn-flat"><?= Yii::t('app', 'Profile'); ?></a>
                                 </div>
                                 <div class="pull-right">
@@ -209,7 +209,7 @@ AppAsset::register($this);
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . Yii::t('app', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
+                    //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],
                 [
                     'label' => '<i class="fa fa-unlock"></i> <span>' . Yii::t('app', 'RBAC') . '</span>',

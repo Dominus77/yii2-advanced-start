@@ -27,11 +27,9 @@ $this->params['title']['small'] = Module::t('backend', 'TITLE_DASHBOARD');
                     </div>
                 </div>
                 <div class="box-body">
-                    <?php if (\Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
-                        <a class="btn btn-app" href="<?= Url::to(['/users/default/index']); ?>">
-                            <i class="fa fa-users"></i> <?= Yii::t('app', 'Users'); ?>
-                        </a>
-                    <?php endif; ?>
+                    <a class="btn btn-app" href="<?= Url::to(['/users/default/index']); ?>">
+                        <i class="fa fa-users"></i> <?= Yii::t('app', 'Users'); ?>
+                    </a>
                     <?php if (\Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC)) : ?>
                         <a class="btn btn-app" href="<?= Url::to(['/rbac/default/index']); ?>">
                             <i class="fa fa-unlock"></i> <?= Yii::t('app', 'RBAC'); ?>

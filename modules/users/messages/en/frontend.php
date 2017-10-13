@@ -19,6 +19,8 @@ return [
     'TITLE_MY_PROFILE' => 'My Profile',
     'TITLE_PROFILE' => 'Profile',
     'TITLE_UPDATE' => 'Update',
+    'TITLE_PASSWORD' => 'Password',
+    'TITLE_PHOTO' => 'Photo',
 
     'TITLE_SIGN_UP' => 'Sign Up',
     'EMAIL_UNIQUE' => 'This email address has already been taken.',

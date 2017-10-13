@@ -31,17 +31,21 @@ class Bootstrap implements BootstrapInterface
         // Rules
         $app->getUrlManager()->addRules(
             [
-                // объявление правил здесь
+                // Rules
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
 
+                // Users
                 'users' => 'users/default/index',
                 'users/create' => 'users/default/create',
                 'users/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
-                'user/update' => 'users/default/update',
-                'user/update-profile' => 'users/default/update-profile',
-                'user/update-avatar' => 'users/default/update-avatar',
-                'user/update-password' => 'users/default/update-password',
-                'user/delete' => 'users/default/delete',
+
+                // Profile
+                'user' => 'users/profile/index',
+                'user/update' => 'users/profile/update',
+                'user/update-profile' => 'users/profile/update-profile',
+                'user/update-avatar' => 'users/profile/update-avatar',
+                'user/update-password' => 'users/profile/update-password',
+                'user/delete' => 'users/profile/delete',
             ]
         );
     }
