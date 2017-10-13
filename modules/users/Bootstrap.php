@@ -36,8 +36,8 @@ class Bootstrap implements BootstrapInterface
                 // Users
                 'users' => 'users/default/index',
                 'users/create' => 'users/default/create',
-                'users/<_a:[\w\-]+>' => 'users/default/<_a>',
                 'users/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
+                'users/<_a:[\w\-]+>' => 'users/default/<_a>',
 
                 // Profile backend
                 'user' => 'users/profile/index',
