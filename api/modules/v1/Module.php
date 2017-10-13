@@ -7,7 +7,8 @@ use yii\filters\RateLimiter;
 use api\components\IpLimiter;
 
 /**
- * v1 module definition class
+ * Class Module
+ * @package api\modules\v1
  */
 class Module extends \yii\base\Module
 {
@@ -23,7 +24,7 @@ class Module extends \yii\base\Module
                 'class' => RateLimiter::className(),
                 'user' => new IpLimiter(),
                 'enableRateLimitHeaders' => true,
-                'errorMessage' => Yii::t('app', 'MSG_LIMIT_EXCEEDED'),
+                'errorMessage' => Yii::t('app', 'Exceeded the limit of applications!'),
             ],
         ];
     }

@@ -7,38 +7,5 @@
  */
 
 return [
-    'STATUS_BLOCKED' => 'Blocked',
-    'STATUS_ACTIVE' => 'Active',
-    'STATUS_WAIT' => 'Wait',
 
-    'ERROR_USERNAME_EXISTS' => 'This user name is already taken, please select another.',
-    'ERROR_EMAIL_EXISTS' => 'A person with this email is already registered, enter another email.',
-
-    'User "{:Username}" not found' => 'User "{:Username}" not found.',
-    'Username:' => 'Username:',
-    'Password:' => 'Password:',
-    'New password:' => 'New password:',
-    'More than 6 symbols' => 'More than 6 symbols.',
-    'Status:' => 'Status:',
-    'Success!' => 'Operation completed successfully.',
-    'Error!' => 'Error!',
-    'Done!' => 'Done!',
-
-    'Backend' => 'Backend',
-    'Create User' => 'Create User',
-    'Update User' => 'Update User',
-    'View User' => 'View User',
-    'Delete User' => 'Delete User',
-
-    'Update own post' => 'Update own post',
-
-    'Role:' => 'Role:',
-    'All Roles' => 'All Roles',
-    'User Manager' => 'User Manager',
-    'User' => 'User',
-    'Author' => 'Author',
-    'Moderator' => 'Moderator',
-    'Manager' => 'Manager',
-    'Administrator' => 'Administrator',
-    'Super administrator' => 'Super administrator',
 ];

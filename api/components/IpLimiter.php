@@ -11,6 +11,10 @@ namespace api\components;
 use Yii;
 use yii\filters\RateLimitInterface;
 
+/**
+ * Class IpLimiter
+ * @package api\components
+ */
 class IpLimiter implements RateLimitInterface
 {
     /**

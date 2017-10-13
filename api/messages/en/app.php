@@ -1,4 +1,4 @@
 <?php
 return [
-    'MSG_LIMIT_EXCEEDED' => 'Limit Exceeded applications!',
+    'Exceeded the limit of applications!' => 'Exceeded the limit of applications!',
 ];
