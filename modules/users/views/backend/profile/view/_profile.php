@@ -69,14 +69,14 @@ use modules\users\Module;
 
     <div class="col-sm-offset-2 col-sm-10">
 
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'Update'), ['update'], [
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('module', 'Update'), ['update'], [
             'class' => 'btn btn-primary',
         ]) ?>
 
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'Delete'), ['delete'], [
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), ['delete'], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Module::t('backend', 'Are you sure you want to delete the record?'),
+                'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
                 'method' => 'post',
             ],
         ]) ?>

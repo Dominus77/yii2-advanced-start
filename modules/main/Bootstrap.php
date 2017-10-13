@@ -22,6 +22,7 @@ class Bootstrap implements BootstrapInterface
             'class'          => 'yii\i18n\PhpMessageSource',
             'basePath'       => '@modules/main/messages',
             'fileMap'        => [
+                'modules/main/module' => 'module.php',
                 'modules/main/backend' => 'backend.php',
                 'modules/main/frontend' => 'frontend.php',
             ],

@@ -8,13 +8,13 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
-$this->title = Module::t('frontend', 'TITLE_REQUEST_PASSWORD_RESET');
+$this->title = Module::t('module', 'Password Reset Form');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-default-request-password-reset">
+<div class="users-frontend-default-request-password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('frontend', 'TEXT_REQUEST_PASSWORD_RESET'); ?></p>
+    <p><?= Module::t('module', 'Enter your email address'); ?></p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email')->textInput(['class' => 'form-control']) ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' . Module::t('frontend', 'BUTTON_SEND'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' . Module::t('module', 'Send'), ['class' => 'btn btn-primary']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

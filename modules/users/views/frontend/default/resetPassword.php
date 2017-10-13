@@ -6,16 +6,16 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use modules\users\components\widgets\passfield\Passfield;
+use modules\users\widgets\passfield\Passfield;
 use modules\users\Module;
 
-$this->title = Module::t('frontend', 'RESET_PASSWORD');
+$this->title = Module::t('module', 'Reset Password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-default-reset-password">
+<div class="users-frontend-default-reset-password">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('frontend', 'TEXT_PLEASE_NEW_PASSWORD') ?></p>
+    <p><?= Module::t('module', 'Create a new password') ?></p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]); ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('frontend', 'BUTTON_SAVE'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), ['class' => 'btn btn-primary']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

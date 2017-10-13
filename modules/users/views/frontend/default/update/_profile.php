@@ -11,10 +11,8 @@ use modules\users\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="users-backend-default-update">
-    <?php
-    $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-    $form = ActiveForm::begin([
+<div class="users-frontend-default-update">
+    <?php $form = ActiveForm::begin([
         'action' => Url::to(['update-profile']),
         'layout' => 'horizontal',
         'fieldConfig' => [
@@ -30,26 +28,26 @@ use modules\users\Module;
         'maxlength' => true,
         'class' => 'form-control',
         'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
-        'placeholder' => Module::t('backend', 'USERNAME'),
+        'placeholder' => Module::t('module', 'Username'),
     ]) ?>
 
     <?= $form->field($model, 'email')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
         //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
-        'placeholder' => Module::t('backend', 'EMAIL'),
+        'placeholder' => Module::t('module', 'Email'),
     ]) ?>
 
     <?= $form->field($model, 'first_name')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'FIRST_NAME'),
+        'placeholder' => Module::t('module', 'First Name'),
     ]) ?>
 
     <?= $form->field($model, 'last_name')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'LAST_NAME'),
+        'placeholder' => Module::t('module', 'Last Name'),
     ]) ?>
 
     <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
@@ -64,8 +62,8 @@ use modules\users\Module;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('frontend', 'BUTTON_SAVE'), [
-                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+                'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>
         </div>

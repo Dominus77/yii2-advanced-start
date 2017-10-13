@@ -208,7 +208,7 @@ AppAsset::register($this);
                     'url' => ['/main/default/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('backend', 'Users') . '</span>',
+                    'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('module', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
                     //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],

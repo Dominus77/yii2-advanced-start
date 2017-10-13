@@ -185,7 +185,7 @@ class DefaultController extends Controller
                         ];
                     } else {
                         return [
-                            'body' => Html::tag('span', Module::t('backend', 'Error!'), ['class' => 'label label-danger']),
+                            'body' => Html::tag('span', Module::t('module', 'Error!'), ['class' => 'label label-danger']),
                             'success' => false,
                         ];
                     }
@@ -223,7 +223,7 @@ class DefaultController extends Controller
                     $authManager->assign($role, $model->id);
                 }
                 if ($model->save())
-                    Yii::$app->session->setFlash('success', Module::t('backend', 'Profile successfully changed.'));
+                    Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
             }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
@@ -239,7 +239,7 @@ class DefaultController extends Controller
         if ($model = $this->findModel($id)) {
             $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('backend', 'Password changed successfully.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
@@ -283,21 +283,22 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
-        if ($model = $this->findModel($id)) {
+        if (Yii::$app->request->post() && $model = $this->findModel($id)) {
             // Запрещаем удалять самого себя
             if ($model->id !== Yii::$app->user->identity->getId()) {
                 if ($model->isDeleted()) {
                     if ($model->delete())
-                        Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_DELETED_SUCCESS'));
+                        Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
                 } else {
                     $model->status = $model::STATUS_DELETED;
                     if ($model->save())
-                        Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_CHECKED_DELETED_SUCCESS'));
+                        Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully checked deleted.'));
                 }
             } else {
-                Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed to edit the profile.'));
+                Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed to edit the profile.'));
             }
         }
+        Yii::$app->session->setFlash('error', Module::t('module', 'Not the correct query format!'));
         return $this->redirect(['index']);
     }
 
@@ -313,7 +314,7 @@ class DefaultController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
     }
 

@@ -22,8 +22,7 @@ class Bootstrap implements BootstrapInterface
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/users/messages',
             'fileMap' => [
-                'modules/users/backend' => 'backend.php',
-                'modules/users/frontend' => 'frontend.php',
+                'modules/users/module' => 'module.php',
                 'modules/users/mail' => 'mail.php',
             ],
         ];
@@ -37,9 +36,10 @@ class Bootstrap implements BootstrapInterface
                 // Users
                 'users' => 'users/default/index',
                 'users/create' => 'users/default/create',
+                'users/<_a:[\w\-]+>' => 'users/default/<_a>',
                 'users/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
 
-                // Profile
+                // Profile backend
                 'user' => 'users/profile/index',
                 'user/update' => 'users/profile/update',
                 'user/update-profile' => 'users/profile/update-profile',

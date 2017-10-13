@@ -6,7 +6,8 @@ use yii\base\Model;
 use modules\users\Module;
 
 /**
- * Signup form
+ * Class SignupForm
+ * @package modules\users\models\frontend
  */
 class SignupForm extends Model
 {
@@ -23,14 +24,14 @@ class SignupForm extends Model
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('frontend', 'USERNAME_UNIQUE')],
+            ['username', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('module', 'This username already exists.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('frontend', 'EMAIL_UNIQUE')],
+            ['email', 'unique', 'targetClass' => '\modules\users\models\frontend\User', 'message' => Module::t('module', 'This email already exists.')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
@@ -43,9 +44,9 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Module::t('frontend', 'USERNAME'),
-            'email' => Module::t('frontend', 'EMAIL'),
-            'password' => Module::t('frontend', 'PASSWORD'),
+            'username' => Module::t('module', 'Username'),
+            'email' => Module::t('module', 'Email'),
+            'password' => Module::t('module', 'Password'),
         ];
     }
 
@@ -69,7 +70,7 @@ class SignupForm extends Model
                 Yii::$app->mailer->compose(['text' => '@modules/users/mail/emailConfirm'], ['user' => $user])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo($this->email)
-                    ->setSubject(Module::t('frontend', 'EMAIL_CONFIRMATION') . ' ' . Yii::$app->name)
+                    ->setSubject(Module::t('module', 'The message was successfully sent!') . ' ' . Yii::$app->name)
                     ->send();
 
                 return $user;

@@ -6,10 +6,10 @@ use yii\bootstrap\Tabs;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Module::t('backend', 'Profile');
+$this->title = Module::t('module', 'Profile');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'Profile'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->username;
 ?>
 <div class="users-backend-profile-update">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $model->username;
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('backend', 'Profile'),
+                        'label' => Module::t('module', 'Profile'),
                         'content' => $this->render('update/_profile', [
                             'model' => $model,
                         ]),
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $model->username;
                         'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'Password'),
+                        'label' => Module::t('module', 'Password'),
                         'content' => $this->render('update/_password', [
                             'model' => $model,
                         ]),
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $model->username;
                         'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'Photo'),
+                        'label' => Module::t('module', 'Photo'),
                         'content' => $this->render('update/_photo', [
                             'model' => $model,
                         ]),

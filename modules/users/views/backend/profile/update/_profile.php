@@ -29,26 +29,26 @@ use modules\users\Module;
             'maxlength' => true,
             'class' => 'form-control',
             'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS) ? false : true,
-            'placeholder' => Module::t('backend', 'Username'),
+            'placeholder' => Module::t('module', 'Username'),
         ]) ?>
     <?php endif ?>
 
     <?= $form->field($model, 'first_name')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'First Name'),
+        'placeholder' => Module::t('module', 'First Name'),
     ]) ?>
 
     <?= $form->field($model, 'last_name')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'Last Name'),
+        'placeholder' => Module::t('module', 'Last Name'),
     ]) ?>
 
     <?= $form->field($model, 'email')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'Email'),
+        'placeholder' => Module::t('module', 'Email'),
     ]) ?>
 
     <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
@@ -65,7 +65,7 @@ use modules\users\Module;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

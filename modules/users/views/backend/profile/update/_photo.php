@@ -58,7 +58,7 @@ iCheckAsset::register($this);
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

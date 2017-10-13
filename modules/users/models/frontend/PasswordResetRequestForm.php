@@ -6,7 +6,8 @@ use yii\base\Model;
 use modules\users\Module;
 
 /**
- * Password reset request form
+ * Class PasswordResetRequestForm
+ * @package modules\users\models\frontend
  */
 class PasswordResetRequestForm extends Model
 {
@@ -24,7 +25,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\modules\users\models\frontend\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => Module::t('frontend', 'MSG_NOT_USERS_FOR_EMAIL'),
+                'message' => Module::t('module', 'There is no user with this e-mail.'),
             ],
         ];
     }
@@ -61,7 +62,7 @@ class PasswordResetRequestForm extends Model
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject(Module::t('frontend', 'PASSWORD_RESET_FOR') . ' ' . Yii::$app->name)
+            ->setSubject(Module::t('module', 'Password reset for') . ' ' . Yii::$app->name)
             ->send();
     }
 }

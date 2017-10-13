@@ -33,7 +33,7 @@ use modules\users\Module;
         'options' => [
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'New Password'),
+            'placeholder' => Module::t('module', 'New Password'),
         ],
         'config' => [
             'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -51,12 +51,12 @@ use modules\users\Module;
     <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('backend', 'Repeat Password'),
+        'placeholder' => Module::t('module', 'Repeat Password'),
     ]) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

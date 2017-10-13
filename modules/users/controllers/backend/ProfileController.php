@@ -101,7 +101,7 @@ class ProfileController extends Controller
                     $authManager->assign($role, $model->id);
                 }
                 if ($model->save())
-                    Yii::$app->session->setFlash('success', Module::t('backend', 'Profile successfully changed.'));
+                    Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
             }
         }
         return $this->redirect(['update', 'tab' => 'profile']);
@@ -116,7 +116,7 @@ class ProfileController extends Controller
         if ($model = $this->findModel()) {
             $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('backend', 'Password changed successfully.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             }
         }
         return $this->redirect(['update', 'tab' => 'password']);
@@ -165,11 +165,11 @@ class ProfileController extends Controller
             $model->status = $model::STATUS_DELETED;
             if ($model->save()) {
                 Yii::$app->user->logout();
-                Yii::$app->session->setFlash('success', Module::t('backend', 'Profile successfully deleted.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
                 return $this->goHome();
             }
         }
-        Yii::$app->session->setFlash('error', Module::t('backend', 'Not the correct query format!'));
+        Yii::$app->session->setFlash('error', Module::t('module', 'Not the correct query format!'));
         return $this->redirect(['index']);
     }
 
@@ -184,7 +184,7 @@ class ProfileController extends Controller
         if (($model = User::findOne(Yii::$app->user->identity->getId())) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Module::t('backend', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
     }
 }

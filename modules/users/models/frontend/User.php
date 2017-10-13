@@ -12,6 +12,10 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use modules\users\Module;
 
+/**
+ * Class User
+ * @package modules\users\models\frontend
+ */
 class User extends \modules\users\models\User
 {
     const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
@@ -45,12 +49,12 @@ class User extends \modules\users\models\User
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
             if($this->$attribute) {
                 if (!$this->validatePassword($this->$attribute))
-                    $this->addError($attribute, Module::t('frontend', 'MSG_INCORRECT_CURRENT_PASSWORD'));
+                    $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
             } else {
-                $this->addError($attribute, Module::t('frontend', 'MSG_INPUT_CURRENT_PASSWORD'));
+                $this->addError($attribute, Module::t('module', 'Enter your current password.'));
             }
         } else {
-            $this->addError($attribute, Module::t('frontend', 'MSG_INCORRECT_INPUT_FIELDS'));
+            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
         }
     }
 
@@ -74,9 +78,9 @@ class User extends \modules\users\models\User
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'currentPassword' => Module::t('frontend', 'CURRENT_PASSWORD'),
-            'newPassword' => Module::t('frontend', 'NEW_PASSWORD'),
-            'newPasswordRepeat' => Module::t('frontend', 'REPEAT_PASSWORD'),
+            'currentPassword' => Module::t('module', 'Current Password'),
+            'newPassword' => Module::t('module', 'New Password'),
+            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
         ]);
     }
 
@@ -88,7 +92,7 @@ class User extends \modules\users\models\User
         if (parent::beforeSave($insert)) {
             if (!empty($this->newPassword)) {
                 $this->setPassword($this->newPassword);
-                Yii::$app->session->setFlash('success', Module::t('frontend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             }
             return true;
         }

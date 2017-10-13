@@ -6,10 +6,10 @@ use yii\bootstrap\Tabs;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Module::t('backend', 'Profile');
+$this->title = Module::t('module', 'Profile');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = Module::t('backend', 'Profile');
+$this->params['breadcrumbs'][] = Module::t('module', 'Profile');
 ?>
 <div class="users-backend-profile-index">
     <div class="box">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'Profile');
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('backend', 'Profile'),
+                        'label' => Module::t('module', 'Profile'),
                         'content' => $this->render('view/_profile', [
                             'model' => $model,
                         ]),

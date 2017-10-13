@@ -21,10 +21,10 @@ use yii\web\NotFoundHttpException;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
 use modules\users\Module;
-use yii\helpers\VarDumper;
 
 /**
- * Default controller for the `users` module
+ * Class DefaultController
+ * @package modules\users\controllers\frontend
  */
 class DefaultController extends Controller
 {
@@ -38,20 +38,20 @@ class DefaultController extends Controller
                     'delete' => ['post'],
                 ],
             ],
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['login', 'signup', 'request-password-reset', 'reset-password'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?']
                     ],
                     [
-                        'actions' => ['logout', 'index', 'update', 'update-profile', 'update-avatar', 'update-password', 'delete'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@']
                     ],
                 ],
-            ],
+            ],*/
         ];
     }
 
@@ -97,7 +97,7 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->save())
-                Yii::$app->session->setFlash('success', Module::t('frontend', 'Password changed successfully.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
     }
@@ -114,7 +114,7 @@ class DefaultController extends Controller
         $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('frontend', 'MSG_PROFILE_SAVE_SUCCESS'));
+            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
         }
         return $this->redirect(['update', 'tab' => 'profile']);
     }
@@ -205,7 +205,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'FLASH_EMAIL_CONFIRM_REQUEST'));
+                Yii::$app->getSession()->setFlash('success', Module::t('module', 'It remains to activate the account.'));
                 return $this->goHome();
             }
         }
@@ -229,9 +229,9 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'FLASH_EMAIL_CONFIRM_SUCCESS'));
+            Yii::$app->getSession()->setFlash('success', Module::t('module', 'Thank you for registering!'));
         } else {
-            Yii::$app->getSession()->setFlash('error', Yii::t('app', 'FLASH_EMAIL_CONFIRM_ERROR'));
+            Yii::$app->getSession()->setFlash('error', Module::t('module', 'Error sending message!'));
         }
 
         return $this->goHome();
@@ -247,11 +247,11 @@ class DefaultController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', Module::t('frontend', 'Check your email for further instructions.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Check your email for further instructions.'));
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', Module::t('frontend', 'Sorry, we are unable to reset password for email provided.'));
+                Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
         }
 
@@ -276,7 +276,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', Module::t('frontend', 'New password was saved.'));
+            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
 
             return $this->goHome();
         }
@@ -298,7 +298,7 @@ class DefaultController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
     }
 }

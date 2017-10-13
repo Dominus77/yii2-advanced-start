@@ -9,6 +9,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use modules\main\Module as MainModule;
+use modules\users\Module as UserModule;
 
 AppAsset::register($this);
 ?>
@@ -35,19 +37,19 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => Yii::t('app', 'NAV_HOME'), 'url' => ['/main/default/index']],
-        ['label' => Yii::t('app', 'NAV_ABOUT'), 'url' => ['/main/default/about']],
-        ['label' => Yii::t('app', 'NAV_CONTACT'), 'url' => ['/main/default/contact']],
+        ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
+        ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
+        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_SIGN_UP'), 'url' => ['/users/default/signup']];
-        $menuItems[] = ['label' => Yii::t('app', 'NAV_LOGIN'), 'url' => ['/users/default/login']];
+        $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/default/signup']];
+        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/default/login']];
     } else {
         $menuItems[] = [
-            'label' => Yii::t('app', 'NAV_MY_MENU'),
+            'label' => Yii::t('app', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'NAV_PROFILE') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/users/default/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'NAV_LOGOUT'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/users/default/index']],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];
     }

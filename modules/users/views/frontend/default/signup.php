@@ -10,13 +10,13 @@ use modules\users\models\frontend\User;
 use modules\users\widgets\passfield\Passfield;
 use modules\users\Module;
 
-$this->title = Module::t('frontend', 'TITLE_SIGN_UP');
+$this->title = Module::t('module', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-default-signup">
+<div class="users-frontend-default-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('frontend', 'TEXT_FOLLOWING_FIELDS_SIGN_UP'); ?></p>
+    <p><?= Module::t('module', 'Please fill in the following fields to sign up'); ?>:</p>
 
     <div class="row">
         <div class="col-md-5">
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('frontend', 'BUTTON_SIGN_UP'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('module', 'Send'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

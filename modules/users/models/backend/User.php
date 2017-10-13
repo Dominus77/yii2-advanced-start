@@ -55,8 +55,8 @@ class User extends \modules\users\models\User
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'newPassword' => Module::t('backend', 'New Password'),
-            'newPasswordRepeat' => Module::t('backend', 'Repeat Password'),
+            'newPassword' => Module::t('module', 'New Password'),
+            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
         ]);
     }
 
