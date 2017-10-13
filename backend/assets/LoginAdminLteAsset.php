@@ -18,17 +18,6 @@ class LoginAdminLteAsset extends AssetBundle
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = ['css/AdminLTE' . $min . '.css'];
-
-        $view = \Yii::$app->getView();
-        $view->registerJs(new \yii\web\JsExpression("
-            $(function () {
-                $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                    radioClass: 'iradio_square-blue',
-                    increaseArea: '20%' // optional
-                });
-            });
-        "));
     }
 
     public $depends = [

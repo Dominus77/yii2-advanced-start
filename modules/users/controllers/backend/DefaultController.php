@@ -223,7 +223,7 @@ class DefaultController extends Controller
                     $authManager->assign($role, $model->id);
                 }
                 if ($model->save())
-                    Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PROFILE_SAVE_SUCCESS'));
+                    Yii::$app->session->setFlash('success', Module::t('backend', 'Profile successfully changed.'));
             }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
@@ -237,11 +237,10 @@ class DefaultController extends Controller
     public function actionUpdatePassword($id)
     {
         if ($model = $this->findModel($id)) {
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_PASSWORD_UPDATE_SUCCESS'));
-            }
             $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', Module::t('backend', 'Password changed successfully.'));
+            }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
     }

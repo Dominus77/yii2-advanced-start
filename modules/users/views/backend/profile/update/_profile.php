@@ -24,6 +24,15 @@ use modules\users\Module;
         ],
     ]); ?>
 
+    <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
+        <?= $form->field($model, 'username')->textInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS) ? false : true,
+            'placeholder' => Module::t('backend', 'Username'),
+        ]) ?>
+    <?php endif ?>
+
     <?= $form->field($model, 'first_name')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
@@ -41,6 +50,18 @@ use modules\users\Module;
         'class' => 'form-control',
         'placeholder' => Module::t('backend', 'Email'),
     ]) ?>
+
+    <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
+        <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
+            'class' => 'form-control',
+            'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC) ? false : true,
+        ]) ?>
+
+        <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
+            'class' => 'form-control',
+            'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS) ? false : true,
+        ]) ?>
+    <?php endif ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

@@ -3,12 +3,15 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
+use backend\assets\plugins\iCheckAsset;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\backend\User */
 /* @var $uploadModel modules\users\models\UploadForm */
 /* @var $form yii\widgets\ActiveForm */
+
+iCheckAsset::register($this);
 ?>
 
 <div class="users-backend-profile-update">
@@ -33,7 +36,12 @@ use modules\users\Module;
                 ]); ?>
             </div>
         </div>
-        <?= $form->field($model, 'isDel')->checkbox(); ?>
+        <?/*= $form->field($model, 'isDel')->checkbox();*/ ?>
+
+        <div class="checkbox icheck">
+            <?= $form->field($model, 'isDel')->checkbox(['class' => 'iCheck']); ?>
+        </div>
+
     <?php else : ?>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -50,8 +58,8 @@ use modules\users\Module;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'BUTTON_CREATE') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'BUTTON_SAVE'), [
-                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
+                'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>
         </div>

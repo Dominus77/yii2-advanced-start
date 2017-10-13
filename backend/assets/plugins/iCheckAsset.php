@@ -22,6 +22,16 @@ class iCheckAsset extends AssetBundle
             'iCheck/all.css',
         ];
         $this->js = ['iCheck/icheck' . $min . '.js'];
+        $view = \Yii::$app->getView();
+        $view->registerJs(new \yii\web\JsExpression("
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+            });
+        "));
     }
 
     public $depends = [

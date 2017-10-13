@@ -6,6 +6,7 @@ use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
+
 ?>
 <div class="row">
     <div class="col-sm-2">
@@ -68,14 +69,14 @@ use modules\users\Module;
 
     <div class="col-sm-offset-2 col-sm-10">
 
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'BUTTON_UPDATE'), ['update'], [
+        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('backend', 'Update'), ['update'], [
             'class' => 'btn btn-primary',
         ]) ?>
 
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'BUTTON_DELETE'), ['delete'], [
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('backend', 'Delete'), ['delete'], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Module::t('backend', 'CONFIRM_DELETE'),
+                'confirm' => Module::t('backend', 'Are you sure you want to delete the record?'),
                 'method' => 'post',
             ],
         ]) ?>
