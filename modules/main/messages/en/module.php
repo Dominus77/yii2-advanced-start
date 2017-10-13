@@ -20,4 +20,7 @@ return [
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.',
     'Thank you for contacting us. We will respond to you as soon as possible.' => 'Thank you for contacting us. We will respond to you as soon as possible.',
     'There was an error sending email.' => 'There was an error sending email.',
+
+    'You are not allowed access!' => 'You are not allowed access!',
+    'Welcome!' => 'Welcome!',
 ];

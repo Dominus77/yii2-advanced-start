@@ -20,4 +20,7 @@ return [
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.',
     'Thank you for contacting us. We will respond to you as soon as possible.' => 'Благодарим Вас за обращение к нам. Мы ответим вам как можно скорее.',
     'There was an error sending email.' => 'Ошибка отправки электронной почты.',
+
+    'You are not allowed access!' => 'Вам запрещен доступ!',
+    'Welcome!' => 'Добро пожаловать!',
 ];

@@ -7,11 +7,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Module::t('backend', 'View');
+$this->title = Module::t('module', 'View');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'Users'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Module::t('backend', 'View');
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Module::t('module', 'View');
 ?>
 <div class="users-backend-default-view">
     <div class="box">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'View');
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('backend', 'Profile'),
+                        'label' => Module::t('module', 'Profile'),
                         'content' => $this->render('view/_profile', [
                             'model' => $model,
                         ]),

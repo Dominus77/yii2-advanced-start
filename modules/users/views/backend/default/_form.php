@@ -33,25 +33,25 @@ use modules\users\Module;
             'maxlength' => true,
             'class' => 'form-control',
             //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
-            'placeholder' => Module::t('backend', 'Username'),
+            'placeholder' => Module::t('module', 'Username'),
         ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
             //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
-            'placeholder' => Module::t('backend', 'Email'),
+            'placeholder' => Module::t('module', 'Email'),
         ]) ?>
 
         <?= Passfield::widget([
             'form' => $form,
             'model' => $model,
             'attribute' => 'newPassword',
-            'label' => Module::t('backend', 'Password'),
+            'label' => Module::t('module', 'Password'),
             'options' => [
                 'maxlength' => true,
                 'class' => 'form-control',
-                'placeholder' => Module::t('backend', 'Password'),
+                'placeholder' => Module::t('module', 'Password'),
             ],
             'config' => [
                 'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -69,7 +69,7 @@ use modules\users\Module;
         <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'Repeat Password'),
+            'placeholder' => Module::t('module', 'Repeat Password'),
         ]) ?>
 
         <hr>
@@ -79,13 +79,13 @@ use modules\users\Module;
         <?= $form->field($model, 'first_name')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'First Name'),
+            'placeholder' => Module::t('module', 'First Name'),
         ]) ?>
 
         <?= $form->field($model, 'last_name')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'Last Name'),
+            'placeholder' => Module::t('module', 'Last Name'),
         ]) ?>
 
         <hr>
@@ -102,7 +102,7 @@ use modules\users\Module;
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('backend', 'Create') : '<span class="fa fa-floppy-o"></span> ' . Module::t('backend', 'Save'), [
+                <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-plus"></span> ' . Module::t('module', 'Create') : '<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
                     'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
                     'name' => 'submit-button',
                 ]) ?>

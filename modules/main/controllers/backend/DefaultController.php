@@ -39,11 +39,11 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
-            Yii::$app->session->setFlash('error', Module::t('backend', 'MSG_YOU_NOT_ALLOWED'));
+            Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed access!'));
             return $this->goHome();
         }
         // Greeting in the admin panel, you can delete what would not be boring :)
-        Yii::$app->session->setFlash('success', Module::t('backend', 'MSG_WELCOME'));
+        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome!'));
 
         return $this->render('index');
     }

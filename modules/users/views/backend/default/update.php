@@ -7,12 +7,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
-$this->title = Module::t('backend', 'Update');
+$this->title = Module::t('module', 'Update');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('backend', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('backend', 'Update');
+$this->params['breadcrumbs'][] = Module::t('module', 'Update');
 ?>
 <div class="users-backend-default-update">
     <div class="box">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'Update');
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('backend', 'Profile'),
+                        'label' => Module::t('module', 'Profile'),
                         'content' => $this->render('/profile/update/_profile', [
                             'model' => $model,
                         ]),
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'Update');
                         'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'Password'),
+                        'label' => Module::t('module', 'Password'),
                         'content' => $this->render('/profile/update/_password', [
                             'model' => $model,
                         ]),
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = Module::t('backend', 'Update');
                         'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
                     ],
                     [
-                        'label' => Module::t('backend', 'Photo'),
+                        'label' => Module::t('module', 'Photo'),
                         'content' => $this->render('/profile/update/_photo', [
                             'model' => $model,
                         ]),

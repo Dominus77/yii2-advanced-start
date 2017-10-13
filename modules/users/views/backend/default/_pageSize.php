@@ -31,7 +31,7 @@ $this->registerJs($script, yii\web\View::POS_BEGIN);
             100 => 100
         ], [
             'class' => 'form-control',
-            'prompt' => Module::t('backend', '- all -'),
+            'prompt' => Module::t('module', '- all -'),
             'onchange' => 'submitForm()',
         ])->label(false) ?>
     </div>

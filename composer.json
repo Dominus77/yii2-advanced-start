@@ -20,7 +20,6 @@
         "driftyco/ionicons": "^2.0",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-field-range": "*",
-        "kartik-v/yii2-tabs-x": "*",
         "dominus77/yii2-sweetalert2-widget": "*"
     },
     "require-dev": {
