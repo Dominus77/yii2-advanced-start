@@ -25,6 +25,11 @@ class Passfield extends InputWidget
     public $config = [];
 
     /**
+     * @var string
+     */
+    public $label;
+
+    /**
      * @inheritdoc
      */
     public function run()
@@ -36,7 +41,9 @@ class Passfield extends InputWidget
             if ($this->form == null) {
                 throw new InvalidConfigException(__CLASS__ . '.form property must be specified');
             }
-            return $this->form->field($this->model, $this->attribute)->passwordInput($this->options);
+            if(empty($this->label))
+                return $this->form->field($this->model, $this->attribute)->passwordInput($this->options);
+            return $this->form->field($this->model, $this->attribute)->passwordInput($this->options)->label($this->label);
         } else {
             return Html::passwordInput($this->name, $this->value, $this->options);
         }

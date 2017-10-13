@@ -47,6 +47,7 @@ use modules\users\Module;
             'form' => $form,
             'model' => $model,
             'attribute' => 'newPassword',
+            'label' => Module::t('backend', 'Password'),
             'options' => [
                 'maxlength' => true,
                 'class' => 'form-control',
@@ -64,12 +65,6 @@ use modules\users\Module;
                 ]
             ],
         ]); ?>
-
-        <?/*= $form->field($model, 'newPassword')->passwordInput([
-            'maxlength' => true,
-            'class' => 'form-control',
-            'placeholder' => Module::t('backend', 'Password'),
-        ])->label(Module::t('backend', 'Password')) */?>
 
         <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
             'maxlength' => true,

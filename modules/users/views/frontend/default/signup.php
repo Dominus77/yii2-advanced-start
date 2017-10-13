@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\models\frontend\User;
-use modules\users\components\widgets\passfield\Passfield;
+use modules\users\widgets\passfield\Passfield;
 use modules\users\Module;
 
 $this->title = Module::t('frontend', 'TITLE_SIGN_UP');

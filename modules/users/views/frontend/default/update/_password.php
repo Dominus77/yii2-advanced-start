@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
-use modules\users\components\widgets\passfield\Passfield;
+use modules\users\widgets\passfield\Passfield;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
