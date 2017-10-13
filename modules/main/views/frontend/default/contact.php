@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                     'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    'captchaAction' => Url::to(['/main/default/captcha']),
+                    'captchaAction' => Url::to('/main/default/captcha'),
                     'imageOptions' => [
                         'style' => 'display:block; border:none; cursor: pointer',
                         'alt' => Module::t('frontend', 'CAPTCHA_IMAGE_ALT'),

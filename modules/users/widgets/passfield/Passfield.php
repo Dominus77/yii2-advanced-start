@@ -24,7 +24,6 @@ class Passfield extends InputWidget
      */
     public $config = [];
 
-    public $label;
     /**
      * @inheritdoc
      */
