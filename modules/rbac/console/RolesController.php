@@ -36,7 +36,7 @@ class RolesController extends Controller
         $userRoles = self::getUserRoleValue($user->id);
         if($userRoles === null) {
             $authManager->assign($role, $user->id);
-            $this->stdout(Console::convertEncoding(Yii::t('app', 'Done!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
         } else {
             $this->stdout(Console::convertEncoding(Yii::t('app', 'The user already has a role.')), Console::FG_RED, Console::BOLD);
