@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'VIEW'),
+                                        'original-title' => Module::t('module', 'View'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'UPDATE'),
+                                        'original-title' => Module::t('module', 'Update'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -81,16 +81,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $linkOptions = ArrayHelper::merge([
                                         'class' => 'text-danger',
                                         'data' => [
-                                            'confirm' => Yii::t('app', 'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?'),
+                                            'confirm' => Module::t('module', 'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?'),
                                         ]
                                     ], $linkOptions);
                                 }
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), ArrayHelper::merge([
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Yii::t('app', 'DELETE'),
+                                        'original-title' => Module::t('module', 'Delete'),
                                         'method' => 'post',
-                                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                        'confirm' => Module::t('module', 'Are you sure you want to delete this item?'),
                                     ]
                                 ], $linkOptions));
                             },

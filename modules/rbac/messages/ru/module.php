@@ -68,4 +68,6 @@ return [
 
     'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'Разрешение "{:parent}" является родителем "{:permission}"!',
     'The role of the "{:parent}" is the parent of the "{:role}"!' => 'Роль "{:parent}" является родителем "{:role}"!',
+
+    'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'Элемент будет безвозвратно удален, что может повлиять на некоторые данные. Вы действительно хотите удалить его?',
 ];
