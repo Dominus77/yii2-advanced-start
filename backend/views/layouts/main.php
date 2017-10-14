@@ -217,9 +217,24 @@ AppAsset::register($this);
                     //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],
                 [
-                    'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span>',
+                    'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
                     'url' => ['/rbac/default/index'],
+                    'options' => ['class' => 'treeview'],
                     'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC),
+                    'items' => [
+                        [
+                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Permissions') . '</span>',
+                            'url' => ['/rbac/permissions/index'],
+                        ],
+                        [
+                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Roles') . '</span>',
+                            'url' => ['/rbac/roles/index'],
+                        ],
+                        [
+                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Assign') . '</span>',
+                            'url' => ['/rbac/assign/index'],
+                        ],
+                    ],
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',
