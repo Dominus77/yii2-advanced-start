@@ -165,6 +165,7 @@ composer install
 Init an environment:
 
 ~~~
+cd advanced-project
 php init
 ~~~
 
