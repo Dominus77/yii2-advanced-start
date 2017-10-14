@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Yii::t('app', 'UPDATE'), ['class' => 'btn btn-primary', 'form' => 'form-permission']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t('module', 'Update'), [
+                    'class' => 'btn btn-primary', 'form' => 'form-permission'
+                ]) ?>
             </div>
         </div>
     </div>

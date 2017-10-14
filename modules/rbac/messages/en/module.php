@@ -47,8 +47,9 @@ return [
     'View' => 'View',
     'Update' => 'Update',
     'Create' => 'Create',
-
     'Revoke' => 'Revoke',
+    'Save' => 'Save',
+    'Delete' => 'Delete',
 
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)',
 
@@ -58,11 +59,9 @@ return [
 
     'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?',
     'The operation was successful!' => 'The operation was successful!',
-
     'Do you really want to untie all roles?' => 'Do you really want to untie all roles?',
     'Do you really want to untie the role?' => 'Do you really want to untie the role?',
-
     'You must select in the field «{attribute}».' => 'You must select in the field «{attribute}».',
-
     'You must specify the User class in the module settings.' => 'You must specify the User class in the module settings.',
+    'Are you sure you want to delete the entry?' => 'Are you sure you want to delete the entry?',
 ];

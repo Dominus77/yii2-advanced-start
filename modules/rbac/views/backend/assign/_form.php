@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use modules\rbac\Module;
 
@@ -23,7 +22,9 @@ use modules\rbac\Module;
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Yii::t('app', 'CREATE') : '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t('module', 'Create') : '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Module::t('module', 'Save'), [
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'
+        ]) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

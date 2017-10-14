@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'CREATE'), ['class' => 'btn btn-success', 'form' => 'form-permission']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span> ' . Module::t('module', 'Create'), [
+                    'class' => 'btn btn-success', 'form' => 'form-permission'
+                ]) ?>
             </div>
         </div>
     </div>

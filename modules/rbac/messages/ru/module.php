@@ -48,8 +48,9 @@ return [
     'View' => 'Просмотр',
     'Update' => 'Редактирование',
     'Create' => 'Создание',
-
     'Revoke' => 'Отвязать',
+    'Save' => 'Сохранить',
+    'Delete' => 'Удалить',
 
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'Разрешено использовать латиницу, цифры, тире и знак подчеркивания.(A-z,0-1,-,_)',
 
@@ -59,11 +60,9 @@ return [
 
     'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => 'Внимание! Все ранее созданные разрешения и роли будут удалены. Вы действительно хотите выполнить это действие?',
     'The operation was successful!' => 'Операция выполнена успешно!',
-
     'Do you really want to untie all roles?' => 'Вы действительно хотите отвязать все роли?',
     'Do you really want to untie the role?' => 'Вы действительно хотите отвязать роль?',
-
     'You must select in the field «{attribute}».' => 'Необходимо сделать выбор в поле «{attribute}».',
-
     'You must specify the User class in the module settings.' => 'Необходимо указать класс User в настройках модуля.',
+    'Are you sure you want to delete the entry?' => 'Вы действительно хотите удалить запись?',
 ];

@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
         </div>
         <div class="box-footer">
             <p>
-                <?= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Yii::t('app', 'UPDATE'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t('module', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Module::t('module', 'Revoke'), ['revoke', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
