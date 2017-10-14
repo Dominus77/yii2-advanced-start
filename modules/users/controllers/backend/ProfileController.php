@@ -62,8 +62,6 @@ class ProfileController extends Controller
     public function actionUpdate()
     {
         if ($model = $this->findModel()) {
-
-            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
             $user_role = $model->getUserRoleValue();
             $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
 
@@ -81,8 +79,6 @@ class ProfileController extends Controller
     public function actionUpdateProfile()
     {
         if ($model = $this->findModel()) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
             $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
 
             $user_role = $model->getUserRoleValue();

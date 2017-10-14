@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
                 'items' => [
                     [
                         'label' => Module::t('module', 'Profile'),
-                        'content' => $this->render('/profile/update/_profile', [
+                        'content' => $this->render('update/_profile', [
                             'model' => $model,
                         ]),
                         'options' => ['id' => 'profile'],
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
                     ],
                     [
                         'label' => Module::t('module', 'Password'),
-                        'content' => $this->render('/profile/update/_password', [
+                        'content' => $this->render('update/_password', [
                             'model' => $model,
                         ]),
                         'options' => ['id' => 'password'],
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
                     ],
                     [
                         'label' => Module::t('module', 'Photo'),
-                        'content' => $this->render('/profile/update/_photo', [
+                        'content' => $this->render('update/_photo', [
                             'model' => $model,
                         ]),
                         'options' => ['id' => 'avatar'],

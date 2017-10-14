@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
-
+use backend\assets\plugins\iCheckAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
@@ -15,7 +15,9 @@ use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
 use modules\rbac\Module as RbacModule;
 
+iCheckAsset::register($this);
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -145,8 +145,6 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         if ($model = $this->findModel($id)) {
-
-            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
             $user_role = $model->getUserRoleValue();
             $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
 
@@ -203,8 +201,6 @@ class DefaultController extends Controller
     public function actionUpdateProfile($id)
     {
         if ($model = $this->findModel($id)) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
             $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
 
             $user_role = $model->getUserRoleValue();
@@ -291,6 +287,7 @@ class DefaultController extends Controller
                         if ($model->delete())
                             Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
                     } else {
+                        $model->scenario = $model::SCENARIO_PROFILE_DELETE;
                         $model->status = $model::STATUS_DELETED;
                         if ($model->save())
                             Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully checked deleted.'));

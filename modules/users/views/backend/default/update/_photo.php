@@ -16,7 +16,7 @@ use modules\users\Module;
     <?php
     $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
     $form = ActiveForm::begin([
-        'action' => Url::to(['update-avatar']),
+        'action' => Url::to(['update-avatar', 'id' => $model->id]),
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [
