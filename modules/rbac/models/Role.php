@@ -25,7 +25,7 @@ class Role extends Model
     const ROLE_EDITOR = 'editor';
     const ROLE_EDITOR_DESCRIPTION = 'Editor';
 
-    const ROLE_DEFAULT = 'default';
+    const ROLE_DEFAULT = 'user';
     const ROLE_DEFAULT_DESCRIPTION = 'User';
 
     // сценарии

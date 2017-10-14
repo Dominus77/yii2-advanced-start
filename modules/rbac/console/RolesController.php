@@ -15,6 +15,10 @@ use yii\helpers\ArrayHelper;
 use modules\users\models\User;
 use console\components\helpers\Console;
 
+/**
+ * Class RolesController
+ * @package modules\rbac\console
+ */
 class RolesController extends Controller
 {
     /**
@@ -27,8 +31,17 @@ class RolesController extends Controller
         $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding(ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description')));
         $authManager = Yii::$app->getAuthManager();
         $role = $authManager->getRole($roleName);
-        $authManager->assign($role, $user->id);
-        $this->stdout(Console::convertEncoding(Yii::t('app', 'Done!')) . PHP_EOL);
+
+        // Проверяем есть ли уже такая роль у пользователя
+        $userRoles = self::getUserRoleValue($user->id);
+        if($userRoles === null) {
+            $authManager->assign($role, $user->id);
+            $this->stdout(Console::convertEncoding(Yii::t('app', 'Done!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(PHP_EOL);
+        } else {
+            $this->stdout(Console::convertEncoding(Yii::t('app', 'The user already has a role.')), Console::FG_RED, Console::BOLD);
+            $this->stdout(PHP_EOL);
+        }
     }
 
     /**
@@ -53,7 +66,25 @@ class RolesController extends Controller
             $role = $authManager->getRole($roleName);
             $authManager->revoke($role, $user->id);
         }
-        $this->stdout(Console::convertEncoding(Yii::t('app', 'Done!')) . PHP_EOL);
+        $this->stdout(Console::convertEncoding(Yii::t('app', 'Done!')), Console::FG_GREEN, Console::BOLD);
+        $this->stdout(PHP_EOL);
+    }
+
+    /**
+     * @param null $user_id
+     * @return mixed|null
+     */
+    public function getUserRoleValue($user_id = null)
+    {
+        if ($role = Yii::$app->authManager->getRolesByUser($user_id)) {
+            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                foreach ($role as $key => $value) {
+                    return $value->name;
+                }
+                return null;
+            });
+        }
+        return null;
     }
 
     /**
