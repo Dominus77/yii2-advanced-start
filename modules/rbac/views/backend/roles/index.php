@@ -7,14 +7,14 @@ use modules\rbac\Module;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'Roles');
+$this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Module::t('module', 'Roles');
 ?>
 <div class="rbac-backend-roles-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+            <h3 class="box-title"><?= Module::t('module', 'Roles') ?></h3>
 
             <div class="box-tools pull-right"></div>
         </div>

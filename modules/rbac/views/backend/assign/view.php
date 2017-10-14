@@ -8,7 +8,7 @@ use yii\helpers\VarDumper;
 /* @var $this yii\web\View */
 /* @var $model modules\rbac\models\Assignment */
 
-$this->title = Module::t('module', 'View');
+$this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Assign'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Html::encode($model->username);
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
 <div class="rbac-backend-assign-view">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?>
+            <h3 class="box-title"><?= Module::t('module', 'View') ?>
                 <small><?= Html::encode($model->username) ?></small>
             </h3>
         </div>

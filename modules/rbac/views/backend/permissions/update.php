@@ -6,7 +6,7 @@ use modules\rbac\Module;
 /* @var $this yii\web\View */
 /* @var $model modules\rbac\models\Permission */
 
-$this->title = Module::t('module', 'Update');
+$this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Permissions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
 <div class="rbac-backend-permissions-update">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?>
+            <h3 class="box-title"><?= Module::t('module', 'Update') ?>
                 <small><?= Html::encode($model->name) ?></small>
             </h3>
         </div>

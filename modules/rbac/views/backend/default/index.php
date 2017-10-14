@@ -6,13 +6,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\rbac\Module;
 
-$this->title = Module::t('module', 'RBAC');
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Module::t('module', 'Role Based Access Control');
+$this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
 ?>
 <div class="rbac-backend-default-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+            <h3 class="box-title"><?= Module::t('module', 'RBAC') ?></h3>
 
             <div class="box-tools pull-right">
 
