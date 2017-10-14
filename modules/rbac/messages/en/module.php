@@ -64,4 +64,7 @@ return [
     'You must select in the field «{attribute}».' => 'You must select in the field «{attribute}».',
     'You must specify the User class in the module settings.' => 'You must specify the User class in the module settings.',
     'Are you sure you want to delete the entry?' => 'Are you sure you want to delete the entry?',
+
+    'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'The permission of the "{:parent}" is the parent of the "{:permission}"!',
+    'The role of the "{:parent}" is the parent of the "{:role}"!' => 'The role of the "{:parent}" is the parent of the "{:role}"!',
 ];

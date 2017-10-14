@@ -4,6 +4,7 @@ namespace modules\rbac\controllers\backend;
 
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -142,7 +143,13 @@ class RolesController extends Controller
             $role = $auth->getRole($model->name);
             foreach ($model->itemsRoles as $value) {
                 $add = $auth->getRole($value);
-                $auth->addChild($role, $add);
+                // Проверяем, не является добовляемая роль родителем?
+                $result = $this->detectLoop($role, $add);
+                if (!$result) {
+                    $auth->addChild($role, $add);
+                } else {
+                    Yii::$app->session->setFlash('error', Module::t('module', 'The role of the "{:parent}" is the parent of the "{:role}"!', [':parent' => $add->name, ':role' => $role->name]));
+                }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
         }
@@ -186,7 +193,13 @@ class RolesController extends Controller
             $role = $auth->getRole($model->name);
             foreach ($model->itemsPermissions as $value) {
                 $add = $auth->getPermission($value);
-                $auth->addChild($role, $add);
+                // Проверяем, не является добовляемое разрешение родителем?
+                $result = $this->detectLoop($role, $add);
+                if (!$result) {
+                    $auth->addChild($role, $add);
+                } else {
+                    Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $role->name]));
+                }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
@@ -227,5 +240,24 @@ class RolesController extends Controller
         $role = $auth->getRole($id);
         $auth->remove($role);
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $parent
+     * @param $child
+     * @return bool
+     */
+    protected function detectLoop($parent, $child)
+    {
+        $auth = Yii::$app->authManager;
+        if ($child->name === $parent->name) {
+            return true;
+        }
+        foreach ($auth->getChildren($child->name) as $grandchild) {
+            if ($this->detectLoop($parent, $grandchild)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

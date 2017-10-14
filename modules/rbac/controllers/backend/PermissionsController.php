@@ -143,7 +143,13 @@ class PermissionsController extends Controller
             $permission = $auth->getPermission($model->name);
             foreach ($model->permissionItems as $perm) {
                 $add = $auth->getPermission($perm);
-                $auth->addChild($permission, $add);
+                // Проверяем, не является добовляемое разрешение родителем?
+                $result = $this->detectLoop($permission, $add);
+                if (!$result) {
+                    $auth->addChild($permission, $add);
+                } else {
+                    Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $permission->name]));
+                }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
@@ -184,5 +190,24 @@ class PermissionsController extends Controller
         $perm = $auth->getPermission($id);
         $auth->remove($perm);
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $parent
+     * @param $child
+     * @return bool
+     */
+    protected function detectLoop($parent, $child)
+    {
+        $auth = Yii::$app->authManager;
+        if ($child->name === $parent->name) {
+            return true;
+        }
+        foreach ($auth->getChildren($child->name) as $grandchild) {
+            if ($this->detectLoop($parent, $grandchild)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

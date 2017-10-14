@@ -65,4 +65,7 @@ return [
     'You must select in the field «{attribute}».' => 'Необходимо сделать выбор в поле «{attribute}».',
     'You must specify the User class in the module settings.' => 'Необходимо указать класс User в настройках модуля.',
     'Are you sure you want to delete the entry?' => 'Вы действительно хотите удалить запись?',
+
+    'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'Разрешение "{:parent}" является родителем "{:permission}"!',
+    'The role of the "{:parent}" is the parent of the "{:role}"!' => 'Роль "{:parent}" является родителем "{:role}"!',
 ];
