@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 <div class="rbac-backend-roles-create">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Create') ?></h3>
+            <h3 class="box-title"><?= Module::t('module', 'Create Role') ?></h3>
         </div>
         <div class="box-body">
             <?= $this->render('_form', [

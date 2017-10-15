@@ -47,10 +47,13 @@ return [
 
     'View' => 'Просмотр',
     'Update' => 'Редактирование',
-    'Create' => 'Создание',
+    'Create' => 'Создать',
     'Revoke' => 'Отвязать',
     'Save' => 'Сохранить',
     'Delete' => 'Удалить',
+
+    'Example: moderator' => 'Пример: moderator',
+    'Example: updatePost' => 'Пример: updatePost',
 
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'Разрешено использовать латиницу, цифры, тире и знак подчеркивания.(A-z,0-1,-,_)',
 

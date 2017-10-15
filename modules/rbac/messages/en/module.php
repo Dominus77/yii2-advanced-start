@@ -51,6 +51,9 @@ return [
     'Save' => 'Save',
     'Delete' => 'Delete',
 
+    'Example: moderator' => 'Example: moderator',
+    'Example: updatePost' => 'Example: updatePost',
+
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)',
 
     'Not a valid request to the method!' => 'Not a valid request to the method!',

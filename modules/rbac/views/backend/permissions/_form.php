@@ -19,7 +19,7 @@ use modules\rbac\Module;
     <?= $form->field($model, 'name')->textInput([
         'maxlength' => true,
         'disabled' => ($model->scenario == $model::SCENARIO_UPDATE) ? true : false,
-    ]) ?>
+    ])->hint(Module::t('module', 'Example: updatePost')) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
