@@ -12,7 +12,7 @@ class DatePickerAsset extends AssetBundle
 {
     public static $language;
 
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-datepicker';
     public $css;
     public $js;
 
@@ -22,11 +22,11 @@ class DatePickerAsset extends AssetBundle
         $min = YII_ENV_DEV ? '' : '.min';
         $language = self::$language ? self::$language : substr(\Yii::$app->language, 0, 2);
         $this->css = [
-            'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+            'dist/css/bootstrap-datepicker3.css',
         ];
         $this->js = [
-            'bootstrap-datepicker/dist/js/bootstrap-datepicker' . $min . '.js',
-            'bootstrap-datepicker/dist/locales/bootstrap-datepicker.' . $language . '.min.js',
+            'dist/js/bootstrap-datepicker' . $min . '.js',
+            'dist/locales/bootstrap-datepicker.' . $language . '.min.js',
         ];
     }
 

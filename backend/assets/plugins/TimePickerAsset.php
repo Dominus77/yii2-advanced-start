@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
  */
 class TimePickerAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-timepicker';
     public $css;
     public $js;
 
@@ -18,10 +18,10 @@ class TimePickerAsset extends AssetBundle
     {
         parent::init();
         $this->css = [
-            'bootstrap-timepicker/css/timepicker.less',
+            'css/timepicker.less',
         ];
         $this->js = [
-            'bootstrap-timepicker/js/bootstrap-timepicker.js',
+            'js/bootstrap-timepicker.js',
         ];
     }
 

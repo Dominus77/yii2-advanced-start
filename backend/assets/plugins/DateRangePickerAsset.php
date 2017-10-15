@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
  */
 class DateRangePickerAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker';
     public $css;
     public $js;
 
@@ -18,10 +18,10 @@ class DateRangePickerAsset extends AssetBundle
     {
         parent::init();
         $this->css = [
-            'bootstrap-daterangepicker/daterangepicker.css',
+            'daterangepicker.css',
         ];
         $this->js = [
-            'bootstrap-daterangepicker/daterangepicker.js',
+            'daterangepicker.js',
         ];
     }
 

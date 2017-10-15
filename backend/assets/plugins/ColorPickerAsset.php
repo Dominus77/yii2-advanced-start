@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
  */
 class ColorPickerAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-colorpicker';
     public $css;
     public $js;
 
@@ -19,10 +19,10 @@ class ColorPickerAsset extends AssetBundle
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
-            'bootstrap-colorpicker/dist/css/bootstrap-colorpicker' . $min . '.css',
+            'dist/css/bootstrap-colorpicker' . $min . '.css',
         ];
         $this->js = [
-            'bootstrap-colorpicker/dist/js/bootstrap-colorpicker' . $min . '.js',
+            'dist/js/bootstrap-colorpicker' . $min . '.js',
         ];
     }
 
