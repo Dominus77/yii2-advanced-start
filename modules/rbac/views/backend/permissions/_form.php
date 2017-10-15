@@ -13,7 +13,8 @@ use modules\rbac\Module;
 <div class="rbac-backend-permissions-form">
 
     <?php $form = ActiveForm::begin([
-        'id' => 'form-permission'
+        'id' => 'form-permission',
+        'enableAjaxValidation' => true,
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput([

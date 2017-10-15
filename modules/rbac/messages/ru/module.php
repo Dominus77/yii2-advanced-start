@@ -59,7 +59,7 @@ return [
     'Example: moderator' => 'Пример: moderator',
     'Example: updatePost' => 'Пример: updatePost',
 
-    'This name is already taken.' => 'Это название уже занято.',
+    'This name is already taken.' => 'Это название уже используется.',
     'Enter name permission.' => 'Введите название разрешения.',
     'Enter name role.' => 'Введите название роли.',
 

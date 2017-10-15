@@ -88,6 +88,12 @@ class PermissionsController extends Controller
     {
         $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
         $model->isNewRecord = true;
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $auth = Yii::$app->authManager;
