@@ -113,7 +113,7 @@ class RbacInit
 
         // Привязываем пользователей к ролям
         // Назначаем роль super_admin пользователю с ID 1
-        // $auth->assign($super_admin, 1); //Это супер админ
+        $auth->assign($super_admin, 1); //Это супер админ
 
         return true;
     }
