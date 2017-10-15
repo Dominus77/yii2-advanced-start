@@ -12,7 +12,6 @@ $this->params['title']['small'] = Module::t('module', 'Dashboard');
 ?>
 <section class="content main-backend-default-index">
     <div class="row">
-
         <div class="col-md-4">
             <div class="box box-default">
                 <div class="box-header with-border">
