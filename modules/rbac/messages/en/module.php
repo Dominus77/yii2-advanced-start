@@ -58,6 +58,10 @@ return [
     'Example: moderator' => 'Example: moderator',
     'Example: updatePost' => 'Example: updatePost',
 
+    'This name is already taken.' => 'This name is already taken.',
+    'Enter name permission.' => 'Enter name permission.',
+    'Enter name role.' => 'Enter name role.',
+
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)',
 
     'Not a valid request to the method!' => 'Not a valid request to the method!',

@@ -89,11 +89,13 @@ class PermissionsController extends Controller
         $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
         $model->isNewRecord = true;
         if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            $perm = $auth->createPermission($model->name);
-            $perm->description = $model->description;
-            if ($auth->add($perm)) {
-                return $this->redirect(['view', 'id' => $model->name]);
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                $perm = $auth->createPermission($model->name);
+                $perm->description = $model->description;
+                if ($auth->add($perm)) {
+                    return $this->redirect(['view', 'id' => $model->name]);
+                }
             }
         }
         return $this->render('create', [

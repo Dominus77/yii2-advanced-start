@@ -59,6 +59,10 @@ return [
     'Example: moderator' => 'Пример: moderator',
     'Example: updatePost' => 'Пример: updatePost',
 
+    'This name is already taken.' => 'Это название уже занято.',
+    'Enter name permission.' => 'Введите название разрешения.',
+    'Enter name role.' => 'Введите название роли.',
+
     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'Разрешено использовать латиницу, цифры, тире и знак подчеркивания.(A-z,0-1,-,_)',
 
     'Not a valid request to the method!' => 'Не верный запрос к методу!',

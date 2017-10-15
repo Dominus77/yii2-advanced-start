@@ -51,9 +51,29 @@ class Permission extends Model
             ['name', 'required', 'on' => self::SCENARIO_CREATE],
             ['name', 'string', 'max' => 64, 'on' => self::SCENARIO_CREATE],
             ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t('module', 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'), 'on' => self::SCENARIO_CREATE],
+            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
+
             [['description'], 'string'],
             [['permissionItems', 'permissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE],
         ];
+    }
+
+    /**
+     * @param $attribute
+     * @param $params
+     */
+    public function validateUniqueName($attribute, $params)
+    {
+        if (!empty($this->name) && !$this->hasErrors()) {
+            if ($this->$attribute) {
+                $auth = Yii::$app->authManager;
+                if ($auth->getPermission($this->name)) {
+                    $this->addError($attribute, Module::t('module', 'This name is already taken.'));
+                }
+            } else {
+                $this->addError($attribute, Module::t('module', 'Enter name permission.'));
+            }
+        }
     }
 
     /**

@@ -90,11 +90,13 @@ class RolesController extends Controller
         $model = new Role(['scenario' => Role::SCENARIO_CREATE]);
         $model->isNewRecord = true;
         if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            $role = $auth->createRole($model->name);
-            $role->description = $model->description;
-            if ($auth->add($role)) {
-                return $this->redirect(['view', 'id' => $model->name]);
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                $role = $auth->createRole($model->name);
+                $role->description = $model->description;
+                if ($auth->add($role)) {
+                    return $this->redirect(['view', 'id' => $model->name]);
+                }
             }
         }
         return $this->render('create', [
