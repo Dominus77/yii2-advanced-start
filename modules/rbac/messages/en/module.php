@@ -14,6 +14,8 @@ return [
     'Reset rbac' => 'Reset rbac',
     'Update Role' => 'Update Role',
     'Update Permission' => 'Update Permission',
+    'View Role' => 'View Role',
+    'View Permission' => 'View Permission',
 
     'Name' => 'Name',
     'Type' => 'Type',

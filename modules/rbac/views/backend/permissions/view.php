@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $model->name;
 <div class="rbac-backend-permissions-view">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'View') ?>
+            <h3 class="box-title"><?= Module::t('module', 'View Permission') ?>
                 <small><?= Html::encode($model->name) ?></small>
             </h3>
         </div>

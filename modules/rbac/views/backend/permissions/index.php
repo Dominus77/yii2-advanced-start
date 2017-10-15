@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use modules\rbac\Module;
@@ -55,7 +56,44 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                         'label' => Module::t('module', 'Rule Name'),
                         'format' => 'raw',
                     ],
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'contentOptions' => [
+                            'class' => 'action-column'
+                        ],
+                        'template' => '{view} {update} {delete}',
+                        'buttons' => [
+                            'view' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->name]), [
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('module', 'View'),
+                                        'pjax' => 0,
+                                    ]
+                                ]);
+                            },
+                            'update' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->name]), [
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('module', 'Update'),
+                                        'pjax' => 0,
+                                    ]
+                                ]);
+                            },
+                            'delete' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->name]), [
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'original-title' => Module::t('module', 'Delete'),
+                                        'method' => 'post',
+                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
+                                    ]
+                                ]);
+
+                            },
+                        ]
+                    ],
                 ],
             ]); ?>
         </div>

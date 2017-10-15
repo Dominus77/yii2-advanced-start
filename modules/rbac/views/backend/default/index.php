@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         <div class="box-footer">
             <div class="pull-right">
                 <?= Html::a(Module::t('module', 'Reset rbac'), Url::to(['default/reset']), [
+                    'class' => 'text-red',
                     'data' => [
                         'method' => 'post',
                         'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
