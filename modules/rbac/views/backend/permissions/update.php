@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
 <div class="rbac-backend-permissions-update">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Update') ?>
+            <h3 class="box-title"><?= Module::t('module', 'Update Permission') ?>
                 <small><?= Html::encode($model->name) ?></small>
             </h3>
         </div>

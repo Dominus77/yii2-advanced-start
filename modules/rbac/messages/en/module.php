@@ -12,6 +12,8 @@ return [
     'Rules' => 'Rules',
     'Create Rule' => 'Create Rule',
     'Reset rbac' => 'Reset rbac',
+    'Update Role' => 'Update Role',
+    'Update Permission' => 'Update Permission',
 
     'Name' => 'Name',
     'Type' => 'Type',
