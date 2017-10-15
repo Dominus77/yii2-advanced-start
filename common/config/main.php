@@ -39,20 +39,6 @@ return [
         'assetManager' => [
             'appendTimestamp' => true,
             'basePath' => '@app/web/assets',
-            'converter' => [
-                'class' => 'nizsheanez\assetConverter\Converter',
-                'force' => false, // true : If you want convert your sass each time without time dependency
-                'destinationDir' => 'compiled', //at which folder of @webroot put compiled files
-                'parsers' => [
-                    'less' => [ // file extension to parse
-                        'class' => 'nizsheanez\assetConverter\Less',
-                        'output' => 'css', // parsed output file type
-                        'options' => [
-                            'auto' => true, // optional options
-                        ],
-                    ],
-                ],
-            ],
         ],
     ],
 ];

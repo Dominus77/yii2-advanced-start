@@ -15,7 +15,6 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-imagine": "^2.0",
-        "nizsheanez/yii2-asset-converter": "1.*",
         "almasaeed2010/adminlte": ">= 2.4",
         "fortawesome/font-awesome": "^4.6",
         "driftyco/ionicons": "^2.0",
