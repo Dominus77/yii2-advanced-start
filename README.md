@@ -35,9 +35,10 @@ Functional
 - Confirmation by email
 - Last visit
 - Registration Type
+- RBAC Management from the console and web interface
 
 System
-- RBAC (DbManager) Management from the console and web interface
+- RBAC (DbManager)
 - Manage users
 - Console commands
 - i18n
