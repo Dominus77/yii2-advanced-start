@@ -23,7 +23,7 @@ Pages (frontend)
 - Contact
 - Sign Up
 - Profile
-- Login
+- Login and Logout
 
 Modules
 - main
