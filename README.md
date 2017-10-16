@@ -14,6 +14,7 @@ Base components
 Pages (backend AdminLTE template)
 - Home
 - Users
+- RBAC
 - Login and Logout
 
 Pages (frontend)
@@ -34,7 +35,7 @@ Functional
 - Registration Type
 
 System
-- RBAC (DbManager)
+- RBAC (DbManager) Management from the console and web interface
 - Manage users
 - Console commands
 - i18n
