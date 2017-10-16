@@ -15,12 +15,14 @@ Pages (backend AdminLTE template)
 - Home
 - Users
 - RBAC
+- Profile
 - Login and Logout
 
 Pages (frontend)
 - Home
 - Contact
 - Sign Up
+- Profile
 - Login
 
 Modules
