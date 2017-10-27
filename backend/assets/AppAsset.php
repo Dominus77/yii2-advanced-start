@@ -35,7 +35,6 @@ class AppAsset extends AssetBundle
                     title: message,
                     type: 'warning',
                     showCancelButton: true,
-                    closeOnConfirm: true,
                     allowOutsideClick: true,
                     confirmButtonText: \"{$message['confirmButtonText']}\",
                     cancelButtonText: \"{$message['cancelButtonText']}\"
