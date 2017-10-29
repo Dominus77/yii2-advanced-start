@@ -3,7 +3,6 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
-use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\users\models\LoginForm;
 use modules\users\models\backend\User;
@@ -23,8 +22,6 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
-    protected $jsFile;
-
     /**
      * @inheritdoc
      */
@@ -58,20 +55,6 @@ class DefaultController extends Controller
                 ],
             ],
         ];
-    }
-
-    public function init()
-    {
-        parent::init();
-
-        $this->jsFile = '@modules/users/views/ajax/ajax.js';
-
-        // Publish and register the required JS file
-        Yii::$app->assetManager->publish($this->jsFile);
-        $this->getView()->registerJsFile(
-            Yii::$app->assetManager->getPublishedUrl($this->jsFile),
-            ['yii\web\YiiAsset'] // depends
-        );
     }
 
     /**
