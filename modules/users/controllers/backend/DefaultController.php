@@ -279,24 +279,36 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->request->post()) {
-            if($model = $this->findModel($id)) {
-                // Запрещаем удалять самого себя
-                if ($model->id !== Yii::$app->user->identity->getId()) {
-                    if ($model->isDeleted()) {
-                        if ($model->delete())
-                            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully deleted.'));
-                    } else {
-                        $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-                        $model->status = $model::STATUS_DELETED;
-                        if ($model->save())
-                            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully checked deleted.'));
+        if (Yii::$app->request->isAjax) {
+            $model = $this->findModel($id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            // Запрещаем удалять самого себя
+            if ($model->id !== Yii::$app->user->identity->getId()) {
+                if ($model->isDeleted()) {
+                    if ($model->delete()) {
+                        return [
+                            'title' => Module::t('module', 'Done!'),
+                            'text' => Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]),
+                            'type' => 'success',
+                        ];
                     }
                 } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed to edit the profile.'));
+                    $model->scenario = $model::SCENARIO_PROFILE_DELETE;
+                    $model->status = $model::STATUS_DELETED;
+                    if ($model->save()) {
+                        return [
+                            'title' => Module::t('module', 'Done!'),
+                            'text' => Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]),
+                            'type' => 'success',
+                        ];
+                    }
                 }
-                return $this->redirect(['index']);
             }
+            return [
+                'title' => Module::t('module', 'Cancelled!'),
+                'text' => Module::t('module', 'You can not remove yourself.'),
+                'type' => 'error',
+            ];
         }
         Yii::$app->session->setFlash('error', Module::t('module', 'Not the correct query format!'));
         return $this->redirect(['index']);

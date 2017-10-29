@@ -6,7 +6,10 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use kartik\widgets\DatePicker;
+use dominus77\sweetalert2\assets\SweetAlert2Asset;
 use modules\users\Module;
+
+SweetAlert2Asset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $searchModel modules\users\models\backend\UserSearch */
@@ -14,6 +17,52 @@ use modules\users\Module;
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
+
+$canceled = json_encode([
+    'title' => Module::t('module', 'Cancelled!'),
+    'text' => Module::t('module', 'The action to remove the user has been canceled.'),
+    'type' => 'error',
+]);
+$script = new \yii\web\JsExpression("
+    function confirm(options) {
+        var title = options.title,
+            text = options.text,
+            confirmButtonText = options.confirmButtonText,
+            cancelButtonText = options.cancelButtonText,
+            url = options.url;
+
+        swal({
+            title: title,
+            text: text,
+            type: 'warning',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: cancelButtonText
+        }).then(function () {
+            $.post(url).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.text,
+                    type: data.type
+                });
+                $.pjax.reload({container: '#pjax-container', timeout: 5000});
+            })
+        }, function (dismiss) {
+            if (dismiss === 'cancel') {
+                swal({$canceled})
+            }
+        });
+    }
+
+    $(document).on('ready pjax:success', function() {
+        $(\"[data-toggle='tooltip']\").tooltip();
+    });
+");
+
+$this->registerJs($script, \yii\web\View::POS_END);
 ?>
 <div class="users-backend-default-index">
     <div class="box">
@@ -25,8 +74,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <?php Pjax::begin([
+            'id' => 'pjax-container',
             'enablePushState' => false,
-            'timeout' => 2000,
+            'timeout' => 5000,
         ]); ?>
         <div class="box-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -39,9 +89,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
                         'class' => 'btn btn-block btn-success',
+                        'title' => Module::t('module', 'Create'),
                         'data' => [
                             'toggle' => 'tooltip',
-                            'original-title' => Module::t('module', 'Create'),
+                            'placement' => 'left',
                             'pjax' => 0,
                         ],
                     ]) ?>
@@ -99,10 +150,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,
+                                    'title' => Module::t('module', 'Click to change status'),
                                     'data' => [
                                         'pjax' => 0,
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Click to change status'),
                                     ],
                                 ]);
                             }
@@ -169,33 +220,49 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
                             'view' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                    'title' => Module::t('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'View'),
                                         'pjax' => 0,
                                     ]
                                 ]);
                             },
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                    'title' => Module::t('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Update'),
                                         'pjax' => 0,
                                     ]
                                 ]);
                             },
                             'delete' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
+                                if ($model->isDeleted()) {
+                                    $options = json_encode([
+                                        'title' => Module::t('module', 'Are you sure?'),
+                                        'text' => Module::t('module', 'You won\'t be able to revert this!'),
+                                        'confirmButtonText' => Module::t('module', 'Yes, delete it!'),
+                                        'cancelButtonText' => Module::t('module', 'No, do not delete'),
+                                        'url' => $url,
+                                    ]);
+                                } else {
+                                    $options = json_encode([
+                                        'title' => Module::t('module', 'Are you sure?'),
+                                        'text' => Module::t('module', 'The user "{:name}" will be marked as deleted!', [':name' => $model->username]),
+                                        'confirmButtonText' => Module::t('module', 'Yes, note!'),
+                                        'cancelButtonText' => Module::t('module', 'No, do not tag.'),
+                                        'url' => $url,
+                                    ]);
+                                }
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', [
+                                    'title' => Module::t('module', 'Delete'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Delete'),
-                                        'method' => 'post',
-                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
-                                    ]
+                                        'pjax' => 0,
+                                    ],
+                                    'onclick' => "confirm({$options}); return false;",
                                 ]);
-
                             },
                         ]
                     ],

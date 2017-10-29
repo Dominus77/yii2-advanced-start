@@ -54,18 +54,18 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                         'buttons' => [
                             'view' => function ($url, $model) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
+                                    'title' => Module::t('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'View'),
                                         'pjax' => 0,
                                     ]
                                 ]);
                             },
                             'update' => function ($url, $model) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
+                                    'title' => Module::t('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Update'),
                                         'pjax' => 0,
                                     ]
                                 ]);
@@ -86,9 +86,9 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                                     ], $linkOptions);
                                 }
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), ArrayHelper::merge([
+                                    'title' => Module::t('module', 'Delete'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Delete'),
                                         'method' => 'post',
                                         'confirm' => Module::t('module', 'Are you sure you want to delete this item?'),
                                     ]

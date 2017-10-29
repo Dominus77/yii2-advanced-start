@@ -24,9 +24,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
                         'class' => 'btn btn-block btn-success',
+                        'title' => Module::t('module', 'Create Permission'),
                         'data' => [
                             'toggle' => 'tooltip',
-                            'original-title' => Module::t('module', 'Create Permission'),
+                            'placement' => 'left',
                             'pjax' => 0,
                         ],
                     ]) ?>
@@ -65,27 +66,27 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                         'buttons' => [
                             'view' => function ($url, $model) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->name]), [
+                                    'title' => Module::t('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'View'),
                                         'pjax' => 0,
                                     ]
                                 ]);
                             },
                             'update' => function ($url, $model) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->name]), [
+                                    'title' => Module::t('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Update'),
                                         'pjax' => 0,
                                     ]
                                 ]);
                             },
                             'delete' => function ($url, $model) {
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->name]), [
+                                    'title' => Module::t('module', 'Delete'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'original-title' => Module::t('module', 'Delete'),
                                         'method' => 'post',
                                         'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
                                     ]

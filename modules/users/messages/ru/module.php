@@ -100,4 +100,18 @@ return [
     'Create a new password' => 'Придумайте новый пароль',
 
     'Member since' => 'Зарегистрирован с',
+
+    'Are you sure?' => 'Вы уверены?',
+    'The user "{:name}" will be marked as deleted!' => 'Пользователь "{:name}" будет отмечен как удалён!',
+    'Yes, note!' => 'Да, отметить!',
+    'No, do not tag.' => 'Нет, не отмечать.',
+    'You won\'t be able to revert this!' => 'Действие является не обратимым!',
+    'Yes, delete it!' => 'Да, удалить!',
+    'No, do not delete' => 'Нет, не удалять',
+    'Cancelled!' => 'Отменено!',
+    'The action to remove the user has been canceled.' => 'Действие по удалению пользователя отменено.',
+    'Done!' => 'Готово!',
+    'The user "{:name}" are marked as deleted.' => 'Пользователь "{:name}" помечен как удалён.',
+    'The user "{:name}" have been successfully deleted.' => 'Пользователь "{:name}" успешно удалён.',
+    'You can not remove yourself.' => 'Нельзя удалить самого себя.',
 ];
