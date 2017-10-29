@@ -194,9 +194,17 @@ class PermissionsController extends Controller
      */
     public function actionDelete($id)
     {
-        $auth = Yii::$app->authManager;
-        $perm = $auth->getPermission($id);
-        $auth->remove($perm);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $auth = Yii::$app->authManager;
+            $perm = $auth->getPermission($id);
+            $auth->remove($perm);
+            return [
+                'title' => Module::t('module', 'Done!'),
+                'text' => Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]),
+                'type' => 'success',
+            ];
+        }
         return $this->redirect(['index']);
     }
 

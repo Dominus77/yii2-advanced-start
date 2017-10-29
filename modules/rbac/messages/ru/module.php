@@ -81,4 +81,19 @@ return [
     'The role of the "{:parent}" is the parent of the "{:role}"!' => 'Роль "{:parent}" является родителем "{:role}"!',
 
     'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'Элемент будет безвозвратно удален, что может повлиять на некоторые данные. Вы действительно хотите удалить его?',
+
+    'Cancelled!' => 'Отменено!',
+    'Uninstall action canceled.' => 'Действие по удалению отменено.',
+    'Done!' => 'Готово!',
+    'The permission "{:name}" have been successfully deleted.' => 'Разрешение "{:name}" успешно удалено.',
+    'Are you sure?' => 'Вы уверены?',
+    'The permission "{:name}" will deleted!' => 'Разрешение "{:name}" будет удалено!',
+    'The role "{:name}" will deleted!' => 'Роль "{:name}" будет удалена!',
+    'The role "{:name}" have been successfully deleted.' => 'Роль "{:name}" успешно удалена.',
+    'User "{:username}" will be unlinked from "{:role}"!' => 'Пользователь "{:username}" будет отвязан от "{:role}"!',
+    'User "{:username}" successfully unassigned.' => 'Пользователь "{:username}" успешно отвязан.',
+    'Yes, delete it!' => 'Да, удалить!',
+    'No, do not delete' => 'Нет, не удалять',
+    'Yes, untie it!' => 'Да, отвязать!',
+    'No, do not untie' => 'Нет, не отвязывать',
 ];

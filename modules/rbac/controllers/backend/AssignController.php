@@ -122,12 +122,21 @@ class AssignController extends Controller
      */
     public function actionRevoke($id)
     {
-        $model = $this->findModel($id);
-        $auth = Yii::$app->authManager;
-        if ($auth->getRolesByUser($model->id)) {
-            $auth->revokeAll($model->id);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $model = $this->findModel($id);
+            $auth = Yii::$app->authManager;
+            if ($auth->getRolesByUser($model->id)) {
+                $auth->revokeAll($model->id);
+                return [
+                    'title' => Module::t('module', 'Done!'),
+                    'text' => Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]),
+                    'type' => 'success',
+                ];
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->redirect(['view', 'id' => $model->id]);
+        return $this->redirect(['index']);
     }
 
     /**

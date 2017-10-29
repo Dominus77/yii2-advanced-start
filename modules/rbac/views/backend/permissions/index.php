@@ -3,7 +3,11 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+use dominus77\sweetalert2\assets\SweetAlert2Asset;
 use modules\rbac\Module;
+
+SweetAlert2Asset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -11,11 +15,56 @@ use modules\rbac\Module;
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
+
+$canceled = json_encode([
+    'title' => Module::t('module', 'Cancelled!'),
+    'text' => Module::t('module', 'Uninstall action canceled.'),
+    'type' => 'error',
+]);
+$script = new \yii\web\JsExpression("
+    function confirm(options) {
+        var title = options.title,
+            text = options.text,
+            confirmButtonText = options.confirmButtonText,
+            cancelButtonText = options.cancelButtonText,
+            url = options.url;
+
+        swal({
+            title: title,
+            text: text,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: cancelButtonText
+        }).then(function () {
+            $.post(url).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.text,
+                    type: data.type
+                });
+                $.pjax.reload({container: '#pjax-container', timeout: 5000});
+            })
+        }, function (dismiss) {
+            if (dismiss === 'cancel') {
+                swal({$canceled})
+            }
+        });
+    }
+
+    $(document).on('ready pjax:success', function() {
+        $(\"[data-toggle='tooltip']\").tooltip();
+    });
+");
+$this->registerJs($script, \yii\web\View::POS_END);
 ?>
 <div class="rbac-backend-permissions-index">
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'Permissions') ?></h3>
+
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
@@ -33,6 +82,11 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                     ]) ?>
                 </p>
             </div>
+            <?php Pjax::begin([
+                'id' => 'pjax-container',
+                'enablePushState' => false,
+                'timeout' => 5000,
+            ]); ?>
             <?= GridView::widget([
                 'id' => 'grid-rbac-permissions',
                 'dataProvider' => $dataProvider,
@@ -65,7 +119,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
                             'view' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->name]), [
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                     'title' => Module::t('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
@@ -74,7 +128,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                                 ]);
                             },
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->name]), [
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                     'title' => Module::t('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
@@ -83,13 +137,20 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                                 ]);
                             },
                             'delete' => function ($url, $model) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->name]), [
+                                $options = json_encode([
+                                    'title' => Module::t('module', 'Are you sure?'),
+                                    'text' => Module::t('module', 'The permission "{:name}" will deleted!', [':name' => $model->name]),
+                                    'confirmButtonText' => Module::t('module', 'Yes, delete it!'),
+                                    'cancelButtonText' => Module::t('module', 'No, do not delete'),
+                                    'url' => $url,
+                                ]);
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', [
                                     'title' => Module::t('module', 'Delete'),
                                     'data' => [
                                         'toggle' => 'tooltip',
-                                        'method' => 'post',
-                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
-                                    ]
+                                        'pjax' => 0,
+                                    ],
+                                    'onclick' => "confirm({$options}); return false;",
                                 ]);
 
                             },
@@ -97,6 +158,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                     ],
                 ],
             ]); ?>
+            <?php Pjax::end(); ?>
         </div>
         <div class="box-footer"></div>
     </div>

@@ -36,7 +36,6 @@ $script = new \yii\web\JsExpression("
             text: text,
             type: 'warning',
             showCancelButton: true,
-            showLoaderOnConfirm: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: confirmButtonText,

@@ -244,9 +244,17 @@ class RolesController extends Controller
      */
     public function actionDelete($id)
     {
-        $auth = Yii::$app->authManager;
-        $role = $auth->getRole($id);
-        $auth->remove($role);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $auth = Yii::$app->authManager;
+            $role = $auth->getRole($id);
+            $auth->remove($role);
+            return [
+                'title' => Module::t('module', 'Done!'),
+                'text' => Module::t('module', 'The role "{:name}" have been successfully deleted.', [':name' => $role->name]),
+                'type' => 'success',
+            ];
+        }
         return $this->redirect(['index']);
     }
 

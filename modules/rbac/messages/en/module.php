@@ -80,4 +80,19 @@ return [
     'The role of the "{:parent}" is the parent of the "{:role}"!' => 'The role of the "{:parent}" is the parent of the "{:role}"!',
 
     'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?',
+
+    'Cancelled!' => 'Cancelled!',
+    'Uninstall action canceled.' => 'Uninstall action canceled.',
+    'Done!' => 'Done!',
+    'The permission "{:name}" have been successfully deleted.' => 'The permission "{:name}" have been successfully deleted.',
+    'Are you sure?' => 'Are you sure?',
+    'The permission "{:name}" will deleted!' => 'The permission "{:name}" will deleted!',
+    'The role "{:name}" will deleted!' => 'The role "{:name}" will deleted!',
+    'The role "{:name}" have been successfully deleted.' => 'The role "{:name}" have been successfully deleted.',
+    'User "{:username}" will be unlinked from "{:role}"!' => 'User "{:username}" will be unlinked from "{:role}"!',
+    'User "{:username}" successfully unassigned.' => 'User "{:username}" successfully unassigned.',
+    'Yes, delete it!' => 'Yes, delete it!',
+    'No, do not delete' => 'No, do not delete',
+    'Yes, untie it!' => 'Yes, untie it!',
+    'No, do not untie' => 'No, do not untie',
 ];
