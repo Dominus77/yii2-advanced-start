@@ -43,7 +43,7 @@ class DefaultController extends Controller
             return $this->goHome();
         }
         // Greeting in the admin panel, you can delete what would not be boring :)
-        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome!'));
+        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome, {:username}!', [':username' => Yii::$app->user->identity->username]));
 
         return $this->render('index');
     }

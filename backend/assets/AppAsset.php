@@ -22,25 +22,6 @@ class AppAsset extends AssetBundle
         parent::init();
         $this->css[] = 'css/site.css';
         $this->js[] = 'js/dashboard.js';
-
-        $message = [
-            'confirmButtonText' => Yii::t('app', 'Yes, delete!'),
-            'cancelButtonText' => Yii::t('app', 'No, do not delete!'),
-        ];
-
-        $view = \Yii::$app->getView();
-        $view->registerJs(new \yii\web\JsExpression("
-            yii.confirm = function (message, okCallback, cancelCallback) {
-                swal({
-                    title: message,
-                    type: 'warning',
-                    showCancelButton: true,
-                    allowOutsideClick: true,
-                    confirmButtonText: \"{$message['confirmButtonText']}\",
-                    cancelButtonText: \"{$message['cancelButtonText']}\"
-                }).then(okCallback);
-            };
-        "));
     }
 
     public $depends = [
@@ -53,6 +34,5 @@ class AppAsset extends AssetBundle
         'backend\assets\plugins\SlimScrollAsset',
         'backend\assets\plugins\FastClickAsset',
         'backend\assets\AdminLteAsset',
-        'dominus77\sweetalert2\assets\SweetAlert2Asset',
     ];
 }

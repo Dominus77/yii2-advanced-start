@@ -22,5 +22,6 @@ return [
     'There was an error sending email.' => 'Ошибка отправки электронной почты.',
 
     'You are not allowed access!' => 'Вам запрещен доступ!',
-    'Welcome!' => 'Добро пожаловать!',
+    'Welcome, {:username}!' => 'Добро пожаловать, {:username}!',
+    'Click the button to continue.' => 'Кликните на кнопке для продолжения.',
 ];

@@ -22,5 +22,6 @@ return [
     'There was an error sending email.' => 'There was an error sending email.',
 
     'You are not allowed access!' => 'You are not allowed access!',
-    'Welcome!' => 'Welcome!',
+    'Welcome, {:username}!' => 'Welcome, {:username}!',
+    'Click the button to continue.' => 'Click the button to continue.',
 ];
