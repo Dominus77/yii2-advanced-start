@@ -146,12 +146,10 @@ $this->registerJs($script, \yii\web\View::POS_END);
                         'format' => 'raw',
                         'value' => function ($data) {
                             if ($data->id != Yii::$app->user->identity->getId()) {
-                                $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,
                                     'title' => Module::t('module', 'Click to change status'),
                                     'data' => [
-                                        'pjax' => 0,
                                         'toggle' => 'tooltip',
                                     ],
                                 ]);

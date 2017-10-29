@@ -177,15 +177,7 @@ class DefaultController extends Controller
                         $model->status = $model::STATUS_WAIT;
                     }
                     if ($model->save()) {
-                        return [
-                            'body' => $model->statusLabelName,
-                            'success' => true,
-                        ];
-                    } else {
-                        return [
-                            'body' => Html::tag('span', Module::t('module', 'Error!'), ['class' => 'label label-danger']),
-                            'success' => false,
-                        ];
+                        return $this->actionIndex();
                     }
                 }
             }
