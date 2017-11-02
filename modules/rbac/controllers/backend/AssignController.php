@@ -122,19 +122,16 @@ class AssignController extends Controller
      */
     public function actionRevoke($id)
     {
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $model = $this->findModel($id);
-            $auth = Yii::$app->authManager;
-            if ($auth->getRolesByUser($model->id)) {
-                $auth->revokeAll($model->id);
-                return [
-                    'title' => Module::t('module', 'Done!'),
-                    'text' => Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]),
-                    'type' => 'success',
-                ];
+        $model = $this->findModel($id);
+        $auth = Yii::$app->authManager;
+        if ($auth->getRolesByUser($model->id)) {
+            if ($auth->revokeAll($model->id)) {
+                Yii::$app->session->setFlash('success', Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]));
+            } else {
+                Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            Yii::$app->session->setFlash('warning', Module::t('module', 'User "{:username}" is not attached to any role!', [':username' => $model->username]));
         }
         return $this->redirect(['index']);
     }
@@ -150,7 +147,7 @@ class AssignController extends Controller
         if (($model = $userModel->findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
     }
 }

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use modules\rbac\Module;
-use yii\helpers\VarDumper;
 
 /* @var $this yii\web\View */
 /* @var $model modules\rbac\models\Assignment */
@@ -64,7 +63,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                 <?= Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Module::t('module', 'Revoke'), ['revoke', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => Module::t('module', 'Do you really want to untie the role?'),
+                        'confirm' => Module::t('module', 'Do you really want to untie the user from the role?'),
                         'method' => 'post',
                     ],
                 ]) ?>
