@@ -22,6 +22,8 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
+    protected $jsFile;
+
     /**
      * @inheritdoc
      */
@@ -55,6 +57,20 @@ class DefaultController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function init()
+    {
+        parent::init();
+
+        $this->jsFile = '@modules/users/views/ajax/ajax.js';
+
+        // Publish and register the required JS file
+        Yii::$app->assetManager->publish($this->jsFile);
+        $this->getView()->registerJsFile(
+            Yii::$app->assetManager->getPublishedUrl($this->jsFile),
+            ['depends' => 'yii\web\JqueryAsset',] // depends
+        );
     }
 
     /**
@@ -160,7 +176,10 @@ class DefaultController extends Controller
                         $model->status = $model::STATUS_WAIT;
                     }
                     if ($model->save()) {
-                        return $this->actionIndex();
+                        return [
+                            'body' => $model->statusLabelName,
+                            'success' => true,
+                        ];
                     }
                 }
             }
@@ -254,38 +273,23 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->request->isAjax) {
-            $model = $this->findModel($id);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            // Запрещаем удалять самого себя
-            if ($model->id !== Yii::$app->user->identity->getId()) {
-                if ($model->isDeleted()) {
-                    if ($model->delete()) {
-                        return [
-                            'title' => Module::t('module', 'Done!'),
-                            'text' => Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]),
-                            'type' => 'success',
-                        ];
-                    }
-                } else {
-                    $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-                    $model->status = $model::STATUS_DELETED;
-                    if ($model->save()) {
-                        return [
-                            'title' => Module::t('module', 'Done!'),
-                            'text' => Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]),
-                            'type' => 'success',
-                        ];
-                    }
+        $model = $this->findModel($id);
+        // Запрещаем удалять самого себя
+        if ($model->id !== Yii::$app->user->identity->getId()) {
+            if ($model->isDeleted()) {
+                if ($model->delete()) {
+                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
+                }
+            } else {
+                $model->scenario = $model::SCENARIO_PROFILE_DELETE;
+                $model->status = $model::STATUS_DELETED;
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
                 }
             }
-            return [
-                'title' => Module::t('module', 'Cancelled!'),
-                'text' => Module::t('module', 'You can not remove yourself.'),
-                'type' => 'error',
-            ];
+        } else {
+            Yii::$app->session->setFlash('warning', Module::t('module', 'You can not remove yourself.'));
         }
-        Yii::$app->session->setFlash('error', Module::t('module', 'Not the correct query format!'));
         return $this->redirect(['index']);
     }
 

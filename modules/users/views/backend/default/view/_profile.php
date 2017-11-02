@@ -1,12 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 
+$this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
 ?>
 <div class="row">
     <div class="col-sm-2">
@@ -41,7 +43,16 @@ use modules\users\Module;
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
-                    'value' => $model->statusLabelName,
+                    'value' => Html::a($model->statusLabelName, Url::to(['status', 'id' => $model->id]), [
+                        'id' => 'status_link_' . $model->id,
+                        'title' => Module::t('module', 'Click to change the status'),
+                        'data' => [
+                            'toggle' => 'tooltip',
+                        ],
+                    ]),
+                    'contentOptions' => [
+                        'class' => 'link-decoration-none',
+                    ],
                 ],
                 [
                     'attribute' => 'created_at',

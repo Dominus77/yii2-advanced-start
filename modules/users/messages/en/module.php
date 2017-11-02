@@ -88,7 +88,7 @@ return [
 
     'Error!' => 'Error!',
 
-    'Click to change status' => 'Click to change the status',
+    'Click to change the status' => 'Click to change the status',
 
     'form of discharge' => 'form of discharge',
     'If you have forgotten your password, use {:Link}' => 'If you have forgotten your password, use {:Link}',
@@ -101,16 +101,8 @@ return [
 
     'Member since' => 'Member since',
 
-    'Are you sure?' => 'Are you sure?',
     'The user "{:name}" will be marked as deleted!' => 'The user "{:name}" will be marked as deleted!',
-    'Yes, note!' => 'Yes, note!',
-    'No, do not tag.' => 'No, do not tag.',
     'You won\'t be able to revert this!' => 'You won\'t be able to revert this!',
-    'Yes, delete it!' => 'Yes, delete it!',
-    'No, do not delete' => 'No, do not delete',
-    'Cancelled!' => 'Cancelled!',
-    'The action to remove the user has been canceled.' => 'The action to remove the user has been canceled.',
-    'Done!' => 'Done!',
     'The user "{:name}" are marked as deleted.' => 'The user "{:name}" are marked as deleted.',
     'The user "{:name}" have been successfully deleted.' => 'The user "{:name}" have been successfully deleted.',
     'You can not remove yourself.' => 'You can not remove yourself.',
