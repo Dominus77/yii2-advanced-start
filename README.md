@@ -153,7 +153,6 @@ INSTALLATION
 
 Create a project:
 ~~~
-composer global require "fxp/composer-asset-plugin:^1.4.2"
 composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start advanced-project
 ~~~
 
@@ -162,7 +161,6 @@ or clone the repository for `pull` command availability:
 ~~~
 git clone https://github.com/Dominus77/yii2-advanced-start.git advanced-project
 cd advanced-project
-composer global require "fxp/composer-asset-plugin:^1.4.2"
 composer install
 ~~~
 
