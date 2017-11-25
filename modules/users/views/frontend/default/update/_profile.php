@@ -50,16 +50,6 @@ use modules\users\Module;
         'placeholder' => Module::t('module', 'Last Name'),
     ]) ?>
 
-    <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
-        'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC) ? false : true,
-    ]) ?>
-
-    <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
-        'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
-    ]) ?>
-
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [

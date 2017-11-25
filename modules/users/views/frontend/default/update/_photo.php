@@ -16,26 +16,15 @@ use modules\users\Module;
     <?php
     $form = ActiveForm::begin([
         'action' => Url::to(['update-avatar']),
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'horizontalCssClasses' => [
-                'label' => 'col-sm-2',
-                'offset' => 'col-sm-offset-2',
-                'wrapper' => 'col-sm-10',
-            ],
-        ],
     ]); ?>
     <?php if ($model->avatar) : ?>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <?= Html::img($model->getAvatarPath(), [
-                    'class' => 'profile-user-img img-responsive img-circle',
-                    'style' => 'margin:0; width:auto',
-                    'alt' => 'avatar_' . $model->username,
-                ]); ?>
-            </div>
+            <?= Html::img($model->getAvatarPath(), [
+                'class' => 'profile-user-img img-responsive img-circle',
+                'style' => 'margin:0; width:auto',
+                'alt' => 'avatar_' . $model->username,
+            ]); ?>
         </div>
-        <? /*= $form->field($model, 'isDel')->checkbox();*/ ?>
 
         <div class="checkbox icheck">
             <?= $form->field($model, 'isDel')->checkbox(['class' => 'iCheck']); ?>
@@ -43,25 +32,23 @@ use modules\users\Module;
 
     <?php else : ?>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <?= $model->getGravatar(null, 80, 'mm', 'g', true, [
-                    'class' => 'profile-user-img img-responsive img-circle',
-                    'style' => 'margin:0; width:auto',
-                    'alt' => 'avatar_' . $model->username,
-                ]); ?>
-            </div>
+            <?= $model->getGravatar(null, 80, 'mm', 'g', true, [
+                'class' => 'profile-user-img img-responsive img-circle',
+                'style' => 'margin:0; width:auto',
+                'alt' => 'avatar_' . $model->username,
+            ]); ?>
         </div>
     <?php endif; ?>
 
     <?= $form->field($model, 'imageFile')->fileInput(); ?>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
-                'class' => 'btn btn-primary',
-                'name' => 'submit-button',
-            ]) ?>
-        </div>
+
+        <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+            'class' => 'btn btn-primary',
+            'name' => 'submit-button',
+        ]) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>
