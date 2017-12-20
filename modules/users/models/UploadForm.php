@@ -5,7 +5,7 @@ namespace modules\users\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
-use yii\helpers\url;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\imagine\Image;
 
