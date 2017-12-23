@@ -106,4 +106,6 @@ return [
     'The user "{:name}" are marked as deleted.' => 'The user "{:name}" are marked as deleted.',
     'The user "{:name}" have been successfully deleted.' => 'The user "{:name}" have been successfully deleted.',
     'You can not remove yourself.' => 'You can not remove yourself.',
+
+    'Exceeded the limit of applications!' => 'Exceeded the limit of applications!',
 ];

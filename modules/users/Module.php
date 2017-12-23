@@ -6,7 +6,8 @@ use Yii;
 use yii\console\Application as ConsoleApplication;
 
 /**
- * users module definition class
+ * Class Module
+ * @package modules\users
  */
 class Module extends \yii\base\Module
 {
@@ -19,6 +20,11 @@ class Module extends \yii\base\Module
      * @var boolean Если модуль используется для админ-панели.
      */
     public $isBackend;
+
+    /**
+     * @var boolean Если модуль используется для RESTful.
+     */
+    public $isApi;
 
     /**
      * Upload avatar path
@@ -49,6 +55,8 @@ class Module extends \yii\base\Module
         if ($this->isBackend === true) {
             $this->controllerNamespace = 'modules\users\controllers\backend';
             $this->setViewPath('@modules/users/views/backend');
+        } else if($this->isApi === true) {
+            $this->controllerNamespace = 'modules\users\controllers\api';
         } else {
             $this->setViewPath('@modules/users/views/frontend');
             if (Yii::$app instanceof ConsoleApplication) {

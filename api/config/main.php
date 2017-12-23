@@ -12,12 +12,18 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'modules\users\Bootstrap'
+        'modules\users\BootstrapApi',
     ],
     'modules' => [
+        // Url http://yii2-advanced-start.loc/api/v1/users
+        // Url http://yii2-advanced-start.loc/api/v1/users/1
         'v1' => [
-            //'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'   // here is our v1 modules
+        ],
+        // Url http://yii2-advanced-start.loc/api/users/users
+        // Url http://yii2-advanced-start.loc/api/users/users/1
+        'users' => [
+            'isApi' => true,
         ],
     ],
     'components' => [
@@ -29,7 +35,7 @@ return [
             ]
         ],
         'user' => [
-            'identityClass' => 'api\users\models\User',
+            'identityClass' => 'modules\users\models\api\User',
             'enableSession' => false,
             'loginUrl' => null,
         ],

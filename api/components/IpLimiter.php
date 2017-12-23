@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 29.10.16
- * Time: 20:26
- */
 
 namespace api\components;
 

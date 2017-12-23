@@ -106,4 +106,6 @@ return [
     'The user "{:name}" are marked as deleted.' => 'Пользователь "{:name}" помечен как удалён.',
     'The user "{:name}" have been successfully deleted.' => 'Пользователь "{:name}" успешно удалён.',
     'You can not remove yourself.' => 'Нельзя удалить самого себя.',
+
+    'Exceeded the limit of applications!' => 'Превышен лимит запросов!',
 ];
