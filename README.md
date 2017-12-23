@@ -53,99 +53,102 @@ DIRECTORY STRUCTURE
 
 ```
 api
-    components/          contains components api application
-    config/              contains api application configurations
-    messages/            contains i18n api application
-    modules/             contains modules api version application
-    runtime/             contains files generated during runtime
-    tests/               contains tests for api application
-    web/                 contains the entry script
+    components/             contains components api application
+    config/                 contains api application configurations
+    messages/               contains i18n api application
+    modules/                contains modules api version application
+    runtime/                contains files generated during runtime
+    tests/                  contains tests for api application
+    web/                    contains the entry script
 common
-    assets/              contains application assets such as JavaScript and CSS
-    components/          contains components frontend, backend and console
-    config/              contains shared configurations
-    mail/                contains layouts files for e-mails
-    messages/            contains i18n backend frontend
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes
-    widgets/             contains widgets backend and frontend
+    assets/                 contains application assets such as JavaScript and CSS
+    components/             contains components frontend, backend and console
+    config/                 contains shared configurations
+    mail/                   contains layouts files for e-mails
+    messages/               contains i18n backend frontend
+    models/                 contains model classes used in both backend and frontend
+    tests/                  contains tests for common classes
+    widgets/                contains widgets backend and frontend
 console
-    components/          contains console components
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    messages/            contains i18n console
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
+    components/             contains console components
+    config/                 contains console configurations
+    controllers/            contains console controllers (commands)
+    messages/               contains i18n console
+    migrations/             contains database migrations
+    models/                 contains console-specific model classes
+    runtime/                contains files generated during runtime
 backend
-    assets/              contains application assets such as JavaScript and CSS
-    components/          contains backend components
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    messages/            contains i18n backend
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains backend widgets
+    assets/                 contains application assets such as JavaScript and CSS
+    components/             contains backend components
+    config/                 contains backend configurations
+    controllers/            contains Web controller classes
+    messages/               contains i18n backend
+    models/                 contains backend-specific model classes
+    runtime/                contains files generated during runtime
+    tests/                  contains tests for backend application
+    views/                  contains view files for the Web application
+    web/                    contains the entry script and Web resources
+    widgets/                contains backend widgets
 frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    messages/            contains i18n frontend
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
+    assets/                 contains application assets such as JavaScript and CSS
+    config/                 contains frontend configurations
+    controllers/            contains Web controller classes
+    messages/               contains i18n frontend
+    models/                 contains frontend-specific model classes
+    runtime/                contains files generated during runtime
+    tests/                  contains tests for frontend application
+    views/                  contains view files for the Web application
+    web/                    contains the entry script and Web resources
+    widgets/                contains frontend widgets
+vendor/                     contains dependent 3rd-party packages
+environments/               contains environment-based overrides
 modules/
-    main/               contains module main
-        controllers/    contains module Web controller classes
-            backend/    contains module backend Web controller classes
-            frontend/   contains module frontend Web controller classes
-        messages/       contains i18n module
-        models/         contains module-specific model classes
-            backend/    contains module backend-specific model classes
-            frontend/   contains module frontend-specific model classes
-        views/          contains module view files for the Web application
-            backend/    contains module backend view files for the Web application
-            frontend/   contains module frontend view files for the Web application
-        Bootstrap.php   File autoload module settings app components (urlManager)
-        Module.php      General Module class
-    rbac/               contains module rbac
-        components/     rules and rbac init
-            behavior/   access backend behavior
-        console/        contains console controllers (commands)
-        controllers/    contains module Web controller classes
-            backend/    contains module backend Web controller classes
-        messages/       contains i18n module
-        migrations/     contains database migrations module
-        models/         contains module-specific model classes
-        views/          contains module view files for the Web application
-            backend/    contains module backend view files for the Web application
-        Bootstrap.php   File autoload module settings app components (urlManager)
-        Module.php      General Module class
-    users/              contains module users
-        commands/       contains console controllers (commands)
-        components/     contains module components
-        controllers/    contains module Web controller classes
-            backend/    contains module backend Web controller classes
-            frontend/   contains module frontend Web controller classes
-        mail/           contains module view files for e-mails
-        messages/       contains i18n module
-        migrations/     contains database migrations module
-        models/         contains module-specific model classes
-            backend/    contains module backend-specific model classes
-            frontend/   contains module frontend-specific model classes
-        views/          contains module view files for the Web application
-            backend/    contains module backend view files for the Web application
-            frontend/   contains module frontend view files for the Web application
-        Bootstrap.php   File autoload module settings app components (urlManager)
-        Module.php      General Module class
+    main/                   contains module main
+        controllers/        contains module Web controller classes
+            backend/        contains module backend Web controller classes
+            frontend/       contains module frontend Web controller classes
+        messages/           contains i18n module
+        models/             contains module-specific model classes
+            backend/        contains module backend-specific model classes
+            frontend/       contains module frontend-specific model classes
+        views/              contains module view files for the Web application
+            backend/        contains module backend view files for the Web application
+            frontend/       contains module frontend view files for the Web application
+        Bootstrap.php       File autoload module settings app components (urlManager)
+        Module.php          General Module class
+    rbac/                   contains module rbac
+        components/         rules and rbac init
+            behavior/       access backend behavior
+        console/            contains console controllers (commands)
+        controllers/        contains module Web controller classes
+            backend/        contains module backend Web controller classes
+        messages/           contains i18n module
+        migrations/         contains database migrations module
+        models/             contains module-specific model classes
+        views/              contains module view files for the Web application
+            backend/        contains module backend view files for the Web application
+        Bootstrap.php       File autoload module settings app components (urlManager)
+        Module.php          General Module class
+    users/                  contains module users
+        commands/           contains console controllers (commands)
+        components/         contains module components
+        controllers/        contains module Web controller classes
+            api/            contains module RESTful Api controller classes
+            backend/        contains module backend Web controller classes
+            frontend/       contains module frontend Web controller classes
+        mail/               contains module view files for e-mails
+        messages/           contains i18n module
+        migrations/         contains database migrations module
+        models/             contains module-specific model classes
+            api/            contains module api-specific model classes
+            backend/        contains module backend-specific model classes
+            frontend/       contains module frontend-specific model classes
+        views/              contains module view files for the Web application
+            backend/        contains module backend view files for the Web application
+            frontend/       contains module frontend view files for the Web application
+        Bootstrap.php       File autoload module settings app components (urlManager)
+        BootstrapApi.php    File autoload module settings app components for RESTful (urlManager)
+        Module.php          General Module class
 ```
 
 INSTALLATION
@@ -288,7 +291,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ~~~
 
-Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/users
+Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and RESTful Api http://mysite.com/api/users
 
 TESTING
 -------
