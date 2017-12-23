@@ -23,12 +23,12 @@ class BootstrapApi extends Bootstrap
                     ],
                 ],
                 // @see http://www.yiiframework.com/doc-2.0/guide-rest-routing.html
-                'PUT,PATCH users/<id>' => 'users/default/update',
-                'DELETE users/<id>' => 'users/default/delete',
-                'GET,HEAD users/<id>' => 'users/default/view',
-                'POST users' => 'users/default/create',
+                'PUT,PATCH user/<id>' => 'users/default/update',
+                'DELETE user/<id>' => 'users/default/delete',
+                'GET,HEAD user/<id>' => 'users/default/view',
+                'POST user' => 'users/default/create',
                 'GET,HEAD users' => 'users/default/index',
-                'users/<id>' => 'users/default/options',
+                'user/<id>' => 'users/default/options',
                 'users' => 'users/default/options',
             ]
         );
