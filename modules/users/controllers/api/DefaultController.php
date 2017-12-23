@@ -9,10 +9,10 @@ use api\components\IpLimiter;
 use modules\users\Module;
 
 /**
- * Class UserController
+ * Class DefaultController
  * @package modules\users\controllers\api
  */
-class UserController extends ActiveController
+class DefaultController extends ActiveController
 {
     public $modelClass = 'modules\users\models\api\User';
 

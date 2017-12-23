@@ -28,7 +28,7 @@ class User extends \modules\users\models\User
     }
 
     /**
-     * /api/v1/user
+     * /api/users/1
      * @return array
      */
     public function fields()
@@ -37,7 +37,7 @@ class User extends \modules\users\models\User
     }
 
     /**
-     * /api/v1/users?expand=status
+     * /api/users/1?expand=status
      * @return array
      */
     public function extraFields()

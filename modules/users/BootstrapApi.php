@@ -19,11 +19,17 @@ class BootstrapApi extends Bootstrap
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'users/user'
+                        'users/default'
                     ],
-                    'except' => ['delete'],
-                    'pluralize' => true,
                 ],
+                // @see http://www.yiiframework.com/doc-2.0/guide-rest-routing.html
+                'PUT,PATCH users/<id>' => 'users/default/update',
+                'DELETE users/<id>' => 'users/default/delete',
+                'GET,HEAD users/<id>' => 'users/default/view',
+                'POST users' => 'users/default/create',
+                'GET,HEAD users' => 'users/default/index',
+                'users/<id>' => 'users/default/options',
+                'users' => 'users/default/options',
             ]
         );
         parent::bootstrap($app);
