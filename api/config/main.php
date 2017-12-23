@@ -20,8 +20,8 @@ return [
         'v1' => [
             'class' => 'api\modules\v1\Module'   // here is our v1 modules
         ],
-        // Url http://yii2-advanced-start.loc/api/users/users
-        // Url http://yii2-advanced-start.loc/api/users/users/1
+        // Url http://yii2-advanced-start.loc/api/users
+        // Url http://yii2-advanced-start.loc/api/user/1
         'users' => [
             'isApi' => true,
         ],
