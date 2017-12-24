@@ -304,7 +304,10 @@ AppAsset::register($this);
                 href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.'); ?>
     </footer>
 
-    <?= \backend\widgets\control\ControlSidebar::widget(['status' => true]) ?>
+    <?= \backend\widgets\control\ControlSidebar::widget([
+        'status' => true,
+        'demo' => false,
+    ]) ?>
 </div>
 
 <?php $this->endBody() ?>

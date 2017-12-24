@@ -5,6 +5,10 @@ namespace common\assets;
 use yii\web\AssetBundle;
 use yii\web\View;
 
+/**
+ * Class Html5ShivAsset
+ * @package common\assets
+ */
 class Html5ShivAsset extends AssetBundle
 {
     public $sourcePath = '@bower/html5shiv/dist';

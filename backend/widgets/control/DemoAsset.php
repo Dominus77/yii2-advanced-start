@@ -1,12 +1,12 @@
 <?php
 
-namespace backend\assets;
+namespace backend\widgets\control;
 
 use yii\web\AssetBundle;
 
 /**
  * Class DemoAsset
- * @package backend\assets
+ * @package backend\widgets\control
  */
 class DemoAsset extends AssetBundle
 {
