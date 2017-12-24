@@ -23,26 +23,62 @@ class Bootstrap implements BootstrapInterface
         // Rules
         $app->getUrlManager()->addRules(
             [
-                // объявление правил здесь
-                'rbac' => 'rbac/default/index',
-                'rbac/reset' => 'rbac/default/reset',
-
-                'rbac/roles' => 'rbac/roles/index',
-                'rbac/roles/create' => 'rbac/roles/create',
-                'rbac/roles/add-permissions' => 'rbac/roles/add-permissions',
-                'rbac/roles/remove-permissions' => 'rbac/roles/remove-permissions',
-                'rbac/roles/add-roles' => 'rbac/roles/add-roles',
-                'rbac/roles/remove-roles' => 'rbac/roles/remove-roles',
-                'rbac/roles/<id:[\w\-]+>/<_a:[\w\-]+>' => 'rbac/roles/<_a>',
-
-                'rbac/permissions' => 'rbac/permissions/index',
-                'rbac/permissions/create' => 'rbac/permissions/create',
-                'rbac/permissions/add-permissions' => 'rbac/permissions/add-permissions',
-                'rbac/permissions/remove-permissions' => 'rbac/permissions/remove-permissions',
-                'rbac/permissions/<id:[\w\-]+>/<_a:[\w\-]+>' => 'rbac/permissions/<_a>',
-
-                'rbac/assign' => 'rbac/assign/index',
-                'rbac/assign/<id:\d+>/<_a:[\w\-]+>' => 'rbac/assign/<_a>',
+                // Roles
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/roles',
+                    'prefix' => 'rbac/roles',
+                    'rules' => [
+                        '' => 'index',
+                    ],
+                ],
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/roles',
+                    'prefix' => 'rbac/role',
+                    'rules' => [
+                        '<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
+                        '<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
+                // Permissions
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/permissions',
+                    'prefix' => 'rbac/permissions',
+                    'rules' => [
+                        '' => 'index',
+                    ],
+                ],
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/permissions',
+                    'prefix' => 'rbac/permission',
+                    'rules' => [
+                        '<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
+                        '<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
+                // Assign
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/assign',
+                    'prefix' => 'rbac/assign',
+                    'rules' => [
+                        '' => 'index',
+                        '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
+                // Default
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'rbac/default',
+                    'prefix' => 'rbac',
+                    'rules' => [
+                        '' => 'index',
+                        '<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
             ]
         );
     }
