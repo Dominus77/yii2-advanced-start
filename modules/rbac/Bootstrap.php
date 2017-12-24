@@ -4,6 +4,10 @@ namespace modules\rbac;
 
 use yii\base\BootstrapInterface;
 
+/**
+ * Class Bootstrap
+ * @package modules\rbac
+ */
 class Bootstrap implements BootstrapInterface
 {
     /**
@@ -27,36 +31,22 @@ class Bootstrap implements BootstrapInterface
                 [
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'rbac/roles',
-                    'prefix' => 'rbac/roles',
+                    'prefix' => 'rbac',
                     'rules' => [
-                        '' => 'index',
-                    ],
-                ],
-                [
-                    'class' => 'yii\web\GroupUrlRule',
-                    'routePrefix' => 'rbac/roles',
-                    'prefix' => 'rbac/role',
-                    'rules' => [
-                        '<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
-                        '<_a:[\w\-]+>' => '<_a>',
+                        'roles' => 'index',
+                        'role/<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
+                        'role/<_a:[\w\-]+>' => '<_a>',
                     ],
                 ],
                 // Permissions
                 [
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'rbac/permissions',
-                    'prefix' => 'rbac/permissions',
+                    'prefix' => 'rbac',
                     'rules' => [
-                        '' => 'index',
-                    ],
-                ],
-                [
-                    'class' => 'yii\web\GroupUrlRule',
-                    'routePrefix' => 'rbac/permissions',
-                    'prefix' => 'rbac/permission',
-                    'rules' => [
-                        '<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
-                        '<_a:[\w\-]+>' => '<_a>',
+                        'permissions' => 'index',
+                        'permission/<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
+                        'permission/<_a:[\w\-]+>' => '<_a>',
                     ],
                 ],
                 // Assign

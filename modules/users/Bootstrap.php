@@ -1,15 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 17.10.16
- * Time: 13:36
- */
 
 namespace modules\users;
 
 use yii\base\BootstrapInterface;
 
+/**
+ * Class Bootstrap
+ * @package modules\users
+ */
 class Bootstrap implements BootstrapInterface
 {
     /**
