@@ -11,7 +11,7 @@ class SignupCest
 
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('/users/default/signup');
+        $I->amOnRoute('/users/profile/signup');
     }
 
     public function signupWithEmptyFields(FunctionalTester $I)

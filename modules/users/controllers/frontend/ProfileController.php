@@ -23,10 +23,10 @@ use yii\web\Response;
 use modules\users\Module;
 
 /**
- * Class DefaultController
+ * Class ProfileController
  * @package modules\users\controllers\frontend
  */
-class DefaultController extends Controller
+class ProfileController extends Controller
 {
     public function behaviors()
     {

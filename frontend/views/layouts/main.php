@@ -42,14 +42,14 @@ AppAsset::register($this);
         ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/default/signup']];
-        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/default/login']];
+        $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/profile/signup']];
+        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/profile/login']];
     } else {
         $menuItems[] = [
             'label' => Yii::t('app', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/users/default/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') .' ('.Yii::$app->user->identity->username.')', 'url' => ['/users/profile/index']],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/profile/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];
     }

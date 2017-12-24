@@ -31,21 +31,35 @@ class Bootstrap implements BootstrapInterface
         $app->getUrlManager()->addRules(
             [
                 // Rules
-                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'users/default',
+                    'prefix' => 'user',
+                    'rules' => [
+                        '<_a:(create)>' => '<_a>',
+                        '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'users/default',
+                    'prefix' => 'users',
+                    'rules' => [
+                        '' => 'index',
+                        '<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
 
-                // Users
-                'users' => 'users/default/index',
-                'users/create' => 'users/default/create',
-                'users/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
-                'users/<_a:[\w\-]+>' => 'users/default/<_a>',
-
-                // Profile backend
-                'user' => 'users/profile/index',
-                'user/update' => 'users/profile/update',
-                'user/update-profile' => 'users/profile/update-profile',
-                'user/update-avatar' => 'users/profile/update-avatar',
-                'user/update-password' => 'users/profile/update-password',
-                'user/delete' => 'users/profile/delete',
+                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/profile/<_a>',
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'users/profile',
+                    'prefix' => 'profile',
+                    'rules' => [
+                        '' => 'index',
+                        '<_a:[\w\-]+>' => '<_a>',
+                    ],
+                ],
             ]
         );
     }

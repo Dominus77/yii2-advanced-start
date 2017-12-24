@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
             </div>
             <div class="form-group text-muted">
-                <?= Module::t('module', 'If you have forgotten your password, use {:Link}', [':Link' => Html::a(Module::t('module', 'form of discharge'), ['default/request-password-reset'])]) . '.'; ?>
+                <?= Module::t('module', 'If you have forgotten your password, use {:Link}', [':Link' => Html::a(Module::t('module', 'form of discharge'), ['profile/request-password-reset'])]) . '.'; ?>
             </div>
             <div class="form-group">
                 <?= Html::submitButton('<span class="glyphicon glyphicon-log-in"></span> ' . Module::t('module', 'Sign In'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

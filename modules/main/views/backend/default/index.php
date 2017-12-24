@@ -11,13 +11,13 @@ use modules\main\Module;
 $this->title = Module::t('module', 'Home');
 $this->params['title']['small'] = Module::t('module', 'Dashboard');
 ?>
-<?= Alert::widget([
+<?/*= Alert::widget([
     'options' => [
         Module::t('module', 'Welcome, {:username}!', [':username' => Yii::$app->user->identity->username]),
         Module::t('module', 'Click the button to continue.'),
         Alert::TYPE_SUCCESS
     ]
-]) ?>
+])*/ ?>
 <section class="content main-backend-default-index">
     <div class="row">
         <div class="col-md-4">
