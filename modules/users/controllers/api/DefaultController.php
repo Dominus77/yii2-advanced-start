@@ -6,6 +6,8 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\filters\RateLimiter;
 use api\components\IpLimiter;
+//use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
 use modules\users\Module;
 
 /**
@@ -25,6 +27,11 @@ class DefaultController extends ActiveController
             'enableRateLimitHeaders' => true,
             'errorMessage' => Module::t('module', 'Exceeded the limit of applications!'),
         ];
+
+        $behaviors['authenticator']['class'] = QueryParamAuth::className();
+        $behaviors['authenticator']['only'] = ['update'];
+        $behaviors['authenticator']['tokenParam'] = 'auth_key';
+
         return $behaviors;
     }
 }
