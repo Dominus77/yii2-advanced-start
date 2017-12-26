@@ -29,8 +29,8 @@ class DefaultController extends ActiveController
         ];
 
         $behaviors['authenticator']['class'] = QueryParamAuth::className();
-        $behaviors['authenticator']['only'] = ['update'];
-        $behaviors['authenticator']['tokenParam'] = 'auth_key';
+        $behaviors['authenticator']['only'] = ['update', 'index'];
+        $behaviors['authenticator']['tokenParam'] = 'auth_key'; // This value can be changed to its own, for example hash
 
         return $behaviors;
     }
