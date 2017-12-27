@@ -44,4 +44,16 @@ class User extends \modules\users\models\User
     {
         return ['status', 'created_at', 'updated_at', 'last_visit', 'registration_type'];
     }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return boolean if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        Yii::$app->security->derivationIterations = 1;
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
 }

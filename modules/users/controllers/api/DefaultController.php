@@ -38,9 +38,10 @@ class DefaultController extends ActiveController
                 [
                     'class' => HttpBasicAuth::className(),
                     'auth' => function ($username, $password) {
-                        $user = \modules\users\models\api\User::find()->where(['username' => $username])->one();
-                        if ($user->validatePassword($password)) {
-                            return $user;
+                        if($user = \modules\users\models\api\User::find()->where(['username' => $username])->one()) {
+                            if ($user->validatePassword($password)) {
+                                return $user;
+                            }
                         }
                         return null;
                     },
