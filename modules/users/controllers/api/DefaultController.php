@@ -6,6 +6,7 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\filters\RateLimiter;
 use api\components\IpLimiter;
+//use yii\filters\auth\HttpBasicAuth;
 //use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use modules\users\Module;
@@ -29,7 +30,7 @@ class DefaultController extends ActiveController
         ];
 
         $behaviors['authenticator']['class'] = QueryParamAuth::className();
-        $behaviors['authenticator']['only'] = ['update'];
+        $behaviors['authenticator']['only'] = ['update','index'];
         $behaviors['authenticator']['tokenParam'] = 'auth_key'; // This value can be changed to its own, for example hash
 
         return $behaviors;

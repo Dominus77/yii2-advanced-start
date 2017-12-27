@@ -23,6 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+
+            <div class="form-group">
+                <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::className(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'dd MM yyyy',
+                ]); ?>
+            </div>
             <div class="form-group">
                 <?= $form->field($model, 'name')->textInput(['class' => 'form-control']) ?>
             </div>
@@ -36,18 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'body')->textarea(['rows' => 6, 'class' => 'form-control']) ?>
             </div>
             <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
-            <div class="form-group">
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    'captchaAction' => Url::to('/main/default/captcha'),
-                    'imageOptions' => [
-                        'style' => 'display:block; border:none; cursor: pointer',
-                        'alt' => Module::t('module', 'Code'),
-                        'title' => Module::t('module', 'Click on the picture to change the code.'),
-                    ],
-                    'class' => 'form-control',
-                ]) ?>
-            </div>
+                <div class="form-group">
+                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                        'captchaAction' => Url::to('/main/default/captcha'),
+                        'imageOptions' => [
+                            'style' => 'display:block; border:none; cursor: pointer',
+                            'alt' => Module::t('module', 'Code'),
+                            'title' => Module::t('module', 'Click on the picture to change the code.'),
+                        ],
+                        'class' => 'form-control',
+                    ]) ?>
+                </div>
             <?php endif; ?>
             <div class="form-group">
                 <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' . Module::t('module', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>

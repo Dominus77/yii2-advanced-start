@@ -18,6 +18,7 @@ class ContactForm extends Model
     public $subject;
     public $body;
     public $verifyCode;
+    public $date;
 
     const SCENARIO_GUEST = 'guest';
 
@@ -55,6 +56,7 @@ class ContactForm extends Model
             'subject' => Module::t('module', 'Subject'),
             'body' => Module::t('module', 'Body'),
             'verifyCode' => Module::t('module', 'Verification Code'),
+            'date' => 'Дата',
         ];
     }
 
