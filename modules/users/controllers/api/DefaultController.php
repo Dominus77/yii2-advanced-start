@@ -34,6 +34,11 @@ class DefaultController extends ActiveController
             'class' => CompositeAuth::className(),
             'only' => ['update', 'index'], // Access only for these actions
             'authMethods' => [
+                // Access by token
+                [
+                    'class' => QueryParamAuth::className(),
+                    'tokenParam' => 'auth_key', // This value can be changed to its own, for example hash
+                ],
                 // Access by username and password
                 [
                     'class' => HttpBasicAuth::className(),
@@ -45,11 +50,6 @@ class DefaultController extends ActiveController
                         }
                         return null;
                     },
-                ],
-                // Access by token
-                [
-                    'class' => QueryParamAuth::className(),
-                    'tokenParam' => 'auth_key', // This value can be changed to its own, for example hash
                 ],
             ],
         ];
