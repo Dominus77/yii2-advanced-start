@@ -6,7 +6,8 @@ use Yii;
 use yii\rest\ActiveController;
 use yii\filters\RateLimiter;
 use api\components\IpLimiter;
-//use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
 //use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use modules\users\Module;
@@ -29,9 +30,28 @@ class DefaultController extends ActiveController
             'errorMessage' => Module::t('module', 'Exceeded the limit of applications!'),
         ];
 
-        $behaviors['authenticator']['class'] = QueryParamAuth::className();
-        $behaviors['authenticator']['only'] = ['update','index'];
-        $behaviors['authenticator']['tokenParam'] = 'auth_key'; // This value can be changed to its own, for example hash
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::className(),
+            'only' => ['update', 'index'], // Access only for these actions
+            'authMethods' => [
+                // Access by username and password
+                [
+                    'class' => HttpBasicAuth::className(),
+                    'auth' => function ($username, $password) {
+                        $user = \modules\users\models\api\User::find()->where(['username' => $username])->one();
+                        if ($user->validatePassword($password)) {
+                            return $user;
+                        }
+                        return null;
+                    },
+                ],
+                // Access by token
+                [
+                    'class' => QueryParamAuth::className(),
+                    'tokenParam' => 'auth_key', // This value can be changed to its own, for example hash
+                ],
+            ],
+        ];
 
         return $behaviors;
     }
