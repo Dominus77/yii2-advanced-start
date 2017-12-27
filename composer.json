@@ -21,8 +21,7 @@
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-field-range": "*",
         "dominus77/yii2-sweetalert2-widget": "*",
-        "guzzlehttp/guzzle": ">=4.1.4",
-        "yiisoft/yii2-jui": "~2.0.0"
+        "guzzlehttp/guzzle": ">=4.1.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
