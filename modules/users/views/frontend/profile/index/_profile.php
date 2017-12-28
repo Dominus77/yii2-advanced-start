@@ -38,6 +38,7 @@ use modules\users\Module;
                     'format' => 'raw',
                     'value' => $model->statusLabelName,
                 ],
+                'auth_key',
                 'created_at:datetime',
                 'updated_at:datetime',
                 'last_visit:datetime',

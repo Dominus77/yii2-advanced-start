@@ -43,6 +43,7 @@ use modules\users\Module;
                     'format' => 'raw',
                     'value' => $model->statusLabelName,
                 ],
+                'auth_key',
                 [
                     'attribute' => 'created_at',
                     'format' => 'raw',
