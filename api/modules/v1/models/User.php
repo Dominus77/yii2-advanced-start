@@ -5,6 +5,10 @@ namespace api\modules\v1\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 
+/**
+ * Class User
+ * @package api\modules\v1\models
+ */
 class User extends \modules\users\models\User
 {
     /**

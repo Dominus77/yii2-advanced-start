@@ -17,6 +17,9 @@ class Module extends \yii\base\Module
      */
     public $controllerNamespace = 'api\modules\v1\controllers';
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [

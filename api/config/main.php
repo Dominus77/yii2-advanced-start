@@ -16,21 +16,20 @@ return [
     ],
     'modules' => [
         'v1' => [
-            //'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'   // here is our v1 modules
         ],
     ],
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-api',
             'baseUrl' => '/api',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
         'user' => [
-            'identityClass' => 'api\users\models\User',
+            'identityClass' => 'api\modules\v1\models\User',
             'enableSession' => false,
+            'enableAutoLogin' => false,
             'loginUrl' => null,
         ],
         'log' => [
