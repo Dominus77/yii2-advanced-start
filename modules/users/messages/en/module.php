@@ -12,6 +12,7 @@ return [
     'Last Visit' => 'Last Visit',
     'Username' => 'Username',
     'Email' => 'Email',
+    'Auth Key' => 'Auth Key',
     'Status' => 'Status',
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',

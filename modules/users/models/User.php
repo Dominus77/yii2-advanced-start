@@ -105,6 +105,7 @@ class User extends ActiveRecord implements IdentityInterface
             'last_visit' => Module::t('module', 'Last Visit'),
             'username' => Module::t('module', 'Username'),
             'email' => Module::t('module', 'Email'),
+            'auth_key' => Module::t('module', 'Auth Key'),
             'status' => Module::t('module', 'Status'),
             'role' => Module::t('module', 'Role'),
             'userRoleName' => Module::t('module', 'Role'),

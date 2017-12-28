@@ -12,6 +12,7 @@ return [
     'Last Visit' => 'Последний визит',
     'Username' => 'Пользователь',
     'Email' => 'Email',
+    'Auth Key' => 'Ключ авторизации',
     'Status' => 'Статус',
     'First Name' => 'Имя',
     'Last Name' => 'Фамилия',
