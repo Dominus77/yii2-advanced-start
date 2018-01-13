@@ -14,7 +14,6 @@ use modules\rbac\Module;
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-role',
-        'enableAjaxValidation' => true,
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput([
