@@ -1,6 +1,8 @@
 Yii 2 Advanced Start Project Template
 ===============================
 
+[![Build Status](https://travis-ci.org/Dominus77/yii2-advanced-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-advanced-start)
+
 The application is built using advanced pattern and has a modular structure.
 Backend part uses [AdminLTE](https://almsaeedstudio.com) template
 Available console user management commands and RBAC system.
