@@ -17,3 +17,4 @@ install:
 
 script:
   - php init --env=Development --overwrite=n
+  - mysql -e 'CREATE DATABASE yii2_advanced_start_test;'
