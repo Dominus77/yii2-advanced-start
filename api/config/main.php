@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-api',
     'language' => 'en',
+    'homeUrl' => '/api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
