@@ -177,13 +177,13 @@ cd advanced-project
 php init
 ~~~
 
-Create a database, default configure yii2-advanced-start in common\config\main-local.php
+Create a database, default configure yii2_advanced_start in common\config\main-local.php
 
 ~~~
 //...
 'components' => [
     'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start',
+        'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
         //...
     ],
     //...
@@ -299,13 +299,13 @@ Now frontend is available at http://mysite.com, and backend at http://mysite.com
 TESTING
 -------
 
-Create a database, default configure yii2-advanced-start in common\config\test-local.php
+Create a database, default configure yii2_advanced_start_test in common\config\test-local.php
 
 ~~~
 //...
 'components' => [
     'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2-advanced-start_test',
+        'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test',
     ],
 ]
 //...
