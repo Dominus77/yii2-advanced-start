@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\models;
 
 use Yii;
@@ -248,7 +249,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if ($user_id) {
             if ($role = Yii::$app->authManager->getRolesByUser($user_id))
-                return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                return ArrayHelper::getValue($role, function ($role) {
                     foreach ($role as $key => $value) {
                         return $value->name;
                     }
@@ -256,7 +257,7 @@ class User extends ActiveRecord implements IdentityInterface
                 });
         } else {
             if ($role = Yii::$app->authManager->getRolesByUser($this->id))
-                return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                return ArrayHelper::getValue($role, function ($role) {
                     foreach ($role as $key => $value) {
                         return $value->name;
                     }
@@ -271,7 +272,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getUserFullName()
     {
-        if (Yii::$app->getUser()) {
+        if (Yii::$app->user) {
             if ($this->first_name && $this->last_name) {
                 $fullName = $this->first_name . ' ' . $this->last_name;
             } else if ($this->first_name) {
@@ -525,13 +526,13 @@ class User extends ActiveRecord implements IdentityInterface
      * @param bool $insert
      * @param array $changedAttributes
      */
-    public function afterSave($insert, $changedAttributes)
+    /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
 
         }
-    }
+    }*/
 
     /**
      * Действия перед удалением
@@ -540,12 +541,27 @@ class User extends ActiveRecord implements IdentityInterface
     public function beforeDelete()
     {
         parent::beforeDelete();
-        // Отвязываем пользователя от всех ролей
+        $this->revokeRoles();
+        $this->removeAvatar();
+        return true;
+    }
+
+    /**
+     * Отвязываем пользователя от всех ролей
+     */
+    public function revokeRoles()
+    {
         $authManager = Yii::$app->getAuthManager();
         if ($authManager->getRolesByUser($this->id)) {
             $authManager->revokeAll($this->id);
         }
-        // Удаляем аватарку
+    }
+
+    /**
+     * Удаляем аватарку
+     */
+    public function removeAvatar()
+    {
         if ($this->avatar) {
             $upload = Yii::$app->getModule('users')->uploads;
             $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $this->id);
@@ -553,11 +569,10 @@ class User extends ActiveRecord implements IdentityInterface
             if (file_exists($file)) {
                 unlink($file);
             }
-            // и папку пользователя
+            // удаляем папку пользователя
             if (is_dir($path)) {
                 @rmdir($path);
             }
         }
-        return true;
     }
 }
