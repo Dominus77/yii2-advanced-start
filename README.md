@@ -4,6 +4,7 @@ Yii 2 Advanced Start Project Template
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/stable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![Latest Unstable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/unstable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![License](https://poser.pugx.org/dominus77/yii2-advanced-start/license)](https://packagist.org/packages/dominus77/yii2-advanced-start)
+[![Build Status](https://travis-ci.org/Dominus77/yii2-advanced-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-advanced-start)
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-advanced-start/downloads)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 
 The application is built using advanced pattern and has a modular structure.
