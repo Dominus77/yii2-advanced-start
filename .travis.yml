@@ -19,4 +19,5 @@ script:
   - php init --env=Development --overwrite=n
   - mysql -e 'CREATE DATABASE yii2_advanced_start_test;'
   - php yii_test migrate --interactive=0
+  - php yii_test rbac/rbac/init
   - vendor/bin/codecept run --debug
