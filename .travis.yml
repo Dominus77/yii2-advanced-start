@@ -6,18 +6,39 @@ php:
   - 5.6
   - 7.0
   - 7.1
+#  - hhvm
+
+# faster builds on new travis setup not using sudo
+sudo: false
+
+# cache vendor dirs
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 install:
-  - composer self-update
-  - composer install
-
-before_install:
-  - sudo pip install codecov
-
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer update --dev --prefer-dist --no-interaction
+  # install php extensions
+  - |
+    if (php --version | grep -i HipHop > /dev/null); then
+      echo "Skipping imagick and gmagick tests on HHVM"
+    else
+      pear config-set preferred_state beta
+      printf "\n" | pecl install imagick
+      # gmagick is not installed on travis currently
+      #printf "\n" | pecl install gmagick
+    fi
+# setup application:
+  - |
+    ./init --env=Development
+    sed -i s/root/travis/ common/config/main-local.php
+    sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontend/config/main.php
+    sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backend/config/main.php
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source --dev
-  - composer install --dev
+  - mysql -e 'CREATE DATABASE yii2advanced_test;'
+  - php yii_test migrate --interactive=0
 
 script:
-  - php init --env=Development --overwrite=n
+  - composer validate --strict
+  - vendor/bin/codecept run
