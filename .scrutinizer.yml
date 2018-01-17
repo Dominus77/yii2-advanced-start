@@ -1,5 +1,5 @@
 filter:
-    excluded_paths: [api/tests/*, backend/tests/*, common/tests/*, frontend/tests/*]
+    excluded_paths: [api/tests/* backend/tests/*, common/tests/*, frontend/tests/*]
 checks:
     php:
         code_rating: true
@@ -31,4 +31,4 @@ tools:
         excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
     php_cpd:
         enabled: true
-excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
+        excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
