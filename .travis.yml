@@ -9,7 +9,7 @@ sudo: false
 # cache vendor dirs
 cache:
   directories:
-- $HOME/.composer/cache
+    - $HOME/.composer/cache
 
 install:
   - travis_retry composer self-update && composer --version
