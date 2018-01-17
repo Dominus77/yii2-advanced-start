@@ -38,6 +38,7 @@ install:
 before_script:
   - mysql -e 'CREATE DATABASE yii2advanced_test;'
   - php yii_test migrate --interactive=0
+  - php yii_test rbac/rbac/init
 
 script:
   - composer validate --strict
