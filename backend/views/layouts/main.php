@@ -134,7 +134,6 @@ AppAsset::register($this);
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <?= AvatarWidget::widget([
-                                //'gravatar' => true, // force gravatar https://www.gravatar.com
                                 'imageOptions' => [
                                     'class' => 'user-image',
                                 ],
@@ -146,7 +145,7 @@ AppAsset::register($this);
                                 <?= AvatarWidget::widget(); ?>
                                 <p>
                                     <?= Yii::$app->user->identity->getUserFullName(); ?>
-                                    - <?= Yii::$app->user->identity->getUserRoleName(); ?>
+                                    - <?php // echo Yii::$app->user->identity->getUserRoleName(); ?>
                                     <small><?= UserModule::t('module', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
                                 </p>
                             </li>
