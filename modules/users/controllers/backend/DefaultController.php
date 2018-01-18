@@ -244,11 +244,10 @@ class DefaultController extends Controller
     {
         if ($model = $this->findModel($id)) {
             $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
-            $avatar = $model->avatar;
+            $oldAvatar = $model->avatar;
             if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
                 if ($model->isDel) {
-                    $model->avatar = $this->removeAvatar($model, $avatar);
-                    $model->save();
+                    $this->processRemoveAvatar($model, $oldAvatar);
                 }
                 $uploadModel = new UploadForm();
                 if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
@@ -260,20 +259,21 @@ class DefaultController extends Controller
 
     /**
      * Remove Avatar
-     * @param $model \modules\users\models\backend\User
+     * @param \modules\users\models\backend\User $model
      * @param string $oldAvatar
-     * @return null
      */
-    public function removeAvatar($model = null, $oldAvatar = '')
+    public function processRemoveAvatar($model = null, $oldAvatar = '')
     {
         if ($model && $oldAvatar) {
             $upload = Yii::$app->getModule('users')->uploads;
             $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
             $avatar = $path . '/' . $oldAvatar;
-            if (file_exists($avatar))
+            if (file_exists($avatar)) {
                 unlink($avatar);
+            }
+            $model->avatar = null;
+            $model->save();
         }
-        return null;
     }
 
     /**
