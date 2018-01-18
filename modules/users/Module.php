@@ -22,24 +22,6 @@ class Module extends \yii\base\Module
     public $isBackend;
 
     /**
-     * Upload avatar path
-     * @var string
-     */
-    public $uploads = 'uploads/users';
-
-    /**
-     * Size avatar image (width. height)
-     * @var array
-     */
-    public $imageSize = [160, 160];
-
-    /**
-     * Allow Extensions uploaded file
-     * @var string
-     */
-    public $ext = 'png, jpg';
-
-    /**
      * @inheritdoc
      */
     public function init()

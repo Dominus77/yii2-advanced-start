@@ -3,34 +3,30 @@
 namespace modules\users\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use modules\users\Module;
 
 /**
- * User model
+ * This is the model class for table "{{%user}}".
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
- * @property integer $last_visit
- * @property string $email_confirm_token
- * @property string $avatar
- * @property string $first_name
- * @property string $last_name
- * @property string $registration_type
+ * @property int $id ID
+ * @property string $username Username
+ * @property string $auth_key Authorization Key
+ * @property string $password_hash Hash Password
+ * @property string $password_reset_token Password Token
+ * @property string $email_confirm_token Email Confirm Token
+ * @property string $email Email
+ * @property int $status Status
+ * @property int $last_visit Last Visit
+ * @property int $created_at Created
+ * @property int $updated_at Updated
+ * @property string $first_name First Name
+ * @property string $last_name Last Name
+ * @property int $registration_type Type Registration
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -42,11 +38,14 @@ class User extends ActiveRecord implements IdentityInterface
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 
-    const RBAC_DEFAULT_ROLE = \modules\rbac\models\Role::ROLE_DEFAULT;
+    const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
+    const SCENARIO_AVATAR_UPDATE = 'avatarUpdate';
+    const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
+    const SCENARIO_PROFILE_DELETE = 'profileDelete';
 
-    public $role;
-    public $imageFile;
-    public $isDel;
+    public $currentPassword;
+    public $newPassword;
+    public $newPasswordRepeat;
 
     /**
      * @inheritdoc
@@ -90,8 +89,44 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
 
-            [['role', 'registration_type'], 'safe'],
+            [['registration_type'], 'safe'],
+
+            [['newPassword', 'newPasswordRepeat', 'currentPassword'], 'required', 'on' => self::SCENARIO_PASSWORD_UPDATE],
+            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
+            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
+            ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false],
         ];
+    }
+
+    /**
+     * @param $attribute
+     */
+    public function validateCurrentPassword($attribute)
+    {
+        if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
+            if ($this->$attribute) {
+                if (!$this->validatePassword($this->$attribute))
+                    $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+            } else {
+                $this->addError($attribute, Module::t('module', 'Enter your current password.'));
+            }
+        } else {
+            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_AVATAR_UPDATE] = ['isDel'];
+        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
+        $scenarios['default'] = ['username', 'email', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
+        return $scenarios;
     }
 
     /**
@@ -108,183 +143,13 @@ class User extends ActiveRecord implements IdentityInterface
             'email' => Module::t('module', 'Email'),
             'auth_key' => Module::t('module', 'Auth Key'),
             'status' => Module::t('module', 'Status'),
-            'role' => Module::t('module', 'Role'),
-            'userRoleName' => Module::t('module', 'Role'),
-            'avatar' => Module::t('module', 'Avatar'),
             'first_name' => Module::t('module', 'First Name'),
             'last_name' => Module::t('module', 'Last Name'),
             'registration_type' => Module::t('module', 'Registration Type'),
-            'imageFile' => Module::t('module', 'Avatar'),
-            'isDel' => Module::t('module', 'Delete Avatar'),
+            'currentPassword' => Module::t('module', 'Current Password'),
+            'newPassword' => Module::t('module', 'New Password'),
+            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getAvatarPath()
-    {
-        if ($this->avatar != null) {
-            $upload = Yii::$app->getModule('users')->uploads;
-            $path = Yii::$app->params['domainFrontend'] . '/' . $upload . '/' . $this->id . '/' . $this->avatar;
-            return $path;
-        }
-        return null;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getStatusesArray()
-    {
-        return [
-            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
-            self::STATUS_ACTIVE => Module::t('module', 'Active'),
-            self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted'),
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getRegistrationType()
-    {
-        if ($this->registration_type > 0) {
-            if (($model = User::findOne($this->registration_type)) !== null) {
-                return $model->username;
-            }
-        }
-        return Module::t('module', 'System');
-    }
-
-    /**
-     * @return array
-     */
-    public static function getLabelsArray()
-    {
-        return [
-            self::STATUS_BLOCKED => 'default',
-            self::STATUS_ACTIVE => 'success',
-            self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger',
-        ];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatusName()
-    {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }
-
-    /**
-     * Return <span class="label label-success">Active</span>
-     * @return string
-     */
-    public function getStatusLabelName()
-    {
-        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', self::getStatusName(), ['class' => 'label label-' . $name]);
-    }
-
-    /**
-     * @return array
-     */
-    public function getRolesArray()
-    {
-        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
-    }
-
-    /**
-     * @return mixed|null
-     */
-    public function getUserRoleName()
-    {
-        if ($role = Yii::$app->authManager->getRolesByUser($this->id))
-            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
-                foreach ($role as $key => $value) {
-                    return $value->description;
-                }
-                return null;
-            });
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoleName()
-    {
-        $auth = Yii::$app->authManager;
-        $roles = $auth->getRolesByUser($this->id);
-        $role = '';
-        foreach ($roles as $item) {
-            $role .= $item->description ? $item->description . ', ' : $item->name . ', ';
-        }
-        return chop($role, ' ,');
-    }
-
-    /**
-     * Получаем роль пользователя
-     */
-    public function getRoleUser()
-    {
-        if ($role = Yii::$app->authManager->getRolesByUser($this->id))
-            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
-                foreach ($role as $key => $value) {
-                    return $value->name;
-                }
-                return null;
-            });
-        return null;
-    }
-
-    /**
-     * @param null $user_id
-     * @return mixed|null
-     */
-    public function getUserRoleValue($user_id = null)
-    {
-        if ($user_id) {
-            if ($role = Yii::$app->authManager->getRolesByUser($user_id))
-                return ArrayHelper::getValue($role, function ($role) {
-                    foreach ($role as $key => $value) {
-                        return $value->name;
-                    }
-                    return null;
-                });
-        } else {
-            if ($role = Yii::$app->authManager->getRolesByUser($this->id))
-                return ArrayHelper::getValue($role, function ($role) {
-                    foreach ($role as $key => $value) {
-                        return $value->name;
-                    }
-                    return null;
-                });
-        }
-        return null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserFullName()
-    {
-        if (Yii::$app->user) {
-            if ($this->first_name && $this->last_name) {
-                $fullName = $this->first_name . ' ' . $this->last_name;
-            } else if ($this->first_name) {
-                $fullName = $this->first_name;
-            } else if ($this->last_name) {
-                $fullName = $this->last_name;
-            } else {
-                $fullName = $this->username;
-            }
-            return Html::encode($fullName);
-        }
-        return false;
     }
 
     /**
@@ -370,7 +235,6 @@ class User extends ActiveRecord implements IdentityInterface
         if (empty($token)) {
             return false;
         }
-
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
         $timestamp = (int)end($parts);
@@ -480,35 +344,8 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Gravatar Service
-     * @url https://www.gravatar.com
-     *
-     * @param $email
-     * @param int $s
-     * @param string $d
-     * @param string $r
-     * @param bool $img
-     * @param array $attr
-     * @return string
-     */
-    public function getGravatar($email = null, $s = 80, $d = 'mm', $r = 'g', $img = false, $attr = [])
-    {
-        $email = empty($email) ? $this->email : $email;
-
-        $url = 'https://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($email))) . '?';
-        $url .= http_build_query([
-            's' => $s,
-            'd' => $d,
-            'r' => $r,
-        ]);
-
-        return $img ? Html::img($url, $attr) : $url;
-    }
-
-    /**
-     * Действия перед сохранением
-     * @inheritdoc
+     * @param bool $insert
+     * @return bool
      */
     public function beforeSave($insert)
     {
@@ -516,50 +353,102 @@ class User extends ActiveRecord implements IdentityInterface
             if ($insert) {
                 $this->generateAuthKey();
             }
+            if (!empty($this->newPassword)) {
+                $this->setPassword($this->newPassword);
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            }
             return true;
         }
         return false;
     }
 
     /**
-     * Действия перед удалением
-     * @return bool
+     * @inheritdoc
      */
     public function beforeDelete()
     {
         parent::beforeDelete();
-        $this->revokeRoles();
-        $this->removeAvatar();
+        // Защита от удаления самого себя
+        if ($this->id == Yii::$app->user->identity->getId()) {
+            return false;
+        }
         return true;
     }
 
     /**
-     * Отвязываем пользователя от всех ролей
+     * @return array
      */
-    public function revokeRoles()
+    public static function getStatusesArray()
     {
-        $authManager = Yii::$app->getAuthManager();
-        if ($authManager->getRolesByUser($this->id)) {
-            $authManager->revokeAll($this->id);
-        }
+        return [
+            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
+            self::STATUS_ACTIVE => Module::t('module', 'Active'),
+            self::STATUS_WAIT => Module::t('module', 'Wait'),
+            self::STATUS_DELETED => Module::t('module', 'Deleted'),
+        ];
     }
 
     /**
-     * Удаляем аватарку
+     * @return mixed
      */
-    public function removeAvatar()
+    public function getStatusName()
     {
-        if ($this->avatar) {
-            $upload = Yii::$app->getModule('users')->uploads;
-            $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $this->id);
-            $file = $path . DIRECTORY_SEPARATOR . $this->avatar;
-            if (file_exists($file)) {
-                unlink($file);
-            }
-            // удаляем папку пользователя
-            if (is_dir($path)) {
-                @rmdir($path);
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * Return <span class="label label-success">Active</span>
+     * @return string
+     */
+    public function getStatusLabelName()
+    {
+        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
+        return Html::tag('span', self::getStatusName(), ['class' => 'label label-' . $name]);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLabelsArray()
+    {
+        return [
+            self::STATUS_BLOCKED => 'default',
+            self::STATUS_ACTIVE => 'success',
+            self::STATUS_WAIT => 'warning',
+            self::STATUS_DELETED => 'danger',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistrationType()
+    {
+        if ($this->registration_type > 0) {
+            if (($model = User::findOne($this->registration_type)) !== null) {
+                return $model->username;
             }
         }
+        return Module::t('module', 'System');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserFullName()
+    {
+        if (Yii::$app->user) {
+            if ($this->first_name && $this->last_name) {
+                $fullName = $this->first_name . ' ' . $this->last_name;
+            } else if ($this->first_name) {
+                $fullName = $this->first_name;
+            } else if ($this->last_name) {
+                $fullName = $this->last_name;
+            } else {
+                $fullName = $this->username;
+            }
+            return Html::encode($fullName);
+        }
+        return false;
     }
 }

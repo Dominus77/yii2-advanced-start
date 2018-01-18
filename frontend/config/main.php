@@ -54,7 +54,7 @@ return [
         ],
     ],
     'as afterAction' => [
-        'class' => '\modules\users\components\behavior\LastVisitBehavior',
+        'class' => '\modules\users\behavior\LastVisitBehavior',
     ],
     'params' => $params,
 ];

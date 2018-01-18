@@ -2,11 +2,12 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \modules\users\models\frontend\ResetPasswordForm */
+/* @var $model \modules\users\models\ResetPasswordForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\widgets\passfield\Passfield;
+use modules\users\models\User;
 use modules\users\Module;
 
 $this->title = Module::t('module', 'Reset Password');
@@ -36,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'showWarn' => true,
                         'showTip' => true,
                         'length' => [
-                            'min' => $model::LENGTH_STRING_PASSWORD_MIN,
-                            'max' => $model::LENGTH_STRING_PASSWORD_MAX,
+                            'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                            'max' => User::LENGTH_STRING_PASSWORD_MAX,
                         ]
                     ],
                 ]); ?>

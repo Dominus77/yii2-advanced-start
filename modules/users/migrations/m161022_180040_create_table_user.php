@@ -32,7 +32,6 @@ class m161022_180040_create_table_user extends Migration
             'created_at' => $this->integer()->notNull()->comment('Created'),
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
 
-            'avatar' => $this->string()->defaultValue(null)->comment('Avatar'),
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
 

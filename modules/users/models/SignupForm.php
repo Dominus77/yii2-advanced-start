@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\users\models\frontend;
+namespace modules\users\models;
 
 use Yii;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use modules\users\Module;
 
 /**
  * Class SignupForm
- * @package modules\users\models\frontend
+ * @package modules\users\models
  */
 class SignupForm extends Model
 {

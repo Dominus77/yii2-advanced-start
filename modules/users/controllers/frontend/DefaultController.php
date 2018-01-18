@@ -1,32 +1,27 @@
 <?php
-
 namespace modules\users\controllers\frontend;
 
 use Yii;
-use yii\helpers\Url;
 use yii\web\Controller;
-use modules\users\models\frontend\User;
-use modules\users\models\UploadForm;
-use yii\web\UploadedFile;
-use modules\users\models\frontend\SignupForm;
+use modules\users\models\User;
+use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
-use modules\users\models\frontend\EmailConfirmForm;
-use modules\users\models\frontend\ResetPasswordForm;
-use modules\users\models\frontend\PasswordResetRequestForm;
+use modules\users\models\EmailConfirmForm;
+use modules\users\models\ResetPasswordForm;
+use modules\users\models\PasswordResetRequestForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
 use modules\users\Module;
 
 /**
- * Class ProfileController
+ * Class DefaultController
  * @package modules\users\controllers\frontend
  */
-class ProfileController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @return array
@@ -62,9 +57,6 @@ class ProfileController extends Controller
     public function actionUpdate()
     {
         $model = $this->findModel();
-        $user_role = $model->getUserRoleValue();
-        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
-
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -98,42 +90,11 @@ class ProfileController extends Controller
     public function actionUpdateProfile()
     {
         $model = $this->findModel();
-        $user_role = $model->getUserRoleValue();
-        $model->role = $user_role ? $user_role : $model::RBAC_DEFAULT_ROLE;
         $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
         }
         return $this->redirect(['update', 'tab' => 'profile']);
-    }
-
-    /**
-     * @return string|Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdateAvatar()
-    {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_AVATAR_UPDATE;
-        $avatar = $model->avatar;
-        if ($model->load(Yii::$app->request->post()) && ($model->scenario === $model::SCENARIO_AVATAR_UPDATE)) {
-            if ($model->isDel) {
-                if ($avatar) {
-                    $upload = Yii::$app->getModule('users')->uploads;
-                    $path = str_replace('\\', '/', Url::to('@upload') . DIRECTORY_SEPARATOR . $upload . DIRECTORY_SEPARATOR . $model->id);
-                    $avatar = $path . '/' . $avatar;
-                    if (file_exists($avatar))
-                        unlink($avatar);
-                    $model->avatar = null;
-                    $model->save();
-                }
-            }
-            $uploadModel = new UploadForm();
-            if ($uploadModel->imageFile = UploadedFile::getInstance($model, 'imageFile'))
-                $uploadModel->upload();
-        }
-        return $this->redirect(['update', 'tab' => 'avatar']);
     }
 
     /**
@@ -266,7 +227,6 @@ class ProfileController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
-
             return $this->goHome();
         }
 

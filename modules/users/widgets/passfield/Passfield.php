@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users\widgets\passfield;
 
 use yii\base\InvalidConfigException;

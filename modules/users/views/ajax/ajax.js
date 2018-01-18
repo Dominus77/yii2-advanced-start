@@ -1,5 +1,6 @@
 /**
- * Created by Dominus on 10.03.17.
+ * Ajax Link
+ * @param e
  */
 function handleAjaxLink(e) {
 

@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \modules\users\models\frontend\SignupForm */
+/* @var $model \modules\users\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use modules\users\models\frontend\User;
+use modules\users\models\User;
 use modules\users\widgets\passfield\Passfield;
 use modules\users\Module;
 

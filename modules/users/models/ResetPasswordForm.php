@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\users\models\frontend;
+namespace modules\users\models;
 
 use yii\base\Model;
 use yii\base\InvalidParamException;
@@ -13,9 +13,6 @@ use modules\users\Module;
 class ResetPasswordForm extends Model
 {
     public $password;
-
-    const LENGTH_STRING_PASSWORD_MIN = 6;
-    const LENGTH_STRING_PASSWORD_MAX = 16;
 
     /**
      * @var \modules\users\models\User
@@ -49,7 +46,7 @@ class ResetPasswordForm extends Model
     {
         return [
             ['password', 'required'],
-            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            ['password', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
         ];
     }
 
@@ -73,7 +70,6 @@ class ResetPasswordForm extends Model
         $user = $this->_user;
         $user->setPassword($this->password);
         $user->removePasswordResetToken();
-
         return $user->save(false);
     }
 }

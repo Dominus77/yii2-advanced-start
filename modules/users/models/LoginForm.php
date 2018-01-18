@@ -12,7 +12,6 @@ use modules\users\Module;
  */
 class LoginForm extends Model
 {
-    //public $username;
     public $email;
     public $password;
     public $rememberMe = false;
@@ -26,7 +25,6 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            //[['username', 'password'], 'required'],
             [['email', 'password'], 'required'],
             [['email'], 'email'],
             // rememberMe must be a boolean value

@@ -29,7 +29,7 @@ class Bootstrap implements BootstrapInterface
         $app->getUrlManager()->addRules(
             [
                 // Rules
-                [
+                /*[
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'users/default',
                     'prefix' => 'user',
@@ -46,10 +46,19 @@ class Bootstrap implements BootstrapInterface
                         '' => 'index',
                         '<_a:[\w\-]+>' => '<_a>',
                     ],
+                ],*/
+                [
+                    'class' => 'yii\web\GroupUrlRule',
+                    'routePrefix' => 'users/default',
+                    'prefix' => 'user',
+                    'rules' => [
+                        '<_a:(create)>' => '<_a>',
+                        '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
+                    ],
                 ],
 
-                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/profile/<_a>',
-                [
+                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
+                /*[
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'users/profile',
                     'prefix' => 'profile',
@@ -57,7 +66,7 @@ class Bootstrap implements BootstrapInterface
                         '' => 'index',
                         '<_a:[\w\-]+>' => '<_a>',
                     ],
-                ],
+                ],*/
             ]
         );
     }
