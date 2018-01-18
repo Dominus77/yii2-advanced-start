@@ -1,4 +1,5 @@
 <?php
+
 return [
     'id' => 'modules-rbac-tests',
     'language'=>'en',

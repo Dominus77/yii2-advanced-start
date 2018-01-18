@@ -8,6 +8,7 @@ use modules\users\Module;
 /* @var $model modules\users\models\User */
 
 ?>
+
 <div class="row">
     <div class="col-sm-2">
         <?php if ($model->avatar) : ?>
@@ -83,5 +84,4 @@ use modules\users\Module;
         ]) ?>
 
     </div>
-
 </div>

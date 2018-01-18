@@ -11,6 +11,7 @@ $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
 ?>
+
 <div class="rbac-backend-permissions-index">
     <div class="box">
         <div class="box-header with-border">
@@ -63,7 +64,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                         ],
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
-                            'view' => function ($url, $model) {
+                            'view' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                     'title' => Module::t('module', 'View'),
                                     'data' => [
@@ -71,7 +72,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                                     ]
                                 ]);
                             },
-                            'update' => function ($url, $model) {
+                            'update' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                     'title' => Module::t('module', 'Update'),
                                     'data' => [
@@ -79,7 +80,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                                     ]
                                 ]);
                             },
-                            'delete' => function ($url, $model) {
+                            'delete' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
                                     'title' => Module::t('module', 'Delete'),
                                     'data' => [

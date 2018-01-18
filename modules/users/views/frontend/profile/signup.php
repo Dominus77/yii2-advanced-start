@@ -13,6 +13,7 @@ use modules\users\Module;
 $this->title = Module::t('module', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-frontend-default-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 

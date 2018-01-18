@@ -7,7 +7,8 @@ use modules\users\models\LoginForm;
 use common\fixtures\User as UserFixture;
 
 /**
- * Login form test
+ * Class LoginFormTest
+ * @package common\tests\unit\models
  */
 class LoginFormTest extends \Codeception\Test\Unit
 {
@@ -16,7 +17,9 @@ class LoginFormTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-
+    /**
+     * @inheritdoc
+     */
     public function _before()
     {
         $this->tester->haveFixtures([
@@ -27,6 +30,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testLoginNoUser()
     {
         $model = new LoginForm([
@@ -38,6 +44,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect('user should not be logged in', Yii::$app->user->isGuest)->true();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([
@@ -50,6 +59,9 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect('user should not be logged in', Yii::$app->user->isGuest)->true();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testLoginCorrect()
     {
         $model = new LoginForm([

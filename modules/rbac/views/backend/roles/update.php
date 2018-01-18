@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Roles'), 'url'
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
 $this->params['breadcrumbs'][] = Module::t('module', 'Update');
 ?>
+
 <div class="rbac-backend-roles-update">
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -32,3 +33,4 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
             </div>
         </div>
     </div>
+</div>

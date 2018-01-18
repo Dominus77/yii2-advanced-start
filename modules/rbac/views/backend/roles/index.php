@@ -11,6 +11,7 @@ $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
 ?>
+
 <div class="rbac-backend-roles-index">
     <div class="box">
         <div class="box-header with-border">

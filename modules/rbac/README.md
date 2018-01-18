@@ -1,10 +1,8 @@
-Yii2 модуль управления доступом на основе ролей (RBAC)
-=================================================
+# Yii2 модуль управления доступом на основе ролей (RBAC)
 
 Модуль содержит вэб-интерфейс для управления ролями, разрешениями и назначение прав пользователям.
 
-Подключение
------
+## Подключение
 
 common/config/main.php
 ```
@@ -65,8 +63,7 @@ php yii migrate --migrationPath=@yii/rbac/migrations
 php yii rbac/rbac/init
 ```
 
-Ссылки
------
+## Ссылки
 Панель управления RBAC
 ```
 /rbac/default/index
@@ -92,11 +89,9 @@ php yii rbac/rbac/init
 /rbac/default/reset
 ```
 
-Документация
------
+## Документация
 [Role Based Access Control (RBAC)](http://www.yiiframework.com/doc-2.0/guide-security-authorization.html#rbac)
 
-Лицензия
------
+## Лицензия
 The BSD License (BSD). Please see [License File](https://github.com/Dominus77/yii2-advanced-start/blob/master/modules/rbac/LICENSE.md) for more information.
 

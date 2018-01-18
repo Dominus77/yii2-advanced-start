@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:04
- */
 
 namespace modules\users\widgets\profile\profileImage;
 
@@ -14,6 +8,10 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use modules\users\models\User;
 
+/**
+ * Class ProfileImageWidget
+ * @package modules\users\widgets\profile\profileImage
+ */
 class ProfileImageWidget extends Widget
 {
     /**
@@ -26,6 +24,9 @@ class ProfileImageWidget extends Widget
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         echo $this->render('index', [

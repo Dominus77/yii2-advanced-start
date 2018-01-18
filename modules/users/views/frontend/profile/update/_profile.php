@@ -34,7 +34,7 @@ use modules\users\Module;
     <?= $form->field($model, 'email')->textInput([
         'maxlength' => true,
         'class' => 'form-control',
-        //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+        //'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
         'placeholder' => Module::t('module', 'Email'),
     ]) ?>
 

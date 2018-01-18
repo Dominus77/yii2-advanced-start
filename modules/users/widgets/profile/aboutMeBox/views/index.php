@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:43
- */
-?>
 <!-- About Me Box -->
 <div class="box box-primary">
     <div class="box-header with-border">

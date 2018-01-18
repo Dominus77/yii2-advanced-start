@@ -21,9 +21,19 @@ class IpLimiter implements RateLimitInterface
      */
     const RATE_LIMIT_TIME = 60;
 
+    /**
+     * @var string
+     */
     public $allowance;
+
+    /**
+     * @var string
+     */
     public $allowance_updated_at;
 
+    /**
+     * @var string
+     */
     private $cache_key = 'limitRelate';
 
     /**

@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 08.10.16
- * Time: 11:15
- */
 
 namespace console\components\helpers;
 
-
+/**
+ * Class Console
+ * @package console\components\helpers
+ */
 class Console extends \yii\helpers\Console
 {
     /**
@@ -21,10 +18,9 @@ class Console extends \yii\helpers\Console
      */
     public static function convertEncoding($string, $code = 'cp866', $to = 'UTF-8')
     {
-        if(is_array($string)) {
+        if (is_array($string)) {
             $strings = [];
-            foreach($string as $key => $value)
-            {
+            foreach ($string as $key => $value) {
                 $strings[$key] = mb_convert_encoding($value, $code, $to);
             }
             return $strings;

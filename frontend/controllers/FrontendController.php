@@ -1,17 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 18.10.16
- * Time: 15:51
- */
 
 namespace app\controllers;
 
 use yii\web\Controller;
 
+/**
+ * Class FrontendController
+ * @package app\controllers
+ */
 class FrontendController extends Controller
 {
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -21,6 +22,11 @@ class FrontendController extends Controller
         ];
     }
 
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
     public function beforeAction($action)
     {
         if ($action->id == 'error')

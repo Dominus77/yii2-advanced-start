@@ -11,6 +11,7 @@ use modules\users\Module;
 $this->title = Module::t('module', 'Password Reset Form');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-frontend-default-request-password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 12.10.16
- * Time: 8:35
- */
 
 namespace modules\users\widgets\passfield;
 
@@ -13,6 +7,10 @@ use yii\helpers\Html;
 use yii\widgets\InputWidget;
 use modules\users\widgets\passfield\assets\PassfieldAsset;
 
+/**
+ * Class Passfield
+ * @package modules\users\widgets\passfield
+ */
 class Passfield extends InputWidget
 {
     /**
@@ -41,7 +39,7 @@ class Passfield extends InputWidget
             if ($this->form == null) {
                 throw new InvalidConfigException(__CLASS__ . '.form property must be specified');
             }
-            if(empty($this->label))
+            if (empty($this->label))
                 return $this->form->field($this->model, $this->attribute)->passwordInput($this->options);
             return $this->form->field($this->model, $this->attribute)->passwordInput($this->options)->label($this->label);
         } else {

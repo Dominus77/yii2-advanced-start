@@ -15,6 +15,9 @@ use modules\rbac\components\RbacInit;
  */
 class RbacController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function actionInit()
     {
         if(RbacInit::processInit()) {

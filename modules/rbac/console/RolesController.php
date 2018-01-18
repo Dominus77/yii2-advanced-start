@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 07.10.16
- * Time: 5:48
- */
 
 namespace modules\rbac\console;
 
@@ -34,7 +28,7 @@ class RolesController extends Controller
 
         // Проверяем есть ли уже такая роль у пользователя
         $userRoles = self::getUserRoleValue($user->id);
-        if($userRoles === null) {
+        if ($userRoles === null) {
             $authManager->assign($role, $user->id);
             $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);

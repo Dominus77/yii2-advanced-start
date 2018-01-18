@@ -5,8 +5,15 @@ namespace frontend\tests\functional;
 use frontend\tests\FunctionalTester;
 use common\fixtures\User as UserFixture;
 
+/**
+ * Class LoginCest
+ * @package frontend\tests\functional
+ */
 class LoginCest
 {
+    /**
+     * @param FunctionalTester $I
+     */
     function _before(FunctionalTester $I)
     {
         $I->haveFixtures([
@@ -18,6 +25,11 @@ class LoginCest
         $I->amOnRoute('/users/profile/login');
     }
 
+    /**
+     * @param $email
+     * @param $password
+     * @return array
+     */
     protected function formParams($email, $password)
     {
         return [
@@ -26,6 +38,9 @@ class LoginCest
         ];
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkEmpty(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
@@ -33,12 +48,18 @@ class LoginCest
         $I->seeValidationError('Password cannot be blank.');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkWrongPassword(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('admin@email.loc', 'wrong'));
         $I->seeValidationError('Invalid email or password.');
     }
-    
+
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkValidLogin(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('sfriesen@jenkins.info', 'password_0'));

@@ -246,7 +246,7 @@ class RolesController extends Controller
     {
         $auth = Yii::$app->authManager;
         $role = $auth->getRole($id);
-        if($auth->remove($role)) {
+        if ($auth->remove($role)) {
             Yii::$app->session->setFlash('success', Module::t('module', 'The role "{:name}" have been successfully deleted.', [':name' => $role->name]));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));

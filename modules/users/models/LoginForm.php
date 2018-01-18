@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\models;
 
 use Yii;
@@ -6,7 +7,8 @@ use yii\base\Model;
 use modules\users\Module;
 
 /**
- * Login form
+ * Class LoginForm
+ * @package modules\users\models
  */
 class LoginForm extends Model
 {

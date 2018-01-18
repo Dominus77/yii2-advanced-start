@@ -35,4 +35,3 @@ phpunit.phar
 /.vagrant
 
 /composer.lock
-

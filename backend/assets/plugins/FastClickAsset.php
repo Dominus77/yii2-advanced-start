@@ -10,15 +10,28 @@ use yii\web\AssetBundle;
  */
 class FastClickAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/fastclick/lib';
-    public $js;
 
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->js = ['fastclick.js'];
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'backend\assets\BootstrapAsset',

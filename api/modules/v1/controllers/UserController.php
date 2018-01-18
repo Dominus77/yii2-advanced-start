@@ -15,6 +15,9 @@ use yii\filters\auth\QueryParamAuth;
  */
 class UserController extends ActiveController
 {
+    /**
+     * @var string
+     */
     public $modelClass = 'api\modules\v1\models\User';
 
     /**

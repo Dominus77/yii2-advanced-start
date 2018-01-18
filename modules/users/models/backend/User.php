@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 09.10.16
- * Time: 3:20
- */
 
 namespace modules\users\models\backend;
 
@@ -12,6 +6,10 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use modules\users\Module;
 
+/**
+ * Class User
+ * @package modules\users\models\backend
+ */
 class User extends \modules\users\models\User
 {
     const SCENARIO_ADMIN_CREATE = 'adminCreate';

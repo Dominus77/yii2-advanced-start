@@ -8,6 +8,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use modules\users\models\User;
 
+/**
+ * Class AvatarWidget
+ * @package modules\users\widgets
+ */
 class AvatarWidget extends Widget
 {
     /**

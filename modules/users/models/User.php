@@ -522,19 +522,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Действия после сохранения
-     * @param bool $insert
-     * @param array $changedAttributes
-     */
-    /*public function afterSave($insert, $changedAttributes)
-    {
-        parent::afterSave($insert, $changedAttributes);
-        if ($insert) {
-
-        }
-    }*/
-
-    /**
      * Действия перед удалением
      * @return bool
      */

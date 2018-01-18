@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 18.10.16
- * Time: 18:16
- */
+
 return [
     'HELLO {username}' => 'Hello {username}',
     'FOLLOW_TO_RESET_PASSWORD' => 'Follow the link below to reset your password',

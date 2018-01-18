@@ -34,7 +34,7 @@ class DefaultController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'reset' => YII_ENV_TEST ? ['GET']:['POST'],
+                    'reset' => YII_ENV_TEST ? ['GET'] : ['POST'],
                 ],
             ],
         ];

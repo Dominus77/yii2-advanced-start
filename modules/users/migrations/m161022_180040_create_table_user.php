@@ -4,6 +4,10 @@ namespace modules\users\migrations;
 
 use yii\db\Migration;
 
+/**
+ * Class m161022_180040_create_table_user
+ * @package modules\users\migrations
+ */
 class m161022_180040_create_table_user extends Migration
 {
     public function up()

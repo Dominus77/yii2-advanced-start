@@ -11,6 +11,9 @@ use yii\base\Model;
  */
 class Message extends Model
 {
+    /**
+     * @var string
+     */
     public $message = 'This message api v1.';
 
     /**

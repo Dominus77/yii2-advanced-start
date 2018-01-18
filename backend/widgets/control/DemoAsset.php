@@ -10,9 +10,19 @@ use yii\web\AssetBundle;
  */
 class DemoAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
-    public $js;
 
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

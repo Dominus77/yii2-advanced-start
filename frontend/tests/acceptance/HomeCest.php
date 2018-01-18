@@ -1,12 +1,20 @@
 <?php
+
 namespace frontend\tests\acceptance;
 
 use Yii;
 use frontend\tests\AcceptanceTester;
 use yii\helpers\Url;
 
+/**
+ * Class HomeCest
+ * @package frontend\tests\acceptance
+ */
 class HomeCest
 {
+    /**
+     * @param AcceptanceTester $I
+     */
     public function checkHome(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/index'));

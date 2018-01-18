@@ -10,9 +10,19 @@ use yii\web\AssetBundle;
  */
 class LoginAdminLteAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
-    public $css;
 
+    /**
+     * @var array
+     */
+    public $css = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -20,6 +30,9 @@ class LoginAdminLteAsset extends AssetBundle
         $this->css = ['css/AdminLTE' . $min . '.css'];
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\YiiAsset',
         'backend\assets\BootstrapAsset',

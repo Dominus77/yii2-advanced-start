@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\models\frontend;
 
 use yii\base\Model;

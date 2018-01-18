@@ -10,6 +10,7 @@ use modules\users\Module;
 
 $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
 ?>
+
 <div class="row">
     <div class="col-sm-2">
         <?php if ($model->avatar) : ?>
@@ -93,5 +94,4 @@ $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);",
         ]) ?>
 
     </div>
-
 </div>

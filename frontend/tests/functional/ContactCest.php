@@ -1,22 +1,36 @@
 <?php
+
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
 
 /* @var $scenario \Codeception\Scenario */
 
+/**
+ * Class ContactCest
+ * @package frontend\tests\functional
+ */
 class ContactCest
 {
+    /**
+     * @param FunctionalTester $I
+     */
     public function _before(FunctionalTester $I)
     {
         $I->amOnPage(['main/default/contact']);
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkContact(FunctionalTester $I)
     {
         $I->see('Contact', 'h1');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkContactSubmitNoData(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', []);
@@ -28,6 +42,9 @@ class ContactCest
         $I->seeValidationError('Verification Code cannot be blank');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkContactSubmitNotCorrectEmail(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [
@@ -44,6 +61,9 @@ class ContactCest
         $I->dontSeeValidationError('Verification Code cannot be blank');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkContactSubmitCorrectData(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [

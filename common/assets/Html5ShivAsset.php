@@ -11,13 +11,23 @@ use yii\web\View;
  */
 class Html5ShivAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@bower/html5shiv/dist';
+
+    /**
+     * @var array
+     */
     public $js = [
         'html5shiv.min.js',
     ];
+
+    /**
+     * @var array
+     */
     public $jsOptions = [
         'condition' => 'lt IE 9',
         'position' => View::POS_HEAD,
     ];
 }
-

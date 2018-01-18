@@ -12,6 +12,7 @@ use modules\users\Module;
 $this->title = Module::t('module', 'Reset Password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-frontend-default-reset-password">
     <h1><?= Html::encode($this->title) ?></h1>
 

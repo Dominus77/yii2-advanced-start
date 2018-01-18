@@ -36,7 +36,7 @@ use modules\users\Module;
                 ]); ?>
             </div>
         </div>
-        <?/*= $form->field($model, 'isDel')->checkbox();*/ ?>
+        <?php /*echo $form->field($model, 'isDel')->checkbox();*/ ?>
 
         <div class="checkbox icheck">
             <?= $form->field($model, 'isDel')->checkbox(['class' => 'iCheck']); ?>

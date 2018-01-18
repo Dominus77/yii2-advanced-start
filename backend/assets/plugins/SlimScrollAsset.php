@@ -10,9 +10,19 @@ use yii\web\AssetBundle;
  */
 class SlimScrollAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/jquery-slimscroll';
-    public $js;
 
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -20,6 +30,9 @@ class SlimScrollAsset extends AssetBundle
         $this->js = ['jquery.slimscroll' . $min . '.js'];
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'backend\assets\BootstrapAsset',

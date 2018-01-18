@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\main\controllers\backend;
 
 use Yii;
@@ -8,7 +9,8 @@ use modules\rbac\models\Permission;
 use modules\main\Module;
 
 /**
- * Site controller
+ * Class DefaultController
+ * @package modules\main\controllers\backend
  */
 class DefaultController extends Controller
 {

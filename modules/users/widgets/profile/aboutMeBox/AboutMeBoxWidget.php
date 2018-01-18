@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:04
- */
 
 namespace modules\users\widgets\profile\aboutMeBox;
 
@@ -15,6 +9,10 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use modules\users\models\User;
 
+/**
+ * Class AboutMeBoxWidget
+ * @package modules\users\widgets\profile\aboutMeBox
+ */
 class AboutMeBoxWidget extends Widget
 {
     /**
@@ -22,11 +20,17 @@ class AboutMeBoxWidget extends Widget
      */
     public $model;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         echo $this->render('index', [

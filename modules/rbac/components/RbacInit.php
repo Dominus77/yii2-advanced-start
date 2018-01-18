@@ -12,6 +12,9 @@ use modules\rbac\models\Permission;
  */
 class RbacInit
 {
+    /**
+     * @return bool
+     */
     public static function processInit()
     {
         $auth = Yii::$app->authManager;

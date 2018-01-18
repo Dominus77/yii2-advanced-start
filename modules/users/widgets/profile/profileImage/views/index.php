@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:05
- */
+/** @var $data array */
 ?>
 <!-- Profile Image -->
 <div class="box box-primary">

@@ -7,9 +7,13 @@ use common\fixtures\User as UserFixture;
 
 /**
  * Class LoginCest
+ * @package backend\tests\functional
  */
 class LoginCest
 {
+    /**
+     * @param FunctionalTester $I
+     */
     public function _before(FunctionalTester $I)
     {
         $I->haveFixtures([
@@ -21,6 +25,11 @@ class LoginCest
         $I->amOnRoute('/users/default/login');
     }
 
+    /**
+     * @param $email
+     * @param $password
+     * @return array
+     */
     protected function formParams($email, $password)
     {
         return [
@@ -29,6 +38,9 @@ class LoginCest
         ];
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkEmpty(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
@@ -36,12 +48,18 @@ class LoginCest
         $I->seeValidationError('Password cannot be blank');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkWrongPassword(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('admin@email.loc', 'wrong'));
         $I->seeValidationError('Invalid email or password.');
     }
 
+    /**
+     * @param FunctionalTester $I
+     */
     public function checkValidLoginAccessDenied(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('sfriesen@jenkins.info', 'password_0'));

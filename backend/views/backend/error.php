@@ -1,14 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 18.10.16
- * Time: 10:43
- */
+
+/** @var $exception object */
+
 use yii\helpers\Html;
 
 $this->title = $name;
 ?>
+
 <div class="site-error">
     <div class="error-page">
         <h2 class="headline text-yellow"> <?= nl2br(Html::encode($exception->statusCode)); ?></h2>

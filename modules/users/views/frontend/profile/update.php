@@ -10,6 +10,7 @@ $this->title = Module::t('module', 'Update');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-frontend-default-update">
     <div class="nav-tabs-custom">
         <?= Tabs::widget([

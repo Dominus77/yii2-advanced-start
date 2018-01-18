@@ -1,4 +1,5 @@
 <?php
+
 return [
     'Login' => 'Авторизация',
     'Login to the site to start the session' => 'Войдите на сайт, чтобы начать сеанс',

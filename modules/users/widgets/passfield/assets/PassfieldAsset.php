@@ -1,24 +1,37 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 12.10.16
- * Time: 8:28
- */
 
 namespace modules\users\widgets\passfield\assets;
 
 use yii\web\AssetBundle;
 
+/**
+ * Class PassfieldAsset
+ * @package modules\users\widgets\passfield\assets
+ */
 class PassfieldAsset extends AssetBundle
 {
-    public $sourcePath = '@modules/users/widgets/passfield/assets/src';
-    public $css;
-    public $js;
+    /**
+     * @var string
+     */
+    public $sourcePath;
 
+    /**
+     * @var array
+     */
+    public $css = [];
+
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
+        $this->sourcePath = __DIR__ . '/src';
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
             'css/passfield' . $min . '.css'
@@ -29,9 +42,11 @@ class PassfieldAsset extends AssetBundle
         ] : [
             'js/passfield' . $min . '.js',
         ];
-
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',

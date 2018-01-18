@@ -1,8 +1,9 @@
-Yii2 Passfield
---------------
+# Yii2 Passfield
+
 Pass*Field is a javascript that simplifies creation of sophisticated password fields. Docs and live demo are
 http://antelle.github.io/passfield/
 
+```
 \modules\users\components\widgets\passfield\Passfield::widget([
     'form' => $form,
     'model' => $model,
@@ -22,3 +23,4 @@ http://antelle.github.io/passfield/
         ]
     ],
 ]);
+```

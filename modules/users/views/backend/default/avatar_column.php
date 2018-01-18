@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 25.10.16
- * Time: 14:57
- */
 
 use yii\helpers\Html;
 
 /* @var $model modules\users\models\backend\User */
-
 ?>
 
 <?php if ($path = $model->avatarPath) : ?>

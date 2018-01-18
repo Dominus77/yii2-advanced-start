@@ -9,6 +9,7 @@ use yii\bootstrap\Tabs;
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-frontend-default-index">
     <h1><?= Html::encode($this->title) ?></h1>
 

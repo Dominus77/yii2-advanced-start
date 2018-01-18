@@ -1,11 +1,19 @@
 <?php
+
 namespace frontend\tests\unit\models;
 
 use Yii;
 use modules\main\models\frontend\ContactForm;
 
+/**
+ * Class ContactFormTest
+ * @package frontend\tests\unit\models
+ */
 class ContactFormTest extends \Codeception\Test\Unit
 {
+    /**
+     * @inheritdoc
+     */
     public function testSendEmail()
     {
         $model = new ContactForm();

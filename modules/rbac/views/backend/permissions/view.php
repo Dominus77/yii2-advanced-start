@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' 
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Permissions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->name;
 ?>
+
 <div class="rbac-backend-permissions-view">
     <div class="box box-primary">
         <div class="box-header with-border">

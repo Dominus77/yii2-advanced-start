@@ -9,6 +9,7 @@ use modules\rbac\Module;
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
 ?>
+
 <div class="rbac-backend-default-index">
     <div class="box">
         <div class="box-header with-border">
@@ -43,4 +44,3 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         </div>
     </div>
 </div>
-

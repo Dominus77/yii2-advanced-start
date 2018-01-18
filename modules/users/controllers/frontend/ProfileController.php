@@ -96,7 +96,7 @@ class ProfileController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->save())
+            if ($model->save())
                 Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);

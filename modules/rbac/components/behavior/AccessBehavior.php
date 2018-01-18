@@ -12,9 +12,19 @@ use yii\console\Controller;
  */
 class AccessBehavior extends Behavior
 {
+    /**
+     * @var string
+     */
     public $permission = '';
+
+    /**
+     * @var string
+     */
     public $role = '';
 
+    /**
+     * @return array
+     */
     public function events()
     {
         return [
@@ -22,6 +32,9 @@ class AccessBehavior extends Behavior
         ];
     }
 
+    /**
+     * @param $events
+     */
     public function accessAction($events)
     {
         if (!empty($this->permission) && !$this->checkPermission()) {

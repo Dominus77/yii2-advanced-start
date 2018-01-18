@@ -11,6 +11,7 @@ $this->params['title']['small'] = $model->username;
 
 $this->params['breadcrumbs'][] = Module::t('module', 'Profile');
 ?>
+
 <div class="users-backend-profile-index">
     <div class="box">
         <div class="box-header with-border">

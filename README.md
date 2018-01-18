@@ -1,5 +1,4 @@
-Yii 2 Advanced Start Project Template
-===============================
+# Yii 2 Advanced Start Project Template
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/stable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![Latest Unstable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/unstable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
@@ -14,8 +13,7 @@ Available console user management commands and RBAC system.
 - [Web page](http://dominus77.github.io/yii2-advanced-start)
 - [github.com](https://github.com/Dominus77/yii2-advanced-start)
 
-Base components
-------
+## Base components
 
 Pages (backend AdminLTE template)
 - Home
@@ -49,13 +47,11 @@ System
 - Console commands
 - i18n
 
-Requirements
-------
+## Requirements
 
 The minimum requirement by this project template that your Web server supports PHP 5.4.0.
 
-DIRECTORY STRUCTURE
--------------------
+## DIRECTORY STRUCTURE
 
 ```
 api
@@ -154,32 +150,31 @@ modules/
         Module.php      General Module class
 ```
 
-INSTALLATION
-------------
+## INSTALLATION
 
 Create a project:
-~~~
+```
 composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start advanced-project
-~~~
+```
 
 or clone the repository for `pull` command availability:
 
-~~~
+```
 git clone https://github.com/Dominus77/yii2-advanced-start.git advanced-project
 cd advanced-project
 composer install
-~~~
+```
 
 Init an environment:
 
-~~~
+```
 cd advanced-project
 php init
-~~~
+```
 
 Create a database, default configure yii2_advanced_start in common\config\main-local.php
 
-~~~
+```
 //...
 'components' => [
     'db' => [
@@ -189,31 +184,31 @@ Create a database, default configure yii2_advanced_start in common\config\main-l
     //...
 ],
 //...
-~~~
+```
 
 Apply migration:
 
-~~~
+```
 php yii migrate
-~~~
+```
 
 See all available commands:
 
-~~~
+```
 php yii
-~~~
+```
 
 Initialization RBAC:
 
-~~~
+```
 php yii rbac/rbac/init
-~~~
+```
 
 Create user, enter the command and follow the instructions:
 
-~~~
+```
 php yii users/user/create
-~~~
+```
 
 - Username: set username (admin);
 - Email: set email (admin@example.com);
@@ -222,9 +217,9 @@ php yii users/user/create
 
 Assign role admin:
 
-~~~
+```
 php yii rbac/roles/assign
-~~~
+```
 
 - Username: set username (admin);
 - Role: set role (admin, editor, manager, super_admin, user, ? - Help); (This set configure rbac module models Role.php, Permission.php and in folder components to RbacInit.php)
@@ -233,7 +228,7 @@ php yii rbac/roles/assign
 If you are installing the server into the public_html folder on the server with Apache, you must configure redirection.
 At the root folder, create a public_html .hitaccess with the following content:
 
-~~~
+```
 Options FollowSymLinks
 AddDefaultCharset utf-8
 
@@ -283,25 +278,24 @@ AddDefaultCharset utf-8
     RewriteCond %{REQUEST_URI} \.(htaccess|htpasswd|svn|git)
     RewriteRule \.(htaccess|htpasswd|svn|git) - [F]
 </IfModule>
-~~~
+```
 
 The web folder, the backend, frontend and api parts also add .hitaccess:
 
-~~~
+```
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
-~~~
+```
 
 Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/users
 
-TESTING
--------
+## TESTING
 
 Create a database, default configure yii2_advanced_start_test in common\config\test-local.php
 
-~~~
+```
 //...
 'components' => [
     'db' => [
@@ -309,20 +303,17 @@ Create a database, default configure yii2_advanced_start_test in common\config\t
     ],
 ]
 //...
-~~~
+```
 
 Apply migration:
 
-~~~
+```
 php yii_test migrate/up
-~~~
+```
 
 Run in console:
 
-~~~
+```
 vendor\bin\codecept build
 vendor\bin\codecept run
-~~~
-
-
-
+```

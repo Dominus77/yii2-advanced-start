@@ -10,12 +10,29 @@ use yii\web\AssetBundle;
  */
 class DatePickerAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public static $language;
 
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-datepicker';
-    public $css;
-    public $js;
 
+    /**
+     * @var array
+     */
+    public $css = [];
+
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -30,6 +47,9 @@ class DatePickerAsset extends AssetBundle
         ];
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\jui\JuiAsset',

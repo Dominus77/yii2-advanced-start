@@ -11,12 +11,29 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $basePath = '@webroot';
+
+    /**
+     * @var string
+     */
     public $baseUrl = '@web';
 
+    /**
+     * @var array
+     */
     public $css = [];
+
+    /**
+     * @var array
+     */
     public $js = [];
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -24,6 +41,9 @@ class AppAsset extends AssetBundle
         $this->js[] = 'js/dashboard.js';
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\YiiAsset',
         'backend\assets\BootstrapAsset',

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use modules\users\Module;
@@ -6,6 +7,7 @@ use modules\users\Module;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 ?>
+
 <div class="row">
     <div class="col-sm-2">
         <?php if ($model->avatar) : ?>

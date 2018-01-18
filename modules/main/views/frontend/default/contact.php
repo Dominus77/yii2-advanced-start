@@ -13,6 +13,7 @@ use modules\main\Module;
 $this->title = Module::t('module', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="main-frontend-default-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 

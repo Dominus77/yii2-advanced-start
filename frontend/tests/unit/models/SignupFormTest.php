@@ -4,6 +4,10 @@ namespace frontend\tests\unit\models;
 use common\fixtures\User as UserFixture;
 use modules\users\models\frontend\SignupForm;
 
+/**
+ * Class SignupFormTest
+ * @package frontend\tests\unit\models
+ */
 class SignupFormTest extends \Codeception\Test\Unit
 {
     /**
@@ -11,7 +15,9 @@ class SignupFormTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-
+    /**
+     * @inheritdoc
+     */
     public function _before()
     {
         $this->tester->haveFixtures([
@@ -22,6 +28,9 @@ class SignupFormTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testCorrectSignup()
     {
         $model = new SignupForm([
@@ -39,6 +48,9 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect($user->validatePassword('some_password'))->true();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([

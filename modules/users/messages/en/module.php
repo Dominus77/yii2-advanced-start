@@ -1,4 +1,5 @@
 <?php
+
 return [
     'Login' => 'Login',
     'Login to the site to start the session' => 'Login to the site to start the session',

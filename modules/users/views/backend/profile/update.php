@@ -12,6 +12,7 @@ $this->params['title']['small'] = $model->username;
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->username;
 ?>
+
 <div class="users-backend-profile-update">
     <div class="box">
         <div class="box-header with-border">

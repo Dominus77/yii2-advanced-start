@@ -10,10 +10,24 @@ use yii\web\AssetBundle;
  */
 class iCheckAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
-    public $css;
-    public $js;
 
+    /**
+     * @var array
+     */
+    public $css = [];
+
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -34,6 +48,9 @@ class iCheckAsset extends AssetBundle
         "));
     }
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'backend\assets\BootstrapAsset',

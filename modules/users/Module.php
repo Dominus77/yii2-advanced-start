@@ -6,7 +6,8 @@ use Yii;
 use yii\console\Application as ConsoleApplication;
 
 /**
- * users module definition class
+ * Class Module
+ * @package modules\users
  */
 class Module extends \yii\base\Module
 {

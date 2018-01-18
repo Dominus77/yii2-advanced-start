@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\commands;
 
 use Yii;
@@ -14,6 +15,9 @@ use console\components\helpers\Console;
  */
 class UserController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function actionIndex()
     {
         echo 'yii users/user/create' . PHP_EOL;
@@ -22,6 +26,9 @@ class UserController extends Controller
         echo 'yii users/user/change-password' . PHP_EOL;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function actionCreate()
     {
         $model = new User();
@@ -37,6 +44,11 @@ class UserController extends Controller
         $this->log($model->save());
     }
 
+    /**
+     * @throws Exception
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function actionRemove()
     {
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
@@ -44,6 +56,9 @@ class UserController extends Controller
         $this->log($model->delete());
     }
 
+    /**
+     * @throws Exception
+     */
     public function actionActivate()
     {
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
@@ -53,6 +68,9 @@ class UserController extends Controller
         $this->log($model->save());
     }
 
+    /**
+     * @throws Exception
+     */
     public function actionChangePassword()
     {
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);

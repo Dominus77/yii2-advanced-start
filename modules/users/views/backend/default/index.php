@@ -15,6 +15,7 @@ use modules\users\Module;
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="users-backend-default-index">
     <div class="box">
         <div class="box-header with-border">
@@ -170,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
-                            'view' => function ($url, $model) {
+                            'view' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                     'title' => Module::t('module', 'View'),
                                     'data' => [
@@ -179,7 +180,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]
                                 ]);
                             },
-                            'update' => function ($url, $model) {
+                            'update' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                     'title' => Module::t('module', 'Update'),
                                     'data' => [

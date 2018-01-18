@@ -1,1 +1,32 @@
-<?phpnamespace common\assets;use yii\web\AssetBundle;class IonIconsAsset extends AssetBundle{    public $sourcePath = '@vendor/driftyco/ionicons';    public $css;    public function init()    {        parent::init();        $min = YII_ENV_DEV ? '' : '.min';        $this->css = ['css/ionicons' . $min . '.css'];    }}
+<?php
+
+namespace common\assets;
+
+use yii\web\AssetBundle;
+
+/**
+ * Class IonIconsAsset
+ * @package common\assets
+ */
+class IonIconsAsset extends AssetBundle
+{
+    /**
+     * @var string
+     */
+    public $sourcePath = '@vendor/driftyco/ionicons';
+
+    /**
+     * @var array
+     */
+    public $css = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $min = YII_ENV_DEV ? '' : '.min';
+        $this->css = ['css/ionicons' . $min . '.css'];
+    }
+}

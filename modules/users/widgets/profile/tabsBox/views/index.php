@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:50
- */
+
 use yii\widgets\DetailView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use modules\rbac\models\Rbac as BackendRbac;
+use modules\rbac\models\Role as BackendRbac;
 use modules\users\Module;
 
 ?>
+
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
@@ -157,7 +153,7 @@ use modules\users\Module;
                     'maxlength' => true,
                     'class' => 'form-control',
                     'placeholder' => 'Псевдоним',
-                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMIN) ? false : true,
                 ]) ?>
             </div>
 
@@ -182,7 +178,7 @@ use modules\users\Module;
                     'maxlength' => true,
                     'class' => 'form-control',
                     'placeholder' => 'Email',
-                    //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+                    //'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMIN) ? false : true,
                 ]) ?>
             </div>
 
@@ -205,14 +201,14 @@ use modules\users\Module;
             <div class="col-sm-10">
                 <?= $form->field($model, 'role')->dropDownList($model->rolesArray, [
                     'class' => 'form-control',
-                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMIN) ? false : true,
                 ]) ?>
             </div>
 
             <div class="col-sm-10">
                 <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
                     'class' => 'form-control',
-                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMINISTRATOR) ? false : true,
+                    'disabled' => Yii::$app->user->can(BackendRbac::ROLE_ADMIN) ? false : true,
                 ]) ?>
             </div>
             <div class="form-group">

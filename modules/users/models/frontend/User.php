@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Sсhevchenko <ivanovosity@gmail.com>
- * Date: 09.10.16
- * Time: 3:20
- */
 
 namespace modules\users\models\frontend;
 

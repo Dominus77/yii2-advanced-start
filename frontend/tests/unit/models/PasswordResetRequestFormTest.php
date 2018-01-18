@@ -7,6 +7,10 @@ use modules\users\models\frontend\PasswordResetRequestForm;
 use common\fixtures\User as UserFixture;
 use modules\users\models\User;
 
+/**
+ * Class PasswordResetRequestFormTest
+ * @package frontend\tests\unit\models
+ */
 class PasswordResetRequestFormTest extends \Codeception\Test\Unit
 {
     /**
@@ -14,7 +18,9 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-
+    /**
+     * @inheritdoc
+     */
     public function _before()
     {
         $this->tester->haveFixtures([
@@ -25,6 +31,9 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testSendMessageWithWrongEmailAddress()
     {
         $model = new PasswordResetRequestForm();
@@ -32,6 +41,9 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         expect_not($model->sendEmail());
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testNotSendEmailsToInactiveUser()
     {
         $user = $this->tester->grabFixture('user', 1);
@@ -40,6 +52,9 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
         expect_not($model->sendEmail());
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testSendEmailSuccessfully()
     {
         $userFixture = $this->tester->grabFixture('user', 2);

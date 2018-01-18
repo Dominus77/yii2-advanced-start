@@ -9,6 +9,9 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

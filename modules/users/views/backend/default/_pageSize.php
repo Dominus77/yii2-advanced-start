@@ -37,4 +37,3 @@ $this->registerJs($script, yii\web\View::POS_BEGIN);
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-

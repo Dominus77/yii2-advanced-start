@@ -9,6 +9,10 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\imagine\Image;
 
+/**
+ * Class UploadForm
+ * @package modules\users\models
+ */
 class UploadForm extends Model
 {
     /**

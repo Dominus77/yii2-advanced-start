@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Shevchenko <ivanovosity@gmail.com>
- * Date: 26.10.16
- * Time: 14:04
- */
 
 namespace modules\users\widgets\profile\tabsBox;
 
@@ -15,6 +9,10 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use modules\users\models\User;
 
+/**
+ * Class TabsBoxWidget
+ * @package modules\users\widgets\profile\tabsBox
+ */
 class TabsBoxWidget extends Widget
 {
     /**

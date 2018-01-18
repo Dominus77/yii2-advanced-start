@@ -11,6 +11,7 @@ $this->params['title']['small'] = Module::t('module', 'Create');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 ?>
+
 <div class="users-backend-default-create">
     <div class="box box-primary">
         <div class="box-header with-border">

@@ -5,6 +5,10 @@ namespace frontend\tests\unit\models;
 use common\fixtures\User as UserFixture;
 use modules\users\models\frontend\ResetPasswordForm;
 
+/**
+ * Class ResetPasswordFormTest
+ * @package frontend\tests\unit\models
+ */
 class ResetPasswordFormTest extends \Codeception\Test\Unit
 {
     /**
@@ -12,7 +16,9 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-
+    /**
+     * @inheritdoc
+     */
     public function _before()
     {
         $this->tester->haveFixtures([
@@ -23,6 +29,9 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testResetWrongToken()
     {
         $this->tester->expectException('yii\base\InvalidParamException', function() {
@@ -34,6 +43,9 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         });
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testResetCorrectToken()
     {
         $user = $this->tester->grabFixture('user', 2);

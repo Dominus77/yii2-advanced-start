@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' 
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Assign'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Html::encode($model->username);
 ?>
+
 <div class="rbac-backend-assign-view">
     <div class="box box-primary">
         <div class="box-header with-border">

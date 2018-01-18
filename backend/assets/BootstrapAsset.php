@@ -11,11 +11,24 @@ use yii\web\AssetBundle;
  */
 class BootstrapAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist';
 
-    public $css;
-    public $js;
+    /**
+     * @var array
+     */
+    public $css = [];
 
+    /**
+     * @var array
+     */
+    public $js = [];
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -25,8 +38,8 @@ class BootstrapAsset extends AssetBundle
 
         // Подключаем свои файлы Bootstrap
         Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapAsset'] = [
-                'sourcePath' => $this->sourcePath,
-                'css' => [$this->css],
+            'sourcePath' => $this->sourcePath,
+            'css' => [$this->css],
         ];
         Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = [
             'sourcePath' => $this->sourcePath,
