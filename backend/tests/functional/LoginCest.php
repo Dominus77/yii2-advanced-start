@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
@@ -14,7 +13,7 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
-    public function _before(FunctionalTester $I)
+    function _before(FunctionalTester $I)
     {
         $I->haveFixtures([
             'user' => [
@@ -44,8 +43,8 @@ class LoginCest
     public function checkEmpty(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
-        $I->seeValidationError('Email cannot be blank');
-        $I->seeValidationError('Password cannot be blank');
+        $I->seeValidationError('Email cannot be blank.');
+        $I->seeValidationError('Password cannot be blank.');
     }
 
     /**

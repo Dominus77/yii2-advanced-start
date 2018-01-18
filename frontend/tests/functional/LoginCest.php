@@ -1,5 +1,4 @@
 <?php
-
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
@@ -22,7 +21,7 @@ class LoginCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
-        $I->amOnRoute('/users/profile/login');
+        $I->amOnRoute('/users/default/login');
     }
 
     /**

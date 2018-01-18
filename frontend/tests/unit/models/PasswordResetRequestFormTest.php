@@ -1,9 +1,8 @@
 <?php
-
 namespace frontend\tests\unit\models;
 
 use Yii;
-use modules\users\models\frontend\PasswordResetRequestForm;
+use modules\users\models\PasswordResetRequestForm;
 use common\fixtures\User as UserFixture;
 use modules\users\models\User;
 

@@ -159,7 +159,6 @@ class DefaultController extends Controller
                 return $this->goHome();
             }
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);

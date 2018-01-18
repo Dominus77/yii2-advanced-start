@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users;
 
 use yii\base\BootstrapInterface;
@@ -37,8 +36,8 @@ class Bootstrap implements BootstrapInterface
                         '<_a:(create)>' => '<_a>',
                         '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
                     ],
-                ],
-                [
+                ],*/
+                /*[
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'users/default',
                     'prefix' => 'users',
@@ -47,7 +46,7 @@ class Bootstrap implements BootstrapInterface
                         '<_a:[\w\-]+>' => '<_a>',
                     ],
                 ],*/
-                [
+                /*[
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'users/default',
                     'prefix' => 'user',
@@ -55,8 +54,7 @@ class Bootstrap implements BootstrapInterface
                         '<_a:(create)>' => '<_a>',
                         '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
                     ],
-                ],
-
+                ],*/
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
                 /*[
                     'class' => 'yii\web\GroupUrlRule',

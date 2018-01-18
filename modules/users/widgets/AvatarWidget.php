@@ -23,25 +23,42 @@ class AvatarWidget extends Widget
         'class' => 'img-circle',
     ];
 
-    public $gravatar = false;
+    public $email = '';
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
-        echo self::getAvatar();
+        echo $this->getGravatar(80, 'mm', 'g', true, $this->imageOptions);
     }
 
     /**
+     * @param int $s
+     * @param string $d
+     * @param string $r
+     * @param bool|false $img
+     * @param array $attr
      * @return string
      */
-    private function getAvatar()
+    public function getGravatar($s = 80, $d = 'mm', $r = 'g', $img = false, $attr = [])
     {
-        if(($this->gravatar === false) && Yii::$app->user->identity->getAvatarPath())
-            return Html::img(Yii::$app->user->identity->getAvatarPath(), $this->imageOptions);
-        return Yii::$app->user->identity->getGravatar(null, 80, 'mm', 'g', true, $this->imageOptions);
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim($this->email))) . '?';
+        $url .= http_build_query([
+            's' => $s,
+            'd' => $d,
+            'r' => $r,
+        ]);
+
+        return $img ? Html::img($url, $attr) : $url;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
@@ -20,7 +19,7 @@ class SignupCest
      */
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('/users/profile/signup');
+        $I->amOnRoute('/users/default/signup');
     }
 
     /**

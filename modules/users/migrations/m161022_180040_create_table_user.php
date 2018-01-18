@@ -10,7 +10,10 @@ use yii\db\Migration;
  */
 class m161022_180040_create_table_user extends Migration
 {
-    public function up()
+    /**
+     * @inheritdoc
+     */
+    public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -26,20 +29,20 @@ class m161022_180040_create_table_user extends Migration
             'password_reset_token' => $this->string()->unique()->comment('Password Token'),
             'email_confirm_token' => $this->string()->comment('Email Confirm Token'),
             'email' => $this->string()->notNull()->unique()->comment('Email'),
-
             'status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('Status'),
             'last_visit' => $this->integer()->comment('Last Visit'),
             'created_at' => $this->integer()->notNull()->comment('Created'),
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
-
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
-
             'registration_type' => $this->integer()->defaultValue(0)->comment('Type Registration'),
         ], $tableOptions);
     }
 
-    public function down()
+    /**
+     * @inheritdoc
+     */
+    public function safeDown()
     {
         $this->dropTable('{{%user}}');
     }
