@@ -25,7 +25,6 @@ use modules\users\Module;
             ],
         ],
     ]); ?>
-
     <?php if (Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS)) : ?>
         <?= $form->field($model, 'username')->textInput([
             'maxlength' => true,

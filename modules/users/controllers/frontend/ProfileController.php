@@ -28,6 +28,9 @@ use modules\users\Module;
  */
 class ProfileController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -38,20 +41,6 @@ class ProfileController extends Controller
                     'delete' => ['post'],
                 ],
             ],
-            /*'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'signup', 'request-password-reset', 'reset-password'],
-                        'allow' => true,
-                        'roles' => ['?']
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['@']
-                    ],
-                ],
-            ],*/
         ];
     }
 
