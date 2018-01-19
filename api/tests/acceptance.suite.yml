@@ -3,4 +3,4 @@ modules:
     enabled:
         - REST:
             depends: PhpBrowser
-            url: 'http://yii2-advanced-start.loc/api/'
+            url: 'http://localhost/api/'
