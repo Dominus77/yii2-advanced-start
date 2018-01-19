@@ -8,7 +8,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://http://advanced.avalon37.loc
+            url: http://yii2-advanced-start.loc/
         - \Helper\Acceptance
         - Yii2:
             part: ORM

@@ -266,9 +266,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public static function findByEmailConfirmToken($email_confirm_token)
     {
-        if (empty($email_confirm_token)) {
-            return false;
-        }
         return static::findOne([
             'email_confirm_token' => $email_confirm_token,
             'status' => self::STATUS_WAIT
