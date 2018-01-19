@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                     [
-                        'attribute' => 'Role',
+                        'attribute' => 'userRoleName',
                         'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $assignModel->getRolesArray(), [
                             'class' => 'form-control',
                             'prompt' => Module::t('module', '- all -'),

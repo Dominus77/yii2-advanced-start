@@ -24,7 +24,7 @@ use modules\users\Module;
                 'last_name',
                 'email:email',
                 [
-                    'attribute' => 'role',
+                    'attribute' => 'userRoleName',
                     'format' => 'raw',
                     'value' => function ($model) use ($assignModel) {
                         return $assignModel->getRoleName($model->id);
