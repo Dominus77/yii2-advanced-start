@@ -13,7 +13,6 @@ return [
 
         'status' => '1',
         'last_visit' => '1402312317',
-        'avatar' => null,
         'first_name' => 'Nicole',
         'last_name' => 'Paucek',
         'registration_type' => '0',
