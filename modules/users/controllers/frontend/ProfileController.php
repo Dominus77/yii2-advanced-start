@@ -74,6 +74,23 @@ class ProfileController extends Controller
     }
 
     /**
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateProfile()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+        } else {
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+        }
+        return $this->redirect(['update', 'tab' => 'profile']);
+    }
+
+    /**
      * @return array|string|Response
      * @throws NotFoundHttpException
      */
@@ -87,26 +104,12 @@ class ProfileController extends Controller
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save())
-                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+        } else {
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
-    }
-
-    /**
-     * @return string|Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdateProfile()
-    {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
-        }
-        return $this->redirect(['update', 'tab' => 'profile']);
     }
 
     /**

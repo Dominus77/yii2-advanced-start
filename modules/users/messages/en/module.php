@@ -72,6 +72,7 @@ return [
     'Password changed successfully.' => 'Password changed successfully.',
     'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
     'Profile successfully changed.' => 'Profile successfully changed.',
+    'Error! Profile not changed.' => 'Error! Profile not changed.',
     'Profile successfully deleted.' => 'Profile successfully delete.',
     'Profile successfully checked deleted.' => 'Profile successfully checked deleted.',
     'Not the correct query format!' => 'Not the correct query format!',

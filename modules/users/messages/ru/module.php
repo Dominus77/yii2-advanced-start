@@ -72,6 +72,7 @@ return [
     'Password changed successfully.' => 'Пароль успешно изменён.',
     'Error! Password changed not successfully.' => 'Ошибка! Пароль не изменён.',
     'Profile successfully changed.' => 'Профиль успешно изменён.',
+    'Error! Profile not changed.' => 'Ошибка! Профиль не изменён.',
     'Profile successfully deleted.' => 'Профиль успешно удалён.',
     'Profile successfully checked deleted.' => 'Профиль отмечен как удалённый.',
     'Not the correct query format!' => 'Не верный формат запроса!',

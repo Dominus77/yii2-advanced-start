@@ -5,15 +5,11 @@ use Yii;
 use modules\users\models\LoginForm;
 use modules\users\models\User;
 use modules\users\models\search\UserSearch;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\base\InvalidParamException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use modules\rbac\models\Permission;
-use yii\bootstrap\ActiveForm;
-use yii\web\Response;
 use modules\users\Module;
 
 /**
@@ -175,9 +171,10 @@ class DefaultController extends Controller
         if ($model = $this->findModel($id)) {
             $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
 
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->save())
-                    Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+            } else {
+                Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
             }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
@@ -193,14 +190,8 @@ class DefaultController extends Controller
         if ($model = $this->findModel($id)) {
             $model->scenario = $model::SCENARIO_ADMIN_PASSWORD_UPDATE;
 
-            /*if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validate($model);
-            }*/
-
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->save())
-                    Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
             }
