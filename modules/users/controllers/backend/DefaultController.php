@@ -243,6 +243,7 @@ class DefaultController extends Controller
      */
     public function actionDelete($id)
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel($id);
         // Запрещаем удалять самого себя
         if ($model->id !== Yii::$app->user->identity->getId()) {
@@ -251,8 +252,8 @@ class DefaultController extends Controller
                     Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
                 }
             } else {
-                $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-                $model->status = $model::STATUS_DELETED;
+                $model->scenario = User::SCENARIO_PROFILE_DELETE;
+                $model->status = User::STATUS_DELETED;
                 if ($model->save()) {
                     Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
                 }
@@ -264,19 +265,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return null|static
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
+        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
     }
 
     /**

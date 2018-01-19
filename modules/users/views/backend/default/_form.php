@@ -27,14 +27,12 @@ use modules\users\Module;
         <?= $form->field($model, 'username')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
             'placeholder' => Module::t('module', 'Username'),
         ]) ?>
 
         <?= $form->field($model, 'email')->textInput([
             'maxlength' => true,
             'class' => 'form-control',
-            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_UPDATE_USERS) ? false : true,
             'placeholder' => Module::t('module', 'Email'),
         ]) ?>
 
@@ -83,14 +81,8 @@ use modules\users\Module;
 
         <hr>
 
-        <?php /* echo $form->field($model, 'role')->dropDownList($model->rolesArray, [
-            'class' => 'form-control',
-            'disabled' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC) ? false : true,
-        ])*/ ?>
-
         <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
             'class' => 'form-control',
-            //'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_ADMIN) ? false : true,
         ]) ?>
 
         <div class="form-group">

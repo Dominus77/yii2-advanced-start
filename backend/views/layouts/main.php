@@ -145,7 +145,6 @@ AppAsset::register($this);
                                 <?= AvatarWidget::widget(); ?>
                                 <p>
                                     <?= Yii::$app->user->identity->getUserFullName(); ?>
-                                    - <?php // echo Yii::$app->user->identity->getUserRoleName(); ?>
                                     <small><?= UserModule::t('module', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
                                 </p>
                             </li>

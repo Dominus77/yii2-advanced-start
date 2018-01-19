@@ -77,6 +77,7 @@ class ProfileController extends Controller
      */
     public function actionUpdateProfile()
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
 
@@ -94,6 +95,7 @@ class ProfileController extends Controller
      */
     public function actionUpdatePassword()
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
 
@@ -117,6 +119,7 @@ class ProfileController extends Controller
      */
     public function actionDelete()
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_DELETE;
         $model->status = $model::STATUS_DELETED;
@@ -131,6 +134,7 @@ class ProfileController extends Controller
      */
     public function actionGenerateAuthKey()
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->generateAuthKey();
         $model->save();
@@ -138,10 +142,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return null|static
+     * @throws NotFoundHttpException
      */
     protected function findModel()
     {
