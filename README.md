@@ -1,4 +1,3 @@
-
 # Yii 2 Advanced Start Project Template
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/stable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
