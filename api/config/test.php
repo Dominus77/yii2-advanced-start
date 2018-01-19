@@ -4,7 +4,6 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-api-test',
-            //'enableCsrfValidation' => false,
         ],
     ],
 ];

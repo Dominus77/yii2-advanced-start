@@ -74,7 +74,7 @@ class IpLimiter implements RateLimitInterface
             'allowance_updated_at' => $timestamp,
         ];
         $cache = Yii::$app->cache;
-        if ($data = $cache->get($this->cache_key)) {
+        if ($cache->get($this->cache_key)) {
             $cache->delete($this->cache_key);
         }
         $cache->add($this->cache_key, serialize($array), self::RATE_LIMIT_TIME);

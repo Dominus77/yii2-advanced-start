@@ -28,7 +28,7 @@ class SearchSidebar extends \yii\bootstrap\Widget
      */
     public function run()
     {
-        if ($this->status == true) {
+        if ($this->status === true) {
             echo $this->render('searchSidebar');
         }
     }

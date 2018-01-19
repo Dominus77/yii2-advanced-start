@@ -38,7 +38,6 @@ return [
             'baseUrl' => '/admin',
         ],
         'assetManager' => [
-            //'linkAssets' => true,
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist',

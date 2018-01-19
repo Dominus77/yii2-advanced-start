@@ -212,7 +212,6 @@ AppAsset::register($this);
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('module', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    //'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],
                 [
                     'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
