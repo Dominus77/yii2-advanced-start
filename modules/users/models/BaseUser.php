@@ -180,7 +180,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return boolean
      */
-    public static function isPasswordResetTokenValid($token)
+    public static function isPasswordResetTokenValid($token = '')
     {
         if (empty($token)) {
             return false;
