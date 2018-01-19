@@ -13,9 +13,9 @@ use modules\users\Module;
 class EmailConfirmForm extends Model
 {
     /**
-     * @var null|static
+     * @var \modules\users\models\BaseUser
      */
-    private $_user = null;
+    private $_user;
 
     /**
      * Creates a form model given a token.
@@ -24,13 +24,13 @@ class EmailConfirmForm extends Model
      * @param  array $config
      * @throws \yii\base\InvalidParamException if token is empty or not valid
      */
-    public function __construct($token, $config = [])
+    public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
             throw new InvalidParamException(Module::t('module', 'Email confirm token cannot be blank.'));
         }
         $this->_user = BaseUser::findByEmailConfirmToken($token);
-        if (!$this->_user && $this->_user === null) {
+        if (!$this->_user) {
             throw new InvalidParamException(Module::t('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
@@ -43,7 +43,6 @@ class EmailConfirmForm extends Model
      */
     public function confirmEmail()
     {
-        /** @var BaseUser $user */
         $user = $this->_user;
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
