@@ -29,10 +29,14 @@ use modules\users\Module;
  */
 class BaseUser extends ActiveRecord implements IdentityInterface
 {
+    // Status
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
     const STATUS_DELETED = 3;
+
+    // Type of registration
+    const TYPE_REGISTRATION_SYSTEM = 0;
 
     /**
      * @inheritdoc
@@ -351,7 +355,13 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return string
+     * Type of registration
+     * How the user is created
+     * If the system registration type is registered by itself,
+     * if it is created from the admin area,
+     * then the login type that created the account
+     *
+     * @return mixed|string
      */
     public function getRegistrationType()
     {
@@ -360,7 +370,27 @@ class BaseUser extends ActiveRecord implements IdentityInterface
                 return $model->username;
             }
         }
-        return Module::t('module', 'System');
+        return $this->getRegistrationTypeName();
+    }
+
+    /**
+     * Returns the registration type string
+     * @return mixed
+     */
+    public function getRegistrationTypeName()
+    {
+        return ArrayHelper::getValue(self::getRegistrationTypesArray(), $this->registration_type);
+    }
+
+    /**
+     * Returns an array of log types
+     * @return array
+     */
+    public static function getRegistrationTypesArray()
+    {
+        return [
+            self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
+        ];
     }
 
     /**

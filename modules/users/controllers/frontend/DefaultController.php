@@ -13,8 +13,6 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
-use yii\bootstrap\ActiveForm;
-use yii\web\Response;
 use modules\users\Module;
 
 /**
@@ -48,68 +46,6 @@ class DefaultController extends Controller
         return $this->render('index', [
             'model' => $this->findModel(),
         ]);
-    }
-
-    /**
-     * @return array|string|Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdate()
-    {
-        $model = $this->findModel();
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * @return array|string|Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdatePassword()
-    {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save())
-                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
-        }
-        return $this->redirect(['update', 'tab' => 'password']);
-    }
-
-    /**
-     * @return string|Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdateProfile()
-    {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
-        }
-        return $this->redirect(['update', 'tab' => 'profile']);
-    }
-
-    /**
-     * Deletes an existing User model.
-     * This delete set status blocked, is successful, logout and the browser will be redirected to the 'home' page.
-     * @return mixed
-     */
-    public function actionDelete()
-    {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-        $model->status = $model::STATUS_DELETED;
-        if ($model->save())
-            Yii::$app->user->logout();
-        return $this->goHome();
     }
 
     /**

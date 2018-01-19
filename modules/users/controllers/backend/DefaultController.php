@@ -2,15 +2,18 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
-use yii\helpers\Url;
 use modules\users\models\LoginForm;
 use modules\users\models\User;
 use modules\users\models\search\UserSearch;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\base\InvalidParamException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use modules\rbac\models\Permission;
+use yii\bootstrap\ActiveForm;
+use yii\web\Response;
 use modules\users\Module;
 
 /**
@@ -56,13 +59,21 @@ class DefaultController extends Controller
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
+        $this->processRegisterJs();
+    }
 
+    /**
+     * Publish and register the required JS file
+     */
+    protected function processRegisterJs()
+    {
         $this->jsFile = '@modules/users/views/ajax/ajax.js';
-
-        // Publish and register the required JS file
         Yii::$app->assetManager->publish($this->jsFile);
         $this->getView()->registerJsFile(
             Yii::$app->assetManager->getPublishedUrl($this->jsFile),
@@ -101,6 +112,19 @@ class DefaultController extends Controller
     }
 
     /**
+     * Generate new auth key
+     * @param $id
+     * @throws NotFoundHttpException
+     */
+    public function actionGenerateAuthKey($id)
+    {
+        $model = $this->findModel($id);
+        $model->generateAuthKey();
+        $model->save();
+        $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -108,15 +132,17 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new User();
-
         $model->status = $model::STATUS_WAIT;
-        $model->registration_type = Yii::$app->user->identity->getId();
+        /** @var \modules\users\models\User $identity */
+        $identity = Yii::$app->user->identity;
+        $model->registration_type = $identity->id;
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
+
         $model->scenario = $model::SCENARIO_ADMIN_CREATE;
         return $this->render('create', [
             'model' => $model,
@@ -141,35 +167,20 @@ class DefaultController extends Controller
 
     /**
      * @param $id
-     * @return array|\yii\web\Response
+     * @return \yii\web\Response
      * @throws NotFoundHttpException
      */
-    public function actionStatus($id)
+    public function actionUpdateProfile($id)
     {
-        if (Yii::$app->request->isAjax) {
-            if ($model = $this->findModel($id)) {
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                // Запрещаем менять статус у себя и админа
-                if ($model->id !== Yii::$app->user->identity->getId()) {
-                    if ($model->status == $model::STATUS_ACTIVE) {
-                        $model->status = $model::STATUS_BLOCKED;
-                    } else if ($model->status == $model::STATUS_BLOCKED) {
-                        $model->status = $model::STATUS_ACTIVE;
-                    } else if ($model->status == $model::STATUS_WAIT) {
-                        $model->status = $model::STATUS_ACTIVE;
-                    } else if ($model->status == $model::STATUS_DELETED) {
-                        $model->status = $model::STATUS_WAIT;
-                    }
-                    if ($model->save()) {
-                        return [
-                            'body' => $model->statusLabelName,
-                            'success' => true,
-                        ];
-                    }
-                }
+        if ($model = $this->findModel($id)) {
+            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save())
+                    Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
             }
         }
-        return $this->redirect(['index']);
+        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
     }
 
     /**
@@ -180,12 +191,51 @@ class DefaultController extends Controller
     public function actionUpdatePassword($id)
     {
         if ($model = $this->findModel($id)) {
-            $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            $model->scenario = $model::SCENARIO_ADMIN_PASSWORD_UPDATE;
+
+            /*if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }*/
+
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save())
+                    Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            } else {
+                Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
             }
         }
         return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
+    }
+
+    /**
+     * Change Status
+     * @param $id
+     * @return array|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionStatus($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            if ($model = $this->findModel($id)) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                /**
+                 * Запрещаем менять статус у себя
+                 * @var \modules\users\models\User $identity
+                 */
+                $identity = Yii::$app->user->identity;
+                if ($model->id !== $identity->id) {
+                    $model->setStatus();
+                    if ($model->save()) {
+                        return [
+                            'body' => $model->getStatusLabelName(),
+                            'success' => true,
+                        ];
+                    }
+                }
+            }
+        }
+        return $this->redirect(['index']);
     }
 
     /**

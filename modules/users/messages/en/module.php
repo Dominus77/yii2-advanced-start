@@ -43,6 +43,8 @@ return [
     'Sign In' => 'Sign In',
     'Sign Out' => 'Sign Out',
     'Send' => 'Send',
+    'Generate' => 'Generate',
+    'Generate new key' => 'Generate new key',
 
     '- text -' => '- text -',
     '- all -' => '- all -',
@@ -68,6 +70,7 @@ return [
     'Wrong Email confirm token.' => 'Wrong Email confirm token.',
 
     'Password changed successfully.' => 'Password changed successfully.',
+    'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
     'Profile successfully changed.' => 'Profile successfully changed.',
     'Profile successfully deleted.' => 'Profile successfully delete.',
     'Profile successfully checked deleted.' => 'Profile successfully checked deleted.',

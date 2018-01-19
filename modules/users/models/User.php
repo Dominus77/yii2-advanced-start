@@ -16,6 +16,7 @@ class User extends BaseUser
 
     const SCENARIO_ADMIN_CREATE = 'adminCreate';
     const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
+    const SCENARIO_ADMIN_PASSWORD_UPDATE = 'adminPasswordUpdate';
     const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
     const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
     const SCENARIO_PROFILE_DELETE = 'profileDelete';
@@ -41,7 +42,7 @@ class User extends BaseUser
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE, self::SCENARIO_PASSWORD_UPDATE]],
+            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE, self::SCENARIO_PASSWORD_UPDATE, self::SCENARIO_ADMIN_PASSWORD_UPDATE]],
             ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
             ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false],
@@ -75,6 +76,7 @@ class User extends BaseUser
         $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'role', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_ADMIN_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
         $scenarios['default'] = ['username', 'email', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
         return $scenarios;
@@ -108,5 +110,21 @@ class User extends BaseUser
             return true;
         }
         return false;
+    }
+
+    /**
+     * Set Status
+     */
+    public function setStatus()
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            $this->status = self::STATUS_BLOCKED;
+        } else if ($this->status == self::STATUS_BLOCKED) {
+            $this->status = self::STATUS_ACTIVE;
+        } else if ($this->status == self::STATUS_WAIT) {
+            $this->status = self::STATUS_ACTIVE;
+        } else if ($this->status == self::STATUS_DELETED) {
+            $this->status = self::STATUS_WAIT;
+        }
     }
 }

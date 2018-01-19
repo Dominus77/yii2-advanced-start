@@ -56,7 +56,7 @@ class Bootstrap implements BootstrapInterface
                     ],
                 ],*/
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
-                /*[
+                [
                     'class' => 'yii\web\GroupUrlRule',
                     'routePrefix' => 'users/profile',
                     'prefix' => 'profile',
@@ -64,7 +64,7 @@ class Bootstrap implements BootstrapInterface
                         '' => 'index',
                         '<_a:[\w\-]+>' => '<_a>',
                     ],
-                ],*/
+                ],
             ]
         );
     }

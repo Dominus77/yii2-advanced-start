@@ -43,6 +43,8 @@ return [
     'Sign In' => 'Войти',
     'Sign Out' => 'Выйти',
     'Send' => 'Отправить',
+    'Generate' => 'Генерировать',
+    'Generate new key' => 'Сгенерировать новый ключ',
 
     '- text -' => '- текст -',
     '- all -' => '- все -',
@@ -68,6 +70,7 @@ return [
     'Wrong Email confirm token.' => 'Не верный ключ подтверждения электронной почты!',
 
     'Password changed successfully.' => 'Пароль успешно изменён.',
+    'Error! Password changed not successfully.' => 'Ошибка! Пароль не изменён.',
     'Profile successfully changed.' => 'Профиль успешно изменён.',
     'Profile successfully deleted.' => 'Профиль успешно удалён.',
     'Profile successfully checked deleted.' => 'Профиль отмечен как удалённый.',

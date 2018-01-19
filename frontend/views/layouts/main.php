@@ -45,10 +45,12 @@ AppAsset::register($this);
         $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/default/signup']];
         $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/default/login']];
     } else {
+        /** @var modules\users\models\User $identity */
+        $identity = Yii::$app->user->identity;
         $menuItems[] = [
             'label' => Yii::t('app', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . Yii::$app->user->identity->username . ')', 'url' => ['/users/profile/index']],
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
                 ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];

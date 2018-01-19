@@ -8,4 +8,7 @@ $(function () {
 
     // Tooltip
     $('[data-toggle="tooltip"]').tooltip();
+    $(document).ajaxComplete(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 });
