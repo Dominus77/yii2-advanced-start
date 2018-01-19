@@ -29,7 +29,7 @@ class EmailConfirmForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidParamException(Module::t('module', 'Email confirm token cannot be blank.'));
         }
-        $this->_user = User::findByEmailConfirmToken($token);
+        $this->_user = BaseUser::findByEmailConfirmToken($token);
         if (!$this->_user) {
             throw new InvalidParamException(Module::t('module', 'Wrong Email confirm token.'));
         }
@@ -46,8 +46,6 @@ class EmailConfirmForm extends Model
         $user = $this->_user;
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
-        if($user->save())
-            return $user;
         if ($user->save()) {
             // Даём роль по умолчанию
             $authManager = Yii::$app->getAuthManager();
