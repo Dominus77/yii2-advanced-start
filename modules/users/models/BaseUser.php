@@ -261,12 +261,18 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param string $email_confirm_token
-     * @return static|null
+     * @param $email_confirm_token
+     * @return bool|null|static
      */
     public static function findByEmailConfirmToken($email_confirm_token)
     {
-        return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => self::STATUS_WAIT]);
+        if (empty($email_confirm_token)) {
+            return false;
+        }
+        return static::findOne([
+            'email_confirm_token' => $email_confirm_token,
+            'status' => self::STATUS_WAIT
+        ]);
     }
 
     /**

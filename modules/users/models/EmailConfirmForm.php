@@ -30,7 +30,7 @@ class EmailConfirmForm extends Model
             throw new InvalidParamException(Module::t('module', 'Email confirm token cannot be blank.'));
         }
         $this->_user = BaseUser::findByEmailConfirmToken($token);
-        if (!$this->_user) {
+        if (!$this->_user && $this->_user === null) {
             throw new InvalidParamException(Module::t('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
