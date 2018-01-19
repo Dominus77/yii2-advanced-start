@@ -24,6 +24,11 @@ class User extends BaseUser
     /**
      * @var string
      */
+    public $role;
+
+    /**
+     * @var string
+     */
     public $currentPassword;
 
     /**
@@ -74,9 +79,9 @@ class User extends BaseUser
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_ADMIN_CREATE] = ['avatar', 'username', 'email', 'status', 'role', 'newPassword', 'newPasswordRepeat', 'registration_type', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'role', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_ADMIN_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
+        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
         $scenarios['default'] = ['username', 'email', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
         return $scenarios;
@@ -88,6 +93,7 @@ class User extends BaseUser
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
+            'role' => Module::t('module', 'Role'),
             'currentPassword' => Module::t('module', 'Current Password'),
             'newPassword' => Module::t('module', 'New Password'),
             'newPasswordRepeat' => Module::t('module', 'Repeat Password'),

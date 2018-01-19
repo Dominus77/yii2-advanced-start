@@ -12,6 +12,7 @@ use modules\users\Module;
 /* @var $searchModel modules\users\models\search\UserSearch */
 /* @var $model modules\users\models\User */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'timeout' => 5000,
         ]); ?>
         <div class="box-body">
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
             <div class="pull-left">
                 <?= $this->render('_pageSize', [
                     'model' => $searchModel,
@@ -97,7 +97,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) {
-                            if ($data->id != Yii::$app->user->identity->getId()) {
+                            /** @var modules\users\models\User $identity */
+                            $identity = Yii::$app->user->identity;
+                            if ($data->id != $identity->id) {
                                 $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,
@@ -118,9 +120,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'style' => 'width:150px',
                         ],
                     ],
-                    /*[
-                        'attribute' => 'userRoleName',
-                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $searchModel->rolesArray, [
+                    [
+                        'attribute' => 'Role',
+                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $assignModel->getRolesArray(), [
                             'class' => 'form-control',
                             'prompt' => Module::t('module', '- all -'),
                             'data' => [
@@ -128,13 +130,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]),
                         'format' => 'raw',
-                        'value' => function ($data) {
-                            return $data->userRoleName;
+                        'value' => function ($data) use ($assignModel) {
+                            return $assignModel->getUserRoleName($data->id);
                         },
                         'contentOptions' => [
                             'style' => 'width:200px',
                         ],
-                    ],*/
+                    ],
                     [
                         'attribute' => 'last_visit',
                         'format' => 'raw',

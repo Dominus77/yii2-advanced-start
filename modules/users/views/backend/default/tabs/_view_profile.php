@@ -8,8 +8,7 @@ use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
-
-$this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+/* @var $assignModel \modules\rbac\models\Assignment */
 ?>
 
 <div class="row">
@@ -31,21 +30,31 @@ $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);",
                 'first_name',
                 'last_name',
                 'email:email',
-                /*[
+                [
                     'attribute' => 'role',
                     'format' => 'raw',
-                    'value' => $model->userRoleName,
-                ],*/
+                    'value' => function ($model) use ($assignModel) {
+                        return $assignModel->getRoleName($model->id);
+                    },
+                ],
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
-                    'value' => Html::a($model->statusLabelName, Url::to(['status', 'id' => $model->id]), [
-                        'id' => 'status_link_' . $model->id,
-                        'title' => Module::t('module', 'Click to change the status'),
-                        'data' => [
-                            'toggle' => 'tooltip',
-                        ],
-                    ]),
+                    'value' => function ($model) {
+                        /** @var modules\users\models\User $identity */
+                        $identity = Yii::$app->user->identity;
+                        if ($model->id != $identity->id) {
+                            $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                            return Html::a($model->statusLabelName, Url::to(['status', 'id' => $model->id]), [
+                                'id' => 'status_link_' . $model->id,
+                                'title' => Module::t('module', 'Click to change the status'),
+                                'data' => [
+                                    'toggle' => 'tooltip',
+                                ],
+                            ]);
+                        }
+                        return $model->statusLabelName;
+                    },
                     'contentOptions' => [
                         'class' => 'link-decoration-none',
                     ],

@@ -1,9 +1,7 @@
 <?php
-
 namespace modules\rbac\controllers\backend;
 
 use Yii;
-use yii\helpers\Url;
 use modules\rbac\models\Assignment;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
@@ -60,6 +58,7 @@ class AssignController extends Controller
      */
     public function actionIndex()
     {
+        $assignModel = new Assignment();
         $users = $this->_user->find()->all();
         $dataProvider = new ArrayDataProvider([
             'allModels' => $users,
@@ -72,6 +71,7 @@ class AssignController extends Controller
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'assignModel' => $assignModel,
         ]);
     }
 
@@ -82,8 +82,10 @@ class AssignController extends Controller
      */
     public function actionView($id)
     {
+        $assignModel = new Assignment();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'assignModel' => $assignModel,
         ]);
     }
 

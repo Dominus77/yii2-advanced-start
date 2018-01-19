@@ -8,6 +8,7 @@ use modules\rbac\Module;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
@@ -41,9 +42,8 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                         'attribute' => 'role',
                         'label' => Module::t('module', 'Role'),
                         'format' => 'raw',
-                        'value' => function ($data) {
-                            /** @var $data \modules\rbac\models\Assignment */
-                            return $data->getRoleName($data->id);
+                        'value' => function ($data) use ($assignModel) {
+                            return $assignModel->getRoleName($data->id);
                         }
                     ],
                     [

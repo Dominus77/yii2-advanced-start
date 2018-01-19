@@ -5,7 +5,8 @@ use yii\widgets\DetailView;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\rbac\models\Assignment */
+/* @var $model modules\users\models\User */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
@@ -38,14 +39,16 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                             [
                                 'attribute' => 'role',
                                 'format' => 'raw',
-                                'value' => $model->getRoleName($model->id)
+                                'value' => function ($model) use ($assignModel) {
+                                    return $assignModel->getRoleName($model->id);
+                                },
                             ]
                         ],
                     ]) ?>
                 </div>
                 <div class="col-md-6">
                     <?php
-                    $role = $model->getRoleUser();
+                    $role = $assignModel->getRoleUser($model->id);
                     $auth = Yii::$app->authManager;
                     if ($permissionsRole = $auth->getPermissionsByRole($role)) : ?>
                         <strong><?= Module::t('module', 'Permissions by role') ?></strong>

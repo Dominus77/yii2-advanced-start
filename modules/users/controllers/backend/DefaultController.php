@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use modules\rbac\models\Permission;
+use modules\rbac\models\Assignment;
 use modules\users\Module;
 
 /**
@@ -85,10 +86,11 @@ class DefaultController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $assignModel = new Assignment();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'assignModel' => $assignModel,
         ]);
     }
 
@@ -100,8 +102,12 @@ class DefaultController extends Controller
     public function actionView($id)
     {
         if ($model = $this->findModel($id)) {
+            $assignModel = new Assignment([
+                'user' => $model
+            ]);
             return $this->render('view', [
                 'model' => $model,
+                'assignModel' => $assignModel,
             ]);
         }
         return $this->redirect(['index']);
@@ -283,6 +289,7 @@ class DefaultController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
         $this->layout = '//login';
 
         $model = new LoginForm();

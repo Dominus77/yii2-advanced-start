@@ -4,13 +4,7 @@ namespace modules\users\controllers\frontend;
 use Yii;
 use yii\web\Controller;
 use modules\users\models\User;
-use modules\users\models\SignupForm;
-use modules\users\models\LoginForm;
-use modules\users\models\EmailConfirmForm;
-use modules\users\models\ResetPasswordForm;
-use modules\users\models\PasswordResetRequestForm;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
+use modules\rbac\models\Assignment;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -56,8 +50,12 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = $this->findModel();
+        $assignModel = new Assignment([
+            'user' => $model
+        ]);
         return $this->render('index', [
             'model' => $model,
+            'assignModel' => $assignModel,
         ]);
     }
 

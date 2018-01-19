@@ -41,38 +41,55 @@ class Assignment extends Model
 
     /**
      * Список всех ролей
+     * @return array
      */
     public function getRolesArray()
     {
-        $auth = Yii::$app->authManager;
-        $roles = $auth->getRoles();
-        $arr = [];
-        foreach ($roles as $value) {
-            $arr[$value->name] = $value->name . ' (' . $value->description . ')';
-        }
-        return $arr;
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 
     /**
+     * @param $id
      * @return string
      */
-    public function getRoleName()
+    public function getRoleName($id = null)
     {
+        $id = $id ? $id : $this->user->id;
         $auth = Yii::$app->authManager;
-        $roles = $auth->getRolesByUser($this->user->id);
+        $roles = $auth->getRolesByUser($id);
         $role = '';
         foreach ($roles as $item) {
-            $role .= $item->description ? $item->description. ', ' : $item->name . ', ';
+            $role .= $item->description ? $item->description . ', ' : $item->name . ', ';
         }
         return chop($role, ' ,');
     }
 
     /**
+     * @param $id
      * @return mixed|null
      */
-    public function getRoleUser()
+    public function getUserRoleName($id = null)
     {
-        if ($role = Yii::$app->authManager->getRolesByUser($this->user->id))
+        $id = $id ? $id : $this->user->id;
+        if ($role = Yii::$app->authManager->getRolesByUser($id))
+            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+                foreach ($role as $key => $value) {
+                    return $value->description;
+                }
+                return null;
+            });
+        return null;
+    }
+
+    /**
+     * Получаем роль пользователя
+     * @param null $id
+     * @return mixed|null
+     */
+    public function getRoleUser($id = null)
+    {
+        $id = $id ? $id : $this->user->id;
+        if ($role = Yii::$app->authManager->getRolesByUser($id))
             return ArrayHelper::getValue($role, function ($role, $defaultValue) {
                 foreach ($role as $key => $value) {
                     return $value->name;
@@ -81,4 +98,30 @@ class Assignment extends Model
             });
         return null;
     }
+
+    /**
+     * @param null $user_id
+     * @return mixed|null
+     */
+    /* public function getUserRoleValue($user_id = null)
+     {
+         if ($user_id) {
+             if ($role = Yii::$app->authManager->getRolesByUser($user_id))
+                 return ArrayHelper::getValue($role, function ($role) {
+                     foreach ($role as $key => $value) {
+                         return $value->name;
+                     }
+                     return null;
+                 });
+         } else {
+             if ($role = Yii::$app->authManager->getRolesByUser($this->id))
+                 return ArrayHelper::getValue($role, function ($role) {
+                     foreach ($role as $key => $value) {
+                         return $value->name;
+                     }
+                     return null;
+                 });
+         }
+         return null;
+     }*/
 }

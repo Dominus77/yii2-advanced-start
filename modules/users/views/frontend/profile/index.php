@@ -6,6 +6,7 @@ use yii\bootstrap\Tabs;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => Html::encode($this->title),
                     'content' => $this->render('tabs/_view', [
                         'model' => $model,
+                        'assignModel' => $assignModel,
                     ]),
                     'options' => ['id' => 'profile'],
                     'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,

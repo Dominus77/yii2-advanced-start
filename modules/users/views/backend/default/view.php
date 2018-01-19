@@ -6,6 +6,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'View');
 $this->params['title']['small'] = $model->username;
@@ -26,6 +27,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'View');
                         'label' => Module::t('module', 'Profile'),
                         'content' => $this->render('tabs/_view_profile', [
                             'model' => $model,
+                            'assignModel' => $assignModel,
                         ]),
                         'options' => ['id' => 'profile'],
                         'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,

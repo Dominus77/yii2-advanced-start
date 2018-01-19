@@ -7,6 +7,7 @@ use modules\users\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
+/* @var $assignModel \modules\rbac\models\Assignment */
 ?>
 
 <div class="row">
@@ -22,11 +23,13 @@ use modules\users\Module;
                 'first_name',
                 'last_name',
                 'email:email',
-                /*[
+                [
                     'attribute' => 'role',
                     'format' => 'raw',
-                    'value' => $model->userRoleName,
-                ],*/
+                    'value' => function ($model) use ($assignModel) {
+                        return $assignModel->getRoleName($model->id);
+                    },
+                ],
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
