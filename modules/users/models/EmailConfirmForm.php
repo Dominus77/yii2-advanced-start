@@ -13,9 +13,9 @@ use modules\users\Module;
 class EmailConfirmForm extends Model
 {
     /**
-     * @var User
+     * @var null|static
      */
-    private $_user;
+    private $_user = null;
 
     /**
      * Creates a form model given a token.
@@ -43,6 +43,7 @@ class EmailConfirmForm extends Model
      */
     public function confirmEmail()
     {
+        /** @var BaseUser $user */
         $user = $this->_user;
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();

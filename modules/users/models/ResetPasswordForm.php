@@ -12,12 +12,15 @@ use modules\users\Module;
  */
 class ResetPasswordForm extends Model
 {
+    /**
+     * @var string
+     */
     public $password;
 
     /**
-     * @var \modules\users\models\BaseUser
+     * @var null|static
      */
-    private $_user;
+    private $_user = null;
 
 
     /**
@@ -67,6 +70,7 @@ class ResetPasswordForm extends Model
      */
     public function resetPassword()
     {
+        /** @var BaseUser $user */
         $user = $this->_user;
         $user->setPassword($this->password);
         $user->removePasswordResetToken();

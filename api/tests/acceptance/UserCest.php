@@ -4,7 +4,6 @@ namespace api\tests\acceptance;
 
 use Yii;
 use api\tests\AcceptanceTester;
-use yii\helpers\Url;
 
 /**
  * Class UserCest
