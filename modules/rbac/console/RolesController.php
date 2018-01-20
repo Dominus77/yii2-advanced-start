@@ -16,6 +16,15 @@ use console\components\helpers\Console;
 class RolesController extends Controller
 {
     /**
+     * @inheritdoc
+     */
+    public function actionIndex()
+    {
+        echo 'yii rbac/roles/assign - Assign user role.' . PHP_EOL;
+        echo 'yii rbac/roles/revoke - Revoke user role.' . PHP_EOL;
+    }
+
+    /**
      * Adds role to user
      */
     public function actionAssign()
@@ -71,7 +80,7 @@ class RolesController extends Controller
     public function getUserRoleValue($user_id = null)
     {
         if ($role = Yii::$app->authManager->getRolesByUser($user_id)) {
-            return ArrayHelper::getValue($role, function ($role, $defaultValue) {
+            return ArrayHelper::getValue($role, function ($role) {
                 foreach ($role as $key => $value) {
                     return $value->name;
                 }
@@ -82,19 +91,23 @@ class RolesController extends Controller
     }
 
     /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $username
-     * @throws \yii\console\Exception
      * @return \modules\users\models\User the loaded model
+     * @throws \yii\console\Exception if the model cannot be found
      */
-    private function findModel($username)
+    private function findModel($username = '')
     {
-        if (!$model = User::findOne(['username' => $username])) {
-            throw new Exception(
-                Console::convertEncoding(
-                    Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])
-                )
-            );
+        if (!empty($username)) {
+            if ($model = User::findOne(['username' => $username])) {
+                return $model;
+            }
         }
-        return $model;
+        throw new Exception(
+            Console::convertEncoding(
+                Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])
+            )
+        );
     }
 }

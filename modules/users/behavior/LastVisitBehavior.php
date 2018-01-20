@@ -1,6 +1,8 @@
 <?php
+
 namespace modules\users\behavior;
 
+use Yii;
 use yii\base\Behavior;
 use yii\console\Controller;
 
@@ -11,7 +13,7 @@ use yii\console\Controller;
 class LastVisitBehavior extends Behavior
 {
     /**
-     * @return array
+     * @inheritdoc
      */
     public function events()
     {
@@ -25,8 +27,9 @@ class LastVisitBehavior extends Behavior
      */
     public function afterAction()
     {
-        if (!\Yii::$app->user->isGuest) {
-            $model = \Yii::$app->getUser()->getIdentity();
+        if (!Yii::$app->user->isGuest) {
+            /** @var \yii\web\IdentityInterface $model */
+            $model = Yii::$app->user->identity;
             $model->touch('last_visit');
         }
         return true;

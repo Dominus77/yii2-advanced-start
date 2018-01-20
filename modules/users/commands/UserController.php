@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\commands;
 
 use Yii;
@@ -87,7 +88,7 @@ class UserController extends Controller
      * @throws \yii\console\Exception
      * @return User the loaded model
      */
-    private function findModel($username)
+    private function findModel($username = '')
     {
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
@@ -103,7 +104,7 @@ class UserController extends Controller
      * @param Model $model
      * @param string $attribute
      */
-    private function readValue($model, $attribute)
+    private function readValue($model = null, $attribute = '')
     {
         $model->$attribute = $this->prompt(Console::convertEncoding(Yii::t('app', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':')), [
             'validator' => function ($input, &$error) use ($model, $attribute) {
@@ -121,9 +122,9 @@ class UserController extends Controller
     /**
      * @param bool $success
      */
-    private function log($success)
+    private function log($success = false)
     {
-        if ($success) {
+        if ($success === true) {
             $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
         } else {
             $this->stderr(Console::convertEncoding(Yii::t('app', 'Error!')), Console::FG_RED, Console::BOLD);
