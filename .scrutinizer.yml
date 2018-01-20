@@ -6,6 +6,7 @@ filter:
         - "frontend/tests/*"
         - "environments/*"
         - "vagrant/*"
+        - "modules/rbac/tests/*"
 checks:
     php:
         code_rating: true
@@ -40,6 +41,7 @@ tools:
             - "backend/tests"
             - "common/tests"
             - "frontend/tests"
+            - "modules/rbac/tests"
             - "api/runtime"
             - "backend/runtime"
             - "console/runtime"

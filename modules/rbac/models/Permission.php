@@ -103,7 +103,7 @@ class Permission extends Model
 
     /**
      * Возвращает детей разрешения для текущего разрешения
-     * @return \yii\rbac\Permission[]
+     * @return array
      */
     public function getPermissionChildren()
     {

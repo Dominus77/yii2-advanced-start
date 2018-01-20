@@ -106,7 +106,7 @@ class Role extends Model
 
     /**
      * Возвращает установленные разрешения для роли
-     * @return \yii\rbac\Permission[]
+     * @return array
      */
     public function getPermissionsByRole()
     {
