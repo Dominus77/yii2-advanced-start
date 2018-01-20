@@ -103,7 +103,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $token
+     * @param string $token
      * @return \yii\web\Response
      * @throws BadRequestHttpException
      */
