@@ -21,6 +21,7 @@ AppAsset::register($this);
 
 $identity = Yii::$app->user->identity;
 $assetManager = Yii::$app->assetManager;
+$publishedUrl = ($url = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist')) ? $url : false;
 $formatter = Yii::$app->formatter;
 ?>
 <?php $this->beginPage() ?>
@@ -67,10 +68,10 @@ $formatter = Yii::$app->formatter;
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img
-                                                    src="<?= /** @scrutinizer ignore-type */ $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
-                                                    class="img-circle"
-                                                    alt="User Image">
+                                                <?= $publishedUrl ? Html::img($publishedUrl . '/img/user2-160x160.jpg', [
+                                                    'class' => 'img-circle',
+                                                    'alt' => 'User Image',
+                                                ]) : ''; ?>
                                             </div>
                                             <h4>
                                                 Support Team
