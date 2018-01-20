@@ -106,8 +106,8 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
-    {
+    public static function findIdentity($id = null)
+    {        
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
@@ -116,7 +116,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param null $type
      * @return null|static
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public static function findIdentityByAccessToken($token = '', $type = null)
     {
         return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
     }
@@ -127,7 +127,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername($username = '')
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
@@ -138,7 +138,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $email
      * @return static|null
      */
-    public static function findByUsernameEmail($email)
+    public static function findByUsernameEmail($email = '')
     {
         return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
@@ -149,7 +149,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $string
      * @return static|null
      */
-    public static function findByUsernameOrEmail($string)
+    public static function findByUsernameOrEmail($string = '')
     {
         return static::find()
             ->where(['or', ['username' => $string], ['email' => $string]])
@@ -163,7 +163,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token)
+    public static function findByPasswordResetToken($token = '')
     {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
@@ -210,7 +210,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey = '')
     {
         return $this->getAuthKey() === $authKey;
     }
@@ -221,7 +221,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $password password to validate
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword($password = '')
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -231,7 +231,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword($password = '')
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -264,7 +264,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param $email_confirm_token
      * @return bool|null|static
      */
-    public static function findByEmailConfirmToken($email_confirm_token)
+    public static function findByEmailConfirmToken($email_confirm_token = '')
     {
         return static::findOne([
             'email_confirm_token' => $email_confirm_token,

@@ -71,6 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => Module::t('module', 'Users'),
                         'format' => 'raw',
                         'value' => function ($data) {
+                            /* @var $this yii\web\View */
                             return $this->render('_avatar_column', ['model' => $data]);
                         },
                         'headerOptions' => ['width' => '120'],
@@ -100,6 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             /** @var modules\users\models\User $identity */
                             $identity = Yii::$app->user->identity;
                             if ($data->id != $identity->id) {
+                                /* @var $this yii\web\View */
                                 $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,
@@ -156,7 +158,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         ]),
                         'value' => function ($data) {
-                            return Yii::$app->formatter->asDatetime($data->last_visit, 'd LLL yyyy, H:mm');
+                            $formatter = Yii::$app->formatter;
+                            return $formatter->asDatetime($data->last_visit, 'd LLL yyyy, H:mm');
                         },
                         'headerOptions' => [
                             'class' => 'text-center',

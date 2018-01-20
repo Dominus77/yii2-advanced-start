@@ -91,7 +91,8 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                Yii::$app->getSession()->setFlash('success', Module::t('module', 'It remains to activate the account.'));
+                $session = Yii::$app->getSession();
+                $session->setFlash('success', Module::t('module', 'It remains to activate the account.'));
                 return $this->goHome();
             }
         }
@@ -113,10 +114,11 @@ class DefaultController extends Controller
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        if ($model->confirmEmail()) {
-            Yii::$app->getSession()->setFlash('success', Module::t('module', 'Thank you for registering!'));
+        $session = Yii::$app->getSession();
+        if ($model->confirmEmail()) {            
+            $session->setFlash('success', Module::t('module', 'Thank you for registering!'));
         } else {
-            Yii::$app->getSession()->setFlash('error', Module::t('module', 'Error sending message!'));
+            $session->setFlash('error', Module::t('module', 'Error sending message!'));
         }
 
         return $this->goHome();
@@ -131,12 +133,12 @@ class DefaultController extends Controller
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'Check your email for further instructions.'));
-
+            $session = Yii::$app->getSession();
+            if ($model->sendEmail()) {                
+                $session->setFlash('success', Module::t('module', 'Check your email for further instructions.'));
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
+                $session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
         }
 
@@ -161,7 +163,8 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            $session = Yii::$app->getSession();
+            $session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             return $this->goHome();
         }
 
@@ -178,11 +181,12 @@ class DefaultController extends Controller
      */
     protected function findModel()
     {
-        $id = Yii::$app->user->identity->getId();
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
+        if (!Yii::$app->user->isGuest) {
+            $identity = Yii::$app->user->identity;        
+            if (($model = User::findOne($identity->id)) !== null) {
+                return $model;
+            }
         }
+        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));        
     }
 }
