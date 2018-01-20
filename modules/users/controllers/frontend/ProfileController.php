@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\controllers\frontend;
 
 use Yii;
@@ -19,7 +20,7 @@ use modules\users\Module;
 class ProfileController extends Controller
 {
     /**
-     * @return array
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -134,7 +135,6 @@ class ProfileController extends Controller
      */
     public function actionGenerateAuthKey()
     {
-        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->generateAuthKey();
         $model->save();
@@ -142,8 +142,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return null|static
-     * @throws NotFoundHttpException
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel()
     {

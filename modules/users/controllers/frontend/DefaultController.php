@@ -23,7 +23,7 @@ use modules\users\Module;
 class DefaultController extends Controller
 {
     /**
-     * @return array
+     * @inheritdoc
      */
     public function behaviors()
     {

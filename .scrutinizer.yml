@@ -18,7 +18,7 @@ checks:
         fix_doc_comments: true
 tools:
     external_code_coverage:
-        timeout: 600
+        timeout: 2100 # Timeout in seconds.
     php_analyzer: true
     php_code_coverage: false
     php_code_sniffer:
@@ -27,6 +27,7 @@ tools:
     php_loc:
         enabled: true
         excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
-    php_cpd:
-        enabled: true
-        excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
+    # disable copy paste detector and similarity analyzer as they have no real value
+    # and a huge bunch of false-positives
+    php_cpd: false
+    php_sim: false
