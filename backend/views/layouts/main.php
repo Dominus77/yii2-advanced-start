@@ -20,6 +20,8 @@ iCheckAsset::register($this);
 AppAsset::register($this);
 
 $identity = Yii::$app->user->identity;
+$fullUserName = !Yii::$app->user->isGuest ? $identity->getUserFullName() : '';
+
 $assetManager = Yii::$app->assetManager;
 $publishedUrl = ($url = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist')) ? $url : false;
 $formatter = Yii::$app->formatter;
@@ -143,13 +145,13 @@ $formatter = Yii::$app->formatter;
                                     'class' => 'user-image',
                                 ],
                             ]); ?>
-                            <span class="hidden-xs"><?= $identity->/** @scrutinizer ignore-call */getUserFullName() ?></span>
+                            <span class="hidden-xs"><?= $fullUserName ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <?= AvatarWidget::widget(); ?>
                                 <p>
-                                    <?= $identity->/** @scrutinizer ignore-call */getUserFullName() ?>
+                                    <?= $fullUserName ?>
                                     <small><?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') ?></small>
                                 </p>
                             </li>
@@ -197,7 +199,7 @@ $formatter = Yii::$app->formatter;
                     <?= AvatarWidget::widget(); ?>
                 </div>
                 <div class="pull-left info">
-                    <p><?= $identity->/** @scrutinizer ignore-call */getUserFullName() ?></p>
+                    <p><?= $fullUserName ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online'); ?></a>
                 </div>
             </div>
