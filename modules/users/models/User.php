@@ -131,11 +131,11 @@ class User extends BaseUser
     }
 
     /**
-     * @return string $userFullName
+     * @return string|null
      */
     public function getUserFullName()
     {
-        $fullName = '';
+        $fullName = null;
         if (Yii::$app->user) {
             if ($this->first_name && $this->last_name) {
                 $fullName = $this->first_name . ' ' . $this->last_name;

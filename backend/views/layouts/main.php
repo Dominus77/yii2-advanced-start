@@ -68,7 +68,7 @@ $formatter = Yii::$app->formatter;
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img
-                                                    src="<?= $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
+                                                    src="<?= /** @scrutinizer ignore-type */ $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
                                                     class="img-circle"
                                                     alt="User Image">
                                             </div>
