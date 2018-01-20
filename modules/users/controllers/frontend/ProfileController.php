@@ -145,7 +145,7 @@ class ProfileController extends Controller
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel()
+    private function findModel()
     {
         if (!Yii::$app->user->isGuest) {
             /** @var \modules\users\models\User $identity */

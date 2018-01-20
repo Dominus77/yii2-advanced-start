@@ -99,14 +99,9 @@ class RolesController extends Controller
      */
     private function findModel($username = '')
     {
-        if ($model = User::findOne(['username' => $username])) {
+        if (($model = User::findOne(['username' => $username])) !== null) {
             return $model;
-        } else {
-            throw new Exception(
-                Console::convertEncoding(
-                    Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])
-                )
-            );
         }
+        throw new Exception(Console::convertEncoding(Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])));
     }
 }
