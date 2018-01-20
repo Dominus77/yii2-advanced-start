@@ -4,6 +4,8 @@ filter:
         - "backend/tests/*"
         - "common/tests/*"
         - "frontend/tests/*"
+        - "environments/*"
+        - "vagrant/*"
 checks:
     php:
         code_rating: true
@@ -33,6 +35,7 @@ tools:
         excluded_dirs:
             - "vendor"
             - "environments"
+            - "vagrant"
             - "api/tests"
             - "backend/tests"
             - "common/tests"
