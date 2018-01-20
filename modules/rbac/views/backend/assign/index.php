@@ -73,7 +73,9 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                             },
                             'revoke' => function ($url, $model) {
                                 $linkOptions = [];
-                                if ($model->id == Yii::$app->user->identity->getId()) {
+                                /** @var object $identity */
+                                $identity = Yii::$app->user->identity;
+                                if ($model->id == $identity->id) {
                                     $linkOptions = [
                                         'style' => 'display: none;',
                                     ];

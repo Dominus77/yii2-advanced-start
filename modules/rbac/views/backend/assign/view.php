@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                 </div>
                 <div class="col-md-6">
                     <?php
+                    /** @var string $role */
                     $role = $assignModel->getRoleUser($model->id);
                     $auth = Yii::$app->authManager;
                     if ($permissionsRole = $auth->getPermissionsByRole($role)) : ?>

@@ -58,10 +58,9 @@ class Permission extends Model
     }
 
     /**
-     * @param $attribute
-     * @param $params
+     * @param string $attribute
      */
-    public function validateUniqueName($attribute, $params)
+    public function validateUniqueName($attribute)
     {
         if (!empty($this->name) && !$this->hasErrors()) {
             if ($this->$attribute) {

@@ -16,7 +16,6 @@ use modules\rbac\Module;
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'role')->listBox($model->rolesArray, [
-                //'multiple' => 'true',
                 'size' => 8
             ]) ?>
         </div>
