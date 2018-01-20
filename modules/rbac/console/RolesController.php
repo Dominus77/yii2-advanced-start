@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Alexey Schevchenko <ivanovosity@gmail.com>
+ * Date: 07.10.16
+ * Time: 5:48
+ */
 
 namespace modules\rbac\console;
 
@@ -16,32 +22,22 @@ use console\components\helpers\Console;
 class RolesController extends Controller
 {
     /**
-     * @inheritdoc
-     */
-    public function actionIndex()
-    {
-        echo 'yii rbac/roles/assign - Assign user role.' . PHP_EOL;
-        echo 'yii rbac/roles/revoke - Revoke user role.' . PHP_EOL;
-    }
-
-    /**
      * Adds role to user
+     * @throws Exception
      */
     public function actionAssign()
     {
+        $authManager = Yii::$app->authManager;
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
         $user = $this->findModel($username);
 
-        $array = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
-        $select = is_array($array) ? $array : [];
-
-        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding($select));
-
-        $authManager = Yii::$app->getAuthManager();
+        $roles = Yii::$app->authManager->getRoles();
+        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding(ArrayHelper::map($roles, 'name', 'description')));
         $role = $authManager->getRole($roleName);
 
         // Проверяем есть ли уже такая роль у пользователя
-        if ($userRoles = $this->getUserRoleValue($user->id)) {
+        $userRoles = $this->getUserRoleValue($user->id);
+        if ($userRoles === null) {
             $authManager->assign($role, $user->id);
             $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
@@ -53,20 +49,21 @@ class RolesController extends Controller
 
     /**
      * Removes role from user
+     * @throws Exception
      */
     public function actionRevoke()
     {
+        $authManager = Yii::$app->authManager;
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
         $user = $this->findModel($username);
         $roleName = $this->select(
             Console::convertEncoding(Yii::t('app', 'Role:')), ArrayHelper::merge(
             ['all' => Console::convertEncoding(Yii::t('app', 'All Roles'))],
             Console::convertEncoding(
-                ArrayHelper::map(Yii::$app->authManager->getRolesByUser($user->id), 'name', 'description')
+                ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
             )
         )
         );
-        $authManager = Yii::$app->getAuthManager();
         if ($roleName == 'all') {
             $authManager->revokeAll($user->id);
         } else {
@@ -79,36 +76,39 @@ class RolesController extends Controller
 
     /**
      * @param integer $user_id
-     * @return mixed|false
+     * @return mixed|null
      */
     public function getUserRoleValue($user_id)
     {
-        if (is_integer($user_id)) {
-            $authManager = Yii::$app->authManager;
-            if ($role = $authManager->getRolesByUser($user_id)) {
-                return ArrayHelper::getValue($role, function ($role) {
-                    foreach ($role as $key => $value) {
-                        return $value->name;
-                    }
-                    return false;
-                });
-            }
+        $authManager = Yii::$app->authManager;
+        if ($role = $authManager->getRolesByUser($user_id)) {
+            return ArrayHelper::getValue($role, function ($role) {
+                foreach ($role as $key => $value) {
+                    return $value->name;
+                }
+                return null;
+            });
         }
-        return false;
+        return null;
     }
 
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param string $username
-     * @return null|User the loaded model
-     * @throws \yii\console\Exception if the model cannot be found
+     * @return User the loaded model
+     * @throws Exception if the model cannot be found
      */
-    private function findModel($username = '')
+    private function findModel($username)
     {
-        if (($model = User::findOne(['username' => $username])) !== null) {
-            return $model;
+        if (!$model = User::findOne(['username' => $username])) {
+            throw new Exception(
+                Console::convertEncoding(
+                    Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])
+                )
+            );
         }
-        throw new Exception(Console::convertEncoding(Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])));
+        return $model;
     }
 }
