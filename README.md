@@ -5,6 +5,7 @@
 [![License](https://poser.pugx.org/dominus77/yii2-advanced-start/license)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![Build Status](https://travis-ci.org/Dominus77/yii2-advanced-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-advanced-start)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-advanced-start/downloads)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 
 The application is built using advanced pattern and has a modular structure.
