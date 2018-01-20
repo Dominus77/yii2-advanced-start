@@ -4,7 +4,7 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
-use components\helpers\Helpers;
+use common\components\helpers\Helpers;
 use modules\users\models\User;
 use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
