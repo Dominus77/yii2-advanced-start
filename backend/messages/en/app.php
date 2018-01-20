@@ -5,6 +5,8 @@ return [
     'HEADER' => 'General menu',
     'Search' => 'Search',
 
+    'No Authorize' => 'No Authorize',
+
     'Yes, delete!' => 'Yes, delete!',
     'No, do not delete!' => 'No, do not delete!',
 

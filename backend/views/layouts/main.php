@@ -20,7 +20,7 @@ iCheckAsset::register($this);
 AppAsset::register($this);
 
 $identity = Yii::$app->user->identity;
-$fullUserName = !Yii::$app->user->isGuest ? $identity->getUserFullName() : '';
+$fullUserName = $identity ? $identity->getUserFullName() : Yii::t('app', 'No Authorize');
 
 $assetManager = Yii::$app->assetManager;
 $publishedUrl = ($url = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist')) ? $url : false;

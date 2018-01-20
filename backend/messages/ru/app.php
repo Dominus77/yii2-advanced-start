@@ -5,6 +5,8 @@ return [
     'HEADER' => 'Главное меню',
     'Search' => 'Поиск',
 
+    'No Authorize' => 'Не авторизован',
+
     'Yes, delete!' => 'Да, удалить!',
     'No, do not delete!' => 'Нет, не удалять!',
 
