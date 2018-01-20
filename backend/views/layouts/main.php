@@ -27,6 +27,7 @@ $assetManager = Yii::$app->assetManager;
 $publishedUrl = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 
 $formatter = Yii::$app->formatter;
+$homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ $formatter = Yii::$app->formatter;
 <div class="wrapper">
     <header class="main-header">
 
-        <a href="<?= Yii::$app->homeUrl ?>" class="logo">
+        <a href="<?= $homeUrl ?>" class="logo">
             <span class="logo-mini"><b>A</b>LT</span>
             <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
@@ -320,4 +321,3 @@ $formatter = Yii::$app->formatter;
 </body>
 </html>
 <?php $this->endPage() ?>
-
