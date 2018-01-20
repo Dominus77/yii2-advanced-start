@@ -43,7 +43,7 @@ class PasswordResetRequestForm extends Model
             'email' => $this->email,
         ]);
 
-        if (!$user) {
+        if ($user === null) {
             return false;
         }
 
