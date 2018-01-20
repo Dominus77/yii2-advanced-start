@@ -1,5 +1,9 @@
 filter:
-    excluded_paths: [api/tests/*, backend/tests/*, common/tests/*, frontend/tests/*]
+    excluded_paths:
+        - "api/tests/*"
+        - "backend/tests/*"
+        - "common/tests/*"
+        - "frontend/tests/*"
 checks:
     php:
         code_rating: true
@@ -26,7 +30,16 @@ tools:
             standard: PSR2
     php_loc:
         enabled: true
-        excluded_dirs: [vendor, api/tests, backend/tests, common/tests, frontend/tests, api/runtime, backend/runtime, console/runtime, frontend/runtime]
+        excluded_dirs:
+            - "vendor"
+            - "api/tests"
+            - "backend/tests"
+            - "common/tests"
+            - "frontend/tests"
+            - "api/runtime"
+            - "backend/runtime"
+            - "console/runtime"
+            - "frontend/runtime"
     # disable copy paste detector and similarity analyzer as they have no real value
     # and a huge bunch of false-positives
     php_cpd: false
