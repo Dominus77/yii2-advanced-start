@@ -143,14 +143,14 @@ $formatter = Yii::$app->formatter;
                                     'class' => 'user-image',
                                 ],
                             ]); ?>
-                            <span class="hidden-xs"><?= $identity->userFullName; ?></span>
+                            <span class="hidden-xs"><?= $identity->getUserFullName() ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <?= AvatarWidget::widget(); ?>
                                 <p>
-                                    <?= $identity->userFullName; ?>
-                                    <small><?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy'); ?></small>
+                                    <?= $identity->getUserFullName() ?>
+                                    <small><?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') ?></small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -197,7 +197,7 @@ $formatter = Yii::$app->formatter;
                     <?= AvatarWidget::widget(); ?>
                 </div>
                 <div class="pull-left info">
-                    <p><?= $identity->userFullName; ?></p>
+                    <p><?= $identity->getUserFullName() ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online'); ?></a>
                 </div>
             </div>
