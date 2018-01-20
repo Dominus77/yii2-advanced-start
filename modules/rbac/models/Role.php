@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\models;
 
 use Yii;
@@ -64,9 +63,8 @@ class Role extends Model
 
     /**
      * @param $attribute
-     * @param $params
      */
-    public function validateUniqueName($attribute, $params)
+    public function validateUniqueName($attribute)
     {
         if (!empty($this->name) && !$this->hasErrors()) {
             if ($this->$attribute) {

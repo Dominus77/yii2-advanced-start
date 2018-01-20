@@ -71,7 +71,7 @@ class RolesController extends Controller
     }
 
     /**
-     * @param integer $user_id
+     * @param string $user_id
      * @return mixed|null
      */
     public function getUserRoleValue($user_id)

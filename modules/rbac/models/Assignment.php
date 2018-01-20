@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\models;
 
 use Yii;
@@ -49,10 +48,10 @@ class Assignment extends Model
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return string
      */
-    public function getRoleName($id = null)
+    public function getRoleName($id)
     {
         $id = $id ? $id : $this->user->id;
         $auth = Yii::$app->authManager;
@@ -65,10 +64,10 @@ class Assignment extends Model
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return mixed|null
      */
-    public function getUserRoleName($id = null)
+    public function getUserRoleName($id)
     {
         $id = $id ? $id : $this->user->id;
         if ($role = Yii::$app->authManager->getRolesByUser($id))
@@ -83,10 +82,10 @@ class Assignment extends Model
 
     /**
      * Получаем роль пользователя
-     * @param null $id
+     * @param string $id
      * @return mixed|null
      */
-    public function getRoleUser($id = null)
+    public function getRoleUser($id)
     {
         $id = $id ? $id : $this->user->id;
         if ($role = Yii::$app->authManager->getRolesByUser($id))

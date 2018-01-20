@@ -20,6 +20,12 @@ class AssignController extends Controller
     /** @var $user object */
     private $_user = null;
 
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws InvalidConfigException
+     * @throws \yii\web\BadRequestHttpException
+     */
     public function beforeAction($action)
     {
         if (empty(Yii::$app->controller->module->params['userClass'])) {
@@ -30,7 +36,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -76,7 +82,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return string
      * @throws NotFoundHttpException
      */
@@ -90,7 +96,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -111,14 +117,14 @@ class AssignController extends Controller
                 return $this->redirect(['view', 'id' => $model->user->id]);
             }
         }
-        $model->role = $model->getRoleUser();
+        $model->role = $model->getRoleUser($id);
         return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return \yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -140,9 +146,11 @@ class AssignController extends Controller
     }
 
     /**
-     * @param $id
-     * @return static
-     * @throws NotFoundHttpException
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return \modules\users\models\User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {

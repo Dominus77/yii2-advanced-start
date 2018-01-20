@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\models;
 
 use Yii;
