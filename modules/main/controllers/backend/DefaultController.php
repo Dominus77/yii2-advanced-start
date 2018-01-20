@@ -35,8 +35,7 @@ class DefaultController extends Controller
 
     /**
      * Displays homepage.
-     *
-     * @return string
+     * @return string|\yii\web\Response
      */
     public function actionIndex()
     {
@@ -45,7 +44,9 @@ class DefaultController extends Controller
             return $this->goHome();
         }
         // Greeting in the admin panel, you can delete what would not be boring :)
-        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome, {:username}!', [':username' => Yii::$app->user->identity->username]));
+        /** @var \modules\users\models\User $identity */
+        $identity = Yii::$app->user->identity;
+        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]));
 
         return $this->render('index');
     }

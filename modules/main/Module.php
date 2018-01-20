@@ -51,7 +51,7 @@ class Module extends \yii\base\Module
      * @param $category
      * @param $message
      * @param array $params
-     * @param null $language
+     * @param null|string $language
      * @return string
      */
     public static function t($category, $message, $params = [], $language = null)

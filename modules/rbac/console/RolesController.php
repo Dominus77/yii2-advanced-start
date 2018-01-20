@@ -31,13 +31,17 @@ class RolesController extends Controller
     {
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
         $user = $this->findModel($username);
-        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding(ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description')));
+
+        $array = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
+        $select = is_array($array) ? $array : [];
+
+        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding($select));
+
         $authManager = Yii::$app->getAuthManager();
         $role = $authManager->getRole($roleName);
 
         // Проверяем есть ли уже такая роль у пользователя
-        $userRoles = self::getUserRoleValue($user->id);
-        if ($userRoles === null) {
+        if ($userRoles = $this->getUserRoleValue($user->id)) {
             $authManager->assign($role, $user->id);
             $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
@@ -74,20 +78,23 @@ class RolesController extends Controller
     }
 
     /**
-     * @param null $user_id
-     * @return mixed|null
+     * @param integer $user_id
+     * @return mixed|false
      */
-    public function getUserRoleValue($user_id = null)
+    public function getUserRoleValue($user_id)
     {
-        if ($role = Yii::$app->authManager->getRolesByUser($user_id)) {
-            return ArrayHelper::getValue($role, function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->name;
-                }
-                return null;
-            });
+        if (is_integer($user_id)) {
+            $authManager = Yii::$app->authManager;
+            if ($role = $authManager->getRolesByUser($user_id)) {
+                return ArrayHelper::getValue($role, function ($role) {
+                    foreach ($role as $key => $value) {
+                        return $value->name;
+                    }
+                    return false;
+                });
+            }
         }
-        return null;
+        return false;
     }
 
     /**

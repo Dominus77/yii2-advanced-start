@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\components\behavior;
 
 use Yii;
@@ -33,9 +32,9 @@ class AccessBehavior extends Behavior
     }
 
     /**
-     * @param $events
+     * @inheritdoc
      */
-    public function accessAction($events)
+    public function accessAction()
     {
         if (!empty($this->permission) && !$this->checkPermission()) {
             if (!Yii::$app->user->isGuest) {

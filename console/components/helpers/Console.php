@@ -11,7 +11,7 @@ class Console extends \yii\helpers\Console
     /**
      * Convert string encode to
      *
-     * @param $string
+     * @param array|string $string
      * @param string $code
      * @param string $to
      * @return array|string
