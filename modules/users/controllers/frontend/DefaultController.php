@@ -4,7 +4,6 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
-use common\components\helpers\MyHelpers;
 use modules\users\models\User;
 use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
@@ -59,7 +58,7 @@ class DefaultController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->processGoHome();
         }
 
         $model = new LoginForm();
@@ -80,7 +79,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->processGoHome();
     }
 
     /**
@@ -93,7 +92,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->signup()) {
-                return MyHelpers::goHome(Module::t('module', 'It remains to activate the account.'));
+                return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
             }
         }
 
@@ -116,9 +115,9 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            return MyHelpers::goHome(Module::t('module', 'Thank you for registering!'));
+            return $this->processGoHome(Module::t('module', 'Thank you for registering!'));
         }
-        return MyHelpers::goHome(Module::t('module', 'Error sending message!'), 'error');
+        return $this->processGoHome(Module::t('module', 'Error sending message!'), 'error');
     }
 
     /**
@@ -131,7 +130,7 @@ class DefaultController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                return MyHelpers::goHome(Module::t('module', 'Check your email for further instructions.'));
+                return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
@@ -157,7 +156,7 @@ class DefaultController extends Controller
             throw new BadRequestHttpException($e->getMessage());
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            return MyHelpers::goHome(Module::t('module', 'Password changed successfully.'));
+            return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
         }
         return $this->render('resetPassword', [
             'model' => $model,
@@ -180,5 +179,18 @@ class DefaultController extends Controller
             }
         }
         throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
+    }
+
+    /**
+     * @param string $message
+     * @param string $type
+     * @return \yii\web\Response
+     */
+    public function processGoHome($message = '', $type = 'success')
+    {
+        if (!empty($message)) {
+            Yii::$app->session->setFlash($type, $message);
+        }
+        return $this->goHome();
     }
 }
