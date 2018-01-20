@@ -25,7 +25,6 @@ tools:
 #        timeout: 600 # Timeout in seconds.
     php_analyzer: true
     php_code_coverage: false
-    php_scrutinizer: true
     php_code_sniffer:
         config:
             standard: PSR2
@@ -45,3 +44,11 @@ tools:
     # and a huge bunch of false-positives
     php_cpd: false
     php_sim: false
+build:
+    nodes:
+        analysis:
+            project_setup:
+                override: true
+            tests:
+                override: [php-scrutinizer-run]
+                
