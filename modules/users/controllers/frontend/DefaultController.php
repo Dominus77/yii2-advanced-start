@@ -4,7 +4,6 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
-use common\components\helpers\Helpers;
 use modules\users\models\User;
 use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
@@ -59,7 +58,7 @@ class DefaultController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            Helpers::goHome();
+            return $this->goHome();
         }
 
         $model = new LoginForm();
@@ -80,7 +79,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        Helpers::goHome();
+        return $this->goHome();
     }
 
     /**
@@ -93,9 +92,11 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->signup()) {
-                Helpers::goHome('success', Module::t('module', 'It remains to activate the account.'));
+                Yii::$app->getSession()->setFlash('success', Module::t('module', 'It remains to activate the account.'));
+                return $this->goHome();
             }
         }
+
         return $this->render('signup', [
             'model' => $model,
         ]);
@@ -106,7 +107,7 @@ class DefaultController extends Controller
      * @return \yii\web\Response
      * @throws BadRequestHttpException
      */
-    public function actionEmailConfirm($token)
+    public function actionEmailConfirm($token = '')
     {
         try {
             $model = new EmailConfirmForm($token);
@@ -115,9 +116,11 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            Helpers::goHome('success', Module::t('module', 'Thank you for registering!'));
+            Yii::$app->getSession()->setFlash('success', Module::t('module', 'Thank you for registering!'));
+        } else {
+            Yii::$app->getSession()->setFlash('error', Module::t('module', 'Error sending message!'));
         }
-        Helpers::goHome('error', Module::t('module', 'Error sending message!'));
+        return $this->goHome();
     }
 
     /**
@@ -130,7 +133,8 @@ class DefaultController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Helpers::goHome('success', Module::t('module', 'Check your email for further instructions.'));
+                Yii::$app->session->setFlash('success', Module::t('module', 'Check your email for further instructions.'));
+                return $this->goHome();
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
@@ -148,7 +152,7 @@ class DefaultController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword($token = '')
     {
         try {
             $model = new ResetPasswordForm($token);
@@ -156,7 +160,8 @@ class DefaultController extends Controller
             throw new BadRequestHttpException($e->getMessage());
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Helpers::goHome('success', Module::t('module', 'Password changed successfully.'));
+            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            return $this->goHome();
         }
         return $this->render('resetPassword', [
             'model' => $model,
