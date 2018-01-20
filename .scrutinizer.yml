@@ -44,3 +44,4 @@ tools:
     # and a huge bunch of false-positives
     php_cpd: false
     php_sim: false
+php-scrutinizer-run
