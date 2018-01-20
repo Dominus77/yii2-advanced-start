@@ -124,6 +124,7 @@ class AssignController extends Controller
      */
     public function actionRevoke($id)
     {
+        /** @var \modules\users\models\User $model */
         $model = $this->findModel($id);
         $auth = Yii::$app->authManager;
         if ($auth->getRolesByUser($model->id)) {
