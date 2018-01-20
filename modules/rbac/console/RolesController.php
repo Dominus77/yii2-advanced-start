@@ -94,7 +94,7 @@ class RolesController extends Controller
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $username
-     * @return User the loaded model
+     * @return null|User the loaded model
      * @throws \yii\console\Exception if the model cannot be found
      */
     private function findModel($username = '')
