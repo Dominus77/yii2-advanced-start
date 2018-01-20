@@ -5,6 +5,8 @@
 use yii\helpers\Html;
 
 $this->title = $name;
+
+$homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : ['/'];
 ?>
 
 <div class="site-error">
@@ -17,7 +19,9 @@ $this->title = $name;
             </h3>
 
             <p>
-                <?= Yii::t('app', 'Meanwhile, you may {:Link} or try using the search form.', [':Link' => Html::a(Yii::t('app', 'return to dashboard'), Yii::$app->homeUrl)]); ?>
+                <?= Yii::t('app', 'Meanwhile, you may {:Link} or try using the search form.', [
+                    ':Link' => Html::a(Yii::t('app', 'return to dashboard'), $homeUrl)
+                ]); ?>
             </p>
 
             <form class="search-form">
