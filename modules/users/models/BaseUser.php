@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\models;
 
 use Yii;
@@ -10,6 +11,9 @@ use yii\helpers\Html;
 use modules\users\Module;
 
 /**
+ * Class BaseUser
+ * @package modules\users\models
+ *
  * This is the model class for table "{{%user}}".
  *
  * @property int $id ID
@@ -107,14 +111,14 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @inheritdoc
      */
     public static function findIdentity($id = null)
-    {        
+    {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
      * @param mixed $token
      * @param null $type
-     * @return null|static
+     * @return null|static|ActiveRecord
      */
     public static function findIdentityByAccessToken($token = '', $type = null)
     {
@@ -125,7 +129,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * Finds user by username
      *
      * @param string $username
-     * @return static|null
+     * @return static|null|ActiveRecord
      */
     public static function findByUsername($username = '')
     {
@@ -136,7 +140,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * Finds user by email
      *
      * @param string $email
-     * @return static|null
+     * @return array|null|ActiveRecord
      */
     public static function findByUsernameEmail($email = '')
     {
@@ -147,7 +151,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * Finds user by username or email
      *
      * @param string $string
-     * @return static|null
+     * @return array|null|ActiveRecord
      */
     public static function findByUsernameOrEmail($string = '')
     {

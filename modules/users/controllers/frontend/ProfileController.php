@@ -4,6 +4,7 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
+use components\helpers\Helpers;
 use modules\users\models\User;
 use modules\rbac\models\Assignment;
 use yii\filters\AccessControl;
@@ -20,7 +21,7 @@ use modules\users\Module;
 class ProfileController extends Controller
 {
     /**
-     * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -51,9 +52,10 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = $this->findModel();
-        $assignModel = new Assignment([
-            'user' => $model
-        ]);
+
+        $assignModel = new Assignment();
+        $assignModel->user = $model;
+
         return $this->render('index', [
             'model' => $model,
             'assignModel' => $assignModel,
@@ -78,7 +80,6 @@ class ProfileController extends Controller
      */
     public function actionUpdateProfile()
     {
-        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
 
@@ -96,7 +97,6 @@ class ProfileController extends Controller
      */
     public function actionUpdatePassword()
     {
-        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
 
@@ -120,13 +120,12 @@ class ProfileController extends Controller
      */
     public function actionDelete()
     {
-        /** @var \modules\users\models\User $model */
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PROFILE_DELETE;
         $model->status = $model::STATUS_DELETED;
         if ($model->save())
             Yii::$app->user->logout();
-        return $this->goHome();
+        Helpers::goHome();
     }
 
     /**
