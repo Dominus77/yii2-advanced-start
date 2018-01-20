@@ -2,7 +2,6 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-/* @var \modules\users\models\User $identity */
 
 use backend\assets\AppAsset;
 use backend\assets\plugins\iCheckAsset;
@@ -19,11 +18,14 @@ use modules\rbac\Module as RbacModule;
 iCheckAsset::register($this);
 AppAsset::register($this);
 
+/* @var \modules\users\models\User $identity */
 $identity = Yii::$app->user->identity;
 $fullUserName = ($identity !== null) ? $identity->getUserFullName() : Yii::t('app', 'No Authorize');
 
 $assetManager = Yii::$app->assetManager;
-$publishedUrl = ($url = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist')) ? $url : false;
+/** @var false|string $publishedUrl */
+$publishedUrl = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+
 $formatter = Yii::$app->formatter;
 ?>
 <?php $this->beginPage() ?>
