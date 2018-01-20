@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexey Schevchenko <ivanovosity@gmail.com>
- * Date: 07.10.16
- * Time: 5:48
- */
-
 namespace modules\rbac\console;
 
 use Yii;
@@ -32,7 +25,8 @@ class RolesController extends Controller
         $user = $this->findModel($username);
 
         $roles = Yii::$app->authManager->getRoles();
-        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), Console::convertEncoding(ArrayHelper::map($roles, 'name', 'description')));
+        $select = Console::convertEncoding(ArrayHelper::map($roles, 'name', 'description'));
+        $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), $select);
         $role = $authManager->getRole($roleName);
 
         // Проверяем есть ли уже такая роль у пользователя
