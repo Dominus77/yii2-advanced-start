@@ -9,6 +9,7 @@ use backend\assets\LoginAsset;
 use common\widgets\Alert;
 
 LoginAsset::register($this);
+$homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -34,7 +35,7 @@ LoginAsset::register($this);
 </div>
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?= Yii::$app->homeUrl ?>"><b>Admin</b>LTE</a><br>
+        <a href="<?= $homeUrl ?>"><b>Admin</b>LTE</a><br>
         <?= Yii::$app->name; ?>
     </div>
     <div class="login-box-body">

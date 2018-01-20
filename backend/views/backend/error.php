@@ -5,8 +5,7 @@
 use yii\helpers\Html;
 
 $this->title = $name;
-
-$homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : ['/'];
+$homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 ?>
 
 <div class="site-error">
