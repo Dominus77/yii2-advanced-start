@@ -32,6 +32,7 @@ tools:
         enabled: true
         excluded_dirs:
             - "vendor"
+            - "environments"
             - "api/tests"
             - "backend/tests"
             - "common/tests"
