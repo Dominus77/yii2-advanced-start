@@ -4,6 +4,7 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
+use common\components\helpers\MyHelpers;
 use modules\users\models\User;
 use modules\rbac\models\Assignment;
 use yii\filters\AccessControl;
@@ -124,7 +125,7 @@ class ProfileController extends Controller
         $model->status = $model::STATUS_DELETED;
         if ($model->save())
             Yii::$app->user->logout();
-        return $this->goHome();
+        return MyHelpers::goHome();
     }
 
     /**
