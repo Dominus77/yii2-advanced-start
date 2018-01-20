@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+/* @var \modules\users\models\User $identity */
 
 use backend\assets\AppAsset;
 use backend\assets\plugins\iCheckAsset;
@@ -18,6 +19,9 @@ use modules\rbac\Module as RbacModule;
 iCheckAsset::register($this);
 AppAsset::register($this);
 
+$identity = Yii::$app->user->identity;
+$assetManager = Yii::$app->assetManager;
+$formatter = Yii::$app->formatter;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -64,7 +68,7 @@ AppAsset::register($this);
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img
-                                                    src="<?= Yii::$app->getAssetManager()->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
+                                                    src="<?= $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . '/img/user2-160x160.jpg' ?>"
                                                     class="img-circle"
                                                     alt="User Image">
                                             </div>
@@ -138,14 +142,14 @@ AppAsset::register($this);
                                     'class' => 'user-image',
                                 ],
                             ]); ?>
-                            <span class="hidden-xs"><?= Yii::$app->user->identity->getUserFullName(); ?></span>
+                            <span class="hidden-xs"><?= $identity->getUserFullName(); ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <?= AvatarWidget::widget(); ?>
                                 <p>
-                                    <?= Yii::$app->user->identity->getUserFullName(); ?>
-                                    <small><?= UserModule::t('module', 'Member since') . ' ' . Yii::$app->formatter->asDatetime(Yii::$app->user->identity->created_at, 'LLL yyyy'); ?></small>
+                                    <?= $identity->getUserFullName(); ?>
+                                    <small><?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy'); ?></small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -192,7 +196,7 @@ AppAsset::register($this);
                     <?= AvatarWidget::widget(); ?>
                 </div>
                 <div class="pull-left info">
-                    <p><?= Yii::$app->user->identity->getUserFullName(); ?></p>
+                    <p><?= $identity->getUserFullName(); ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online'); ?></a>
                 </div>
             </div>
@@ -311,3 +315,4 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+

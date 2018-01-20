@@ -1,9 +1,9 @@
 <?php
-
 namespace modules\users\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use modules\users\Module;
 
 /**
@@ -128,5 +128,25 @@ class User extends BaseUser
         } else if ($this->status == self::STATUS_DELETED) {
             $this->status = self::STATUS_WAIT;
         }
+    }
+
+    /**
+     * @return string $userFullName
+     */
+    public function getUserFullName()
+    {
+        $fullName = '';
+        if (Yii::$app->user) {
+            if ($this->first_name && $this->last_name) {
+                $fullName = $this->first_name . ' ' . $this->last_name;
+            } else if ($this->first_name) {
+                $fullName = $this->first_name;
+            } else if ($this->last_name) {
+                $fullName = $this->last_name;
+            } else {
+                $fullName = $this->username;
+            }
+        }
+        return Html::encode($fullName);
     }
 }

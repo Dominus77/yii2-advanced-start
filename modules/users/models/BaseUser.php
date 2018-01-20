@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users\models;
 
 use Yii;
@@ -398,25 +397,5 @@ class BaseUser extends ActiveRecord implements IdentityInterface
         return [
             self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserFullName()
-    {
-        if (Yii::$app->user) {
-            if ($this->first_name && $this->last_name) {
-                $fullName = $this->first_name . ' ' . $this->last_name;
-            } else if ($this->first_name) {
-                $fullName = $this->first_name;
-            } else if ($this->last_name) {
-                $fullName = $this->last_name;
-            } else {
-                $fullName = $this->username;
-            }
-            return Html::encode($fullName);
-        }
-        return false;
     }
 }
