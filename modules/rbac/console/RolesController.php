@@ -25,7 +25,9 @@ class RolesController extends Controller
         $user = $this->findModel($username);
 
         $roles = Yii::$app->authManager->getRoles();
-        $select = Console::convertEncoding(ArrayHelper::map($roles, 'name', 'description'));
+        $array = ArrayHelper::map($roles, 'name', 'description');
+        $encodingArray = Console::convertEncoding($array);
+        $select = is_array($encodingArray) ? $encodingArray : $array;
         $roleName = $this->select(Console::convertEncoding(Yii::t('app', 'Role:')), $select);
         $role = $authManager->getRole($roleName);
 
