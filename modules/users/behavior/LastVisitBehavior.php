@@ -30,6 +30,7 @@ class LastVisitBehavior extends Behavior
         if (!Yii::$app->user->isGuest) {
             /** @var \yii\web\IdentityInterface $model */
             $model = Yii::$app->user->identity;
+            /** @var \yii\behaviors\TimestampBehavior $model Updates a timestamp attribute to the current timestamp. */
             $model->touch('last_visit');
         }
         return true;
