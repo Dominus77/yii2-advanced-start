@@ -7,6 +7,7 @@ filter:
         - "environments/*"
         - "vagrant/*"
         - "modules/rbac/tests/*"
+        - "*/Bootstrap.php"
 checks:
     php:
         code_rating: true
