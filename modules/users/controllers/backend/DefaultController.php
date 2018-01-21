@@ -253,7 +253,7 @@ class DefaultController extends Controller
         $identity = Yii::$app->user->identity;
         if ($model->id !== $identity->id) {
             if ($model->isDeleted()) {
-                if ($model->delete()) {
+                if ($model->delete() !== false) {
                     Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
                 }
             } else {

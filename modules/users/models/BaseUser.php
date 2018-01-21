@@ -112,7 +112,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param int|string $id
-     * @return null|static
+     * @return null|static|\yii\db\BaseActiveRecord
      */
     public static function findIdentity($id)
     {
@@ -121,8 +121,8 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param mixed $token
-     * @param null $type
-     * @return null|static|ActiveRecord
+     * @param null|mixed $type
+     * @return null|static||\yii\db\BaseActiveRecord
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -200,7 +200,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * @return integer|string|array|array<mixed,null|mixed>
      */
     public function getId()
     {
