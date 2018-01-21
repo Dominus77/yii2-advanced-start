@@ -100,7 +100,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param User $model
+     * @param \yii\base\Model|null $model
      * @param string $attribute
      */
     private function readValue($model = null, $attribute = '')
