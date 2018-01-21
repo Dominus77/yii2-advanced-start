@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
         $model = $this->findModel($username);
-        if ($model->delete()) {
+        if ($model->delete() !== false) {
             $this->log(true);
         } else {
             $this->log(false);
