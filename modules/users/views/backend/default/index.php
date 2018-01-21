@@ -16,6 +16,7 @@ use modules\users\Module;
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
+$view = $this;
 ?>
 
 <div class="users-backend-default-index">
@@ -70,8 +71,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'label' => Module::t('module', 'Users'),
                         'format' => 'raw',
-                        'value' => function ($data) use ($this) {
-                            return $this->render('_avatar_column', ['model' => $data]);
+                        'value' => function ($data) use ($view) {
+                            return $view->render('_avatar_column', ['model' => $data]);
                         },
                         'headerOptions' => ['width' => '120'],
                     ],
@@ -96,11 +97,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]),
                         'format' => 'raw',
-                        'value' => function ($data) use ($this) {
+                        'value' => function ($data) use ($view) {
                             /** @var modules\users\models\User $identity */
                             $identity = Yii::$app->user->identity;
                             if ($data->id != $identity->id) {
-                                $this->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                                $view->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,
                                     'title' => Module::t('module', 'Click to change the status'),

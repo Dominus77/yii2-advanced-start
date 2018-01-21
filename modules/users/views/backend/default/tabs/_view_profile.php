@@ -9,6 +9,8 @@ use modules\users\Module;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 /* @var $assignModel \modules\rbac\models\Assignment */
+
+$view = $this;
 ?>
 
 <div class="row">
@@ -40,11 +42,11 @@ use modules\users\Module;
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
-                    'value' => function ($model) use ($this) {
+                    'value' => function ($model) use ($view) {
                         /** @var object $identity */
                         $identity = Yii::$app->user->identity;
                         if ($model->id != $identity->id) {
-                            $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                            $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                             return Html::a($model->statusLabelName, Url::to(['status', 'id' => $model->id]), [
                                 'id' => 'status_link_' . $model->id,
                                 'title' => Module::t('module', 'Click to change the status'),
@@ -62,8 +64,8 @@ use modules\users\Module;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) use ($this) {
-                        return $this->render('col_auth_key', ['model' => $model]);
+                    'value' => function ($model) use ($view) {
+                        return $view->render('col_auth_key', ['model' => $model]);
                     }
                 ],
                 [
