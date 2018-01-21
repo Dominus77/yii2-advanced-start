@@ -8,6 +8,7 @@ filter:
         - "vagrant/*"
         - "modules/rbac/tests/*"
         - "*/Bootstrap.php"
+        - "modules/users/models/BaseUser.php"
 checks:
     php:
         code_rating: true
