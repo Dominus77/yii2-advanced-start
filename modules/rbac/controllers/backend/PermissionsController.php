@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\controllers\backend;
 
 use Yii;
@@ -19,6 +18,7 @@ class PermissionsController extends Controller
 {
     /**
      * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -64,7 +64,7 @@ class PermissionsController extends Controller
 
     /**
      * Displays a single Permission model.
-     * @param string $id
+     * @param string|int $id
      * @return mixed
      */
     public function actionView($id)
@@ -82,7 +82,7 @@ class PermissionsController extends Controller
     /**
      * Creates Permission a new Permission model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return array|string|\yii\web\Response
      */
     public function actionCreate()
     {
@@ -112,8 +112,8 @@ class PermissionsController extends Controller
     /**
      * Updates an existing Permission model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
+     * @param string|int $id
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -189,8 +189,8 @@ class PermissionsController extends Controller
     /**
      * Deletes an existing Permission model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
+     * @param string|int $id
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -205,8 +205,8 @@ class PermissionsController extends Controller
     }
 
     /**
-     * @param $parent
-     * @param $child
+     * @param object $parent
+     * @param object $child
      * @return bool
      */
     protected function detectLoop($parent, $child)

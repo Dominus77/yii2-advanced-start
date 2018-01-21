@@ -43,6 +43,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
+     * @return string
      */
     public static function tableName()
     {
@@ -51,6 +52,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -63,6 +65,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -88,6 +91,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
@@ -107,9 +111,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * @param int|string $id
+     * @return null|static
      */
-    public static function findIdentity($id = null)
+    public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
@@ -119,7 +124,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param null $type
      * @return null|static|ActiveRecord
      */
-    public static function findIdentityByAccessToken($token = '', $type = null)
+    public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
     }
@@ -130,7 +135,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null|ActiveRecord
      */
-    public static function findByUsername($username = '')
+    public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
@@ -141,7 +146,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $email
      * @return array|null|ActiveRecord
      */
-    public static function findByUsernameEmail($email = '')
+    public static function findByUsernameEmail($email)
     {
         return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
@@ -152,7 +157,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $string
      * @return array|null|ActiveRecord
      */
-    public static function findByUsernameOrEmail($string = '')
+    public static function findByUsernameOrEmail($string)
     {
         return static::find()
             ->where(['or', ['username' => $string], ['email' => $string]])
@@ -163,10 +168,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * Finds user by password reset token
      *
-     * @param string $token password reset token
+     * @param mixed $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token = '')
+    public static function findByPasswordResetToken($token)
     {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
@@ -180,10 +185,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * Finds out if password reset token is valid
      *
-     * @param string $token password reset token
+     * @param mixed $token password reset token
      * @return boolean
      */
-    public static function isPasswordResetTokenValid($token = '')
+    public static function isPasswordResetTokenValid($token)
     {
         if (empty($token)) {
             return false;
@@ -211,9 +216,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * @param mixed $authKey
+     * @return bool
      */
-    public function validateAuthKey($authKey = '')
+    public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
     }
@@ -224,7 +230,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * @param string $password password to validate
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password = '')
+    public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -234,7 +240,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password = '')
+    public function setPassword($password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -264,10 +270,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param $email_confirm_token
+     * @param mixed $email_confirm_token
      * @return bool|null|static
      */
-    public static function findByEmailConfirmToken($email_confirm_token = '')
+    public static function findByEmailConfirmToken($email_confirm_token)
     {
         return static::findOne([
             'email_confirm_token' => $email_confirm_token,

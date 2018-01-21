@@ -9,6 +9,10 @@ use modules\users\Module;
 /**
  * Class LoginForm
  * @package modules\users\models
+ *
+ * @property string $email Email
+ * @property string $password Password
+ * @property bool $rememberMe Remember Me
  */
 class LoginForm extends Model
 {
@@ -20,6 +24,7 @@ class LoginForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -36,6 +41,7 @@ class LoginForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
@@ -52,9 +58,8 @@ class LoginForm extends Model
      * This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
@@ -67,7 +72,7 @@ class LoginForm extends Model
     /**
      * Logs in a user using the provided username and password.
      *
-     * @return boolean whether the user is logged in successfully
+     * @return bool whether the user is logged in successfully
      */
     public function login()
     {
@@ -81,7 +86,7 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return array|null|User
      */
     protected function getUser()
     {

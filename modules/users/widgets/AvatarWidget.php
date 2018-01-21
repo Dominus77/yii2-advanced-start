@@ -8,28 +8,17 @@ use yii\helpers\Html;
 /**
  * Class AvatarWidget
  * @package modules\users\widgets
+ *
+ * @property array $imageOptions
+ * @property string $email
+ * @property string|int $size
  */
 class AvatarWidget extends Widget
 {
-    /**
-     * Image options
-     * <img class="img-circle">
-     * @var array
-     */
     public $imageOptions = [
         'class' => 'img-circle',
     ];
-
-    /**
-     * The email address
-     * @var string
-     */
     public $email = '';
-
-    /**
-     * Size in pixels, defaults to 80px [ 1 - 2048 ]
-     * @var string
-     */
     public $size = '80';
 
     /**
@@ -58,7 +47,7 @@ class AvatarWidget extends Widget
      * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
      * @param bool $img True to return a complete IMG tag False for just the URL
      * @param array $attr Optional, additional key/value attributes to include in the IMG tag
-     * @return String containing either just a URL or a complete image tag
+     * @return string containing either just a URL or a complete image tag
      * @source https://gravatar.com/site/implement/images/php/
      */
     public function getGravatar($email = '', $s = '80', $d = 'mm', $r = 'g', $img = false, $attr = [])
@@ -78,7 +67,7 @@ class AvatarWidget extends Widget
      */
     public function getUserEmail()
     {
-        /** @var \modules\users\models\User $user */
+        /** @var object $user */
         $user = Yii::$app->user->identity;
         return (!Yii::$app->user->isGuest) ? $user->email : $this->email;
     }

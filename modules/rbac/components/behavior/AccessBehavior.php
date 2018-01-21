@@ -22,6 +22,7 @@ class AccessBehavior extends Behavior
     public $role = '';
 
     /**
+     * @inheritdoc
      * @return array
      */
     public function events()

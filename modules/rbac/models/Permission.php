@@ -43,6 +43,7 @@ class Permission extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {

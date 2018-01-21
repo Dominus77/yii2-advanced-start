@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\console;
 
 use Yii;

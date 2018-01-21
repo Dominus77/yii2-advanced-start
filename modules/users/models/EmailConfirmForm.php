@@ -20,7 +20,7 @@ class EmailConfirmForm extends Model
     /**
      * Creates a form model given a token.
      *
-     * @param  string $token
+     * @param  mixed $token
      * @param  array $config
      * @throws \yii\base\InvalidParamException if token is empty or not valid
      */
@@ -39,7 +39,7 @@ class EmailConfirmForm extends Model
     /**
      * Confirm email.
      *
-     * @return boolean if email was confirmed.
+     * @return bool|\yii\rbac\Assignment if email was confirmed.
      */
     public function confirmEmail()
     {

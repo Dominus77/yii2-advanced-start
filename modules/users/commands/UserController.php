@@ -4,7 +4,6 @@ namespace modules\users\commands;
 
 use Yii;
 use modules\users\models\User;
-use yii\base\Model;
 use yii\console\Controller;
 use yii\console\Exception;
 use console\components\helpers\Console;
@@ -88,7 +87,7 @@ class UserController extends Controller
      * @throws \yii\console\Exception
      * @return User the loaded model
      */
-    private function findModel($username = '')
+    private function findModel($username)
     {
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
@@ -101,7 +100,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param Model $model
+     * @param User $model
      * @param string $attribute
      */
     private function readValue($model = null, $attribute = '')

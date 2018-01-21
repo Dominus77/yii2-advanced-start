@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac\components;
 
 use yii\rbac\Rule;
@@ -7,6 +6,8 @@ use yii\rbac\Rule;
 /**
  * Class AuthorRule
  * @package modules\rbac\components
+ *
+ * @property string $name Name
  */
 class AuthorRule extends Rule
 {

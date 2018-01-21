@@ -71,7 +71,7 @@ class RolesController extends Controller
     }
 
     /**
-     * @param string $user_id
+     * @param string|int $user_id
      * @return mixed|null
      */
     public function getUserRoleValue($user_id)
@@ -93,7 +93,7 @@ class RolesController extends Controller
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param string $username
-     * @return User the loaded model
+     * @return null|User the loaded model
      * @throws Exception if the model cannot be found
      */
     private function findModel($username)

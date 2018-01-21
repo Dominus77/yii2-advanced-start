@@ -9,6 +9,10 @@ use modules\users\Module;
 /**
  * Class SignupForm
  * @package modules\users\models
+ *
+ * @property string $username Username
+ * @property string $email Email
+ * @property string $password Password
  */
 class SignupForm extends Model
 {
@@ -18,6 +22,7 @@ class SignupForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -41,6 +46,7 @@ class SignupForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
@@ -54,7 +60,7 @@ class SignupForm extends Model
     /**
      * Signs user up.
      *
-     * @return \modules\users\models\User|null the saved model or null if saving fails
+     * @return User|null the saved model or null if saving fails
      */
     public function signup()
     {

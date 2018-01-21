@@ -28,6 +28,8 @@ class Passfield extends InputWidget
 
     /**
      * @inheritdoc
+     * @return $this|string
+     * @throws InvalidConfigException
      */
     public function run()
     {

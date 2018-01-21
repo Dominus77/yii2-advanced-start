@@ -9,6 +9,12 @@ use modules\rbac\Module;
 /**
  * Class Assignment
  * @package modules\rbac\models
+ *
+ * @property object $user User
+ * @property string|int $id Id
+ * @property string $username Username
+ * @property string $role Role
+ * @property bool $isNewRecord Is New Record
  */
 class Assignment extends Model
 {
@@ -19,6 +25,7 @@ class Assignment extends Model
     public $isNewRecord = false;
 
     /**
+     * @inheritdoc
      * @return array
      */
     public function rules()
@@ -30,6 +37,7 @@ class Assignment extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
@@ -48,7 +56,7 @@ class Assignment extends Model
     }
 
     /**
-     * @param string $id
+     * @param string|int $id
      * @return string
      */
     public function getRoleName($id)
@@ -64,7 +72,7 @@ class Assignment extends Model
     }
 
     /**
-     * @param string $id
+     * @param string|int $id
      * @return mixed|null
      */
     public function getUserRoleName($id)
@@ -82,7 +90,7 @@ class Assignment extends Model
 
     /**
      * Получаем роль пользователя
-     * @param string $id
+     * @param string|int $id
      * @return mixed|null
      */
     public function getRoleUser($id)

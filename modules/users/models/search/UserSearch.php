@@ -9,6 +9,11 @@ use modules\users\models\User;
 /**
  * Class UserSearch
  * @package modules\users\models\backend
+ *
+ * @property string $userRoleName User Role Name
+ * @property string $date_from Date From
+ * @property string $date_to Date To
+ * @property integer $pageSize Page Size
  */
 class UserSearch extends User
 {
@@ -17,6 +22,9 @@ class UserSearch extends User
     public $date_to;
     public $pageSize;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -25,6 +33,7 @@ class UserSearch extends User
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -36,6 +45,7 @@ class UserSearch extends User
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function scenarios()
     {

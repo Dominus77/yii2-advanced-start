@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users\controllers\frontend;
 
 use Yii;
@@ -23,6 +22,7 @@ use modules\users\Module;
 class DefaultController extends Controller
 {
     /**
+     * @inheritdoc
      * @return array
      */
     public function behaviors()
@@ -53,7 +53,7 @@ class DefaultController extends Controller
     /**
      * Logs in a user.
      *
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionLogin()
     {
@@ -74,7 +74,7 @@ class DefaultController extends Controller
     /**
      * Logs out the current user.
      *
-     * @return mixed
+     * @return \yii\web\Response
      */
     public function actionLogout()
     {
@@ -85,7 +85,7 @@ class DefaultController extends Controller
     /**
      * Signs user up.
      *
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionSignup()
     {
@@ -95,18 +95,17 @@ class DefaultController extends Controller
                 return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
             }
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);
     }
 
     /**
-     * @param string $token
+     * @param mixed $token
      * @return \yii\web\Response
      * @throws BadRequestHttpException
      */
-    public function actionEmailConfirm($token = '')
+    public function actionEmailConfirm($token)
     {
         try {
             $model = new EmailConfirmForm($token);
@@ -123,7 +122,7 @@ class DefaultController extends Controller
     /**
      * Requests password reset.
      *
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionRequestPasswordReset()
     {
@@ -135,7 +134,6 @@ class DefaultController extends Controller
                 Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
         }
-
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
         ]);
@@ -144,11 +142,11 @@ class DefaultController extends Controller
     /**
      * Resets password.
      *
-     * @param string $token
-     * @return mixed
+     * @param mixed $token
+     * @return string|\yii\web\Response
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token = '')
+    public function actionResetPassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
@@ -166,7 +164,7 @@ class DefaultController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return User the loaded model
+     * @return null|User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel()

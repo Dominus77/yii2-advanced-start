@@ -38,7 +38,7 @@ class User extends BaseUser
     public $newPasswordRepeat;
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -51,7 +51,7 @@ class User extends BaseUser
     }
 
     /**
-     * @param $attribute
+     * @param string $attribute
      */
     public function validateCurrentPassword($attribute)
     {
@@ -68,7 +68,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function scenarios()
     {
@@ -84,7 +84,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {

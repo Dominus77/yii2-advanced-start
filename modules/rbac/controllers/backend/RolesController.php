@@ -4,7 +4,6 @@ namespace modules\rbac\controllers\backend;
 
 use Yii;
 use yii\data\ArrayDataProvider;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -20,6 +19,7 @@ class RolesController extends Controller
 {
     /**
      * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -65,7 +65,7 @@ class RolesController extends Controller
 
     /**
      * Displays a single Role model.
-     * @param string $id
+     * @param string|int $id
      * @return mixed
      */
     public function actionView($id)
@@ -83,7 +83,7 @@ class RolesController extends Controller
     /**
      * Creates Role a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return array|string|\yii\web\Response
      */
     public function actionCreate()
     {
@@ -113,8 +113,8 @@ class RolesController extends Controller
     /**
      * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
+     * @param string|int $id
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -139,6 +139,7 @@ class RolesController extends Controller
 
     /**
      * Привязываем роль
+     * @return \yii\web\Response
      * @throws BadRequestHttpException
      */
     public function actionAddRoles()
@@ -239,8 +240,8 @@ class RolesController extends Controller
     /**
      * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
+     * @param string|int $id
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -255,8 +256,8 @@ class RolesController extends Controller
     }
 
     /**
-     * @param $parent
-     * @param $child
+     * @param object $parent
+     * @param object $child
      * @return bool
      */
     protected function detectLoop($parent, $child)

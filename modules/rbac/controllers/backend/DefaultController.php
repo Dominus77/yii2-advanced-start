@@ -1,9 +1,7 @@
 <?php
-
 namespace modules\rbac\controllers\backend;
 
 use Yii;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -17,6 +15,7 @@ use modules\rbac\Module;
 class DefaultController extends Controller
 {
     /**
+     * @inheritdoc
      * @return array
      */
     public function behaviors()
@@ -42,7 +41,7 @@ class DefaultController extends Controller
 
     /**
      * Renders the index view for the module
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {

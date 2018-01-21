@@ -1,15 +1,16 @@
 <?php
-
 namespace modules\main;
 
 use Yii;
 
 /**
- * main module definition class
+ * Class Module
+ * @package modules\main
  */
 class Module extends \yii\base\Module
 {
     /**
+     * @inheritdoc
      * @return array
      */
     public function behaviors()
@@ -22,12 +23,12 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * @inheritdoc
+     * @var string
      */
     public $controllerNamespace = 'modules\main\controllers\frontend';
 
     /**
-     * @var boolean Если модуль используется для админ-панели.
+     * @var bool Если модуль используется для админ-панели.
      */
     public $isBackend;
 
@@ -48,8 +49,8 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * @param $category
-     * @param $message
+     * @param string $category
+     * @param string $message
      * @param array $params
      * @param null|string $language
      * @return string

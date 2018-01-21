@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users;
 
 use Yii;
@@ -12,12 +11,12 @@ use yii\console\Application as ConsoleApplication;
 class Module extends \yii\base\Module
 {
     /**
-     * @inheritdoc
+     * @var string
      */
     public $controllerNamespace = 'modules\users\controllers\frontend';
 
     /**
-     * @var boolean Если модуль используется для админ-панели.
+     * @var bool Если модуль используется для админ-панели.
      */
     public $isBackend;
 
@@ -41,10 +40,10 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * @param $category
-     * @param $message
+     * @param string $category
+     * @param string $message
      * @param array $params
-     * @param null $language
+     * @param null|string $language
      * @return string
      */
     public static function t($category, $message, $params = [], $language = null)

@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\users\controllers\frontend;
 
 use Yii;
@@ -20,6 +19,7 @@ use modules\users\Module;
 class ProfileController extends Controller
 {
     /**
+     * @inheritdoc
      * @return array
      */
     public function behaviors()
@@ -62,7 +62,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return string|Response
+     * @return string
      * @throws NotFoundHttpException
      */
     public function actionUpdate()
@@ -74,7 +74,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return string|Response
+     * @return Response
      * @throws NotFoundHttpException
      */
     public function actionUpdateProfile()
@@ -91,7 +91,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return array|string|Response
+     * @return array|Response
      * @throws NotFoundHttpException
      */
     public function actionUpdatePassword()
@@ -115,7 +115,8 @@ class ProfileController extends Controller
     /**
      * Deletes an existing User model.
      * This delete set status blocked, is successful, logout and the browser will be redirected to the 'home' page.
-     * @return mixed
+     * @return Response
+     * @throws NotFoundHttpException
      */
     public function actionDelete()
     {
@@ -142,13 +143,13 @@ class ProfileController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return User the loaded model
+     * @return null|User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     private function findModel()
     {
         if (!Yii::$app->user->isGuest) {
-            /** @var \modules\users\models\User $identity */
+            /** @var object $identity */
             $identity = Yii::$app->user->identity;
             if (($model = User::findOne($identity->id)) !== null) {
                 return $model;

@@ -11,6 +11,7 @@ class Bootstrap implements BootstrapInterface
 {
     /**
      * @inheritdoc
+     * @param \yii\base\Application $app
      */
     public function bootstrap($app)
     {

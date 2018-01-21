@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\main\controllers\backend;
 
 use Yii;
@@ -16,6 +15,7 @@ class DefaultController extends Controller
 {
     /**
      * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -35,7 +35,7 @@ class DefaultController extends Controller
 
     /**
      * Displays homepage.
-     * @return string|\yii\web\Response
+     * @return mixed|\yii\web\Response
      */
     public function actionIndex()
     {
@@ -44,7 +44,7 @@ class DefaultController extends Controller
             return $this->goHome();
         }
         // Greeting in the admin panel, you can delete what would not be boring :)
-        /** @var \modules\users\models\User $identity */
+        /** @var object $identity */
         $identity = Yii::$app->user->identity;
         Yii::$app->session->setFlash('success', Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]));
 

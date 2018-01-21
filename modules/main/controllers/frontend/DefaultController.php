@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\main\controllers\frontend;
 
 use Yii;
@@ -13,9 +12,9 @@ use modules\main\Module;
  */
 class DefaultController extends Controller
 {
-
     /**
      * @inheritdoc
+     * @return array
      */
     public function actions()
     {
@@ -44,12 +43,12 @@ class DefaultController extends Controller
     /**
      * Displays contact page.
      *
-     * @return mixed
+     * @return mixed|\yii\web\Response
      */
     public function actionContact()
     {
         $model = new ContactForm();
-        if(Yii::$app->user->isGuest)
+        if (Yii::$app->user->isGuest)
             $model->scenario = $model::SCENARIO_GUEST;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -58,7 +57,6 @@ class DefaultController extends Controller
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));
             }
-
             return $this->refresh();
         } else {
             return $this->render('contact', [

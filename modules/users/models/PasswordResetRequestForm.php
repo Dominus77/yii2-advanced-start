@@ -8,6 +8,8 @@ use modules\users\Module;
 /**
  * Class PasswordResetRequestForm
  * @package modules\users\models\frontend
+ *
+ * @property string $email Email
  */
 class PasswordResetRequestForm extends Model
 {
@@ -15,6 +17,7 @@ class PasswordResetRequestForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -33,7 +36,7 @@ class PasswordResetRequestForm extends Model
     /**
      * Sends an email with a link, for resetting the password.
      *
-     * @return boolean whether the email was send
+     * @return bool whether the email was send
      */
     public function sendEmail()
     {

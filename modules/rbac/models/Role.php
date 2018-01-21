@@ -47,6 +47,7 @@ class Role extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -62,7 +63,7 @@ class Role extends Model
     }
 
     /**
-     * @param $attribute
+     * @param string $attribute
      */
     public function validateUniqueName($attribute)
     {
@@ -90,6 +91,7 @@ class Role extends Model
     }
 
     /**
+     * @inheritdoc
      * @return array
      */
     public function attributeLabels()

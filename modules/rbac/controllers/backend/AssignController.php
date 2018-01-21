@@ -36,6 +36,7 @@ class AssignController extends Controller
     }
 
     /**
+     * @inheritdoc
      * @return array
      */
     public function behaviors()
@@ -60,7 +61,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {
@@ -82,8 +83,8 @@ class AssignController extends Controller
     }
 
     /**
-     * @param string $id
-     * @return string
+     * @param string|int $id
+     * @return mixed
      * @throws NotFoundHttpException
      */
     public function actionView($id)
@@ -96,7 +97,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @param string $id
+     * @param string|int $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -124,7 +125,7 @@ class AssignController extends Controller
     }
 
     /**
-     * @param string $id
+     * @param string|int $id
      * @return \yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -148,8 +149,8 @@ class AssignController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return \modules\users\models\User the loaded model
+     * @param string|int $id
+     * @return null|\modules\users\models\User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

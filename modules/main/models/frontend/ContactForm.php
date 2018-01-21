@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\main\models\frontend;
 
 use Yii;
@@ -10,6 +9,12 @@ use modules\main\Module;
 /**
  * Class ContactForm
  * @package modules\main\models\frontend
+ *
+ * @property string $name Name
+ * @property string $email Email
+ * @property string $subject Subject
+ * @property string $body Body
+ * @property string $verifyCode Verify Code
  */
 class ContactForm extends Model
 {
@@ -23,6 +28,7 @@ class ContactForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function rules()
     {
@@ -37,6 +43,10 @@ class ContactForm extends Model
         ];
     }
 
+    /**
+     * @inheritdoc
+     * @return array
+     */
     public function scenarios()
     {
         $scenarios = parent::scenarios();
@@ -46,6 +56,7 @@ class ContactForm extends Model
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
@@ -62,7 +73,7 @@ class ContactForm extends Model
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param string $email the target email address
-     * @return boolean whether the email was sent
+     * @return bool whether the email was sent
      */
     public function sendEmail($email)
     {

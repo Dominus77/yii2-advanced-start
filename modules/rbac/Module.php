@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\rbac;
 
 use Yii;
@@ -12,12 +11,12 @@ use yii\console\Application as ConsoleApplication;
 class Module extends \yii\base\Module
 {
     /**
-     * @var string $userClass
+     * @var string
      */
     public $userClass = 'modules\users\models\User';
 
     /**
-     * @inheritdoc
+     * @var string
      */
     public $controllerNamespace = 'modules\rbac\controllers\backend';
 
@@ -34,13 +33,13 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * @param $category
-     * @param $message
+     * @param string $category
+     * @param string $message
      * @param array $params
-     * @param string $language
+     * @param string|null $language
      * @return string
      */
-    public static function t($category, $message, $params = [], $language = '')
+    public static function t($category, $message, $params = [], $language = null)
     {
         return Yii::t('modules/rbac/' . $category, $message, $params, $language);
     }

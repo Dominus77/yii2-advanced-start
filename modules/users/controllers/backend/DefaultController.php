@@ -19,10 +19,12 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
+    /** @var  mixed $jsFile */
     protected $jsFile;
 
     /**
      * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -96,8 +98,9 @@ class DefaultController extends Controller
 
     /**
      * Displays a single User model.
-     * @param integer $id
-     * @return mixed
+     * @param int|string $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -115,7 +118,7 @@ class DefaultController extends Controller
 
     /**
      * Generate new auth key
-     * @param $id
+     * @param int|string $id
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey($id)
@@ -129,7 +132,7 @@ class DefaultController extends Controller
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
@@ -153,9 +156,9 @@ class DefaultController extends Controller
 
     /**
      * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * @param int|string $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -168,7 +171,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int|string $id
      * @return \yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -187,7 +190,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int|string $id
      * @return \yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -207,7 +210,7 @@ class DefaultController extends Controller
 
     /**
      * Change Status
-     * @param $id
+     * @param int|string $id
      * @return array|\yii\web\Response
      * @throws NotFoundHttpException
      */
@@ -218,7 +221,7 @@ class DefaultController extends Controller
                 Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 /**
                  * Запрещаем менять статус у себя
-                 * @var \modules\users\models\User $identity
+                 * @var object $identity
                  */
                 $identity = Yii::$app->user->identity;
                 if ($model->id !== $identity->id) {
@@ -238,7 +241,7 @@ class DefaultController extends Controller
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int|string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -246,7 +249,9 @@ class DefaultController extends Controller
         /** @var \modules\users\models\User $model */
         $model = $this->findModel($id);
         // Запрещаем удалять самого себя
-        if ($model->id !== Yii::$app->user->identity->getId()) {
+        /** @var object $identity */
+        $identity = Yii::$app->user->identity;
+        if ($model->id !== $identity->id) {
             if ($model->isDeleted()) {
                 if ($model->delete()) {
                     Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
@@ -267,11 +272,11 @@ class DefaultController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param $id string
-     * @return User the loaded model
+     * @param int|string $id
+     * @return null|User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id = '')
+    protected function findModel($id)
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;
@@ -282,7 +287,7 @@ class DefaultController extends Controller
     /**
      * Login action.
      *
-     * @return string
+     * @return string|\yii\web\Response
      */
     public function actionLogin()
     {
@@ -311,7 +316,7 @@ class DefaultController extends Controller
     /**
      * Logout action.
      *
-     * @return string
+     * @return \yii\web\Response
      */
     public function actionLogout()
     {
