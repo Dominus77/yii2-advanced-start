@@ -13,7 +13,7 @@ use modules\users\models\User;
  * @property string $userRoleName User Role Name
  * @property string $date_from Date From
  * @property string $date_to Date To
- * @property integer|string $pageSize Page Size
+ * @property integer $pageSize Page Size
  */
 class UserSearch extends User
 {
@@ -114,8 +114,10 @@ class UserSearch extends User
         if ($this->pageSize) {
             $dataProvider->pagination->pageSize = $this->pageSize;
         }
+
         if (is_integer($query->count()))
             $dataProvider->pagination->totalCount = $query->count();
+
         return $dataProvider;
     }
 }
