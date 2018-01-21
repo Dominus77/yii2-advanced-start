@@ -122,7 +122,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @param mixed $token
      * @param null|mixed $type
-     * @return null|static||\yii\db\BaseActiveRecord
+     * @return null|static|\yii\db\BaseActiveRecord
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
