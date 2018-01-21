@@ -22,7 +22,7 @@ use modules\users\Module;
  * @property string $password_reset_token Password Token
  * @property string $email_confirm_token Email Confirm Token
  * @property string $email Email
- * @property int $status Status
+ * @property int|string $status Status
  * @property int $last_visit Last Visit
  * @property int $created_at Created
  * @property int $updated_at Updated
