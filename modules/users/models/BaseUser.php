@@ -113,22 +113,26 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      * @param int|string $id
-     * @return IdentityInterface|object|\yii\db\BaseActiveRecord
+     * @return IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        /** @var IdentityInterface $result */
+        $result = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return $result;
     }
 
     /**
      * @inheritdoc
      * @param mixed $token
      * @param mixed $type
-     * @return IdentityInterface|object|\yii\db\BaseActiveRecord
+     * @return IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        /** @var IdentityInterface $result */
+        $result = static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        return $result;
     }
 
     /**
