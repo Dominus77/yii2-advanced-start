@@ -200,11 +200,13 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @param bool|false $asArray
      * @return mixed current user ID
      */
-    public function getId()
+    public function getId($asArray = false)
     {
-        return $this->getPrimaryKey();
+        /** @var $this \yii\db\BaseActiveRecord */
+        return $this->getPrimaryKey($asArray);
     }
 
     /**
