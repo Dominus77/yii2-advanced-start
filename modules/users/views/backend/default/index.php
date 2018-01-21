@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'label' => Module::t('module', 'Users'),
                         'format' => 'raw',
-                        'value' => function ($data) {
+                        'value' => function ($data) use ($this) {
                             return $this->render('_avatar_column', ['model' => $data]);
                         },
                         'headerOptions' => ['width' => '120'],
@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]),
                         'format' => 'raw',
-                        'value' => function ($data) {
+                        'value' => function ($data) use ($this) {
                             /** @var modules\users\models\User $identity */
                             $identity = Yii::$app->user->identity;
                             if ($data->id != $identity->id) {

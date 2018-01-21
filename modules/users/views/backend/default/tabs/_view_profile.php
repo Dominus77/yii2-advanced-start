@@ -40,7 +40,7 @@ use modules\users\Module;
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
-                    'value' => function ($model) {
+                    'value' => function ($model) use ($this) {
                         /** @var object $identity */
                         $identity = Yii::$app->user->identity;
                         if ($model->id != $identity->id) {
@@ -62,7 +62,7 @@ use modules\users\Module;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) {
+                    'value' => function ($model) use ($this) {
                         return $this->render('col_auth_key', ['model' => $model]);
                     }
                 ],

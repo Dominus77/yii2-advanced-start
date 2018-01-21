@@ -38,7 +38,7 @@ use modules\users\Module;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) {
+                    'value' => function ($model) use ($this) {
                         /** @var \yii\web\View $this */
                         return $this->render('col_auth_key', ['model' => $model]);
                     }
