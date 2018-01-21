@@ -112,7 +112,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param int|string $id
-     * @return IdentityInterface|null|\yii\db\BaseActiveRecord the identity object that matches the given ID.
+     * @return IdentityInterface|null|static|ActiveRecord the identity object that matches the given ID.
      */
     public static function findIdentity($id)
     {
@@ -122,7 +122,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @param mixed $token
      * @param null|mixed $type
-     * @return IdentityInterface|null|\yii\db\BaseActiveRecord the identity object that matches the given token.
+     * @return IdentityInterface|null|static|ActiveRecord the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
