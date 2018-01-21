@@ -50,7 +50,8 @@ class UserSearch extends User
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        $model = new Model();
+        return $model->scenarios();
     }
 
     /**

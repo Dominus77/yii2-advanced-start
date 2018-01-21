@@ -13,7 +13,7 @@ use modules\users\Module;
 class EmailConfirmForm extends Model
 {
     /**
-     * @var \modules\users\models\BaseUser
+     * @var \modules\users\models\BaseUser|bool
      */
     private $_user;
 

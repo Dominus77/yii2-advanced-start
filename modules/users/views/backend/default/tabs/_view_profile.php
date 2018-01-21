@@ -41,7 +41,7 @@ use modules\users\Module;
                     'attribute' => 'status',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        /** @var modules\users\models\User $identity */
+                        /** @var object $identity */
                         $identity = Yii::$app->user->identity;
                         if ($model->id != $identity->id) {
                             $this->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);

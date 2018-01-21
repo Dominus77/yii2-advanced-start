@@ -19,7 +19,7 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
-    /** @var  mixed $jsFile */
+    /** @var  string $jsFile */
     protected $jsFile;
 
     /**
@@ -73,7 +73,8 @@ class DefaultController extends Controller
     protected function processRegisterJs()
     {
         $this->jsFile = '@modules/users/views/ajax/ajax.js';
-        Yii::$app->assetManager->publish($this->jsFile);
+        $assetManager = Yii::$app->assetManager;
+        $assetManager->publish($this->jsFile);
         $this->getView()->registerJsFile(
             Yii::$app->assetManager->getPublishedUrl($this->jsFile),
             ['depends' => 'yii\web\JqueryAsset',] // depends
