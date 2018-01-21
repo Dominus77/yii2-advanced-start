@@ -206,12 +206,11 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return integer|string
+     * @return int|string
      */
     public function getId()
     {
-        //$primaryKey = $this->getPrimaryKey();
-        return $this->id;
+        return $this->getId();
     }
 
     /**
