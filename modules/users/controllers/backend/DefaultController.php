@@ -19,7 +19,7 @@ use modules\users\Module;
  */
 class DefaultController extends Controller
 {
-    /** @var  string $jsFile */
+    /** @var  string|bool $jsFile */
     protected $jsFile;
 
     /**
