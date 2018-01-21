@@ -107,7 +107,9 @@ class UserController extends Controller
     {
         $model->$attribute = $this->prompt(Console::convertEncoding(Yii::t('app', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':')), [
             'validator' => function ($input, &$error) use ($model, $attribute) {
+                /** @var string $input */
                 $model->$attribute = $input;
+                /** @var \yii\base\Model $model */
                 if ($model->validate([$attribute])) {
                     return true;
                 } else {
