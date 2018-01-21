@@ -42,8 +42,9 @@ class UserController extends Controller
         if (($select = Console::convertEncoding(User::getStatusesArray())) && is_array($select)) {
             $model->status = $this->select(Console::convertEncoding(Yii::t('app', 'Status:')), $select);
             $this->log($model->save());
+        } else {
+            $this->log();
         }
-        $this->log();
     }
 
     /**
@@ -128,11 +129,11 @@ class UserController extends Controller
     }
 
     /**
-     * @param bool $success
+     * @param bool|int $success
      */
     private function log($success = false)
     {
-        if ($success === true) {
+        if ($success === true || $success !== 0) {
             $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
         } else {
             $this->stderr(Console::convertEncoding(Yii::t('app', 'Error!')), Console::FG_RED, Console::BOLD);
