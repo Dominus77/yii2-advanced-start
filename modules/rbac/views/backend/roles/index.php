@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                         ],
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
-                            'view' => function ($url, $model) {
+                            'view' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                     'title' => Module::t('module', 'View'),
                                     'data' => [
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                                     ]
                                 ]);
                             },
-                            'update' => function ($url, $model) {
+                            'update' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                     'title' => Module::t('module', 'Update'),
                                     'data' => [
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                                     ]
                                 ]);
                             },
-                            'delete' => function ($url, $model) {
+                            'delete' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
                                     'title' => Module::t('module', 'Delete'),
                                     'data' => [

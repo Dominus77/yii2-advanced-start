@@ -39,8 +39,11 @@ class UserController extends Controller
             'error' => Console::convertEncoding(Yii::t('app', 'More than 6 symbols')),
         ]));
         $model->generateAuthKey();
-        $model->status = $this->select(Console::convertEncoding(Yii::t('app', 'Status:')), Console::convertEncoding(User::getStatusesArray()));
-        $this->log($model->save());
+        if (($select = Console::convertEncoding(User::getStatusesArray())) && is_array($select)) {
+            $model->status = $this->select(Console::convertEncoding(Yii::t('app', 'Status:')), $select);
+            $this->log($model->save());
+        }
+        $this->log();
     }
 
     /**
