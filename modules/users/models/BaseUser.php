@@ -204,7 +204,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        /** @var $this \yii\db\BaseActiveRecord */
         return $this->getPrimaryKey();
     }
 
@@ -351,7 +350,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     public function getStatusLabelName()
     {
         $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', self::getStatusName(), ['class' => 'label label-' . $name]);
+        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
     }
 
     /**
