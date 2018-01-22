@@ -7,3 +7,5 @@ paths:
     log: console/runtime/logs
 settings:
     colors: true
+coverage:
+    enabled: true
