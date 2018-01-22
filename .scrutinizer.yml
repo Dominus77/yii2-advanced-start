@@ -1,12 +1,12 @@
-filter:
-    excluded_paths:
-        - "api/tests/*"
-        - "backend/tests/*"
-        - "common/tests/*"
-        - "frontend/tests/*"
-        - "environments/*"
-        - "vagrant/*"
-        - "modules/rbac/tests/*"
+#filter:
+#    excluded_paths:
+#        - "api/tests/*"
+#        - "backend/tests/*"
+#        - "common/tests/*"
+#        - "frontend/tests/*"
+#        - "environments/*"
+#        - "vagrant/*"
+#        - "modules/rbac/tests/*"
 checks:
     php:
         code_rating: true
