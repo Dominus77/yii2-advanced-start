@@ -5,6 +5,7 @@ namespace modules\main\controllers\backend;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use dominus77\sweetalert2\Alert;
 use modules\rbac\models\Permission;
 use modules\main\Module;
 
@@ -44,10 +45,16 @@ class DefaultController extends Controller
             Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed access!'));
             return $this->goHome();
         }
-        // Greeting in the admin panel, you can delete what would not be boring :)
+        //Greeting in the admin panel :)
         /** @var object $identity */
         $identity = Yii::$app->user->identity;
-        Yii::$app->session->setFlash('success', Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]));
+        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, [
+            [
+                'title' => Module::t('module', 'Dashboard'),
+                'text' => Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]),
+                'timer' => 3000,
+            ]
+        ]);
 
         return $this->render('index');
     }

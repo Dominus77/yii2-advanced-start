@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use dominus77\sweetalert2\Alert;
 use modules\users\widgets\AvatarWidget;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
@@ -294,7 +294,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false,
             ]) ?>
-            <?= Alert::widget() ?>
+            <?= Alert::widget(['useSessionFlash' => true]) ?>
         </section>
         <section class="content">
             <?= $content ?>
