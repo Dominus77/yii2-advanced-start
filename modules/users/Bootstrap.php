@@ -1,22 +1,20 @@
 <?php
 namespace modules\users;
 
-use yii\base\BootstrapInterface;
+use Yii;
 
 /**
  * Class Bootstrap
  * @package modules\users
  */
-class Bootstrap implements BootstrapInterface
+class Bootstrap
 {
     /**
-     * @inheritdoc
-     * @param \yii\base\Application $app
+     * @param array $config
      */
-    public function bootstrap($app)
+    public function __construct($config = [])
     {
-        // i18n
-        $app->i18n->translations['modules/users/*'] = [
+        Yii::$app->i18n->translations['modules/users/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/users/messages',
             'fileMap' => [
@@ -25,8 +23,7 @@ class Bootstrap implements BootstrapInterface
             ],
         ];
 
-        // Rules
-        $app->getUrlManager()->addRules(
+        Yii::$app->getUrlManager()->addRules(
             [
                 // Rules
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
