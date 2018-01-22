@@ -37,8 +37,6 @@ class Module extends \yii\base\Module
                 $this->controllerNamespace = 'modules\users\commands';
             }
         }
-
-
     }
 
     /**
