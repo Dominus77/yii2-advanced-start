@@ -77,11 +77,9 @@ class DefaultController extends Controller
         $assetManager = Yii::$app->assetManager;
         $assetManager->publish($this->jsFile);
         $url = $assetManager->getPublishedUrl($this->jsFile);
-        if (is_string($url)) {
-            $this->view->registerJsFile($url,
-                ['depends' => 'yii\web\JqueryAsset',] // depends
-            );
-        }
+        $this->view->registerJsFile($url,
+            ['depends' => 'yii\web\JqueryAsset',] // depends
+        );
     }
 
     /**
