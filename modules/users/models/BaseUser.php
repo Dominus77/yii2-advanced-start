@@ -32,6 +32,7 @@ use modules\users\Module;
  * @property int $registration_type Type Registration
  * @property string statusLabelName Status name in label
  * @property array statusesArray Array statuses
+ * @property string statusName Name status
  */
 class BaseUser extends ActiveRecord implements IdentityInterface
 {

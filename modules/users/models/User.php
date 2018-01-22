@@ -11,6 +11,9 @@ use modules\users\Module;
 /**
  * Class User
  * @package modules\users\models
+ *
+ * @property array statusesArray Array statuses
+ * @property string userFullName Full user name
  */
 class User extends BaseUser
 {
