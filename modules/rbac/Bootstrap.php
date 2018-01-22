@@ -11,8 +11,8 @@ class Bootstrap
 {
     public function __construct()
     {
-        // i18n
-        Yii::$app->i18n->translations['modules/rbac/*'] = [
+        $i18n = Yii::$app->i18n;
+        $i18n->translations['modules/rbac/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/rbac/messages',
             'fileMap' => [
@@ -20,8 +20,8 @@ class Bootstrap
             ],
         ];
 
-        // Rules
-        Yii::$app->getUrlManager()->addRules(
+        $urlManager = Yii::$app->urlManager;
+        $urlManager->addRules(
             [
                 // Roles
                 [

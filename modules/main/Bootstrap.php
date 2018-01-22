@@ -11,7 +11,8 @@ class Bootstrap
 {
     public function __construct()
     {
-        Yii::$app->i18n->translations['modules/main/*'] = [
+        $i18n = Yii::$app->i18n;
+        $i18n->translations['modules/main/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/main/messages',
             'fileMap' => [
@@ -21,10 +22,10 @@ class Bootstrap
             ],
         ];
 
-        // Rules
-        Yii::$app->getUrlManager()->addRules(
+        $urlManager = Yii::$app->urlManager;
+        $urlManager->addRules(
             [
-                // объявление правил здесь
+                // Declaration of rules here
                 '' => 'main/default/index',
                 '<_a:(about|contact|captcha)>' => 'main/default/<_a>',
             ]

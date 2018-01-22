@@ -11,7 +11,8 @@ class Bootstrap
 {
     public function __construct()
     {
-        Yii::$app->i18n->translations['modules/users/*'] = [
+        $i18n = Yii::$app->i18n;
+        $i18n->translations['modules/users/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/users/messages',
             'fileMap' => [
@@ -20,7 +21,8 @@ class Bootstrap
             ],
         ];
 
-        Yii::$app->getUrlManager()->addRules(
+        $urlManager = Yii::$app->urlManager;
+        $urlManager->addRules(
             [
                 // Rules
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
