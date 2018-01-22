@@ -25,4 +25,5 @@ return [
     'You are not allowed access!' => 'Вам запрещен доступ!',
     'Welcome, {:username}!' => 'Добро пожаловать, {:username}!',
     'Click the button to continue.' => 'Кликните на кнопке для продолжения.',
+    'Will close in {n, plural, one{# second} few{# seconds} many{# second} other{# seconds}}.' => 'Закроется через {n, plural, one{# секунду} few{# секунды} many{# секунд} other{# секунды}}.',
 ];

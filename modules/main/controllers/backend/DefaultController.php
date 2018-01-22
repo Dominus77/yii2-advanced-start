@@ -48,14 +48,14 @@ class DefaultController extends Controller
         //Greeting in the admin panel :)
         /** @var object $identity */
         $identity = Yii::$app->user->identity;
+        $time = 3000;
         Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, [
             [
-                'title' => Module::t('module', 'Dashboard'),
-                'text' => Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]),
-                'timer' => 3000,
+                'title' => Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]),
+                'text' => Module::t('module', 'Will close in {n, plural, one{# second} few{# seconds} many{# second} other{# seconds}}.', ['n' => $time / 1000]),
+                'timer' => $time,
             ]
         ]);
-
         return $this->render('index');
     }
 }
