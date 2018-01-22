@@ -1,12 +1,12 @@
-#filter:
-#    excluded_paths:
-#        - "api/tests/*"
-#        - "backend/tests/*"
-#        - "common/tests/*"
-#        - "frontend/tests/*"
+filter:
+    excluded_paths:
+        - "api/tests/*"
+        - "backend/tests/*"
+        - "common/tests/*"
+        - "frontend/tests/*"
 #        - "environments/*"
-#        - "vagrant/*"
-#        - "modules/rbac/tests/*"
+        - "vagrant/*"
+        - "modules/rbac/tests/*"
 checks:
     php:
         code_rating: true
@@ -24,8 +24,8 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 tools:
-#    external_code_coverage:
-#        timeout: 600 # Timeout in seconds.
+    external_code_coverage:
+        timeout: 600 # Timeout in seconds.
     php_analyzer: true
     php_code_coverage: false
     php_code_sniffer:
