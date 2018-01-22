@@ -228,7 +228,7 @@ class DefaultController extends Controller
                  * @var object $identity
                  */
                 $identity = Yii::$app->user->identity;
-                if ($model->id !== $identity->id) {
+                if ($model->id !== $identity->id && !$model->isSuperAdmin($model->id)) {
                     $model->setStatus();
                     if ($model->save()) {
                         return [

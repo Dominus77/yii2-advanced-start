@@ -4,6 +4,7 @@ namespace modules\rbac\models;
 
 use Yii;
 use yii\base\Model;
+use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
 
 /**
@@ -12,6 +13,8 @@ use modules\rbac\Module;
  */
 class Role extends Model
 {
+    use ModuleTrait;
+
     // константы ролей
     const ROLE_SUPER_ADMIN = 'super_admin';
     const ROLE_SUPER_ADMIN_DESCRIPTION = 'Super Administrator';

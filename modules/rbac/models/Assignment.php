@@ -5,6 +5,7 @@ namespace modules\rbac\models;
 use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
+use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
 
 /**
@@ -19,6 +20,8 @@ use modules\rbac\Module;
  */
 class Assignment extends Model
 {
+    use ModuleTrait;
+
     public $user;
     public $id;
     public $username;

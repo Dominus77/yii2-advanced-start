@@ -98,9 +98,10 @@ $view = $this;
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) use ($view) {
-                            /** @var modules\users\models\User $identity */
+                            /** @var object $identity */
                             $identity = Yii::$app->user->identity;
-                            if ($data->id != $identity->id) {
+                            /** @var \modules\users\models\User $data */
+                            if ($data->id !== $identity->id && !$data->isSuperAdmin($data->id)) {
                                 $view->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                                 return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
                                     'id' => 'status_link_' . $data->id,

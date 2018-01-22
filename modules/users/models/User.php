@@ -153,4 +153,20 @@ class User extends BaseUser
         }
         return Html::encode($fullName);
     }
+
+    /**
+     * @param integer|string $id
+     * @return bool
+     */
+    public function isSuperAdmin($id)
+    {
+        $id = $id ? $id : $this->id;
+        $authManager = Yii::$app->authManager;
+        $roles = $authManager->getRolesByUser($id);
+        foreach ($roles as $role) {
+            if ($role->name == \modules\rbac\models\Role::ROLE_SUPER_ADMIN)
+                return true;
+        }
+        return false;
+    }
 }
