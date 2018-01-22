@@ -322,7 +322,8 @@ class DefaultController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        $model = new LoginForm();
+        $model->logout();
         return $this->goHome();
     }
 }

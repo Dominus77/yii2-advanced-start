@@ -84,6 +84,15 @@ class LoginForm extends Model
     }
 
     /**
+     * Logout user
+     * @return bool
+     */
+    public function logout()
+    {
+        return Yii::$app->user->logout();
+    }
+
+    /**
      * Finds user by [[username]]
      *
      * @return array|null|User
