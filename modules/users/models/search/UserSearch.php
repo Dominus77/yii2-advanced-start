@@ -23,11 +23,14 @@ class UserSearch extends User
     public $date_to;
     public $pageSize;
 
+    private $_scenario = self::SCENARIO_DEFAULT;
+
     /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->_scenario = static::SCENARIO_DEFAULT;
         parent::init();
         $this->pageSize = Yii::$app->params['user.pageSize'];
     }
@@ -51,7 +54,7 @@ class UserSearch extends User
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        $scenarios = Model::/** @scrutinizer ignore-call */scenarios();
+        $scenarios = Model::scenarios();
         return $scenarios;
     }
 
