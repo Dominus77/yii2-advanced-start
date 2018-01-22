@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\models\search;
 
 use Yii;

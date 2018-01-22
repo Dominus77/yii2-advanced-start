@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\rbac\components;
 
 use yii\rbac\Rule;

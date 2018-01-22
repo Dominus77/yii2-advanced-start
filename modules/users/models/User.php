@@ -1,9 +1,11 @@
 <?php
+
 namespace modules\users\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
 /**
@@ -12,6 +14,8 @@ use modules\users\Module;
  */
 class User extends BaseUser
 {
+    use ModuleTrait;
+
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 

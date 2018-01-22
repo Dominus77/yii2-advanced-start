@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\rbac\controllers\backend;
 
 use Yii;

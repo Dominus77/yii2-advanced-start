@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\widgets;
 
 use Yii;

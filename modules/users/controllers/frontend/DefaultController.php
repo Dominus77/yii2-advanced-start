@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\controllers\frontend;
 
 use Yii;
