@@ -8,8 +8,6 @@ use modules\users\Module;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 /* @var $assignModel \modules\rbac\models\Assignment */
-
-$view = $this;
 ?>
 
 <div class="row">
@@ -28,9 +26,7 @@ $view = $this;
                 [
                     'attribute' => 'userRoleName',
                     'format' => 'raw',
-                    'value' => function ($model) use ($assignModel) {
-                        return $assignModel->getRoleName($model->id);
-                    },
+                    'value' => $assignModel->getRoleName($model->id),
                 ],
                 [
                     'attribute' => 'status',
@@ -40,9 +36,7 @@ $view = $this;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) use ($view) {
-                        return $view->render('col_auth_key', ['model' => $model]);
-                    }
+                    'value' => $this->render('col_auth_key', ['model' => $model]),
                 ],
                 'created_at:datetime',
                 'updated_at:datetime',
