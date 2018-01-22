@@ -9,10 +9,7 @@ use Yii;
  */
 class Bootstrap
 {
-    /**
-     * @param array $config
-     */
-    public function __construct($config = [])
+    public function __construct()
     {
         Yii::$app->i18n->translations['modules/users/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',

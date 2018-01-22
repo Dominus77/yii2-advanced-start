@@ -1,22 +1,17 @@
 <?php
 namespace modules\main;
 
-use yii\base\BootstrapInterface;
+use Yii;
 
 /**
  * Class Bootstrap
  * @package modules\main
  */
-class Bootstrap implements BootstrapInterface
+class Bootstrap
 {
-    /**
-     * @inheritdoc
-     * @param \yii\base\Application $app
-     */
-    public function bootstrap($app)
+    public function __construct()
     {
-        // i18n
-        $app->i18n->translations['modules/main/*'] = [
+        Yii::$app->i18n->translations['modules/main/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/main/messages',
             'fileMap' => [
@@ -27,7 +22,7 @@ class Bootstrap implements BootstrapInterface
         ];
 
         // Rules
-        $app->getUrlManager()->addRules(
+        Yii::$app->getUrlManager()->addRules(
             [
                 // объявление правил здесь
                 '' => 'main/default/index',

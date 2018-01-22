@@ -1,22 +1,18 @@
 <?php
 namespace modules\rbac;
 
-use yii\base\BootstrapInterface;
+use Yii;
 
 /**
  * Class Bootstrap
  * @package modules\rbac
  */
-class Bootstrap implements BootstrapInterface
+class Bootstrap
 {
-    /**
-     * @inheritdoc
-     * @param \yii\base\Application $app
-     */
-    public function bootstrap($app)
+    public function __construct()
     {
         // i18n
-        $app->i18n->translations['modules/rbac/*'] = [
+        Yii::$app->i18n->translations['modules/rbac/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@modules/rbac/messages',
             'fileMap' => [
@@ -25,7 +21,7 @@ class Bootstrap implements BootstrapInterface
         ];
 
         // Rules
-        $app->getUrlManager()->addRules(
+        Yii::$app->getUrlManager()->addRules(
             [
                 // Roles
                 [
