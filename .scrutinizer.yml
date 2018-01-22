@@ -4,7 +4,7 @@ filter:
         - "backend/tests/*"
         - "common/tests/*"
         - "frontend/tests/*"
-#        - "environments/*"
+        - "environments/*"
         - "vagrant/*"
         - "modules/rbac/tests/*"
 checks:
