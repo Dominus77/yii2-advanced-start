@@ -33,7 +33,8 @@ script:
   - php init --env=Development --overwrite=n
   - mysql -e 'CREATE DATABASE yii2_advanced_start_test;'
   - php yii_test migrate --interactive=0
-  - vendor/bin/codecept run
+  - vendor/bin/codecept --coverage-text --coverage-clover=coverage.clover run
+  - vendor/bin/codecept --coverage-clover=coverage.xml run
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
