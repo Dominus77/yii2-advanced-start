@@ -94,37 +94,6 @@ class BaseController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int|string $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        /** @var \modules\users\models\User $model */
-        $model = $this->findModel($id);
-        // Запрещаем удалять самого себя
-        /** @var object $identity */
-        $identity = Yii::$app->user->identity;
-        if ($model->id !== $identity->id) {
-            if ($model->isDeleted()) {
-                if ($model->delete() !== false) {
-                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
-                }
-            } else {
-                $model->scenario = User::SCENARIO_PROFILE_DELETE;
-                $model->status = User::STATUS_DELETED;
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
-                }
-            }
-        } else {
-            Yii::$app->session->setFlash('warning', Module::t('module', 'You can not remove yourself.'));
-        }
-        return $this->redirect(['index']);
-    }
-
-    /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int|string $id
