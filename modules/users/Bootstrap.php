@@ -12,6 +12,15 @@ class Bootstrap
 {
     public function __construct()
     {
+        $this->registerTranslate();
+        $this->registerRules();
+    }
+
+    /**
+     * Translate
+     */
+    protected function registerTranslate()
+    {
         $i18n = Yii::$app->i18n;
         $i18n->translations['modules/users/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
@@ -21,7 +30,13 @@ class Bootstrap
                 'modules/users/mail' => 'mail.php',
             ],
         ];
+    }
 
+    /**
+     * Rules
+     */
+    protected function registerRules()
+    {
         $urlManager = Yii::$app->urlManager;
         $urlManager->addRules(
             [
