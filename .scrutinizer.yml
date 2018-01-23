@@ -8,6 +8,8 @@ filter:
         - "vagrant/*"
         - "modules/rbac/tests/*"
         - "modules/rbac/components/RbacInit.php"
+    dependency_paths:
+        - "modules/rbac/components/RbacInit.php"
 checks:
     php:
         code_rating: true
