@@ -50,6 +50,10 @@ class User extends BaseUser
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
+            ['status', 'integer'],
+            ['status', 'default', 'value' => self::STATUS_WAIT],
+            ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
             [['newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE, self::SCENARIO_PASSWORD_UPDATE, self::SCENARIO_ADMIN_PASSWORD_UPDATE]],
             ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],

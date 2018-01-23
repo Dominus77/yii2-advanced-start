@@ -84,10 +84,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
             ['email', 'unique', 'targetClass' => self::className(), 'message' => Module::t('module', 'This email is already taken.')],
             ['email', 'string', 'max' => 255],
 
-            ['status', 'integer'],
-            ['status', 'default', 'value' => self::STATUS_WAIT],
-            ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-
             [['first_name', 'last_name'], 'string', 'max' => 45],
             [['registration_type'], 'safe'],
         ];
