@@ -58,17 +58,26 @@ class Alert extends \yii\bootstrap\Widget
         foreach ($flashes as $type => $data) {
             if (isset($this->alertTypes[$type])) {
                 $data = (array)$data;
-                foreach ($data as $i => $message) {
-                    /* initialize css class for each alert box */
-                    $this->options['class'] = $this->alertTypes[$type] . $appendCss;
-
-                    /* assign unique id to each alert box */
-                    $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
-                    $this->renderFlash($message);
-                }
+                $this->processTypes($this->alertTypes[$type], $data, $appendCss);
                 $session->removeFlash($type);
             }
+        }
+    }
 
+    /**
+     * @param string $type
+     * @param array $data
+     * @param string $appendCss
+     */
+    protected function processTypes($type, $data, $appendCss)
+    {
+        foreach ($data as $i => $message) {
+            /* initialize css class for each alert box */
+            $this->options['class'] = $type . $appendCss;
+
+            /* assign unique id to each alert box */
+            $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
+            $this->renderFlash($message);
         }
     }
 
@@ -76,7 +85,7 @@ class Alert extends \yii\bootstrap\Widget
      * @param array $message
      * @throws \Exception
      */
-    public function renderFlash($message)
+    protected function renderFlash($message)
     {
         echo \yii\bootstrap\Alert::widget([
             'body' => $message,

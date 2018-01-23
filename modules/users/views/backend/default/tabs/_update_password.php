@@ -13,7 +13,9 @@ use modules\users\Module;
 ?>
 
 <div class="users-backend-profile-update">
-    <?php $form = ActiveForm::begin([
+    <?php
+    $model->scenario = $model::SCENARIO_ADMIN_PASSWORD_UPDATE;
+    $form = ActiveForm::begin([
         'action' => Url::to(['update-password', 'id' => $model->id]),
         'layout' => 'horizontal',
         'fieldConfig' => [

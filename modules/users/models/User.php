@@ -126,6 +126,19 @@ class User extends BaseUser
     }
 
     /**
+     * @return array
+     */
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
+            self::STATUS_ACTIVE => Module::t('module', 'Active'),
+            self::STATUS_WAIT => Module::t('module', 'Wait'),
+            self::STATUS_DELETED => Module::t('module', 'Deleted'),
+        ];
+    }
+
+    /**
      * Set Status
      */
     public function setStatus()
@@ -183,19 +196,6 @@ class User extends BaseUser
     public function isDeleted()
     {
         return $this->status === self::STATUS_DELETED;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getStatusesArray()
-    {
-        return [
-            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
-            self::STATUS_ACTIVE => Module::t('module', 'Active'),
-            self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted'),
-        ];
     }
 
     /**
