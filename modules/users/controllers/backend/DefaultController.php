@@ -169,7 +169,7 @@ class DefaultController extends BaseController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if(!$model->isSuperAdmin()) {
+        if (!$model->isSuperAdmin()) {
             if ($model->isDeleted()) {
                 $model->delete();
                 Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
