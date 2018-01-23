@@ -172,4 +172,56 @@ class User extends BaseUser
         }
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->status === self::STATUS_DELETED;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
+            self::STATUS_ACTIVE => Module::t('module', 'Active'),
+            self::STATUS_WAIT => Module::t('module', 'Wait'),
+            self::STATUS_DELETED => Module::t('module', 'Deleted'),
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * Return <span class="label label-success">Active</span>
+     * @return string
+     */
+    public function getStatusLabelName()
+    {
+        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
+        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLabelsArray()
+    {
+        return [
+            self::STATUS_BLOCKED => 'default',
+            self::STATUS_ACTIVE => 'success',
+            self::STATUS_WAIT => 'warning',
+            self::STATUS_DELETED => 'danger',
+        ];
+    }
 }
