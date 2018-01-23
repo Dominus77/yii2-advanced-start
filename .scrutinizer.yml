@@ -6,7 +6,9 @@ filter:
         - "frontend/tests/*"
         - "environments/*"
         - "vagrant/*"
+        - "modules/users/migrations/*"
         - "modules/rbac/tests/*"
+        - "modules/rbac/migrations/*"
         - "modules/rbac/components/RbacInit.php"
     dependency_paths:
         - "modules/rbac/components/RbacInit.php"
