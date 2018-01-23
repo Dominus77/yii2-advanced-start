@@ -165,7 +165,7 @@ class User extends BaseUser
      * @param integer|string $id
      * @return bool
      */
-    public function isSuperAdmin($id)
+    public function isSuperAdmin($id = '')
     {
         $id = $id ? $id : $this->id;
         $authManager = Yii::$app->authManager;

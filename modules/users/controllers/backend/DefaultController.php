@@ -168,25 +168,17 @@ class DefaultController extends BaseController
      */
     public function actionDelete($id)
     {
-        /** @var \modules\users\models\User $model */
         $model = $this->findModel($id);
-        // Запрещаем удалять самого себя
-        /** @var object $identity */
-        $identity = Yii::$app->user->identity;
-        if ($model->id !== $identity->id) {
+        if(!$model->isSuperAdmin()) {
             if ($model->isDeleted()) {
-                if ($model->delete() !== false) {
-                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
-                }
+                $model->delete();
+                Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
             } else {
-                $model->scenario = User::SCENARIO_PROFILE_DELETE;
-                $model->status = User::STATUS_DELETED;
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
-                }
+                /** @var $model \yii2tech\ar\softdelete\SoftDeleteBehavior */
+                $model->softDelete();
+                /** @var $model User */
+                Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
             }
-        } else {
-            Yii::$app->session->setFlash('warning', Module::t('module', 'You can not remove yourself.'));
         }
         return $this->redirect(['index']);
     }

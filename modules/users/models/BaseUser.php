@@ -4,10 +4,10 @@ namespace modules\users\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use modules\users\Module;
 
 /**
@@ -63,6 +63,12 @@ class BaseUser extends ActiveRecord implements IdentityInterface
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
+            ],
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'status' => self::STATUS_DELETED,
+                ],
             ],
         ];
     }
