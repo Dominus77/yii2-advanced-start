@@ -5,7 +5,8 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
-use kartik\widgets\DatePicker;
+use yii\web\JsExpression;
+use backend\assets\plugins\DatePickerAsset;
 use modules\users\Module;
 
 /* @var $this yii\web\View */
@@ -16,7 +17,31 @@ use modules\users\Module;
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
-$view = $this;
+
+$language = substr(\Yii::$app->language, 0, 2);
+DatePickerAsset::$language = $language;
+DatePickerAsset::register($this);
+
+$js = new JsExpression("
+    initDatePicker();
+    $(document).on('ready pjax:success', function() {
+       initDatePicker();
+    });
+
+    function initDatePicker()
+    {
+        /** @see http://bootstrap-datepicker.readthedocs.io/en/latest/index.html */
+        $('#datepicker').datepicker({
+            language: '{$language}',
+            autoclose: true,
+            format: 'dd.mm.yyyy',
+            zIndexOffset: 1001,
+            orientation: 'bottom'
+        });
+    }
+");
+$this->registerJs($js, \yii\web\View::POS_END);
+
 ?>
 
 <div class="users-backend-default-index">
@@ -71,7 +96,8 @@ $view = $this;
                         ]),
                         'label' => Module::t('module', 'Users'),
                         'format' => 'raw',
-                        'value' => function ($data) use ($view) {
+                        'value' => function ($data) {
+                            $view = Yii::$app->controller->view;
                             return $view->render('_avatar_column', ['model' => $data]);
                         },
                         'headerOptions' => ['width' => '120'],
@@ -97,7 +123,8 @@ $view = $this;
                             ],
                         ]),
                         'format' => 'raw',
-                        'value' => function ($data) use ($view) {
+                        'value' => function ($data) {
+                            $view = Yii::$app->controller->view;
                             /** @var object $identity */
                             $identity = Yii::$app->user->identity;
                             /** @var \modules\users\models\User $data */
@@ -141,32 +168,19 @@ $view = $this;
                     ],
                     [
                         'attribute' => 'last_visit',
-                        'format' => 'raw',
-                        'filter' => DatePicker::widget([
-                            'language' => Yii::$app->language,
-                            'model' => $searchModel,
-                            'attribute' => 'date_from',
-                            'attribute2' => 'date_to',
-                            'options' => ['placeholder' => Module::t('module', '- start -')],
-                            'options2' => ['placeholder' => Module::t('module', '- end -')],
-                            'type' => DatePicker::TYPE_RANGE,
-                            'separator' => '<i class="glyphicon glyphicon-resize-horizontal"></i>',
-                            'pluginOptions' => [
-                                'todayHighlight' => true,
-                                'format' => 'dd-mm-yyyy',
-                                'autoclose' => true,
-                            ]
-                        ]),
-                        'value' => function ($data) {
-                            $formatter = Yii::$app->formatter;
-                            return $formatter->asDatetime($data->last_visit, 'd LLL yyyy, H:mm');
-                        },
+                        'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div>'
+                            . Html::activeInput('text', $searchModel, 'date_from', [
+                                'id' => 'datepicker',
+                                'class' => 'form-control',
+                                'placeholder' => Module::t('module', '- select -'),
+                                'data' => [
+                                    'pjax' => true,
+                                ],
+                            ]) . '</div></div>',
+                        'format' => 'datetime',
                         'headerOptions' => [
-                            'class' => 'text-center',
-                        ],
-                        'contentOptions' => [
-                            'class' => 'text-center',
-                        ],
+                            'style' => 'width: 165px;'
+                        ]
                     ],
                     [
                         'class' => 'yii\grid\ActionColumn',

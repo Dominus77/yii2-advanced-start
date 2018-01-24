@@ -50,6 +50,7 @@ return [
     '- all -' => '- all -',
     '- start -' => '- start -',
     '- end -' => '- end -',
+    '- select -' => '- select -',
 
     'It remains to activate the account.' => 'It remains to activate your account. A letter with a link to activate, we sent you an indication of the registration e-mail address. Please check your mail.',
     'Thank you for registering!' => 'Thank you for registering, your account has successfully been activated. You can now sign in using your login details.',
