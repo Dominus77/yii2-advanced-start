@@ -16,6 +16,7 @@ use modules\users\Module;
     $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
     $form = ActiveForm::begin([
         'action' => Url::to(['update-password']),
+        'validationUrl' => ['ajax-validate-password-form'],
         'layout' => 'horizontal',
         'fieldConfig' => [
             'horizontalCssClasses' => [

@@ -98,11 +98,6 @@ class ProfileController extends Controller
     {
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            $this->validateAjaxPassword($model);
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         } else {
@@ -112,13 +107,18 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param $model User
-     * @return array
+     * @return array|Response
+     * @throws NotFoundHttpException
      */
-    protected function validateAjaxPassword($model)
+    public function actionAjaxValidatePasswordForm()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return ActiveForm::validate($model);
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        return $this->redirect(['index']);
     }
 
     /**
