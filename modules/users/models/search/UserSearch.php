@@ -101,6 +101,23 @@ class UserSearch extends User
             return $dataProvider;
         }
 
+        $this->processFilter($query);
+
+        if ($this->pageSize) {
+            $dataProvider->pagination->pageSize = $this->pageSize;
+        }
+
+        if (is_integer($query->count()))
+            $dataProvider->pagination->totalCount = $query->count();
+
+        return $dataProvider;
+    }
+
+    /**
+     * @param $query \yii\db\QueryInterface
+     */
+    protected function processFilter($query)
+    {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -112,14 +129,5 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'item_name', $this->userRoleName])
             ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 23:59:59') : null]);
-
-        if ($this->pageSize) {
-            $dataProvider->pagination->pageSize = $this->pageSize;
-        }
-
-        if (is_integer($query->count()))
-            $dataProvider->pagination->totalCount = $query->count();
-
-        return $dataProvider;
     }
 }
