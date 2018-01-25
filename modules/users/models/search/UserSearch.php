@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\users\models\User;
+use yii\db\ActiveRecord;
 
 /**
  * Class UserSearch
@@ -70,6 +71,34 @@ class UserSearch extends User
         // add conditions that should always apply here
         $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
 
+        $dataProvider = $this->processDataProvider($query);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $this->processFilter($query);
+
+        if ($this->pageSize) {
+            $dataProvider->pagination->pageSize = $this->pageSize;
+        }
+
+        if (is_integer($query->count()))
+            $dataProvider->pagination->totalCount = $query->count();
+
+        return $dataProvider;
+    }
+
+    /**
+     * @param $query \yii\db\QueryInterface
+     * @return ActiveDataProvider
+     */
+    protected function processDataProvider($query)
+    {
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -92,23 +121,6 @@ class UserSearch extends User
                 'last_visit'
             ]
         ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            $query->where('0=1');
-            return $dataProvider;
-        }
-
-        $this->processFilter($query);
-
-        if ($this->pageSize) {
-            $dataProvider->pagination->pageSize = $this->pageSize;
-        }
-
-        if (is_integer($query->count()))
-            $dataProvider->pagination->totalCount = $query->count();
 
         return $dataProvider;
     }
