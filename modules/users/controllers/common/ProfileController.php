@@ -100,8 +100,7 @@ class ProfileController extends Controller
         $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
+            $this->validateAjaxPassword($model);
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -110,6 +109,16 @@ class ProfileController extends Controller
             Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
+    }
+
+    /**
+     * @param $model User
+     * @return array
+     */
+    protected function validateAjaxPassword($model)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ActiveForm::validate($model);
     }
 
     /**
