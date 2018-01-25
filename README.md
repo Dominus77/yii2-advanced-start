@@ -112,6 +112,7 @@ modules/
         models/         contains module-specific model classes
             backend/    contains module backend-specific model classes
             frontend/   contains module frontend-specific model classes
+        traits/         contains module traits
         views/          contains module view files for the Web application
             backend/    contains module backend view files for the Web application
             frontend/   contains module frontend view files for the Web application
@@ -126,13 +127,15 @@ modules/
         messages/       contains i18n module
         migrations/     contains database migrations module
         models/         contains module-specific model classes
+        tests/          contains module tests
+        traits/         contains module traits
         views/          contains module view files for the Web application
             backend/    contains module backend view files for the Web application
         Bootstrap.php   File autoload module settings app components (urlManager)
         Module.php      General Module class
     users/              contains module users
+        behavior/       contains module behavior
         commands/       contains console controllers (commands)
-        components/     contains module components
         controllers/    contains module Web controller classes
             backend/    contains module backend Web controller classes
             frontend/   contains module frontend Web controller classes
@@ -142,9 +145,12 @@ modules/
         models/         contains module-specific model classes
             backend/    contains module backend-specific model classes
             frontend/   contains module frontend-specific model classes
+        traits/         contains module traits
         views/          contains module view files for the Web application
+            ajax/       contains module ajax.js
             backend/    contains module backend view files for the Web application
             frontend/   contains module frontend view files for the Web application
+        widgets/        contains module widgets
         Bootstrap.php   File autoload module settings app components (urlManager)
         Module.php      General Module class
 ```
