@@ -19,6 +19,9 @@ use modules\users\Module;
  */
 class ProfileController extends Controller
 {
+    /** @var  string|bool $jsFile */
+    protected $jsFile;
+
     /**
      * @inheritdoc
      * @return array
@@ -42,6 +45,29 @@ class ProfileController extends Controller
                 ],
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->processRegisterJs();
+    }
+
+    /**
+     * Publish and register the required JS file
+     */
+    protected function processRegisterJs()
+    {
+        $this->jsFile = '@modules/users/views/ajax/ajax.js';
+        $assetManager = Yii::$app->assetManager;
+        $assetManager->publish($this->jsFile);
+        $url = $assetManager->getPublishedUrl($this->jsFile);
+        $this->view->registerJsFile($url,
+            ['depends' => 'yii\web\JqueryAsset',] // depends
+        );
     }
 
     /**
@@ -138,15 +164,33 @@ class ProfileController extends Controller
     }
 
     /**
-     * Generate new auth key
+     * Action Generate new auth key
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey()
     {
+        $model = $this->processGenerateAuthKey();
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+                'body' => $this->renderAjax('tabs/col_auth_key', ['model' => $model]),
+                'success' => true,
+            ];
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Generate new auth key
+     * @return User|null
+     * @throws NotFoundHttpException
+     */
+    private function processGenerateAuthKey()
+    {
         $model = $this->findModel();
         $model->generateAuthKey();
         $model->save();
-        $this->redirect(['index']);
+        return $model;
     }
 
     /**
