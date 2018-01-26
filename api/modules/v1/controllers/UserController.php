@@ -3,6 +3,7 @@
 namespace api\modules\v1\controllers;
 
 use Yii;
+use api\modules\v1\models\User;
 use yii\rest\ActiveController;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
@@ -40,15 +41,27 @@ class UserController extends ActiveController
                 'basicAuth' => [
                     'class' => HttpBasicAuth::className(),
                     'auth' => function ($username, $password) {
-                        $modelClass = $this->modelClass;
-                        if ($user = $modelClass::find()->where(['username' => $username])->one()) {
-                            return $user->validatePassword($password) ? $user : null;
-                        }
-                        return null;
+                        return $this->processBasicAuth($username, $password);
                     }
                 ],
             ]
         ];
         return $behaviors;
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return User|null
+     */
+    protected function processBasicAuth($username, $password)
+    {
+        /** @var User $modelClass */
+        $modelClass = $this->modelClass;
+        /** @var User $user */
+        if ($user = $modelClass::find()->where(['username' => $username])->one()) {
+            return $user->validatePassword($password) ? $user : null;
+        }
+        return null;
     }
 }
