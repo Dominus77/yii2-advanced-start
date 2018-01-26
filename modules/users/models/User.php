@@ -140,22 +140,16 @@ class User extends BaseUser
 
     /**
      * Set Status
+     * @return int|string
      */
     public function setStatus()
     {
-        switch ($this->status) {
-            case self::STATUS_ACTIVE:
-                $this->status = self::STATUS_BLOCKED;
-                break;
-            case self::STATUS_BLOCKED:
-                $this->status = self::STATUS_ACTIVE;
-                break;
-            case self::STATUS_WAIT:
-                $this->status = self::STATUS_ACTIVE;
-                break;
-            case self::STATUS_DELETED:
-                $this->status = self::STATUS_WAIT;
-                break;
+        if ($this->status === self::STATUS_ACTIVE) {
+            $this->status = self::STATUS_BLOCKED;
+        } else if (($this->status === self::STATUS_BLOCKED) || ($this->status === self::STATUS_WAIT)) {
+            $this->status = self::STATUS_ACTIVE;
+        } else if ($this->status === self::STATUS_DELETED) {
+            $this->status = self::STATUS_WAIT;
         }
         return $this->status;
     }
