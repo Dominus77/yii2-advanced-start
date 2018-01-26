@@ -79,7 +79,15 @@ class UserSearch extends User
                 'defaultOrder' => ['id' => SORT_ASC],
             ],
         ]);
+        return $this->setSortDataProvider($dataProvider);
+    }
 
+    /**
+     * @param ActiveDataProvider $dataProvider
+     * @return mixed
+     */
+    protected function setSortDataProvider($dataProvider)
+    {
         $dataProvider->setSort([
             'attributes' => [
                 'id',
@@ -95,7 +103,6 @@ class UserSearch extends User
                 'last_visit'
             ]
         ]);
-
         return $dataProvider;
     }
 
