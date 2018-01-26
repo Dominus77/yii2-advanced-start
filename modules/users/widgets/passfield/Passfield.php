@@ -1,4 +1,5 @@
 <?php
+
 namespace modules\users\widgets\passfield;
 
 use yii\base\InvalidConfigException;
@@ -33,9 +34,7 @@ class Passfield extends InputWidget
      */
     public function run()
     {
-        PassfieldAsset::register($this->view);
-        $config = empty($this->config) ? json_encode(['locale' => \Yii::$app->language]) : json_encode($this->config);
-        $this->view->registerJs(sprintf('$("#%s").passField(%s)', $this->options['id'], $config));
+        $this->registerAssets();
         if ($this->hasModel()) {
             if ($this->form == null) {
                 throw new InvalidConfigException(__CLASS__ . '.form property must be specified');
@@ -46,5 +45,15 @@ class Passfield extends InputWidget
         } else {
             return Html::passwordInput($this->name, $this->value, $this->options);
         }
+    }
+
+    /**
+     * Register Assets
+     */
+    public function registerAssets()
+    {
+        PassfieldAsset::register($this->view);
+        $config = empty($this->config) ? json_encode(['locale' => \Yii::$app->language]) : json_encode($this->config);
+        $this->view->registerJs(sprintf('$("#%s").passField(%s)', $this->options['id'], $config));
     }
 }
