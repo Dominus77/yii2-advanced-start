@@ -38,38 +38,66 @@ class Bootstrap
     protected function registerRules()
     {
         $urlManager = Yii::$app->urlManager;
-        $urlManager->addRules(
-            [
-                // Rules
-                '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
-                [
-                    'class' => 'yii\web\GroupUrlRule',
-                    'routePrefix' => 'users/default',
-                    'prefix' => 'user',
-                    'rules' => [
-                        '<_a:(create)>' => '<_a>',
-                        '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
-                    ],
-                ],
-                [
-                    'class' => 'yii\web\GroupUrlRule',
-                    'routePrefix' => 'users/default',
-                    'prefix' => 'users',
-                    'rules' => [
-                        '' => 'index',
-                        '<_a:[\w\-]+>' => '<_a>',
-                    ],
-                ],
-                [
-                    'class' => 'yii\web\GroupUrlRule',
-                    'routePrefix' => 'users/profile',
-                    'prefix' => 'profile',
-                    'rules' => [
-                        '' => 'index',
-                        '<_a:[\w\-]+>' => '<_a>',
-                    ],
-                ],
-            ]
-        );
+        $urlManager->addRules($this->rules());
+    }
+
+    /**
+     * @return array
+     */
+    protected function rules()
+    {
+        $rules = [
+            '<_a:(login|logout|signup|email-confirm|request-password-reset|reset-password)>' => 'users/default/<_a>',
+        ];
+        array_push($rules, $this->rulesUser(), $this->rulesUsers(), $this->rulesProfile());
+        return $rules;
+    }
+
+    /**
+     * @return array
+     */
+    protected function rulesUser()
+    {
+        return [
+            'class' => 'yii\web\GroupUrlRule',
+            'routePrefix' => 'users/default',
+            'prefix' => 'user',
+            'rules' => [
+                '<_a:(create)>' => '<_a>',
+                '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function rulesUsers()
+    {
+        return [
+            'class' => 'yii\web\GroupUrlRule',
+            'routePrefix' => 'users/default',
+            'prefix' => 'users',
+            'rules' => [
+                '' => 'index',
+                '<_a:[\w\-]+>' => '<_a>',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function rulesProfile()
+    {
+        return [
+            'class' => 'yii\web\GroupUrlRule',
+            'routePrefix' => 'users/profile',
+            'prefix' => 'profile',
+            'rules' => [
+                '' => 'index',
+                '<_a:[\w\-]+>' => '<_a>',
+            ],
+        ];
     }
 }
