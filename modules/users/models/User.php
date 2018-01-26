@@ -157,6 +157,7 @@ class User extends BaseUser
                 $this->status = self::STATUS_WAIT;
                 break;
         }
+        return $this->status;
     }
 
     /**
