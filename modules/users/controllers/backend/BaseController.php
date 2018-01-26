@@ -19,7 +19,7 @@ use modules\users\Module;
 class BaseController extends Controller
 {
     /** @var  string|bool $jsFile */
-    protected $jsFile;
+    private $jsFile;
 
     /**
      * @inheritdoc
@@ -36,7 +36,7 @@ class BaseController extends Controller
     /**
      * @return array
      */
-    protected function getVerbs()
+    private function getVerbs()
     {
         return [
             'class' => VerbFilter::className(),
@@ -50,7 +50,7 @@ class BaseController extends Controller
     /**
      * @return array
      */
-    protected function getAccess()
+    private function getAccess()
     {
         return [
             'class' => AccessControl::className(),
@@ -139,18 +139,26 @@ class BaseController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            // Если запрещен доступ к Backend сбрасываем авторизацию записываем сообщение в сессию
-            // и перебрасываем на страницу входа
-            if (!Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
-                Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
-                return $this->goHome();
-            }
-            return $this->goBack();
+            return $this->processCheckPermissionLogin();
         }
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @return \yii\web\Response
+     */
+    protected function processCheckPermissionLogin()
+    {
+        // If access to Backend is denied, reset authorization, write a message to the session
+        // and move it to the login page
+        if (!Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
+            Yii::$app->user->logout();
+            Yii::$app->session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
+            return $this->goHome();
+        }
+        return $this->goBack();
     }
 
     /**
