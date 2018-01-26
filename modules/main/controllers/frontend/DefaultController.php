@@ -53,16 +53,26 @@ class DefaultController extends Controller
             $model->scenario = $model::SCENARIO_GUEST;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
-            } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));
-            }
-            return $this->refresh();
+            return $this->processSendEmail($model);
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param ContactForm $model
+     * @return \yii\web\Response
+     */
+    protected function processSendEmail($model)
+    {
+        if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
+        } else {
+            Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));
+        }
+        return $this->refresh();
     }
 
     /**
