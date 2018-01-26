@@ -67,14 +67,22 @@ class User extends BaseUser
     public function validateCurrentPassword($attribute)
     {
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
-            if ($attribute) {
-                if (!$this->validatePassword($this->$attribute))
-                    $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
-            } else {
-                $this->addError($attribute, Module::t('module', 'Enter your current password.'));
-            }
+            $this->processValidatePassword($attribute);
         } else {
             $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+        }
+    }
+
+    /**
+     * @param string $attribute
+     */
+    protected function processValidatePassword($attribute)
+    {
+        if ($attribute) {
+            if (!$this->validatePassword($this->$attribute))
+                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+        } else {
+            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
         }
     }
 
