@@ -154,12 +154,27 @@ class DefaultController extends Controller
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
+
+        if ($model->load(Yii::$app->request->post())) {
+            if($this->processResetPassword($model)) {
+                return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
+            }
         }
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param ResetPasswordForm $model
+     * @return bool|\yii\web\Response
+     */
+    protected function processResetPassword($model)
+    {
+        if ($model->validate() && $model->resetPassword()) {
+            return true;
+        }
+        return false;
     }
 
     /**
