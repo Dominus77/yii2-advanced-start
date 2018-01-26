@@ -36,7 +36,7 @@ use modules\users\Module;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => $this->render('col_auth_key', ['model' => $model]),
+                    'value' => $this->render('../../../common/profile/col_auth_key', ['model' => $model]),
                 ],
                 'created_at:datetime',
                 'updated_at:datetime',

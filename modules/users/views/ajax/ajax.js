@@ -30,7 +30,6 @@ function ajaxLinkGenerateAuthKey(e) {
     e.preventDefault();
 
     var
-        $title = $(e.target),
         $link = $('#' + this.id),
         callUrl = $link.attr('href');
 
