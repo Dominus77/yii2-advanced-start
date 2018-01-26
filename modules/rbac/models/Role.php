@@ -71,14 +71,14 @@ class Role extends Model
      */
     public function validateUniqueName($attribute)
     {
+        if (!$attribute) {
+            $this->addError($attribute, Module::t('module', 'Enter name role.'));
+        }
+
         if (!empty($this->name) && !$this->hasErrors()) {
-            if ($this->$attribute) {
-                $auth = Yii::$app->authManager;
-                if ($auth->getRole($this->name)) {
-                    $this->addError($attribute, Module::t('module', 'This name is already taken.'));
-                }
-            } else {
-                $this->addError($attribute, Module::t('module', 'Enter name role.'));
+            $auth = Yii::$app->authManager;
+            if ($auth->getRole($this->name)) {
+                $this->addError($attribute, Module::t('module', 'This name is already taken.'));
             }
         }
     }

@@ -67,7 +67,7 @@ class User extends BaseUser
     public function validateCurrentPassword($attribute)
     {
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
-            if ($this->$attribute) {
+            if ($attribute) {
                 if (!$this->validatePassword($this->$attribute))
                     $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
             } else {

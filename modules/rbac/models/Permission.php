@@ -67,14 +67,14 @@ class Permission extends Model
      */
     public function validateUniqueName($attribute)
     {
+        if (!$attribute) {
+            $this->addError($attribute, Module::t('module', 'Enter name permission.'));
+        }
+
         if (!empty($this->name) && !$this->hasErrors()) {
-            if ($this->$attribute) {
-                $auth = Yii::$app->authManager;
-                if ($auth->getPermission($this->name)) {
-                    $this->addError($attribute, Module::t('module', 'This name is already taken.'));
-                }
-            } else {
-                $this->addError($attribute, Module::t('module', 'Enter name permission.'));
+            $auth = Yii::$app->authManager;
+            if ($auth->getPermission($this->name)) {
+                $this->addError($attribute, Module::t('module', 'This name is already taken.'));
             }
         }
     }

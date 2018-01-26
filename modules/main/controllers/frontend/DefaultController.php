@@ -59,11 +59,10 @@ class DefaultController extends Controller
                 Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));
             }
             return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
     }
 
     /**
