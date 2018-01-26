@@ -160,20 +160,12 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public
-    function getUserFullName()
+    public function getUserFullName()
     {
-        $fullName = '';
+        $fullName = Module::t('module', 'Guest');
         if (!Yii::$app->user->isGuest) {
-            if ($this->first_name && $this->last_name) {
-                $fullName = $this->first_name . ' ' . $this->last_name;
-            } else if ($this->first_name) {
-                $fullName = $this->first_name;
-            } else if ($this->last_name) {
-                $fullName = $this->last_name;
-            } else {
-                $fullName = $this->username;
-            }
+            $fullName = $this->first_name . ' ' . $this->last_name;
+            $fullName = ($fullName != ' ') ? trim($fullName) : $this->username;
         }
         return Html::encode($fullName);
     }

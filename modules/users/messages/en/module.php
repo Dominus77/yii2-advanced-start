@@ -7,6 +7,7 @@ return [
     'Remember Me' => 'Remember Me',
 
     'Users' => 'Users',
+    'Guest' => 'Guest',
 
     'Created' => 'Created',
     'Updated' => 'Updated',
