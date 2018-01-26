@@ -165,9 +165,9 @@ class User extends BaseUser
         $fullName = Module::t('module', 'Guest');
         if (!Yii::$app->user->isGuest) {
             $fullName = $this->first_name . ' ' . $this->last_name;
-            $fullName = ($fullName != ' ') ? trim($fullName) : $this->username;
+            $fullName = ($fullName != ' ') ? $fullName : $this->username;
         }
-        return Html::encode($fullName);
+        return Html::encode(trim($fullName));
     }
 
     /**
