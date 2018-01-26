@@ -116,13 +116,6 @@ class UserSearch extends User
 
         $this->processFilter($query);
 
-        if ($this->pageSize) {
-            $dataProvider->pagination->pageSize = $this->pageSize;
-        }
-
-        if (is_integer($query->count()))
-            $dataProvider->pagination->totalCount = $query->count();
-
         return $dataProvider;
     }
 
