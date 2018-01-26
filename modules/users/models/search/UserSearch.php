@@ -57,6 +57,17 @@ class UserSearch extends User
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    protected function getQuery()
+    {
+        $query = User::find();
+        // add conditions that should always apply here
+        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
+        return $query;
+    }
+
+    /**
      * Creates data provider instance with search query applied
      *
      * @param array $params
@@ -65,10 +76,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
-
-        // add conditions that should always apply here
-        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
+        $query = $this->getQuery();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
