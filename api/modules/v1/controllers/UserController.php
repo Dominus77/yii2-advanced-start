@@ -52,7 +52,7 @@ class UserController extends ActiveController
     /**
      * @param string $username
      * @param string $password
-     * @return User|null
+     * @return User|null|array
      */
     protected function processBasicAuth($username, $password)
     {
