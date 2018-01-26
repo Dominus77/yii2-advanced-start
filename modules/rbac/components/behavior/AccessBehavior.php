@@ -38,18 +38,8 @@ class AccessBehavior extends Behavior
      */
     public function accessAction()
     {
-        if (!empty($this->permission) && !$this->checkPermission()) {
-            if (!Yii::$app->user->isGuest) {
-                Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed access!'));
-            }
-        }
-
-        if (!empty($this->role) && !$this->checkRole()) {
-            if (!Yii::$app->user->isGuest) {
-                Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed access!'));
-            }
+        if ((!empty($this->permission) && !$this->checkPermission()) || (!empty($this->role) && !$this->checkRole())) {
+            $this->processLogout();
         }
     }
 
@@ -77,5 +67,16 @@ class AccessBehavior extends Behavior
             }
         }
         return false;
+    }
+
+    /**
+     * Logout and set Flash message
+     */
+    private function processLogout()
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed access!'));
+        }
     }
 }
