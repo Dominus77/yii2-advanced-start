@@ -138,33 +138,45 @@ class DefaultController extends BaseController
      */
     public function actionStatus($id)
     {
-        if (Yii::$app->request->isAjax) {
-            if ($model = $this->findModel($id)) {
+        if ($model = $this->processChangeStatus($id)) {
+            if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                /**
-                 * Запрещаем менять статус у себя
-                 * @var object $identity
-                 */
-                $identity = Yii::$app->user->identity;
-                if ($model->id !== $identity->id && !$model->isSuperAdmin($model->id)) {
-                    $model->setStatus();
-                    if ($model->save()) {
-                        return [
-                            'body' => $model->getStatusLabelName(),
-                            'success' => true,
-                        ];
-                    }
-                }
+                return [
+                    'body' => $model->getStatusLabelName(),
+                    'success' => true,
+                ];
             }
         }
         return $this->redirect(['index']);
     }
 
     /**
+     * @param int|string $id
+     * @return bool|User|null
+     * @throws NotFoundHttpException
+     */
+    private function processChangeStatus($id)
+    {
+        $model = $this->findModel($id);
+        /** @var object $identity */
+        $identity = Yii::$app->user->identity;
+        if ($model->id !== $identity->id && !$model->isSuperAdmin($model->id)) {
+            $model->setStatus();
+            $model->save();
+            return $model;
+        }
+        return false;
+    }
+
+    /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int|string $id
-     * @return mixed
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
