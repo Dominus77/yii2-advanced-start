@@ -73,37 +73,25 @@ class UserSearch extends User
      */
     protected function getDataProvider($query)
     {
-        $dataProvider = new ActiveDataProvider([
+        return new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => ['id' => SORT_ASC],
+                'attributes' => [
+                    'id',
+                    'username',
+                    'email',
+                    'status',
+                    'userRoleName' => [
+                        'asc' => ['item_name' => SORT_ASC],
+                        'desc' => ['item_name' => SORT_DESC],
+                        'default' => SORT_ASC,
+                        'label' => 'Role Name',
+                    ],
+                    'last_visit'
+                ]
             ],
         ]);
-        return $this->setSortDataProvider($dataProvider);
-    }
-
-    /**
-     * @param ActiveDataProvider $dataProvider
-     * @return mixed
-     */
-    protected function setSortDataProvider($dataProvider)
-    {
-        $dataProvider->setSort([
-            'attributes' => [
-                'id',
-                'username',
-                'email',
-                'status',
-                'userRoleName' => [
-                    'asc' => ['item_name' => SORT_ASC],
-                    'desc' => ['item_name' => SORT_DESC],
-                    'default' => SORT_ASC,
-                    'label' => 'Role Name',
-                ],
-                'last_visit'
-            ]
-        ]);
-        return $dataProvider;
     }
 
     /**
