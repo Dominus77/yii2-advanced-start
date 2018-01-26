@@ -30,6 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'options' => ['id' => 'password'],
                     'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
                 ],
+                [
+                    'label' => Module::t('module', 'Avatar'),
+                    'content' => $this->render('../../common/profile/tabs/_update_avatar', [
+                        'model' => $model,
+                    ]),
+                    'options' => ['id' => 'avatar'],
+                    'active' => (Yii::$app->request->get('tab') == 'avatar') ? true : false,
+                ],
             ]
         ]); ?>
     </div>
