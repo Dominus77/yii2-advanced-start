@@ -68,16 +68,11 @@ class UserSearch extends User
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
+     * @param \yii\db\ActiveQuery $query
      * @return ActiveDataProvider
      */
-    public function search($params)
+    protected function getDataProvider($query)
     {
-        $query = $this->getQuery();
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -100,6 +95,21 @@ class UserSearch extends User
                 'last_visit'
             ]
         ]);
+
+        return $dataProvider;
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = $this->getQuery();
+        $dataProvider = $this->getDataProvider($query);
 
         $this->load($params);
 
