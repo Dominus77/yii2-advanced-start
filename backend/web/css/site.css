@@ -39,3 +39,8 @@ div.required label:after {
 .nav-tabs-custom {
     margin-top: 10px;
 }
+
+/* Starting with v7.6.0, the font size for .swal2-popup is used, which affects the size of the window itself. */
+.swal2-popup {
+    font-size: 1.4rem !important;
+}

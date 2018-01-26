@@ -28,30 +28,46 @@ class BaseController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                    'logout' => ['POST'],
-                ],
+            'verbs' => $this->getVerbs(),
+            'access' => $this->getAccess()
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getVerbs()
+    {
+        return [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'delete' => ['POST'],
+                'logout' => ['POST'],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login'],
-                        'allow' => true,
-                        'roles' => ['?']
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@']
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => [Permission::PERMISSION_MANAGER_USERS]
-                    ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getAccess()
+    {
+        return [
+            'class' => AccessControl::className(),
+            'rules' => [
+                [
+                    'actions' => ['login'],
+                    'allow' => true,
+                    'roles' => ['?']
+                ],
+                [
+                    'actions' => ['logout'],
+                    'allow' => true,
+                    'roles' => ['@']
+                ],
+                [
+                    'allow' => true,
+                    'roles' => [Permission::PERMISSION_MANAGER_USERS]
                 ],
             ],
         ];
