@@ -84,6 +84,7 @@ class PermissionsController extends Controller
      * Creates Permission a new Permission model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return array|string|\yii\web\Response
+     * @throws \Exception
      */
     public function actionCreate()
     {
@@ -115,6 +116,7 @@ class PermissionsController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string|int $id
      * @return string|\yii\web\Response
+     * @throws \Exception
      */
     public function actionUpdate($id)
     {
@@ -141,6 +143,7 @@ class PermissionsController extends Controller
      * Привязываем разрешение
      * @return array|\yii\web\Response
      * @throws BadRequestHttpException
+     * @throws \Exception
      */
     public function actionAddPermissions()
     {

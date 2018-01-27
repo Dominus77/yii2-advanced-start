@@ -101,6 +101,7 @@ class AssignController extends Controller
      * @param string|int $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
+     * @throws \Exception
      */
     public function actionUpdate($id)
     {

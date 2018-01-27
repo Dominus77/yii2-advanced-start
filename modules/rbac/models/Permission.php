@@ -71,12 +71,24 @@ class Permission extends Model
             $this->addError($attribute, Module::t('module', 'Enter name permission.'));
         }
 
-        if (!empty($this->name) && !$this->hasErrors()) {
+        if (!$this->hasErrors()) {
+            $this->processCheckPermissionName($attribute);
+        }
+    }
+
+    /**
+     * @param string $attribute
+     * @return mixed
+     */
+    public function processCheckPermissionName($attribute)
+    {
+        if (!empty($this->name)) {
             $auth = Yii::$app->authManager;
             if ($auth->getPermission($this->name)) {
                 $this->addError($attribute, Module::t('module', 'This name is already taken.'));
             }
         }
+        return $attribute;
     }
 
     /**
