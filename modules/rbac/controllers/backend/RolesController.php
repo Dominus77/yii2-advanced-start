@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
 use modules\rbac\models\Role;
 use modules\rbac\Module;
 
@@ -91,11 +93,6 @@ class RolesController extends Controller
         $model = new Role(['scenario' => Role::SCENARIO_CREATE]);
         $model->isNewRecord = true;
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
-
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $auth = Yii::$app->authManager;
@@ -109,6 +106,19 @@ class RolesController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @return array|bool
+     */
+    public function actionAjaxValidateForm()
+    {
+        $model = new Role(['scenario' => Role::SCENARIO_CREATE]);
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        return false;
     }
 
     /**

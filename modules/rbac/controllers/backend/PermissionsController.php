@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\widgets\ActiveForm;
+use yii\web\Response;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
 
@@ -103,7 +104,7 @@ class PermissionsController extends Controller
             }
         }
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
@@ -113,10 +114,8 @@ class PermissionsController extends Controller
     public function actionAjaxValidateForm()
     {
         $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
-        $model->isNewRecord = true;
-
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
         return false;
