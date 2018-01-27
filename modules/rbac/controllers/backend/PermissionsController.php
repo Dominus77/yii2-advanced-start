@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
+use yii\widgets\ActiveForm;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
 
@@ -83,18 +84,13 @@ class PermissionsController extends Controller
     /**
      * Creates Permission a new Permission model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return array|string|\yii\web\Response
+     * @return string|\yii\web\Response
      * @throws \Exception
      */
     public function actionCreate()
     {
         $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
         $model->isNewRecord = true;
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -109,6 +105,21 @@ class PermissionsController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @return array|bool
+     */
+    public function actionAjaxValidateForm()
+    {
+        $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
+        $model->isNewRecord = true;
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        return false;
     }
 
     /**
