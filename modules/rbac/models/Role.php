@@ -74,13 +74,24 @@ class Role extends Model
         if (!$attribute) {
             $this->addError($attribute, Module::t('module', 'Enter name role.'));
         }
+        if (!$this->hasErrors()) {
+            $this->processCheckRoleName($attribute);
+        }
+    }
 
-        if (!empty($this->name) && !$this->hasErrors()) {
+    /**
+     * @param string $attribute
+     * @return mixed
+     */
+    public function processCheckRoleName($attribute)
+    {
+        if (!empty($this->name)) {
             $auth = Yii::$app->authManager;
             if ($auth->getRole($this->name)) {
                 $this->addError($attribute, Module::t('module', 'This name is already taken.'));
             }
         }
+        return $attribute;
     }
 
     /**
