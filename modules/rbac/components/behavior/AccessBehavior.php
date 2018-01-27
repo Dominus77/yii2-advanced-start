@@ -38,7 +38,7 @@ class AccessBehavior extends Behavior
      */
     public function accessAction()
     {
-        if ((!empty($this->permission) && !$this->checkPermission()) || (!empty($this->role) && !$this->checkRole())) {
+        if (($this->checkPermission() === false) && ($this->checkRole() === false)) {
             $this->processLogout();
         }
     }
