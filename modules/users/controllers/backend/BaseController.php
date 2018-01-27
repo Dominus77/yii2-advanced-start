@@ -3,6 +3,7 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
+use yii\helpers\Url;
 use modules\users\models\LoginForm;
 use modules\users\models\User;
 use yii\web\Controller;
@@ -99,6 +100,8 @@ class BaseController extends Controller
 
     /**
      * Action Generate new auth key
+     * @param int|string $id
+     * @return array|Response
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey($id)
@@ -107,7 +110,7 @@ class BaseController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'body' => $this->renderAjax('tabs/col_auth_key', ['model' => $model]),
+                'body' => $this->renderAjax('../../common/profile/col_auth_key', ['model' => $model, 'url' => Url::to(['generate-auth-key', 'id' => $model->id])]),
                 'success' => true,
             ];
         }

@@ -65,7 +65,7 @@ $view = $this;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => $this->render('col_auth_key', ['model' => $model]),
+                    'value' => $this->render('../../../common/profile/col_auth_key', ['model' => $model, 'url' => Url::to(['generate-auth-key', 'id' => $model->id])]),
                 ],
                 [
                     'attribute' => 'created_at',

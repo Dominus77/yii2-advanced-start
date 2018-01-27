@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                             ],
                             [
                                 'attribute' => 'role',
+                                'label' => Module::t('module', 'Role'),
                                 'format' => 'raw',
                                 'value' => function ($model) use ($assignModel) {
                                     return $assignModel->getRoleName($model->id);
