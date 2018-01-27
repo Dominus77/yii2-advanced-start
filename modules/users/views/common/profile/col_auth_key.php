@@ -18,7 +18,7 @@ $this->registerJs(new yii\web\JsExpression("
         <code><?= $model->auth_key ?></code>
     </div>
     <div class="col-md-6">
-        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> ' . Module::t('module', 'Generate'), ['generate-auth-key'], [
+        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span> ' . Module::t('module', 'Generate'), ['/profile/generate-auth-key'], [
             'id' => 'auth_key_link',
             'class' => 'btn btn-sm btn-default',
             'title' => Module::t('module', 'Generate new key'),

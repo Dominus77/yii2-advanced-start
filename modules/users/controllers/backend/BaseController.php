@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use modules\rbac\models\Permission;
+use yii\web\Response;
 use modules\users\Module;
 
 /**
@@ -97,16 +98,34 @@ class BaseController extends Controller
     }
 
     /**
-     * Generate new auth key
-     * @param int|string $id
+     * Action Generate new auth key
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey($id)
     {
+        $model = $this->processGenerateAuthKey($id);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                'body' => $this->renderAjax('tabs/col_auth_key', ['model' => $model]),
+                'success' => true,
+            ];
+        }
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    /**
+     * Generate new auth key
+     * @param int|string $id
+     * @return User|null
+     * @throws NotFoundHttpException
+     */
+    public function processGenerateAuthKey($id)
+    {
         $model = $this->findModel($id);
         $model->generateAuthKey();
         $model->save();
-        $this->redirect(['view', 'id' => $model->id]);
+        return $model;
     }
 
     /**

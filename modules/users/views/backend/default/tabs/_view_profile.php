@@ -16,6 +16,7 @@ $view = $this;
 <div class="row">
     <div class="col-sm-2">
         <?= AvatarWidget::widget([
+            'email' => $model->email,
             'imageOptions' => [
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'margin-bottom:10px; width:auto',
@@ -64,9 +65,7 @@ $view = $this;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) use ($view) {
-                        return $view->render('col_auth_key', ['model' => $model]);
-                    }
+                    'value' => $this->render('col_auth_key', ['model' => $model]),
                 ],
                 [
                     'attribute' => 'created_at',

@@ -171,7 +171,7 @@ class ProfileController extends Controller
     {
         $model = $this->processGenerateAuthKey();
         if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'body' => $this->renderAjax('../../common/profile/col_auth_key', ['model' => $model]),
                 'success' => true,
