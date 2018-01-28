@@ -14,6 +14,8 @@ class RbacInit
 {
     /**
      * @return bool
+     * @throws \Exception
+     * @throws \yii\base\Exception
      */
     public static function processInit()
     {

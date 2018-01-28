@@ -77,6 +77,7 @@ class UserController extends Controller
 
     /**
      * @throws Exception
+     * @throws \yii\base\Exception
      */
     public function actionChangePassword()
     {

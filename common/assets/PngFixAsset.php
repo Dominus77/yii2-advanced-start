@@ -14,15 +14,22 @@ class PngFixAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@common/assets/src/pngfix';
+    public $sourcePath;
 
     /**
      * @var array
      */
-    public $js = [
-        'jquery.ifixpng.js',
-        'script.js'
-    ];
+    public $js = [];
+
+    public function init()
+    {
+        parent::init();
+        $this->sourcePath = __DIR__ . '/src/pngfix';
+        $this->js = [
+            'jquery.ifixpng.js',
+            'script.js'
+        ];
+    }
 
     /**
      * @var array

@@ -41,6 +41,7 @@ class EmailConfirmForm extends Model
      * Confirm email.
      *
      * @return bool|\yii\rbac\Assignment if email was confirmed.
+     * @throws \Exception
      */
     public function confirmEmail()
     {

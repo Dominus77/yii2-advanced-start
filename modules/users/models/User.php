@@ -14,6 +14,7 @@ use modules\users\Module;
  *
  * @property array statusesArray Array statuses
  * @property string userFullName Full user name
+ * @property int|string registrationType Type registered
  */
 class User extends BaseUser
 {
@@ -120,6 +121,7 @@ class User extends BaseUser
      *
      * @param bool $insert
      * @return bool
+     * @throws \yii\base\Exception
      */
     public function beforeSave($insert)
     {
@@ -182,8 +184,7 @@ class User extends BaseUser
      * @param integer|string $id
      * @return bool
      */
-    public
-    function isSuperAdmin($id = '')
+    public function isSuperAdmin($id = '')
     {
         $id = $id ? $id : $this->id;
         $authManager = Yii::$app->authManager;
@@ -198,8 +199,7 @@ class User extends BaseUser
     /**
      * @return bool
      */
-    public
-    function isDeleted()
+    public function isDeleted()
     {
         return $this->status === self::STATUS_DELETED;
     }
@@ -207,8 +207,7 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public
-    function getStatusName()
+    public function getStatusName()
     {
         return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
     }
@@ -217,8 +216,7 @@ class User extends BaseUser
      * Return <span class="label label-success">Active</span>
      * @return string
      */
-    public
-    function getStatusLabelName()
+    public function getStatusLabelName()
     {
         $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
         return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
@@ -227,8 +225,7 @@ class User extends BaseUser
     /**
      * @return array
      */
-    public
-    static function getLabelsArray()
+    public static function getLabelsArray()
     {
         return [
             self::STATUS_BLOCKED => 'default',

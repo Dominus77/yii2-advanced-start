@@ -3,6 +3,7 @@
 namespace backend\assets\plugins;
 
 use yii\web\AssetBundle;
+use yii\web\JsExpression;
 
 /**
  * Class iCheckAsset
@@ -37,7 +38,7 @@ class iCheckAsset extends AssetBundle
         ];
         $this->js = ['iCheck/icheck' . $min . '.js'];
         $view = \Yii::$app->getView();
-        $view->registerJs(new \yii\web\JsExpression("
+        $view->registerJs(new JsExpression("
             $(function () {
                 $('input.iCheck').iCheck({
                     checkboxClass: 'icheckbox_square-blue',

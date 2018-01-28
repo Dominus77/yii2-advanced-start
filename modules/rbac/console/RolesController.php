@@ -18,6 +18,7 @@ class RolesController extends Controller
     /**
      * Adds role to user
      * @throws Exception
+     * @throws \Exception
      */
     public function actionAssign()
     {

@@ -67,6 +67,7 @@ class ResetPasswordForm extends Model
      * Resets password.
      *
      * @return bool if password was reset.
+     * @throws \yii\base\Exception
      */
     public function resetPassword()
     {

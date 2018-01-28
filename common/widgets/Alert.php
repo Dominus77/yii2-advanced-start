@@ -68,6 +68,7 @@ class Alert extends \yii\bootstrap\Widget
      * @param string $type
      * @param array $data
      * @param string $appendCss
+     * @throws \Exception
      */
     protected function processTypes($type, $data, $appendCss)
     {

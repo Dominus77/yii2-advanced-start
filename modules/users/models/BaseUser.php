@@ -33,6 +33,7 @@ use modules\users\Module;
  * @property string statusLabelName Status name in label
  * @property array statusesArray Array statuses
  * @property string statusName Name status
+ * @property int|string registrationType Type registered
  */
 class BaseUser extends ActiveRecord implements IdentityInterface
 {
@@ -251,6 +252,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
+     * @throws \yii\base\Exception
      */
     public function setPassword($password)
     {

@@ -37,11 +37,12 @@ class BootstrapAsset extends AssetBundle
         $this->js = ['js/bootstrap' . $min . '.js'];
 
         // Подключаем свои файлы Bootstrap
-        Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapAsset'] = [
+        $assetManager = Yii::$app->assetManager;
+        $assetManager->bundles['yii\bootstrap\BootstrapAsset'] = [
             'sourcePath' => $this->sourcePath,
             'css' => [$this->css],
         ];
-        Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = [
+        $assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = [
             'sourcePath' => $this->sourcePath,
             'js' => [$this->js],
         ];

@@ -10,7 +10,6 @@ use modules\users\Module;
 /* @var $model modules\users\models\User */
 /* @var $assignModel \modules\rbac\models\Assignment */
 
-$view = $this;
 ?>
 
 <div class="row">
@@ -43,7 +42,8 @@ $view = $this;
                 [
                     'attribute' => 'status',
                     'format' => 'raw',
-                    'value' => function ($model) use ($view) {
+                    'value' => function ($model) {
+                        $view = Yii::$app->controller->view;
                         /** @var object $identity */
                         $identity = Yii::$app->user->identity;
                         if ($model->id != $identity->id) {

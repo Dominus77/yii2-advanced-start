@@ -14,7 +14,7 @@ use modules\rbac\Module;
 trait ModuleTrait
 {
     /**
-     * @return Module
+     * @return null|\yii\base\Module
      */
     public function getModule()
     {

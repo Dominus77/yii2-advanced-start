@@ -17,6 +17,5 @@ use modules\users\Module;
             ]
         ]) ?>
     </p>
-
     <p><?= Module::t('module', 'To change the avatar, please use the {:link} service.', [':link' => Html::a('Gravatar', 'http://www.gravatar.com', ['target' => '_blank'])]) ?></p>
 </div>
