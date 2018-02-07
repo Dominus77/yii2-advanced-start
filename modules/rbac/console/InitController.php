@@ -109,6 +109,8 @@ class InitController extends Controller
                     $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
                     $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_UPDATE_OWN_POST));
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -123,17 +125,19 @@ class InitController extends Controller
     {
         foreach ($roles as $key => $role) {
             switch ($key) {
-                case Role::ROLE_EDITOR:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_DEFAULT));
-                    break;
-                case Role::ROLE_MANAGER:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_EDITOR));
+                case Role::ROLE_SUPER_ADMIN:
+                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_ADMIN));
                     break;
                 case Role::ROLE_ADMIN:
                     $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_MANAGER));
                     break;
-                case Role::ROLE_SUPER_ADMIN:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_ADMIN));
+                case Role::ROLE_MANAGER:
+                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_EDITOR));
+                    break;
+                case Role::ROLE_EDITOR:
+                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_DEFAULT));
+                    break;
+                default:
                     break;
             }
         }
