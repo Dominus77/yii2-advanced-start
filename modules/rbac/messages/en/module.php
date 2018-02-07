@@ -25,6 +25,7 @@ return [
     'Created' => 'Created',
     'Updated' => 'Updated',
 
+    'Super Administrator' => 'Super Administrator',
     'Administrator' => 'Administrator',
     'Manager' => 'Manager',
     'Editor' => 'Editor',
@@ -33,14 +34,14 @@ return [
     'Access to RBAC management' => 'Access to RBAC management',
     'Manager Users' => 'Manager Users',
     'Access to the admin area' => 'Access to the admin area',
-    'Editing Users' => 'Editing Users',
-    'Editing the portfolio' => 'Editing the portfolio',
-    'Editing services' => 'Editing services',
+    'Access to Users management' => 'Access to Users management',
+    'Access to Posts management' => 'Access to Posts management',
     'Editing your own post' => 'Editing your own post',
 
     'Permissions by role' => 'Permissions by role',
     'Items permissions' => 'itemsPermissions',
     'Roles by role' => 'Roles by role',
+    'Items roles' => 'Items roles',
 
     'Role' => 'Role',
     'Permission' => 'Permission',

@@ -25,6 +25,7 @@ return [
     'Created' => 'Дата создания',
     'Updated' => 'Дата изменения',
 
+    'Super Administrator' => 'Супер Администратор',
     'Administrator' => 'Администратор',
     'Manager' => 'Менеджер',
     'Editor' => 'Редактор',
@@ -33,9 +34,8 @@ return [
     'Access to RBAC management' => 'Доступ к управлению RBAC',
     'Manager Users' => 'Управление пользователями',
     'Access to the admin area' => 'Доступ к админке',
-    'Editing Users' => 'Редактирование пользователей',
-    'Editing the portfolio' => 'Редактирование портфолио',
-    'Editing services' => 'Редактирование услуг',
+    'Access to Users management' => 'Доступ к управлению пользователями',
+    'Access to Posts management' => 'Доступ к управлению постами',
     'Editing your own post' => 'Редактирование собственного поста',
 
     'Permissions by role' => 'Наследует разрешения',
