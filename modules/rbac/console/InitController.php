@@ -10,7 +10,7 @@ use modules\rbac\models\Role;
 use modules\rbac\models\Permission;
 
 /**
- * Class RbacController
+ * Class InitController
  * Инициализатор RBAC выполняется в консоли php yii rbac/init
  *
  * @package console\controllers
