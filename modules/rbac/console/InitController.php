@@ -8,6 +8,7 @@ use yii\console\Controller;
 use yii\helpers\Console;
 use modules\rbac\models\Role;
 use modules\rbac\models\Permission;
+use modules\rbac\Module;
 
 /**
  * Class InitController
@@ -67,7 +68,7 @@ class InitController extends Controller
         $result = [];
         foreach ($array as $key => $value) {
             $result[$key] = ($type === self::TYPE_ROLE) ? $auth->createRole($key) : $auth->createPermission($key);
-            $result[$key]->description = $value;
+            $result[$key]->description = Module::t('module', $value);
             // Add rules
             if ($key == Permission::PERMISSION_UPDATE_OWN_POST) {
                 $authorRule = new \modules\rbac\components\AuthorRule;
