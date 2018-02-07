@@ -88,31 +88,32 @@ class InitController extends Controller
      */
     protected function processAddPermissionToRoles($auth, $roles = [], $permissions = [])
     {
-        foreach ($roles as $key => $role) {
-            switch ($key) {
-                case Role::ROLE_SUPER_ADMIN:
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_RBAC));
-                    break;
-                case Role::ROLE_ADMIN:
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
-                    break;
-                case Role::ROLE_MANAGER:
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
-                    break;
-                case Role::ROLE_EDITOR:
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
-                    $auth->addChild($role, ArrayHelper::getValue($permissions, Permission::PERMISSION_UPDATE_OWN_POST));
-                    break;
-                default:
-                    break;
-            }
-        }
+        // ROLE_SUPER_ADMIN
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_RBAC));
+        // ROLE_ADMIN
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
+        // ROLE_MANAGER
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_MANAGER),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_MANAGER),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+        // ROLE_EDITOR
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_EDITOR),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_EDITOR),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_UPDATE_OWN_POST));
     }
 
     /**
