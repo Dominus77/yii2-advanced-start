@@ -6,7 +6,6 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use modules\rbac\components\RbacInit;
 use modules\rbac\Module;
 
 /**
@@ -55,7 +54,8 @@ class DefaultController extends Controller
      */
     public function actionReset()
     {
-        RbacInit::processInit();
+        $auth = Yii::$app->authManager;
+        $auth->removeAll();
         Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
         $this->redirect(['index']);
     }
