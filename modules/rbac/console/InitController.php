@@ -62,11 +62,11 @@ class InitController extends Controller
      * @param string $type
      * @return array
      */
-    protected function processCreate($auth, $array = [], $type = 'Roles')
+    protected function processCreate($auth, $array = [], $type = self::TYPE_ROLE)
     {
         $result = [];
         foreach ($array as $key => $value) {
-            $result[$key] = ($type === 'Roles') ? $auth->createRole($key) : $auth->createPermission($key);
+            $result[$key] = ($type === self::TYPE_ROLE) ? $auth->createRole($key) : $auth->createPermission($key);
             $result[$key]->description = $value;
             // Add rules
             if ($key == Permission::PERMISSION_UPDATE_OWN_POST) {
