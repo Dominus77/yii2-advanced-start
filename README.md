@@ -206,7 +206,7 @@ php yii
 Initialization RBAC:
 
 ```
-php yii rbac/rbac/init
+php yii rbac/init
 ```
 
 Create user, enter the command and follow the instructions:
