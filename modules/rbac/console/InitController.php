@@ -123,24 +123,17 @@ class InitController extends Controller
      */
     protected function processAddChildRoles($auth, $roles = [])
     {
-        foreach ($roles as $key => $role) {
-            switch ($key) {
-                case Role::ROLE_SUPER_ADMIN:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_ADMIN));
-                    break;
-                case Role::ROLE_ADMIN:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_MANAGER));
-                    break;
-                case Role::ROLE_MANAGER:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_EDITOR));
-                    break;
-                case Role::ROLE_EDITOR:
-                    $auth->addChild($role, ArrayHelper::getValue($roles, Role::ROLE_DEFAULT));
-                    break;
-                default:
-                    break;
-            }
-        }
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($roles, Role::ROLE_ADMIN));
+
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
+            ArrayHelper::getValue($roles, Role::ROLE_MANAGER));
+
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_MANAGER),
+            ArrayHelper::getValue($roles, Role::ROLE_EDITOR));
+
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_EDITOR),
+            ArrayHelper::getValue($roles, Role::ROLE_DEFAULT));
     }
 
     /**
