@@ -122,6 +122,20 @@ class Role extends Model
     }
 
     /**
+     * @return array
+     */
+    public function getRolesArray()
+    {
+        return [
+            self::ROLE_SUPER_ADMIN => self::ROLE_SUPER_ADMIN_DESCRIPTION,
+            self::ROLE_ADMIN => self::ROLE_ADMIN_DESCRIPTION,
+            self::ROLE_MANAGER => self::ROLE_MANAGER_DESCRIPTION,
+            self::ROLE_EDITOR => self::ROLE_EDITOR_DESCRIPTION,
+            self::ROLE_DEFAULT => self::ROLE_DEFAULT_DESCRIPTION,
+        ];
+    }
+
+    /**
      * Возвращает установленные разрешения для роли
      * @return array
      */

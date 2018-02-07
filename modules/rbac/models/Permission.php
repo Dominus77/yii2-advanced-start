@@ -77,6 +77,20 @@ class Permission extends Model
     }
 
     /**
+     * @return array
+     */
+    public function getPermissionsArray()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
+            self::PERMISSION_MANAGER_RBAC => self::PERMISSION_MANAGER_RBAC_DESCRIPTION,
+            self::PERMISSION_MANAGER_USERS => self::PERMISSION_MANAGER_USERS_DESCRIPTION,
+            self::PERMISSION_MANAGER_POST => self::PERMISSION_MANAGER_POST_DESCRIPTION,
+            self::PERMISSION_UPDATE_OWN_POST => self::PERMISSION_UPDATE_OWN_POST_DESCRIPTION,
+        ];
+    }
+
+    /**
      * @param string $attribute
      * @return mixed
      */

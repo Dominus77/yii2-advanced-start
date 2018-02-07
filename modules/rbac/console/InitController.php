@@ -158,14 +158,8 @@ class InitController extends Controller
      */
     protected function getRoles()
     {
-        $roles = [
-            Role::ROLE_SUPER_ADMIN => Role::ROLE_SUPER_ADMIN_DESCRIPTION,
-            Role::ROLE_ADMIN => Role::ROLE_ADMIN_DESCRIPTION,
-            Role::ROLE_MANAGER => Role::ROLE_MANAGER_DESCRIPTION,
-            Role::ROLE_EDITOR => Role::ROLE_EDITOR_DESCRIPTION,
-            Role::ROLE_DEFAULT => Role::ROLE_DEFAULT_DESCRIPTION,
-        ];
-        return $roles;
+        $role = new Role();
+        return $role->getRolesArray();
     }
 
     /**
@@ -175,13 +169,7 @@ class InitController extends Controller
      */
     protected function getPermissions()
     {
-        $permissions = [
-            Permission::PERMISSION_VIEW_ADMIN_PAGE => Permission::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
-            Permission::PERMISSION_MANAGER_RBAC => Permission::PERMISSION_MANAGER_RBAC_DESCRIPTION,
-            Permission::PERMISSION_MANAGER_USERS => Permission::PERMISSION_MANAGER_USERS_DESCRIPTION,
-            Permission::PERMISSION_MANAGER_POST => Permission::PERMISSION_MANAGER_POST_DESCRIPTION,
-            Permission::PERMISSION_UPDATE_OWN_POST => Permission::PERMISSION_UPDATE_OWN_POST_DESCRIPTION,
-        ];
-        return $permissions;
+        $permission = new Permission();
+        return $permission->getPermissionsArray();
     }
 }
