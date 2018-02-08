@@ -45,7 +45,7 @@ class Bootstrap
      */
     protected function rules()
     {
-        $rules = [];
+        $rules = ['rbac/init' => 'rbac/console/init'];
         array_push($rules, $this->rulesRoles(), $this->rulesPermissions(), $this->rulesAssign(), $this->rulesDefault());
         return $rules;
     }

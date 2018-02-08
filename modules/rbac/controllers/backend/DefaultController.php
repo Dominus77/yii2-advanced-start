@@ -5,7 +5,6 @@ namespace modules\rbac\controllers\backend;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use modules\rbac\Module;
 
 /**
@@ -30,12 +29,6 @@ class DefaultController extends Controller
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'reset' => YII_ENV_TEST ? ['GET'] : ['POST'],
-                ],
-            ],
         ];
     }
 
@@ -46,17 +39,5 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
-    }
-
-    /**
-     * Переинициализация RBAC
-     * с установкой настроек по умолчанию
-     */
-    public function actionReset()
-    {
-        $auth = Yii::$app->authManager;
-        $auth->removeAll();
-        Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
-        $this->redirect(['index']);
     }
 }

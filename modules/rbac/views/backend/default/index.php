@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         </div>
         <div class="box-footer">
             <div class="pull-right">
-                <?php /* echo Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['default/reset']), [
+                <?= Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['default/reset']), [
                     'class' => 'text-yellow',
                     'data' => [
                         'toggle' => 'tooltip',
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
                         'method' => 'post',
                         'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
                     ]
-                ])*/ ?>
+                ]) ?>
             </div>
         </div>
     </div>

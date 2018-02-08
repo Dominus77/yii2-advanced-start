@@ -11,7 +11,7 @@ use modules\rbac\models\Permission;
 use modules\rbac\Module;
 
 /**
- * Class InitController
+ * Class RbacController
  * Инициализатор RBAC выполняется в консоли php yii rbac/init
  *
  * @package console\controllers
@@ -26,6 +26,19 @@ class InitController extends Controller
      */
     public function actionIndex()
     {
+        if ($this->processInit()) {
+            $this->stdout('Done!', Console::FG_GREEN, Console::BOLD);
+            $this->stdout(PHP_EOL);
+        } else {
+            $this->stderr('FAIL', Console::FG_RED, Console::BOLD);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function processInit()
+    {
         /** @var yii\rbac\DbManager $auth */
         $auth = Yii::$app->authManager;
         $this->processClear($auth);
@@ -35,12 +48,7 @@ class InitController extends Controller
         $this->processAddChildRoles($auth, $roles);
 
         $role = ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN);
-        if ($this->processAssignUserToRole($auth, $role, 1)) {
-            $this->stdout('Done!', Console::FG_GREEN, Console::BOLD);
-            $this->stdout(PHP_EOL);
-        } else {
-            $this->stderr('FAIL', Console::FG_RED, Console::BOLD);
-        }
+        return $this->processAssignUserToRole($auth, $role, 1);
     }
 
     /**
@@ -98,6 +106,7 @@ class InitController extends Controller
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_RBAC));
+
         // ROLE_ADMIN
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
@@ -105,11 +114,13 @@ class InitController extends Controller
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
+
         // ROLE_MANAGER
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_MANAGER),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_MANAGER),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+
         // ROLE_EDITOR
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_EDITOR),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
