@@ -3,15 +3,16 @@
 namespace modules\rbac\controllers\backend;
 
 use Yii;
-use yii\web\Controller;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use modules\rbac\Module;
 
 /**
  * Class DefaultController
  * @package modules\rbac\controllers\backend
  */
-class DefaultController extends Controller
+class DefaultController extends \modules\rbac\console\InitController
 {
     /**
      * @inheritdoc
@@ -29,6 +30,12 @@ class DefaultController extends Controller
                     ],
                 ],
             ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'init' => YII_ENV_TEST ? ['GET'] : ['POST'],
+                ],
+            ],
         ];
     }
 
@@ -39,5 +46,17 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Переинициализация RBAC
+     * с установкой настроек по умолчанию
+     */
+    public function actionInit()
+    {
+        if ($this->processInit()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
+        }
+        Yii::$app->getResponse()->redirect(Url::to(['default/index']));
     }
 }

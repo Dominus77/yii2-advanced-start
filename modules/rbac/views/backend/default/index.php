@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         </div>
         <div class="box-footer">
             <div class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['default/reset']), [
+                <?= Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['init']), [
                     'class' => 'text-yellow',
                     'data' => [
                         'toggle' => 'tooltip',
