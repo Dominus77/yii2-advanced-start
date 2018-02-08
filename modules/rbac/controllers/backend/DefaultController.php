@@ -57,6 +57,6 @@ class DefaultController extends \modules\rbac\console\InitController
         if ($this->processInit()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
         }
-        Yii::$app->getResponse()->redirect(Url::to(['default/index']));
+        Yii::$app->getResponse()->redirect(Url::to(['index']));
     }
 }
