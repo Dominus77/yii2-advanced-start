@@ -88,4 +88,5 @@ return [
     'User "{:username}" is not attached to any role!' => 'Пользователь "{:username}" не привязан ни к одной роли!',
     'Error!' => 'Ошибка!',
     'The requested page does not exist.' => 'Запрошенная страница не существует.',
+    'You are not allowed access!' => 'Вам не разрешен доступ!',
 ];

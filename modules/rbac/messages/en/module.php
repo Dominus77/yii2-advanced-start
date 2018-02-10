@@ -88,4 +88,5 @@ return [
     'User "{:username}" is not attached to any role!' => 'User "{:username}" is not attached to any role!',
     'Error!' => 'Error!',
     'The requested page does not exist.' => 'The requested page does not exist.',
+    'You are not allowed access!' => 'You are not allowed access!',
 ];

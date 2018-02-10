@@ -5,6 +5,7 @@ namespace modules\rbac\components\behavior;
 use Yii;
 use yii\base\Behavior;
 use yii\console\Controller;
+use modules\rbac\Module;
 
 /**
  * Class AccessBehavior
@@ -76,7 +77,7 @@ class AccessBehavior extends Behavior
     {
         if (!Yii::$app->user->isGuest) {
             Yii::$app->user->logout();
-            Yii::$app->session->setFlash('error', Yii::t('app', 'You are not allowed access!'));
+            Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed access!'));
         }
     }
 }
