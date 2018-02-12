@@ -46,6 +46,13 @@ System
 - Console commands
 - i18n
 
+## Css Theme Bootstrap
+The template includes the of the Css Theme Bootstrap
+- Switching the theme occurs in the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/5e30c05a70a1476d64b80dd9bbb906fb8c77a7e8/frontend/config/main.php#L35)
+- Themes lie in [/common/themes/bootstrap](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/themes/bootstrap)
+- To disable theme support and leave the default theme, you should comment out the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/5e30c05a70a1476d64b80dd9bbb906fb8c77a7e8/frontend/config/main.php#L57-L62) 
+
+
 ## Requirements
 
 The minimum requirement by this project template that your Web server supports PHP 5.4.0.
@@ -68,6 +75,7 @@ common
     mail/                contains layouts files for e-mails
     messages/            contains i18n backend frontend
     models/              contains model classes used in both backend and frontend
+    themes/              contains themes
     tests/               contains tests for common classes
     widgets/             contains widgets backend and frontend
 console

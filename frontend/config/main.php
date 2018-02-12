@@ -51,9 +51,9 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
         ],
-        // Comment this component for theme bootstrap default
         'assetManager' => [
             'bundles' => [
+                // Comment this component for theme bootstrap default
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@common/themes/bootstrap',
                     'css' => [
