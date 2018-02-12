@@ -7,9 +7,36 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+/**
+ * This Css Theme Bootstrap
+ * @package /common/themes/bootstrap
+ * @var string
+ *
+ * Css Themes:
+ * ------------
+ * cerulean
+ * cosmo
+ * cyborg
+ * darkly
+ * flatly
+ * journal
+ * lumen
+ * paper
+ * readable
+ * sandstone
+ * simplex
+ * slate
+ * spacelab
+ * superhero
+ * united
+ * yeti
+ * ------------
+ */
+$bootstrap_theme = 'cerulean';
+
 return [
     'id' => 'app-frontend',
-    'language'=>'ru',
+    'language' => 'ru',
     'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
@@ -23,6 +50,17 @@ return [
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
+        ],
+        // Comment this for theme bootstrap default
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@common/themes/bootstrap/' . $bootstrap_theme,
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+                    ]
+                ],
+            ],
         ],
         'user' => [
             'identityClass' => 'modules\users\models\User',

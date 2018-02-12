@@ -128,3 +128,10 @@ div.required label:after {
     padding: 3px;
     width: 100px;
 }
+
+.yii-logo {
+    width: auto;
+    height: 32px;
+    float: left;
+    padding-right: 10px;
+}
