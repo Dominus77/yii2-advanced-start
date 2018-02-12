@@ -8,7 +8,7 @@ $params = array_merge(
 );
 
 /**
- * This Css Theme Bootstrap
+ * This Bootstrap Css Theme
  * @package /common/themes/bootstrap
  * @var string
  *
@@ -51,13 +51,13 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
         ],
-        // Comment this for theme bootstrap default
+        // Comment this component for theme bootstrap default
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => '@common/themes/bootstrap/' . $bootstrap_theme,
+                    'sourcePath' => '@common/themes/bootstrap',
                     'css' => [
-                        YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+                        YII_ENV_DEV ? $bootstrap_theme . '/bootstrap.css' : $bootstrap_theme . '/bootstrap.min.css',
                     ]
                 ],
             ],
