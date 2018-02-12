@@ -48,9 +48,9 @@ System
 
 ## Css Theme Bootstrap
 The template includes the of the Css Theme Bootstrap
-- Switching the theme occurs in the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/5e30c05a70a1476d64b80dd9bbb906fb8c77a7e8/frontend/config/main.php#L35)
+- Switching the theme occurs in the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/e366b9b65d0ca3411aec70390f97e42f0561213c/frontend/config/main.php#L35)
 - Themes lie in [/common/themes/bootstrap](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/themes/bootstrap)
-- To disable theme support and leave the default theme, you should comment out the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/5e30c05a70a1476d64b80dd9bbb906fb8c77a7e8/frontend/config/main.php#L57-L62) 
+- To disable theme support and leave the default theme, you should comment out the [/frontend/config/main.php](https://github.com/Dominus77/yii2-advanced-start/blob/e366b9b65d0ca3411aec70390f97e42f0561213c/frontend/config/main.php#L57-L62) 
 
 
 ## Requirements
