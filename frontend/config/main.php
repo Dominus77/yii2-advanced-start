@@ -51,7 +51,7 @@ return [
         ],
         'assetManager' => [
             'bundles' => [
-                // Comment this component for theme bootstrap default
+                // Comment this for theme bootstrap default
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@frontend/assets/bootstrap',
                     'css' => [
