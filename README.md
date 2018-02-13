@@ -46,8 +46,8 @@ System
 - Console commands
 - i18n
 
-## Css Theme Bootstrap
-The template includes the of the Css Theme Bootstrap
+## CSS Themes Bootstrap
+The template includes the of the CSS Theme Bootstrap
 
 Switching the theme occurs in the `/frontend/config/main.php`
 

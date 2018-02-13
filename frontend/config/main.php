@@ -8,12 +8,13 @@ $params = array_merge(
 );
 
 /**
- * This Bootstrap Css Theme
+ * This CSS Themes Bootstrap
  * ------------
  * cerulean
  * cosmo
  * cyborg
  * darkly
+ * default
  * flatly
  * journal
  * lumen
@@ -30,7 +31,7 @@ $params = array_merge(
  * @package /frontend/assets/bootstrap
  * @var string
  */
-$bootstrap_theme = 'cerulean';
+$bootstrap_theme = 'cosmo';
 
 return [
     'id' => 'app-frontend',
@@ -51,7 +52,6 @@ return [
         ],
         'assetManager' => [
             'bundles' => [
-                // Comment this for theme bootstrap default
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@frontend/assets/bootstrap',
                     'css' => [
