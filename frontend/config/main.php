@@ -31,7 +31,7 @@ $params = array_merge(
  * @package /frontend/assets/bootstrap
  * @var string
  */
-$bootstrap_theme = 'cosmo';
+$css_theme = 'cosmo';
 
 return [
     'id' => 'app-frontend',
@@ -55,7 +55,7 @@ return [
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@frontend/assets/bootstrap',
                     'css' => [
-                        YII_ENV_DEV ? $bootstrap_theme . '/bootstrap.css' : $bootstrap_theme . '/bootstrap.min.css',
+                        YII_ENV_DEV ? $css_theme . '/bootstrap.css' : $css_theme . '/bootstrap.min.css',
                     ]
                 ],
             ],
