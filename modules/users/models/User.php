@@ -97,9 +97,9 @@ class User extends BaseUser
         $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_ADMIN_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['email', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['username', 'email', 'first_name', 'last_name'];
         $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
-        $scenarios['default'] = ['username', 'email', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
+        $scenarios['default'] = ['username', 'email', 'first_name', 'last_name', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
         return $scenarios;
     }
 
