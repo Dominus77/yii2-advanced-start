@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="nav-tabs-custom">
             <?= Tabs::widget([
+                'options' => ['role' => 'tablist'],
                 'items' => [
                     [
                         'label' => Html::encode($this->title),
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $model,
                             'assignModel' => $assignModel,
                         ]),
-                        'options' => ['id' => 'profile'],
+                        'options' => ['id' => 'profile', 'role' => 'tabpanel'],
                         'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
                     ],
                 ]

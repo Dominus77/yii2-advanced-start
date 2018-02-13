@@ -16,7 +16,6 @@ body {
 
 .footer {
     height: 60px;
-    border-top: 1px solid #ddd;
     padding-top: 20px;
 }
 
@@ -99,10 +98,10 @@ a.desc:after {
     padding: 8px;
 }
 
-@media(max-width:768px) {
-	.nav li > form {
-	    padding: 3px;
-	}
+@media (max-width: 768px) {
+    .nav li > form {
+        padding: 3px;
+    }
 }
 
 .nav > li > form > button:hover {
@@ -118,6 +117,10 @@ div.required label:after {
     background: #fff none repeat scroll 0 0;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    padding: 10px;
+}
+
+.nav-tabs > .tab-content {
     padding: 10px;
 }
 
