@@ -31,7 +31,7 @@ $params = array_merge(
  * @package /frontend/assets/bootstrap
  * @var string
  */
-$css_theme = 'cosmo';
+$css_theme = 'lumen';
 
 return [
     'id' => 'app-frontend',
