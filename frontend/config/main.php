@@ -9,10 +9,6 @@ $params = array_merge(
 
 /**
  * This Bootstrap Css Theme
- * @package /common/themes/bootstrap
- * @var string
- *
- * Css Themes:
  * ------------
  * cerulean
  * cosmo
@@ -31,6 +27,8 @@ $params = array_merge(
  * united
  * yeti
  * ------------
+ * @package /frontend/assets/bootstrap
+ * @var string
  */
 $bootstrap_theme = 'cerulean';
 
@@ -55,7 +53,7 @@ return [
             'bundles' => [
                 // Comment this component for theme bootstrap default
                 'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => '@common/themes/bootstrap',
+                    'sourcePath' => '@frontend/assets/bootstrap',
                     'css' => [
                         YII_ENV_DEV ? $bootstrap_theme . '/bootstrap.css' : $bootstrap_theme . '/bootstrap.min.css',
                     ]
