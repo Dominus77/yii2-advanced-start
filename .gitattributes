@@ -1,5 +1,3 @@
-backend/assets/AdminLTE/dist/* linguist-vendored
-backend/assets/AdminLTE/plugins/* linguist-vendored
 # Ignore all test and documentation for archive
 /.github            export-ignore
 /.gitattributes     export-ignore
