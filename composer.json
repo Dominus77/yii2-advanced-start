@@ -40,8 +40,5 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
- 	],
-    "scripts": {
-      "post-install-cmd": "php init --env=Development --overwrite=n"
-    }
+ 	]    
 }
