@@ -32,7 +32,7 @@ class UserController extends ActiveController
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
         ];
-        
+
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
             'only' => ['update'],
