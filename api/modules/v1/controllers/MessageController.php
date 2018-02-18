@@ -12,6 +12,21 @@ use api\modules\v1\models\Message;
 class MessageController extends Controller
 {
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        // Add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+        
+        return $behaviors;
+    }
+
+    /**
      * @return string
      */
     public function actionIndex()

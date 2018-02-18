@@ -28,7 +28,7 @@ class UserController extends ActiveController
     {
         $behaviors = parent::behaviors();
 
-        // add CORS filter
+        // Add CORS filter
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
         ];
