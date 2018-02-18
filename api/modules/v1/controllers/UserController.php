@@ -27,6 +27,12 @@ class UserController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+        
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
             'only' => ['update'],
