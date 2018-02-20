@@ -325,6 +325,6 @@ php yii_test migrate/up
 Run in console:
 
 ```
-vendor\bin\codecept build
-vendor\bin\codecept run
+vendor/bin/codecept build
+vendor/bin/codecept run
 ```
