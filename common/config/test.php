@@ -12,8 +12,5 @@ return [
             'class' => 'yii\web\User',
             'identityClass' => 'modules\users\models\User',
         ],
-        'request' => [
-            'cookieValidationKey' => 'test',
-        ],
     ],
 ];

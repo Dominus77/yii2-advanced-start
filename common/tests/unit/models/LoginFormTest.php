@@ -64,6 +64,7 @@ class LoginFormTest extends \Codeception\Test\Unit
      */
     public function testLoginCorrect()
     {
+        Yii::$app->getRequest()->cookieValidationKey = 'test';
         $model = new LoginForm([
             'email' => 'nicole.paucek@schultz.info',
             'password' => 'password_0',
