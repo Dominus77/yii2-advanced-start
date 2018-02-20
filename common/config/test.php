@@ -8,11 +8,6 @@ return [
         'modules\rbac\Bootstrap',
     ],
     'components' => [
-        'request' => [
-            'csrfParam' => '_csrf-frontend-test',
-            'enableCsrfValidation' => false,
-            'cookieValidationKey' => 'tester',
-        ],
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'modules\users\models\User',
