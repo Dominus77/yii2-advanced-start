@@ -1,7 +1,7 @@
 {
     "name": "dominus77/yii2-advanced-start",
     "description": "Yii 2 Advanced start template on Yii2",
-    "keywords": ["Dominus77", "yii2", "framework", "advanced", "start project template"],
+    "keywords": ["Dominus77", "yii2", "framework", "advanced", "project template"],
     "homepage": "http://dominus77.github.io/yii2-advanced-start",
     "type": "project",
     "license": "BSD-3-Clause",

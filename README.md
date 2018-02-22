@@ -1,4 +1,4 @@
-# Yii 2 Advanced Start Project Template
+# Yii2 Start Project Advanced Template
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/stable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![Latest Unstable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/unstable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
@@ -47,6 +47,7 @@ System
 - i18n
 
 ## CSS Themes Bootstrap
+
 The template includes the of the CSS Theme Bootstrap
 
 Switching the theme occurs in the `/frontend/config/main.php`
