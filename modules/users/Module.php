@@ -12,6 +12,11 @@ use yii\console\Application as ConsoleApplication;
 class Module extends \yii\base\Module
 {
     /**
+     * Время в сек, когда пользователей со статусом "Ожидает", можно удалять
+     * В основном для Cron задачи.
+     * ```
+     * php yii users/cron/remove-overdue
+     * ```
      * @var int
      */
     public $emailConfirmTokenExpire = 259200; // 3 days
