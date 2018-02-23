@@ -12,6 +12,11 @@ use yii\console\Application as ConsoleApplication;
 class Module extends \yii\base\Module
 {
     /**
+     * @var int
+     */
+    public $emailConfirmTokenExpire = 259200; // 3 days
+
+    /**
      * @var string
      */
     public $controllerNamespace = 'modules\users\controllers\frontend';

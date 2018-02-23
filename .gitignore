@@ -35,3 +35,4 @@ phpunit.phar
 /.vagrant
 
 /composer.lock
+/yii*

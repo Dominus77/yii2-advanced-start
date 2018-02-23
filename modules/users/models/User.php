@@ -5,6 +5,7 @@ namespace modules\users\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use modules\users\models\query\UserQuery;
 use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
@@ -233,5 +234,14 @@ class User extends BaseUser
             self::STATUS_WAIT => 'warning',
             self::STATUS_DELETED => 'danger',
         ];
+    }
+
+    /**
+     * @return object|\yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function find()
+    {
+        return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
 }
