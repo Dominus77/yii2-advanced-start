@@ -55,7 +55,7 @@ Switching the theme occurs in the `/frontend/config/main.php`
 
 ## Requirements
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+The minimum requirement by this project template that your Web server supports PHP 5.5.0.
 
 ## DIRECTORY STRUCTURE
 
