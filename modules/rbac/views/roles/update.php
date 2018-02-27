@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = Module::t('module', 'Update');
 ?>
 
-<div class="rbac-backend-roles-update">
+<div class="rbac-roles-update">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'Update Role') ?>

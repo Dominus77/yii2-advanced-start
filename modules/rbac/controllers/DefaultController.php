@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\rbac\controllers\backend;
+namespace modules\rbac\controllers;
 
 use Yii;
 use yii\helpers\Url;
@@ -10,7 +10,7 @@ use modules\rbac\Module;
 
 /**
  * Class DefaultController
- * @package modules\rbac\controllers\backend
+ * @package modules\rbac\controllers
  */
 class DefaultController extends \modules\rbac\console\InitController
 {

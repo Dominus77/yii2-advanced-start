@@ -9,7 +9,7 @@ use modules\rbac\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="rbac-backend-assign-form">
+<div class="rbac-assign-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

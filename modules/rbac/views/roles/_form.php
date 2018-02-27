@@ -10,7 +10,7 @@ use modules\rbac\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="rbac-backend-roles-form">
+<div class="rbac-roles-form">
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-role',

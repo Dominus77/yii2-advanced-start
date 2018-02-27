@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Roles'), 'url'
 $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 ?>
 
-<div class="rbac-backend-roles-create">
+<div class="rbac-roles-create">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'Create Role') ?></h3>

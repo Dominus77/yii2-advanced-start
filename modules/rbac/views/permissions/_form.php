@@ -10,7 +10,7 @@ use modules\rbac\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="rbac-backend-permissions-form">
+<div class="rbac-permissions-form">
 
     <?php $form = ActiveForm::begin([
         'id' => 'form-permission',

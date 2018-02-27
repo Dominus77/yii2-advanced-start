@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Roles'), 'url'
 $this->params['breadcrumbs'][] = $model->name;
 ?>
 
-<div class="rbac-backend-roles-view">
+<div class="rbac-roles-view">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'View Role') ?>

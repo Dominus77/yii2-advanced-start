@@ -1,38 +1,30 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'Roles');
+$this->params['breadcrumbs'][] = Module::t('module', 'Assign');
 ?>
 
-<div class="rbac-backend-roles-index">
+<div class="rbac-assign-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Roles') ?></h3>
+            <h3 class="box-title"><?= Module::t('module', 'Assign') ?></h3>
 
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
             <div class="pull-left"></div>
-            <div class="pull-right">
-                <p>
-                    <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
-                        'class' => 'btn btn-block btn-success',
-                        'title' => Module::t('module', 'Create Role'),
-                        'data' => [
-                            'toggle' => 'tooltip',
-                            'placement' => 'left',
-                        ],
-                    ]) ?>
-                </p>
-            </div>
+            <div class="pull-right"></div>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",
@@ -42,52 +34,60 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     [
-                        'attribute' => 'name',
-                        'label' => Module::t('module', 'Name'),
+                        'attribute' => 'username',
+                        'label' => Module::t('module', 'User'),
                         'format' => 'raw',
                     ],
                     [
-                        'attribute' => 'description',
-                        'label' => Module::t('module', 'Description'),
+                        'attribute' => 'role',
+                        'label' => Module::t('module', 'Role'),
                         'format' => 'raw',
-                    ],
-                    [
-                        'attribute' => 'ruleName',
-                        'label' => Module::t('module', 'Rule Name'),
-                        'format' => 'raw',
+                        'value' => function ($data) use ($assignModel) {
+                            return $assignModel->getRoleName($data->id);
+                        }
                     ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'contentOptions' => [
                             'class' => 'action-column'
                         ],
-                        'template' => '{view} {update} {delete}',
+                        'template' => '{view} {update} {revoke}',
                         'buttons' => [
-                            'view' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                            'view' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to(['view', 'id' => $model->id]), [
                                     'title' => Module::t('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
+                                        'pjax' => 0,
                                     ]
                                 ]);
                             },
-                            'update' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                            'update' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['update', 'id' => $model->id]), [
                                     'title' => Module::t('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
+                                        'pjax' => 0,
                                     ]
                                 ]);
                             },
-                            'delete' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                                    'title' => Module::t('module', 'Delete'),
+                            'revoke' => function ($url, $model) {
+                                $linkOptions = [];
+                                /** @var object $identity */
+                                $identity = Yii::$app->user->identity;
+                                if ($model->id == $identity->id) {
+                                    $linkOptions = [
+                                        'style' => 'display: none;',
+                                    ];
+                                }
+                                return Html::a('<span class="glyphicon glyphicon-remove"></span>', Url::to(['revoke', 'id' => $model->id]), ArrayHelper::merge([
+                                    'title' => Module::t('module', 'Revoke'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'method' => 'post',
-                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
+                                        'confirm' => Module::t('module', 'Do you really want to untie the user from the role?'),
                                     ],
-                                ]);
+                                ], $linkOptions));
                             },
                         ]
                     ],

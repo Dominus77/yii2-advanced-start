@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->user->username, 'url' => ['
 $this->params['breadcrumbs'][] = Module::t('module', 'Update');
 ?>
 
-<div class="rbac-backend-assign-update">
+<div class="rbac-assign-update">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'Update') ?>

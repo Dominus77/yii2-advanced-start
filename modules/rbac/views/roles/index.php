@@ -9,13 +9,13 @@ use modules\rbac\Module;
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
+$this->params['breadcrumbs'][] = Module::t('module', 'Roles');
 ?>
 
-<div class="rbac-backend-permissions-index">
+<div class="rbac-roles-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Permissions') ?></h3>
+            <h3 class="box-title"><?= Module::t('module', 'Roles') ?></h3>
 
             <div class="box-tools pull-right"></div>
         </div>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
                         'class' => 'btn btn-block btn-success',
-                        'title' => Module::t('module', 'Create Permission'),
+                        'title' => Module::t('module', 'Create Role'),
                         'data' => [
                             'toggle' => 'tooltip',
                             'placement' => 'left',
@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                 </p>
             </div>
             <?= GridView::widget([
-                'id' => 'grid-rbac-permissions',
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",
                 'tableOptions' => [

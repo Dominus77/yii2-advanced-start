@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Permissions'),
 $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 ?>
 
-<div class="rbac-backend-permissions-create">
+<div class="rbac-permissions-create">
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Module::t('module', 'Create Permission') ?></h3>

@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\rbac\controllers\backend;
+namespace modules\rbac\controllers;
 
 use Yii;
 use modules\rbac\models\Assignment;
@@ -14,7 +14,7 @@ use modules\rbac\Module;
 
 /**
  * Class AssignController
- * @package modules\rbac\controllers\backend
+ * @package modules\rbac\controllers
  */
 class AssignController extends Controller
 {

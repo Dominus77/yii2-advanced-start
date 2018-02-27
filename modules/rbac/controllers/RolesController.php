@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\rbac\controllers\backend;
+namespace modules\rbac\controllers;
 
 use Yii;
 use yii\data\ArrayDataProvider;
@@ -15,7 +15,7 @@ use modules\rbac\Module;
 
 /**
  * Class RolesController
- * @package modules\rbac\controllers\backend
+ * @package modules\rbac\controllers
  */
 class RolesController extends Controller
 {

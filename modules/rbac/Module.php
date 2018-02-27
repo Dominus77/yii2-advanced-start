@@ -19,7 +19,7 @@ class Module extends \yii\base\Module
     /**
      * @var string
      */
-    public $controllerNamespace = 'modules\rbac\controllers\backend';
+    public $controllerNamespace = 'modules\rbac\controllers';
 
     /**
      * @inheritdoc
@@ -30,7 +30,7 @@ class Module extends \yii\base\Module
         if (Yii::$app instanceof ConsoleApplication) {
             $this->controllerNamespace = 'modules\rbac\console';
         }
-        $this->setViewPath('@modules/rbac/views/backend');
+        $this->setViewPath('@modules/rbac/views');
     }
 
     /**
