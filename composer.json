@@ -29,7 +29,7 @@
         "bower-asset/html5shiv": "*",
         "bower-asset/respond": "*",
 
-        "codeception/base": "2.3.8",
+        "codeception/base": "~2.3.8",
         "codeception/verify": "^0.3.1"
     },
     "config": {
