@@ -11,7 +11,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.5.0",
-        "yiisoft/yii2": "~2.0.13",
+        "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-imagine": "^2.0",
@@ -29,8 +29,8 @@
         "bower-asset/html5shiv": "*",
         "bower-asset/respond": "*",
 
-        "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1"
+        "codeception/base": "2.3.8",
+        "codeception/verify": "^0.3.1"
     },
     "config": {
         "process-timeout": 1800
