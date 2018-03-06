@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Yii2-advanced-start',
     'id' => 'app-common-tests',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
