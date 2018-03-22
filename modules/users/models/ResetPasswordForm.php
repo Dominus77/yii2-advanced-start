@@ -3,7 +3,7 @@
 namespace modules\users\models;
 
 use yii\base\Model;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use modules\users\Module;
 
 /**
@@ -31,11 +31,11 @@ class ResetPasswordForm extends Model
     public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException(Module::t('module', 'Password reset token cannot be blank.'));
+            throw new InvalidArgumentException(Module::t('module', 'Password reset token cannot be blank.'));
         }
         $this->_user = BaseUser::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException(Module::t('module', 'Wrong password reset token.'));
+            throw new InvalidArgumentException(Module::t('module', 'Wrong password reset token.'));
         }
         parent::__construct($config);
     }

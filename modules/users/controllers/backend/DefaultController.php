@@ -16,8 +16,8 @@ use modules\users\Module;
 class DefaultController extends BaseController
 {
     /**
-     * Lists all User models.
-     * @return mixed
+     * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionIndex()
     {

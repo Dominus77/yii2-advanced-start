@@ -3,7 +3,7 @@
 namespace modules\users\models;
 
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use modules\users\Module;
 
@@ -28,11 +28,11 @@ class EmailConfirmForm extends Model
     public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException(Module::t('module', 'Email confirm token cannot be blank.'));
+            throw new InvalidArgumentException(Module::t('module', 'Email confirm token cannot be blank.'));
         }
         $this->_user = BaseUser::findByEmailConfirmToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException(Module::t('module', 'Wrong Email confirm token.'));
+            throw new InvalidArgumentException(Module::t('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
     }

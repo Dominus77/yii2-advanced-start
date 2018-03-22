@@ -57,7 +57,8 @@ class UserSearch extends User
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return object|\yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
      */
     protected function getQuery()
     {
@@ -95,11 +96,9 @@ class UserSearch extends User
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
      * @param array $params
-     *
-     * @return ActiveDataProvider
+     * @return mixed|ActiveDataProvider
+     * @throws \yii\base\InvalidConfigException
      */
     public function search($params)
     {

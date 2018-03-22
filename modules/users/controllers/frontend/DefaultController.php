@@ -10,7 +10,7 @@ use modules\users\models\LoginForm;
 use modules\users\models\EmailConfirmForm;
 use modules\users\models\ResetPasswordForm;
 use modules\users\models\PasswordResetRequestForm;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -84,9 +84,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * Signs user up.
-     *
      * @return string|\yii\web\Response
+     * @throws \yii\base\Exception
      */
     public function actionSignup()
     {
@@ -105,12 +104,13 @@ class DefaultController extends Controller
      * @param mixed $token
      * @return \yii\web\Response
      * @throws BadRequestHttpException
+     * @throws \Exception
      */
     public function actionEmailConfirm($token)
     {
         try {
             $model = new EmailConfirmForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
@@ -141,17 +141,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * Resets password.
-     *
      * @param mixed $token
      * @return string|\yii\web\Response
      * @throws BadRequestHttpException
+     * @throws \yii\base\Exception
      */
     public function actionResetPassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
@@ -165,8 +164,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param ResetPasswordForm $model
-     * @return bool|\yii\web\Response
+     * @param $model ResetPasswordForm|\yii\base\Model
+     * @return bool
+     * @throws \yii\base\Exception
      */
     protected function processResetPassword($model)
     {
