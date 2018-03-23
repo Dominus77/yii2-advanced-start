@@ -83,50 +83,16 @@ class DefaultController extends BaseController
      */
     public function actionUpdate($id)
     {
-        if ($model = $this->findModel($id)) {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * @param int|string $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdateProfile($id)
-    {
-        if ($model = $this->findModel($id)) {
-            $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
-            } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_ADMIN_UPDATE;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'profile']);
-    }
-
-    /**
-     * @param int|string $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUpdatePassword($id)
-    {
-        if ($model = $this->findModel($id)) {
-            $model->scenario = $model::SCENARIO_ADMIN_PASSWORD_UPDATE;
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
-            } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
-            }
-        }
-        return $this->redirect(['update', 'id' => $model->id, 'tab' => 'password']);
+        return $this->render('update_admin', [
+            'model' => $model,
+        ]);
     }
 
     /**

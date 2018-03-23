@@ -95,7 +95,7 @@ class User extends BaseUser
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_ADMIN_CREATE] = ['avatar', 'username', 'email', 'status', 'newPassword', 'newPasswordRepeat', 'registration_type', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'first_name', 'last_name'];
+        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'first_name', 'last_name', 'newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_ADMIN_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
         $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['username', 'email', 'first_name', 'last_name'];

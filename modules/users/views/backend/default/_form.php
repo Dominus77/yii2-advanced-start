@@ -36,6 +36,7 @@ use modules\users\Module;
             'placeholder' => Module::t('module', 'Email'),
         ]) ?>
 
+
         <?= Passfield::widget([
             'form' => $form,
             'model' => $model,
