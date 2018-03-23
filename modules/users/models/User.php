@@ -129,7 +129,6 @@ class User extends BaseUser
         if (parent::beforeSave($insert)) {
             if (!empty($this->newPassword)) {
                 $this->setPassword($this->newPassword);
-                Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
             }
             return true;
         }

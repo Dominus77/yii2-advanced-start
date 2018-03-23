@@ -59,6 +59,7 @@ class DefaultController extends BaseController
     public function actionCreate()
     {
         $model = new User();
+        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
         $model->status = $model::STATUS_WAIT;
         /** @var \modules\users\models\User $identity */
         $identity = Yii::$app->user->identity;
@@ -69,8 +70,6 @@ class DefaultController extends BaseController
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-
-        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
         return $this->render('create', [
             'model' => $model,
         ]);
