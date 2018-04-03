@@ -7,6 +7,16 @@ use yii\helpers\Html;
 /**
  * Class PageSize
  * @package common\widgets
+ *
+ * Using:
+ * <?= common\widgets\PageSize::widget() ?>
+ *
+ * <?= GridView::widget([
+ *      'dataProvider' => $dataProvider,
+ *      'filterModel' => $searchModel,
+ *      'filterSelector' => 'select[name="per-page"]', // name select page-size
+ *      'columns' => [...],
+ * ]) ?>
  */
 class PageSize extends \yii\base\Widget
 {
