@@ -21,16 +21,6 @@ class UserSearch extends User
     public $userRoleName;
     public $date_from;
     public $date_to;
-    public $pageSize;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        $this->pageSize = Yii::$app->params['user.pageSize'];
-    }
 
     /**
      * @inheritdoc
@@ -39,7 +29,7 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'pageSize'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['username', 'email', 'role', 'userRoleName', 'date_from', 'date_to'], 'safe'],
         ];
     }
@@ -114,7 +104,6 @@ class UserSearch extends User
         }
 
         $this->processFilter($query);
-        $dataProvider = $this->setPageSize($dataProvider);
         $dataProvider = $this->setTotalCount($query, $dataProvider);
         return $dataProvider;
     }
@@ -135,18 +124,6 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'item_name', $this->userRoleName])
             ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 23:59:59') : null]);
-    }
-
-    /**
-     * @param ActiveDataProvider $dataProvider
-     * @return mixed
-     */
-    protected function setPageSize($dataProvider)
-    {
-        if ($this->pageSize) {
-            $dataProvider->pagination->pageSize = $this->pageSize;
-        }
-        return $dataProvider;
     }
 
     /**

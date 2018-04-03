@@ -58,9 +58,14 @@ $this->registerJs($js, \yii\web\View::POS_END);
         ]); ?>
         <div class="box-body">
             <div class="pull-left">
-                <?= $this->render('_pageSize', [
-                    'model' => $searchModel,
-                ]) ?>
+                <?= common\widgets\PageSize::widget([
+                    'label' => '',
+                    'defaultPageSize' => 25,
+                    'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]); ?>
             </div>
             <div class="pull-right">
                 <p>
@@ -79,6 +84,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
                 'id' => 'grid-users',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
+                'filterSelector' => 'select[name="per-page"]',
                 'layout' => "{items}",
                 'tableOptions' => [
                     'class' => 'table table-bordered table-hover',
