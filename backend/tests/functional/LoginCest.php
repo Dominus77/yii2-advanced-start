@@ -61,7 +61,7 @@ class LoginCest
      */
     public function checkValidLoginAccessDenied(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('sfriesen@jenkins.info', 'password_0'));
+        $I->submitForm('#login-form', $this->formParams('tester@jenkins.info', 'password_0'));
         $I->see('You do not have rights, access is denied.');
     }
 }
