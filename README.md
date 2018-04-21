@@ -184,7 +184,7 @@ cd advanced-project
 php init
 ```
 
-Create a database, default configure yii2_advanced_start in common\config\main-local.php
+Create a database, default configure yii2_advanced_start in `common\config\main-local.php`
 
 ```
 //...
@@ -223,7 +223,7 @@ php yii users/user/create
 ```
 
 - Username: set username (admin);
-- Email: set email (admin@example.com);
+- Email: set email (`admin@example.com`);
 - Password: set password (min 6 symbol);
 - Status: set status (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
@@ -301,11 +301,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ```
 
-Now frontend is available at http://mysite.com, and backend at http://mysite.com/admin, and api http://mysite.com/api/v1/users
+Now frontend is available at `http://mysite.com`, and backend at `http://mysite.com/admin`, and api `http://mysite.com/api/v1/users`
 
 ## TESTING
 
-Create a database, default configure yii2_advanced_start_test in common\config\test-local.php
+Create a database, default configure yii2_advanced_start_test in `common\config\test-local.php`
 
 ```
 //...
@@ -323,8 +323,13 @@ Apply migration:
 php yii_test migrate/up
 ```
 
-Run in console:
-
+#### Run in console
+Windows:
+```
+vendor\bin\codecept build
+vendor\bin\codecept run
+```
+Other:
 ```
 vendor/bin/codecept build
 vendor/bin/codecept run
