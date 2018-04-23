@@ -301,7 +301,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ```
 
-Now frontend is available at `http://mysite.com`, and backend at `http://mysite.com/admin`, and api `http://mysite.com/api/v1/users`
+Now frontend is available at `http://sitename.com`, and backend at `http://sitename.com/admin`, and api `http://sitename.com/api/v1/users`
 
 ## TESTING
 
