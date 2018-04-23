@@ -39,7 +39,7 @@ class InitController extends Controller
      */
     public function processInit()
     {
-        /** @var yii\rbac\DbManager $auth */
+        /** @var yii\rbac\ManagerInterface|yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth */
         $auth = Yii::$app->authManager;
         $this->processClear($auth);
         $roles = $this->processCreate($auth, $this->getRoles(), self::TYPE_ROLE);
@@ -66,7 +66,7 @@ class InitController extends Controller
     /**
      * Create Roles and Permissions
      *
-     * @param yii\rbac\DbManager $auth
+     * @param $auth yii\rbac\ManagerInterface|yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager
      * @param array $array
      * @param string $type
      * @return array
@@ -91,7 +91,7 @@ class InitController extends Controller
     /**
      * Add Permissions for Roles
      *
-     * @param yii\rbac\DbManager $auth
+     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
      * @param array $roles
      * @param array $permissions
      */
@@ -131,7 +131,7 @@ class InitController extends Controller
     /**
      * Add Child role for Roles
      *
-     * @param yii\rbac\DbManager $auth
+     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
      * @param array $roles
      */
     protected function processAddChildRoles($auth, $roles = [])
@@ -152,7 +152,7 @@ class InitController extends Controller
     /**
      * Assign Role to User
      *
-     * @param yii\rbac\DbManager $auth
+     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
      * @param array $role
      * @param int $userId
      * @return bool
