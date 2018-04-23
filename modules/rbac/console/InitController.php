@@ -153,7 +153,7 @@ class InitController extends Controller
      * Assign Role to User
      *
      * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager|yii\rbac\ManagerInterface $auth
-     * @param array $role
+     * @param array|string $role
      * @param int $userId
      * @return bool
      */
