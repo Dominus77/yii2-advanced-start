@@ -53,14 +53,30 @@ class AvatarWidget extends Widget
      */
     public function getGravatar($email = '', $s = '80', $d = 'mm', $r = 'g', $img = false, $attr = [])
     {
-        $url = 'https://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($email))) . '?';
-        $url .= http_build_query([
-            's' => $s,
-            'd' => $d,
-            'r' => $r,
-        ]);
+        $data = ['email' => $email, 's' => $s, 'd' => $d, 'r' => $r];
+        $key = 'gravatar';
+        $duration = 60 * 60; // 3600 сек или 1 час
+        $cache = Yii::$app->cache;
+        $url = $cache->getOrSet($key, function () use ($data) {
+            return $this->calculateSomething($data);
+        }, $duration);
         return $img ? Html::img($url, $attr) : $url;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    protected function calculateSomething($data = [])
+    {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim($data['email']))) . '?';
+        $url .= http_build_query([
+            's' => $data['s'],
+            'd' => $data['d'],
+            'r' => $data['r'],
+        ]);
+        return $url;
     }
 
     /**
