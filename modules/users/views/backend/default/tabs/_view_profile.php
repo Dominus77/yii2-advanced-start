@@ -9,7 +9,6 @@ use modules\users\Module;
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
 /* @var $assignModel \modules\rbac\models\Assignment */
-
 ?>
 
 <div class="row">
@@ -65,7 +64,30 @@ use modules\users\Module;
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => $this->render('../../../common/profile/col_auth_key', ['model' => $model, 'url' => Url::to(['generate-auth-key', 'id' => $model->id])]),
+                    'value' => function ($model) {
+                        $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
+                        $link = Html::a(Module::t('module', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
+                            'class' => 'btn btn-sm btn-default',
+                            'title' => Module::t('module', 'Generate new key'),
+                            'data' => [
+                                'toggle' => 'tooltip',
+                            ],
+                            'onclick' => "                                
+                                $.ajax({
+                                    type: 'POST',
+                                    cache: false,
+                                    url: this.href,
+                                    success: function(response) {                                       
+                                        if(response.success) {
+                                            $('#authKey').html(response.success);
+                                        }
+                                    }
+                                });
+                                return false;
+                            ",
+                        ]);
+                        return $key . ' ' . $link;
+                    }
                 ],
                 [
                     'attribute' => 'created_at',

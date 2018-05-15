@@ -110,8 +110,7 @@ class BaseController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'body' => $this->renderAjax('../../common/profile/col_auth_key', ['model' => $model, 'url' => Url::to(['generate-auth-key', 'id' => $model->id])]),
-                'success' => true,
+                'success' => $model->auth_key,
             ];
         }
         return $this->redirect(['view', 'id' => $model->id]);
