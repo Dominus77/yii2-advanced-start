@@ -54,7 +54,7 @@ class AvatarWidget extends Widget
     public function getGravatar($email = '', $s = '80', $d = 'mm', $r = 'g', $img = false, $attr = [])
     {
         $data = ['email' => $email, 's' => $s, 'd' => $d, 'r' => $r];
-        $key = 'gravatar';
+        $key = 'gravatar_' . md5($email);
         $duration = 60 * 60; // 3600 сек или 1 час
         $cache = Yii::$app->cache;
         $url = $cache->getOrSet($key, function () use ($data) {
