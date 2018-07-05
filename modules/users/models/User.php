@@ -243,4 +243,16 @@ class User extends BaseUser
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
+
+    /**
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        $authManager = Yii::$app->getAuthManager();
+        if ($authManager->getRolesByUser($this->id)) {
+            $authManager->revokeAll($this->id);
+        }
+        return parent::beforeDelete();
+    }
 }
