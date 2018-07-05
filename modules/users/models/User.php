@@ -249,10 +249,14 @@ class User extends BaseUser
      */
     public function beforeDelete()
     {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+
         $authManager = Yii::$app->getAuthManager();
         if ($authManager->getRolesByUser($this->id)) {
             $authManager->revokeAll($this->id);
         }
-        return parent::beforeDelete();
+        return true;
     }
 }
