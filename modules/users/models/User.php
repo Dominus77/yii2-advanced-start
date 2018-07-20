@@ -189,19 +189,6 @@ class User extends IdentityUser
     }
 
     /**
-     * @return string
-     */
-    public function getUserFullName()
-    {
-        $fullName = Module::t('module', 'Guest');
-        if (!Yii::$app->user->isGuest) {
-            $fullName = $this->first_name . ' ' . $this->last_name;
-            $fullName = ($fullName != ' ') ? $fullName : $this->username;
-        }
-        return Html::encode(trim($fullName));
-    }
-
-    /**
      * @param integer|string $id
      * @return bool
      */

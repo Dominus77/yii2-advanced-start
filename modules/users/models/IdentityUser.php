@@ -3,6 +3,7 @@
 namespace modules\users\models;
 
 use Yii;
+use yii\helpers\Html;
 use yii\behaviors\TimestampBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use yii\db\ActiveRecord;
@@ -306,5 +307,18 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
     public function removeEmailConfirmToken()
     {
         $this->email_confirm_token = null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserFullName()
+    {
+        $fullName = Module::t('module', 'Guest');
+        if (!Yii::$app->user->isGuest) {
+            $fullName = $this->first_name . ' ' . $this->last_name;
+            $fullName = ($fullName != ' ') ? $fullName : $this->username;
+        }
+        return Html::encode(trim($fullName));
     }
 }
