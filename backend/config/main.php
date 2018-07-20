@@ -54,7 +54,7 @@ return [
             ],
         ],
         'user' => [
-            'identityClass' => 'modules\users\models\User',
+            'identityClass' => 'modules\users\models\IdentityUser',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
             'loginUrl' => ['/users/default/login'],

@@ -6,7 +6,6 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use modules\users\models\query\UserQuery;
-use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
 /**
@@ -16,11 +15,12 @@ use modules\users\Module;
  * @property array statusesArray Array statuses
  * @property string userFullName Full user name
  * @property int|string registrationType Type registered
+ * @property int $registration_type Type Registration
+ * @property string statusLabelName Status name in label
+ * @property string statusName Status name
  */
-class User extends BaseUser
+class User extends IdentityUser
 {
-    use ModuleTrait;
-
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 
@@ -64,31 +64,6 @@ class User extends BaseUser
     }
 
     /**
-     * @param string $attribute
-     */
-    public function validateCurrentPassword($attribute)
-    {
-        if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
-            $this->processValidatePassword($attribute);
-        } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
-        }
-    }
-
-    /**
-     * @param string $attribute
-     */
-    protected function processValidatePassword($attribute)
-    {
-        if ($attribute) {
-            if (!$this->validatePassword($this->$attribute))
-                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
-        } else {
-            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
-        }
-    }
-
-    /**
      * @return array
      */
     public function scenarios()
@@ -118,21 +93,67 @@ class User extends BaseUser
     }
 
     /**
-     * Actions before saving
+     * Type of registration
+     * How the user is created
+     * If the system registration type is registered by itself,
+     * if it is created from the admin area,
+     * then the login type that created the account
      *
-     * @param bool $insert
-     * @return bool
-     * @throws \yii\base\Exception
+     * @return mixed|string
      */
-    public function beforeSave($insert)
+    public function getRegistrationType()
     {
-        if (parent::beforeSave($insert)) {
-            if (!empty($this->newPassword)) {
-                $this->setPassword($this->newPassword);
+        if ($this->registration_type > 0) {
+            if (($model = User::findOne($this->registration_type)) !== null) {
+                return $model->username;
             }
-            return true;
         }
-        return false;
+        return $this->getRegistrationTypeName();
+    }
+
+    /**
+     * Returns the registration type string
+     * @return mixed
+     */
+    public function getRegistrationTypeName()
+    {
+        return ArrayHelper::getValue(self::getRegistrationTypesArray(), $this->registration_type);
+    }
+
+    /**
+     * Returns an array of log types
+     * @return array
+     */
+    public static function getRegistrationTypesArray()
+    {
+        return [
+            self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
+        ];
+    }
+
+    /**
+     * @param string $attribute
+     */
+    public function validateCurrentPassword($attribute)
+    {
+        if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
+            $this->processValidatePassword($attribute);
+        } else {
+            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+        }
+    }
+
+    /**
+     * @param string $attribute
+     */
+    protected function processValidatePassword($attribute)
+    {
+        if ($attribute) {
+            if (!$this->validatePassword($this->$attribute))
+                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+        } else {
+            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
+        }
     }
 
     /**
@@ -242,6 +263,33 @@ class User extends BaseUser
     public static function find()
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
+    }
+
+    /**
+     * Actions before saving
+     *
+     * @param bool $insert
+     * @return bool
+     */
+    /**
+     * Actions before saving
+     *
+     * @param bool $insert
+     * @return bool
+     * @throws \yii\base\Exception
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->generateAuthKey();
+            }
+            if (!empty($this->newPassword)) {
+                $this->setPassword($this->newPassword);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
