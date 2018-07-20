@@ -21,7 +21,6 @@ return [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationNamespaces' => [
-                'console\migrations',
                 'modules\rbac\migrations',
                 'modules\users\migrations',
             ],
