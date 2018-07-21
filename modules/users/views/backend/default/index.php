@@ -61,7 +61,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
                 <?= common\widgets\PageSize::widget([
                     'label' => '',
                     'defaultPageSize' => 25,
-                    'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'sizes' => [10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
                     'options' => [
                         'class' => 'form-control'
                     ]
