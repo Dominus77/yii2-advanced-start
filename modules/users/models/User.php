@@ -24,13 +24,6 @@ class User extends IdentityUser
     const LENGTH_STRING_PASSWORD_MIN = 6;
     const LENGTH_STRING_PASSWORD_MAX = 16;
 
-    const SCENARIO_ADMIN_CREATE = 'adminCreate';
-    const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
-    const SCENARIO_ADMIN_PASSWORD_UPDATE = 'adminPasswordUpdate';
-    const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
-    const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
-    const SCENARIO_PROFILE_DELETE = 'profileDelete';
-
     /**
      * @var string
      */

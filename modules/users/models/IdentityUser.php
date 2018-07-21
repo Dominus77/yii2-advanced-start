@@ -41,6 +41,13 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     const STATUS_DELETED = 3;
 
+    const SCENARIO_ADMIN_CREATE = 'adminCreate';
+    const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
+    const SCENARIO_ADMIN_PASSWORD_UPDATE = 'adminPasswordUpdate';
+    const SCENARIO_PROFILE_UPDATE = 'profileUpdate';
+    const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
+    const SCENARIO_PROFILE_DELETE = 'profileDelete';
+
     // Type of registration
     const TYPE_REGISTRATION_SYSTEM = 0;
 
@@ -81,7 +88,7 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
+            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.'), 'on' => [self::SCENARIO_ADMIN_CREATE]],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
