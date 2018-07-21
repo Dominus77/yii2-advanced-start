@@ -15,6 +15,5 @@ return [
         'last_visit' => '1402312317',
         'first_name' => 'Nicole',
         'last_name' => 'Paucek',
-        'registration_type' => '0',
     ],
 ];
