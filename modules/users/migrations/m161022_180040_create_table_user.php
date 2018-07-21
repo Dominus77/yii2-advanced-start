@@ -37,6 +37,7 @@ class m161022_180040_create_table_user extends Migration
             'last_name' => $this->string(45)->comment('Last Name'),
         ], $tableOptions);
 
+        // OAuth https://github.com/yiisoft/yii2-authclient
         $this->createTable('{{%auth}}', [
             'id' => $this->primaryKey()->comment('ID'),
             'user_id' => $this->integer()->notNull()->comment('User ID'),
