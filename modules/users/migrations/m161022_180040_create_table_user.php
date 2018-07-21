@@ -35,8 +35,16 @@ class m161022_180040_create_table_user extends Migration
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
-            'registration_type' => $this->integer()->defaultValue(0)->comment('Type Registration'),
         ], $tableOptions);
+
+        $this->createTable('{{%auth}}', [
+            'id' => $this->primaryKey()->comment('ID'),
+            'user_id' => $this->integer()->notNull()->comment('User ID'),
+            'source' => $this->string()->notNull()->comment('Source'),
+            'source_id' => $this->string()->notNull()->comment('Source ID'),
+        ], $tableOptions);
+
+        $this->addForeignKey('FK-auth-user_id-user-id', '{{%auth}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -44,6 +52,7 @@ class m161022_180040_create_table_user extends Migration
      */
     public function safeDown()
     {
+        $this->dropTable('{{%auth}}');
         $this->dropTable('{{%user}}');
     }
 }

@@ -70,11 +70,6 @@ $this->registerJs(new yii\web\JsExpression("
                 'created_at:datetime',
                 'updated_at:datetime',
                 'last_visit:datetime',
-                [
-                    'attribute' => 'registration_type',
-                    'format' => 'raw',
-                    'value' => $model->registrationType,
-                ],
             ],
         ]) ?>
     </div>

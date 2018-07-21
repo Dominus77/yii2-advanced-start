@@ -48,9 +48,6 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
     const SCENARIO_PASSWORD_UPDATE = 'passwordUpdate';
     const SCENARIO_PROFILE_DELETE = 'profileDelete';
 
-    // Type of registration
-    const TYPE_REGISTRATION_SYSTEM = 0;
-
     /**
      * @inheritdoc
      * @return string
@@ -97,7 +94,6 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
             ['email', 'string', 'max' => 255],
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
-            [['registration_type'], 'safe'],
         ];
     }
 

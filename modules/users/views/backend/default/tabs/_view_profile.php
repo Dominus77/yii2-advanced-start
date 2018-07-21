@@ -104,11 +104,6 @@ use modules\users\Module;
                     'format' => 'raw',
                     'value' => Yii::$app->formatter->asDatetime($model->last_visit, 'd LLL yyyy, H:mm:ss'),
                 ],
-                [
-                    'attribute' => 'registration_type',
-                    'format' => 'raw',
-                    'value' => $model->registrationType,
-                ],
             ],
         ]) ?>
     </div>

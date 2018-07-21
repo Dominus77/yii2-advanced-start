@@ -89,4 +89,12 @@ return [
     'Error!' => 'Error!',
     'The requested page does not exist.' => 'The requested page does not exist.',
     'You are not allowed access!' => 'You are not allowed access!',
+
+    'Fail!' => 'Fail!',
+    'Done!' => 'Done!',
+    'The user already has a role.' => 'The user already has a role.',
+    'Username:' => 'Username:',
+    'Role:' => 'Role:',
+    'All Roles' => 'All Roles',
+    'User "{:Username}" not found' => 'User "{:Username}" not found',
 ];

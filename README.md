@@ -37,7 +37,6 @@ Functional
 - Reset password
 - Confirmation by email
 - Last visit
-- Registration Type
 - RBAC Management from the console and web interface
 
 System

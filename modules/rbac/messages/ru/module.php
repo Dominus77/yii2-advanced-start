@@ -89,4 +89,12 @@ return [
     'Error!' => 'Ошибка!',
     'The requested page does not exist.' => 'Запрошенная страница не существует.',
     'You are not allowed access!' => 'Вам не разрешен доступ!',
+
+    'Fail!' => 'Не удачно!',
+    'Done!' => 'Готово!',
+    'The user already has a role.' => 'Данному пользователю роль уже присвоена.',
+    'Username:' => 'Пользователь:',
+    'Role:' => 'Роль:',
+    'All Roles' => 'Все роли',
+    'User "{:Username}" not found' => 'Пользователь "{:Username}" не найден',
 ];

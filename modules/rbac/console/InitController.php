@@ -5,7 +5,7 @@ namespace modules\rbac\console;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\console\Controller;
-use yii\helpers\Console;
+use console\components\helpers\Console;
 use modules\rbac\models\Role;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
@@ -27,10 +27,10 @@ class InitController extends Controller
     public function actionIndex()
     {
         if ($this->processInit()) {
-            $this->stdout('Done!', Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t('module','Done!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
         } else {
-            $this->stderr('FAIL', Console::FG_RED, Console::BOLD);
+            $this->stderr(Console::convertEncoding(Module::t('module','Fail!')), Console::FG_RED, Console::BOLD);
         }
     }
 
