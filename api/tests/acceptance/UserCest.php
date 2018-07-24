@@ -3,8 +3,7 @@
 namespace api\tests\acceptance;
 
 use Yii;
-use api\tests\FunctionalTester;
-use yii\helpers\Url;
+use api\tests\AcceptanceTester;
 
 /**
  * Class UserCest
@@ -13,12 +12,12 @@ use yii\helpers\Url;
 class UserCest
 {
     /**
-     * @param FunctionalTester $I
+     * @param AcceptanceTester $I
      */
-    public function checkUsers(FunctionalTester $I)
+    public function checkUsers(AcceptanceTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET(Url::to('users'));
+        $I->sendGET('v1/users');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
