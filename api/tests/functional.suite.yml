@@ -1,5 +1,4 @@
-suite_namespace: api\tests\functional
-actor: FunctionalTester
+class_name: FunctionalTester
 modules:
     enabled:
         - Asserts
