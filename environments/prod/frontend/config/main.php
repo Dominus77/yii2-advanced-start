@@ -2,9 +2,7 @@
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require(__DIR__ . '/params.php')
 );
 
 /**
@@ -47,7 +45,7 @@ return [
     'defaultRoute' => 'main/default/index',
     'components' => [
         'request' => [
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => 'X2KQSdRiLxxYpue0QsmPOFJfFSPa6A0-',
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
         ],

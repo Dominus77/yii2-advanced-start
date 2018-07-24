@@ -30,22 +30,22 @@ class UserController extends ActiveController
 
         // Add CORS filter
         $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
+            'class' => \yii\filters\Cors::class,
         ];
 
         $behaviors['authenticator'] = [
-            'class' => CompositeAuth::className(),
+            'class' => CompositeAuth::class,
             'only' => ['update'],
             'authMethods' => [
                 'bearerAuth' => [
-                    'class' => HttpBearerAuth::className(),
+                    'class' => HttpBearerAuth::class,
                 ],
                 'paramAuth' => [
-                    'class' => QueryParamAuth::className(),
+                    'class' => QueryParamAuth::class,
                     'tokenParam' => 'auth_key', // This value can be changed to its own, for example hash
                 ],
                 'basicAuth' => [
-                    'class' => HttpBasicAuth::className(),
+                    'class' => HttpBasicAuth::class,
                     'auth' => function ($username, $password) {
                         return $this->processBasicAuth($username, $password);
                     }
@@ -58,7 +58,8 @@ class UserController extends ActiveController
     /**
      * @param string $username
      * @param string $password
-     * @return User|null|array
+     * @return User|null
+     * @throws \yii\base\InvalidConfigException
      */
     protected function processBasicAuth($username, $password)
     {

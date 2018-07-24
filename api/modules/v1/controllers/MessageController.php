@@ -20,7 +20,7 @@ class MessageController extends Controller
 
         // Add CORS filter
         $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
+            'class' => \yii\filters\Cors::class,
         ];
 
         return $behaviors;

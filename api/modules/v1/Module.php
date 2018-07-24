@@ -24,7 +24,7 @@ class Module extends \yii\base\Module
     {
         return [
             'rateLimiter' => [
-                'class' => RateLimiter::className(),
+                'class' => RateLimiter::class,
                 'user' => new IpLimiter(),
                 'enableRateLimitHeaders' => true,
                 'errorMessage' => Yii::t('app', 'Exceeded the limit of applications!'),

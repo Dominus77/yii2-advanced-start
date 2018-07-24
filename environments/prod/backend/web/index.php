@@ -1,17 +1,16 @@
 <?php
 defined('YII_DEBUG') || define('YII_DEBUG', false);
 defined('YII_ENV') || define('YII_ENV', 'prod');
+defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', __DIR__ . '/../../');
 
-require(__DIR__ . '/../../vendor/autoload.php');
-require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
-require(__DIR__ . '/../../common/config/bootstrap.php');
-require(__DIR__ . '/../config/bootstrap.php');
+require(YII_APP_BASE_PATH . '/vendor/autoload.php');
+require(YII_APP_BASE_PATH . '/vendor/yiisoft/yii2/Yii.php');
+require(YII_APP_BASE_PATH . '/common/config/bootstrap.php');
+require(YII_APP_BASE_PATH . '/backend/config/bootstrap.php');
 
 $config = yii\helpers\ArrayHelper::merge(
-    require(__DIR__ . '/../../common/config/main.php'),
-    require(__DIR__ . '/../../common/config/main-local.php'),
-    require(__DIR__ . '/../config/main.php'),
-    require(__DIR__ . '/../config/main-local.php')
+    require(YII_APP_BASE_PATH . '/common/config/main.php'),
+    require(YII_APP_BASE_PATH . '/backend/config/main.php')
 );
 
 $application = new yii\web\Application($config);

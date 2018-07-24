@@ -36,7 +36,8 @@ $js = new JsExpression("
             autoclose: true,
             format: 'dd.mm.yyyy',
             zIndexOffset: 1001,
-            orientation: 'bottom'
+            orientation: 'bottom',
+            todayHighlight: true
         });
     }
 ");
