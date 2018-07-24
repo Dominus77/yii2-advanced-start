@@ -1,0 +1,9 @@
+suite_namespace: api\tests\functional
+actor: FunctionalTester
+modules:
+    enabled:
+        - Asserts
+        - Yii2
+        - REST:
+            url: api/
+            depends: Yii2

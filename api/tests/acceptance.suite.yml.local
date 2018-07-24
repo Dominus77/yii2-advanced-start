@@ -1,0 +1,6 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - REST:
+            depends: PhpBrowser
+            url: 'http://yii2-advanced-start.loc/api/'
