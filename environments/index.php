@@ -40,7 +40,6 @@ return [
         ],
         'setExecutable' => [
             'yii',
-            'yii_test',
             'tests/codeception/bin/yii',
         ],
         'setCookieValidationKey' => [
@@ -62,9 +61,9 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
-            'backend/config/main.php',
-            'frontend/config/main.php',
-            'api/config/main.php',
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+            'api/config/main-local.php',
         ],
     ],
 ];

@@ -10,7 +10,9 @@ require(YII_APP_BASE_PATH . '/api/config/bootstrap.php');
 
 $config = yii\helpers\ArrayHelper::merge(
     require(YII_APP_BASE_PATH . '/common/config/main.php'),
-    require(YII_APP_BASE_PATH . '/api/config/main.php')
+    require(YII_APP_BASE_PATH . '/common/config/main-local.php'),
+    require(YII_APP_BASE_PATH . '/api/config/main.php'),
+    require(YII_APP_BASE_PATH . '/api/config/main-local.php')
 );
 
 $application = new yii\web\Application($config);
