@@ -1,11 +1,11 @@
 <?php
-
+defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', __DIR__ . '/../../../../');
 return [
     'id' => 'modules-rbac-tests',
-    'language'=>'en',
+    'language' => 'en',
     'components' => [
         'assetManager' => [
-            'basePath' => __DIR__ . '/../../../../frontend/web/assets',
+            'basePath' => YII_APP_BASE_PATH . '/frontend/web/assets',
         ],
     ],
 ];

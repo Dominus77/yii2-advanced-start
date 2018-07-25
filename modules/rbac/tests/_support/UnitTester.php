@@ -1,5 +1,5 @@
 <?php
-
+namespace modules\rbac\tests;
 
 /**
  * Inherited Methods
