@@ -42,6 +42,6 @@ class User extends \modules\users\models\User
      */
     public function extraFields()
     {
-        return ['status', 'created_at', 'updated_at', 'last_visit', 'registration_type'];
+        return ['status', 'created_at', 'updated_at', 'last_visit'];
     }
 }
