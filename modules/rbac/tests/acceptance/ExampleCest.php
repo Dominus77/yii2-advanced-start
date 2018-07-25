@@ -14,7 +14,7 @@ class ExampleCest
     /**
      * @param AcceptanceTester $I
      */
-    public function checkUsers(AcceptanceTester $I)
+    public function checkTest(AcceptanceTester $I)
     {
 
     }
