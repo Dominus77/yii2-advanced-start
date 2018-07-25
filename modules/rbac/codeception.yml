@@ -12,4 +12,14 @@ settings:
 modules:
     config:
         Yii2:
+            cleanup: false
             configFile: 'tests/_config/test-local.php'
+coverage:
+    enabled: true
+    whitelist:
+            include:
+                - models/*
+            exclude:
+                - messages/*
+                - migrations/*
+                - views/*

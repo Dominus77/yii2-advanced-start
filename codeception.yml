@@ -4,6 +4,7 @@ include:
     - frontend
     - backend
     - api
+    - modules/rbac
 paths:
     log: console/runtime/logs
 settings:
