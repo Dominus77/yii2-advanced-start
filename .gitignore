@@ -1,7 +1,5 @@
 # yii console command
-/yii
-/yii_test
-/yii_test.bat
+/yii*
 
 # phpstorm project files
 .idea
@@ -33,6 +31,3 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
-
-/composer.lock
-/yii*
