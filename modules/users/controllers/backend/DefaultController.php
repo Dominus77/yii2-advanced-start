@@ -61,10 +61,6 @@ class DefaultController extends BaseController
         $model = new User();
         $model->scenario = $model::SCENARIO_ADMIN_CREATE;
         $model->status = $model::STATUS_WAIT;
-        /** @var \modules\users\models\User $identity */
-        $identity = Yii::$app->user->identity;
-        $model->registration_type = $identity->id;
-
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
