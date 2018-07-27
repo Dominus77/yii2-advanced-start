@@ -14,7 +14,6 @@ use modules\users\Module;
  *
  * @property array statusesArray Array statuses
  * @property string userFullName Full user name
- * @property int|string registrationType Type registered
  * @property string statusLabelName Status name in label
  * @property string statusName Status name
  */
