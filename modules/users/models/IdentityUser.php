@@ -114,7 +114,6 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
             'status' => Module::t('module', 'Status'),
             'first_name' => Module::t('module', 'First Name'),
             'last_name' => Module::t('module', 'Last Name'),
-            'registration_type' => Module::t('module', 'Registration Type'),
         ];
     }
 
