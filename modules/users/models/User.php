@@ -12,7 +12,7 @@ use modules\users\Module;
  * Class User
  * @package modules\users\models
  *
- * @property array statusesArray Array statuses
+ * @property array $statusesArray Array statuses
  * @property string userFullName Full user name
  * @property string statusLabelName Status name in label
  * @property string statusName Status name
@@ -196,7 +196,7 @@ class User extends IdentityUser
     }
 
     /**
-     * @return object|\yii\db\ActiveQuery
+     * @return UserQuery object|\yii\db\ActiveQuery
      * @throws \yii\base\InvalidConfigException
      */
     public static function find()
