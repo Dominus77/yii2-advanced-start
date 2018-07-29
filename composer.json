@@ -38,6 +38,9 @@
     },
     "repositories": [
         {
+            "packagist": false
+        },
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
