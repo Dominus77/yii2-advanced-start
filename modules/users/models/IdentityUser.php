@@ -90,7 +90,7 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.'), 'on' => [self::SCENARIO_ADMIN_CREATE]],
             ['email', 'string', 'max' => 255],
 
             [['first_name', 'last_name'], 'string', 'max' => 45],

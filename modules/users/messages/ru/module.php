@@ -24,7 +24,6 @@ return [
     'Repeat Password' => 'Повторить пароль',
     'Registration Type' => 'Тип регистрации',
     'Avatar' => 'Фото',
-    'Delete Avatar' => 'Удалить фото',
     'System' => 'Система',
 
     'Blocked' => 'Заблокирован',
@@ -34,7 +33,6 @@ return [
 
     'Profile' => 'Профиль',
     'Password' => 'Пароль',
-    'Photo' => 'Фото',
 
     'Create' => 'Создать',
     'Save' => 'Сохранить',
@@ -49,8 +47,6 @@ return [
 
     '- text -' => '- текст -',
     '- all -' => '- все -',
-    '- start -' => '- от -',
-    '- end -' => '- до -',
     '- select -' => '- выбрать -',
 
     'It remains to activate the account.' => 'Осталось активировать учетную запись. Письмо с ссылкой на активацию мы отправили Вам по указаному при регистрации адресу электронной почты.<br>Пожалуйста проверьте Вашу почту.',
@@ -75,11 +71,7 @@ return [
     'Error! Password changed not successfully.' => 'Ошибка! Пароль не изменён.',
     'Profile successfully changed.' => 'Профиль успешно изменён.',
     'Error! Profile not changed.' => 'Ошибка! Профиль не изменён.',
-    'Profile successfully deleted.' => 'Профиль успешно удалён.',
-    'Profile successfully checked deleted.' => 'Профиль отмечен как удалённый.',
-    'Not the correct query format!' => 'Не верный формат запроса!',
     'The requested page does not exist.' => 'Запрошенная страница не существует.',
-    'You are not allowed to edit the profile.' => 'Вы не можете изменить профиль.',
     'There is no user with this e-mail.' => 'Нет ни одного пользователя с такой электронной почтой.',
 
     'Password reset for' => 'Сброс пароля для',
@@ -113,7 +105,8 @@ return [
     'You won\'t be able to revert this!' => 'Действие является не обратимым!',
     'The user "{:name}" are marked as deleted.' => 'Пользователь "{:name}" помечен как удалён.',
     'The user "{:name}" have been successfully deleted.' => 'Пользователь "{:name}" успешно удалён.',
-    'You can not remove yourself.' => 'Нельзя удалить самого себя.',
 
     'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватарку, пожалуйста воспользуйтесь сервисом {:link}.',
+    'This email is already taken.' => 'Данный Email уже существует в системе, выберите другой.',
+    'This username is already taken.' => 'Данное имя пользователя уже существует в системе, пожалуйста выберите другое.',
 ];

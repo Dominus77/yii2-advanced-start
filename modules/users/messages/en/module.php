@@ -24,7 +24,6 @@ return [
     'Repeat Password' => 'Repeat Password',
     'Registration Type' => 'Registration Type',
     'Avatar' => 'Avatar',
-    'Delete Avatar' => 'Delete Avatar',
     'System' => 'System',
 
     'Blocked' => 'Blocked',
@@ -34,7 +33,6 @@ return [
 
     'Profile' => 'Profile',
     'Password' => 'Password',
-    'Photo' => 'Photo',
 
     'Create' => 'Create',
     'Save' => 'Save',
@@ -49,8 +47,6 @@ return [
 
     '- text -' => '- text -',
     '- all -' => '- all -',
-    '- start -' => '- start -',
-    '- end -' => '- end -',
     '- select -' => '- select -',
 
     'It remains to activate the account.' => 'It remains to activate your account. A letter with a link to activate, we sent you an indication of the registration e-mail address. Please check your mail.',
@@ -75,11 +71,7 @@ return [
     'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
     'Profile successfully changed.' => 'Profile successfully changed.',
     'Error! Profile not changed.' => 'Error! Profile not changed.',
-    'Profile successfully deleted.' => 'Profile successfully delete.',
-    'Profile successfully checked deleted.' => 'Profile successfully checked deleted.',
-    'Not the correct query format!' => 'Not the correct query format!',
     'The requested page does not exist.' => 'The requested page does not exist.',
-    'You are not allowed to edit the profile.' => 'You are not allowed to edit the profile.',
     'There is no user with this e-mail.' => 'There is no user with this e-mail.',
 
     'Password reset for' => 'Password reset for',
@@ -113,7 +105,8 @@ return [
     'You won\'t be able to revert this!' => 'You won\'t be able to revert this!',
     'The user "{:name}" are marked as deleted.' => 'The user "{:name}" are marked as deleted.',
     'The user "{:name}" have been successfully deleted.' => 'The user "{:name}" have been successfully deleted.',
-    'You can not remove yourself.' => 'You can not remove yourself.',
 
     'To change the avatar, please use the {:link} service.' => 'To change the avatar, please use the {:link} service.',
+    'This email is already taken.' => 'This email is already taken.',
+    'This username is already taken.' => 'This username is already taken.',
 ];
