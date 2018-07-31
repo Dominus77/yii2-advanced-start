@@ -14,7 +14,7 @@ use modules\users\Module;
 class EmailConfirmForm extends Model
 {
     /**
-     * @var \modules\users\models\BaseUser|bool
+     * @var \modules\users\models\User|bool
      */
     private $_user;
 
@@ -30,7 +30,7 @@ class EmailConfirmForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidArgumentException(Module::t('module', 'Email confirm token cannot be blank.'));
         }
-        $this->_user = BaseUser::findByEmailConfirmToken($token);
+        $this->_user = User::findByEmailConfirmToken($token);
         if (!$this->_user) {
             throw new InvalidArgumentException(Module::t('module', 'Wrong Email confirm token.'));
         }
