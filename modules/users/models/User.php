@@ -209,12 +209,6 @@ class User extends IdentityUser
      *
      * @param bool $insert
      * @return bool
-     */
-    /**
-     * Actions before saving
-     *
-     * @param bool $insert
-     * @return bool
      * @throws \yii\base\Exception
      */
     public function beforeSave($insert)
