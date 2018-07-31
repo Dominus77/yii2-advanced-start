@@ -1,7 +1,9 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $user modules\users\models\User */
+/**
+ * @var $this yii\web\View
+ * @var $user modules\users\models\User
+ */
 
 use modules\users\Module;
 
