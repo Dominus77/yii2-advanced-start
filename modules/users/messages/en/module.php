@@ -52,8 +52,8 @@ return [
     '- all -' => '- all -',
     '- select -' => '- select -',
 
-    'It remains to activate the account.' => "It remains to activate your account.\n A letter with a link to activate, we sent you an indication of the registration e-mail address.\n Please check your mail.",
-    'Thank you for registering!' => 'Thank you for registering, your account has successfully been activated. You can now sign in using your login details.',
+    'It remains to activate the account.' => nl2br("A letter with a link to activate, we sent you an indication of the registration e-mail address.\n Please check your mail."),
+    'Thank you for registering!' => nl2br("Thank you for registering, your account has successfully been activated.\n You can now sign in using your login details."),
     'Error sending message!' => 'Error sending message!',
     'Check your email for further instructions.' => 'Check your email for further instructions.',
     'Sorry, we are unable to reset password.' => 'Sorry, we are unable to reset password.',
@@ -73,7 +73,6 @@ return [
     'Password changed successfully.' => 'Password changed successfully.',
     'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
     'Profile successfully save.' => 'Profile successfully save.',
-    'Error! Profile not save.' => 'Error! Profile not save.',
     'The requested page does not exist.' => 'The requested page does not exist.',
     'There is no user with this e-mail.' => 'There is no user with this e-mail.',
 
