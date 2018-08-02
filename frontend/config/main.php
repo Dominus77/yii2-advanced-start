@@ -62,7 +62,7 @@ return [
             ],
         ],
         'user' => [
-            'identityClass' => 'modules\users\models\IdentityUser',
+            'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
             'loginUrl' => ['/users/default/login'],

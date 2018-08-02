@@ -12,8 +12,5 @@ return [
         'email' => 'nicole.paucek@schultz.info',
 
         'status' => '1',
-        'last_visit' => '1402312317',
-        'first_name' => 'Nicole',
-        'last_name' => 'Paucek',
     ],
 ];
