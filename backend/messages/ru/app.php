@@ -7,9 +7,6 @@ return [
 
     'No Authorize' => 'Не авторизован',
 
-    'Yes, delete!' => 'Да, удалить!',
-    'No, do not delete!' => 'Нет, не удалять!',
-
     'Go to Frontend' => 'Вернуться на сайт',
 
     'All rights reserved.' => 'Все права защищены.',

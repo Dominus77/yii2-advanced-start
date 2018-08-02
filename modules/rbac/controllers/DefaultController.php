@@ -22,7 +22,7 @@ class DefaultController extends \modules\rbac\console\InitController
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -31,7 +31,7 @@ class DefaultController extends \modules\rbac\console\InitController
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'init' => YII_ENV_TEST ? ['GET'] : ['POST'],
                 ],

@@ -18,7 +18,7 @@ class Module extends \yii\base\Module
     {
         return [
             'rateLimiter' => [
-                'class' => \yii\filters\RateLimiter::className(),
+                'class' => \yii\filters\RateLimiter::class,
             ],
         ];
     }

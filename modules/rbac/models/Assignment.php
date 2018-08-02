@@ -2,17 +2,19 @@
 
 namespace modules\rbac\models;
 
+
 use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use modules\rbac\traits\ModuleTrait;
+use modules\users\models\User;
 use modules\rbac\Module;
 
 /**
  * Class Assignment
  * @package modules\rbac\models
  *
- * @property object $user User
+ * @property User $user User
  * @property string|int $id Id
  * @property string $username Username
  * @property mixed $role Role

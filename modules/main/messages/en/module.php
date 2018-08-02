@@ -24,6 +24,5 @@ return [
 
     'You are not allowed access!' => 'You are not allowed access!',
     'Welcome, {:username}!' => 'Welcome, {:username}!',
-    'Click the button to continue.' => 'Click the button to continue.',
     'Will close in {n, plural, one{# second} few{# seconds} many{# second} other{# seconds}}.' => 'Will close in {n, plural, one{# second} few{# seconds} many{# second} other{# seconds}}.',
 ];
