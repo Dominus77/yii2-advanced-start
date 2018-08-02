@@ -2,10 +2,10 @@
 
 namespace modules\main\controllers\backend;
 
+use modules\users\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use dominus77\sweetalert2\Alert;
 use modules\rbac\models\Permission;
 use modules\main\Module;
 
@@ -23,7 +23,7 @@ class DefaultController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['index'],
@@ -46,16 +46,11 @@ class DefaultController extends Controller
             return $this->goHome();
         }
         //Greeting in the admin panel :)
-        /** @var object $identity */
+        /** @var User $identity */
         $identity = Yii::$app->user->identity;
-        $time = 3000;
-        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, [
-            [
-                'title' => Module::t('module', 'Welcome, {:username}!', [':username' => $identity->username]),
-                'text' => Module::t('module', 'Will close in {n, plural, one{# second} few{# seconds} many{# second} other{# seconds}}.', ['n' => $time / 1000]),
-                'timer' => $time,
-            ]
-        ]);
+        Yii::$app->session->setFlash('primary', Module::t('module', 'Welcome, {:username}!', [
+            ':username' => $identity->username
+        ]));
         return $this->render('index');
     }
 }
