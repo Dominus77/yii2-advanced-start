@@ -47,13 +47,12 @@ class UserSearch extends User
     }
 
     /**
-     * @return object|\yii\db\ActiveQuery
-     * @throws \yii\base\InvalidConfigException
+     * @return \modules\users\models\query\UserQuery
      */
     protected function getQuery()
     {
         $query = User::find();
-        // add conditions that should always apply here
+        $query->innerJoinWith('profile', 'profile.user_id = id');
         $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
         return $query;
     }
@@ -79,7 +78,12 @@ class UserSearch extends User
                         'default' => SORT_ASC,
                         'label' => 'Role Name',
                     ],
-                    'last_visit'
+                    'profile.last_visit' => [
+                        'asc' => ['item_name' => SORT_ASC],
+                        'desc' => ['item_name' => SORT_DESC],
+                        'default' => SORT_ASC,
+                        'label' => 'Last Visit',
+                    ]
                 ]
             ],
         ]);
@@ -117,11 +121,11 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+            'item_name' => $this->userRoleName,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'item_name', $this->userRoleName])
             ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 23:59:59') : null]);
     }

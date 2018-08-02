@@ -1,11 +1,13 @@
 <?php
 
-use modules\users\Module;
-use yii\bootstrap\Tabs;
-use yii\helpers\Html;
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ */
 
-/* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use modules\users\Module;
 
 $this->title = Module::t('module', 'Update');
 $this->params['title']['small'] = $model->username;
@@ -20,27 +22,54 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
         <div class="box-header with-border">
             <h3 class="box-title"><?= Html::encode($model->username); ?></h3>
         </div>
-        <div class="nav-tabs-custom">
-            <?= Tabs::widget([
-                'items' => [
-                    [
-                        'label' => Module::t('module', 'Profile'),
-                        'content' => $this->render('tabs/_update_profile', [
-                            'model' => $model,
-                        ]),
-                        'options' => ['id' => 'profile'],
-                        'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
-                    ],
-                    [
-                        'label' => Module::t('module', 'Password'),
-                        'content' => $this->render('tabs/_update_password', [
-                            'model' => $model,
-                        ]),
-                        'options' => ['id' => 'password'],
-                        'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
-                    ],
-                ]
-            ]); ?>
+        <?php $form = ActiveForm::begin(); ?>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'username')->textInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model, 'email')->textInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model, 'password')->passwordInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model, 'status')->dropDownList($model->statusesArray) ?>
+
+                    <hr>
+
+                    <?= $form->field($model->profile, 'first_name')->textInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model->profile, 'last_name')->textInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model->profile, 'email_gravatar')->textInput([
+                        'maxlength' => true,
+                        'placeholder' => true,
+                    ]) ?>
+                </div>
+            </div>
         </div>
+        <div class="box-footer">
+            <div class="form-group">
+                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+                    'class' => 'btn btn-primary',
+                    'name' => 'submit-button',
+                ]) ?>
+            </div>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>

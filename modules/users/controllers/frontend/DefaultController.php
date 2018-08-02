@@ -61,7 +61,6 @@ class DefaultController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->processGoHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

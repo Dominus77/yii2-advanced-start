@@ -2,10 +2,11 @@
 
 namespace modules\users\commands;
 
-use modules\users\models\User;
-use yii\console\Controller;
-use yii\helpers\Console;
 use Yii;
+use console\components\helpers\Console;
+use yii\console\Controller;
+use modules\users\models\User;
+use modules\users\Module;
 
 /**
  * Console crontab actions
@@ -26,16 +27,16 @@ class CronController extends Controller
             /** @var User $user */
             $this->stdout($user->username);
             if ($user->delete() !== false) {
-                Yii::info('Remove expired users ' . $user->username);
+                Yii::info(Module::t('module', 'Remove expired user {:Username}', [':Username' => $user->username]));
                 $this->stdout(' OK', Console::FG_GREEN, Console::BOLD);
             } else {
-                Yii::warning('Cannot remove expired users ' . $user->username);
+                Yii::warning(Module::t('module', 'Cannot remove expired user {:Username}', [':Username' => $user->username]));
                 $this->stderr(' FAIL', Console::FG_RED, Console::BOLD);
             }
             $this->stdout(PHP_EOL);
         }
 
-        $this->stdout('Done!', Console::FG_GREEN, Console::BOLD);
+        $this->stdout(Module::t('module', 'Done!'), Console::FG_GREEN, Console::BOLD);
         $this->stdout(PHP_EOL);
     }
 }

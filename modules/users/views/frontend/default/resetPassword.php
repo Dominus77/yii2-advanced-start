@@ -1,8 +1,10 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \modules\users\models\ResetPasswordForm */
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model \modules\users\models\ResetPasswordForm
+ */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -29,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'password',
                     'options' => [
                         'class' => 'form-control',
+                        'placeholder' => true,
                     ],
                     'config' => [
                         'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -44,7 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]); ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), [
+                    'class' => 'btn btn-primary'
+                ]) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

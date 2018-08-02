@@ -1,13 +1,15 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ * @var $assignModel \modules\rbac\models\Assignment
+ */
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use modules\users\widgets\AvatarWidget;
 use modules\users\Module;
-
-/* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
-/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->registerJs(new yii\web\JsExpression("
     $(function () {
@@ -26,9 +28,10 @@ $this->registerJs(new yii\web\JsExpression("
             'attributes' => [
                 'id',
                 'username',
-                'first_name',
-                'last_name',
+                'profile.first_name',
+                'profile.last_name',
                 'email:email',
+                'profile.email_gravatar',
                 [
                     'attribute' => 'userRoleName',
                     'format' => 'raw',
@@ -69,7 +72,7 @@ $this->registerJs(new yii\web\JsExpression("
                 ],
                 'created_at:datetime',
                 'updated_at:datetime',
-                'last_visit:datetime',
+                'profile.last_visit:datetime',
             ],
         ]) ?>
     </div>
@@ -79,10 +82,6 @@ $this->registerJs(new yii\web\JsExpression("
         ]) ?>
         <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), ['delete'], [
             'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
-                'method' => 'post',
-            ],
         ]) ?>
     </div>
 </div>

@@ -19,12 +19,15 @@ return [
     'First Name' => 'Имя',
     'Last Name' => 'Фамилия',
     'Role' => 'Права',
-    'Current Password' => 'Старый пароль',
+    'Current Password' => 'Ваш текущий пароль',
     'New Password' => 'Новый пароль',
     'Repeat Password' => 'Повторить пароль',
-    'Registration Type' => 'Тип регистрации',
     'Avatar' => 'Фото',
-    'System' => 'Система',
+    'Hash Password' => 'Хэш пароля',
+    'Password Token' => 'Токен сброса пароля',
+    'Email Confirm Token' => 'Токен подтверждения Email',
+    'User Role Name' => 'Роль',
+    'Email Gravatar' => 'Email gravatar',
 
     'Blocked' => 'Заблокирован',
     'Active' => 'Активно',
@@ -49,7 +52,7 @@ return [
     '- all -' => '- все -',
     '- select -' => '- выбрать -',
 
-    'It remains to activate the account.' => 'Осталось активировать учетную запись. Письмо с ссылкой на активацию мы отправили Вам по указаному при регистрации адресу электронной почты.<br>Пожалуйста проверьте Вашу почту.',
+    'It remains to activate the account.' => "Осталось активировать учетную запись.\n Письмо с ссылкой на активацию мы отправили Вам по указаному при регистрации адресу электронной почты.\nПожалуйста проверьте Вашу почту.",
     'Thank you for registering!' => 'Спасибо за регистрацию, Ваша учётная запись успешно активирована. Теперь Вы можете войти на сайт используя Ваши регистрационные данные.',
     'Error sending message!' => 'Ошибка отправки сообщения!',
     'Check your email for further instructions.' => 'Проверьте свою электронную почту для получения дальнейших инструкций.',
@@ -69,7 +72,7 @@ return [
 
     'Password changed successfully.' => 'Пароль успешно изменён.',
     'Error! Password changed not successfully.' => 'Ошибка! Пароль не изменён.',
-    'Profile successfully changed.' => 'Профиль успешно изменён.',
+    'Profile successfully save.' => 'Профиль успешно сохранен.',
     'Error! Profile not changed.' => 'Ошибка! Профиль не изменён.',
     'The requested page does not exist.' => 'Запрошенная страница не существует.',
     'There is no user with this e-mail.' => 'Нет ни одного пользователя с такой электронной почтой.',
@@ -106,7 +109,28 @@ return [
     'The user "{:name}" are marked as deleted.' => 'Пользователь "{:name}" помечен как удалён.',
     'The user "{:name}" have been successfully deleted.' => 'Пользователь "{:name}" успешно удалён.',
 
+    'This username is already taken.' => 'Это имя пользователя занято.',
+    'This email is already taken.' => 'Этот email занят.',
+
     'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватарку, пожалуйста воспользуйтесь сервисом {:link}.',
-    'This email is already taken.' => 'Данный Email уже существует в системе, выберите другой.',
-    'This username is already taken.' => 'Данное имя пользователя уже существует в системе, пожалуйста выберите другое.',
+
+    'Password:' => 'Пароль:',
+    'More than 6 symbols' => 'Более 6 символов',
+    'Status:' => 'Статус:',
+    'New password:' => 'Новый пароль:',
+    'Remove expired user {:Username}' => 'Удален пользователь {:Username} не подтвердивший свою регистрацию',
+    'Cannot remove expired user {:Username}' => 'Не удалось удалить пользователя {:Username} не подтвердившего свою регистрацию',
+    'Done!' => 'Готово!',
+    'Success!' => 'Успешно!',
+    'User "{:Username}" not found' => 'Пользователь "{:Username}" не найден.',
+    'User not found.' => 'Пользователь не найден.',
+
+    'Confirm deleting profile' => 'Подтверждение удаления профиля',
+    'Your profile has been successfully deleted!' => 'Ваш профиль успешно удалён!',
+
+    'Form successfully saved.' => 'Форма успешно сохранена.',
+    'Error! Failed to save the form.' => 'Ошибка! Не удалось сохранить форму.',
+
+    'Send a link to activate your account.' => 'Отправить ссылку для активации аккаунта.',
+    'Account activation!' => 'Активация аккаунта!',
 ];

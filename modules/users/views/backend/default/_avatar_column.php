@@ -1,13 +1,14 @@
 <?php
 
+/* @var $model modules\users\models\User */
+
 use modules\users\widgets\AvatarWidget;
 
-/* @var $model modules\users\models\User */
 ?>
 <div class="row">
     <div class="col-sm-12 text-center">
         <?= AvatarWidget::widget([
-            'email' => $model->email,
+            'email' => $model->profile->email_gravatar,
             'imageOptions' => [
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'width:60px',

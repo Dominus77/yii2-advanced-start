@@ -3,14 +3,32 @@
 namespace modules\users\models\query;
 
 use modules\users\models\User;
-use yii\db\ActiveQuery;
 
 /**
- * Class UserQuery
- * @package modules\users\models\query
+ * This is the ActiveQuery class for [[\modules\users\models\User]].
+ *
+ * @see \modules\users\models\User
  */
-class UserQuery extends ActiveQuery
+class UserQuery extends \yii\db\ActiveQuery
 {
+    /**
+     * {@inheritdoc}
+     * @return \modules\users\models\User[]|array
+     */
+    public function all($db = null)
+    {
+        return parent::all($db);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \modules\users\models\User|array|null
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
+
     /**
      * @param int $timeout
      * @return $this

@@ -3,109 +3,329 @@
 namespace modules\users\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use modules\users\models\query\UserQuery;
+use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
 /**
- * Class User
- * @package modules\users\models
+ * This is the model class for table "{{%user}}".
  *
- * @property array $statusesArray Array statuses
- * @property string userFullName Full user name
- * @property string statusLabelName Status name in label
- * @property string statusName Status name
+ * @property int $id ID
+ * @property string $username Username
+ * @property string $email Email
+ * @property string $auth_key Authorization Key
+ * @property string $password_hash Hash Password
+ * @property string $password_reset_token Password Token
+ * @property string $email_confirm_token Email Confirm Token
+ * @property int $created_at Created
+ * @property int $updated_at Updated
+ * @property int $status Status
+ *
+ * @property UserProfile $profile
+ * @property string $statusLabelName
+ * @property string $statusName
+ * @property array $statusesArray
+ * @property string $labelMailConfirm
  */
-class User extends IdentityUser
+class User extends ActiveRecord implements IdentityInterface
 {
-    const LENGTH_STRING_PASSWORD_MIN = 6;
-    const LENGTH_STRING_PASSWORD_MAX = 16;
+    use ModuleTrait;
+
+    // Statuses
+    const STATUS_BLOCKED = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_WAIT = 2;
+    const STATUS_DELETED = 3;
+
+    // Length password
+    const LENGTH_STRING_PASSWORD_MIN = 2;
+    const LENGTH_STRING_PASSWORD_MAX = 32;
 
     /**
      * @var string
      */
-    public $currentPassword;
+    public $password;
 
     /**
-     * @var string
+     * {@inheritdoc}
+     * @return string
      */
-    public $newPassword;
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
 
     /**
-     * @var string
+     * {@inheritdoc}
+     * @return array
      */
-    public $newPasswordRepeat;
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+            ],
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::class,
+                'softDeleteAttributeValues' => [
+                    'status' => self::STATUS_DELETED,
+                ],
+            ],
+        ];
+    }
 
     /**
+     * {@inheritdoc}
      * @return array
      */
     public function rules()
     {
-        return ArrayHelper::merge(parent::rules(), [
+        return [
+            ['username', 'required'],
+            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
+            ['email', 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_reset_token'], 'unique'],
+
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
-            [['newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE, self::SCENARIO_PASSWORD_UPDATE, self::SCENARIO_ADMIN_PASSWORD_UPDATE]],
-            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN],
-            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
-            ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false],
-        ]);
+            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+        ];
     }
 
     /**
-     * @return array
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ADMIN_CREATE] = ['avatar', 'username', 'email', 'status', 'newPassword', 'newPasswordRepeat', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_ADMIN_UPDATE] = ['username', 'email', 'status', 'first_name', 'last_name', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_ADMIN_PASSWORD_UPDATE] = ['newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_PASSWORD_UPDATE] = ['currentPassword', 'newPassword', 'newPasswordRepeat'];
-        $scenarios[self::SCENARIO_PROFILE_UPDATE] = ['username', 'email', 'first_name', 'last_name'];
-        $scenarios[self::SCENARIO_PROFILE_DELETE] = ['status'];
-        $scenarios['default'] = ['username', 'email', 'first_name', 'last_name', 'password_hash', 'status', 'auth_key', 'email_confirm_token'];
-        return $scenarios;
-    }
-
-    /**
+     * {@inheritdoc}
      * @return array
      */
     public function attributeLabels()
     {
-        return ArrayHelper::merge(parent::attributeLabels(), [
-            'userRoleName' => Module::t('module', 'Role'),
-            'currentPassword' => Module::t('module', 'Current Password'),
-            'newPassword' => Module::t('module', 'New Password'),
-            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
+        return [
+            'id' => Module::t('module', 'ID'),
+            'username' => Module::t('module', 'Username'),
+            'email' => Module::t('module', 'Email'),
+            'auth_key' => Module::t('module', 'Auth Key'),
+            'password_hash' => Module::t('module', 'Hash Password'),
+            'password_reset_token' => Module::t('module', 'Password Token'),
+            'email_confirm_token' => Module::t('module', 'Email Confirm Token'),
+            'created_at' => Module::t('module', 'Created'),
+            'updated_at' => Module::t('module', 'Updated'),
+            'status' => Module::t('module', 'Status'),
+            'userRoleName' => Module::t('module', 'User Role Name'),
+            'password' => Module::t('module', 'Password'),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \modules\users\models\query\UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile()
+    {
+        return $this->hasOne(UserProfile::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @param int|string $id
+     * @return User|null|IdentityInterface
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @param mixed $token
+     * @param null $type
+     * @return User|null|IdentityInterface
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return int|string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return string
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @param string $authKey
+     * @return bool
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Generates email confirmation token
+     */
+    public function generateEmailConfirmToken()
+    {
+        $this->email_confirm_token = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Finds out if password reset token is valid
+     *
+     * @param mixed $token password reset token
+     * @return boolean
+     */
+    public static function isPasswordResetTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+        $expire = Module::$passwordResetTokenExpire;
+        $parts = explode('_', $token);
+        $timestamp = (int)end($parts);
+        return $timestamp + $expire >= time();
+    }
+
+    /**
+     * Finds user by password reset token
+     *
+     * @param mixed $token password reset token
+     * @return static|null
+     */
+    public static function findByPasswordResetToken($token)
+    {
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+        return static::findOne([
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
         ]);
     }
 
     /**
-     * @param string $attribute
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     * @throws \yii\base\Exception
      */
-    public function validateCurrentPassword($attribute)
+    public function setPassword($password)
     {
-        if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
-            $this->processValidatePassword($attribute);
-        } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
-        }
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
-     * @param string $attribute
+     * Removes password reset token
      */
-    protected function processValidatePassword($attribute)
+    public function removePasswordResetToken()
     {
-        if ($attribute) {
-            if (!$this->validatePassword($this->$attribute))
-                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
-        } else {
-            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
-        }
+        $this->password_reset_token = null;
+    }
+
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    /**
+     * Finds user by email
+     *
+     * @param string $email
+     * @return array|null|ActiveRecord
+     */
+    public static function findByUsernameEmail($email)
+    {
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by username or email
+     *
+     * @param string $string
+     * @return array|null|ActiveRecord
+     */
+    public static function findByUsernameOrEmail($string)
+    {
+        return static::find()
+            ->where(['or', ['username' => $string], ['email' => $string]])
+            ->andWhere(['status' => self::STATUS_ACTIVE])
+            ->one();
+    }
+
+    /**
+     * @param mixed $email_confirm_token
+     * @return bool|null|static
+     */
+    public static function findByEmailConfirmToken($email_confirm_token)
+    {
+        return static::findOne([
+            'email_confirm_token' => $email_confirm_token,
+            'status' => self::STATUS_WAIT
+        ]);
+    }
+
+    /**
+     * Removes email confirmation token
+     */
+    public function removeEmailConfirmToken()
+    {
+        $this->email_confirm_token = null;
     }
 
     /**
@@ -119,6 +339,66 @@ class User extends IdentityUser
             self::STATUS_WAIT => Module::t('module', 'Wait'),
             self::STATUS_DELETED => Module::t('module', 'Deleted'),
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLabelsArray()
+    {
+        return [
+            self::STATUS_BLOCKED => 'default',
+            self::STATUS_ACTIVE => 'success',
+            self::STATUS_WAIT => 'warning',
+            self::STATUS_DELETED => 'danger',
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * Return <span class="label label-success">Active</span>
+     * @return string
+     */
+    public function getStatusLabelName()
+    {
+        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
+        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function getLabelMailConfirm($name = 'default')
+    {
+        if ($this->status === self::STATUS_WAIT) {
+            return Html::tag('span', Html::tag('span', '', [
+                'class' => 'glyphicon glyphicon-envelope',
+            ]), ['class' => 'label label-' . $name]);
+        }
+        return '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function sendConfirmEmail()
+    {
+        return Yii::$app->mailer->compose([
+            'html' => '@modules/users/mail/emailConfirm-html',
+            'text' => '@modules/users/mail/emailConfirm-text'
+        ], ['user' => $this])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+            ->setTo($this->email)
+            ->setSubject(Module::t('module', 'Account activation!') . ' ' . Yii::$app->name)
+            ->send();
     }
 
     /**
@@ -138,6 +418,19 @@ class User extends IdentityUser
                 $this->status = self::STATUS_ACTIVE;
         }
         return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserFullName()
+    {
+        $fullName = Module::t('module', 'Guest');
+        if (!Yii::$app->user->isGuest) {
+            $fullName = $this->profile->first_name . ' ' . $this->profile->last_name;
+            $fullName = ($fullName != ' ') ? $fullName : $this->username;
+        }
+        return Html::encode(trim($fullName));
     }
 
     /**
@@ -165,48 +458,6 @@ class User extends IdentityUser
     }
 
     /**
-     * @return mixed
-     */
-    public function getStatusName()
-    {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }
-
-    /**
-     * Return <span class="label label-success">Active</span>
-     * @return string
-     */
-    public function getStatusLabelName()
-    {
-        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getLabelsArray()
-    {
-        return [
-            self::STATUS_BLOCKED => 'default',
-            self::STATUS_ACTIVE => 'success',
-            self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger',
-        ];
-    }
-
-    /**
-     * @return UserQuery object|\yii\db\ActiveQuery
-     * @throws \yii\base\InvalidConfigException
-     */
-    public static function find()
-    {
-        return Yii::createObject(UserQuery::class, [get_called_class()]);
-    }
-
-    /**
-     * Actions before saving
-     *
      * @param bool $insert
      * @return bool
      * @throws \yii\base\Exception
@@ -226,18 +477,36 @@ class User extends IdentityUser
     }
 
     /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            $profile = new UserProfile([
+                'user_id' => $this->id,
+                'email_gravatar' => $this->email
+            ]);
+            $profile->save();
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
      * @return bool
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function beforeDelete()
     {
-        if (!parent::beforeDelete()) {
-            return false;
+        if ($this->isDeleted()) {
+            $this->profile->delete();
+            // Отвязываем от ролей
+            $authManager = Yii::$app->getAuthManager();
+            if ($authManager->getRolesByUser($this->id)) {
+                $authManager->revokeAll($this->id);
+            }
         }
-
-        $authManager = Yii::$app->getAuthManager();
-        if ($authManager->getRolesByUser($this->id)) {
-            $authManager->revokeAll($this->id);
-        }
-        return true;
+        return parent::beforeDelete();
     }
 }

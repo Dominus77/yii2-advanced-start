@@ -10,52 +10,28 @@ use modules\users\Module;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="users-backend-profile-tabs-_update_profile">
-    <?php $form = ActiveForm::begin([
-        'action' => Url::to(['update-profile']),
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'horizontalCssClasses' => [
-                'label' => 'col-sm-2',
-                'offset' => 'col-sm-offset-2',
-                'wrapper' => 'col-sm-10',
-            ],
-        ],
-    ]); ?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput([
-        'maxlength' => true,
-        'class' => 'form-control',
-        'disabled' => Yii::$app->user->can(\modules\rbac\models\Role::ROLE_SUPER_ADMIN) ? false : true,
-        'placeholder' => Module::t('module', 'Username'),
-    ]) ?>
+        <?= $form->field($model, 'first_name')->textInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => true,
+        ]) ?>
 
-    <?= $form->field($model, 'email')->textInput([
-        'maxlength' => true,
-        'class' => 'form-control',
-        'placeholder' => Module::t('module', 'Email'),
-    ]) ?>
+        <?= $form->field($model, 'last_name')->textInput([
+            'maxlength' => true,
+            'class' => 'form-control',
+            'placeholder' => true,
+        ]) ?>
 
-    <?= $form->field($model, 'first_name')->textInput([
-        'maxlength' => true,
-        'class' => 'form-control',
-        'placeholder' => Module::t('module', 'First Name'),
-    ]) ?>
-
-    <?= $form->field($model, 'last_name')->textInput([
-        'maxlength' => true,
-        'class' => 'form-control',
-        'placeholder' => Module::t('module', 'Last Name'),
-    ]) ?>
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="form-group">
             <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
 </div>

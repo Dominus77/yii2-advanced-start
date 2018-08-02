@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $searchModel modules\users\models\search\UserSearch
+ * @var $model modules\users\models\User
+ * @var $dataProvider yii\data\ActiveDataProvider
+ * @var $assignModel \modules\rbac\models\Assignment
+ */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
@@ -7,16 +15,13 @@ use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use yii\web\JsExpression;
 use backend\assets\plugins\DatePickerAsset;
+use modules\users\assets\UserAsset;
 use modules\users\Module;
-
-/* @var $this yii\web\View */
-/* @var $searchModel modules\users\models\search\UserSearch */
-/* @var $model modules\users\models\User */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
+
+UserAsset::register($this);
 
 $language = substr(\Yii::$app->language, 0, 2);
 DatePickerAsset::$language = $language;
@@ -131,20 +136,28 @@ $this->registerJs($js, \yii\web\View::POS_END);
                         ]),
                         'format' => 'raw',
                         'value' => function ($data) {
-                            $view = Yii::$app->controller->view;
                             /** @var object $identity */
                             $identity = Yii::$app->user->identity;
                             /** @var \modules\users\models\User $data */
                             if ($data->id !== $identity->id && !$data->isSuperAdmin($data->id)) {
-                                $view->registerJs("$('#status_link_" . $data->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
-                                return Html::a($data->statusLabelName, Url::to(['status', 'id' => $data->id]), [
-                                    'id' => 'status_link_' . $data->id,
-                                    'title' => Module::t('module', 'Click to change the status'),
-                                    'data' => [
-                                        'toggle' => 'tooltip',
-                                        'pjax' => 0,
-                                    ],
-                                ]);
+                                return Html::a($data->statusLabelName, Url::to(['set-status', 'id' => $data->id]), [
+                                        'id' => $data->id,
+                                        'class' => 'link-status',
+                                        'title' => Module::t('module', 'Click to change the status'),
+                                        'data' => [
+                                            'toggle' => 'tooltip',
+                                            'pjax' => 0,
+                                            'id' => $data->id,
+                                        ],
+                                    ]) . ' ' .
+                                    Html::a($data->labelMailConfirm, Url::to(['send-confirm-email', 'id' => $data->id]), [
+                                        'id' => 'email-link-' . $data->id,
+                                        'class' => 'link-email',
+                                        'title' => Module::t('module', 'Send a link to activate your account.'),
+                                        'data' => [
+                                            'toggle' => 'tooltip',
+                                        ],
+                                    ]);
                             }
                             return $data->statusLabelName;
                         },
@@ -174,7 +187,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
                         ],
                     ],
                     [
-                        'attribute' => 'last_visit',
+                        'attribute' => 'profile.last_visit',
                         'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div>'
                             . Html::activeInput('text', $searchModel, 'date_from', [
                                 'id' => 'datepicker',

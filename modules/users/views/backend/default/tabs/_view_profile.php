@@ -1,20 +1,26 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ * @var $assignModel \modules\rbac\models\Assignment
+ */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use modules\users\widgets\AvatarWidget;
+use modules\users\assets\UserAsset;
 use modules\users\Module;
 
-/* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
-/* @var $assignModel \modules\rbac\models\Assignment */
+UserAsset::register($this);
+
 ?>
 
 <div class="row">
     <div class="col-sm-2">
         <?= AvatarWidget::widget([
-            'email' => $model->email,
+            'email' => $model->profile->email_gravatar,
             'imageOptions' => [
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'margin-bottom:10px; width:auto',
@@ -28,9 +34,10 @@ use modules\users\Module;
             'attributes' => [
                 'id',
                 'username',
-                'first_name',
-                'last_name',
+                'profile.first_name',
+                'profile.last_name',
                 'email:email',
+                'profile.email_gravatar',
                 [
                     'attribute' => 'userRoleName',
                     'format' => 'raw',
@@ -42,18 +49,26 @@ use modules\users\Module;
                     'attribute' => 'status',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        $view = Yii::$app->controller->view;
                         /** @var object $identity */
                         $identity = Yii::$app->user->identity;
                         if ($model->id != $identity->id) {
-                            $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
-                            return Html::a($model->statusLabelName, Url::to(['status', 'id' => $model->id]), [
-                                'id' => 'status_link_' . $model->id,
-                                'title' => Module::t('module', 'Click to change the status'),
-                                'data' => [
-                                    'toggle' => 'tooltip',
-                                ],
-                            ]);
+                            return Html::a($model->statusLabelName, Url::to(['set-status', 'id' => $model->id]), [
+                                    'id' => 'status-link-' . $model->id,
+                                    'class' => 'link-status',
+                                    'title' => Module::t('module', 'Click to change the status'),
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'id' => $model->id,
+                                    ],
+                                ]) . ' '
+                                . Html::a($model->labelMailConfirm, Url::to(['send-confirm-email', 'id' => $model->id]), [
+                                    'id' => 'email-link-' . $model->id,
+                                    'class' => 'link-email',
+                                    'title' => Module::t('module', 'Send a link to activate your account.'),
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                    ],
+                                ]);
                         }
                         return $model->statusLabelName;
                     },
@@ -100,9 +115,9 @@ use modules\users\Module;
                     'value' => Yii::$app->formatter->asDatetime($model->updated_at, 'd LLL yyyy, H:mm:ss'),
                 ],
                 [
-                    'attribute' => 'last_visit',
+                    'attribute' => 'profile.last_visit',
                     'format' => 'raw',
-                    'value' => Yii::$app->formatter->asDatetime($model->last_visit, 'd LLL yyyy, H:mm:ss'),
+                    'value' => Yii::$app->formatter->asDatetime($model->profile->last_visit, 'd LLL yyyy, H:mm:ss'),
                 ],
             ],
         ]) ?>

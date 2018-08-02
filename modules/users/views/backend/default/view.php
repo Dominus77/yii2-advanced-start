@@ -1,12 +1,14 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ * @var $assignModel \modules\rbac\models\Assignment
+ */
+
 use modules\users\Module;
 use yii\bootstrap\Tabs;
 use yii\helpers\Html;
-
-/* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
-/* @var $assignModel \modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'View');
 $this->params['title']['small'] = $model->username;

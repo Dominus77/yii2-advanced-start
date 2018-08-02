@@ -22,9 +22,12 @@ return [
     'Current Password' => 'Current Password',
     'New Password' => 'New Password',
     'Repeat Password' => 'Repeat Password',
-    'Registration Type' => 'Registration Type',
     'Avatar' => 'Avatar',
-    'System' => 'System',
+    'Hash Password' => 'Hash Password',
+    'Password Token' => 'Password Token',
+    'Email Confirm Token' => 'Email Confirm Token',
+    'User Role Name' => 'User Role Name',
+    'Email Gravatar' => 'Email gravatar',
 
     'Blocked' => 'Blocked',
     'Active' => 'Active',
@@ -49,7 +52,7 @@ return [
     '- all -' => '- all -',
     '- select -' => '- select -',
 
-    'It remains to activate the account.' => 'It remains to activate your account. A letter with a link to activate, we sent you an indication of the registration e-mail address. Please check your mail.',
+    'It remains to activate the account.' => "It remains to activate your account.\n A letter with a link to activate, we sent you an indication of the registration e-mail address.\n Please check your mail.",
     'Thank you for registering!' => 'Thank you for registering, your account has successfully been activated. You can now sign in using your login details.',
     'Error sending message!' => 'Error sending message!',
     'Check your email for further instructions.' => 'Check your email for further instructions.',
@@ -69,8 +72,8 @@ return [
 
     'Password changed successfully.' => 'Password changed successfully.',
     'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
-    'Profile successfully changed.' => 'Profile successfully changed.',
-    'Error! Profile not changed.' => 'Error! Profile not changed.',
+    'Profile successfully save.' => 'Profile successfully save.',
+    'Error! Profile not save.' => 'Error! Profile not save.',
     'The requested page does not exist.' => 'The requested page does not exist.',
     'There is no user with this e-mail.' => 'There is no user with this e-mail.',
 
@@ -106,7 +109,28 @@ return [
     'The user "{:name}" are marked as deleted.' => 'The user "{:name}" are marked as deleted.',
     'The user "{:name}" have been successfully deleted.' => 'The user "{:name}" have been successfully deleted.',
 
-    'To change the avatar, please use the {:link} service.' => 'To change the avatar, please use the {:link} service.',
-    'This email is already taken.' => 'This email is already taken.',
     'This username is already taken.' => 'This username is already taken.',
+    'This email is already taken.' => 'This email is already taken.',
+
+    'To change the avatar, please use the {:link} service.' => 'To change the avatar, please use the {:link} service.',
+
+    'Password:' => 'Password:',
+    'More than 6 symbols' => 'More than 6 symbols',
+    'Status:' => 'Status:',
+    'New password:' => 'New password:',
+    'Remove expired user {:Username}' => 'Remove expired users {:Username}',
+    'Cannot remove expired user {:Username}' => 'Cannot remove expired user {:Username}',
+    'Done!' => 'Done!',
+    'Success!' => 'Success!',
+    'User "{:Username}" not found' => 'User "{:Username}" not found.',
+    'User not found.' => 'User not found.',
+
+    'Confirm deleting profile' => 'Confirm deleting profile',
+    'Your profile has been successfully deleted!' => 'Your profile has been successfully deleted!',
+
+    'Form successfully saved.' => 'Form successfully saved.',
+    'Error! Failed to save the form.' => 'Error! Failed to save the form.',
+
+    'Send a link to activate your account.' => 'Send a link to activate your account.',
+    'Account activation!' => 'Account activation!',
 ];

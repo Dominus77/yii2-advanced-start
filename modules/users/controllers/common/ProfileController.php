@@ -5,9 +5,9 @@ namespace modules\users\controllers\common;
 use Yii;
 use yii\web\Controller;
 use modules\users\models\User;
+use modules\users\models\UpdatePasswordForm;
+use modules\users\models\UserDeleteForm;
 use modules\rbac\models\Assignment;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
@@ -19,31 +19,6 @@ use modules\users\Module;
  */
 class ProfileController extends Controller
 {
-    /**
-     * @inheritdoc
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@']
-                    ],
-                ],
-            ],
-        ];
-    }
-
     /**
      * @return string
      * @throws NotFoundHttpException
@@ -68,37 +43,55 @@ class ProfileController extends Controller
     public function actionUpdate()
     {
         $model = $this->findModel();
+        if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully save.'));
+            return $this->redirect(['update', 'tab' => 'profile']);
+        }
         return $this->render('update', [
             'model' => $model,
+            'passwordForm' => new UpdatePasswordForm($model),
         ]);
     }
 
     /**
      * @return Response
      * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
      */
-    public function actionUpdateProfile()
+    public function actionUpdateAvatar()
     {
         $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_UPDATE;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+        if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Form successfully saved.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Failed to save the form.'));
         }
-        return $this->redirect(['update', 'tab' => 'profile']);
+        return $this->redirect(['update', 'tab' => 'avatar']);
     }
 
     /**
      * @return array|Response
      * @throws NotFoundHttpException
      */
-    public function actionUpdatePassword()
+    public function actionAjaxValidateAvatarForm()
     {
         $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (Yii::$app->request->isAjax && $model->profile->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model->profile);
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionUpdatePassword()
+    {
+        $model = new UpdatePasswordForm($this->findModel());
+        if ($model->load(Yii::$app->request->post()) && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
@@ -112,8 +105,7 @@ class ProfileController extends Controller
      */
     public function actionAjaxValidatePasswordForm()
     {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+        $model = new UpdatePasswordForm($this->findModel());
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
@@ -122,19 +114,17 @@ class ProfileController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
-     * This delete set status blocked, is successful, logout and the browser will be redirected to the 'home' page.
-     * @return Response
+     * @return array|Response
      * @throws NotFoundHttpException
      */
-    public function actionDelete()
+    public function actionAjaxValidatePasswordDeleteForm()
     {
-        $model = $this->findModel();
-        $model->scenario = $model::SCENARIO_PROFILE_DELETE;
-        $model->status = $model::STATUS_DELETED;
-        if ($model->save())
-            Yii::$app->user->logout();
-        return $this->goHome();
+        $model = new UserDeleteForm($this->findModel());
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        return $this->redirect(['delete']);
     }
 
     /**
@@ -167,15 +157,32 @@ class ProfileController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return null|User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string|Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete()
+    {
+        $model = new UserDeleteForm($this->findModel());
+        if ($model->load(Yii::$app->request->post()) && $model->userDelete()) {
+            Yii::$app->user->logout();
+            Yii::$app->session->setFlash('success', Module::t('module', 'Your profile has been successfully deleted!'));
+            return $this->goHome();
+        }
+        return $this->render('delete', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return User|null
+     * @throws NotFoundHttpException
      */
     private function findModel()
     {
         if (!Yii::$app->user->isGuest) {
-            /** @var object $identity */
+            /** @var User $identity */
             $identity = Yii::$app->user->identity;
             if (($model = User::findOne($identity->id)) !== null) {
                 return $model;

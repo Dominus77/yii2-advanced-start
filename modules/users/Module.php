@@ -22,6 +22,11 @@ class Module extends \yii\base\Module
     public $emailConfirmTokenExpire = 259200; // 3 days
 
     /**
+     * @var int
+     */
+    public static $passwordResetTokenExpire = 3600;
+
+    /**
      * @var string
      */
     public $controllerNamespace = 'modules\users\controllers\frontend';
@@ -44,9 +49,9 @@ class Module extends \yii\base\Module
             $this->setViewPath('@modules/users/views/backend');
         } else {
             $this->setViewPath('@modules/users/views/frontend');
-            if (Yii::$app instanceof ConsoleApplication) {
-                $this->controllerNamespace = 'modules\users\commands';
-            }
+        }
+        if (Yii::$app instanceof ConsoleApplication) {
+            $this->controllerNamespace = 'modules\users\commands';
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace modules\users\controllers\backend;
 
-use Yii;
+use yii\filters\AccessControl;
 
 /**
  * Class ProfileController
@@ -10,5 +10,21 @@ use Yii;
  */
 class ProfileController extends \modules\users\controllers\common\ProfileController
 {
-
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                ],
+            ],
+        ];
+    }
 }

@@ -5,6 +5,7 @@ namespace modules\users\widgets;
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
+use modules\users\models\User;
 
 /**
  * Class AvatarWidget
@@ -28,7 +29,7 @@ class AvatarWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->email = !empty($this->email) ? $this->email : $this->getUserEmail();
+        $this->email = !empty($this->email) ? $this->email : $this->getGravatarEmail();
     }
 
     /**
@@ -82,10 +83,10 @@ class AvatarWidget extends Widget
     /**
      * @return string
      */
-    public function getUserEmail()
+    public function getGravatarEmail()
     {
-        /** @var object $user */
+        /** @var User $user */
         $user = Yii::$app->user->identity;
-        return (!Yii::$app->user->isGuest) ? $user->email : $this->email;
+        return (!Yii::$app->user->isGuest) ? $user->profile->email_gravatar : $this->email;
     }
 }

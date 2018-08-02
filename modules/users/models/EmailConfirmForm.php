@@ -51,8 +51,11 @@ class EmailConfirmForm extends Model
         if ($user->save(false)) {
             // Даём роль по умолчанию
             $authManager = Yii::$app->getAuthManager();
-            $role = $authManager->getRole(\modules\rbac\models\Role::ROLE_DEFAULT);
-            return $authManager->assign($role, $user->id);
+            if (!$authManager->getRolesByUser($user->id)) {
+                $role = $authManager->getRole(\modules\rbac\models\Role::ROLE_DEFAULT);
+                return $authManager->assign($role, $user->id);
+            }
+            return true;
         }
         return false;
     }

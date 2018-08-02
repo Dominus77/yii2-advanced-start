@@ -1,8 +1,10 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \modules\users\models\SignupForm */
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model \modules\users\models\SignupForm
+ */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -23,9 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-            <?= $form->field($model, 'username')->textInput(['class' => 'form-control']) ?>
+            <?= $form->field($model, 'username')->textInput([
+                'placeholder' => true,
+            ]) ?>
 
-            <?= $form->field($model, 'email')->textInput(['class' => 'form-control']) ?>
+            <?= $form->field($model, 'email')->textInput([
+                'placeholder' => true,
+            ]) ?>
 
             <?= Passfield::widget([
                 'form' => $form,
@@ -33,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'password',
                 'options' => [
                     'class' => 'form-control',
+                    'placeholder' => true,
                 ],
                 'config' => [
                     'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
@@ -48,7 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('module', 'Send'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('module', 'Send'), [
+                    'class' => 'btn btn-primary',
+                    'name' => 'signup-button'
+                ]) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
