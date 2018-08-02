@@ -49,6 +49,8 @@ class User extends ActiveRecord implements IdentityInterface
     const LENGTH_STRING_PASSWORD_MIN = 2;
     const LENGTH_STRING_PASSWORD_MAX = 32;
 
+    const SCENARIO_ADMIN_CREATE = 'adminCreate';
+
     /**
      * @var string
      */
@@ -105,7 +107,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
-            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            [['password'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
+            [['password'], 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
         ];
     }
 
