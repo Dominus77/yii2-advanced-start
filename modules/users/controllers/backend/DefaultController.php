@@ -166,8 +166,8 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        $model->status = $model::STATUS_WAIT;
         $model->scenario = $model::SCENARIO_ADMIN_CREATE;
+        $model->status = $model::STATUS_WAIT;
         if ($model->load(Yii::$app->request->post())) {
             $model->setPassword($model->password);
             if ($model->save()) {
