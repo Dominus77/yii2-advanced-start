@@ -17,6 +17,12 @@ use modules\rbac\Module;
 class RolesController extends Controller
 {
     /**
+     * Color
+     * @var bool
+     */
+    public $color = true;
+
+    /**
      * Adds role to user
      * @throws Exception
      * @throws \Exception
@@ -24,24 +30,24 @@ class RolesController extends Controller
     public function actionAssign()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
         $user = $this->findModel($username);
 
         $roles = Yii::$app->authManager->getRoles();
-        $array = ArrayHelper::map($roles, 'name', 'description');
-        $encodingArray = Console::convertEncoding($array);
-        $select = is_array($encodingArray) ? $encodingArray : $array;
-        $roleName = $this->select(Console::convertEncoding(Module::t('module', 'Role:')), $select);
+        $select = ArrayHelper::map($roles, 'name', 'description');
+        /*$encodingArray = Console::convertEncoding($array);
+        $select = is_array($encodingArray) ? $encodingArray : $array;*/
+        $roleName = $this->select(Module::t('module', 'Role:'), $select);
         $role = $authManager->getRole($roleName);
 
         // Проверяем есть ли уже такая роль у пользователя
         $userRoles = $this->getUserRoleValue($user->id);
         if ($userRoles === null) {
             $authManager->assign($role, $user->id);
-            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Module::t('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
         } else {
-            $this->stdout(Console::convertEncoding(Module::t('module', 'The user already has a role.')), Console::FG_RED, Console::BOLD);
+            $this->stdout(Module::t('module', 'The user already has a role.'), Console::FG_RED, Console::BOLD);
             $this->stdout(PHP_EOL);
         }
     }
@@ -53,14 +59,12 @@ class RolesController extends Controller
     public function actionRevoke()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
         $user = $this->findModel($username);
         $roleName = $this->select(
-            Console::convertEncoding(Module::t('module', 'Role:')), ArrayHelper::merge(
-            ['all' => Console::convertEncoding(Module::t('module', 'All Roles'))],
-            Console::convertEncoding(
-                ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
-            )
+            Module::t('module', 'Role:'), ArrayHelper::merge(
+            ['all' => Module::t('module', 'All Roles')],
+            ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
         )
         );
         if ($roleName == 'all') {
@@ -69,7 +73,7 @@ class RolesController extends Controller
             $role = $authManager->getRole($roleName);
             $authManager->revoke($role, $user->id);
         }
-        $this->stdout(Console::convertEncoding(Module::t('module', 'Done!')), Console::FG_GREEN, Console::BOLD);
+        $this->stdout(Module::t('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
         $this->stdout(PHP_EOL);
     }
 
@@ -103,9 +107,7 @@ class RolesController extends Controller
     {
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
-                Console::convertEncoding(
-                    Module::t('module', 'User "{:Username}" not found', [':Username' => $username])
-                )
+                Module::t('module', 'User "{:Username}" not found', [':Username' => $username])
             );
         }
         return $model;

@@ -22,15 +22,21 @@ class InitController extends Controller
     const TYPE_PERMISSION = 'Permissions';
 
     /**
+     * Color
+     * @var bool
+     */
+    public $color = true;
+
+    /**
      * Initialize RBAC
      */
     public function actionIndex()
     {
         if ($this->processInit()) {
-            $this->stdout(Console::convertEncoding(Module::t('module','Done!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
         } else {
-            $this->stderr(Console::convertEncoding(Module::t('module','Fail!')), Console::FG_RED, Console::BOLD);
+            $this->stderr(Console::convertEncoding(Module::t('module', 'Fail!')), Console::FG_RED, Console::BOLD);
         }
     }
 
@@ -101,7 +107,11 @@ class InitController extends Controller
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_CONFIG));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_COMMENTS));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN),
@@ -112,6 +122,8 @@ class InitController extends Controller
             ArrayHelper::getValue($permissions, Permission::PERMISSION_VIEW_ADMIN_PAGE));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_POST));
+        $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
+            ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_COMMENTS));
         $auth->addChild(ArrayHelper::getValue($roles, Role::ROLE_ADMIN),
             ArrayHelper::getValue($permissions, Permission::PERMISSION_MANAGER_USERS));
 

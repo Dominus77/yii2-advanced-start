@@ -27,7 +27,7 @@ class RolesController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => true,
@@ -36,7 +36,7 @@ class RolesController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST']
                 ],

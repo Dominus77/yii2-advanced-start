@@ -2,9 +2,7 @@
 
 namespace modules\rbac\controllers;
 
-
 use Yii;
-use modules\users\models\User;
 use modules\rbac\models\Assignment;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
@@ -20,7 +18,7 @@ use modules\rbac\Module;
  */
 class AssignController extends Controller
 {
-    /** @var $user User */
+    /** @var $user object */
     private $_user = null;
 
     /**
@@ -46,7 +44,7 @@ class AssignController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => true,
@@ -55,7 +53,7 @@ class AssignController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'revoke' => ['POST'],
                 ],

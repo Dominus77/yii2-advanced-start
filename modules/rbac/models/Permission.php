@@ -19,6 +19,9 @@ class Permission extends Model
     const PERMISSION_VIEW_ADMIN_PAGE = 'viewAdminPage';
     const PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION = 'Access to the admin area';
 
+    const PERMISSION_MANAGER_CONFIG = 'managerConfig';
+    const PERMISSION_MANAGER_CONFIG_DESCRIPTION = 'Access to the config site';
+
     const PERMISSION_MANAGER_RBAC = 'managerRbac';
     const PERMISSION_MANAGER_RBAC_DESCRIPTION = 'Access to RBAC management';
 
@@ -27,6 +30,9 @@ class Permission extends Model
 
     const PERMISSION_MANAGER_POST = 'managerPosts';
     const PERMISSION_MANAGER_POST_DESCRIPTION = 'Access to Posts management';
+
+    const PERMISSION_MANAGER_COMMENTS = 'managerComments';
+    const PERMISSION_MANAGER_COMMENTS_DESCRIPTION = 'Access to Comments management';
 
     // редактирование только своих постов
     const PERMISSION_UPDATE_OWN_POST = 'updateOwnPost';
@@ -44,6 +50,22 @@ class Permission extends Model
     public $permissions;
     /** @var array $permissionItems Разрешения */
     public $permissionItems;
+
+    /**
+     * @return array
+     */
+    public function getPermissionsArray()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
+            self::PERMISSION_MANAGER_CONFIG => self::PERMISSION_MANAGER_CONFIG_DESCRIPTION,
+            self::PERMISSION_MANAGER_RBAC => self::PERMISSION_MANAGER_RBAC_DESCRIPTION,
+            self::PERMISSION_MANAGER_USERS => self::PERMISSION_MANAGER_USERS_DESCRIPTION,
+            self::PERMISSION_MANAGER_POST => self::PERMISSION_MANAGER_POST_DESCRIPTION,
+            self::PERMISSION_MANAGER_COMMENTS => self::PERMISSION_MANAGER_COMMENTS_DESCRIPTION,
+            self::PERMISSION_UPDATE_OWN_POST => self::PERMISSION_UPDATE_OWN_POST_DESCRIPTION,
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -114,20 +136,6 @@ class Permission extends Model
             'itemsRoles' => Module::t('module', 'Items roles'),
             'permissions' => Module::t('module', 'Permissions by role'),
             'permissionItems' => Module::t('module', 'Items permissions'),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getPermissionsArray()
-    {
-        return [
-            self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
-            self::PERMISSION_MANAGER_RBAC => self::PERMISSION_MANAGER_RBAC_DESCRIPTION,
-            self::PERMISSION_MANAGER_USERS => self::PERMISSION_MANAGER_USERS_DESCRIPTION,
-            self::PERMISSION_MANAGER_POST => self::PERMISSION_MANAGER_POST_DESCRIPTION,
-            self::PERMISSION_UPDATE_OWN_POST => self::PERMISSION_UPDATE_OWN_POST_DESCRIPTION,
         ];
     }
 
