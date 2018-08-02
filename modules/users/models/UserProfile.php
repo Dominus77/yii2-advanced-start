@@ -21,7 +21,7 @@ use modules\users\Module;
  *
  * @property User $user
  *
- * @method touch() TimestampBehavior
+ * @method touch(string) TimestampBehavior
  */
 class UserProfile extends \yii\db\ActiveRecord
 {

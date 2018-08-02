@@ -15,6 +15,7 @@ $this->params['title']['small'] = $model->username;
 
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Module::t('module', 'View');
+
 ?>
 
 <div class="users-backend-default-view">

@@ -8,7 +8,8 @@
 use yii\helpers\Html;
 use modules\users\Module;
 
-$confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['users/default/email-confirm', 'token' => $user->email_confirm_token]);
+// $confirmLink = Yii::$app->urlManagerFrontend->createAbsoluteUrl(['email-confirm', 'token' => $user->email_confirm_token]);
+$confirmLink = Yii::$app->urlManager->hostInfo.'/email-confirm?token='.$user->email_confirm_token;
 ?>
 <div class="email-confirm">
     <p><?= Module::t('mail', 'HELLO {username}', ['username' => $user->username]); ?>!</p>

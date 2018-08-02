@@ -82,6 +82,16 @@ return [
             'enableStrictParsing' => true,
             'rules' => [],
         ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => '',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => [
+                'email-confirm' => 'users/default/email-confirm'
+            ],
+        ],
     ],
     // Последний визит
     'as afterAction' => [

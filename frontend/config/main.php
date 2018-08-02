@@ -89,6 +89,14 @@ return [
             'enableStrictParsing' => true,
             'rules' => [],
         ],
+        'urlManagerBackend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => '/admin',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => [],
+        ],
     ],
     'as afterAction' => [
         'class' => '\modules\users\behavior\LastVisitBehavior',
