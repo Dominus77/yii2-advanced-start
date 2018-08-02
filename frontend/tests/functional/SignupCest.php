@@ -64,6 +64,7 @@ class SignupCest
             'SignupForm[password]' => '123456',
         ]);
 
-        $I->see('It remains to activate your account.');
+        $I->see('A letter with a link to activate, we sent you an indication of the registration e-mail address.
+Please check your mail.');
     }
 }
