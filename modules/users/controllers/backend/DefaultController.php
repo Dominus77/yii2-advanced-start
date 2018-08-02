@@ -160,15 +160,18 @@ class DefaultController extends Controller
 
     /**
      * Creates a new User model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
+     * @throws \yii\base\Exception
      */
     public function actionCreate()
     {
         $model = new User();
         $model->status = $model::STATUS_WAIT;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setPassword($model->password);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
         return $this->render('create', [
             'model' => $model,
