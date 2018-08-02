@@ -20,6 +20,8 @@ use modules\users\Module;
  * @property int $updated_at Updated
  *
  * @property User $user
+ *
+ * @method touch() TimestampBehavior
  */
 class UserProfile extends \yii\db\ActiveRecord
 {

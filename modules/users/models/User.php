@@ -32,6 +32,8 @@ use modules\users\Module;
  * @property string $statusName
  * @property array $statusesArray
  * @property string $labelMailConfirm
+ *
+ * @method touch() TimestampBehavior
  */
 class User extends ActiveRecord implements IdentityInterface
 {
