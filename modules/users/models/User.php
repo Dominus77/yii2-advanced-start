@@ -487,6 +487,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             $profile = new UserProfile([
                 'user_id' => $this->id,
@@ -494,7 +495,6 @@ class User extends ActiveRecord implements IdentityInterface
             ]);
             $profile->save();
         }
-        parent::afterSave($insert, $changedAttributes);
     }
 
     /**
