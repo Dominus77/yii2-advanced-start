@@ -18,6 +18,9 @@ use modules\users\Module;
 /**
  * Class DefaultController
  * @package modules\users\controllers\backend
+ *
+ * @property array $access
+ * @property  array $verb
  */
 class DefaultController extends Controller
 {
@@ -28,7 +31,7 @@ class DefaultController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => $this->getVerbs(),
+            'verbs' => $this->getVerb(),
             'access' => $this->getAccess()
         ];
     }
@@ -36,7 +39,7 @@ class DefaultController extends Controller
     /**
      * @return array
      */
-    private function getVerbs()
+    private function getVerb()
     {
         return [
             'class' => VerbFilter::class,
