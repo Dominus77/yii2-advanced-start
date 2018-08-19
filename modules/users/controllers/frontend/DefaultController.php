@@ -4,16 +4,15 @@ namespace modules\users\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
-use modules\users\models\User;
 use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
 use modules\users\models\EmailConfirmForm;
 use modules\users\models\ResetPasswordForm;
 use modules\users\models\PasswordResetRequestForm;
+use yii\filters\AccessControl;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
-use yii\web\NotFoundHttpException;
 use modules\users\Module;
 
 /**
@@ -29,26 +28,27 @@ class DefaultController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['?']
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
-                    'delete' => ['post'],
                 ],
             ],
         ];
-    }
-
-    /**
-     * @return string
-     * @throws NotFoundHttpException
-     */
-    public function actionIndex()
-    {
-        $model = $this->findModel();
-        return $this->render('index', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -58,9 +58,6 @@ class DefaultController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->processGoHome();
-        }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -173,24 +170,6 @@ class DefaultController extends Controller
             return true;
         }
         return false;
-    }
-
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return null|User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel()
-    {
-        if (!Yii::$app->user->isGuest) {
-            /** @var \modules\users\models\User $identity */
-            $identity = Yii::$app->user->identity;
-            if (($model = User::findOne($identity->id)) !== null) {
-                return $model;
-            }
-        }
-        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
     }
 
     /**
