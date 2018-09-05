@@ -19,7 +19,9 @@
         "almasaeed2010/adminlte": "^2.4",
         "fortawesome/font-awesome": "^4.6",
         "driftyco/ionicons": "^2.0",
-        "guzzlehttp/guzzle": "~5.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "yiisoft/yii2-apidoc": "~2.1.0"
+
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
