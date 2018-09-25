@@ -28,7 +28,7 @@ return [
             ]
         ],
         'user' => [
-            'identityClass' => 'api\modules\v1\models\IdentityUser',
+            'identityClass' => 'api\modules\v1\models\User',
             'enableSession' => false,
             'enableAutoLogin' => false,
             'loginUrl' => null,
