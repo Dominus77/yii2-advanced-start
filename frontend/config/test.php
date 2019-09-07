@@ -6,7 +6,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend-test',
-            'enableCsrfValidation' => false,
-        ],
-    ],
+            'enableCsrfValidation' => false
+        ]
+    ]
 ];

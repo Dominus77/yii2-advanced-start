@@ -2,5 +2,5 @@
 
 return [
     'adminEmail' => '',
-    'supportEmail' => '',
+    'supportEmail' => ''
 ];

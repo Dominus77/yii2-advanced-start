@@ -1,9 +1,19 @@
 <?php
-$params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+
+use yii\caching\FileCache;
+use yii\rest\UrlRule;
+use yii\log\FileTarget;
+use yii\web\JsonParser;
+use yii\helpers\ArrayHelper;
+use api\modules\v1\models\User;
+use api\modules\v1\Module as V1Module;
+use modules\users\Bootstrap as UserBootstrap;
+
+$params = ArrayHelper::merge(
+    require __DIR__ . '/../../common/config/params.php',
+    require __DIR__ . '/../../common/config/params-local.php',
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
 );
 
 return [
@@ -13,34 +23,34 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'modules\users\Bootstrap'
+        UserBootstrap::class
     ],
     'modules' => [
         'v1' => [
-            'class' => 'api\modules\v1\Module'   // here is our v1 modules
-        ],
+            'class' => V1Module::class   // here is our v1 modules
+        ]
     ],
     'components' => [
         'request' => [
             'baseUrl' => '/api',
             'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
+                'application/json' => JsonParser::class
             ]
         ],
         'user' => [
-            'identityClass' => 'api\modules\v1\models\User',
+            'identityClass' => User::class,
             'enableSession' => false,
             'enableAutoLogin' => false,
-            'loginUrl' => null,
+            'loginUrl' => null
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
+                    'class' => FileTarget::class,
+                    'levels' => ['error', 'warning']
+                ]
+            ]
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -48,25 +58,25 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
-                    'class' => 'yii\rest\UrlRule',
+                    'class' => UrlRule::class,
                     'controller' => [
                         'v1/user'
                     ],
                     'except' => ['delete'],
-                    'pluralize' => true,
+                    'pluralize' => true
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule',
+                    'class' => UrlRule::class,
                     'controller' => [
                         'v1/message'
                     ],
-                    'pluralize' => false,
-                ],
-            ],
+                    'pluralize' => false
+                ]
+            ]
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
+            'class' => FileCache::class
+        ]
     ],
-    'params' => $params,
+    'params' => $params
 ];
