@@ -3,12 +3,16 @@
 namespace modules\users\models;
 
 use Yii;
+use yii\base\Exception;
+use yii\db\ActiveQuery;
+use yii\db\StaleObjectException;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
+use modules\rbac\models\Role;
 use modules\users\models\query\UserQuery;
 use modules\users\traits\ModuleTrait;
 use modules\users\Module;
@@ -73,14 +77,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::class,
+                'class' => TimestampBehavior::class
             ],
             'softDeleteBehavior' => [
                 'class' => SoftDeleteBehavior::class,
                 'softDeleteAttributeValues' => [
-                    'status' => self::STATUS_DELETED,
-                ],
-            ],
+                    'status' => self::STATUS_DELETED
+                ]
+            ]
         ];
     }
 
@@ -108,7 +112,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
             [['password'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
-            [['password'], 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            [['password'], 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX]
         ];
     }
 
@@ -130,21 +134,21 @@ class User extends ActiveRecord implements IdentityInterface
             'updated_at' => Module::t('module', 'Updated'),
             'status' => Module::t('module', 'Status'),
             'userRoleName' => Module::t('module', 'User Role Name'),
-            'password' => Module::t('module', 'Password'),
+            'password' => Module::t('module', 'Password')
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return \modules\users\models\query\UserQuery the active query used by this AR class.
+     * @return UserQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new UserQuery(get_called_class());
+        return new UserQuery(static::class);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getProfile()
     {
@@ -202,6 +206,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates "remember me" authentication key
+     * @throws Exception
      */
     public function generateAuthKey()
     {
@@ -210,6 +215,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates email confirmation token
+     * @throws Exception
      */
     public function generateEmailConfirmToken()
     {
@@ -246,7 +252,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'status' => self::STATUS_ACTIVE
         ]);
     }
 
@@ -254,7 +260,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function setPassword($password)
     {
@@ -271,6 +277,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates new password reset token
+     * @throws Exception
      */
     public function generatePasswordResetToken()
     {
@@ -342,7 +349,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
             self::STATUS_ACTIVE => Module::t('module', 'Active'),
             self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted'),
+            self::STATUS_DELETED => Module::t('module', 'Deleted')
         ];
     }
 
@@ -355,7 +362,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::STATUS_BLOCKED => 'default',
             self::STATUS_ACTIVE => 'success',
             self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger',
+            self::STATUS_DELETED => 'danger'
         ];
     }
 
@@ -385,7 +392,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if ($this->status === self::STATUS_WAIT) {
             return Html::tag('span', Html::tag('span', '', [
-                'class' => 'glyphicon glyphicon-envelope',
+                'class' => 'glyphicon glyphicon-envelope'
             ]), ['class' => 'label label-' . $name]);
         }
         return '';
@@ -433,7 +440,7 @@ class User extends ActiveRecord implements IdentityInterface
         $fullName = Module::t('module', 'Guest');
         if (!Yii::$app->user->isGuest) {
             $fullName = $this->profile->first_name . ' ' . $this->profile->last_name;
-            $fullName = ($fullName != ' ') ? $fullName : $this->username;
+            $fullName = ($fullName !== ' ') ? $fullName : $this->username;
         }
         return Html::encode(trim($fullName));
     }
@@ -444,12 +451,13 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function isSuperAdmin($id = '')
     {
-        $id = $id ? $id : $this->id;
+        $id = $id ?: $this->id;
         $authManager = Yii::$app->authManager;
         $roles = $authManager->getRolesByUser($id);
         foreach ($roles as $role) {
-            if ($role->name == \modules\rbac\models\Role::ROLE_SUPER_ADMIN)
+            if ($role->name === Role::ROLE_SUPER_ADMIN) {
                 return true;
+            }
         }
         return false;
     }
@@ -465,7 +473,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @param bool $insert
      * @return bool
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function beforeSave($insert)
     {
@@ -500,7 +508,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return bool
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws StaleObjectException
      */
     public function beforeDelete()
     {
