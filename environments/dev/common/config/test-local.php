@@ -9,7 +9,7 @@ return ArrayHelper::merge(
     [
         'components' => [
             'db' => [
-                'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test'
+                'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_advanced_start_test'
             ]
         ]
     ]
