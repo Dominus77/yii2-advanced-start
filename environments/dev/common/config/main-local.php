@@ -9,8 +9,7 @@ return [
             'class' => Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
             'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8'
+            'password' => ''
         ],
         'mailer' => [
             'class' => Mailer::class,

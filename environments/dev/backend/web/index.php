@@ -4,13 +4,9 @@ use yii\helpers\ArrayHelper;
 use yii\web\Application;
 use yii\base\InvalidConfigException;
 
-defined('YII_DEBUG') || define('YII_DEBUG', true);
-defined('YII_ENV') || define('YII_ENV', 'dev');
-defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', __DIR__ . '/../../');
+defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', dirname(dirname(__DIR__)) . '/');
 
-require YII_APP_BASE_PATH . '/vendor/autoload.php';
-require YII_APP_BASE_PATH . '/vendor/yiisoft/yii2/Yii.php';
-require YII_APP_BASE_PATH . '/common/config/bootstrap.php';
+require YII_APP_BASE_PATH . '/common/web/index.php';
 require YII_APP_BASE_PATH . '/backend/config/bootstrap.php';
 
 $config = ArrayHelper::merge(
