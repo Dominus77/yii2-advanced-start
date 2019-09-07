@@ -9,6 +9,6 @@ $config = [
     ]
 ];
 
-include dirname(dirname(__DIR__)) . '/common/config/local.php';
+include dirname(dirname(__DIR__)) . '/common/config/common-local.php';
 
 return $config;
