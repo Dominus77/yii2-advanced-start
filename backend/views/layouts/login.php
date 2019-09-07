@@ -34,6 +34,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 ]
             ]);
         } catch (Exception $e) {
+            // Save to log
         } ?>
     </div>
 </div>

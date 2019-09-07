@@ -79,16 +79,19 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 'alt' => 'User Image'
                             ]) : '']);
                     } catch (Exception $e) {
+                        // Save to log
                     } ?>
 
                     <?php try {
                         echo NotificationsWidget::widget(['status' => true]);
                     } catch (Exception $e) {
+                        // Save to log
                     } ?>
 
                     <?php try {
                         echo TasksWidget::widget(['status' => true]);
                     } catch (Exception $e) {
+                        // Save to log
                     } ?>
 
                     <li class="dropdown user user-menu">
@@ -100,6 +103,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                     ]
                                 ]);
                             } catch (Exception $e) {
+                                // Save to log
                             } ?>
                             <span class="hidden-xs"><?= $fullUserName ?></span>
                         </a>
@@ -108,6 +112,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 <?php try {
                                     echo AvatarWidget::widget();
                                 } catch (Exception $e) {
+                                    // Save to log
                                 } ?>
                                 <p>
                                     <?= $fullUserName ?>
@@ -115,6 +120,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                         <?php try {
                                             echo UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy');
                                         } catch (InvalidConfigException $e) {
+                                            // Save to log
                                         } ?>
                                     </small>
                                 </p>
@@ -163,6 +169,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     <?php try {
                         echo AvatarWidget::widget();
                     } catch (Exception $e) {
+                        // Save to log
                     } ?>
                 </div>
                 <div class="pull-left info">
@@ -174,6 +181,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             <?php try {
                 echo SearchSidebar::widget(['status' => true]);
             } catch (Exception $e) {
+                // Save to log
             } ?>
 
             <?php
@@ -248,6 +256,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'items' => $items
                 ]);
             } catch (Exception $e) {
+                // Save to log
             }
             ?>
         </section>
@@ -267,10 +276,12 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'encodeLabels' => false
                 ]);
             } catch (Exception $e) {
+                // Save to log
             } ?>
             <?php try {
                 echo Alert::widget();
             } catch (Exception $e) {
+                // Save to log
             } ?>
         </section>
         <section class="content">
@@ -294,6 +305,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             'demo' => false
         ]);
     } catch (Exception $e) {
+        // Save to log
     } ?>
 </div>
 
