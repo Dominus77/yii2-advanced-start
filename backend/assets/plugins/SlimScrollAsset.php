@@ -3,6 +3,8 @@
 namespace backend\assets\plugins;
 
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
+use backend\assets\BootstrapAsset;
 
 /**
  * Class SlimScrollAsset
@@ -14,11 +16,6 @@ class SlimScrollAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/jquery-slimscroll';
-
-    /**
-     * @var array
-     */
-    public $js = [];
 
     /**
      * @inheritdoc
@@ -34,7 +31,7 @@ class SlimScrollAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
-        'backend\assets\BootstrapAsset',
+        JqueryAsset::class,
+        BootstrapAsset::class,
     ];
 }

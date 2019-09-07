@@ -4,6 +4,9 @@ namespace backend\assets;
 
 use Yii;
 use yii\web\AssetBundle;
+use yii\bootstrap\BootstrapAsset as YiiBootstrapAsset;
+use yii\bootstrap\BootstrapPluginAsset as YiiBootstrapPluginAsset;
+use yii\web\YiiAsset;
 
 /**
  * Class BootstrapAsset
@@ -17,16 +20,6 @@ class BootstrapAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -38,17 +31,17 @@ class BootstrapAsset extends AssetBundle
 
         // Подключаем свои файлы Bootstrap
         $assetManager = Yii::$app->assetManager;
-        $assetManager->bundles['yii\bootstrap\BootstrapAsset'] = [
+        $assetManager->bundles[YiiBootstrapAsset::class] = [
             'sourcePath' => $this->sourcePath,
-            'css' => [$this->css],
+            'css' => [$this->css]
         ];
-        $assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = [
+        $assetManager->bundles[YiiBootstrapPluginAsset::class] = [
             'sourcePath' => $this->sourcePath,
-            'js' => [$this->js],
+            'js' => [$this->js]
         ];
     }
 
     public $depends = [
-        'yii\web\YiiAsset',
+        YiiAsset::class
     ];
 }

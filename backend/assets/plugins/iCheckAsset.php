@@ -2,8 +2,11 @@
 
 namespace backend\assets\plugins;
 
+use Yii;
 use yii\web\AssetBundle;
 use yii\web\JsExpression;
+use yii\web\JqueryAsset;
+use backend\assets\BootstrapAsset;
 
 /**
  * Class iCheckAsset
@@ -17,16 +20,6 @@ class iCheckAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -34,10 +27,10 @@ class iCheckAsset extends AssetBundle
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
-            'iCheck/all.css',
+            'iCheck/all.css'
         ];
         $this->js = ['iCheck/icheck' . $min . '.js'];
-        $view = \Yii::$app->getView();
+        $view = Yii::$app->getView();
         $view->registerJs(new JsExpression("
             $(function () {
                 $('input.iCheck').iCheck({
@@ -53,7 +46,7 @@ class iCheckAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
-        'backend\assets\BootstrapAsset',
+        JqueryAsset::class,
+        BootstrapAsset::class
     ];
 }

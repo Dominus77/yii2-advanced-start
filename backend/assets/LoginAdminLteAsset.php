@@ -3,6 +3,12 @@
 namespace backend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
+use common\assets\FontAwesomeAsset;
+use common\assets\IonIconsAsset;
+use backend\assets\plugins\iCheckAsset;
+use common\assets\Html5ShivAsset;
+use common\assets\RespondAsset;
 
 /**
  * Class LoginAdminLteAsset
@@ -14,11 +20,6 @@ class LoginAdminLteAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
-
-    /**
-     * @var array
-     */
-    public $css = [];
 
     /**
      * @inheritdoc
@@ -34,12 +35,12 @@ class LoginAdminLteAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\YiiAsset',
-        'backend\assets\BootstrapAsset',
-        'common\assets\FontAwesomeAsset',
-        'common\assets\IonIconsAsset',
-        'backend\assets\plugins\iCheckAsset',
-        'common\assets\Html5ShivAsset',
-        'common\assets\RespondAsset'
+        YiiAsset::class,
+        BootstrapAsset::class,
+        FontAwesomeAsset::class,
+        IonIconsAsset::class,
+        iCheckAsset::class,
+        Html5ShivAsset::class,
+        RespondAsset::class
     ];
 }

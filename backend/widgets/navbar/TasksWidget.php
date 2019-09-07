@@ -2,13 +2,13 @@
 
 namespace backend\widgets\navbar;
 
-use Yii;
+use yii\bootstrap\Widget;
 
 /**
  * Class TasksWidget
  * @package backend\widgets\navbar
  */
-class TasksWidget extends \yii\bootstrap\Widget
+class TasksWidget extends Widget
 {
     /**
      * @var bool

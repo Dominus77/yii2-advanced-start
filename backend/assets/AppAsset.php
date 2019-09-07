@@ -2,8 +2,14 @@
 
 namespace backend\assets;
 
-use Yii;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
+use common\assets\Html5ShivAsset;
+use common\assets\RespondAsset;
+use common\assets\FontAwesomeAsset;
+use common\assets\IonIconsAsset;
+use backend\assets\plugins\SlimScrollAsset;
+use backend\assets\plugins\FastClickAsset;
 
 /**
  * Class AppAsset
@@ -22,16 +28,6 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -45,14 +41,14 @@ class AppAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\YiiAsset',
-        'backend\assets\BootstrapAsset',
-        'common\assets\Html5ShivAsset',
-        'common\assets\RespondAsset',
-        'common\assets\FontAwesomeAsset',
-        'common\assets\IonIconsAsset',
-        'backend\assets\plugins\SlimScrollAsset',
-        'backend\assets\plugins\FastClickAsset',
-        'backend\assets\AdminLteAsset',
+        YiiAsset::class,
+        BootstrapAsset::class,
+        Html5ShivAsset::class,
+        RespondAsset::class,
+        FontAwesomeAsset::class,
+        IonIconsAsset::class,
+        SlimScrollAsset::class,
+        FastClickAsset::class,
+        AdminLteAsset::class
     ];
 }

@@ -3,6 +3,8 @@
 namespace backend\assets\plugins;
 
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
+use backend\assets\BootstrapAsset;
 
 /**
  * Class FastClickAsset
@@ -14,11 +16,6 @@ class FastClickAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/fastclick/lib';
-
-    /**
-     * @var array
-     */
-    public $js = [];
 
     /**
      * @inheritdoc
@@ -33,7 +30,7 @@ class FastClickAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
-        'backend\assets\BootstrapAsset',
+        JqueryAsset::class,
+        BootstrapAsset::class
     ];
 }

@@ -2,26 +2,18 @@
 
 namespace backend\widgets\search;
 
-use Yii;
+use yii\bootstrap\Widget;
 
 /**
  * Class SearchSidebar
  * @package backend\widgets\search
  */
-class SearchSidebar extends \yii\bootstrap\Widget
+class SearchSidebar extends Widget
 {
     /**
      * @var bool
      */
     public $status = true;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-    }
 
     /**
      * @inheritdoc

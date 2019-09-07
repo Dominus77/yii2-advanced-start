@@ -17,10 +17,8 @@ class PngFixAsset extends AssetBundle
     public $sourcePath;
 
     /**
-     * @var array
+     * @inheritDoc
      */
-    public $js = [];
-
     public function init()
     {
         parent::init();
@@ -36,6 +34,6 @@ class PngFixAsset extends AssetBundle
      */
     public $jsOptions = [
         'condition' => 'lt IE 7',
-        'position' => View::POS_HEAD,
+        'position' => View::POS_HEAD
     ];
 }

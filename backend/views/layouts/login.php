@@ -1,12 +1,13 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use backend\assets\LoginAsset;
 use common\widgets\Alert;
+use yii\web\View;
+
+/* @var $this View */
+/* @var $content string */
 
 LoginAsset::register($this);
 $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
@@ -26,23 +27,26 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 <?php $this->beginBody() ?>
 <div class="row">
     <div class="col-md-12">
-        <?= Alert::widget([
-            'options' => [
-                'style' => 'text-align:center;',
-            ]
-        ]); ?>
+        <?php try {
+            echo Alert::widget([
+                'options' => [
+                    'style' => 'text-align:center;'
+                ]
+            ]);
+        } catch (Exception $e) {
+        } ?>
     </div>
 </div>
 <div class="login-box">
     <div class="login-logo">
         <a href="<?= $homeUrl ?>"><b>Admin</b>LTE</a><br>
-        <?= Yii::$app->name; ?>
+        <?= Yii::$app->name ?>
     </div>
     <div class="login-box-body">
         <?= $content ?>
     </div>
     <div class="login-box-footer">
-        <a href="<?= Url::to('/'); ?>"><?= Yii::t('app', 'Go to Frontend'); ?></a>
+        <a href="<?= Url::to('/') ?>"><?= Yii::t('app', 'Go to Frontend') ?></a>
     </div>
 </div>
 

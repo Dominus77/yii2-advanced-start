@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'Exceeded the limit of applications!' => 'Превышен лимит обращений!',
+    'Exceeded the limit of applications!' => 'Превышен лимит обращений!'
 ];

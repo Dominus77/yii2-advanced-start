@@ -2,7 +2,6 @@
 
 namespace api\modules\v1\models;
 
-use Yii;
 use yii\base\Model;
 
 /**
@@ -22,7 +21,7 @@ class Message extends Model
     public function rules()
     {
         return [
-            [['message'], 'string'],
+            [['message'], 'string']
         ];
     }
 
@@ -32,7 +31,7 @@ class Message extends Model
     public function attributeLabels()
     {
         return [
-            'message' => 'Message',
+            'message' => 'Message'
         ];
     }
 
@@ -43,14 +42,5 @@ class Message extends Model
     public function fields()
     {
         return ['message'];
-    }
-
-    /**
-     * /api/v1/message?expand=status
-     * @return array
-     */
-    public function extraFields()
-    {
-        return [];
     }
 }

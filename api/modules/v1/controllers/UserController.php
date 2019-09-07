@@ -2,13 +2,13 @@
 
 namespace api\modules\v1\controllers;
 
-use Yii;
-use api\modules\v1\models\User;
+use yii\filters\Cors;
 use yii\rest\ActiveController;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
+use api\modules\v1\models\User;
 
 /**
  * Class UserController
@@ -19,7 +19,7 @@ class UserController extends ActiveController
     /**
      * @var string
      */
-    public $modelClass = 'api\modules\v1\models\User';
+    public $modelClass = User::class;
 
     /**
      * @inheritdoc
@@ -30,7 +30,7 @@ class UserController extends ActiveController
 
         // Add CORS filter
         $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::class,
+            'class' => Cors::class
         ];
 
         $behaviors['authenticator'] = [
@@ -38,7 +38,7 @@ class UserController extends ActiveController
             'only' => ['update'],
             'authMethods' => [
                 'bearerAuth' => [
-                    'class' => HttpBearerAuth::class,
+                    'class' => HttpBearerAuth::class
                 ],
                 'paramAuth' => [
                     'class' => QueryParamAuth::class,
@@ -49,7 +49,7 @@ class UserController extends ActiveController
                     'auth' => function ($username, $password) {
                         return $this->processBasicAuth($username, $password);
                     }
-                ],
+                ]
             ]
         ];
         return $behaviors;
@@ -59,7 +59,6 @@ class UserController extends ActiveController
      * @param string $username
      * @param string $password
      * @return User|null
-     * @throws \yii\base\InvalidConfigException
      */
     protected function processBasicAuth($username, $password)
     {

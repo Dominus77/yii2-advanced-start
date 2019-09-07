@@ -3,6 +3,11 @@
 namespace frontend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
+use yii\bootstrap\BootstrapAsset;
+use common\assets\FontAwesomeAsset;
+use common\assets\Html5ShivAsset;
+use common\assets\RespondAsset;
 
 /**
  * Class AppAsset
@@ -24,21 +29,17 @@ class AppAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/site.css',
+        'css/site.css'
     ];
-    /**
-     * @var array
-     */
-    public $js = [];
 
     /**
      * @var array
      */
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'common\assets\FontAwesomeAsset',
-        'common\assets\Html5ShivAsset',
-        'common\assets\RespondAsset'
+        YiiAsset::class,
+        BootstrapAsset::class,
+        FontAwesomeAsset::class,
+        Html5ShivAsset::class,
+        RespondAsset::class
     ];
 }

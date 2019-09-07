@@ -16,11 +16,6 @@ class IonIconsAsset extends AssetBundle
     public $sourcePath = '@vendor/driftyco/ionicons';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
      * @inheritdoc
      */
     public function init()

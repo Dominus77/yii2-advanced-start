@@ -2,6 +2,7 @@
 
 namespace common\widgets;
 
+use yii\base\Widget;
 use yii\helpers\Html;
 
 /**
@@ -18,7 +19,7 @@ use yii\helpers\Html;
  *      'columns' => [...],
  * ]) ?>
  */
-class PageSize extends \yii\base\Widget
+class PageSize extends Widget
 {
     /**
      * @var string the label text.

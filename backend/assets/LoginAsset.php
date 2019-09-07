@@ -24,18 +24,13 @@ class LoginAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/login.css',
+        'css/login.css'
     ];
 
     /**
      * @var array
      */
-    public $js = [];
-
-    /**
-     * @var array
-     */
     public $depends = [
-        'backend\assets\LoginAdminLteAsset',
+        LoginAdminLteAsset::class
     ];
 }

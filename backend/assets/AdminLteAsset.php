@@ -16,16 +16,6 @@ class AdminLteAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -34,15 +24,10 @@ class AdminLteAsset extends AssetBundle
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
             'css/AdminLTE' . $min . '.css',
-            'css/skins/_all-skins' . $min . '.css',
+            'css/skins/_all-skins' . $min . '.css'
         ];
         $this->js = [
             'js/adminlte' . $min . '.js'
         ];
     }
-
-    /**
-     * @var array
-     */
-    public $depends = [];
 }

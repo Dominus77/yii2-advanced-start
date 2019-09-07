@@ -1,17 +1,17 @@
 <?php
 
-/* @var $this \yii\web\View */
-
-/* @var $content string */
-
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
+
+/* @var $this View */
+/* @var $content string */
 
 AppAsset::register($this);
 ?>
@@ -34,13 +34,13 @@ AppAsset::register($this);
         'brandLabel' => Html::img('@web/images/logo.png', ['alt' => Yii::$app->name, 'class' => 'yii-logo']) . Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+            'class' => 'navbar-inverse navbar-fixed-top'
+        ]
     ]);
     $menuItems = [
         ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
         ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
-        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
+        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/default/signup']];
@@ -52,24 +52,33 @@ AppAsset::register($this);
             'label' => Yii::t('app', 'My Menu'),
             'items' => [
                 ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
-            ],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']]
+            ]
         ];
     }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'activateParents' => true,
-        'encodeLabels' => false,
-        'items' => array_filter($menuItems),
-    ]);
+    try {
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'activateParents' => true,
+            'encodeLabels' => false,
+            'items' => array_filter($menuItems)
+        ]);
+    } catch (Exception $e) {
+    }
     NavBar::end();
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+        <?php try {
+            echo Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+            ]);
+        } catch (Exception $e) {
+        } ?>
+        <?php try {
+            echo Alert::widget();
+        } catch (Exception $e) {
+        } ?>
         <?= $content ?>
     </div>
 </div>
@@ -78,7 +87,9 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">
+            Работает на <a href="http://www.yiiframework.com/" target="_blank">Yii Framework</a>
+        </p>
     </div>
 </footer>
 

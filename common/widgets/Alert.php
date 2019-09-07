@@ -8,6 +8,9 @@
 namespace common\widgets;
 
 use Yii;
+use yii\bootstrap\Widget;
+use Exception;
+use yii\bootstrap\Alert as BootstrapAlert;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
@@ -28,7 +31,7 @@ use Yii;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @author Alexander Makarov <sam@rmcreative.ru>
  */
-class Alert extends \yii\bootstrap\Widget
+class Alert extends Widget
 {
     /**
      * @var array the alert types configuration for the flash messages.
@@ -58,7 +61,10 @@ class Alert extends \yii\bootstrap\Widget
         foreach ($flashes as $type => $data) {
             if (isset($this->alertTypes[$type])) {
                 $data = (array)$data;
-                $this->processTypes($this->alertTypes[$type], $data, $appendCss);
+                try {
+                    $this->processTypes($this->alertTypes[$type], $data, $appendCss);
+                } catch (Exception $e) {
+                }
                 $session->removeFlash($type);
             }
         }
@@ -68,7 +74,7 @@ class Alert extends \yii\bootstrap\Widget
      * @param string $type
      * @param array $data
      * @param string $appendCss
-     * @throws \Exception
+     * @throws Exception
      */
     protected function processTypes($type, $data, $appendCss)
     {
@@ -84,14 +90,14 @@ class Alert extends \yii\bootstrap\Widget
 
     /**
      * @param array $message
-     * @throws \Exception
+     * @throws Exception
      */
     protected function renderFlash($message)
     {
-        echo \yii\bootstrap\Alert::widget([
+        echo BootstrapAlert::widget([
             'body' => $message,
             'closeButton' => $this->closeButton,
-            'options' => $this->options,
+            'options' => $this->options
         ]);
     }
 }

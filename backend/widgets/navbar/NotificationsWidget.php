@@ -2,13 +2,13 @@
 
 namespace backend\widgets\navbar;
 
-use Yii;
+use yii\bootstrap\Widget;
 
 /**
  * Class NotificationsWidget
  * @package backend\widgets\navbar
  */
-class NotificationsWidget extends \yii\bootstrap\Widget
+class NotificationsWidget extends Widget
 {
     /**
      * @var bool

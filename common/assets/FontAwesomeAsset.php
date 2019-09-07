@@ -16,11 +16,6 @@ class FontAwesomeAsset extends AssetBundle
     public $sourcePath = '@vendor/fortawesome/font-awesome';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
      * @inheritdoc
      */
     public function init()

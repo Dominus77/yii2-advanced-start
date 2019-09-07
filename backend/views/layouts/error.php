@@ -1,11 +1,11 @@
 <?php
 
-/* @var $this \yii\web\View */
-
-/* @var $content string */
-
 use backend\assets\LoginAsset;
 use yii\helpers\Html;
+use yii\web\View;
+
+/* @var $this View */
+/* @var $content string */
 
 LoginAsset::register($this);
 $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
@@ -28,7 +28,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
     <div class="col-md-12">
         <div class="login-logo">
             <a href="<?= $homeUrl ?>"><b>Admin</b>LTE</a><br>
-            <?= Yii::$app->name; ?>
+            <?= Yii::$app->name ?>
         </div>
         <hr>
         <?= $content ?>

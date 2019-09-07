@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
-use Yii;
+use yii\base\Action;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\ErrorAction;
 
 /**
  * Class BackendController
@@ -18,21 +20,21 @@ class BackendController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
+                'class' => ErrorAction::class
+            ]
         ];
     }
 
     /**
-     * @param \yii\base\Action $action
+     * @param Action $action
      * @return bool
-     * @throws \yii\web\BadRequestHttpException
+     * @throws BadRequestHttpException
      */
     public function beforeAction($action)
     {
-        if ($action->id == 'error')
+        if ($action->id === 'error') {
             $this->layout = 'error.php';
-
+        }
         return parent::beforeAction($action);
     }
 }

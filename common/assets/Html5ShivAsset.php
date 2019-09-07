@@ -20,7 +20,7 @@ class Html5ShivAsset extends AssetBundle
      * @var array
      */
     public $js = [
-        'html5shiv.min.js',
+        'html5shiv.min.js'
     ];
 
     /**
@@ -28,6 +28,6 @@ class Html5ShivAsset extends AssetBundle
      */
     public $jsOptions = [
         'condition' => 'lt IE 9',
-        'position' => View::POS_HEAD,
+        'position' => View::POS_HEAD
     ];
 }

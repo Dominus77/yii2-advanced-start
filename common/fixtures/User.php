@@ -1,7 +1,9 @@
 <?php
+
 namespace common\fixtures;
 
 use yii\test\ActiveFixture;
+use modules\users\models\User as BaseUser;
 
 /**
  * Class User
@@ -9,5 +11,5 @@ use yii\test\ActiveFixture;
  */
 class User extends ActiveFixture
 {
-    public $modelClass = 'modules\users\models\User';
+    public $modelClass = BaseUser::class;
 }

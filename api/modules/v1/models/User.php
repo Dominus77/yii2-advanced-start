@@ -2,14 +2,14 @@
 
 namespace api\modules\v1\models;
 
-use Yii;
 use yii\helpers\ArrayHelper;
+use modules\users\models\User as BaseUser;
 
 /**
  * Class User
  * @package api\modules\v1\models
  */
-class User extends \modules\users\models\User
+class User extends BaseUser
 {
     /**
      * @inheritdoc

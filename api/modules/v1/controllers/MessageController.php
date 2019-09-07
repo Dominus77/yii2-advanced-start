@@ -2,6 +2,7 @@
 
 namespace api\modules\v1\controllers;
 
+use yii\filters\Cors;
 use yii\rest\Controller;
 use api\modules\v1\models\Message;
 
@@ -20,7 +21,7 @@ class MessageController extends Controller
 
         // Add CORS filter
         $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::class,
+            'class' => Cors::class
         ];
 
         return $behaviors;
@@ -31,7 +32,6 @@ class MessageController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Message();
-        return $model->message;
+        return (new Message())->message;
     }
 }

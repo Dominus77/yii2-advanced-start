@@ -3,7 +3,9 @@
 namespace api\components;
 
 use Yii;
+use yii\base\Action;
 use yii\filters\RateLimitInterface;
+use yii\web\Request;
 
 /**
  * Class IpLimiter
@@ -37,8 +39,8 @@ class IpLimiter implements RateLimitInterface
     private $cache_key = 'limitRelate';
 
     /**
-     * @param \yii\web\Request $request
-     * @param \yii\base\Action $action
+     * @param Request $request
+     * @param Action $action
      * @return array
      */
     public function getRateLimit($request, $action)
@@ -47,8 +49,8 @@ class IpLimiter implements RateLimitInterface
     }
 
     /**
-     * @param \yii\web\Request $request
-     * @param \yii\base\Action $action
+     * @param Request $request
+     * @param Action $action
      * @return array
      */
     public function loadAllowance($request, $action)
@@ -62,8 +64,8 @@ class IpLimiter implements RateLimitInterface
     }
 
     /**
-     * @param \yii\web\Request $request
-     * @param \yii\base\Action $action
+     * @param Request $request
+     * @param Action $action
      * @param int $allowance
      * @param int $timestamp
      */

@@ -2,13 +2,14 @@
 
 namespace backend\widgets\control;
 
-use Yii;
+use yii\bootstrap\Widget;
+use yii\web\JsExpression;
 
 /**
  * Class ControlSidebar
  * @package backend\themes\AdminLTE\widgets
  */
-class ControlSidebar extends \yii\bootstrap\Widget
+class ControlSidebar extends Widget
 {
     /**
      * @var bool
@@ -19,14 +20,6 @@ class ControlSidebar extends \yii\bootstrap\Widget
      * @var bool
      */
     public $demo = false;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-    }
 
     /**
      * @inheritdoc
@@ -45,7 +38,7 @@ class ControlSidebar extends \yii\bootstrap\Widget
     public function registerAssets()
     {
         $view = $this->getView();
-        $script = new \yii\web\JsExpression("
+        $script = new JsExpression("
             $('a[href=\"#control-sidebar-home-tab\"]').parent().removeClass('active');
             $('#control-sidebar-home-tab').removeClass('active');
         ");

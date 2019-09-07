@@ -3,6 +3,8 @@
 namespace backend\assets\plugins;
 
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
+use backend\assets\BootstrapAsset;
 
 /**
  * Class ColorPickerAsset
@@ -16,16 +18,6 @@ class ColorPickerAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-colorpicker';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -33,10 +25,10 @@ class ColorPickerAsset extends AssetBundle
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
-            'dist/css/bootstrap-colorpicker' . $min . '.css',
+            'dist/css/bootstrap-colorpicker' . $min . '.css'
         ];
         $this->js = [
-            'dist/js/bootstrap-colorpicker' . $min . '.js',
+            'dist/js/bootstrap-colorpicker' . $min . '.js'
         ];
     }
 
@@ -44,7 +36,7 @@ class ColorPickerAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
-        'backend\assets\BootstrapAsset',
+        JqueryAsset::class,
+        BootstrapAsset::class
     ];
 }

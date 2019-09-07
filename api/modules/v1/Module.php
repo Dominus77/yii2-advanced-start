@@ -27,16 +27,8 @@ class Module extends \yii\base\Module
                 'class' => RateLimiter::class,
                 'user' => new IpLimiter(),
                 'enableRateLimitHeaders' => true,
-                'errorMessage' => Yii::t('app', 'Exceeded the limit of applications!'),
-            ],
+                'errorMessage' => Yii::t('app', 'Exceeded the limit of applications!')
+            ]
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
     }
 }

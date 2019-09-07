@@ -1,8 +1,12 @@
 <?php
+
+use yii\web\View;
+
 /**
- * @var $this \yii\web\View
+ * @var $this View
  * @var $image string User Avatar
  */
+
 ?>
 <li class="dropdown messages-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -16,7 +20,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <?= $image; ?>
+                            <?= $image ?>
                         </div>
                         <h4>
                             Support Team

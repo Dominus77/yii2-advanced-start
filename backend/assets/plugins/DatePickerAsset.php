@@ -2,7 +2,10 @@
 
 namespace backend\assets\plugins;
 
+use Yii;
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
+use backend\assets\BootstrapAsset;
 
 /**
  * Class DatePickerAsset
@@ -21,29 +24,19 @@ class DatePickerAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/bootstrap-datepicker';
 
     /**
-     * @var array
-     */
-    public $css = [];
-
-    /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
-        $language = self::$language ? self::$language : substr(\Yii::$app->language, 0, 2);
+        $language = self::$language ?: substr(Yii::$app->language, 0, 2);
         $this->css = [
-            'dist/css/bootstrap-datepicker3.css',
+            'dist/css/bootstrap-datepicker3.css'
         ];
         $this->js = [
             'dist/js/bootstrap-datepicker' . $min . '.js',
-            'dist/locales/bootstrap-datepicker.' . $language . '.min.js',
+            'dist/locales/bootstrap-datepicker.' . $language . '.min.js'
         ];
     }
 
@@ -51,8 +44,7 @@ class DatePickerAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
-        //'yii\jui\JuiAsset',
-        'backend\assets\BootstrapAsset',
+        JqueryAsset::class,
+        BootstrapAsset::class
     ];
 }

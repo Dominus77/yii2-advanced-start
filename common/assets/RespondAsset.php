@@ -20,7 +20,7 @@ class RespondAsset extends AssetBundle
      * @var array
      */
     public $js = [
-        'respond.min.js',
+        'respond.min.js'
     ];
 
     /**
@@ -28,6 +28,6 @@ class RespondAsset extends AssetBundle
      */
     public $jsOptions = [
         'condition' => 'lt IE 9',
-        'position' => View::POS_HEAD,
+        'position' => View::POS_HEAD
     ];
 }

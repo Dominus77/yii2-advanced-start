@@ -2,13 +2,13 @@
 
 namespace backend\widgets\navbar;
 
-use Yii;
+use yii\bootstrap\Widget;
 
 /**
  * Class MessagesWidget
  * @package backend\widgets\search
  */
-class MessagesWidget extends \yii\bootstrap\Widget
+class MessagesWidget extends Widget
 {
     /**
      * @var bool

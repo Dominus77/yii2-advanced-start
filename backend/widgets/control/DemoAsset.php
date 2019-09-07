@@ -16,11 +16,6 @@ class DemoAsset extends AssetBundle
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
 
     /**
-     * @var array
-     */
-    public $js = [];
-
-    /**
      * @inheritdoc
      */
     public function init()

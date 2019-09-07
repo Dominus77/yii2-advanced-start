@@ -1,25 +1,33 @@
 <?php
 
-/* @var $this \yii\web\View */
-
-/* @var $content string */
-
 use backend\assets\AppAsset;
 use backend\assets\plugins\iCheckAsset;
+use backend\widgets\control\ControlSidebar;
+use backend\widgets\navbar\MessagesWidget;
+use backend\widgets\navbar\NotificationsWidget;
+use backend\widgets\navbar\TasksWidget;
+use backend\widgets\search\SearchSidebar;
+use modules\rbac\models\Permission;
+use modules\users\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
+use yii\base\InvalidConfigException;
 use common\widgets\Alert;
 use modules\users\widgets\AvatarWidget;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
 use modules\rbac\Module as RbacModule;
 
+/* @var $this View */
+/* @var $content string */
+
 iCheckAsset::register($this);
 AppAsset::register($this);
 
-/* @var \modules\users\models\User $identity */
+/* @var User $identity */
 $identity = Yii::$app->user->identity;
 $fullUserName = ($identity !== null) ? $identity->getUserFullName() : Yii::t('app', 'No Authorize');
 
@@ -63,32 +71,52 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
-                    <?= \backend\widgets\navbar\MessagesWidget::widget([
-                        'status' => true,
-                        'image' => $publishedUrl ? Html::img($publishedUrl . '/img/user2-160x160.jpg', [
-                            'class' => 'img-circle',
-                            'alt' => 'User Image',
-                        ]) : '',]) ?>
+                    <?php try {
+                        echo MessagesWidget::widget([
+                            'status' => true,
+                            'image' => $publishedUrl ? Html::img($publishedUrl . '/img/user2-160x160.jpg', [
+                                'class' => 'img-circle',
+                                'alt' => 'User Image'
+                            ]) : '']);
+                    } catch (Exception $e) {
+                    } ?>
 
-                    <?= \backend\widgets\navbar\NotificationsWidget::widget(['status' => true]) ?>
+                    <?php try {
+                        echo NotificationsWidget::widget(['status' => true]);
+                    } catch (Exception $e) {
+                    } ?>
 
-                    <?= \backend\widgets\navbar\TasksWidget::widget(['status' => true]) ?>
+                    <?php try {
+                        echo TasksWidget::widget(['status' => true]);
+                    } catch (Exception $e) {
+                    } ?>
 
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <?= AvatarWidget::widget([
-                                'imageOptions' => [
-                                    'class' => 'user-image',
-                                ],
-                            ]); ?>
+                            <?php try {
+                                echo AvatarWidget::widget([
+                                    'imageOptions' => [
+                                        'class' => 'user-image'
+                                    ]
+                                ]);
+                            } catch (Exception $e) {
+                            } ?>
                             <span class="hidden-xs"><?= $fullUserName ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <?= AvatarWidget::widget(); ?>
+                                <?php try {
+                                    echo AvatarWidget::widget();
+                                } catch (Exception $e) {
+                                } ?>
                                 <p>
                                     <?= $fullUserName ?>
-                                    <small><?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') ?></small>
+                                    <small>
+                                        <?php try {
+                                            echo UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy');
+                                        } catch (InvalidConfigException $e) {
+                                        } ?>
+                                    </small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -107,13 +135,13 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="<?= Url::to(['/users/profile/index']); ?>"
-                                       class="btn btn-default btn-flat"><?= UserModule::t('module', 'Profile'); ?></a>
+                                    <a href="<?= Url::to(['/users/profile/index']) ?>"
+                                       class="btn btn-default btn-flat"><?= UserModule::t('module', 'Profile') ?></a>
                                 </div>
                                 <div class="pull-right">
-                                    <?= Html::beginForm(['/users/default/logout'], 'post')
+                                    <?= Html::beginForm(['/users/default/logout'])
                                     . Html::submitButton(UserModule::t('module', 'Sign Out'), ['class' => 'btn btn-default btn-flat logout'])
-                                    . Html::endForm(); ?>
+                                    . Html::endForm() ?>
                                 </div>
                             </li>
                         </ul>
@@ -132,54 +160,60 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
             <div class="user-panel">
                 <div class="pull-left image">
-                    <?= AvatarWidget::widget(); ?>
+                    <?php try {
+                        echo AvatarWidget::widget();
+                    } catch (Exception $e) {
+                    } ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= $fullUserName ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online'); ?></a>
+                    <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online') ?></a>
                 </div>
             </div>
 
-            <?= \backend\widgets\search\SearchSidebar::widget(['status' => true]); ?>
+            <?php try {
+                echo SearchSidebar::widget(['status' => true]);
+            } catch (Exception $e) {
+            } ?>
 
             <?php
             $items = [
                 [
                     'label' => Yii::t('app', 'HEADER'),
-                    'options' => ['class' => 'header',],
+                    'options' => ['class' => 'header']
                 ],
                 [
                     'label' => '<i class="fa fa-dashboard"></i> <span>' . MainModule::t('module', 'Home') . '</span>',
-                    'url' => ['/main/default/index'],
+                    'url' => ['/main/default/index']
                 ],
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('module', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
+                    'visible' => Yii::$app->user->can(Permission::PERMISSION_MANAGER_USERS)
                 ],
                 [
                     'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
                     'url' => ['/rbac/default/index'],
                     'options' => ['class' => 'treeview'],
-                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC),
+                    'visible' => Yii::$app->user->can(Permission::PERMISSION_MANAGER_RBAC),
                     'items' => [
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Permissions') . '</span>',
-                            'url' => ['/rbac/permissions/index'],
+                            'url' => ['/rbac/permissions/index']
                         ],
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Roles') . '</span>',
-                            'url' => ['/rbac/roles/index'],
+                            'url' => ['/rbac/roles/index']
                         ],
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Assign') . '</span>',
-                            'url' => ['/rbac/assign/index'],
-                        ],
-                    ],
+                            'url' => ['/rbac/assign/index']
+                        ]
+                    ]
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',
-                    'url' => ['#'],
+                    'url' => ['#']
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Multilevel') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
@@ -189,7 +223,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'items' => [
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . Yii::t('app', 'Link in level 2') . '</span>',
-                            'url' => ['#'],
+                            'url' => ['#']
                         ],
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . Yii::t('app', 'Link in level 2') . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
@@ -198,20 +232,23 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                             'items' => [
                                 [
                                     'label' => Yii::t('app', 'Link in level 3'),
-                                    'url' => ['#'],
-                                ],
+                                    'url' => ['#']
+                                ]
                             ]
-                        ],
-                    ],
-                ],
+                        ]
+                    ]
+                ]
             ];
-            echo Menu::widget([
-                'options' => ['class' => 'sidebar-menu',],
-                'encodeLabels' => false,
-                'submenuTemplate' => "\n<ul class='treeview-menu'>\n{items}\n</ul>\n",
-                'activateParents' => true,
-                'items' => $items,
-            ]);
+            try {
+                echo Menu::widget([
+                    'options' => ['class' => 'sidebar-menu'],
+                    'encodeLabels' => false,
+                    'submenuTemplate' => "\n<ul class='treeview-menu'>\n{items}\n</ul>\n",
+                    'activateParents' => true,
+                    'items' => $items
+                ]);
+            } catch (Exception $e) {
+            }
             ?>
         </section>
     </aside>
@@ -223,12 +260,18 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 $small = isset($this->params['title']['small']) ? ' ' . Html::tag('small', Html::encode($this->params['title']['small'])) : '';
                 echo Html::encode($this->title) . $small ?>
             </h1>
-            <?= Breadcrumbs::widget([
-                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                'encodeLabels' => false,
-            ]) ?>
-            <?= Alert::widget() ?>
+            <?php try {
+                echo Breadcrumbs::widget([
+                    'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'encodeLabels' => false
+                ]);
+            } catch (Exception $e) {
+            } ?>
+            <?php try {
+                echo Alert::widget();
+            } catch (Exception $e) {
+            } ?>
         </section>
         <section class="content">
             <?= $content ?>
@@ -242,13 +285,16 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
         </div>
         <strong>&copy; <?= date('Y') ?> <a
-                    href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.'); ?>
+                    href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.') ?>
     </footer>
 
-    <?= \backend\widgets\control\ControlSidebar::widget([
-        'status' => true,
-        'demo' => false,
-    ]) ?>
+    <?php try {
+        echo ControlSidebar::widget([
+            'status' => true,
+            'demo' => false
+        ]);
+    } catch (Exception $e) {
+    } ?>
 </div>
 
 <?php $this->endBody() ?>

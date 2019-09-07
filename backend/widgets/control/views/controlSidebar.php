@@ -14,10 +14,10 @@
     <div class="tab-content">
 
         <div class="tab-pane active" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Recent Activity'); ?></h3>
+            <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Recent Activity') ?></h3>
             <ul class="control-sidebar-menu">
                 <li>
-                    <a href="javascript::;">
+                    <a href="javascript::">
                         <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                         <div class="menu-info">
@@ -29,10 +29,10 @@
                 </li>
             </ul>
 
-            <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Tasks Progress'); ?></h3>
+            <h3 class="control-sidebar-heading"><?= Yii::t('app', 'Tasks Progress') ?></h3>
             <ul class="control-sidebar-menu">
                 <li>
-                    <a href="javascript::;">
+                    <a href="javascript::">
                         <h4 class="control-sidebar-subheading">
                             Custom Template Design
                                 <span class="pull-right-container">
@@ -50,7 +50,7 @@
 
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
-                <h3 class="control-sidebar-heading"><?= Yii::t('app', 'General Settings'); ?></h3>
+                <h3 class="control-sidebar-heading"><?= Yii::t('app', 'General Settings') ?></h3>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">

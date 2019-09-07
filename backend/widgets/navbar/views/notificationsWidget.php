@@ -1,6 +1,9 @@
 <?php
+
+use yii\web\View;
+
 /**
- * @var $this \yii\web\View
+ * @var $this View
  */
 ?>
 <li class="dropdown notifications-menu">
