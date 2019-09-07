@@ -64,6 +64,7 @@ AppAsset::register($this);
             'items' => array_filter($menuItems)
         ]);
     } catch (Exception $e) {
+        // Save to log
     }
     NavBar::end();
     ?>
@@ -74,10 +75,12 @@ AppAsset::register($this);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
             ]);
         } catch (Exception $e) {
+            // Save to log
         } ?>
         <?php try {
             echo Alert::widget();
         } catch (Exception $e) {
+            // Save to log
         } ?>
         <?= $content ?>
     </div>

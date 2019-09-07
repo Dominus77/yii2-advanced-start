@@ -64,6 +64,7 @@ class Alert extends Widget
                 try {
                     $this->processTypes($this->alertTypes[$type], $data, $appendCss);
                 } catch (Exception $e) {
+                    // Save to log
                 }
                 $session->removeFlash($type);
             }
