@@ -1,16 +1,19 @@
 <?php
+
+use yii\db\Connection;
+use yii\swiftmailer\Mailer;
+
 return [
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
+            'class' => Connection::class,
+            'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_advanced_start',
             'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
+            'password' => ''
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-        ],
-    ],
+            'class' => Mailer::class,
+            'viewPath' => '@common/mail'
+        ]
+    ]
 ];

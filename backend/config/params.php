@@ -1,6 +1,7 @@
 <?php
+
 return [
     'adminEmail' => '',
     'supportEmail' => '',
-    'user.pageSize' => 25,
+    'user.pageSize' => 25
 ];

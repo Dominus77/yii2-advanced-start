@@ -1,7 +1,10 @@
 <?php
+
+use yii\gii\Module as GiiModule;
+
 return [
     'bootstrap' => ['gii'],
     'modules' => [
-        'gii' => 'yii\gii\Module',
-    ],
+        'gii' => GiiModule::class
+    ]
 ];

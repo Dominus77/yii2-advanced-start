@@ -8,22 +8,30 @@
  * @license http://www.yiiframework.com/license/
  */
 
+use yii\helpers\ArrayHelper;
+use yii\console\Application;
+use yii\base\InvalidConfigException;
+
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', __DIR__ . '/');
 
-require(YII_APP_BASE_PATH . '/vendor/autoload.php');
-require(YII_APP_BASE_PATH . '/vendor/yiisoft/yii2/Yii.php');
-require(YII_APP_BASE_PATH . '/common/config/bootstrap.php');
-require(YII_APP_BASE_PATH . '/console/config/bootstrap.php');
+require YII_APP_BASE_PATH . '/vendor/autoload.php';
+require YII_APP_BASE_PATH . '/vendor/yiisoft/yii2/Yii.php';
+require YII_APP_BASE_PATH . '/common/config/bootstrap.php';
+require YII_APP_BASE_PATH . '/console/config/bootstrap.php';
 
-$config = yii\helpers\ArrayHelper::merge(
-    require(YII_APP_BASE_PATH . '/common/config/main.php'),
-    require(YII_APP_BASE_PATH . '/common/config/main-local.php'),
-    require(YII_APP_BASE_PATH . '/console/config/main.php'),
-    require(YII_APP_BASE_PATH . '/console/config/main-local.php')
+$config = ArrayHelper::merge(
+    require YII_APP_BASE_PATH . '/common/config/main.php',
+    require YII_APP_BASE_PATH . '/common/config/main-local.php',
+    require YII_APP_BASE_PATH . '/console/config/main.php',
+    require YII_APP_BASE_PATH . '/console/config/main-local.php'
 );
 
-$application = new yii\console\Application($config);
+try {
+    $application = new Application($config);
+} catch (InvalidConfigException $e) {
+}
+
 $exitCode = $application->run();
 exit($exitCode);
