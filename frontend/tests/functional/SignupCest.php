@@ -1,7 +1,9 @@
 <?php
+
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
+use yii\helpers\Url;
 
 /**
  * Class SignupCest
@@ -19,7 +21,7 @@ class SignupCest
      */
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('/users/default/signup');
+        $I->amOnRoute(Url::to(['/users/default/signup']));
     }
 
     /**
@@ -43,10 +45,10 @@ class SignupCest
     {
         $I->submitForm(
             $this->formId, [
-            'SignupForm[username]'  => 'tester',
-            'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
-        ]
+                'SignupForm[username]' => 'tester',
+                'SignupForm[email]' => 'ttttt',
+                'SignupForm[password]' => 'tester_password'
+            ]
         );
         $I->dontSee('Username cannot be blank.', '.help-block');
         $I->dontSee('Password cannot be blank.', '.help-block');
@@ -61,7 +63,7 @@ class SignupCest
         $I->submitForm($this->formId, [
             'SignupForm[username]' => 'testers',
             'SignupForm[email]' => 'testers@example.com',
-            'SignupForm[password]' => '123456',
+            'SignupForm[password]' => '123456'
         ]);
 
         $I->see('A letter with a link to activate, we sent you an indication of the registration e-mail address.

@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use Yii;
 use frontend\tests\FunctionalTester;
 
 /**
@@ -15,7 +16,7 @@ class HomeCest
      */
     public function checkOpen(FunctionalTester $I)
     {
-        $I->amOnPage(\Yii::$app->homeUrl);
+        $I->amOnPage(Yii::$app->homeUrl);
         $I->see('Congratulations!');
         $I->seeLink('About');
         $I->click('About');

@@ -113,7 +113,8 @@ class AssignController extends Controller
         $model = new Assignment([
             'user' => $this->findModel($id)
         ]);
-        if ($model->load(Yii::$app->request->post())) {
+        $model->load(Yii::$app->request->post());
+        if ($model->validate()) {
             $auth = Yii::$app->authManager;
             $role = $auth->getRole($model->role);
             // отвязываем роли если есть

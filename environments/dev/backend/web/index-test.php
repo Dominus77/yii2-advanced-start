@@ -11,6 +11,7 @@ require YII_APP_BASE_PATH . '/backend/config/bootstrap.php';
 try {
     $application = new Application($config);
 } catch (InvalidConfigException $e) {
+    // Exception
 }
 
 $application->run();

@@ -19,6 +19,7 @@ $config = ArrayHelper::merge(
 try {
     $application = new Application($config);
 } catch (InvalidConfigException $e) {
+    // Exception
 }
 
 $application->run();

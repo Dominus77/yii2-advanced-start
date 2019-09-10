@@ -2,7 +2,11 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost:8080
+            # url: http://127.0.0.1:8080
+            url: http://yii2-advanced-start.ru/
             browser: firefox
         - Yii2:
-            part: init
+            # part: init
+            part: [orm, fixtures] # allow to use AR methods
+            cleanup: false # don't wrap test in transaction
+            entryScript: index-test.php

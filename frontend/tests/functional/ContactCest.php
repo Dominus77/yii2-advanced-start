@@ -3,8 +3,10 @@
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
+use yii\helpers\Url;
+use Codeception\Scenario;
 
-/* @var $scenario \Codeception\Scenario */
+/* @var $scenario Scenario */
 
 /**
  * Class ContactCest
@@ -13,11 +15,16 @@ use frontend\tests\FunctionalTester;
 class ContactCest
 {
     /**
+     * @var string
+     */
+    protected $formId = '#contact-form';
+
+    /**
      * @param FunctionalTester $I
      */
     public function _before(FunctionalTester $I)
     {
-        $I->amOnPage(['main/default/contact']);
+        $I->amOnPage(Url::to(['/main/default/contact']));
     }
 
     /**
@@ -35,11 +42,11 @@ class ContactCest
     {
         $I->submitForm('#contact-form', []);
         $I->see('Contact', 'h1');
-        $I->seeValidationError('Name cannot be blank');
-        $I->seeValidationError('E-mail cannot be blank');
-        $I->seeValidationError('Subject cannot be blank');
-        $I->seeValidationError('Body cannot be blank');
-        $I->seeValidationError('Verification Code cannot be blank');
+        $I->see('Name cannot be blank.');
+        $I->seeValidationError('E-mail cannot be blank.');
+        $I->seeValidationError('Subject cannot be blank.');
+        $I->seeValidationError('Body cannot be blank.');
+        $I->seeValidationError('Verification Code cannot be blank.');
     }
 
     /**
@@ -52,7 +59,7 @@ class ContactCest
             'ContactForm[email]' => 'tester.email',
             'ContactForm[subject]' => 'test subject',
             'ContactForm[body]' => 'test content',
-            'ContactForm[verifyCode]' => 'testme',
+            'ContactForm[verifyCode]' => 'testme'
         ]);
         $I->seeValidationError('E-mail is not a valid email address');
         $I->dontSeeValidationError('Name cannot be blank');
@@ -71,7 +78,7 @@ class ContactCest
             'ContactForm[email]' => 'tester@example.com',
             'ContactForm[subject]' => 'test subject',
             'ContactForm[body]' => 'test content',
-            'ContactForm[verifyCode]' => 'testme',
+            'ContactForm[verifyCode]' => 'testme'
         ]);
         $I->seeEmailIsSent();
         $I->see('Thank you for contacting us. We will respond to you as soon as possible.');

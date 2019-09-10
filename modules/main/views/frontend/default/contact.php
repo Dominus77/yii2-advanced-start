@@ -9,7 +9,6 @@ use modules\main\models\frontend\ContactForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-
 /* @var $model ContactForm */
 
 $this->title = Module::t('module', 'Contact');

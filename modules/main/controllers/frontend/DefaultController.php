@@ -62,11 +62,12 @@ class DefaultController extends Controller
             $model->name = $identity->username;
             $model->email = $identity->email;
         }
-
-        if ($model->load(Yii::$app->request->post())) {
-            return $this->processSendEmail($model);
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            if ($model->validate()) {
+                return $this->processSendEmail($model);
+            }
         }
-
         return $this->render('contact', [
             'model' => $model
         ]);
@@ -78,7 +79,7 @@ class DefaultController extends Controller
      */
     protected function processSendEmail($model)
     {
-        if ($model->validate() && $model->sendEmail(Yii::$app->params['adminEmail'])) {
+        if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));

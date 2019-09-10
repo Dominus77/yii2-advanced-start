@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use yii\helpers\Url;
 use frontend\tests\FunctionalTester;
 use common\fixtures\User as UserFixture;
 
@@ -14,7 +15,7 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
-    function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->haveFixtures([
             'user' => [
@@ -22,7 +23,7 @@ class LoginCest
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
-        $I->amOnRoute('/users/default/login');
+        $I->amOnRoute(Url::to(['/users/default/login']));
     }
 
     /**
@@ -34,7 +35,7 @@ class LoginCest
     {
         return [
             'LoginForm[email]' => $email,
-            'LoginForm[password]' => $password,
+            'LoginForm[password]' => $password
         ];
     }
 

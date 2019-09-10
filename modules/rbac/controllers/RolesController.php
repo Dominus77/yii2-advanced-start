@@ -162,22 +162,25 @@ class RolesController extends Controller
         $model = new Role([
             'scenario' => Role::SCENARIO_UPDATE
         ]);
-        if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            /** @var YiiRbacRole $role */
-            $role = $auth->getRole($model->name);
-            foreach ($model->itemsRoles as $value) {
-                /** @var YiiRbacRole $add */
-                $add = $auth->getRole($value);
-                // Проверяем, не является добовляемая роль родителем?
-                $result = $this->detectLoop($role, $add);
-                if (!$result) {
-                    $auth->addChild($role, $add);
-                } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'The role of the "{:parent}" is the parent of the "{:role}"!', [':parent' => $add->name, ':role' => $role->name]));
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                /** @var YiiRbacRole $role */
+                $role = $auth->getRole($model->name);
+                foreach ($model->itemsRoles as $value) {
+                    /** @var YiiRbacRole $add */
+                    $add = $auth->getRole($value);
+                    // Проверяем, не является добовляемая роль родителем?
+                    $result = $this->detectLoop($role, $add);
+                    if (!$result) {
+                        $auth->addChild($role, $add);
+                    } else {
+                        Yii::$app->session->setFlash('error', Module::t('module', 'The role of the "{:parent}" is the parent of the "{:role}"!', [':parent' => $add->name, ':role' => $role->name]));
+                    }
                 }
+                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
             }
-            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
@@ -192,14 +195,17 @@ class RolesController extends Controller
         $model = new Role([
             'scenario' => Role::SCENARIO_UPDATE
         ]);
-        if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            $role = $auth->getRole($model->name);
-            foreach ($model->rolesByRole as $value) {
-                $remove = $auth->getRole($value);
-                $auth->removeChild($role, $remove);
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                $role = $auth->getRole($model->name);
+                foreach ($model->rolesByRole as $value) {
+                    $remove = $auth->getRole($value);
+                    $auth->removeChild($role, $remove);
+                }
+                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
             }
-            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
@@ -215,22 +221,25 @@ class RolesController extends Controller
         $model = new Role([
             'scenario' => Role::SCENARIO_UPDATE
         ]);
-        if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            /** @var YiiRbacRole $role */
-            $role = $auth->getRole($model->name);
-            foreach ($model->itemsPermissions as $value) {
-                /** @var YiiRbacRole $add */
-                $add = $auth->getPermission($value);
-                // Проверяем, не является добовляемое разрешение родителем?
-                $result = $this->detectLoop($role, $add);
-                if (!$result) {
-                    $auth->addChild($role, $add);
-                } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $role->name]));
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                /** @var YiiRbacRole $role */
+                $role = $auth->getRole($model->name);
+                foreach ($model->itemsPermissions as $value) {
+                    /** @var YiiRbacRole $add */
+                    $add = $auth->getPermission($value);
+                    // Проверяем, не является добовляемое разрешение родителем?
+                    $result = $this->detectLoop($role, $add);
+                    if (!$result) {
+                        $auth->addChild($role, $add);
+                    } else {
+                        Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $role->name]));
+                    }
                 }
+                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
             }
-            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
@@ -245,14 +254,17 @@ class RolesController extends Controller
         $model = new Role([
             'scenario' => Role::SCENARIO_UPDATE
         ]);
-        if ($model->load(Yii::$app->request->post())) {
-            $auth = Yii::$app->authManager;
-            $role = $auth->getRole($model->name);
-            foreach ($model->permissionsByRole as $value) {
-                $remove = $auth->getPermission($value);
-                $auth->removeChild($role, $remove);
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            if ($model->validate()) {
+                $auth = Yii::$app->authManager;
+                $role = $auth->getRole($model->name);
+                foreach ($model->permissionsByRole as $value) {
+                    $remove = $auth->getPermission($value);
+                    $auth->removeChild($role, $remove);
+                }
+                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
             }
-            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
