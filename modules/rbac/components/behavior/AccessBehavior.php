@@ -70,8 +70,12 @@ class AccessBehavior extends Behavior
     private function processLogout()
     {
         if (!Yii::$app->user->isGuest) {
-            Yii::$app->user->logout();
-            Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed access!'));
+            /** @var yii\web\User $user */
+            $user = Yii::$app->user;
+            $user->logout();
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('error', Module::t('module', 'You are not allowed access!'));
         }
     }
 }
