@@ -78,6 +78,7 @@ class Assignment extends Model
     /**
      * @param string|int $id
      * @return mixed|null
+     * TODO: Refactoring
      */
     public function getUserRoleName($id)
     {
@@ -97,6 +98,7 @@ class Assignment extends Model
      * Получаем роль пользователя
      * @param string|int $id
      * @return mixed|null
+     * TODO: Refactoring
      */
     public function getRoleUser($id)
     {
