@@ -3,6 +3,9 @@
 namespace modules\users\controllers\backend;
 
 use Yii;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
+use yii\db\StaleObjectException;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -14,6 +17,7 @@ use modules\rbac\models\Assignment;
 use modules\users\models\User;
 use modules\users\models\search\UserSearch;
 use modules\users\Module;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * Class DefaultController
@@ -45,8 +49,8 @@ class DefaultController extends Controller
             'class' => VerbFilter::class,
             'actions' => [
                 'delete' => ['POST'],
-                'logout' => ['POST'],
-            ],
+                'logout' => ['POST']
+            ]
         ];
     }
 
@@ -71,15 +75,15 @@ class DefaultController extends Controller
                 [
                     'allow' => true,
                     'roles' => [Permission::PERMISSION_MANAGER_USERS]
-                ],
-            ],
+                ]
+            ]
         ];
     }
 
     /**
      * Login action.
      *
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionLogin()
     {
@@ -94,20 +98,24 @@ class DefaultController extends Controller
             return $this->processCheckPermissionLogin();
         }
         return $this->render('login', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
-     * @return \yii\web\Response
+     * @return Response
      */
     protected function processCheckPermissionLogin()
     {
         // If access to Backend is denied, reset authorization, write a message to the session
         // and move it to the login page
-        if (!Yii::$app->user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
-            Yii::$app->user->logout();
-            Yii::$app->session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
+        /** @var yii\web\User $user */
+        $user = Yii::$app->user;
+        if (!$user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
+            $user->logout();
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
             return $this->goHome();
         }
         return $this->goBack();
@@ -116,7 +124,7 @@ class DefaultController extends Controller
     /**
      * Logout action.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionLogout()
     {
@@ -127,7 +135,7 @@ class DefaultController extends Controller
 
     /**
      * @return string
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function actionIndex()
     {
@@ -137,14 +145,14 @@ class DefaultController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'assignModel' => $assignModel,
+            'assignModel' => $assignModel
         ]);
     }
 
     /**
      * Displays a single User model.
      * @param int|string $id
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException
      */
     public function actionView($id)
@@ -155,7 +163,7 @@ class DefaultController extends Controller
             ]);
             return $this->render('view', [
                 'model' => $model,
-                'assignModel' => $assignModel,
+                'assignModel' => $assignModel
             ]);
         }
         return $this->redirect(['index']);
@@ -164,7 +172,7 @@ class DefaultController extends Controller
     /**
      * Creates a new User model.
      * @return string|Response
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionCreate()
     {
@@ -178,7 +186,7 @@ class DefaultController extends Controller
             }
         }
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
@@ -186,7 +194,7 @@ class DefaultController extends Controller
      * @param int|string $id
      * @return string|Response
      * @throws NotFoundHttpException
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionUpdate($id)
     {
@@ -200,7 +208,7 @@ class DefaultController extends Controller
             }
         }
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
@@ -215,7 +223,7 @@ class DefaultController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             $result = $this->processChangeStatus($id);
             return [
-                'result' => $result->statusLabelName,
+                'result' => $result->statusLabelName
             ];
         }
         $this->processChangeStatus($id);
@@ -240,8 +248,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param int|string $id
+     * @param $id
      * @return array|Response
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     public function actionSendConfirmEmail($id)
@@ -251,7 +260,7 @@ class DefaultController extends Controller
             $result = $this->processSendEmail($id);
             $name = (!$result->errors) ? 'success' : 'danger';
             return [
-                'result' => $result->getLabelMailConfirm($name),
+                'result' => $result->getLabelMailConfirm($name)
             ];
         }
         $this->processSendEmail($id);
@@ -259,8 +268,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param int|string $id
-     * @return array|User|null
+     * @param $id
+     * @return User
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     protected function processSendEmail($id)
@@ -274,8 +284,9 @@ class DefaultController extends Controller
 
     /**
      * Action Generate new auth key
-     * @param int|string $id
+     * @param $id
      * @return array|Response
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey($id)
@@ -284,7 +295,7 @@ class DefaultController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'success' => $model->auth_key,
+                'success' => $model->auth_key
             ];
         }
         return $this->redirect(['index']);
@@ -292,8 +303,9 @@ class DefaultController extends Controller
 
     /**
      * Generate new auth key
-     * @param int|string $id
-     * @return User|null
+     * @param $id
+     * @return User
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     private function processGenerateAuthKey($id)
@@ -308,24 +320,25 @@ class DefaultController extends Controller
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int|string $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException
-     * @throws \Exception
+     * @throws Exception
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws StaleObjectException
      */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
         if (!$model->isSuperAdmin()) {
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
             if ($model->isDeleted()) {
                 $model->delete();
-                Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
+                $session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
             } else {
-                /** @var $model \yii2tech\ar\softdelete\SoftDeleteBehavior */
+                /** @var $model SoftDeleteBehavior */
                 $model->softDelete();
-                /** @var $model User */
-                Yii::$app->session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
+                $session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
             }
         }
         return $this->redirect(['index']);
@@ -335,7 +348,7 @@ class DefaultController extends Controller
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int|string $id
-     * @return null|User the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

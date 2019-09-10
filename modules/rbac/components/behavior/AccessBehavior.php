@@ -49,7 +49,9 @@ class AccessBehavior extends Behavior
      */
     protected function checkPermission()
     {
-        return !empty($this->permission) && Yii::$app->user->can($this->permission);
+        /** @var yii\web\User $user */
+        $user = Yii::$app->user;
+        return !empty($this->permission) && $user->can($this->permission);
     }
 
     /**
@@ -57,7 +59,9 @@ class AccessBehavior extends Behavior
      */
     protected function checkRole()
     {
-        return !empty($this->role) && Yii::$app->user->can($this->role);
+        /** @var yii\web\User $user */
+        $user = Yii::$app->user;
+        return !empty($this->role) && $user->can($this->role);
     }
 
     /**
@@ -67,7 +71,9 @@ class AccessBehavior extends Behavior
     {
         if (!Yii::$app->user->isGuest) {
             Yii::$app->user->logout();
-            Yii::$app->session->setFlash('error', Module::t('module', 'You are not allowed access!'));
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('error', Module::t('module', 'You are not allowed access!'));
         }
     }
 }

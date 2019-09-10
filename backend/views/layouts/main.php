@@ -27,14 +27,14 @@ use modules\rbac\Module as RbacModule;
 iCheckAsset::register($this);
 AppAsset::register($this);
 
+/** @var yii\web\User $user */
+$user = Yii::$app->user;
 /* @var User $identity */
-$identity = Yii::$app->user->identity;
+$identity = $user->identity;
 $fullUserName = ($identity !== null) ? $identity->getUserFullName() : Yii::t('app', 'No Authorize');
-
 $assetManager = Yii::$app->assetManager;
 /** @var false|string $publishedUrl */
 $publishedUrl = $assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
-
 $formatter = Yii::$app->formatter;
 $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 ?>
@@ -197,13 +197,13 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 [
                     'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('module', 'Users') . '</span>',
                     'url' => ['/users/default/index'],
-                    'visible' => Yii::$app->user->can(Permission::PERMISSION_MANAGER_USERS)
+                    'visible' => $user->can(Permission::PERMISSION_MANAGER_USERS)
                 ],
                 [
                     'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
                     'url' => ['/rbac/default/index'],
                     'options' => ['class' => 'treeview'],
-                    'visible' => Yii::$app->user->can(Permission::PERMISSION_MANAGER_RBAC),
+                    'visible' => $user->can(Permission::PERMISSION_MANAGER_RBAC),
                     'items' => [
                         [
                             'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Permissions') . '</span>',

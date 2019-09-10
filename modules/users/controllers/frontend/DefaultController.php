@@ -3,6 +3,8 @@
 namespace modules\users\controllers\frontend;
 
 use Yii;
+use yii\base\Exception;
+use yii\base\Model;
 use yii\web\Controller;
 use modules\users\models\SignupForm;
 use modules\users\models\LoginForm;
@@ -14,6 +16,7 @@ use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use modules\users\Module;
+use yii\web\Response;
 
 /**
  * Class DefaultController
@@ -39,39 +42,38 @@ class DefaultController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@']
-                    ],
-                ],
+                    ]
+                ]
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+                    'logout' => ['post']
+                ]
+            ]
         ];
     }
 
     /**
      * Logs in a user.
      *
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionLogin()
     {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('login', [
+            'model' => $model
+        ]);
     }
 
     /**
      * Logs out the current user.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionLogout()
     {
@@ -80,25 +82,23 @@ class DefaultController extends Controller
     }
 
     /**
-     * @return string|\yii\web\Response
-     * @throws \yii\base\Exception
+     * @return string|Response
+     * @throws Exception
      */
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->signup()) {
-                return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
         }
         return $this->render('signup', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * @param mixed $token
-     * @return \yii\web\Response
+     * @return Response
      * @throws BadRequestHttpException
      * @throws \Exception
      */
@@ -119,7 +119,7 @@ class DefaultController extends Controller
     /**
      * Requests password reset.
      *
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionRequestPasswordReset()
     {
@@ -127,20 +127,21 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
-            } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
         }
         return $this->render('requestPasswordResetToken', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * @param mixed $token
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws BadRequestHttpException
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionResetPassword($token)
     {
@@ -155,32 +156,31 @@ class DefaultController extends Controller
         }
 
         return $this->render('resetPassword', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
-     * @param $model ResetPasswordForm|\yii\base\Model
+     * @param $model ResetPasswordForm|Model
      * @return bool
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     protected function processResetPassword($model)
     {
-        if ($model->validate() && $model->resetPassword()) {
-            return true;
-        }
-        return false;
+        return $model->validate() && $model->resetPassword();
     }
 
     /**
      * @param string $message
      * @param string $type
-     * @return \yii\web\Response
+     * @return Response
      */
     public function processGoHome($message = '', $type = 'success')
     {
         if (!empty($message)) {
-            Yii::$app->session->setFlash($type, $message);
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash($type, $message);
         }
         return $this->goHome();
     }

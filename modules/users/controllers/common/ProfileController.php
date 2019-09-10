@@ -3,6 +3,8 @@
 namespace modules\users\controllers\common;
 
 use Yii;
+use yii\base\Exception;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use modules\users\models\User;
 use modules\users\models\UpdatePasswordForm;
@@ -32,7 +34,7 @@ class ProfileController extends Controller
 
         return $this->render('index', [
             'model' => $model,
-            'assignModel' => $assignModel,
+            'assignModel' => $assignModel
         ]);
     }
 
@@ -44,27 +46,31 @@ class ProfileController extends Controller
     {
         $model = $this->findModel();
         if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully save.'));
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('success', Module::t('module', 'Profile successfully save.'));
             return $this->redirect(['update', 'tab' => 'profile']);
         }
         return $this->render('update', [
             'model' => $model,
-            'passwordForm' => new UpdatePasswordForm($model),
+            'passwordForm' => new UpdatePasswordForm($model)
         ]);
     }
 
     /**
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionUpdateAvatar()
     {
         $model = $this->findModel();
+        /** @var yii\web\Session $session */
+        $session = Yii::$app->session;
         if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Form successfully saved.'));
+            $session->setFlash('success', Module::t('module', 'Form successfully saved.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Failed to save the form.'));
+            $session->setFlash('error', Module::t('module', 'Error! Failed to save the form.'));
         }
         return $this->redirect(['update', 'tab' => 'avatar']);
     }
@@ -86,15 +92,17 @@ class ProfileController extends Controller
     /**
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionUpdatePassword()
     {
         $model = new UpdatePasswordForm($this->findModel());
+        /** @var yii\web\Session $session */
+        $session = Yii::$app->session;
         if ($model->load(Yii::$app->request->post()) && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            $session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
+            $session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
     }
@@ -128,7 +136,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * Action Generate new auth key
+     * @return array|Response
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     public function actionGenerateAuthKey()
@@ -137,15 +146,15 @@ class ProfileController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'success' => $model->auth_key,
+                'success' => $model->auth_key
             ];
         }
         return $this->redirect(['index']);
     }
 
     /**
-     * Generate new auth key
-     * @return User|null
+     * @return User
+     * @throws Exception
      * @throws NotFoundHttpException
      */
     private function processGenerateAuthKey()
@@ -160,28 +169,33 @@ class ProfileController extends Controller
      * @return string|Response
      * @throws NotFoundHttpException
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws StaleObjectException
      */
     public function actionDelete()
     {
         $model = new UserDeleteForm($this->findModel());
         if ($model->load(Yii::$app->request->post()) && $model->userDelete()) {
-            Yii::$app->user->logout();
-            Yii::$app->session->setFlash('success', Module::t('module', 'Your profile has been successfully deleted!'));
+            /** @var \yii\web\User $user */
+            $user = Yii::$app->user;
+            $user->logout();
+            $session = Yii::$app->session;
+            $session->setFlash('success', Module::t('module', 'Your profile has been successfully deleted!'));
             return $this->goHome();
         }
         return $this->render('delete', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
-     * @return User|null
+     * @return User
      * @throws NotFoundHttpException
      */
     private function findModel()
     {
-        if (!Yii::$app->user->isGuest) {
+        /** @var \yii\web\User $user */
+        $user = Yii::$app->user;
+        if (!$user->isGuest) {
             /** @var User $identity */
             $identity = Yii::$app->user->identity;
             if (($model = User::findOne($identity->id)) !== null) {
