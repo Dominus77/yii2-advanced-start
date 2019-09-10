@@ -178,6 +178,7 @@ class ProfileController extends Controller
             /** @var \yii\web\User $user */
             $user = Yii::$app->user;
             $user->logout();
+            /** @var yii\web\Session $session */
             $session = Yii::$app->session;
             $session->setFlash('success', Module::t('module', 'Your profile has been successfully deleted!'));
             return $this->goHome();
