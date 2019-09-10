@@ -10,6 +10,8 @@ use modules\main\Module;
 
 $this->title = Module::t('module', 'Home');
 $this->params['title']['small'] = Module::t('module', 'Dashboard');
+/** @var yii\web\User $user */
+$user = Yii::$app->user;
 ?>
 
 <section class="content main-backend-default-index">
@@ -33,7 +35,7 @@ $this->params['title']['small'] = Module::t('module', 'Dashboard');
                         <a class="btn btn-app" href="<?= Url::to(['/users/default/index']) ?>">
                             <i class="fa fa-users"></i> <?= UserModule::t('module', 'Users') ?>
                         </a>
-                        <?php if (Yii::$app->user->can(Permission::PERMISSION_MANAGER_RBAC)) : ?>
+                        <?php if ($user->can(Permission::PERMISSION_MANAGER_RBAC)) : ?>
                             <a class="btn btn-app" href="<?= Url::to(['/rbac/default/index']) ?>">
                                 <i class="fa fa-unlock"></i> <?= RbacModule::t('module', 'RBAC') ?>
                             </a>
