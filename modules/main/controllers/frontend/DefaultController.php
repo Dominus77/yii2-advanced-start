@@ -79,10 +79,12 @@ class DefaultController extends Controller
      */
     protected function processSendEmail($model)
     {
+        /** @var yii\web\Session $session */
+        $session = Yii::$app->session;
         if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
+            $session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));
+            $session->setFlash('error', Module::t('module', 'There was an error sending email.'));
         }
         return $this->refresh();
     }

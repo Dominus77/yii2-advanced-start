@@ -3,6 +3,7 @@
 namespace modules\rbac\controllers;
 
 use Yii;
+use modules\rbac\models\Assignment;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -13,9 +14,8 @@ use yii\web\BadRequestHttpException;
 use yii\base\Action;
 use yii\web\Response;
 use Exception;
-use modules\users\models\User;
-use modules\rbac\models\Assignment;
 use modules\rbac\Module;
+use modules\users\models\User;
 
 /**
  * Class AssignController
@@ -113,8 +113,7 @@ class AssignController extends Controller
         $model = new Assignment([
             'user' => $this->findModel($id)
         ]);
-        $model->load(Yii::$app->request->post());
-        if ($model->validate()) {
+        if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
             $role = $auth->getRole($model->role);
             // отвязываем роли если есть
@@ -142,14 +141,16 @@ class AssignController extends Controller
         /** @var User $model */
         $model = $this->findModel($id);
         $auth = Yii::$app->authManager;
+        /** @var yii\web\Session $session */
+        $session = Yii::$app->session;
         if ($auth->getRolesByUser($model->id)) {
             if ($auth->revokeAll($model->id)) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]));
+                $session->setFlash('success', Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]));
             } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
+                $session->setFlash('error', Module::t('module', 'Error!'));
             }
         } else {
-            Yii::$app->session->setFlash('warning', Module::t('module', 'User "{:username}" is not attached to any role!', [':username' => $model->username]));
+            $session->setFlash('warning', Module::t('module', 'User "{:username}" is not attached to any role!', [':username' => $model->username]));
         }
         return $this->redirect(['index']);
     }
@@ -158,7 +159,7 @@ class AssignController extends Controller
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string|int $id
-     * @return null|User the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

@@ -6,8 +6,8 @@ use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use modules\rbac\Module;
 use modules\rbac\console\InitController;
+use modules\rbac\Module;
 
 /**
  * Class DefaultController
@@ -56,7 +56,9 @@ class DefaultController extends InitController
     public function actionInit()
     {
         if ($this->processInit()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
+            /** @var yii\web\Session $session */
+            $session = Yii::$app->session;
+            $session->setFlash('success', Module::t('module', 'The operation was successful!'));
         }
         Yii::$app->getResponse()->redirect(Url::to(['index']));
     }

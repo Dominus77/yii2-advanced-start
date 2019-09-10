@@ -12,7 +12,7 @@ use modules\rbac\Module;
  * Class Role
  * @package modules\rbac\models
  *
- * @property array rolesArray
+ * @property array $rolesArray
  */
 class Role extends Model
 {

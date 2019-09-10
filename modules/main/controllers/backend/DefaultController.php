@@ -42,7 +42,9 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
+        /** @var yii\web\User $user */
+        $user = Yii::$app->user;
+        if (!$user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
             $session->setFlash('error', Module::t('module', 'You are not allowed access!'));

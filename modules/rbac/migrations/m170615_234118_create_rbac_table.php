@@ -6,7 +6,6 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Migration;
 use yii\rbac\DbManager;
-use yii\rbac\ManagerInterface;
 
 /**
  * Class m170615_234118_create_rbac_table
@@ -15,7 +14,7 @@ use yii\rbac\ManagerInterface;
 class m170615_234118_create_rbac_table extends Migration
 {
     /**
-     * @return ManagerInterface
+     * @return yii\rbac\ManagerInterface
      * @throws InvalidConfigException
      */
     protected function getAuthManager()
@@ -41,7 +40,7 @@ class m170615_234118_create_rbac_table extends Migration
     }
 
     /**
-     * @inheritdoc
+     * @return bool|void
      * @throws InvalidConfigException
      */
     public function safeUp()

@@ -1,11 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model Assignment */
+/* @var $model modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];

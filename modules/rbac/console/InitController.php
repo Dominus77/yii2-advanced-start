@@ -5,9 +5,9 @@ namespace modules\rbac\console;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\console\Controller;
+use modules\rbac\components\AuthorRule;
 use console\components\helpers\Console;
 use modules\rbac\models\Role;
-use modules\rbac\components\AuthorRule;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
 
@@ -49,7 +49,7 @@ class InitController extends Controller
         $auth = Yii::$app->authManager;
         $this->processClear($auth);
         $roles = $this->processCreate($auth, $this->getRoles());
-        $permissions = $this->processCreate($auth, self::getPermissions(), self::TYPE_PERMISSION);
+        $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
         //$this->processAddChildRoles($auth, $roles); // Inheritance of roles - If you uncomment, the roles are inherited
 
@@ -155,8 +155,9 @@ class InitController extends Controller
      *
      * @return array
      */
-    protected static function getPermissions()
+    protected function getPermissions()
     {
-        return Permission::getPermissionsArray();
+        $permission = new Permission();
+        return $permission->getPermissionsArray();
     }
 }

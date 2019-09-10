@@ -15,25 +15,25 @@ use modules\rbac\Module;
     <?php $form = ActiveForm::begin([
         'id' => 'form-permission',
         'enableAjaxValidation' => true,
-        'validationUrl' => ['ajax-validate-form'],
+        'validationUrl' => ['ajax-validate-form']
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput([
         'maxlength' => true,
-        'disabled' => ($model->scenario == $model::SCENARIO_UPDATE) ? true : false,
+        'disabled' => $model->scenario === $model::SCENARIO_UPDATE
     ])->hint(Module::t('module', 'Example: updatePost')) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <?php ActiveForm::end(); ?>
 
-    <?php if ($model->scenario == $model::SCENARIO_UPDATE) : ?>
+    <?php if ($model->scenario === $model::SCENARIO_UPDATE) : ?>
         <div id="assign-container-permissions">
             <div class="row">
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-add-permissions',
-                        'action' => Url::to(['remove-permissions']),
+                        'action' => Url::to(['remove-permissions'])
                     ]); ?>
 
                     <?= $form->field($model, 'permissions')->listBox($model->getPermissionChildren(), [
@@ -54,7 +54,7 @@ use modules\rbac\Module;
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-items-permission',
-                        'action' => Url::to(['add-permissions']),
+                        'action' => Url::to(['add-permissions'])
                     ]); ?>
 
                     <?= $form->field($model, 'permissionItems')->listBox($model->getItemsPermissions(), [

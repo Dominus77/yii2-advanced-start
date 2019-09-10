@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
         </div>
         <div class="box-body">
             <?= $this->render('_form', [
-                'model' => $model,
+                'model' => $model
             ]) ?>
         </div>
         <div class="box-footer">

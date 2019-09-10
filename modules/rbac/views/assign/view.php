@@ -2,13 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use modules\users\models\User;
-use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model User */
-/* @var $assignModel Assignment */
+/* @var $model modules\users\models\User */
+/* @var $assignModel modules\rbac\models\Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];

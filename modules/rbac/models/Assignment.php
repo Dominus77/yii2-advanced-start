@@ -83,7 +83,12 @@ class Assignment extends Model
     {
         $id = $id ?: $this->user->id;
         if ($role = Yii::$app->authManager->getRolesByUser($id)) {
-            return ArrayHelper::getValue($role[$this->getRoleUser($id)], 'description');
+            return ArrayHelper::getValue($role, static function ($role) {
+                foreach ($role as $key => $value) {
+                    return $value->description;
+                }
+                return null;
+            });
         }
         return null;
     }
@@ -97,7 +102,12 @@ class Assignment extends Model
     {
         $id = $id ?: $this->user->id;
         if ($role = Yii::$app->authManager->getRolesByUser($id)) {
-            return array_key_first($role);
+            return ArrayHelper::getValue($role, static function ($role) {
+                foreach ($role as $key => $value) {
+                    return $value->name;
+                }
+                return null;
+            });
         }
         return null;
     }

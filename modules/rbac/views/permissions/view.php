@@ -26,41 +26,45 @@ $this->params['breadcrumbs'][] = $model->name;
             <div class="pull-right"></div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= DetailView::widget([
-                        'model' => $permission,
-                        'attributes' => [
-                            [
-                                'attribute' => 'name',
-                                'label' => Module::t('module', 'Name'),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'description',
-                                'label' => Module::t('module', 'Description'),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'ruleName',
-                                'label' => Module::t('module', 'Rule Name'),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'data',
-                                'label' => Module::t('module', 'Data'),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'createdAt',
-                                'label' => Module::t('module', 'Created'),
-                                'format' => 'datetime',
-                            ],
-                            [
-                                'attribute' => 'updatedAt',
-                                'label' => Module::t('module', 'Updated'),
-                                'format' => 'datetime',
-                            ],
-                        ],
-                    ]) ?>
+                    <?php try {
+                        echo DetailView::widget([
+                            'model' => $permission,
+                            'attributes' => [
+                                [
+                                    'attribute' => 'name',
+                                    'label' => Module::t('module', 'Name'),
+                                    'format' => 'raw'
+                                ],
+                                [
+                                    'attribute' => 'description',
+                                    'label' => Module::t('module', 'Description'),
+                                    'format' => 'raw'
+                                ],
+                                [
+                                    'attribute' => 'ruleName',
+                                    'label' => Module::t('module', 'Rule Name'),
+                                    'format' => 'raw'
+                                ],
+                                [
+                                    'attribute' => 'data',
+                                    'label' => Module::t('module', 'Data'),
+                                    'format' => 'raw'
+                                ],
+                                [
+                                    'attribute' => 'createdAt',
+                                    'label' => Module::t('module', 'Created'),
+                                    'format' => 'datetime'
+                                ],
+                                [
+                                    'attribute' => 'updatedAt',
+                                    'label' => Module::t('module', 'Updated'),
+                                    'format' => 'datetime'
+                                ]
+                            ]
+                        ]);
+                    } catch (Exception $e) {
+                        // Save log
+                    } ?>
                 </div>
                 <div class="col-md-6">
                     <?php if ($permissions = $model->getPermissionChildren()) : ?>
@@ -81,8 +85,8 @@ $this->params['breadcrumbs'][] = $model->name;
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
-                        'method' => 'post',
-                    ],
+                        'method' => 'post'
+                    ]
                 ]) ?>
             </p>
         </div>

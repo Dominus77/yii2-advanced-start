@@ -15,25 +15,25 @@ use modules\rbac\Module;
     <?php $form = ActiveForm::begin([
         'id' => 'form-role',
         'enableAjaxValidation' => true,
-        'validationUrl' => ['ajax-validate-form'],
+        'validationUrl' => ['ajax-validate-form']
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput([
         'maxlength' => true,
-        'disabled' => ($model->scenario === $model::SCENARIO_UPDATE) ? true : false,
+        'disabled' => $model->scenario === $model::SCENARIO_UPDATE
     ])->hint(Module::t('module', 'Example: moderator')) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <?php ActiveForm::end(); ?>
 
-    <?php if ($model->scenario == $model::SCENARIO_UPDATE) : ?>
+    <?php if ($model->scenario === $model::SCENARIO_UPDATE) : ?>
         <div id="assign-container-roles">
             <div class="row">
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-add-roles',
-                        'action' => Url::to(['remove-roles']),
+                        'action' => Url::to(['remove-roles'])
                     ]); ?>
                     <?= $form->field($model, 'rolesByRole')->listBox($model->getRolesByRole(), [
                         'multiple' => 'true',
@@ -51,7 +51,7 @@ use modules\rbac\Module;
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-remove-roles',
-                        'action' => Url::to(['add-roles']),
+                        'action' => Url::to(['add-roles'])
                     ]); ?>
                     <?= $form->field($model, 'itemsRoles')->listBox($model->getItemsRoles(), [
                         'multiple' => 'true',
@@ -68,7 +68,7 @@ use modules\rbac\Module;
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-add-permissions',
-                        'action' => Url::to(['remove-permissions']),
+                        'action' => Url::to(['remove-permissions'])
                     ]); ?>
                     <?= $form->field($model, 'permissionsByRole')->listBox($model->getPermissionsByRole(), [
                         'multiple' => 'true',
@@ -87,7 +87,7 @@ use modules\rbac\Module;
                 <div class="col-md-5">
                     <?php $form = ActiveForm::begin([
                         'id' => 'form-remove-permissions',
-                        'action' => Url::to(['add-permissions']),
+                        'action' => Url::to(['add-permissions'])
                     ]); ?>
 
                     <?= $form->field($model, 'itemsPermissions')->listBox($model->getItemsPermissions(), [

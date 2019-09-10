@@ -16,7 +16,7 @@ $user = Yii::$app->user;
 
 <section class="content main-backend-default-index">
     <div class="row">
-        <?php if (Yii::$app->user->can(Permission::PERMISSION_MANAGER_USERS)) : ?>
+        <?php if ($user->can(Permission::PERMISSION_MANAGER_USERS)) : ?>
             <div class="col-md-4">
                 <div class="box box-default">
                     <div class="box-header with-border">

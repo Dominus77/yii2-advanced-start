@@ -54,7 +54,7 @@ class Permission extends Model
     /**
      * @return array
      */
-    public static function getPermissionsArray()
+    public function getPermissionsArray()
     {
         return [
             self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
@@ -80,7 +80,6 @@ class Permission extends Model
             Role::ROLE_EDITOR => self::groupEditor()
         ];
     }
-
     /**
      * Group permissions to role super_admin
      * @return array
@@ -96,7 +95,6 @@ class Permission extends Model
             self::PERMISSION_MANAGER_RBAC
         ];
     }
-
     /**
      * Group permissions to role admin
      * @return array
@@ -110,7 +108,6 @@ class Permission extends Model
             self::PERMISSION_MANAGER_USERS
         ];
     }
-
     /**
      * Group permissions to role manager
      * @return array
@@ -122,7 +119,6 @@ class Permission extends Model
             self::PERMISSION_MANAGER_POST
         ];
     }
-
     /**
      * Group permissions to role editor
      * @return array
@@ -134,7 +130,6 @@ class Permission extends Model
             self::PERMISSION_UPDATE_OWN_POST
         ];
     }
-
 
     /**
      * @inheritdoc

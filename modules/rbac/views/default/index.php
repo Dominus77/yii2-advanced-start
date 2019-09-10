@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         <div class="box-body">
             <ul>
                 <li>
-                    <a href="<?= Url::to(['permissions/index']); ?>"><?= Module::t('module', 'Permissions'); ?></a>
+                    <a href="<?= Url::to(['permissions/index']) ?>"><?= Module::t('module', 'Permissions') ?></a>
                 </li>
-                <li><a href="<?= Url::to(['roles/index']); ?>"><?= Module::t('module', 'Roles'); ?></a></li>
-                <li><a href="<?= Url::to(['assign/index']); ?>"><?= Module::t('module', 'Assign rights'); ?></a>
+                <li><a href="<?= Url::to(['roles/index']) ?>"><?= Module::t('module', 'Roles') ?></a></li>
+                <li><a href="<?= Url::to(['assign/index']) ?>"><?= Module::t('module', 'Assign rights') ?></a>
                 </li>
             </ul>
         </div>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
                         'toggle' => 'tooltip',
                         'original-title' => Module::t('module', 'Reset rbac'),
                         'method' => 'post',
-                        'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
+                        'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?')
                     ]
                 ]) ?>
             </div>

@@ -10,10 +10,10 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
-use yii\rbac\Permission as YiiRbacPermission;
 use Exception;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
+use modules\rbac\traits\ModuleTrait;
 
 /**
  * Class PermissionsController
@@ -21,6 +21,8 @@ use modules\rbac\Module;
  */
 class PermissionsController extends Controller
 {
+    use ModuleTrait;
+
     /**
      * @inheritdoc
      * @return array
@@ -75,7 +77,7 @@ class PermissionsController extends Controller
     public function actionView($id)
     {
         $auth = Yii::$app->authManager;
-        /** @var YiiRbacPermission $permission */
+        /** @var $permission */
         $permission = $auth->getPermission($id);
 
         $model = new Permission(['name' => $permission->name]);
@@ -95,15 +97,13 @@ class PermissionsController extends Controller
     {
         $model = new Permission(['scenario' => Permission::SCENARIO_CREATE]);
         $model->isNewRecord = true;
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
-            if ($model->validate()) {
-                $auth = Yii::$app->authManager;
-                $perm = $auth->createPermission($model->name);
-                $perm->description = $model->description;
-                if ($auth->add($perm)) {
-                    return $this->redirect(['view', 'id' => $model->name]);
-                }
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $auth = Yii::$app->authManager;
+            $perm = $auth->createPermission($model->name);
+            $perm->description = $model->description;
+            if ($auth->add($perm)) {
+                return $this->redirect(['view', 'id' => $model->name]);
             }
         }
         return $this->render('create', [
@@ -134,7 +134,7 @@ class PermissionsController extends Controller
     public function actionUpdate($id)
     {
         $auth = Yii::$app->authManager;
-        /** @var YiiRbacPermission $perm */
+        /** @var  $perm */
         $perm = $auth->getPermission($id);
 
         $model = new Permission([
@@ -142,13 +142,10 @@ class PermissionsController extends Controller
             'name' => $perm->name,
             'description' => $perm->description
         ]);
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
-            if ($model->validate()) {
-                $perm->description = $model->description;
-                if ($auth->update($id, $perm)) {
-                    return $this->redirect(['view', 'id' => $id]);
-                }
+        if ($model->load(Yii::$app->request->post())) {
+            $perm->description = $model->description;
+            if ($auth->update($id, $perm)) {
+                return $this->redirect(['view', 'id' => $id]);
             }
         }
         return $this->render('update', [
@@ -167,25 +164,12 @@ class PermissionsController extends Controller
         $model = new Permission([
             'scenario' => Permission::SCENARIO_UPDATE
         ]);
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
-            if ($model->validate()) {
-                $auth = Yii::$app->authManager;
-                /** @var YiiRbacPermission $permission */
-                $permission = $auth->getPermission($model->name);
-                foreach ($model->permissionItems as $perm) {
-                    /** @var YiiRbacPermission $add */
-                    $add = $auth->getPermission($perm);
-                    // Проверяем, не является добовляемое разрешение родителем?
-                    $result = $this->detectLoop($permission, $add);
-                    if (!$result) {
-                        $auth->addChild($permission, $add);
-                    } else {
-                        Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $permission->name]));
-                    }
-                }
-                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
-            }
+        if ($model->load(Yii::$app->request->post())) {
+            $auth = Yii::$app->authManager;
+            /** @var  $permission */
+            $permission = $auth->getPermission($model->name);
+            self::addChild($model->permissionItems, $permission);
+            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
@@ -200,17 +184,14 @@ class PermissionsController extends Controller
         $model = new Permission([
             'scenario' => Permission::SCENARIO_UPDATE
         ]);
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
-            if ($model->validate()) {
-                $auth = Yii::$app->authManager;
-                $permission = $auth->getPermission($model->name);
-                foreach ($model->permissions as $perm) {
-                    $remove = $auth->getPermission($perm);
-                    $auth->removeChild($permission, $remove);
-                }
-                return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
+        if ($model->load(Yii::$app->request->post())) {
+            $auth = Yii::$app->authManager;
+            $permission = $auth->getPermission($model->name);
+            foreach ($model->permissions as $perm) {
+                $remove = $auth->getPermission($perm);
+                $auth->removeChild($permission, $remove);
             }
+            return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
         throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
     }
@@ -224,32 +205,15 @@ class PermissionsController extends Controller
     public function actionDelete($id)
     {
         $auth = Yii::$app->authManager;
-        /** @var YiiRbacPermission $perm */
+        /** @var  $perm */
         $perm = $auth->getPermission($id);
+        /** @var yii\web\Session $session */
+        $session = Yii::$app->session;
         if ($auth->remove($perm)) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]));
+            $session->setFlash('success', Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
+            $session->setFlash('error', Module::t('module', 'Error!'));
         }
         return $this->redirect(['index']);
-    }
-
-    /**
-     * @param object $parent
-     * @param object $child
-     * @return bool
-     */
-    protected function detectLoop($parent, $child)
-    {
-        $auth = Yii::$app->authManager;
-        if ($child->name === $parent->name) {
-            return true;
-        }
-        foreach ($auth->getChildren($child->name) as $grandchild) {
-            if ($this->detectLoop($parent, $grandchild)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

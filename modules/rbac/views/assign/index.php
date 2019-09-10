@@ -1,11 +1,11 @@
 <?php
 
+use yii\grid\SerialColumn;
+use yii\grid\ActionColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
-use yii\grid\SerialColumn;
-use yii\grid\ActionColumn;
 use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
