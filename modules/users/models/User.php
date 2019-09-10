@@ -7,9 +7,7 @@ use yii\base\Exception;
 use yii\db\ActiveQuery;
 use yii\db\StaleObjectException;
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use modules\rbac\models\Role;
@@ -36,18 +34,13 @@ use modules\users\Module;
  * @property string $statusName
  * @property array $statusesArray
  * @property string $labelMailConfirm
+ * @property string $newPassword
  *
  * @method touch() TimestampBehavior
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends BaseUser
 {
     use ModuleTrait;
-
-    // Statuses
-    const STATUS_BLOCKED = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_WAIT = 2;
-    const STATUS_DELETED = 3;
 
     // Length password
     const LENGTH_STRING_PASSWORD_MIN = 2;
@@ -59,15 +52,6 @@ class User extends ActiveRecord implements IdentityInterface
      * @var string
      */
     public $password;
-
-    /**
-     * {@inheritdoc}
-     * @return string
-     */
-    public static function tableName()
-    {
-        return '{{%user}}';
-    }
 
     /**
      * {@inheritdoc}
@@ -156,107 +140,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
-     * @param int|string $id
-     * @return User|null|IdentityInterface
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @param mixed $token
-     * @param null $type
-     * @return User|null|IdentityInterface
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return int|string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return string
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-    /**
-     * {@inheritdoc}
-     * @param string $authKey
-     * @return bool
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
-    }
-
-    /**
-     * Generates "remember me" authentication key
-     * @throws Exception
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Generates email confirmation token
-     * @throws Exception
-     */
-    public function generateEmailConfirmToken()
-    {
-        $this->email_confirm_token = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param mixed $token password reset token
-     * @return boolean
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
-        $expire = Module::$passwordResetTokenExpire;
-        $parts = explode('_', $token);
-        $timestamp = (int)end($parts);
-        return $timestamp + $expire >= time();
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param mixed $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE
-        ]);
-    }
-
-    /**
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
@@ -338,50 +221,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function removeEmailConfirmToken()
     {
         $this->email_confirm_token = null;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getStatusesArray()
-    {
-        return [
-            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
-            self::STATUS_ACTIVE => Module::t('module', 'Active'),
-            self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted')
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public static function getLabelsArray()
-    {
-        return [
-            self::STATUS_BLOCKED => 'default',
-            self::STATUS_ACTIVE => 'success',
-            self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger'
-        ];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatusName()
-    {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }
-
-    /**
-     * Return <span class="label label-success">Active</span>
-     * @return string
-     */
-    public function getStatusLabelName()
-    {
-        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
     }
 
     /**
