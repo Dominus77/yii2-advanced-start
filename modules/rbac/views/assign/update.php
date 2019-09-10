@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\rbac\models\Assignment */
+/* @var $model Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
         </div>
         <div class="box-body">
             <?= $this->render('_form', [
-                'model' => $model,
+                'model' => $model
             ]) ?>
         </div>
         <div class="box-footer"></div>

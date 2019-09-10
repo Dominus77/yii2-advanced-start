@@ -7,12 +7,13 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use modules\rbac\Module;
+use modules\rbac\console\InitController;
 
 /**
  * Class DefaultController
  * @package modules\rbac\controllers
  */
-class DefaultController extends \modules\rbac\console\InitController
+class DefaultController extends InitController
 {
     /**
      * @inheritdoc
@@ -22,20 +23,20 @@ class DefaultController extends \modules\rbac\console\InitController
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['managerRbac'],
-                    ],
-                ],
+                        'roles' => ['managerRbac']
+                    ]
+                ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
-                    'init' => YII_ENV_TEST ? ['GET'] : ['POST'],
-                ],
-            ],
+                    'init' => YII_ENV_TEST ? ['GET'] : ['POST']
+                ]
+            ]
         ];
     }
 

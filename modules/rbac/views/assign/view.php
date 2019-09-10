@@ -2,11 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use modules\users\models\User;
+use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
-/* @var $assignModel \modules\rbac\models\Assignment */
+/* @var $model User */
+/* @var $assignModel Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
@@ -27,25 +29,29 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
 
             <div class="row">
                 <div class="col-md-6">
-                    <?= DetailView::widget([
-                        'model' => $model,
-                        'attributes' => [
-                            'id',
-                            [
-                                'attribute' => 'username',
-                                'label' => Module::t('module', 'User'),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'role',
-                                'label' => Module::t('module', 'Role'),
-                                'format' => 'raw',
-                                'value' => function ($model) use ($assignModel) {
-                                    return $assignModel->getRoleName($model->id);
-                                },
+                    <?php try {
+                        echo DetailView::widget([
+                            'model' => $model,
+                            'attributes' => [
+                                'id',
+                                [
+                                    'attribute' => 'username',
+                                    'label' => Module::t('module', 'User'),
+                                    'format' => 'raw'
+                                ],
+                                [
+                                    'attribute' => 'role',
+                                    'label' => Module::t('module', 'Role'),
+                                    'format' => 'raw',
+                                    'value' => static function ($model) use ($assignModel) {
+                                        return $assignModel->getRoleName($model->id);
+                                    }
+                                ]
                             ]
-                        ],
-                    ]) ?>
+                        ]);
+                    } catch (Exception $e) {
+                        // Save log
+                    } ?>
                 </div>
                 <div class="col-md-6">
                     <?php
@@ -70,8 +76,8 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Module::t('module', 'Do you really want to untie the user from the role?'),
-                        'method' => 'post',
-                    ],
+                        'method' => 'post'
+                    ]
                 ]) ?>
             </p>
         </div>

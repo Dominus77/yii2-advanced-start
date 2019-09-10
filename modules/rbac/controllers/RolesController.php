@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
+use yii\rbac\Role as YiiRbacRole;
+use Exception;
 use modules\rbac\models\Role;
 use modules\rbac\Module;
 
@@ -27,20 +29,20 @@ class RolesController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['managerRbac'],
-                    ],
-                ],
+                        'roles' => ['managerRbac']
+                    ]
+                ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST']
-                ],
-            ],
+                ]
+            ]
         ];
     }
 
@@ -54,14 +56,14 @@ class RolesController extends Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $auth->getRoles(),
             'sort' => [
-                'attributes' => ['name', 'description', 'ruleName'],
+                'attributes' => ['name', 'description', 'ruleName']
             ],
             'pagination' => [
-                'pageSize' => 15,
-            ],
+                'pageSize' => 15
+            ]
         ]);
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -73,6 +75,7 @@ class RolesController extends Controller
     public function actionView($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacRole $role */
         $role = $auth->getRole($id);
 
         $model = new Role(['name' => $role->name]);
@@ -85,8 +88,8 @@ class RolesController extends Controller
     /**
      * Creates Role a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return array|string|\yii\web\Response
-     * @throws \Exception
+     * @return array|string|Response
+     * @throws Exception
      */
     public function actionCreate()
     {
@@ -94,17 +97,15 @@ class RolesController extends Controller
         $model->isNewRecord = true;
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                $auth = Yii::$app->authManager;
-                $role = $auth->createRole($model->name);
-                $role->description = $model->description;
-                if ($auth->add($role)) {
-                    return $this->redirect(['view', 'id' => $model->name]);
-                }
+            $auth = Yii::$app->authManager;
+            $role = $auth->createRole($model->name);
+            $role->description = $model->description;
+            if ($auth->add($role)) {
+                return $this->redirect(['view', 'id' => $model->name]);
             }
         }
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
@@ -125,18 +126,19 @@ class RolesController extends Controller
      * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string|int $id
-     * @return string|\yii\web\Response
-     * @throws \Exception
+     * @return string|Response
+     * @throws Exception
      */
     public function actionUpdate($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacRole $role */
         $role = $auth->getRole($id);
 
         $model = new Role([
             'scenario' => Role::SCENARIO_UPDATE,
             'name' => $role->name,
-            'description' => $role->description,
+            'description' => $role->description
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $role->description = $model->description;
@@ -145,25 +147,27 @@ class RolesController extends Controller
             }
         }
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * Привязываем роль
-     * @return \yii\web\Response
+     * @return Response
      * @throws BadRequestHttpException
-     * @throws \Exception
+     * @throws Exception
      */
     public function actionAddRoles()
     {
         $model = new Role([
-            'scenario' => Role::SCENARIO_UPDATE,
+            'scenario' => Role::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
+            /** @var YiiRbacRole $role */
             $role = $auth->getRole($model->name);
             foreach ($model->itemsRoles as $value) {
+                /** @var YiiRbacRole $add */
                 $add = $auth->getRole($value);
                 // Проверяем, не является добовляемая роль родителем?
                 $result = $this->detectLoop($role, $add);
@@ -180,13 +184,13 @@ class RolesController extends Controller
 
     /**
      * Отзываем роль
-     * @return array|\yii\web\Response
+     * @return array|Response
      * @throws BadRequestHttpException
      */
     public function actionRemoveRoles()
     {
         $model = new Role([
-            'scenario' => Role::SCENARIO_UPDATE,
+            'scenario' => Role::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
@@ -202,19 +206,21 @@ class RolesController extends Controller
 
     /**
      * Привязываем разрешение
-     * @return array|\yii\web\Response
+     * @return array|Response
      * @throws BadRequestHttpException
-     * @throws \Exception
+     * @throws Exception
      */
     public function actionAddPermissions()
     {
         $model = new Role([
-            'scenario' => Role::SCENARIO_UPDATE,
+            'scenario' => Role::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
+            /** @var YiiRbacRole $role */
             $role = $auth->getRole($model->name);
             foreach ($model->itemsPermissions as $value) {
+                /** @var YiiRbacRole $add */
                 $add = $auth->getPermission($value);
                 // Проверяем, не является добовляемое разрешение родителем?
                 $result = $this->detectLoop($role, $add);
@@ -231,13 +237,13 @@ class RolesController extends Controller
 
     /**
      * Отзываем разрешение
-     * @return array|\yii\web\Response
+     * @return array|Response
      * @throws BadRequestHttpException
      */
     public function actionRemovePermissions()
     {
         $model = new Role([
-            'scenario' => Role::SCENARIO_UPDATE,
+            'scenario' => Role::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
@@ -255,11 +261,12 @@ class RolesController extends Controller
      * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string|int $id
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionDelete($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacRole $role */
         $role = $auth->getRole($id);
         if ($auth->remove($role)) {
             Yii::$app->session->setFlash('success', Module::t('module', 'The role "{:name}" have been successfully deleted.', [':name' => $role->name]));

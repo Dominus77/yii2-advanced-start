@@ -3,13 +3,18 @@
 namespace modules\rbac\controllers;
 
 use Yii;
-use modules\rbac\models\Assignment;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
+use yii\web\BadRequestHttpException;
+use yii\base\Action;
+use yii\web\Response;
+use Exception;
+use modules\users\models\User;
+use modules\rbac\models\Assignment;
 use modules\rbac\Module;
 
 /**
@@ -19,13 +24,13 @@ use modules\rbac\Module;
 class AssignController extends Controller
 {
     /** @var $user object */
-    private $_user = null;
+    private $_user;
 
     /**
-     * @param \yii\base\Action $action
+     * @param Action $action
      * @return bool
      * @throws InvalidConfigException
-     * @throws \yii\web\BadRequestHttpException
+     * @throws BadRequestHttpException
      */
     public function beforeAction($action)
     {
@@ -44,20 +49,20 @@ class AssignController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['managerRbac'],
-                    ],
-                ],
+                        'roles' => ['managerRbac']
+                    ]
+                ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
-                    'revoke' => ['POST'],
-                ],
-            ],
+                    'revoke' => ['POST']
+                ]
+            ]
         ];
     }
 
@@ -71,15 +76,15 @@ class AssignController extends Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $users,
             'sort' => [
-                'attributes' => ['username', 'role'],
+                'attributes' => ['username', 'role']
             ],
             'pagination' => [
-                'pageSize' => 25,
-            ],
+                'pageSize' => 25
+            ]
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'assignModel' => $assignModel,
+            'assignModel' => $assignModel
         ]);
     }
 
@@ -93,15 +98,15 @@ class AssignController extends Controller
         $assignModel = new Assignment();
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'assignModel' => $assignModel,
+            'assignModel' => $assignModel
         ]);
     }
 
     /**
      * @param string|int $id
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException
-     * @throws \Exception
+     * @throws Exception
      */
     public function actionUpdate($id)
     {
@@ -122,18 +127,18 @@ class AssignController extends Controller
         }
         $model->role = $model->getRoleUser($id);
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * @param string|int $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException
      */
     public function actionRevoke($id)
     {
-        /** @var \modules\users\models\User $model */
+        /** @var User $model */
         $model = $this->findModel($id);
         $auth = Yii::$app->authManager;
         if ($auth->getRolesByUser($model->id)) {
@@ -152,7 +157,7 @@ class AssignController extends Controller
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string|int $id
-     * @return null|\modules\users\models\User the loaded model
+     * @return null|User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
@@ -160,8 +165,7 @@ class AssignController extends Controller
         $userModel = $this->_user;
         if (($model = $userModel->findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
         }
+        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
     }
 }

@@ -54,7 +54,7 @@ class Permission extends Model
     /**
      * @return array
      */
-    public function getPermissionsArray()
+    public static function getPermissionsArray()
     {
         return [
             self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
@@ -63,9 +63,78 @@ class Permission extends Model
             self::PERMISSION_MANAGER_USERS => self::PERMISSION_MANAGER_USERS_DESCRIPTION,
             self::PERMISSION_MANAGER_POST => self::PERMISSION_MANAGER_POST_DESCRIPTION,
             self::PERMISSION_MANAGER_COMMENTS => self::PERMISSION_MANAGER_COMMENTS_DESCRIPTION,
-            self::PERMISSION_UPDATE_OWN_POST => self::PERMISSION_UPDATE_OWN_POST_DESCRIPTION,
+            self::PERMISSION_UPDATE_OWN_POST => self::PERMISSION_UPDATE_OWN_POST_DESCRIPTION
         ];
     }
+
+    /**
+     * Groups permissions
+     * @return array
+     */
+    public static function getGroups()
+    {
+        return [
+            Role::ROLE_SUPER_ADMIN => self::groupSuperAdmin(),
+            Role::ROLE_ADMIN => self::groupAdmin(),
+            Role::ROLE_MANAGER => self::groupManager(),
+            Role::ROLE_EDITOR => self::groupEditor()
+        ];
+    }
+
+    /**
+     * Group permissions to role super_admin
+     * @return array
+     */
+    public static function groupSuperAdmin()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE,
+            self::PERMISSION_MANAGER_CONFIG,
+            self::PERMISSION_MANAGER_POST,
+            self::PERMISSION_MANAGER_COMMENTS,
+            self::PERMISSION_MANAGER_USERS,
+            self::PERMISSION_MANAGER_RBAC
+        ];
+    }
+
+    /**
+     * Group permissions to role admin
+     * @return array
+     */
+    public static function groupAdmin()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE,
+            self::PERMISSION_MANAGER_POST,
+            self::PERMISSION_MANAGER_COMMENTS,
+            self::PERMISSION_MANAGER_USERS
+        ];
+    }
+
+    /**
+     * Group permissions to role manager
+     * @return array
+     */
+    public static function groupManager()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE,
+            self::PERMISSION_MANAGER_POST
+        ];
+    }
+
+    /**
+     * Group permissions to role editor
+     * @return array
+     */
+    public static function groupEditor()
+    {
+        return [
+            self::PERMISSION_VIEW_ADMIN_PAGE,
+            self::PERMISSION_UPDATE_OWN_POST
+        ];
+    }
+
 
     /**
      * @inheritdoc
@@ -80,7 +149,7 @@ class Permission extends Model
             ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
 
             [['description'], 'string'],
-            [['permissionItems', 'permissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE],
+            [['permissionItems', 'permissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE]
         ];
     }
 
@@ -135,7 +204,7 @@ class Permission extends Model
             'rolesByPermission' => Module::t('module', 'Roles by permission'),
             'itemsRoles' => Module::t('module', 'Items roles'),
             'permissions' => Module::t('module', 'Permissions by role'),
-            'permissionItems' => Module::t('module', 'Items permissions'),
+            'permissionItems' => Module::t('module', 'Items permissions')
         ];
     }
 
@@ -149,7 +218,7 @@ class Permission extends Model
         $perm = $auth->getChildren($this->name);
         $arr = [];
         foreach ($perm as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }
@@ -166,7 +235,7 @@ class Permission extends Model
         $perm = $auth->getPermissions();
         $arr = [];
         foreach ($perm as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }

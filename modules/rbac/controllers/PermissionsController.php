@@ -10,6 +10,8 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
+use yii\rbac\Permission as YiiRbacPermission;
+use Exception;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
 
@@ -27,20 +29,20 @@ class PermissionsController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['managerRbac'],
-                    ],
-                ],
+                        'roles' => ['managerRbac']
+                    ]
+                ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST']
-                ],
-            ],
+                ]
+            ]
         ];
     }
 
@@ -54,14 +56,14 @@ class PermissionsController extends Controller
         $dataProvider = new ArrayDataProvider([
             'allModels' => $auth->getPermissions(),
             'sort' => [
-                'attributes' => ['name', 'description', 'ruleName'],
+                'attributes' => ['name', 'description', 'ruleName']
             ],
             'pagination' => [
-                'pageSize' => 15,
-            ],
+                'pageSize' => 15
+            ]
         ]);
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -73,20 +75,21 @@ class PermissionsController extends Controller
     public function actionView($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacPermission $permission */
         $permission = $auth->getPermission($id);
 
         $model = new Permission(['name' => $permission->name]);
         return $this->render('view', [
             'permission' => $permission,
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * Creates Permission a new Permission model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     * @throws \Exception
+     * @return string|Response
+     * @throws Exception
      */
     public function actionCreate()
     {
@@ -94,13 +97,11 @@ class PermissionsController extends Controller
         $model->isNewRecord = true;
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                $auth = Yii::$app->authManager;
-                $perm = $auth->createPermission($model->name);
-                $perm->description = $model->description;
-                if ($auth->add($perm)) {
-                    return $this->redirect(['view', 'id' => $model->name]);
-                }
+            $auth = Yii::$app->authManager;
+            $perm = $auth->createPermission($model->name);
+            $perm->description = $model->description;
+            if ($auth->add($perm)) {
+                return $this->redirect(['view', 'id' => $model->name]);
             }
         }
         return $this->render('create', [
@@ -125,18 +126,19 @@ class PermissionsController extends Controller
      * Updates an existing Permission model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string|int $id
-     * @return string|\yii\web\Response
-     * @throws \Exception
+     * @return string|Response
+     * @throws Exception
      */
     public function actionUpdate($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacPermission $perm */
         $perm = $auth->getPermission($id);
 
         $model = new Permission([
             'scenario' => Permission::SCENARIO_UPDATE,
             'name' => $perm->name,
-            'description' => $perm->description,
+            'description' => $perm->description
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $perm->description = $model->description;
@@ -145,25 +147,27 @@ class PermissionsController extends Controller
             }
         }
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * Привязываем разрешение
-     * @return array|\yii\web\Response
+     * @return array|Response
      * @throws BadRequestHttpException
-     * @throws \Exception
+     * @throws Exception
      */
     public function actionAddPermissions()
     {
         $model = new Permission([
-            'scenario' => Permission::SCENARIO_UPDATE,
+            'scenario' => Permission::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
+            /** @var YiiRbacPermission $permission */
             $permission = $auth->getPermission($model->name);
             foreach ($model->permissionItems as $perm) {
+                /** @var YiiRbacPermission $add */
                 $add = $auth->getPermission($perm);
                 // Проверяем, не является добовляемое разрешение родителем?
                 $result = $this->detectLoop($permission, $add);
@@ -180,13 +184,13 @@ class PermissionsController extends Controller
 
     /**
      * Отвязываем разрешение
-     * @return array|\yii\web\Response
+     * @return array|Response
      * @throws BadRequestHttpException
      */
     public function actionRemovePermissions()
     {
         $model = new Permission([
-            'scenario' => Permission::SCENARIO_UPDATE,
+            'scenario' => Permission::SCENARIO_UPDATE
         ]);
         if ($model->load(Yii::$app->request->post())) {
             $auth = Yii::$app->authManager;
@@ -204,11 +208,12 @@ class PermissionsController extends Controller
      * Deletes an existing Permission model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string|int $id
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionDelete($id)
     {
         $auth = Yii::$app->authManager;
+        /** @var YiiRbacPermission $perm */
         $perm = $auth->getPermission($id);
         if ($auth->remove($perm)) {
             Yii::$app->session->setFlash('success', Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]));

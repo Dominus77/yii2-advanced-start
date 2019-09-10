@@ -67,7 +67,7 @@ class RolesController extends Controller
             ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
         )
         );
-        if ($roleName == 'all') {
+        if ($roleName === 'all') {
             $authManager->revokeAll($user->id);
         } else {
             $role = $authManager->getRole($roleName);
@@ -85,12 +85,7 @@ class RolesController extends Controller
     {
         $authManager = Yii::$app->authManager;
         if ($role = $authManager->getRolesByUser($user_id)) {
-            return ArrayHelper::getValue($role, function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->name;
-                }
-                return null;
-            });
+            return array_key_first($role);
         }
         return null;
     }
@@ -100,7 +95,7 @@ class RolesController extends Controller
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param string $username
-     * @return null|User the loaded model
+     * @return User the loaded model
      * @throws Exception if the model cannot be found
      */
     private function findModel($username)

@@ -4,12 +4,15 @@ namespace modules\rbac\models;
 
 use Yii;
 use yii\base\Model;
+use yii\rbac\Item;
 use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
 
 /**
  * Class Role
  * @package modules\rbac\models
+ *
+ * @property array rolesArray
  */
 class Role extends Model
 {
@@ -62,7 +65,7 @@ class Role extends Model
             ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
 
             [['description'], 'string'],
-            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE],
+            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE]
         ];
     }
 
@@ -77,6 +80,20 @@ class Role extends Model
         if (!$this->hasErrors()) {
             $this->processCheckRoleName($attribute);
         }
+    }
+
+    /**
+     * Tree roles
+     * @return array
+     */
+    public static function tree()
+    {
+        return [
+            self::ROLE_SUPER_ADMIN => self::ROLE_ADMIN,
+            self::ROLE_ADMIN => self::ROLE_MANAGER,
+            self::ROLE_MANAGER => self::ROLE_EDITOR,
+            self::ROLE_EDITOR => self::ROLE_DEFAULT
+        ];
     }
 
     /**
@@ -117,7 +134,7 @@ class Role extends Model
             'rolesByRole' => Module::t('module', 'Roles by role'),
             'itemsRoles' => Module::t('module', 'Items roles'),
             'permissionsByRole' => Module::t('module', 'Permissions by role'),
-            'itemsPermissions' => Module::t('module', 'Items permissions'),
+            'itemsPermissions' => Module::t('module', 'Items permissions')
         ];
     }
 
@@ -131,7 +148,7 @@ class Role extends Model
             self::ROLE_ADMIN => self::ROLE_ADMIN_DESCRIPTION,
             self::ROLE_MANAGER => self::ROLE_MANAGER_DESCRIPTION,
             self::ROLE_EDITOR => self::ROLE_EDITOR_DESCRIPTION,
-            self::ROLE_DEFAULT => self::ROLE_DEFAULT_DESCRIPTION,
+            self::ROLE_DEFAULT => self::ROLE_DEFAULT_DESCRIPTION
         ];
     }
 
@@ -145,7 +162,7 @@ class Role extends Model
         $perm = $auth->getPermissionsByRole($this->name);
         $arr = [];
         foreach ($perm as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }
@@ -162,7 +179,7 @@ class Role extends Model
         $perm = $auth->getPermissions();
         $arr = [];
         foreach ($perm as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }
@@ -180,7 +197,7 @@ class Role extends Model
         $roles = $auth->getChildRoles($this->name);
         $arr = [];
         foreach ($roles as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }
@@ -197,7 +214,7 @@ class Role extends Model
         $roles = $auth->getRoles();
         $arr = [];
         foreach ($roles as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->name . ' (' . $value->description . ')';
             }
         }
@@ -223,7 +240,7 @@ class Role extends Model
         $roles = $this->getRoleChild();
         $arr = [];
         foreach ($roles as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->description;
             }
         }
@@ -249,7 +266,7 @@ class Role extends Model
         $roles = $this->getRoles();
         $arr = [];
         foreach ($roles as $value) {
-            if ($value->name != $this->name) {
+            if ($value->name !== $this->name) {
                 $arr[$value->name] = $value->description;
             }
         }
@@ -266,15 +283,16 @@ class Role extends Model
         $children = $auth->getChildren($this->name);
         $perm = [];
         foreach ($children as $key => $child) {
-            if ($child->type == 2)
+            if ($child->type === 2) {
                 $perm[$key] = $child;
+            }
         }
         return $perm;
     }
 
     /**
      * Все дети
-     * @return \yii\rbac\Item[]
+     * @return Item[]
      */
     public function getChildren()
     {

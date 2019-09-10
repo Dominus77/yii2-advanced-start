@@ -35,7 +35,7 @@ class Assignment extends Model
     public function rules()
     {
         return [
-            [['role'], 'safe'],
+            [['role'], 'safe']
         ];
     }
 
@@ -46,7 +46,7 @@ class Assignment extends Model
     public function attributeLabels()
     {
         return [
-            'role' => Module::t('module', 'Role'),
+            'role' => Module::t('module', 'Role')
         ];
     }
 
@@ -65,14 +65,14 @@ class Assignment extends Model
      */
     public function getRoleName($id)
     {
-        $id = $id ? $id : $this->user->id;
+        $id = $id ?: $this->user->id;
         $auth = Yii::$app->authManager;
         $roles = $auth->getRolesByUser($id);
         $role = '';
         foreach ($roles as $item) {
             $role .= $item->description ? $item->description . ', ' : $item->name . ', ';
         }
-        return chop($role, ' ,');
+        return rtrim($role, ' ,');
     }
 
     /**
@@ -81,14 +81,10 @@ class Assignment extends Model
      */
     public function getUserRoleName($id)
     {
-        $id = $id ? $id : $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id))
-            return ArrayHelper::getValue($role, function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->description;
-                }
-                return null;
-            });
+        $id = $id ?: $this->user->id;
+        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
+            return ArrayHelper::getValue($role[$this->getRoleUser($id)], 'description');
+        }
         return null;
     }
 
@@ -99,14 +95,10 @@ class Assignment extends Model
      */
     public function getRoleUser($id)
     {
-        $id = $id ? $id : $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id))
-            return ArrayHelper::getValue($role, function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->name;
-                }
-                return null;
-            });
+        $id = $id ?: $this->user->id;
+        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
+            return array_key_first($role);
+        }
         return null;
     }
 }

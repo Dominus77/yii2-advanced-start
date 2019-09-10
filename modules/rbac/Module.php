@@ -4,6 +4,7 @@ namespace modules\rbac;
 
 use Yii;
 use yii\console\Application as ConsoleApplication;
+use modules\users\models\User;
 
 /**
  * Class Module
@@ -14,7 +15,7 @@ class Module extends \yii\base\Module
     /**
      * @var string
      */
-    public $userClass = 'modules\users\models\User';
+    public $userClass = User::class;
 
     /**
      * @var string

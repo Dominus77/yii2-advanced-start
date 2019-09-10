@@ -6,6 +6,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\Migration;
 use yii\rbac\DbManager;
+use yii\rbac\ManagerInterface;
 
 /**
  * Class m170615_234118_create_rbac_table
@@ -14,8 +15,8 @@ use yii\rbac\DbManager;
 class m170615_234118_create_rbac_table extends Migration
 {
     /**
-     * @throws \yii\base\InvalidConfigException
-     * @return DbManager
+     * @return ManagerInterface
+     * @throws InvalidConfigException
      */
     protected function getAuthManager()
     {
@@ -41,9 +42,11 @@ class m170615_234118_create_rbac_table extends Migration
 
     /**
      * @inheritdoc
+     * @throws InvalidConfigException
      */
     public function safeUp()
     {
+        /** @var DbManager $authManager */
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
 
@@ -58,7 +61,7 @@ class m170615_234118_create_rbac_table extends Migration
             'data' => $this->binary(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
-            'PRIMARY KEY ([[name]])',
+            'PRIMARY KEY ([[name]])'
         ], $tableOptions);
 
         $this->createTable($authManager->itemTable, [
@@ -70,7 +73,7 @@ class m170615_234118_create_rbac_table extends Migration
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
             'PRIMARY KEY ([[name]])',
-            'FOREIGN KEY ([[rule_name]]) REFERENCES ' . $authManager->ruleTable . ' ([[name]])'.
+            'FOREIGN KEY ([[rule_name]]) REFERENCES ' . $authManager->ruleTable . ' ([[name]])' .
             $this->buildFkClause('ON DELETE SET NULL', 'ON UPDATE CASCADE')
         ], $tableOptions);
         $this->createIndex('idx-auth_item-type', $authManager->itemTable, 'type');
@@ -79,10 +82,10 @@ class m170615_234118_create_rbac_table extends Migration
             'parent' => $this->string(64)->notNull(),
             'child' => $this->string(64)->notNull(),
             'PRIMARY KEY ([[parent]], [[child]])',
-            'FOREIGN KEY ([[parent]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])'.
+            'FOREIGN KEY ([[parent]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
             $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
-            'FOREIGN KEY ([[child]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])'.
-            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
+            'FOREIGN KEY ([[child]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
+            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE')
         ], $tableOptions);
 
         $this->createTable($authManager->assignmentTable, [
@@ -91,7 +94,7 @@ class m170615_234118_create_rbac_table extends Migration
             'created_at' => $this->integer(),
             'PRIMARY KEY ([[item_name]], [[user_id]])',
             'FOREIGN KEY ([[item_name]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
-            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
+            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE')
         ], $tableOptions);
 
         if ($this->isMSSQL()) {
@@ -133,10 +136,12 @@ class m170615_234118_create_rbac_table extends Migration
     }
 
     /**
-     * @inheritdoc
+     * @return bool|void
+     * @throws InvalidConfigException
      */
     public function safeDown()
     {
+        /** @var DbManager $authManager */
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
 

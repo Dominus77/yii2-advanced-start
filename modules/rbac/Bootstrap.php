@@ -3,6 +3,8 @@
 namespace modules\rbac;
 
 use Yii;
+use yii\i18n\PhpMessageSource;
+use yii\web\GroupUrlRule;
 
 /**
  * Class Bootstrap
@@ -10,6 +12,9 @@ use Yii;
  */
 class Bootstrap
 {
+    /**
+     * Bootstrap constructor.
+     */
     public function __construct()
     {
         $this->registerTranslate();
@@ -23,11 +28,11 @@ class Bootstrap
     {
         $i18n = Yii::$app->i18n;
         $i18n->translations['modules/rbac/*'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
+            'class' => PhpMessageSource::class,
             'basePath' => '@modules/rbac/messages',
             'fileMap' => [
-                'modules/rbac/module' => 'module.php',
-            ],
+                'modules/rbac/module' => 'module.php'
+            ]
         ];
     }
 
@@ -56,14 +61,14 @@ class Bootstrap
     protected function rulesRoles()
     {
         return [
-            'class' => 'yii\web\GroupUrlRule',
+            'class' => GroupUrlRule::class,
             'routePrefix' => 'rbac/roles',
             'prefix' => 'rbac',
             'rules' => [
                 'roles' => 'index',
                 'role/<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
-                'role/<_a:[\w\-]+>' => '<_a>',
-            ],
+                'role/<_a:[\w\-]+>' => '<_a>'
+            ]
         ];
     }
 
@@ -73,14 +78,14 @@ class Bootstrap
     protected function rulesPermissions()
     {
         return [
-            'class' => 'yii\web\GroupUrlRule',
+            'class' => GroupUrlRule::class,
             'routePrefix' => 'rbac/permissions',
             'prefix' => 'rbac',
             'rules' => [
                 'permissions' => 'index',
                 'permission/<id:[\w\-]+>/<_a:[\w\-]+>' => '<_a>',
-                'permission/<_a:[\w\-]+>' => '<_a>',
-            ],
+                'permission/<_a:[\w\-]+>' => '<_a>'
+            ]
         ];
     }
 
@@ -90,13 +95,13 @@ class Bootstrap
     protected function rulesAssign()
     {
         return [
-            'class' => 'yii\web\GroupUrlRule',
+            'class' => GroupUrlRule::class,
             'routePrefix' => 'rbac/assign',
             'prefix' => 'rbac/assign',
             'rules' => [
                 '' => 'index',
-                '<id:\d+>/<_a:[\w\-]+>' => '<_a>',
-            ],
+                '<id:\d+>/<_a:[\w\-]+>' => '<_a>'
+            ]
         ];
     }
 
@@ -106,13 +111,13 @@ class Bootstrap
     protected function rulesDefault()
     {
         return [
-            'class' => 'yii\web\GroupUrlRule',
+            'class' => GroupUrlRule::class,
             'routePrefix' => 'rbac/default',
             'prefix' => 'rbac',
             'rules' => [
                 '' => 'index',
-                '<_a:[\w\-]+>' => '<_a>',
-            ],
+                '<_a:[\w\-]+>' => '<_a>'
+            ]
         ];
     }
 }

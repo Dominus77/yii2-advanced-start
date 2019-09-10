@@ -49,12 +49,7 @@ class AccessBehavior extends Behavior
      */
     protected function checkPermission()
     {
-        if (!empty($this->permission)) {
-            if (Yii::$app->user->can($this->permission)) {
-                return true;
-            }
-        }
-        return false;
+        return !empty($this->permission) && Yii::$app->user->can($this->permission);
     }
 
     /**
@@ -62,12 +57,7 @@ class AccessBehavior extends Behavior
      */
     protected function checkRole()
     {
-        if (!empty($this->role)) {
-            if (Yii::$app->user->can($this->role)) {
-                return true;
-            }
-        }
-        return false;
+        return !empty($this->role) && Yii::$app->user->can($this->role);
     }
 
     /**
