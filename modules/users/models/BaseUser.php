@@ -18,6 +18,11 @@ use yii\web\IdentityInterface;
  * @property int $id ID
  * @property string $auth_key Authorization Key
  * @property string $email_confirm_token Email Confirm Token
+ * @property int $status
+ * @property string $statusLabelName
+ * @property string $statusName
+ * @property array $statusesArray
+ * @property array $labelsArray
  */
 class BaseUser extends ActiveRecord implements IdentityInterface
 {
@@ -39,7 +44,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      * @param int|string $id
-     * @return User|null|IdentityInterface
+     * @return IdentityInterface|null
      */
     public static function findIdentity($id)
     {
@@ -49,7 +54,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     /**
      * @param mixed $token
      * @param mixed $type
-     * @return User|IdentityInterface|null
+     * @return IdentityInterface|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
