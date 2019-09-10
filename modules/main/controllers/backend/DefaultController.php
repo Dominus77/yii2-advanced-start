@@ -2,10 +2,11 @@
 
 namespace modules\main\controllers\backend;
 
-use modules\users\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\Response;
+use modules\users\models\User;
 use modules\rbac\models\Permission;
 use modules\main\Module;
 
@@ -28,16 +29,16 @@ class DefaultController extends Controller
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => [Permission::PERMISSION_VIEW_ADMIN_PAGE],
-                    ],
-                ],
-            ],
+                        'roles' => [Permission::PERMISSION_VIEW_ADMIN_PAGE]
+                    ]
+                ]
+            ]
         ];
     }
 
     /**
      * Displays homepage.
-     * @return mixed|\yii\web\Response
+     * @return mixed|Response
      */
     public function actionIndex()
     {

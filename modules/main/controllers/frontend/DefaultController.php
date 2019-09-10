@@ -4,7 +4,11 @@ namespace modules\main\controllers\frontend;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\ErrorAction;
+use yii\captcha\CaptchaAction;
+use yii\web\Response;
 use modules\main\models\frontend\ContactForm;
+use modules\users\models\User;
 use modules\main\Module;
 
 /**
@@ -21,14 +25,14 @@ class DefaultController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => ErrorAction::class
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class' => CaptchaAction::class,
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
                 'backColor' => 0xF1F1F1,
-                'foreColor' => 0xEE7600,
-            ],
+                'foreColor' => 0xEE7600
+            ]
         ];
     }
 
@@ -44,7 +48,7 @@ class DefaultController extends Controller
     /**
      * Displays contact page.
      *
-     * @return mixed|\yii\web\Response
+     * @return mixed|Response
      */
     public function actionContact()
     {
@@ -53,28 +57,28 @@ class DefaultController extends Controller
             $model->scenario = $model::SCENARIO_GUEST;
         } else {
             $user = Yii::$app->user;
-            /** @var \modules\users\models\User $identity */
+            /** @var User $identity */
             $identity = $user->identity;
             $model->name = $identity->username;
             $model->email = $identity->email;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post())) {
             return $this->processSendEmail($model);
         }
 
         return $this->render('contact', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     /**
      * @param ContactForm $model
-     * @return \yii\web\Response
+     * @return Response
      */
     protected function processSendEmail($model)
     {
-        if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+        if ($model->validate() && $model->sendEmail(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.'));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'There was an error sending email.'));

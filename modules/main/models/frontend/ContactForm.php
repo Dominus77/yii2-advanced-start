@@ -40,7 +40,7 @@ class ContactForm extends Model
             ['email', 'email'],
             // verifyCode needs to be entered correctly
             [['verifyCode'], 'required', 'on' => self::SCENARIO_GUEST],
-            ['verifyCode', 'captcha', 'captchaAction' => Url::to('/main/default/captcha'), 'on' => self::SCENARIO_GUEST],
+            ['verifyCode', 'captcha', 'captchaAction' => Url::to('/main/default/captcha'), 'on' => self::SCENARIO_GUEST]
         ];
     }
 
@@ -66,7 +66,7 @@ class ContactForm extends Model
             'email' => Module::t('module', 'E-mail'),
             'subject' => Module::t('module', 'Subject'),
             'body' => Module::t('module', 'Body'),
-            'verifyCode' => Module::t('module', 'Verification Code'),
+            'verifyCode' => Module::t('module', 'Verification Code')
         ];
     }
 

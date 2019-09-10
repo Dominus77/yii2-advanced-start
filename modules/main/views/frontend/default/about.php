@@ -1,9 +1,9 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
 use modules\main\Module;
+
+/* @var $this yii\web\View */
 
 $this->title = Module::t('module', 'About');
 $this->params['breadcrumbs'][] = $this->title;

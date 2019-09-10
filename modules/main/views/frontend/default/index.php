@@ -1,8 +1,8 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use modules\main\Module;
+
+/* @var $this yii\web\View */
 
 $this->title = Module::t('module', 'Home');
 ?>

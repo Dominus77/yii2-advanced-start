@@ -3,6 +3,7 @@
 namespace modules\main;
 
 use Yii;
+use yii\filters\RateLimiter;
 
 /**
  * Class Module
@@ -18,8 +19,8 @@ class Module extends \yii\base\Module
     {
         return [
             'rateLimiter' => [
-                'class' => \yii\filters\RateLimiter::class,
-            ],
+                'class' => RateLimiter::class
+            ]
         ];
     }
 
