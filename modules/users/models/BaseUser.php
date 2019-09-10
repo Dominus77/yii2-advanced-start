@@ -42,7 +42,8 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritDoc
+     * @param string|int $id
+     * @return BaseUser|null
      */
     public static function findIdentity($id)
     {
@@ -50,7 +51,9 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritDoc
+     * @param mixed $token
+     * @param mixed $type
+     * @return BaseUser|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
