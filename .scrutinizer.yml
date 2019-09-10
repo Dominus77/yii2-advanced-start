@@ -58,6 +58,4 @@ build:
             project_setup:
                 override: true
             tests:
-                before:
-                    - command: '/usr/bin/composer.phar self-update'
                 override: [php-scrutinizer-run]

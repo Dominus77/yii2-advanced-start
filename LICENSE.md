@@ -1,6 +1,6 @@
 It is released under the terms of the following BSD License. 
 
-Copyright © 2018 by Dominus77 (https://github.com/Dominus77)
+Copyright © 2019 by Dominus77 (https://github.com/Dominus77)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
