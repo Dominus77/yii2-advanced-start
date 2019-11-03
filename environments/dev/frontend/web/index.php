@@ -20,6 +20,7 @@ try {
     $application = new Application($config);
 } catch (InvalidConfigException $e) {
     // Exception
+    return $e->getCode();
 }
 
 $application->run();
