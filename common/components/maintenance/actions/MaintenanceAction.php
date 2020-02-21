@@ -48,22 +48,10 @@ class MaintenanceAction extends Action
      */
     public function run()
     {
-        //$this->disableDebugModule();
-
         if ($this->layout !== null) {
             $this->controller->layout = $this->layout;
         }
         return $this->controller->render($this->view ?: $this->id, $this->getViewRenderParams());
-    }
-
-    /**
-     * Disable DebugModule
-     */
-    protected function disableDebugModule()
-    {
-        /** @var yii\debug\Module $debug */
-        $debug = Yii::$app->getModule('debug');
-        $debug->allowedIPs = [false];
     }
 
     /**
