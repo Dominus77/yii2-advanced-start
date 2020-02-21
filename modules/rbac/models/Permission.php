@@ -16,6 +16,9 @@ class Permission extends Model
     use ModuleTrait;
 
     // разрешения
+    const PERMISSION_MAINTENANCE = 'maintenance';
+    const PERMISSION_MAINTENANCE_DESCRIPTION = 'View a site in maintenance mode';
+
     const PERMISSION_VIEW_ADMIN_PAGE = 'viewAdminPage';
     const PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION = 'Access to the admin area';
 
@@ -57,6 +60,7 @@ class Permission extends Model
     public function getPermissionsArray()
     {
         return [
+            self::PERMISSION_MAINTENANCE => self::PERMISSION_MAINTENANCE_DESCRIPTION,
             self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
             self::PERMISSION_MANAGER_CONFIG => self::PERMISSION_MANAGER_CONFIG_DESCRIPTION,
             self::PERMISSION_MANAGER_RBAC => self::PERMISSION_MANAGER_RBAC_DESCRIPTION,
@@ -87,6 +91,7 @@ class Permission extends Model
     public static function groupSuperAdmin()
     {
         return [
+            self::PERMISSION_MAINTENANCE,
             self::PERMISSION_VIEW_ADMIN_PAGE,
             self::PERMISSION_MANAGER_CONFIG,
             self::PERMISSION_MANAGER_POST,
@@ -102,6 +107,7 @@ class Permission extends Model
     public static function groupAdmin()
     {
         return [
+            self::PERMISSION_MAINTENANCE,
             self::PERMISSION_VIEW_ADMIN_PAGE,
             self::PERMISSION_MANAGER_POST,
             self::PERMISSION_MANAGER_COMMENTS,

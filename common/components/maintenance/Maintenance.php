@@ -2,7 +2,9 @@
 
 namespace common\components\maintenance;
 
+use Yii;
 use yii\base\InvalidConfigException;
+use yii\helpers\VarDumper;
 use yii\web\Application;
 use yii\base\BaseObject;
 use yii\base\BootstrapInterface;
@@ -86,9 +88,8 @@ class Maintenance extends BaseObject implements BootstrapInterface
         if (!is_array($this->filters) || empty($this->filters)) {
             return false;
         }
-
         foreach ($this->filters as $config) {
-            $filter = \Yii::createObject($config);
+            $filter = Yii::createObject($config);
             if (!($filter instanceof Filter)) {
                 throw new InvalidConfigException(
                     'Class "' . get_class($filter) . '" must instance of "' . Filter::class . '".'
@@ -98,7 +99,6 @@ class Maintenance extends BaseObject implements BootstrapInterface
                 return true;
             }
         }
-
         return false;
     }
 }

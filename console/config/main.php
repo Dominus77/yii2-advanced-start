@@ -8,6 +8,9 @@ use modules\main\Bootstrap as MainBootstrap;
 use modules\users\Bootstrap as UserBootstrap;
 use modules\rbac\Bootstrap as RbacBootstrap;
 use modules\users\models\User;
+use common\components\maintenance\commands\MaintenanceController;
+use common\components\maintenance\states\FileState;
+use common\components\maintenance\StateInterface;
 
 $params = ArrayHelper::merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -27,6 +30,14 @@ return [
         RbacBootstrap::class
     ],
     'controllerNamespace' => 'console\controllers',
+    'container' => [
+        'singletons' => [
+            StateInterface::class => [
+                'class' => FileState::class,
+                'directory' => '@frontend/runtime',
+            ]
+        ]
+    ],
     'controllerMap' => [
         'migrate' => [
             'class' => MigrateController::class,
@@ -34,7 +45,10 @@ return [
                 'modules\rbac\migrations',
                 'modules\users\migrations'
             ]
-        ]
+        ],
+        'maintenance' => [
+            'class' => MaintenanceController::class,
+        ],
     ],
     'modules' => [
         'rbac' => [

@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance\filters;
 
+use Yii;
 use common\components\maintenance\Filter;
 use yii\web\IdentityInterface;
 use yii\web\User;
@@ -26,21 +27,11 @@ class UserFilter extends Filter
     protected $identity;
 
     /**
-     * UserChecker constructor.
-     * @param User $user
-     * @param array $config
-     */
-    public function __construct(User $user, array $config = [])
-    {
-        $this->identity = $user->identity;
-        parent::__construct($config);
-    }
-
-    /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->identity = Yii::$app->user->identity;
         if (is_string($this->users)) {
             $this->users = [$this->users];
         }
@@ -53,7 +44,7 @@ class UserFilter extends Filter
     public function isAllowed()
     {
         if (($this->identity instanceof IdentityInterface) && is_array($this->users) && !empty($this->users)) {
-            return (bool) in_array($this->identity->{$this->checkedAttribute}, $this->users);
+            return (bool)in_array($this->identity->{$this->checkedAttribute}, $this->users, true);
         }
         return false;
     }

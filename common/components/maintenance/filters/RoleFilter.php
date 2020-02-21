@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance\filters;
 
+use Yii;
 use common\components\maintenance\Filter;
 use yii\web\User;
 
@@ -21,21 +22,11 @@ class RoleFilter extends Filter
     protected $user;
 
     /**
-     * RoleChecker constructor.
-     * @param User $user
-     * @param array $config
-     */
-    public function __construct(User $user, array $config = [])
-    {
-        $this->user = $user;
-        parent::__construct($config);
-    }
-
-    /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->user = Yii::$app->user;
         if (is_string($this->roles)) {
             $this->roles = [$this->roles];
         }

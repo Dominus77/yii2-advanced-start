@@ -4,7 +4,6 @@ namespace common\components\maintenance\filters;
 
 use Yii;
 use common\components\maintenance\Filter;
-use yii\helpers\VarDumper;
 use yii\web\Request;
 
 /**
@@ -23,20 +22,11 @@ class URIFilter extends Filter
     protected $request;
 
     /**
-     * URIChecker constructor.
-     * @param array $config
-     */
-    public function __construct(array $config = [])
-    {
-        $this->request = Yii::$app->request;
-        parent::__construct($config);
-    }
-
-    /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->request = Yii::$app->request;
         if (is_string($this->uri)) {
             $this->uri = [$this->uri];
         }
@@ -44,7 +34,6 @@ class URIFilter extends Filter
 
     /**
      * @return bool
-     * @throws \yii\console\Exception
      * @throws \yii\web\NotFoundHttpException
      */
     public function isAllowed()

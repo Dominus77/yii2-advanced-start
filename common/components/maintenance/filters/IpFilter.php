@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance\filters;
 
+use Yii;
 use common\components\maintenance\Filter;
 use yii\web\Request;
 
@@ -21,21 +22,11 @@ class IpFilter extends Filter
     protected $request;
 
     /**
-     * IpFilter constructor.
-     * @param Request $request
-     * @param array $config
-     */
-    public function __construct(Request $request, array $config = [])
-    {
-        $this->request = $request;
-        parent::__construct($config);
-    }
-
-    /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->request = Yii::$app->request;
         if (is_string($this->ips)) {
             $this->ips = [$this->ips];
         }
@@ -60,10 +51,10 @@ class IpFilter extends Filter
 
     /**
      * Check IP (mask supported).
-     * @since 1.0.0
      * @param string $filter
      * @param string $ip
      * @return bool
+     * @since 1.0.0
      */
     protected function checkIp($filter, $ip)
     {

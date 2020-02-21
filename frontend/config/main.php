@@ -9,6 +9,12 @@ use yii\helpers\ArrayHelper;
 use modules\main\Bootstrap as MainBootstrap;
 use modules\users\Bootstrap as UserBootstrap;
 use modules\rbac\Bootstrap as RbacBootstrap;
+use common\components\maintenance\Maintenance;
+use common\components\maintenance\filters\URIFilter;
+use common\components\maintenance\filters\RoleFilter;
+use common\components\maintenance\states\FileState;
+use common\components\maintenance\StateInterface;
+use modules\rbac\models\Permission;
 
 $params = ArrayHelper::merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -52,9 +58,39 @@ return [
         'log',
         MainBootstrap::class,
         UserBootstrap::class,
-        RbacBootstrap::class
+        RbacBootstrap::class,
+        Maintenance::class
     ],
     'defaultRoute' => 'main/default/index',
+    'container' => [
+        'singletons' => [
+            Maintenance::class => [
+                'class' => Maintenance::class,
+                'route' => 'maintenance/index',
+                'filters' => [
+                    [
+                        'class' => URIFilter::class,
+                        'uri' => [
+                            'users/default/login',
+                            'users/default/logout'
+                        ]
+                    ],
+                    [
+                        'class' => RoleFilter::class,
+                        'roles' => [
+                            Permission::PERMISSION_MAINTENANCE
+                        ]
+                    ]
+                ],
+                'statusCode' => 503,
+                'retryAfter' => 120
+            ],
+            StateInterface::class => [
+                'class' => FileState::class,
+                'directory' => '@runtime'
+            ]
+        ]
+    ],
     'components' => [
         'request' => [
             'cookieValidationKey' => '',
