@@ -4,7 +4,6 @@ namespace common\components\maintenance;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\helpers\VarDumper;
 use yii\web\Application;
 use yii\base\BaseObject;
 use yii\base\BootstrapInterface;
@@ -62,12 +61,21 @@ class Maintenance extends BaseObject implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        if (YII_DEBUG) {
+            $urlManager = $app->urlManager;
+            $urlManager->addRules(
+                [
+                    '<_m:debug>/<_c:\w+>/<_a:\w+>' => '<_m>/<_c>/<_a>',
+                ]
+            );
+        }
+
         $response = $app->response;
         if ($app->request->isAjax) {
             $response->statusCode = self::STATUS_CODE_OK;
         } else {
             $response->statusCode = $this->statusCode;
-            if ($this->retryAfter){
+            if ($this->retryAfter) {
                 $response->headers->set('Retry-After', $this->retryAfter);
             }
         }

@@ -48,7 +48,7 @@ class MaintenanceAction extends Action
      */
     public function run()
     {
-        $this->disableDebugModule();
+        //$this->disableDebugModule();
 
         if ($this->layout !== null) {
             $this->controller->layout = $this->layout;

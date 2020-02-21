@@ -67,8 +67,11 @@ $config = [
                     [
                         'class' => 'common\components\maintenance\filters\URIFilter',
                         'uri' => [
+                            'debug/default/view',
+                            'debug/default/toolbar',
                             'users/default/login',
-                            'users/default/logout'
+                            'users/default/logout',
+                            'users/default/request-password-reset'
                         ]
                     ],
                     // Allowed roles filter

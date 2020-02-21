@@ -1,11 +1,12 @@
 <?php
 
-use modules\users\behavior\LastVisitBehavior;
+
 use yii\web\UrlManager;
 use yii\log\FileTarget;
-use modules\users\models\User;
 use yii\bootstrap\BootstrapAsset;
 use yii\helpers\ArrayHelper;
+use modules\users\models\User;
+use modules\users\behavior\LastVisitBehavior;
 use modules\main\Bootstrap as MainBootstrap;
 use modules\users\Bootstrap as UserBootstrap;
 use modules\rbac\Bootstrap as RbacBootstrap;
@@ -66,13 +67,16 @@ return [
         'singletons' => [
             Maintenance::class => [
                 'class' => Maintenance::class,
-                'route' => 'maintenance/index',
+                'route' => 'frontend/maintenance',
                 'filters' => [
                     [
                         'class' => URIFilter::class,
                         'uri' => [
+                            'debug/default/view',
+                            'debug/default/toolbar',
                             'users/default/login',
-                            'users/default/logout'
+                            'users/default/logout',
+                            'users/default/request-password-reset'
                         ]
                     ],
                     [

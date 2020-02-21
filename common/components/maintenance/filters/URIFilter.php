@@ -4,6 +4,7 @@ namespace common\components\maintenance\filters;
 
 use Yii;
 use common\components\maintenance\Filter;
+use yii\web\NotFoundHttpException;
 use yii\web\Request;
 
 /**
@@ -34,7 +35,7 @@ class URIFilter extends Filter
 
     /**
      * @return bool
-     * @throws \yii\web\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     public function isAllowed()
     {

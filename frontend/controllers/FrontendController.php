@@ -6,6 +6,7 @@ use yii\base\Action;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\ErrorAction;
+use common\components\maintenance\actions\MaintenanceAction;
 
 /**
  * Class FrontendController
@@ -21,6 +22,9 @@ class FrontendController extends Controller
         return [
             'error' => [
                 'class' => ErrorAction::class
+            ],
+            'maintenance' => [
+                'class' => MaintenanceAction::class
             ]
         ];
     }

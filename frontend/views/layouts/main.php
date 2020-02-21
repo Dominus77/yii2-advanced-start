@@ -56,32 +56,22 @@ AppAsset::register($this);
             ]
         ];
     }
-    try {
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'activateParents' => true,
-            'encodeLabels' => false,
-            'items' => array_filter($menuItems)
-        ]);
-    } catch (Exception $e) {
-        // Save to log
-    }
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'activateParents' => true,
+        'encodeLabels' => false,
+        'items' => array_filter($menuItems)
+    ]);
+
     NavBar::end();
     ?>
 
     <div class="container">
-        <?php try {
-            echo Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
-            ]);
-        } catch (Exception $e) {
-            // Save to log
-        } ?>
-        <?php try {
-            echo Alert::widget();
-        } catch (Exception $e) {
-            // Save to log
-        } ?>
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+        ]) ?>
+        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
