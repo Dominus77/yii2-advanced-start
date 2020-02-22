@@ -45,7 +45,7 @@ section, footer{
 	Main Section
 -----------------------------*/
 
-#note{
+.note{
 	color: #666666;
 	font-size: 12px;
 	margin: 0 auto;

@@ -2,6 +2,7 @@
 
 namespace frontend\widgets\timer;
 
+use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -23,6 +24,18 @@ class CountDown extends Widget
     public $status = true;
 
     /**
+     * Finish timestamp
+     * @var integer
+     */
+    public $timestamp;
+
+    /**
+     * Message note
+     * @var string
+     */
+    public $message = 'Done! Please update this page.';
+
+    /**
      * Plugin options
      * @see https://tutorialzine.com/2011/12/countdown-jquery
      * @var array
@@ -35,9 +48,7 @@ class CountDown extends Widget
     public function init()
     {
         parent::init();
-        if (isset($this->clientOptions['timestamp']) && !empty($this->clientOptions['timestamp'])) {
-            $this->clientOptions['timestamp'] *= 1000;
-        }
+        $this->timestamp *= 1000;
     }
 
     /**
@@ -47,7 +58,8 @@ class CountDown extends Widget
     {
         if ($this->status === true) {
             $this->registerResource();
-            echo Html::tag('div', '', ['id' => $this->id]) . PHP_EOL;
+            echo Html::tag('div', '', ['id' => 'countdown_' . $this->id]) . PHP_EOL;
+            echo Html::tag('div', '', ['id' => 'note_' . $this->id, 'class' => 'note']) . PHP_EOL;
         }
     }
 
@@ -56,7 +68,11 @@ class CountDown extends Widget
      */
     protected function getOptions()
     {
-        return ArrayHelper::merge($this->clientOptions, []);
+        return ArrayHelper::merge($this->clientOptions, [
+            'id' => $this->id,
+            'timestamp' => $this->timestamp,
+            'msg' => $this->message
+        ]);
     }
 
     /**
@@ -67,8 +83,8 @@ class CountDown extends Widget
         $view = $this->getView();
         CountDownAsset::register($view);
         $options = Json::encode($this->getOptions());
-        $script = "
-            $('#{$this->id}').countdown({$options});
+        $script = "            
+            initCountDownTimer({$options});
         ";
         $view->registerJs($script);
     }

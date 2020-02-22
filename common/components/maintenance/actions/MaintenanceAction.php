@@ -5,6 +5,7 @@ namespace common\components\maintenance\actions;
 
 use Yii;
 use yii\base\Action;
+use DateTime;
 
 /**
  * Class MaintenanceAction
@@ -35,7 +36,7 @@ class MaintenanceAction extends Action
     public function init()
     {
         if ($this->defaultMessage === null) {
-            $this->defaultMessage = Yii::t('app', 'The site is undergoing technical work.');
+            $this->defaultMessage = Yii::t('app', 'The site is undergoing technical work. We apologize for any inconvenience caused.');
         }
 
         if ($this->defaultName === null) {
@@ -45,6 +46,7 @@ class MaintenanceAction extends Action
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function run()
     {
@@ -56,12 +58,13 @@ class MaintenanceAction extends Action
 
     /**
      * @return array
+     * @throws \Exception
      */
     protected function getViewRenderParams()
     {
         return [
             'name' => $this->defaultName,
-            'message' => $this->defaultMessage,
+            'message' => $this->defaultMessage
         ];
     }
 }
