@@ -38,6 +38,7 @@ Functional
 - Confirmation by email
 - Last visit
 - RBAC Management from the console and web interface
+- Maintenance
 
 System
 - RBAC (DbManager)

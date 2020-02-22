@@ -18,7 +18,14 @@ class MaintenanceController extends Controller
      */
     protected $state;
 
-    public function __construct(string $id, Module $module, StateInterface $state, array $config = [])
+    /**
+     * MaintenanceController constructor.
+     * @param string $id
+     * @param Module $module
+     * @param StateInterface $state
+     * @param array $config
+     */
+    public function __construct($id, Module $module, StateInterface $state, array $config = [])
     {
         $this->state = $state;
         parent::__construct($id, $module, $config);
@@ -37,6 +44,9 @@ class MaintenanceController extends Controller
 
     }
 
+    /**
+     * Enable maintenance mode
+     */
     public function actionEnable()
     {
         $this->state->enable();
@@ -45,6 +55,9 @@ class MaintenanceController extends Controller
         $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
     }
 
+    /**
+     * Disable maintenance mode
+     */
     public function actionDisable()
     {
         $this->state->disable();
