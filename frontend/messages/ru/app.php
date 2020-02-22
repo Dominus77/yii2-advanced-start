@@ -10,4 +10,5 @@ return [
     'Maintenance' => 'Техническое обслуживание',
     'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'На сайте ведутся технические работы. Приносим извенения за доставленные неудобства.',
     'Done! Please update this page.' => 'Готово! Пожалуйста обновите страницу.',
+    'Notify me' => 'Оповестить меня'
 ];

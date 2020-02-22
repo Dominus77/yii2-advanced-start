@@ -8,7 +8,7 @@ use frontend\widgets\timer\CountDown;
 /* @var $message string */
 
 $this->title = $name;
-$date = new DateTime('25-02-2020 19:40:00');
+$date = new DateTime('22-02-2020 23:00:00');
 $timestamp = $date->getTimestamp();
 ?>
 
@@ -20,3 +20,16 @@ $timestamp = $date->getTimestamp();
     'timestamp' => $timestamp,
     'message' => Yii::t('app', 'Done! Please update this page.'),
 ]) ?>
+<br>
+<div class="form-container">
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputAmount">Email</label>
+            <div class="input-group">
+                <div class="input-group-addon">@</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"><?= Yii::t('app', 'Notify me') ?></button>
+    </form>
+</div>

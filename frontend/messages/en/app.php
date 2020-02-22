@@ -10,4 +10,5 @@ return [
     'Maintenance' => 'Maintenance',
     'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'The site is undergoing technical work. We apologize for any inconvenience caused.',
     'Done! Please update this page.' => 'Done! Please update this page.',
+    'Notify me' => 'Notify me'
 ];

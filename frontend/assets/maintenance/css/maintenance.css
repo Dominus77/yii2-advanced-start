@@ -52,3 +52,7 @@ div.required label:after {
 .wrap > .container p {
     text-align: center;
 }
+
+.wrap > .container .form-container {
+    text-align: center;
+}
