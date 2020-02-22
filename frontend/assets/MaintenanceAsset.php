@@ -10,7 +10,7 @@ use common\assets\Html5ShivAsset;
 use common\assets\RespondAsset;
 
 /**
- * Class AppAsset
+ * Class MaintenanceAsset
  * @package frontend\assets
  */
 class MaintenanceAsset extends AssetBundle
@@ -18,19 +18,24 @@ class MaintenanceAsset extends AssetBundle
     /**
      * @var string
      */
-    public $basePath = '@webroot';
+    public $sourcePath;
 
     /**
-     * @var string
+     * @inheritdoc
      */
-    public $baseUrl = '@web';
+    public function init()
+    {
+        parent::init();
+        $this->sourcePath = __DIR__ . '/maintenance';
 
-    /**
-     * @var array
-     */
-    public $css = [
-        'css/maintenance.css'
-    ];
+        $this->css = [
+            'css/maintenance.css',
+        ];
+
+        $this->publishOptions = [
+            'forceCopy' => YII_ENV_DEV ? true : false
+        ];
+    }
 
     /**
      * @var array

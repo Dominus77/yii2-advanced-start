@@ -21,11 +21,20 @@ MaintenanceAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="container">
-    <?= $content ?>
+<div class="wrap">
+    <div class="container">
+        <?= $content ?>
+    </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
 
+        <p class="pull-right">
+            Работает на <a href="http://www.yiiframework.com/" target="_blank">Yii Framework</a>
+        </p>
+    </div>
+</footer>
 <?php $this->endBody() ?>
 </body>
 </html>
