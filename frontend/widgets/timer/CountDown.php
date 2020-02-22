@@ -1,19 +1,18 @@
 <?php
 
-namespace common\components\maintenance\widgets\timer;
+namespace frontend\widgets\timer;
 
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
-use common\components\maintenance\widgets\timer\assets\CountDownAsset;
+use frontend\widgets\timer\assets\CountDownAsset;
 
 /**
  * Class CountDown
- * @package common\components\maintenance\widgets\timer
+ * @package frontend\widgets\timer
  *
  * @property array $options
- * @property string $html
  */
 class CountDown extends Widget
 {
@@ -24,6 +23,8 @@ class CountDown extends Widget
     public $status = true;
 
     /**
+     * Plugin options
+     * @see https://tutorialzine.com/2011/12/countdown-jquery
      * @var array
      */
     public $clientOptions = [];

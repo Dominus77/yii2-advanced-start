@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use common\components\maintenance\widgets\timer\CountDown;
+use frontend\widgets\timer\CountDown;
 
 /* @var $this yii\web\View */
 /* @var $name string */
