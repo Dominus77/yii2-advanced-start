@@ -8,13 +8,13 @@ use frontend\widgets\timer\CountDown;
 /* @var $message string */
 
 $this->title = $name;
-$date = new DateTime('22-02-2020 13:55:00');
+$date = new DateTime('25-02-2020 19:40:00');
 $timestamp = $date->getTimestamp();
 ?>
 
 <h1><?= Html::encode($this->title) ?></h1>
 <p><?= $message ?></p>
-
+<br>
 <?= CountDown::widget([
     'status' => true,
     'timestamp' => $timestamp,

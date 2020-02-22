@@ -9,5 +9,5 @@ return [
     'Please contact us if you think this is a server error. Thank you.' => 'Please contact us if you think this is a server error. Thank you.',
     'Maintenance' => 'Maintenance',
     'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'The site is undergoing technical work. We apologize for any inconvenience caused.',
-    'Done! Please update this page.' => 'Done! Please update this page.'
+    'Done! Please update this page.' => 'Done! Please update this page.',
 ];

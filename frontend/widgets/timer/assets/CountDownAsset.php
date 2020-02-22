@@ -32,8 +32,9 @@ class CountDownAsset extends AssetBundle
         ];
 
         $this->js = [
+            'js/i18n.js',
             'js/jquery.countdown.js',
-            'js/script.js',
+            'js/script.js'
         ];
 
         $this->publishOptions = [

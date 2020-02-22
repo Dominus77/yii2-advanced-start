@@ -43,12 +43,19 @@ class CountDown extends Widget
     public $clientOptions = [];
 
     /**
+     * en/ru
+     * @var string
+     */
+    public $locale;
+
+    /**
      * @inheritDoc
      */
     public function init()
     {
         parent::init();
         $this->timestamp *= 1000;
+        $this->locale = $this->locale ?: Yii::$app->language;
     }
 
     /**
@@ -83,8 +90,9 @@ class CountDown extends Widget
         $view = $this->getView();
         CountDownAsset::register($view);
         $options = Json::encode($this->getOptions());
+        $translate = Json::encode(Translate::messages($this->locale));
         $script = "            
-            initCountDownTimer({$options});
+            initCountDownTimer({$options}, {$translate});
         ";
         $view->registerJs($script);
     }
