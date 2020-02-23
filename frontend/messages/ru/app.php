@@ -12,5 +12,5 @@ return [
     'Done! Please update this page.' => 'Готово! Пожалуйста обновите страницу.',
     'Notify me' => 'Оповестить меня',
     'Your email' => 'Ваш email',
-    'We will inform you when everything is ready!' => 'Мы сообщим Вам когда все будет готово!'
+    'We will inform you when everything is ready!' => 'Мы сообщим вам, когда все будет готово!'
 ];

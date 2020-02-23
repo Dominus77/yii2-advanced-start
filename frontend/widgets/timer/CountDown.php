@@ -54,6 +54,9 @@ class CountDown extends Widget
     public function init()
     {
         parent::init();
+        if (empty($this->timestamp)) {
+            $this->status = false;
+        }
         $this->timestamp *= 1000;
         $this->locale = $this->locale ?: Yii::$app->language;
     }
