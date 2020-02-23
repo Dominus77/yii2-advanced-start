@@ -4,7 +4,7 @@ namespace frontend\assets;
 
 use yii\web\AssetBundle;
 use yii\web\YiiAsset;
-use yii\bootstrap\BootstrapAsset;
+use yii\bootstrap\BootstrapPluginAsset;
 use common\assets\FontAwesomeAsset;
 use common\assets\Html5ShivAsset;
 use common\assets\RespondAsset;
@@ -42,7 +42,7 @@ class MaintenanceAsset extends AssetBundle
      */
     public $depends = [
         YiiAsset::class,
-        BootstrapAsset::class,
+        BootstrapPluginAsset::class,
         FontAwesomeAsset::class,
         Html5ShivAsset::class,
         RespondAsset::class

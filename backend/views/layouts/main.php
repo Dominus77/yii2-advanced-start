@@ -71,57 +71,33 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
-                    <?php try {
-                        echo MessagesWidget::widget([
-                            'status' => true,
-                            'image' => $publishedUrl ? Html::img($publishedUrl . '/img/user2-160x160.jpg', [
-                                'class' => 'img-circle',
-                                'alt' => 'User Image'
-                            ]) : '']);
-                    } catch (Exception $e) {
-                        // Save to log
-                    } ?>
+                    <?= MessagesWidget::widget([
+                        'status' => true,
+                        'image' => $publishedUrl ? Html::img($publishedUrl . '/img/user2-160x160.jpg', [
+                            'class' => 'img-circle',
+                            'alt' => 'User Image'
+                        ]) : '']) ?>
 
-                    <?php try {
-                        echo NotificationsWidget::widget(['status' => true]);
-                    } catch (Exception $e) {
-                        // Save to log
-                    } ?>
+                    <?= NotificationsWidget::widget(['status' => true]) ?>
 
-                    <?php try {
-                        echo TasksWidget::widget(['status' => true]);
-                    } catch (Exception $e) {
-                        // Save to log
-                    } ?>
+                    <?= TasksWidget::widget(['status' => true]) ?>
 
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <?php try {
-                                echo AvatarWidget::widget([
-                                    'imageOptions' => [
-                                        'class' => 'user-image'
-                                    ]
-                                ]);
-                            } catch (Exception $e) {
-                                // Save to log
-                            } ?>
+                            <?= AvatarWidget::widget([
+                                'imageOptions' => [
+                                    'class' => 'user-image'
+                                ]
+                            ]) ?>
                             <span class="hidden-xs"><?= $fullUserName ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <?php try {
-                                    echo AvatarWidget::widget();
-                                } catch (Exception $e) {
-                                    // Save to log
-                                } ?>
+                                <?= AvatarWidget::widget() ?>
                                 <p>
                                     <?= $fullUserName ?>
                                     <small>
-                                        <?php try {
-                                            echo UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy');
-                                        } catch (InvalidConfigException $e) {
-                                            // Save to log
-                                        } ?>
+                                        <?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') ?>
                                     </small>
                                 </p>
                             </li>
@@ -166,11 +142,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
             <div class="user-panel">
                 <div class="pull-left image">
-                    <?php try {
-                        echo AvatarWidget::widget();
-                    } catch (Exception $e) {
-                        // Save to log
-                    } ?>
+                    <?= AvatarWidget::widget() ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= $fullUserName ?></p>
@@ -178,11 +150,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 </div>
             </div>
 
-            <?php try {
-                echo SearchSidebar::widget(['status' => true]);
-            } catch (Exception $e) {
-                // Save to log
-            } ?>
+            <?= SearchSidebar::widget(['status' => true]) ?>
 
             <?php
             $items = [
@@ -247,17 +215,13 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     ]
                 ]
             ];
-            try {
-                echo Menu::widget([
-                    'options' => ['class' => 'sidebar-menu'],
-                    'encodeLabels' => false,
-                    'submenuTemplate' => "\n<ul class='treeview-menu'>\n{items}\n</ul>\n",
-                    'activateParents' => true,
-                    'items' => $items
-                ]);
-            } catch (Exception $e) {
-                // Save to log
-            }
+            echo Menu::widget([
+                'options' => ['class' => 'sidebar-menu'],
+                'encodeLabels' => false,
+                'submenuTemplate' => "\n<ul class='treeview-menu'>\n{items}\n</ul>\n",
+                'activateParents' => true,
+                'items' => $items
+            ]);
             ?>
         </section>
     </aside>
@@ -269,20 +233,12 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 $small = isset($this->params['title']['small']) ? ' ' . Html::tag('small', Html::encode($this->params['title']['small'])) : '';
                 echo Html::encode($this->title) . $small ?>
             </h1>
-            <?php try {
-                echo Breadcrumbs::widget([
-                    'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                    'encodeLabels' => false
-                ]);
-            } catch (Exception $e) {
-                // Save to log
-            } ?>
-            <?php try {
-                echo Alert::widget();
-            } catch (Exception $e) {
-                // Save to log
-            } ?>
+            <?= Breadcrumbs::widget([
+                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'encodeLabels' => false
+            ]) ?>
+            <?= Alert::widget() ?>
         </section>
         <section class="content">
             <?= $content ?>
@@ -299,14 +255,10 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.') ?>
     </footer>
 
-    <?php try {
-        echo ControlSidebar::widget([
-            'status' => true,
-            'demo' => false
-        ]);
-    } catch (Exception $e) {
-        // Save to log
-    } ?>
+    <?= ControlSidebar::widget([
+        'status' => true,
+        'demo' => false
+    ]) ?>
 </div>
 
 <?php $this->endBody() ?>

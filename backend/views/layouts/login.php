@@ -27,15 +27,11 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 <?php $this->beginBody() ?>
 <div class="row">
     <div class="col-md-12">
-        <?php try {
-            echo Alert::widget([
-                'options' => [
-                    'style' => 'text-align:center;'
-                ]
-            ]);
-        } catch (Exception $e) {
-            // Save to log
-        } ?>
+        <?= Alert::widget([
+            'options' => [
+                'style' => 'text-align:center;'
+            ]
+        ]) ?>
     </div>
 </div>
 <div class="login-box">

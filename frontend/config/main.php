@@ -74,6 +74,7 @@ return [
                         'uri' => [
                             'debug/default/view',
                             'debug/default/toolbar',
+                            'frontend/maintenance-subscribe',
                             'users/default/login',
                             'users/default/logout',
                             'users/default/request-password-reset'
@@ -137,7 +138,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            'rules' => []
+            'rules' => [
+                'maintenance-subscribe' => 'frontend/maintenance-subscribe',
+            ]
         ],
         'urlManagerBackend' => [
             'class' => UrlManager::class,

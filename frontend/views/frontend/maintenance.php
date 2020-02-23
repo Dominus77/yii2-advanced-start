@@ -2,13 +2,14 @@
 
 use yii\helpers\Html;
 use frontend\widgets\timer\CountDown;
+use common\components\maintenance\widgets\SubscribeForm;
 
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
 
 $this->title = $name;
-$date = new DateTime('22-02-2020 23:00:00');
+$date = new DateTime('23-02-2020 23:00:00');
 $timestamp = $date->getTimestamp();
 ?>
 
@@ -22,14 +23,5 @@ $timestamp = $date->getTimestamp();
 ]) ?>
 <br>
 <div class="form-container">
-    <form class="form-inline">
-        <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount">Email</label>
-            <div class="input-group">
-                <div class="input-group-addon">@</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary"><?= Yii::t('app', 'Notify me') ?></button>
-    </form>
+    <?= SubscribeForm::widget() ?>
 </div>
