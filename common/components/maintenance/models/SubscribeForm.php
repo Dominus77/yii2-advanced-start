@@ -18,7 +18,23 @@ use yii\helpers\ArrayHelper;
  */
 class SubscribeForm extends Model
 {
+    /**
+     * @var string
+     */
     public $email;
+    /**
+     * @var array|null
+     */
+    private $_emails;
+
+    /**
+     * @inheritDoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->_emails = $this->getEmails();
+    }
 
     /**
      * @inheritDoc
@@ -50,7 +66,7 @@ class SubscribeForm extends Model
      */
     public function subscribe()
     {
-        if ($this->isSubscribe()) {
+        if ($this->isEmail()) {
             return false;
         }
         return $this->save();
@@ -62,10 +78,10 @@ class SubscribeForm extends Model
      */
     public function sendAllNotify()
     {
-        if ($emails = $this->getEmails()) {
+        if ($this->_emails) {
             $messages = [];
             $mailer = Yii::$app->mailer;
-            foreach ($emails as $email) {
+            foreach ($this->_emails as $email) {
                 $messages[] = $mailer->compose([
                     'html' => '@common/components/maintenance/mail/emailNotice-html',
                     'text' => '@common/components/maintenance/mail/emailNotice-text'
@@ -77,6 +93,15 @@ class SubscribeForm extends Model
             return $mailer->sendMultiple($messages);
         }
         return true;
+    }
+
+    /**
+     * Check email is subscribe
+     * @return bool
+     */
+    public function isEmail()
+    {
+        return ArrayHelper::isIn($this->email, $this->_emails);
     }
 
     /**
@@ -129,14 +154,5 @@ class SubscribeForm extends Model
     protected function getFileStatePath()
     {
         return (new FileState())->path;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSubscribe()
-    {
-        $emails = $this->getEmails();
-        return ArrayHelper::isIn($this->email, $emails);
     }
 }

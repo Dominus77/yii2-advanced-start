@@ -10,7 +10,7 @@ use common\components\maintenance\models\SubscribeForm as ModelSubscribeForm;
 /* @var $message string */
 
 /*$model = new ModelSubscribeForm();
-$emails = $model->sendAllNotify();
+$emails = $model->getEmails();
 \yii\helpers\VarDumper::dump($emails, 10, 1);*/
 
 $this->title = $name;
