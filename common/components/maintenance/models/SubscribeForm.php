@@ -43,6 +43,22 @@ class SubscribeForm extends Model
      */
     public function subscribe()
     {
+        $this->send();
         return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function send()
+    {
+        return Yii::$app->mailer->compose([
+            'html' => '@common/components/maintenance/mail/emailNotice-html',
+            'text' => '@common/components/maintenance/mail/emailNotice-text'
+        ], [])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+            ->setTo($this->email)
+            ->setSubject(Yii::t('app', 'Notification of completion of technical work'))
+            ->send();
     }
 }
