@@ -13,5 +13,6 @@ return [
     'Notify me' => 'Notify me',
     'Your email' => 'Your email',
     'We will inform you when everything is ready!' => 'We will inform you when everything is ready!',
+    'You have already subscribed to the alert!' => 'You have already subscribed to the alert!',
     'Notification of completion of technical work' => 'Notification of completion of technical work'
 ];

@@ -16,21 +16,18 @@ use common\components\maintenance\models\SubscribeForm;
 class SubscribeAction extends Action
 {
     /**
-     * @return array|Response
+     * @return Response
      */
     public function run()
     {
         $model = new SubscribeForm();
         $msgSuccess = Yii::t('app', 'We will inform you when everything is ready!');
+        $msgInfo = Yii::t('app', 'You have already subscribed to the alert!');
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->validate()) {
-            if (Yii::$app->request->isAjax && $model->subscribe()) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return [
-                    'result' => $msgSuccess
-                ];
-            }
             if ($model->subscribe()) {
                 Yii::$app->session->setFlash('SUBSCRIBE_SUCCESS', $msgSuccess);
+            } else {
+                Yii::$app->session->setFlash('SUBSCRIBE_INFO', $msgInfo);
             }
         }
         return $this->controller->redirect(Yii::$app->request->referrer);

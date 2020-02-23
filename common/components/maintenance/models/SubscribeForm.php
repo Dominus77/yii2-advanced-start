@@ -6,6 +6,7 @@ use Generator;
 use Yii;
 use yii\base\Model;
 use common\components\maintenance\states\FileState;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class SubscribeForm
@@ -49,35 +50,32 @@ class SubscribeForm extends Model
      */
     public function subscribe()
     {
+        if ($this->isSubscribe()) {
+            return false;
+        }
         return $this->save();
     }
 
     /**
-     * Send Notify
-     * @return bool
+     * Send all
+     * @return int
      */
-    public function send()
+    public function sendAllNotify()
     {
-        return Yii::$app->mailer->compose([
-            'html' => '@common/components/maintenance/mail/emailNotice-html',
-            'text' => '@common/components/maintenance/mail/emailNotice-text'
-        ], [])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-            ->setTo($this->email)
-            ->setSubject(Yii::t('app', 'Notification of completion of technical work'))
-            ->send();
-    }
-
-    /**
-     * Save email in file
-     * @return bool
-     */
-    protected function save()
-    {
-        $path = $this->getFileStatePath();
-        $fp = fopen($path, 'ab');
-        fwrite($fp, $this->email . PHP_EOL);
-        fclose($fp);
+        if ($emails = $this->getEmails()) {
+            $messages = [];
+            $mailer = Yii::$app->mailer;
+            foreach ($emails as $email) {
+                $messages[] = $mailer->compose([
+                    'html' => '@common/components/maintenance/mail/emailNotice-html',
+                    'text' => '@common/components/maintenance/mail/emailNotice-text'
+                ], [])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo($email)
+                    ->setSubject(Yii::t('app', 'Notification of completion of technical work'));
+            }
+            return $mailer->sendMultiple($messages);
+        }
         return true;
     }
 
@@ -96,6 +94,19 @@ class SubscribeForm extends Model
             $items[] = $item;
         }
         return array_filter($items);
+    }
+
+    /**
+     * Save email in file
+     * @return bool
+     */
+    protected function save()
+    {
+        $path = $this->getFileStatePath();
+        $fp = fopen($path, 'ab');
+        fwrite($fp, $this->email . PHP_EOL);
+        fclose($fp);
+        return true;
     }
 
     /**
@@ -118,5 +129,14 @@ class SubscribeForm extends Model
     protected function getFileStatePath()
     {
         return (new FileState())->path;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscribe()
+    {
+        $emails = $this->getEmails();
+        return ArrayHelper::isIn($this->email, $emails);
     }
 }

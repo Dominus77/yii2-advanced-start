@@ -9,9 +9,9 @@ use common\components\maintenance\models\SubscribeForm as ModelSubscribeForm;
 /* @var $name string */
 /* @var $message string */
 
-$model = new ModelSubscribeForm();
-$emails = $model->getEmails();
-\yii\helpers\VarDumper::dump($emails, 10, 1);
+/*$model = new ModelSubscribeForm();
+$emails = $model->sendAllNotify();
+\yii\helpers\VarDumper::dump($emails, 10, 1);*/
 
 $this->title = $name;
 $date = new DateTime('23-02-2020 23:00:00');
@@ -30,3 +30,4 @@ $timestamp = $date->getTimestamp();
 <div class="form-container">
     <?= SubscribeForm::widget() ?>
 </div>
+<div class="social-container"></div>
