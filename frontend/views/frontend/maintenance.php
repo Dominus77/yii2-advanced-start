@@ -3,10 +3,15 @@
 use yii\helpers\Html;
 use frontend\widgets\timer\CountDown;
 use common\components\maintenance\widgets\SubscribeForm;
+use common\components\maintenance\models\SubscribeForm as ModelSubscribeForm;
 
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
+
+$model = new ModelSubscribeForm();
+$content = $model->read();
+\yii\helpers\VarDumper::dump($content, 10, 1);
 
 $this->title = $name;
 $date = new DateTime('23-02-2020 23:00:00');

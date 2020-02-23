@@ -4,10 +4,14 @@ namespace common\components\maintenance\models;
 
 use Yii;
 use yii\base\Model;
+use common\components\maintenance\states\FileState;
 
 /**
  * Class SubscribeForm
  * @package common\components\maintenance\models
+ *
+ * @property string $fileStatePath
+ * @property string $email
  */
 class SubscribeForm extends Model
 {
@@ -43,11 +47,11 @@ class SubscribeForm extends Model
      */
     public function subscribe()
     {
-        $this->send();
-        return true;
+        return $this->save();
     }
 
     /**
+     * Send Notify
      * @return bool
      */
     public function send()
@@ -60,5 +64,32 @@ class SubscribeForm extends Model
             ->setTo($this->email)
             ->setSubject(Yii::t('app', 'Notification of completion of technical work'))
             ->send();
+    }
+
+    /**
+     * Save email in file
+     * @return bool
+     */
+    protected function save()
+    {
+        $path = $this->getFileStatePath();
+        $fp = fopen($path, 'ab');
+        fwrite($fp, $this->email . PHP_EOL);
+        fclose($fp);
+        return true;
+    }
+
+    public function read()
+    {
+        $path = $this->getFileStatePath();
+        return file_get_contents($path);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFileStatePath()
+    {
+        return (new FileState())->path;
     }
 }

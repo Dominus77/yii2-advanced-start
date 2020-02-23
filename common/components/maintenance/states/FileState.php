@@ -28,7 +28,7 @@ class FileState extends BaseObject implements StateInterface
      * @var string the complete path of the file - populated in init
      */
     public $path;
-    
+
     /**
      * Initialization
      */
@@ -36,7 +36,7 @@ class FileState extends BaseObject implements StateInterface
     {
         $this->path = $this->getStatusFilePath();
     }
-    
+
     /**
      * Turn on mode.
      *
@@ -45,11 +45,12 @@ class FileState extends BaseObject implements StateInterface
     public function enable()
     {
         if (file_put_contents($this->path,
-                'The maintenance Mode of your Application is enabled if this file exists.') === false) {
+                'The maintenance Mode of your Application is enabled if this file exists.' . PHP_EOL) === false) {
             throw new \Exception(
                 "Attention: the maintenance mode could not be enabled because {$this->path} could not be created."
             );
         }
+        chmod($this->path, 0775);
     }
 
     /**
