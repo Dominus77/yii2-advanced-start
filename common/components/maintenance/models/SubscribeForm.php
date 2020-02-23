@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance\models;
 
+use Generator;
 use Yii;
 use yii\base\Model;
 use common\components\maintenance\states\FileState;
@@ -11,6 +12,7 @@ use common\components\maintenance\states\FileState;
  * @package common\components\maintenance\models
  *
  * @property string $fileStatePath
+ * @property array $emails
  * @property string $email
  */
 class SubscribeForm extends Model
@@ -79,10 +81,35 @@ class SubscribeForm extends Model
         return true;
     }
 
-    public function read()
+    /**
+     * Return emails to subscribe
+     * @return array
+     */
+    public function getEmails()
+    {
+        $contents = $this->readTheFile();
+        $items = [];
+        foreach ($contents as $key => $item) {
+            if ($key === 0) {
+                continue;
+            }
+            $items[] = $item;
+        }
+        return array_filter($items);
+    }
+
+    /**
+     * Read file
+     * @return Generator
+     */
+    protected function readTheFile()
     {
         $path = $this->getFileStatePath();
-        return file_get_contents($path);
+        $handle = fopen($path, 'rb');
+        while (!feof($handle)) {
+            yield trim(fgets($handle));
+        }
+        fclose($handle);
     }
 
     /**

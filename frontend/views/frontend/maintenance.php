@@ -10,8 +10,8 @@ use common\components\maintenance\models\SubscribeForm as ModelSubscribeForm;
 /* @var $message string */
 
 $model = new ModelSubscribeForm();
-$content = $model->read();
-\yii\helpers\VarDumper::dump($content, 10, 1);
+$emails = $model->getEmails();
+\yii\helpers\VarDumper::dump($emails, 10, 1);
 
 $this->title = $name;
 $date = new DateTime('23-02-2020 23:00:00');
