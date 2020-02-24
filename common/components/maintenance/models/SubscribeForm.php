@@ -2,9 +2,9 @@
 
 namespace common\components\maintenance\models;
 
-use Generator;
 use Yii;
 use yii\base\Model;
+use common\components\maintenance\StateInterface;
 use common\components\maintenance\states\FileState;
 use yii\helpers\ArrayHelper;
 
@@ -14,6 +14,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property string $fileStatePath
  * @property array $emails
+ * @property string $datetime
+ * @property int $timestamp
  * @property string $email
  */
 class SubscribeForm extends Model
@@ -23,17 +25,18 @@ class SubscribeForm extends Model
      */
     public $email;
     /**
-     * @var array|null
+     * @var StateInterface
      */
-    private $_emails;
+    protected $state;
 
     /**
-     * @inheritDoc
+     * SubscribeForm constructor.
+     * @param array $config
      */
-    public function init()
+    public function __construct(array $config = [])
     {
-        parent::init();
-        $this->_emails = $this->getEmails();
+        $this->state = new FileState();
+        parent::__construct($config);
     }
 
     /**
@@ -78,10 +81,10 @@ class SubscribeForm extends Model
      */
     public function sendAllNotify()
     {
-        if ($this->_emails) {
+        if ($this->emails) {
             $messages = [];
             $mailer = Yii::$app->mailer;
-            foreach ($this->_emails as $email) {
+            foreach ($this->emails as $email) {
                 $messages[] = $mailer->compose([
                     'html' => '@common/components/maintenance/mail/emailNotice-html',
                     'text' => '@common/components/maintenance/mail/emailNotice-text'
@@ -96,29 +99,38 @@ class SubscribeForm extends Model
     }
 
     /**
+     * @return int
+     * @throws \Exception
+     */
+    public function getTimestamp()
+    {
+        return $this->state->timestamp();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatetime()
+    {
+        return $this->state->datetime();
+    }
+
+    /**
+     * Emails subscribe
+     * @return array
+     */
+    public function getEmails()
+    {
+        return $this->state->emails();
+    }
+
+    /**
      * Check email is subscribe
      * @return bool
      */
     public function isEmail()
     {
-        return ArrayHelper::isIn($this->email, $this->_emails);
-    }
-
-    /**
-     * Return emails to subscribe
-     * @return array
-     */
-    public function getEmails()
-    {
-        $contents = $this->readTheFile();
-        $items = [];
-        foreach ($contents as $key => $item) {
-            if ($key === 0) {
-                continue;
-            }
-            $items[] = $item;
-        }
-        return array_filter($items);
+        return ArrayHelper::isIn($this->email, $this->emails);
     }
 
     /**
@@ -127,25 +139,7 @@ class SubscribeForm extends Model
      */
     protected function save()
     {
-        $path = $this->getFileStatePath();
-        $fp = fopen($path, 'ab');
-        fwrite($fp, $this->email . PHP_EOL);
-        fclose($fp);
-        return true;
-    }
-
-    /**
-     * Read file
-     * @return Generator
-     */
-    protected function readTheFile()
-    {
-        $path = $this->getFileStatePath();
-        $handle = fopen($path, 'rb');
-        while (!feof($handle)) {
-            yield trim(fgets($handle));
-        }
-        fclose($handle);
+        return $this->state->save($this->email);
     }
 
     /**
@@ -153,6 +147,6 @@ class SubscribeForm extends Model
      */
     protected function getFileStatePath()
     {
-        return (new FileState())->path;
+        return $this->state->path;
     }
 }

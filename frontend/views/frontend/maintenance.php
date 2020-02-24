@@ -2,20 +2,20 @@
 
 use yii\helpers\Html;
 use frontend\widgets\timer\CountDown;
-use common\components\maintenance\widgets\SubscribeForm;
 use common\components\maintenance\models\SubscribeForm as ModelSubscribeForm;
+use common\components\maintenance\widgets\SubscribeForm;
 
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
-
-/*$model = new ModelSubscribeForm();
-$emails = $model->getEmails();
-\yii\helpers\VarDumper::dump($emails, 10, 1);*/
+/* @var $model ModelSubscribeForm */
 
 $this->title = $name;
-$date = new DateTime('23-02-2020 23:00:00');
-$timestamp = $date->getTimestamp();
+
+//\yii\helpers\VarDumper::dump($model->datetime, 10, 1);
+//\yii\helpers\VarDumper::dump($model->timestamp, 10, 1);
+//\yii\helpers\VarDumper::dump($model->emails, 10, 1);
+
 ?>
 
 <h1><?= Html::encode($this->title) ?></h1>
@@ -23,11 +23,14 @@ $timestamp = $date->getTimestamp();
 <br>
 <?= CountDown::widget([
     'status' => true,
-    'timestamp' => $timestamp,
+    'timestamp' => $model->timestamp,
     'message' => Yii::t('app', 'Done! Please update this page.'),
 ]) ?>
 <br>
 <div class="form-container">
-    <?= SubscribeForm::widget() ?>
+    <?= SubscribeForm::widget([
+        'status' => true,
+        'model' => $model
+    ]) ?>
 </div>
 <div class="social-container"></div>

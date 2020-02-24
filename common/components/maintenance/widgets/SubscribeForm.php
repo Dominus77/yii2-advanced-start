@@ -18,13 +18,23 @@ class SubscribeForm extends Widget
     public $status = true;
 
     /**
+     * @var SubscribeFormModel
+     */
+    public $model;
+
+    public function init()
+    {
+        parent::init();
+        $this->model = $this->model ?: new SubscribeFormModel();
+    }
+
+    /**
      * @return string|void
      */
     public function run()
     {
         if ($this->status === true) {
-            $model = new SubscribeFormModel();
-            echo $this->render('subscribe-form', ['model' => $model]);
+            echo $this->render('subscribe-form', ['model' => $this->model]);
         }
     }
 }

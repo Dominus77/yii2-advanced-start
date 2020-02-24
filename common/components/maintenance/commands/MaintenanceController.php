@@ -35,24 +35,72 @@ class MaintenanceController extends Controller
     {
         if ($this->state->isEnabled()) {
             $enabled = $this->ansiFormat('ENABLED', Console::FG_RED);
-            $this->stdout("Maintenance Mode is $enabled!\n");
-            $this->stdout("use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
-        } else {
-            $this->stdout("Maintenance Mode is disabled.\n");
-            $this->stdout("use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
-        }
+            $datetime = $this->state->datetime();
+            $this->stdout("Maintenance Mode has been $enabled\n");
+            $this->stdout("on until $datetime\n");
 
+            $this->stdout("\nMaintenance Mode update date and time.\n");
+            $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+            $this->stdout("\nMaintenance Mode disable.\n");
+            $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
+        } else {
+            $disabled = $this->ansiFormat('DISABLED', Console::FG_GREEN);
+            $this->stdout("Maintenance Mode has been $disabled!\n");
+            $this->stdout("\nMaintenance Mode enable.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+            $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable \"24-02-2021 05:02:07\"\nto enable maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+            $this->stdout("\nMaintenance Mode update date and time.\n");
+            $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+            $this->stdout("\nMaintenance Mode disable.\n");
+            $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
+        }
     }
 
     /**
      * Enable maintenance mode
+     * @param string $datetime
      */
-    public function actionEnable()
+    public function actionEnable($datetime = '')
     {
-        $this->state->enable();
+        if (!$this->state->isEnabled()) {
+            $this->state->enable($datetime);
+        }
+        $datetime = $this->state->datetime();
         $enabled = $this->ansiFormat('ENABLED', Console::FG_RED);
-        $this->stdout("Maintenance Mode has been $enabled!\n");
+        $this->stdout("Maintenance Mode has been $enabled\n");
+        $this->stdout("on until $datetime\n");
+        $this->stdout("\nMaintenance Mode update date and time.\n");
+        $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+        $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+        $this->stdout("\nMaintenance Mode disable.\n");
         $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
+    }
+
+    /**
+     * Update maintenance mode
+     * @param string $datetime dd-mm-Y H:i:s
+     */
+    public function actionUpdate($datetime = '')
+    {
+        if ($this->state->isEnabled()) {
+            if ($this->state->validDate($datetime)) {
+                $this->state->update($datetime);
+                $updated = $this->ansiFormat('UPDATED', Console::FG_GREEN);
+                $this->stdout("Maintenance Mode has been $updated!\n");
+                $this->stdout("To: \n$datetime \n");
+            } else {
+                $this->stdout("Invalid date and time format\n");
+                $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+                $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+            }
+        } else {
+            $this->stdout("Maintenance Mode not enable!\n");
+            $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+        }
     }
 
     /**
