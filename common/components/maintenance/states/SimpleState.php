@@ -19,7 +19,7 @@ class SimpleState extends BaseObject implements StateInterface
     /**
      * @inheritdoc
      */
-    public function enable()
+    public function enable($datetime)
     {
         $this->enabled = true;
     }
@@ -38,5 +38,13 @@ class SimpleState extends BaseObject implements StateInterface
     public function isEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update($datetime)
+    {
+        // TODO: Implement update() method.
     }
 }

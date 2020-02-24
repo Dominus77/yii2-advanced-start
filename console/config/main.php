@@ -34,7 +34,8 @@ return [
         'singletons' => [
             StateInterface::class => [
                 'class' => FileState::class,
-                'directory' => '@frontend/runtime',
+                'format' => 'd-m-Y H:i:s',
+                'directory' => '@frontend/runtime'
             ]
         ]
     ],

@@ -7,6 +7,7 @@ use yii\base\Model;
 use common\components\maintenance\StateInterface;
 use common\components\maintenance\states\FileState;
 use yii\helpers\ArrayHelper;
+use Exception;
 
 /**
  * Class SubscribeForm
@@ -16,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property array $emails
  * @property string $datetime
  * @property int $timestamp
+ * @property string $format
  * @property string $email
  */
 class SubscribeForm extends Model
@@ -30,13 +32,12 @@ class SubscribeForm extends Model
     protected $state;
 
     /**
-     * SubscribeForm constructor.
-     * @param array $config
+     * @inheritDoc
      */
-    public function __construct(array $config = [])
+    public function init()
     {
+        parent::init();
         $this->state = new FileState();
-        parent::__construct($config);
     }
 
     /**
@@ -65,17 +66,6 @@ class SubscribeForm extends Model
     }
 
     /**
-     * @return bool
-     */
-    public function subscribe()
-    {
-        if ($this->isEmail()) {
-            return false;
-        }
-        return $this->save();
-    }
-
-    /**
      * Send all
      * @return int
      */
@@ -99,8 +89,27 @@ class SubscribeForm extends Model
     }
 
     /**
+     * @return bool
+     */
+    public function subscribe()
+    {
+        if ($this->isEmail()) {
+            return false;
+        }
+        return $this->save();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->state->format;
+    }
+
+    /**
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public function getTimestamp()
     {
@@ -143,6 +152,7 @@ class SubscribeForm extends Model
     }
 
     /**
+     * Maintenance file path
      * @return string
      */
     protected function getFileStatePath()

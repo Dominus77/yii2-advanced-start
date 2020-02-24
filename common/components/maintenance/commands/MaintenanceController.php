@@ -17,6 +17,7 @@ class MaintenanceController extends Controller
      * @var StateInterface
      */
     protected $state;
+    protected $exampleData;
 
     /**
      * MaintenanceController constructor.
@@ -28,6 +29,7 @@ class MaintenanceController extends Controller
     public function __construct($id, Module $module, StateInterface $state, array $config = [])
     {
         $this->state = $state;
+        $this->exampleData = $this->exampleDateFormat();
         parent::__construct($id, $module, $config);
     }
 
@@ -40,20 +42,21 @@ class MaintenanceController extends Controller
             $this->stdout("on until $datetime\n");
 
             $this->stdout("\nMaintenance Mode update date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
             $this->stdout("\nMaintenance Mode disable.\n");
             $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
         } else {
             $disabled = $this->ansiFormat('DISABLED', Console::FG_GREEN);
             $this->stdout("Maintenance Mode has been $disabled!\n");
+
             $this->stdout("\nMaintenance Mode enable.\n");
             $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
             $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/enable \"24-02-2021 05:02:07\"\nto enable maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
             $this->stdout("\nMaintenance Mode update date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+            $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
             $this->stdout("\nMaintenance Mode disable.\n");
             $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
@@ -74,7 +77,7 @@ class MaintenanceController extends Controller
         $this->stdout("Maintenance Mode has been $enabled\n");
         $this->stdout("on until $datetime\n");
         $this->stdout("\nMaintenance Mode update date and time.\n");
-        $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+        $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
         $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
         $this->stdout("\nMaintenance Mode disable.\n");
         $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
@@ -94,12 +97,15 @@ class MaintenanceController extends Controller
                 $this->stdout("To: \n$datetime \n");
             } else {
                 $this->stdout("Invalid date and time format\n");
-                $this->stdout("Use:\nphp yii maintenance/update \"24-02-2021 05:02:07\"\nto update maintenance mode to 24-02-2021 05:02:07.\n");
+                $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
                 $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
             }
         } else {
             $this->stdout("Maintenance Mode not enable!\n");
             $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+            $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+            $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
         }
     }
 
@@ -111,6 +117,18 @@ class MaintenanceController extends Controller
         $this->state->disable();
         $this->stdout("Maintenance Mode has been disabled.\n");
         $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+        $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
+        $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+        $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+    }
+
+    /**
+     * Example format date time
+     * @return mixed
+     */
+    protected function exampleDateFormat()
+    {
+        return $this->state->datetime(time());
     }
 }
 

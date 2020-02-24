@@ -1,6 +1,5 @@
 <?php
 
-
 namespace common\components\maintenance\actions;
 
 use Yii;

@@ -3,12 +3,13 @@
 namespace common\components\maintenance\states;
 
 use Yii;
-use common\components\maintenance\StateInterface;
 use yii\base\BaseObject;
 use DateTime;
 use Generator;
 use RuntimeException;
 use Exception;
+use yii\base\InvalidConfigException;
+use common\components\maintenance\StateInterface;
 
 /**
  * Class FileState
@@ -36,6 +37,7 @@ class FileState extends BaseObject implements StateInterface
     public $path;
 
     /**
+     * Enter Datetime format
      * @var string
      */
     public $format = 'd-m-Y H:i:s';
@@ -53,12 +55,15 @@ class FileState extends BaseObject implements StateInterface
      *
      * @param string $datetime
      * @throws Exception
-     * @since 0.2.5
      */
     public function enable($datetime = '')
     {
-        $datetime = !empty($datetime) ? $datetime : date($this->format);
-        $result = file_put_contents($this->path, $datetime . PHP_EOL);
+        $date = new DateTime(date($this->format, strtotime('-1 day')));
+        if ($this->validDate($datetime)) {
+            $date = new DateTime($datetime);
+        }
+        $timestamp = $date->getTimestamp();
+        $result = file_put_contents($this->path, $timestamp . PHP_EOL);
         chmod($this->path, 0765);
         if ($result === false) {
             throw new RuntimeException(
@@ -73,11 +78,16 @@ class FileState extends BaseObject implements StateInterface
      * @param string $replace
      * @param int $line
      * @return mixed|void
+     * @throws Exception
      */
     public function update($replace, $line = 1)
     {
         $result = false;
         if ($replace && file_exists($this->path)) {
+            if ($this->validDate($replace)) {
+                $date = new DateTime($replace);
+                $replace = $date->getTimestamp();
+            }
             $file = file($this->path);
             $file[$line - 1] = $replace . PHP_EOL;
             $result = file_put_contents($this->path, implode('', $file));
@@ -91,8 +101,6 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Turn off mode.
-     *
-     * @since 0.2.5
      */
     public function disable()
     {
@@ -104,7 +112,7 @@ class FileState extends BaseObject implements StateInterface
     }
 
     /**
-     * Check validate date
+     * Validate datetime
      * @param $date
      * @return bool
      */
@@ -115,23 +123,25 @@ class FileState extends BaseObject implements StateInterface
     }
 
     /**
-     * @return int
-     * @throws Exception
+     * Date ant Time
+     * @param integer|string $timestamp
+     * @return string
+     * @throws InvalidConfigException
      */
-    public function timestamp()
+    public function datetime($timestamp = '')
     {
-        $date = new DateTime($this->datetime());
-        return $date->getTimestamp();
+        $timestamp = $timestamp ?: $this->timestamp();
+        return Yii::$app->formatter->asDatetime($timestamp, 'php:' . $this->format);
     }
 
     /**
-     * Date and Time
+     * Timestamp
      * @return string
      */
-    public function datetime()
+    public function timestamp()
     {
         $contents = $this->getContentArray();
-        if (isset($contents[0]) && $this->validDate($contents[0])) {
+        if (isset($contents[0])) {
             return $contents[0];
         }
         return date($this->format, strtotime('-1 day'));
@@ -204,7 +214,6 @@ class FileState extends BaseObject implements StateInterface
      * Return status file path.
      *
      * @return bool|string
-     * @since 0.2.5
      */
     protected function getStatusFilePath()
     {
