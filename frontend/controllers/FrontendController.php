@@ -1,36 +1,18 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use yii\base\Action;
-use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\ErrorAction;
-use common\components\maintenance\actions\IndexAction;
-use common\components\maintenance\actions\SubscribeAction;
 
 /**
  * Class FrontendController
- * @package app\controllers
+ * @package frontend\controllers
  */
 class FrontendController extends Controller
 {
-    /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => [
-                    'maintenance-subscribe' => ['POST'],
-                ]
-            ]
-        ];
-    }
-
     /**
      * @return array
      */
@@ -40,12 +22,6 @@ class FrontendController extends Controller
             'error' => [
                 'class' => ErrorAction::class
             ],
-            'maintenance' => [
-                'class' => IndexAction::class
-            ],
-            'maintenance-subscribe' => [
-                'class' => SubscribeAction::class
-            ]
         ];
     }
 

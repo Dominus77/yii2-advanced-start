@@ -44,3 +44,7 @@ div.required label:after {
 .swal2-popup {
     font-size: 1.4rem !important;
 }
+
+.help-block {
+    position: absolute;
+}

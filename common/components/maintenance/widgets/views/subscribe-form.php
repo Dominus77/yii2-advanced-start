@@ -12,7 +12,7 @@ use common\components\maintenance\models\SubscribeForm;
 
 <?php $form = ActiveForm::begin([
     'id' => 'maintenance-subscribe-form',
-    'action' => Url::to(['/frontend/maintenance-subscribe']),
+    'action' => Url::to(['/maintenance/subscribe']),
     'options' => [
         'class' => 'form-inline'
     ],

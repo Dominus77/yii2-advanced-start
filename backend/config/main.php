@@ -26,6 +26,7 @@ return [
     'language' => 'en', // en, ru
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
+    'controllerNamespace' => 'backend\controllers',
     'defaultRoute' => 'main/default/index',
     'bootstrap' => [
         'log',
@@ -95,7 +96,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            'rules' => []
+            'rules' => [
+                'maintenance' => 'maintenance/index'
+            ]
         ],
         'urlManagerFrontend' => [
             'class' => UrlManager::class,

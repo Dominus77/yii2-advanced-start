@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\maintenance\actions;
+namespace common\components\maintenance\actions\frontend;
 
 use Yii;
 use yii\base\Action;
@@ -9,8 +9,7 @@ use common\components\maintenance\models\SubscribeForm;
 
 /**
  * Class SubscribeAction
- * @package common\components\maintenance\actions
- *
+ * @package common\components\maintenance\actions\frontend
  */
 class SubscribeAction extends Action
 {

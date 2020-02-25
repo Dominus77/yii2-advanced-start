@@ -6,6 +6,8 @@ use yii\caching\FileCache;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
 use modules\rbac\Module as RbacModule;
+use common\components\maintenance\StateInterface;
+use common\components\maintenance\states\FileState;
 
 return [
     'name' => 'Yii2-advanced-start',
@@ -14,6 +16,15 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset'
+    ],
+    'container' => [
+        'singletons' => [
+            StateInterface::class => [
+                'class' => FileState::class,
+                'dateFormat' => 'd-m-Y H:i:s',
+                'directory' => '@frontend/runtime'
+            ]
+        ]
     ],
     'modules' => [
         'main' => [

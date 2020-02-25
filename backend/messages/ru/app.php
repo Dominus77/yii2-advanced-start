@@ -13,4 +13,8 @@ return [
 
     'return to dashboard' => 'вернуться на главную страницу',
     'Meanwhile, you may {:Link} or try using the search form.' => 'Между тем, вы можете {:Link} или попробовать использовать форму поиска.',
+
+    'Maintenance' => 'Режим работы сайта',
+    'Date and Time' => 'Дата и время',
+    'Save' => 'Сохранить'
 ];

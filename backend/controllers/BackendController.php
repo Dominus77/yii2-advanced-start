@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use yii\base\Action;
 use yii\web\BadRequestHttpException;
@@ -9,7 +9,7 @@ use yii\web\ErrorAction;
 
 /**
  * Class BackendController
- * @package app\controllers
+ * @package backend\controllers
  */
 class BackendController extends Controller
 {

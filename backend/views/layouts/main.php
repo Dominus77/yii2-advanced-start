@@ -188,6 +188,10 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     ]
                 ],
                 [
+                    'label' => '<i class="fa fa-power-off"></i> <span>' . Yii::t('app', 'Maintenance') . '</span>',
+                    'url' => ['/maintenance/index']
+                ],
+                [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',
                     'url' => ['#']
                 ],

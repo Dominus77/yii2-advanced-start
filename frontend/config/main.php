@@ -62,19 +62,20 @@ return [
         RbacBootstrap::class,
         Maintenance::class
     ],
+    'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'main/default/index',
     'container' => [
         'singletons' => [
             Maintenance::class => [
                 'class' => Maintenance::class,
-                'route' => 'frontend/maintenance',
+                'route' => 'maintenance/index',
                 'filters' => [
                     [
                         'class' => URIFilter::class,
                         'uri' => [
                             'debug/default/view',
                             'debug/default/toolbar',
-                            'frontend/maintenance-subscribe',
+                            'maintenance/subscribe',
                             'users/default/login',
                             'users/default/logout',
                             'users/default/request-password-reset'
@@ -139,7 +140,7 @@ return [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
-                'maintenance-subscribe' => 'frontend/maintenance-subscribe',
+                'maintenance/subscribe' => 'maintenance/subscribe',
             ]
         ],
         'urlManagerBackend' => [

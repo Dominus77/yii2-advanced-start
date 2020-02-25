@@ -89,6 +89,7 @@ class SubscribeForm extends Model
     }
 
     /**
+     * Save follower
      * @return bool
      */
     public function subscribe()
@@ -100,6 +101,7 @@ class SubscribeForm extends Model
     }
 
     /**
+     * Timestamp
      * @return int
      * @throws Exception
      */

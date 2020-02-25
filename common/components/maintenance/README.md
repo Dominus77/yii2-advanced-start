@@ -75,7 +75,7 @@ $config = [
                         'uri' => [
                             'debug/default/view',
                             'debug/default/toolbar',
-                            'frontend/maintenance-subscribe',
+                            'maintenance/subscribe',
                             'users/default/login',
                             'users/default/logout',
                             'users/default/request-password-reset'
