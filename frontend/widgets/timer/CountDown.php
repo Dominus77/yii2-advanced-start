@@ -30,10 +30,10 @@ class CountDown extends Widget
     public $timestamp;
 
     /**
-     * Message note
+     * Message complete note
      * @var string
      */
-    public $message = 'Done! Please update this page.';
+    public $message = '';
 
     /**
      * Plugin options
@@ -62,6 +62,7 @@ class CountDown extends Widget
     }
 
     /**
+     * @inheritDoc
      * @return string|void
      */
     public function run()
@@ -74,6 +75,8 @@ class CountDown extends Widget
     }
 
     /**
+     * Plugin options
+     * @see https://tutorialzine.com/2011/12/countdown-jquery
      * @return array
      */
     protected function getOptions()

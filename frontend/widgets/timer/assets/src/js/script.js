@@ -1,25 +1,30 @@
 $(function () {
+    /**
+     * Initialise jQuery Countdown Plugin
+     * @url http://tutorialzine.com/2011/12/countdown-jquery/
+     * @param prop array
+     * @param trans array
+     */
     function initCountDownTimer(prop, trans) {
 
         i18n.translator.add(trans);
 
-        let note = $('#note_' + prop.id),
-            countdownId = prop.id,
+        let noteContainer = $('#note_' + prop.id),
+            countdownContainer = $('#countdown_' + prop.id),
             timestamp = prop.timestamp,
-            msg = prop.msg;
+            message = prop.msg,
+            currentDate = (new Date()).getTime();
 
-        $('#countdown_' + countdownId).countdown({
+        countdownContainer.countdown({
             timestamp: timestamp,
             callback: function (days, hours, minutes, seconds) {
-                let message = msg;
-
-                if ((new Date()).getTime() < timestamp) {
+                if (currentDate < timestamp) {
                     message = i18n("%n days", days) + ", ";
                     message += i18n("%n hours", hours) + ", ";
                     message += i18n("%n minutes", minutes) + " " + i18n("and") + " ";
                     message += i18n("%n seconds", seconds) + " <br />";
                 }
-                note.html(message);
+                noteContainer.html(message);
             }
         });
     }
