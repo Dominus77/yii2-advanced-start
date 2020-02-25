@@ -9,7 +9,7 @@ return [
     'Please contact us if you think this is a server error. Thank you.' => 'Please contact us if you think this is a server error. Thank you.',
     'Maintenance' => 'Maintenance',
     'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'The site is undergoing technical work. We apologize for any inconvenience caused.',
-    'Done! Please update this page.' => 'Done! Please update this page.',
+    'The site will work soon! Please refresh the page.' => 'The site will work soon! Please refresh the page.',
     'Notify me' => 'Notify me',
     'Your email' => 'Your email',
     'We will inform you when everything is ready!' => 'We will inform you when everything is ready!',

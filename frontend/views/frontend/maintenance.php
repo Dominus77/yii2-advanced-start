@@ -19,7 +19,7 @@ $this->title = $name;
 <?= CountDown::widget([
     'status' => true,
     'timestamp' => $model->timestamp,
-    'message' => Yii::t('app', 'Done! Please update this page.'),
+    'message' => Yii::t('app', 'The site will work soon! Please refresh the page.'),
 ]) ?>
 <br>
 <div class="form-container">

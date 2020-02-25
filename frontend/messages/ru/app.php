@@ -9,7 +9,7 @@ return [
     'Please contact us if you think this is a server error. Thank you.' => 'Если вы считаете, что это ошибка сервера, свяжитесь с нами. Спасибо.',
     'Maintenance' => 'Техническое обслуживание',
     'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'На сайте ведутся технические работы. Приносим извенения за доставленные неудобства.',
-    'Done! Please update this page.' => 'Готово! Пожалуйста обновите страницу.',
+    'The site will work soon! Please refresh the page.' => 'Сайт скоро заработает! Пожалуйста, обновите страницу.',
     'Notify me' => 'Оповестить меня',
     'Your email' => 'Ваш email',
     'We will inform you when everything is ready!' => 'Мы сообщим вам когда все будет готово!',
