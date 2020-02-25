@@ -40,7 +40,7 @@ class FileState extends BaseObject implements StateInterface
      * Enter Datetime format
      * @var string
      */
-    public $format = 'd-m-Y H:i:s';
+    public $dateFormat = 'd-m-Y H:i:s';
 
     /**
      * Initialization
@@ -58,7 +58,7 @@ class FileState extends BaseObject implements StateInterface
      */
     public function enable($datetime = '')
     {
-        $date = new DateTime(date($this->format, strtotime('-1 day')));
+        $date = new DateTime(date($this->dateFormat, strtotime('-1 day')));
         if ($this->validDate($datetime)) {
             $date = new DateTime($datetime);
         }
@@ -118,20 +118,23 @@ class FileState extends BaseObject implements StateInterface
      */
     public function validDate($date)
     {
-        $d = DateTime::createFromFormat($this->format, $date);
-        return $d && $d->format($this->format) === $date;
+        $d = DateTime::createFromFormat($this->dateFormat, $date);
+        return $d && $d->format($this->dateFormat) === $date;
     }
 
     /**
      * Date ant Time
-     * @param integer|string $timestamp
+     *
+     * @param string $format
+     * @param string|integer $timestamp
      * @return string
      * @throws InvalidConfigException
      */
-    public function datetime($timestamp = '')
+    public function datetime($timestamp = '', $format = '')
     {
+        $format = $format ?: $this->dateFormat;
         $timestamp = $timestamp ?: $this->timestamp();
-        return Yii::$app->formatter->asDatetime($timestamp, 'php:' . $this->format);
+        return Yii::$app->formatter->asDatetime($timestamp, 'php:' . $format);
     }
 
     /**
@@ -144,7 +147,7 @@ class FileState extends BaseObject implements StateInterface
         if (isset($contents[0])) {
             return $contents[0];
         }
-        return date($this->format, strtotime('-1 day'));
+        return date($this->dateFormat, strtotime('-1 day'));
     }
 
     /**

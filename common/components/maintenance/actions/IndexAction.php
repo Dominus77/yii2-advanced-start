@@ -3,7 +3,6 @@
 
 namespace common\components\maintenance\actions;
 
-use common\components\maintenance\states\FileState;
 use Yii;
 use yii\base\Action;
 use common\components\maintenance\models\SubscribeForm;

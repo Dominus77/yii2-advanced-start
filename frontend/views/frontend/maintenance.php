@@ -11,13 +11,6 @@ use common\components\maintenance\widgets\SubscribeForm;
 /* @var $model ModelSubscribeForm */
 
 $this->title = $name;
-
-\yii\helpers\VarDumper::dump($model->datetime, 10, 1);
-\yii\helpers\VarDumper::dump($model->emails, 10, 1);
-//die;
-\yii\helpers\VarDumper::dump($model->format, 10, 1);
-\yii\helpers\VarDumper::dump($model->timestamp, 10, 1);
-
 ?>
 
 <h1><?= Html::encode($this->title) ?></h1>

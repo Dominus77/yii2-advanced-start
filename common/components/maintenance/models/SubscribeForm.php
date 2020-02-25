@@ -5,7 +5,6 @@ namespace common\components\maintenance\models;
 use Yii;
 use yii\base\Model;
 use common\components\maintenance\StateInterface;
-use common\components\maintenance\states\FileState;
 use yii\helpers\ArrayHelper;
 use Exception;
 
@@ -17,7 +16,7 @@ use Exception;
  * @property array $emails
  * @property string $datetime
  * @property int $timestamp
- * @property string $format
+ * @property string $dateFormat
  * @property string $email
  */
 class SubscribeForm extends Model
@@ -37,7 +36,7 @@ class SubscribeForm extends Model
     public function init()
     {
         parent::init();
-        $this->state = new FileState();
+        $this->state = Yii::$container->get(StateInterface::class);
     }
 
     /**
@@ -102,9 +101,9 @@ class SubscribeForm extends Model
     /**
      * @return string
      */
-    public function getFormat()
+    public function getDatetime()
     {
-        return $this->state->format;
+        return $this->state->datetime($this->timestamp, $this->dateFormat);
     }
 
     /**
@@ -117,11 +116,11 @@ class SubscribeForm extends Model
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getDatetime()
+    public function getDateFormat()
     {
-        return $this->state->datetime();
+        return $this->state->dateFormat;
     }
 
     /**

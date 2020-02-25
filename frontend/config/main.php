@@ -92,7 +92,6 @@ return [
             ],
             StateInterface::class => [
                 'class' => FileState::class,
-                'format' => 'Y-m-d H:i:s',
                 'directory' => '@runtime'
             ]
         ]

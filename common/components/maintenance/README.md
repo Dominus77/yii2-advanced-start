@@ -37,7 +37,7 @@ $config = [
             'common\components\maintenance\StateInterface' => [
                 'class' => 'common\components\maintenance\states\FileState',
                 // optional: format datetime
-                // 'format' => 'd-m-Y H:i:s',
+                // 'dateFormat' => 'd-m-Y H:i:s',
     
                 // optional: use different filename for controlling maintenance state:
                 // 'fileName' => 'myfile.ext',
@@ -132,7 +132,7 @@ $config = [
             'common\components\maintenance\StateInterface' => [
                 'class' => 'common\components\maintenance\states\FileState',
                 // optional: format datetime
-                // 'format' => 'd-m-Y H:i:s',
+                // 'dateFormat' => 'd-m-Y H:i:s',
                 // optional: use different filename for controlling maintenance state:
                 // 'fileName' => 'myfile.ext',    
                 // optional: use different directory for controlling maintenance state:
