@@ -21,9 +21,12 @@ $config = [
                     [
                         'class' => 'common\components\maintenance\filters\URIFilter',
                         'uri' => [
-                            'debug/default/toolbar',
                             'debug/default/view',
-                            'site/login',
+                            'debug/default/toolbar',
+                            'frontend/maintenance-subscribe',
+                            'users/default/login',
+                            'users/default/logout',
+                            'users/default/request-password-reset'
                         ]
                     ]
                 ],
@@ -55,6 +58,7 @@ $config = [
 You can use filters for allow excepts:
 
 ```php
+// frontend/config/main.php
 $config = [
     //...
     'container' => [
@@ -71,6 +75,7 @@ $config = [
                         'uri' => [
                             'debug/default/view',
                             'debug/default/toolbar',
+                            'frontend/maintenance-subscribe',
                             'users/default/login',
                             'users/default/logout',
                             'users/default/request-password-reset'
@@ -152,8 +157,9 @@ $config = [
 
 Now you can set mode by command:
 ```
-php yii maintenance/enable
-```
-```
+php yii maintenance
+php yii maintenance/enable "25-02-2025 16:05:00"
+php yii maintenance/update "24-05-2023 19:05:00"
+php yii maintenance/followers
 php yii maintenance/disable
 ```

@@ -100,28 +100,12 @@ class SubscribeForm extends Model
     }
 
     /**
-     * @return string
-     */
-    public function getDatetime()
-    {
-        return $this->state->datetime($this->timestamp, $this->dateFormat);
-    }
-
-    /**
      * @return int
      * @throws Exception
      */
     public function getTimestamp()
     {
         return $this->state->timestamp();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateFormat()
-    {
-        return $this->state->dateFormat;
     }
 
     /**
