@@ -42,6 +42,7 @@ class Translate
         return [
             'values' => [
                 'and' => 'and',
+                'Left' => 'Left',
                 $n . 'days' => [
                     [0, 0, $n . 'days'],
                     [1, 1, $n . 'day'],
@@ -72,6 +73,13 @@ class Translate
      */
     protected static function ru()
     {
+        $result = [
+            'values' => [
+                'and' => 'и',
+                'Left' => 'Осталось'
+            ]
+        ];
+
         $n = '%n ';
         $values = [
             $n . 'days' => [
@@ -93,12 +101,6 @@ class Translate
                 0 => $n . 'секунд',
                 1 => $n . 'секунда',
                 2 => $n . 'секунды',
-            ]
-        ];
-
-        $result = [
-            'values' => [
-                'and' => 'и'
             ]
         ];
 
