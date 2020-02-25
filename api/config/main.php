@@ -18,7 +18,7 @@ $params = ArrayHelper::merge(
 
 return [
     'id' => 'app-api',
-    'language' => 'en',
+    'language' => 'en', // en, ru
     'homeUrl' => '/api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [

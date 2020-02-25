@@ -21,7 +21,7 @@ $params = ArrayHelper::merge(
 
 return [
     'id' => 'app-console',
-    'language' => 'en',
+    'language' => 'en', // en, ru
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
