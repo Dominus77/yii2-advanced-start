@@ -23,25 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
-            <?php $form = ActiveForm::begin([
-                'id' => 'maintenance-update-form',
-                'action' => Url::to(['/maintenance/index']),
-                'options' => [
-                    'class' => 'form-inline'
-                ],
-                'fieldConfig' => [
-                    'template' => "<div class=\"input-group\"><div class=\"input-group-addon\"><span class=\"fa fa-calendar\"></span></div>{input}</div>\n{hint}\n{error}",
-                ],
-            ]); ?>
-            <?= $form->field($model, 'date')->textInput([
-                'placeholder' => true,
-            ])->label(false) ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'maintenance-update-form',
+                        'action' => Url::to(['/maintenance/index']),
+                        'fieldConfig' => [
+                            'template' => "<div class=\"input-group\"><div class=\"input-group-addon\"><span class=\"fa fa-calendar\"></span></div>{input}</div>\n{hint}\n{error}",
+                        ],
+                    ]); ?>
+                    <?= $form->field($model, 'date')->textInput([
+                        'placeholder' => true,
+                    ])->label(false) ?>
 
-            <?= Html::submitButton(Yii::t('app', 'Save'), [
-                'class' => 'btn btn-primary',
-                'name' => 'maintenance-subscribe-button'
-            ]) ?>
-            <?php ActiveForm::end(); ?>
+                    <?= Html::submitButton(Yii::t('app', 'Save'), [
+                        'class' => 'btn btn-primary',
+                        'name' => 'maintenance-subscribe-button'
+                    ]) ?>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
             <br>
             <br>
         </div>
