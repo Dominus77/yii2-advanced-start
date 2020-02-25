@@ -23,7 +23,7 @@ $params = ArrayHelper::merge(
 
 return [
     'id' => 'app-backend',
-    'language' => 'ru', // en, ru
+    'language' => 'en', // en, ru
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'main/default/index',
