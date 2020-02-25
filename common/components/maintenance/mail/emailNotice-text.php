@@ -1,15 +1,13 @@
 <?php
 
-use yii\helpers\Url;
-
 /**
  * @var $this yii\web\View
+ * @var $link string
  */
 
-$link = Yii::$app->urlManager->hostInfo;
+$link =  Yii::$app->urlManager->createAbsoluteUrl(['main/default/index']);
 ?>
-Технические работы закончены.
+<?= Yii::t('app', 'Technical work completed.') ?>
+<?= Yii::t('app', 'Please follow the link below to visit the site.') ?>
 
-This message allows you to visit our site home page by one click
-
-<?= Url::home('http') ?>
+<?= $link ?>

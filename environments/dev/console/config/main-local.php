@@ -6,5 +6,11 @@ return [
     'bootstrap' => ['gii'],
     'modules' => [
         'gii' => GiiModule::class
+    ],
+    'components' => [
+        'urlManager' => [
+            'baseUrl' => '/',
+            'hostInfo' => $params['frontendUrl'],
+        ],
     ]
 ];

@@ -3,13 +3,14 @@
 namespace common\components\maintenance\states;
 
 use Yii;
-use yii\base\BaseObject;
 use DateTime;
 use Generator;
-use RuntimeException;
 use Exception;
+use RuntimeException;
+use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 use common\components\maintenance\StateInterface;
+use common\components\maintenance\models\SubscribeForm;
 
 /**
  * Class FileState
@@ -101,10 +102,19 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Turn off mode.
+     *
+     * @return mixed|void
      */
     public function disable()
     {
-        if (file_exists($this->path) && !unlink($this->path)) {
+        try {
+            if (file_exists($this->path)) {
+                $subscribe = new SubscribeForm();
+                $result = $subscribe->send($this->emails());
+                unlink($this->path);
+                return $result;
+            }
+        } catch (RuntimeException $e) {
             throw new RuntimeException(
                 "Attention: the maintenance mode could not be disabled because {$this->path} could not be removed."
             );
@@ -113,6 +123,7 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Validate datetime
+     *
      * @param $date
      * @return bool
      */
@@ -139,6 +150,7 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Timestamp
+     *
      * @return string
      */
     public function timestamp()
@@ -151,7 +163,8 @@ class FileState extends BaseObject implements StateInterface
     }
 
     /**
-     * Return emails to subscribe
+     * Return emails to followers
+     *
      * @return array
      */
     public function emails()
@@ -164,6 +177,7 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Save email in file
+     *
      * @param string $str
      * @return bool
      */
@@ -180,6 +194,7 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Return content to array this file
+     *
      * @return array
      */
     protected function getContentArray()
@@ -194,6 +209,7 @@ class FileState extends BaseObject implements StateInterface
 
     /**
      * Read file
+     *
      * @return Generator
      */
     protected function readTheFile()

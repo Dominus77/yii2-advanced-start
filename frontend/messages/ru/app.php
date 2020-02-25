@@ -14,5 +14,7 @@ return [
     'Your email' => 'Ваш email',
     'We will inform you when everything is ready!' => 'Мы сообщим вам когда все будет готово!',
     'You have already subscribed to the alert!' => 'Вы уже подписаны на оповещение!',
-    'Notification of completion of technical work' => 'Оповещение о завершении технических работ'
+    'Notification of completion of technical work' => 'Оповещение о завершении технических работ',
+    'Technical work completed.' => 'Технические работы закончены.',
+    'Please follow the link below to visit the site.' => 'Пожалуйста, пройдите по ссылке ниже, что бы посетить сайт.'
 ];

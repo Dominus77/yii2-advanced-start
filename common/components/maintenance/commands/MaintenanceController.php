@@ -34,7 +34,7 @@ class MaintenanceController extends Controller
     }
 
     /**
-     * Maintenance commands
+     * Maintenance status or commands
      */
     public function actionIndex()
     {
@@ -95,6 +95,9 @@ class MaintenanceController extends Controller
         $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
         $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
 
+        $this->stdout("\nSubscribers to whom messages will be sent after turning off the mode maintenance\n");
+        $this->stdout("Use:\nphp yii maintenance/followers\nto show followers.\n");
+
         $this->stdout("\nMaintenance Mode disable.\n");
         $this->stdout("Use:\nphp yii maintenance/disable\nto disable maintenance mode.\n");
     }
@@ -118,7 +121,9 @@ class MaintenanceController extends Controller
             }
         } else {
             $this->stdout("Maintenance Mode not enable!\n");
+
             $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+
             $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
             $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
@@ -130,9 +135,13 @@ class MaintenanceController extends Controller
      */
     public function actionDisable()
     {
-        $this->state->disable();
+        $result = $this->state->disable();
         $this->stdout("Maintenance Mode has been disabled.\n");
-        $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+        if ($result || $result === 0) {
+            $this->stdout("Notified ($result) subscribers.\n");
+        }
+
+        $this->stdout("\nUse:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
 
         $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
         $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
@@ -144,11 +153,21 @@ class MaintenanceController extends Controller
      */
     public function actionFollowers()
     {
-        if ($emails = $this->state->emails()) {
+        if (!$this->state->isEnabled()) {
+            $this->stdout("Maintenance Mode not enable!\n");
+
+            $this->stdout("\nUse:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
+
+            $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+            $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+        } else if ($emails = $this->state->emails()) {
             $this->stdout('Total (' . count($emails) . ') followers:' . PHP_EOL);
             foreach ($emails as $email) {
                 $this->stdout($email . PHP_EOL);
             }
+        } else {
+            $this->stdout("No followers\n");
         }
     }
 

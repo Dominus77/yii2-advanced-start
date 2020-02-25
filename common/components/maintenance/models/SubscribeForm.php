@@ -65,26 +65,27 @@ class SubscribeForm extends Model
     }
 
     /**
-     * Send all
-     * @return int
+     * Sending notifications to followers
+     *
+     * @param array $emails
+     * @return bool|int
      */
-    public function sendAllNotify()
+    public function send($emails = [])
     {
-        if ($this->emails) {
-            $messages = [];
-            $mailer = Yii::$app->mailer;
-            foreach ($this->emails as $email) {
-                $messages[] = $mailer->compose([
-                    'html' => '@common/components/maintenance/mail/emailNotice-html',
-                    'text' => '@common/components/maintenance/mail/emailNotice-text'
-                ], [])
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo($email)
-                    ->setSubject(Yii::t('app', 'Notification of completion of technical work'));
-            }
-            return $mailer->sendMultiple($messages);
+        $emails = $emails ?: $this->emails;
+        $messages = [];
+        $mailer = Yii::$app->mailer;
+        foreach ($emails as $email) {
+            $messages[] = $mailer->compose([
+                'html' => '@common/components/maintenance/mail/emailNotice-html',
+                'text' => '@common/components/maintenance/mail/emailNotice-text'
+            ], [])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo($email)
+                ->setSubject(Yii::t('app', 'Notification of completion of technical work'));
+
         }
-        return true;
+        return $mailer->sendMultiple($messages);
     }
 
     /**

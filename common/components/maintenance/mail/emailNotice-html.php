@@ -1,16 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /**
  * @var $this yii\web\View
+ * @var $link string
  */
 
-$link = Yii::$app->urlManager->hostInfo
+$link =  Yii::$app->urlManager->createAbsoluteUrl(['main/default/index']);
 ?>
 <div class="email-notice">
-    <h2>Технические работы закончены.</h2>
-    <p>This message allows you to visit our site home page by one click</p>
-    <?= Html::a(Url::home('http'), Url::home('http')) ?>
+    <h2><?= Yii::t('app', 'Technical work completed.') ?></h2>
+    <p><?= Yii::t('app', 'Please follow the link below to visit the site.') ?></p>
+    <?= Html::a($link, $link) ?>
 </div>

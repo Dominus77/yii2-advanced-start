@@ -67,7 +67,13 @@ return [
                     'levels' => ['error', 'warning']
                 ]
             ]
-        ]
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => []
+        ],
     ],
     'params' => $params
 ];

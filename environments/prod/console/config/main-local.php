@@ -1,3 +1,10 @@
 <?php
 
-return [];
+return [
+    'components' => [
+        'urlManager' => [
+            'baseUrl' => '/',
+            'hostInfo' => $params['frontendUrl'],
+        ],
+    ]
+];
