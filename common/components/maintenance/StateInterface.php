@@ -11,23 +11,29 @@ interface StateInterface
     /**
      * Enable mode method
      *
-     * @param string $datetime
+     * @param $datetime string
+     * @param $title string
+     * @param $content string
+     * @param $subscribe bool
      * @return mixed
      */
-    public function enable($datetime);
+    public function enable($datetime, $title, $content, $subscribe);
+
     /**
-     * Update text to mode file
-     *
-     * @param string $datetime
+     * Update param text to mode file
+     * @param $replace string
+     * @param $line integer
      * @return mixed
      */
-    public function update($datetime);
+    public function update($replace, $line);
+
     /**
      * Disable mode method
      *
      * @return mixed
      */
     public function disable();
+
     /**
      * @return bool
      */

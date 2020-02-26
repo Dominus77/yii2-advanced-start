@@ -16,6 +16,9 @@ class Permission extends Model
     use ModuleTrait;
 
     // разрешения
+    const PERMISSION_MANAGER_MAINTENANCE = 'managerMaintenance';
+    const PERMISSION_MANAGER_MAINTENANCE_DESCRIPTION = 'Access to Maintenance management';
+
     const PERMISSION_MAINTENANCE = 'maintenance';
     const PERMISSION_MAINTENANCE_DESCRIPTION = 'View a site in maintenance mode';
 
@@ -60,6 +63,7 @@ class Permission extends Model
     public function getPermissionsArray()
     {
         return [
+            self::PERMISSION_MANAGER_MAINTENANCE => self::PERMISSION_MANAGER_MAINTENANCE_DESCRIPTION,
             self::PERMISSION_MAINTENANCE => self::PERMISSION_MAINTENANCE_DESCRIPTION,
             self::PERMISSION_VIEW_ADMIN_PAGE => self::PERMISSION_VIEW_ADMIN_PAGE_DESCRIPTION,
             self::PERMISSION_MANAGER_CONFIG => self::PERMISSION_MANAGER_CONFIG_DESCRIPTION,
@@ -84,6 +88,7 @@ class Permission extends Model
             Role::ROLE_EDITOR => self::groupEditor()
         ];
     }
+
     /**
      * Group permissions to role super_admin
      * @return array
@@ -91,6 +96,7 @@ class Permission extends Model
     public static function groupSuperAdmin()
     {
         return [
+            self::PERMISSION_MANAGER_MAINTENANCE,
             self::PERMISSION_MAINTENANCE,
             self::PERMISSION_VIEW_ADMIN_PAGE,
             self::PERMISSION_MANAGER_CONFIG,
@@ -100,6 +106,7 @@ class Permission extends Model
             self::PERMISSION_MANAGER_RBAC
         ];
     }
+
     /**
      * Group permissions to role admin
      * @return array
@@ -107,6 +114,7 @@ class Permission extends Model
     public static function groupAdmin()
     {
         return [
+            self::PERMISSION_MANAGER_MAINTENANCE,
             self::PERMISSION_MAINTENANCE,
             self::PERMISSION_VIEW_ADMIN_PAGE,
             self::PERMISSION_MANAGER_POST,
@@ -114,6 +122,7 @@ class Permission extends Model
             self::PERMISSION_MANAGER_USERS
         ];
     }
+
     /**
      * Group permissions to role manager
      * @return array
@@ -125,6 +134,7 @@ class Permission extends Model
             self::PERMISSION_MANAGER_POST
         ];
     }
+
     /**
      * Group permissions to role editor
      * @return array

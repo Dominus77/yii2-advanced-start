@@ -16,5 +16,8 @@ return [
 
     'Maintenance' => 'Режим работы сайта',
     'Date and Time' => 'Дата и время',
+    'Mode' => 'Режим',
+    'Mode normal' => 'Нормальный режим',
+    'Mode maintenance' => 'Техническое обслуживание',
     'Save' => 'Сохранить'
 ];

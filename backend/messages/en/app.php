@@ -16,5 +16,8 @@ return [
 
     'Maintenance' => 'Maintenance',
     'Date and Time' => 'Date and Time',
+    'Mode' => 'Mode',
+    'Mode normal' => 'Mode normal',
+    'Mode maintenance' => 'Mode maintenance',
     'Save' => 'Save'
 ];

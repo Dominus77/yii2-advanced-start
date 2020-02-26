@@ -17,6 +17,7 @@ use Exception;
  * @property string $datetime
  * @property int $timestamp
  * @property string $dateFormat
+ * @property string $fileSubscribePath
  * @property string $email
  */
 class SubscribeForm extends Model
@@ -68,7 +69,7 @@ class SubscribeForm extends Model
      * Sending notifications to followers
      *
      * @param array $emails
-     * @return bool|int
+     * @return int
      */
     public function send($emails = [])
     {
@@ -129,12 +130,20 @@ class SubscribeForm extends Model
     }
 
     /**
+     * @return bool will return true if on subscribe
+     */
+    public function isSubscribe()
+    {
+        return $this->state->isSubscribe();
+    }
+
+    /**
      * Save email in file
      * @return bool
      */
     protected function save()
     {
-        return $this->state->save($this->email);
+        return $this->state->save($this->email, $this->getFileSubscribePath());
     }
 
     /**
@@ -144,5 +153,14 @@ class SubscribeForm extends Model
     protected function getFileStatePath()
     {
         return $this->state->path;
+    }
+
+    /**
+     * Subscribe file path
+     * @return string
+     */
+    protected function getFileSubscribePath()
+    {
+        return $this->state->subscribePath;
     }
 }

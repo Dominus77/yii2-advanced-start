@@ -17,10 +17,39 @@ use Exception;
  */
 class Manager extends Model
 {
+    const MODE_MAINTENANCE_ON = 'maintenanceOn';
+    const MODE_MAINTENANCE_OFF = 'maintenanceOff';
+
     /**
+     * Select mode
+     * @var array
+     */
+    public $mode;
+    /**
+     * Datetime
      * @var string
      */
     public $date;
+    /**
+     * Title
+     * @var string
+     */
+    public $name;
+    /**
+     * Text
+     * @var string
+     */
+    public $text;
+    /**
+     * Subscribe
+     * @var bool
+     */
+    public $subscribe = true;
+    /**
+     * CountDown
+     * @var bool
+     */
+    public $countDown = true;
 
     /**
      * @var StateInterface
@@ -34,6 +63,8 @@ class Manager extends Model
     {
         parent::init();
         $this->state = Yii::$container->get(StateInterface::class);
+        $this->name = $this->name ?: Yii::t('app', 'Maintenance');
+        $this->text = $this->text ?: Yii::t('app', 'The site is undergoing technical work. We apologize for any inconvenience caused.');
     }
 
     /**
@@ -44,7 +75,7 @@ class Manager extends Model
     {
         return [
             ['date', 'trim'],
-            ['date', 'required'],
+            [['date', 'mode'], 'required'],
             ['date', 'string', 'max' => 19],
         ];
     }
@@ -56,7 +87,24 @@ class Manager extends Model
     public function attributeLabels()
     {
         return [
+            'mode' => Yii::t('app', 'Mode'),
             'date' => Yii::t('app', 'Date and Time'),
+            'name' => Yii::t('app', 'Title'),
+            'text' => Yii::t('app', 'Text'),
+            'subscribe' => Yii::t('app', 'Subscribe'),
+            'countDown' => Yii::t('app', 'Count Down'),
+        ];
+    }
+
+    /**
+     * Modes
+     * @return array
+     */
+    public static function getModesArray()
+    {
+        return [
+            self::MODE_MAINTENANCE_OFF => Yii::t('app', 'Mode normal'),
+            self::MODE_MAINTENANCE_ON => Yii::t('app', 'Mode maintenance'),
         ];
     }
 

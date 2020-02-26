@@ -43,7 +43,9 @@ $config = [
                 // 'dateFormat' => 'd-m-Y H:i:s',
     
                 // optional: use different filename for controlling maintenance state:
-                // 'fileName' => 'myfile.ext',
+                // 'fileName' => 'my_file.ext',
+                // optional: use a different file name to store subscribers of end-of-service notify
+                // 'fileSubscribe' => 'my_file_subscribe.ext',
     
                 // optional: use different directory for controlling maintenance state:
                 'directory' => '@runtime',
@@ -139,7 +141,9 @@ $config = [
                 // optional: format datetime
                 // 'dateFormat' => 'd-m-Y H:i:s',
                 // optional: use different filename for controlling maintenance state:
-                // 'fileName' => 'myfile.ext',    
+                // 'fileName' => 'myfile.ext',
+                // optional: use a different file name to store subscribers of end-of-service notify
+                // 'fileSubscribe' => 'my_file_subscribe.ext',    
                 // optional: use different directory for controlling maintenance state:
                 'directory' => '@frontend/runtime',
             ]
@@ -158,8 +162,8 @@ $config = [
 Now you can set mode by command:
 ```
 php yii maintenance
-php yii maintenance/enable "25-02-2025 16:05:00"
-php yii maintenance/update "24-05-2023 19:05:00"
+php yii maintenance/enable --date="25-02-2025 16:05:00" --title="Maintenance" --content="The site is undergoing technical work. We apologize for any inconvenience caused." --subscribe=true
+php yii maintenance/update --date="24-05-2023 19:05:00" --title="Maintenance" --content="The site is undergoing technical work. We apologize for any inconvenience caused." --subscribe=true
 php yii maintenance/followers
 php yii maintenance/disable
 ```

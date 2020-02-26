@@ -2,7 +2,9 @@
 
 namespace backend\controllers;
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use modules\rbac\models\Permission;
 use common\components\maintenance\actions\backend\IndexAction;
 
 /**
@@ -11,6 +13,21 @@ use common\components\maintenance\actions\backend\IndexAction;
  */
 class MaintenanceController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [Permission::PERMISSION_MANAGER_MAINTENANCE]
+                    ]
+                ]
+            ]
+        ];
+    }
+
     /**
      * @return array
      */

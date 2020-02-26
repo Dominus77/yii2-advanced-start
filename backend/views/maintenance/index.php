@@ -28,13 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin([
                         'id' => 'maintenance-update-form',
                         'action' => Url::to(['/maintenance/index']),
-                        'fieldConfig' => [
+                        /*'fieldConfig' => [
                             'template' => "<div class=\"input-group\"><div class=\"input-group-addon\"><span class=\"fa fa-calendar\"></span></div>{input}</div>\n{hint}\n{error}",
-                        ],
+                        ],*/
                     ]); ?>
+                    <?= $form->field($model, 'mode')->dropDownList($model::getModesArray()) ?>
+
                     <?= $form->field($model, 'date')->textInput([
                         'placeholder' => true,
-                    ])->label(false) ?>
+                    ]) ?>
 
                     <?= Html::submitButton(Yii::t('app', 'Save'), [
                         'class' => 'btn btn-primary',

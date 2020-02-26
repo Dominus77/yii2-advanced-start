@@ -2,8 +2,10 @@
 
 namespace common\components\maintenance\actions\frontend;
 
+use common\components\maintenance\states\FileState;
 use Yii;
 use yii\base\Action;
+use common\components\maintenance\StateInterface;
 use common\components\maintenance\models\SubscribeForm;
 
 /**
@@ -30,18 +32,24 @@ class IndexAction extends Action
     public $params = [];
 
     /**
+     * @var StateInterface
+     */
+    protected $state;
+
+    /**
      * {@inheritdoc}
      */
     public function init()
     {
         parent::init();
+        $this->state = Yii::$container->get(StateInterface::class);
 
         if ($this->defaultMessage === null) {
-            $this->defaultMessage = Yii::t('app', 'The site is undergoing technical work. We apologize for any inconvenience caused.');
+            $this->defaultMessage = Yii::t('app', $this->state->getParams(FileState::MAINTENANCE_PARAM_CONTENT));
         }
 
         if ($this->defaultName === null) {
-            $this->defaultName = Yii::t('app', 'Maintenance');
+            $this->defaultName = Yii::t('app', $this->state->getParams(FileState::MAINTENANCE_PARAM_TITLE));
         }
     }
 
@@ -67,7 +75,7 @@ class IndexAction extends Action
         return [
             'name' => $this->defaultName,
             'message' => $this->defaultMessage,
-            'model' => $model
+            'model' => $model,
         ];
     }
 }

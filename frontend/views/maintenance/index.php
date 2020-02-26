@@ -24,7 +24,7 @@ $this->title = $name;
 <br>
 <div class="form-container">
     <?= SubscribeForm::widget([
-        'status' => true,
+        'status' => $model->isSubscribe(),
         'model' => $model
     ]) ?>
 </div>

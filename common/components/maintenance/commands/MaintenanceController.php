@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance\commands;
 
+use common\components\maintenance\states\FileState;
 use yii\helpers\Console;
 use yii\console\Controller;
 use yii\base\Module;
@@ -14,9 +15,32 @@ use common\components\maintenance\StateInterface;
 class MaintenanceController extends Controller
 {
     /**
+     * Date
+     * @var string
+     */
+    public $date;
+    /**
+     * Title
+     * @var string
+     */
+    public $title;
+    /**
+     * Content
+     * @var string
+     */
+    public $content;
+    /**
+     * @var string
+     */
+    public $subscribe;
+
+    /**
      * @var StateInterface
      */
     protected $state;
+    /**
+     * @var mixed string
+     */
     protected $exampleData;
 
     /**
@@ -34,6 +58,35 @@ class MaintenanceController extends Controller
     }
 
     /**
+     * Options
+     * @param string $actionID
+     * @return array|string[]
+     */
+    public function options($actionID)
+    {
+        return [
+            'date',
+            'title',
+            'content',
+            'subscribe',
+        ];
+    }
+
+    /**
+     * Aliases
+     * @return array
+     */
+    public function optionAliases()
+    {
+        return [
+            'd' => 'date',
+            't' => 'title',
+            'c' => 'content',
+            's' => 'subscribe'
+        ];
+    }
+
+    /**
      * Maintenance status or commands
      */
     public function actionIndex()
@@ -46,7 +99,7 @@ class MaintenanceController extends Controller
             $this->stdout('Total (' . count($this->state->emails()) . ') followers.' . PHP_EOL);
 
             $this->stdout("\nMaintenance Mode update date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
+            $this->stdout("Use:\nphp yii maintenance/update --date=\"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
 
             $this->stdout("\nSubscribers to whom messages will be sent after turning off the mode maintenance\n");
@@ -62,11 +115,11 @@ class MaintenanceController extends Controller
             $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
 
             $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable --date=\"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
 
             $this->stdout("\nMaintenance Mode update date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
+            $this->stdout("Use:\nphp yii maintenance/update --date=\"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
 
             $this->stdout("\nSubscribers to whom messages will be sent after turning off the mode maintenance\n");
@@ -79,12 +132,12 @@ class MaintenanceController extends Controller
 
     /**
      * Enable maintenance mode
-     * @param string $datetime
      */
-    public function actionEnable($datetime = '')
+    public function actionEnable()
     {
+        $datetime = $this->date;
         if (!$this->state->isEnabled()) {
-            $this->state->enable($datetime);
+            $this->state->enable($datetime, $this->title, $this->content, $this->subscribe);
         }
         $datetime = $this->state->datetime();
         $enabled = $this->ansiFormat('ENABLED', Console::FG_RED);
@@ -92,7 +145,7 @@ class MaintenanceController extends Controller
         $this->stdout("on until $datetime\n");
 
         $this->stdout("\nMaintenance Mode update date and time.\n");
-        $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
+        $this->stdout("Use:\nphp yii maintenance/update --date=\"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
         $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
 
         $this->stdout("\nSubscribers to whom messages will be sent after turning off the mode maintenance\n");
@@ -104,20 +157,58 @@ class MaintenanceController extends Controller
 
     /**
      * Update date and time maintenance mode
-     * @param string $datetime dd-mm-Y H:i:s
      */
-    public function actionUpdate($datetime = '')
+    public function actionUpdate()
     {
         if ($this->state->isEnabled()) {
-            if ($this->state->validDate($datetime)) {
-                $this->state->update($datetime);
-                $updated = $this->ansiFormat('UPDATED', Console::FG_GREEN);
+            $status = false;
+            $updated = $this->ansiFormat('UPDATED', Console::FG_GREEN);
+            if ($this->date) {
+                if ($this->state->validDate($this->date)) {
+                    $this->state->updateParam(FileState::MAINTENANCE_PARAM_TIMESTAMP, $this->date);
+                    $param = $this->state->datetime();
+                    $this->stdout("Maintenance Mode has been $updated!\n");
+                    $this->stdout("To: $param\n");
+                    $status = true;
+                } else {
+                    $this->stdout("Invalid date and time format\n");
+                    $this->stdout("Use:\nphp yii maintenance/update --date=\"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
+                    $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+                    $status = true;
+                }
+            }
+
+            if ($this->title) {
+                $this->state->updateParam(FileState::MAINTENANCE_PARAM_TITLE, $this->title);
+                $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_TITLE);
                 $this->stdout("Maintenance Mode has been $updated!\n");
-                $this->stdout("To: \n$datetime \n");
-            } else {
-                $this->stdout("Invalid date and time format\n");
-                $this->stdout("Use:\nphp yii maintenance/update \"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
-                $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
+                $this->stdout("To: $param\n");
+                $status = true;
+            }
+
+            if ($this->content) {
+                $this->state->updateParam(FileState::MAINTENANCE_PARAM_CONTENT, $this->content);
+                $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_CONTENT);
+                $this->stdout("Maintenance Mode has been $updated!\n");
+                $this->stdout("To: $param\n");
+                $status = true;
+            }
+
+            if ($this->subscribe) {
+                $this->state->updateParam(FileState::MAINTENANCE_PARAM_SUBSCRIBE, $this->subscribe);
+                $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_SUBSCRIBE);
+                $this->stdout("Maintenance Mode has been $updated!\n");
+                $this->stdout("To: $param\n");
+                $status = true;
+            }
+
+            if ($status === false) {
+                $this->stdout("Not specified what to update\n");
+                $this->stdout("\nUse:\n");
+                $this->stdout("\nphp yii maintenance/update --date=\"$this->exampleData\"\nto update maintenance mode to $this->exampleData.\n");
+                $this->stdout("\nphp yii maintenance/update --title=\"Maintenance\"\nto update maintenance mode title.\n");
+                $this->stdout("\nphp yii maintenance/update --content=\"Maintenance\"\nto update maintenance mode text content.\n");
+                $this->stdout("\nphp yii maintenance/update --subscribe=true\nto enable subscribe form for maintenance mode.\n");
             }
         } else {
             $this->stdout("Maintenance Mode not enable!\n");
@@ -125,7 +216,7 @@ class MaintenanceController extends Controller
             $this->stdout("Use:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
 
             $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable --date=\"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
         }
     }
@@ -144,7 +235,7 @@ class MaintenanceController extends Controller
         $this->stdout("\nUse:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
 
         $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
-        $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+        $this->stdout("Use:\nphp yii maintenance/enable --date=\"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
         $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
     }
 
@@ -159,7 +250,7 @@ class MaintenanceController extends Controller
             $this->stdout("\nUse:\nphp yii maintenance/enable\nto enable maintenance mode.\n");
 
             $this->stdout("\nAlso maintenance Mode enable set to date and time.\n");
-            $this->stdout("Use:\nphp yii maintenance/enable \"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
+            $this->stdout("Use:\nphp yii maintenance/enable --date=\"$this->exampleData\"\nto enable maintenance mode to $this->exampleData.\n");
             $this->stdout("Note:\nThis date and time not disable maintenance mode\n");
         } else if ($emails = $this->state->emails()) {
             $this->stdout('Total (' . count($emails) . ') followers:' . PHP_EOL);
