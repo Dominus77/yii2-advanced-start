@@ -131,6 +131,16 @@ class SubscribeForm extends Model
     }
 
     /**
+     * Timer show/hide
+     * @return bool
+     */
+    public function isTimer()
+    {
+        return $this->state->isTimer();
+    }
+
+    /**
+     * Subscribe form on/off
      * @return bool will return true if on subscribe
      */
     public function isSubscribe()

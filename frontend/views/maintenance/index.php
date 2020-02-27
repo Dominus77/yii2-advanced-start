@@ -17,7 +17,7 @@ $this->title = $name;
 <p><?= $message ?></p>
 <br>
 <?= CountDown::widget([
-    'status' => true,
+    'status' => $model->isTimer(),
     'timestamp' => $model->timestamp,
     'message' => Yii::t('app', 'The site will work soon! Please refresh the page.'),
 ]) ?>

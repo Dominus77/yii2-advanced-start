@@ -12,7 +12,6 @@ use yii\base\InvalidConfigException;
 use common\components\maintenance\interfaces\StateInterface;
 use common\components\maintenance\models\SubscribeForm;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 
 /**
  * Class FileState
@@ -376,7 +375,7 @@ class FileState extends BaseObject implements StateInterface
      *
      * @param $file string
      */
-    protected function createFile($file)
+    /*protected function createFile($file)
     {
         try {
             if ($file && !file_exists($file)) {
@@ -388,6 +387,14 @@ class FileState extends BaseObject implements StateInterface
                 "Failed to create $file file."
             );
         }
+    }*/
+
+    /**
+     * @return bool will return true if on timer
+     */
+    public function isTimer()
+    {
+        return (($date = $this->getParams(self::MAINTENANCE_PARAM_DATE)) && $date > time());
     }
 
     /**
