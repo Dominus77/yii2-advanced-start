@@ -7,6 +7,7 @@ use yii\base\Model;
 use common\components\maintenance\interfaces\StateInterface;
 use yii\helpers\ArrayHelper;
 use Exception;
+use yii\helpers\VarDumper;
 
 /**
  * Class SubscribeForm

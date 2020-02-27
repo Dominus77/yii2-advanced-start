@@ -2,14 +2,13 @@
 
 namespace common\components\maintenance\models;
 
-use common\components\maintenance\states\FileState;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\base\Model;
-use common\components\maintenance\interfaces\StateInterface;
-use Exception;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
+use common\components\maintenance\interfaces\StateInterface;
+use common\components\maintenance\states\FileState;
+use Exception;
 
 /**
  * Class FileStateForm
@@ -72,11 +71,11 @@ class FileStateForm extends Model
     public function init()
     {
         parent::init();
-        $this->mode = self::MODE_MAINTENANCE_OFF;
         $this->state = Yii::$container->get(StateInterface::class);
+        $this->mode = self::MODE_MAINTENANCE_OFF;
         $this->date = $this->datetime;
-        $this->title = $this->title ?: Yii::t('app', 'Maintenance');
-        $this->text = $this->text ?: Yii::t('app', 'The site is undergoing technical work. We apologize for any inconvenience caused.');
+        $this->title = $this->title ?: Yii::t('app', $this->state->defaultTitle);
+        $this->text = $this->text ?: Yii::t('app', $this->state->defaultContent);
         $this->setFollowers();
         $this->setData();
     }
