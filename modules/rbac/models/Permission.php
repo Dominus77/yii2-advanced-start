@@ -19,7 +19,7 @@ class Permission extends Model
     const PERMISSION_MANAGER_MAINTENANCE = 'managerMaintenance';
     const PERMISSION_MANAGER_MAINTENANCE_DESCRIPTION = 'Access to Maintenance management';
 
-    const PERMISSION_MAINTENANCE = 'maintenance';
+    const PERMISSION_MAINTENANCE = 'maintenanceView';
     const PERMISSION_MAINTENANCE_DESCRIPTION = 'View a site in maintenance mode';
 
     const PERMISSION_VIEW_ADMIN_PAGE = 'viewAdminPage';
