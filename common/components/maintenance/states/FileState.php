@@ -164,6 +164,7 @@ class FileState extends BaseObject implements StateInterface
      */
     public function disable()
     {
+        $result = 0;
         try {
             if (file_exists($this->path)) {
                 unlink($this->path);
@@ -172,13 +173,13 @@ class FileState extends BaseObject implements StateInterface
                 if ($result > 0) {
                     unlink($this->subscribePath);
                 }
-                return $result;
             }
         } catch (RuntimeException $e) {
             throw new RuntimeException(
                 "Attention: the maintenance mode could not be disabled because {$this->path} could not be removed."
             );
         }
+        return $result;
     }
 
     /**
