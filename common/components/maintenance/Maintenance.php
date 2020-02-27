@@ -2,6 +2,7 @@
 
 namespace common\components\maintenance;
 
+use common\components\maintenance\interfaces\StateInterface;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\Application;

@@ -1,10 +1,10 @@
 <?php
 
-namespace common\components\maintenance;
+namespace common\components\maintenance\interfaces;
 
 /**
  * Interface StateInterface
- * @package common\components\maintenance
+ * @package common\components\maintenance\interfaces
  */
 interface StateInterface
 {
@@ -21,6 +21,7 @@ interface StateInterface
 
     /**
      * Update param text to mode file
+     *
      * @param $replace string
      * @param $line integer
      * @return mixed

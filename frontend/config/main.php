@@ -14,7 +14,7 @@ use common\components\maintenance\Maintenance;
 use common\components\maintenance\filters\URIFilter;
 use common\components\maintenance\filters\RoleFilter;
 use common\components\maintenance\states\FileState;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
 use modules\rbac\models\Permission;
 
 $params = ArrayHelper::merge(

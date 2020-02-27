@@ -8,7 +8,7 @@ return [
     'The above error occurred while the Web server was processing your request.' => 'Вышеупомянутая ошибка возникла, когда веб-сервер обрабатывал ваш запрос.',
     'Please contact us if you think this is a server error. Thank you.' => 'Если вы считаете, что это ошибка сервера, свяжитесь с нами. Спасибо.',
     'Maintenance' => 'Техническое обслуживание',
-    'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'На сайте ведутся технические работы. Приносим извенения за доставленные неудобства.',
+    'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'На сайте проводятся технические работы. Приносим извинения за доставленные неудобства.',
     'The site will work soon! Please refresh the page.' => 'Сайт скоро заработает! Пожалуйста, обновите страницу.',
     'Notify me' => 'Оповестить меня',
     'Your email' => 'Ваш email',

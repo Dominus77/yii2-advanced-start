@@ -5,7 +5,7 @@ namespace common\components\maintenance\actions\frontend;
 use common\components\maintenance\states\FileState;
 use Yii;
 use yii\base\Action;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
 use common\components\maintenance\models\SubscribeForm;
 
 /**

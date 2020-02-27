@@ -37,7 +37,7 @@ $config = [
                 //Retry-After header
                 'retryAfter' => 120 // or Wed, 21 Oct 2015 07:28:00 GMT for example
             ],
-            'common\components\maintenance\StateInterface' => [
+            'common\components\maintenance\interfaces\StateInterface' => [
                 'class' => 'common\components\maintenance\states\FileState',
                 // optional: format datetime
                 // 'dateFormat' => 'd-m-Y H:i:s',
@@ -136,7 +136,7 @@ $config = [
     //...
     'container' => [
         'singletons' => [
-            'common\components\maintenance\StateInterface' => [
+            'common\components\maintenance\interfaces\StateInterface' => [
                 'class' => 'common\components\maintenance\states\FileState',
                 // optional: format datetime
                 // 'dateFormat' => 'd-m-Y H:i:s',

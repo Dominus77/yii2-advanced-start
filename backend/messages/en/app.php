@@ -15,9 +15,17 @@ return [
     'Meanwhile, you may {:Link} or try using the search form.' => 'Meanwhile, you may {:Link} or try using the search form.',
 
     'Maintenance' => 'Maintenance',
+    'Mode site' => 'Mode site',
+    'The site is undergoing technical work. We apologize for any inconvenience caused.' => 'The site is undergoing technical work. We apologize for any inconvenience caused.',
     'Date and Time' => 'Date and Time',
     'Mode' => 'Mode',
     'Mode normal' => 'Mode normal',
     'Mode maintenance' => 'Mode maintenance',
-    'Save' => 'Save'
+    'Title' => 'Title',
+    'Text' => 'Text',
+    'Subscribe' => 'Subscribe',
+    'Count Down' => 'Count Down',
+    'Save' => 'Save',
+    'Followers' => 'Followers',
+    'Invalid date format. Use example: {:example}' => 'Invalid date format. Use example: {:example}'
 ];

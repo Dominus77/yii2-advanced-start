@@ -4,7 +4,7 @@ namespace common\components\maintenance\models;
 
 use Yii;
 use yii\base\Model;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
 use yii\helpers\ArrayHelper;
 use Exception;
 

@@ -4,22 +4,23 @@ use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
-use common\components\maintenance\models\Manager;
+use common\components\maintenance\models\FileStateForm;
 use yii\helpers\VarDumper;
 
 /**
  * @var $this View
  * @var $name string
- * @var $model Manager
+ * @var $model FileStateForm
+ * @var $isEnable bool
  */
 
 $this->title = $name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="maintenance-index">
-    <div class="box">
+    <div class="box <?= $isEnable ? 'box-danger' : 'box-success' ?>">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+            <h3 class="box-title"><?= Html::encode($model->modeName) ?></h3>
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
@@ -28,9 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin([
                         'id' => 'maintenance-update-form',
                         'action' => Url::to(['/maintenance/index']),
-                        /*'fieldConfig' => [
-                            'template' => "<div class=\"input-group\"><div class=\"input-group-addon\"><span class=\"fa fa-calendar\"></span></div>{input}</div>\n{hint}\n{error}",
-                        ],*/
                     ]); ?>
                     <?= $form->field($model, 'mode')->dropDownList($model::getModesArray()) ?>
 
@@ -38,18 +36,37 @@ $this->params['breadcrumbs'][] = $this->title;
                         'placeholder' => true,
                     ]) ?>
 
+                    <?= $form->field($model, 'title')->textInput([
+                        'placeholder' => true,
+                    ]) ?>
+
+                    <?= $form->field($model, 'text')->textarea([
+                        'rows' => 6,
+                        'class' => 'form-control'
+                    ]) ?>
+
+                    <?= $form->field($model, 'subscribe')->checkbox() ?>
+
                     <?= Html::submitButton(Yii::t('app', 'Save'), [
                         'class' => 'btn btn-primary',
                         'name' => 'maintenance-subscribe-button'
                     ]) ?>
                     <?php ActiveForm::end(); ?>
                 </div>
+                <div class="col-md-6">
+                    <?php if ($followers = $model->followers) { ?>
+                        <h3><?= Yii::t('app', 'Followers') ?></h3>
+                        <?php foreach ($followers as $follower) {
+                            echo $follower . '<br>';
+                        } ?>
+                    <?php } ?>
+                </div>
             </div>
             <br>
             <br>
         </div>
         <div class="box-footer">
-            <?php VarDumper::dump($model->isEnabled(), 10, 1); ?>
+            <p class="pull-right">Maintenance</p>
         </div>
     </div>
 </div>

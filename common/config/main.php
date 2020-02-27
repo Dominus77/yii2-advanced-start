@@ -6,7 +6,7 @@ use yii\caching\FileCache;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
 use modules\rbac\Module as RbacModule;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
 use common\components\maintenance\states\FileState;
 
 return [

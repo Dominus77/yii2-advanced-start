@@ -26,7 +26,7 @@ class Role extends Model
     const ROLE_ADMIN_DESCRIPTION = 'Administrator';
 
     const ROLE_MANAGER = 'manager';
-    const ROLE_MANAGER_DESCRIPTION = 'Manager';
+    const ROLE_MANAGER_DESCRIPTION = 'FileStateForm';
 
     const ROLE_EDITOR = 'editor';
     const ROLE_EDITOR_DESCRIPTION = 'Editor';

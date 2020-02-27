@@ -27,12 +27,12 @@ return [
 
     'Super Administrator' => 'Super Administrator',
     'Administrator' => 'Administrator',
-    'Manager' => 'Manager',
+    'FileStateForm' => 'FileStateForm',
     'Editor' => 'Editor',
     'User' => 'User',
 
     'Access to RBAC management' => 'Access to RBAC management',
-    'Manager Users' => 'Manager Users',
+    'FileStateForm Users' => 'FileStateForm Users',
     'Access to the admin area' => 'Access to the admin area',
     'Access to Users management' => 'Access to Users management',
     'Access to Posts management' => 'Access to Posts management',

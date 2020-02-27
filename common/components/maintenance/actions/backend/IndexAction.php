@@ -5,7 +5,7 @@ namespace common\components\maintenance\actions\backend;
 
 use Yii;
 use yii\base\Action;
-use common\components\maintenance\models\Manager;
+use common\components\maintenance\models\FileStateForm;
 
 /**
  * Class IndexAction
@@ -35,7 +35,7 @@ class IndexAction extends Action
         parent::init();
 
         if ($this->defaultName === null) {
-            $this->defaultName = Yii::t('app', 'Maintenance');
+            $this->defaultName = Yii::t('app', 'Mode site');
         }
     }
 
@@ -48,19 +48,23 @@ class IndexAction extends Action
         if ($this->layout !== null) {
             $this->controller->layout = $this->layout;
         }
-        return $this->controller->render($this->view ?: $this->id, $this->getViewRenderParams());
+        $model = new FileStateForm();
+        if (($post = Yii::$app->request->post()) && $model->load($post) && $model->validate() && $model->save()) {
+            return $this->controller->refresh();
+        }
+        return $this->controller->render($this->view ?: $this->id, $this->getViewRenderParams($model));
     }
 
     /**
+     * @param $model FileStateForm
      * @return array
-     * @throws \Exception
      */
-    protected function getViewRenderParams()
+    protected function getViewRenderParams($model)
     {
-        $model = new Manager();
         return [
             'name' => $this->defaultName,
-            'model' => $model
+            'model' => $model,
+            'isEnable' => $model->isEnabled()
         ];
     }
 }

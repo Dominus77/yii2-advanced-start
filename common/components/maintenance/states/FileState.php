@@ -9,9 +9,10 @@ use Exception;
 use RuntimeException;
 use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
 use common\components\maintenance\models\SubscribeForm;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 /**
  * Class FileState
@@ -24,10 +25,9 @@ use yii\helpers\ArrayHelper;
  */
 class FileState extends BaseObject implements StateInterface
 {
-
-    const MAINTENANCE_PARAM_TIMESTAMP = 'timestamp';
+    const MAINTENANCE_PARAM_DATE = 'date';
     const MAINTENANCE_PARAM_TITLE = 'title';
-    const MAINTENANCE_PARAM_CONTENT = 'content';
+    const MAINTENANCE_PARAM_CONTENT = 'text';
     const MAINTENANCE_PARAM_SUBSCRIBE = 'subscribe';
 
     const MAINTENANCE_SUBSCRIBE_ON = 'true';
@@ -123,6 +123,7 @@ class FileState extends BaseObject implements StateInterface
                 "Attention: the maintenance mode could not be enabled because {$this->path} could not be created."
             );
         }
+        return true;
     }
 
     /**
@@ -132,28 +133,52 @@ class FileState extends BaseObject implements StateInterface
      * @return bool
      * @throws Exception
      */
-    public function updateParam($param = '', $value = '')
+    public function update($param = '', $value = '')
     {
         switch ($param) {
-            case self::MAINTENANCE_PARAM_TIMESTAMP:
+            case self::MAINTENANCE_PARAM_DATE:
                 if ($this->validDate($value)) {
                     $date = new DateTime($value);
-                    $this->update($date->getTimestamp(), $this->getLine(self::MAINTENANCE_PARAM_TIMESTAMP));
+                    $this->replace($date->getTimestamp(), $this->getLine(self::MAINTENANCE_PARAM_DATE));
                 }
                 break;
             case self::MAINTENANCE_PARAM_TITLE:
-                $this->update($value, $this->getLine(self::MAINTENANCE_PARAM_TITLE));
+                $this->replace($value, $this->getLine(self::MAINTENANCE_PARAM_TITLE));
                 break;
             case self::MAINTENANCE_PARAM_CONTENT:
-                $this->update($value, $this->getLine(self::MAINTENANCE_PARAM_CONTENT));
+                $this->replace($value, $this->getLine(self::MAINTENANCE_PARAM_CONTENT));
                 break;
             case self::MAINTENANCE_PARAM_SUBSCRIBE:
-                $this->update($value, $this->getLine(self::MAINTENANCE_PARAM_SUBSCRIBE));
+                $this->replace($value, $this->getLine(self::MAINTENANCE_PARAM_SUBSCRIBE));
                 break;
             default:
                 return false;
         }
         return true;
+    }
+
+    /**
+     * Turn off mode.
+     *
+     * @return int|mixed
+     */
+    public function disable()
+    {
+        try {
+            if (file_exists($this->path)) {
+                unlink($this->path);
+                $subscribe = new SubscribeForm();
+                $result = $subscribe->send($this->emails());
+                if ($result > 0) {
+                    unlink($this->subscribePath);
+                }
+                return $result;
+            }
+        } catch (RuntimeException $e) {
+            throw new RuntimeException(
+                "Attention: the maintenance mode could not be disabled because {$this->path} could not be removed."
+            );
+        }
     }
 
     /**
@@ -173,7 +198,7 @@ class FileState extends BaseObject implements StateInterface
     protected function getMaintenanceFileLinesParamsArray()
     {
         return [
-            1 => self::MAINTENANCE_PARAM_TIMESTAMP,
+            1 => self::MAINTENANCE_PARAM_DATE,
             2 => self::MAINTENANCE_PARAM_TITLE,
             3 => self::MAINTENANCE_PARAM_CONTENT,
             4 => self::MAINTENANCE_PARAM_SUBSCRIBE
@@ -181,14 +206,14 @@ class FileState extends BaseObject implements StateInterface
     }
 
     /**
-     * Update text to mode file
+     * Update text line to mode file
      *
      * @param string $replace
      * @param int $line
      * @return mixed|void
      * @throws Exception
      */
-    public function update($replace, $line = 1)
+    public function replace($replace, $line = 1)
     {
         $result = false;
         if ($replace && file_exists($this->path)) {
@@ -199,30 +224,6 @@ class FileState extends BaseObject implements StateInterface
         if ($result === false) {
             throw new RuntimeException(
                 "Attention: failed to update the end date of the maintenance mode, because {$this->path} failed to update."
-            );
-        }
-    }
-
-    /**
-     * Turn off mode.
-     *
-     * @return mixed|void
-     */
-    public function disable()
-    {
-        try {
-            if (file_exists($this->path)) {
-                $subscribe = new SubscribeForm();
-                $result = $subscribe->send($this->emails());
-                unlink($this->path);
-                if ($result > 0) {
-                    unlink($this->subscribePath);
-                }
-                return $result;
-            }
-        } catch (RuntimeException $e) {
-            throw new RuntimeException(
-                "Attention: the maintenance mode could not be disabled because {$this->path} could not be removed."
             );
         }
     }
@@ -261,7 +262,7 @@ class FileState extends BaseObject implements StateInterface
      */
     public function timestamp()
     {
-        return $this->getParams(self::MAINTENANCE_PARAM_TIMESTAMP);
+        return $this->getParams(self::MAINTENANCE_PARAM_DATE);
     }
 
     /**
@@ -298,8 +299,8 @@ class FileState extends BaseObject implements StateInterface
         $content = $this->getContentArray($this->path);
         if ($param) {
             switch ($param) {
-                case self::MAINTENANCE_PARAM_TIMESTAMP:
-                    $value = isset($content[0]) ? $content[0] : date($this->dateFormat);
+                case self::MAINTENANCE_PARAM_DATE:
+                    $value = isset($content[0]) ? $content[0] : time();
                     break;
                 case self::MAINTENANCE_PARAM_TITLE:
                     $value = isset($content[1]) ? $content[1] : '';

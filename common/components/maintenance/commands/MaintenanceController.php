@@ -2,11 +2,11 @@
 
 namespace common\components\maintenance\commands;
 
-use common\components\maintenance\states\FileState;
 use yii\helpers\Console;
 use yii\console\Controller;
 use yii\base\Module;
-use common\components\maintenance\StateInterface;
+use common\components\maintenance\interfaces\StateInterface;
+use common\components\maintenance\states\FileState;
 
 /**
  * Maintenance mode
@@ -165,7 +165,7 @@ class MaintenanceController extends Controller
             $updated = $this->ansiFormat('UPDATED', Console::FG_GREEN);
             if ($this->date) {
                 if ($this->state->validDate($this->date)) {
-                    $this->state->updateParam(FileState::MAINTENANCE_PARAM_TIMESTAMP, $this->date);
+                    $this->state->update(FileState::MAINTENANCE_PARAM_DATE, $this->date);
                     $param = $this->state->datetime();
                     $this->stdout("Maintenance Mode has been $updated!\n");
                     $this->stdout("To: $param\n");
@@ -179,7 +179,7 @@ class MaintenanceController extends Controller
             }
 
             if ($this->title) {
-                $this->state->updateParam(FileState::MAINTENANCE_PARAM_TITLE, $this->title);
+                $this->state->update(FileState::MAINTENANCE_PARAM_TITLE, $this->title);
                 $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_TITLE);
                 $this->stdout("Maintenance Mode has been $updated!\n");
                 $this->stdout("To: $param\n");
@@ -187,7 +187,7 @@ class MaintenanceController extends Controller
             }
 
             if ($this->content) {
-                $this->state->updateParam(FileState::MAINTENANCE_PARAM_CONTENT, $this->content);
+                $this->state->update(FileState::MAINTENANCE_PARAM_CONTENT, $this->content);
                 $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_CONTENT);
                 $this->stdout("Maintenance Mode has been $updated!\n");
                 $this->stdout("To: $param\n");
@@ -195,7 +195,7 @@ class MaintenanceController extends Controller
             }
 
             if ($this->subscribe) {
-                $this->state->updateParam(FileState::MAINTENANCE_PARAM_SUBSCRIBE, $this->subscribe);
+                $this->state->update(FileState::MAINTENANCE_PARAM_SUBSCRIBE, $this->subscribe);
                 $param = $this->state->getParams(FileState::MAINTENANCE_PARAM_SUBSCRIBE);
                 $this->stdout("Maintenance Mode has been $updated!\n");
                 $this->stdout("To: $param\n");
