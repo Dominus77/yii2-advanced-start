@@ -189,7 +189,8 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 ],
                 [
                     'label' => '<i class="fa fa-power-off"></i> <span>' . Yii::t('app', 'Mode site') . '</span>',
-                    'url' => ['/maintenance/index']
+                    'url' => ['/maintenance/index'],
+                    'visible' => $user->can(Permission::PERMISSION_MANAGER_MAINTENANCE)
                 ],
                 [
                     'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',

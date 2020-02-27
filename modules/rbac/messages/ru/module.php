@@ -101,4 +101,7 @@ return [
 
     'Access to the config site' => 'Доступ к настройкам сайта',
     'Access to Comments management' => 'Управление комментариями',
+
+    'Access to Maintenance management' => 'Доступ к управлению режимом обслуживания',
+    'View a site in maintenance mode' => 'Просмотр сайта в режиме обслуживания',
 ];

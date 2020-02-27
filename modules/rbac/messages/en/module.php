@@ -101,4 +101,7 @@ return [
 
     'Access to the config site' => 'Access to the config site',
     'Access to Comments management' => 'Access to Comments management',
+
+    'Access to Maintenance management' => 'Access to Maintenance management',
+    'View a site in maintenance mode' => 'View a site in maintenance mode',
 ];
