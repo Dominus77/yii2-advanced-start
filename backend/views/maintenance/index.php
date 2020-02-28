@@ -17,24 +17,24 @@ $modeOn = FileStateForm::MODE_MAINTENANCE_ON;
 $modeOff = FileStateForm::MODE_MAINTENANCE_OFF;
 $script = "
     let maintenance = $('#filestateform-mode'),
-        settingContainer = $('#maintenance-setting-container'),
+        settings = $('#maintenance-setting-container'),
         on = '{$modeOn}',
         off = '{$modeOff}';
 
-    function toggleContainer(mode)
+    function toggleSettings(mode)
     {
         if(mode === off) {            
-            settingContainer.hide('slow');
+            settings.hide('slow');
         }        
         if(mode === on) {            
-            settingContainer.show('slow');
+            settings.show('slow');
         }
     }
     
-    toggleContainer(maintenance.val());
+    toggleSettings(maintenance.val());
     
     maintenance.on('change', function(){
-        toggleContainer(this.value);
+        toggleSettings(this.value);
     });
 ";
 $this->registerJs($script);
