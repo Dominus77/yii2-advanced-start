@@ -17,6 +17,7 @@ use Exception;
  * @property mixed $followers
  * @property mixed $datetime
  * @property mixed $modeName
+ * @property string $dateFormat
  * @property int $timestamp
  */
 class FileStateForm extends Model
@@ -243,6 +244,14 @@ class FileStateForm extends Model
     public function isEnabled()
     {
         return $this->state->isEnabled();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return $this->state->dateFormat;
     }
 
     /**

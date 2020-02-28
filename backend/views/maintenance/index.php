@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div style="display:none" id="maintenance-setting-container">
                         <?= $form->field($model, 'date')->textInput([
-                            'placeholder' => true,
+                            'placeholder' => date($model->dateFormat),
                         ]) ?>
 
                         <?= $form->field($model, 'title')->textInput([
@@ -67,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]) ?>
 
                         <?= $form->field($model, 'text')->textarea([
+                            'placeholder' => true,
                             'rows' => 6,
                             'class' => 'form-control'
                         ]) ?>
