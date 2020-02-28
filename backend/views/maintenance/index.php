@@ -110,7 +110,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'noteContainerOptions' => [
                         'style' => 'text-align: left;',
-                        'class' => 'test'
                     ]
                 ]) ?>
             </div>
