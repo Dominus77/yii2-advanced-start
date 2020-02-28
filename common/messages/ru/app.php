@@ -8,7 +8,7 @@ return [
     'We can notify you when everything is ready.' => 'Мы можем оповестить вас, когда все будет готово.',
     'Notify me' => 'Оповестить меня',
     'Your email' => 'Ваш email',
-    'We will inform you when everything is ready!' => 'Мы сообщим вам когда все будет готово!',
+    'We will inform you when everything is ready!' => 'Мы сообщим вам, когда все будет готово!',
     'You have already subscribed to the alert!' => 'Вы уже подписаны на оповещение!',
     // Maintenance mail
     'Notification of completion of technical work' => 'Оповещение о завершении технических работ',

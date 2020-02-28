@@ -6,6 +6,7 @@ namespace common\components\maintenance\actions\backend;
 use Yii;
 use yii\base\Action;
 use common\components\maintenance\models\FileStateForm;
+use yii\data\ArrayDataProvider;
 
 /**
  * Class IndexAction
@@ -52,6 +53,7 @@ class IndexAction extends Action
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->validate() && $model->save()) {
             return $this->controller->refresh();
         }
+
         return $this->controller->render($this->view ?: $this->id, $this->getViewRenderParams($model));
     }
 
@@ -61,10 +63,18 @@ class IndexAction extends Action
      */
     protected function getViewRenderParams($model)
     {
+        $listDataProvider = new ArrayDataProvider([
+            'allModels' => array_flip($model->followers),
+            'pagination' => [
+                'pageSize' => 15
+            ],
+        ]);
+
         return [
             'name' => $this->defaultName,
             'model' => $model,
-            'isEnable' => $model->isEnabled()
+            'isEnable' => $model->isEnabled(),
+            'listDataProvider' => $listDataProvider
         ];
     }
 }
