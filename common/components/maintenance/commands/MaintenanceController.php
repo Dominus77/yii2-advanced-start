@@ -226,10 +226,12 @@ class MaintenanceController extends Controller
      */
     public function actionDisable()
     {
-        $result = $this->state->disable();
         $this->stdout("Maintenance Mode has been disabled.\n");
-        if ($result || $result === 0) {
-            $this->stdout("Notified ($result) subscribers.\n");
+        if ($this->state->isEnabled()) {
+            $result = $this->state->disable();
+            if ($result || $result === 0) {
+                $this->stdout("Notified ($result) subscribers.\n");
+            }
         }
 
         $this->stdout("\nUse:\nphp yii maintenance/enable\nto enable maintenance mode.\n");

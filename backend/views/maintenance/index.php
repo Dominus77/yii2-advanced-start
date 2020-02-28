@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <br>
         </div>
         <div class="box-footer">
-            <p class="pull-right">Maintenance</p>
+            <p class="pull-right" style="color: darkgray">Maintenance</p>
         </div>
     </div>
 </div>

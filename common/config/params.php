@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'adminEmail' => '',
-    'supportEmail' => '',
     'user.passwordResetTokenExpire' => 3600,
-    'domainFrontend' => '',
-    'domainBackend' => ''
+    'adminEmail' => 'admin@example.loc',
+    'supportEmail' => 'support@example.loc',
+    'frontendUrl' => 'http://yii2-advanced-start.loc',
+    'backendUrl' => 'http://yii2-advanced-start.loc/admin'
 ];

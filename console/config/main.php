@@ -58,6 +58,8 @@ return [
             ]
         ],
         'urlManager' => [
+            'baseUrl' => '/',
+            'hostInfo' => $params['frontendUrl'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,

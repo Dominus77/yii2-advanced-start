@@ -1,13 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * @var $this yii\web\View
  * @var $link string
  */
 
-$link =  Yii::$app->urlManager->createAbsoluteUrl(['main/default/index']);
+$link = Url::to(Yii::$app->urlManager->hostInfo);
 ?>
 <div class="email-notice">
     <h2><?= Yii::t('app', 'Technical work completed.') ?></h2>
