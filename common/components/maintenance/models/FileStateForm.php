@@ -24,6 +24,7 @@ class FileStateForm extends Model
 {
     const MODE_MAINTENANCE_ON = 'On';
     const MODE_MAINTENANCE_OFF = 'Off';
+    const MAINTENANCE_NOTIFY_SENDER_KEY = 'notifySender';
 
     /**
      * Select mode
@@ -155,7 +156,7 @@ class FileStateForm extends Model
         if ($this->mode === self::MODE_MAINTENANCE_ON) {
             if ($this->isEnabled()) {
                 $this->update();
-                Yii::$app->session->setFlash('success', 'Технический режим успешно обновлен!');
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Maintenance mode successfully updated!'));
                 $result = true;
             } else {
                 $this->enable();
@@ -163,7 +164,11 @@ class FileStateForm extends Model
             }
         }
         if ($this->mode === self::MODE_MAINTENANCE_OFF) {
-            $this->disable();
+            $count = $this->disable();
+            Yii::$app->session->setFlash(self::MAINTENANCE_NOTIFY_SENDER_KEY, Yii::t('app',
+                '{n, plural, =0{no followers} =1{one message sent} other{# messages sent}}',
+                ['n' => $count])
+            );
             $result = true;
         }
         return $result;

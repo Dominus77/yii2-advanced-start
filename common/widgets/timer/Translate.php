@@ -1,11 +1,11 @@
 <?php
 
-namespace frontend\widgets\timer;
+namespace common\widgets\timer;
 
 /**
  * Class Translate
  * @see https://i18njs.com/
- * @package frontend\widgets\timer
+ * @package common\widgets\timer
  */
 class Translate
 {

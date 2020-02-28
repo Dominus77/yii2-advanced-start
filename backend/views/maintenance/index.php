@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use common\components\maintenance\models\FileStateForm;
+use common\widgets\timer\CountDown;
 
 /**
  * @var $this View
@@ -45,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="maintenance-index">
     <div class="box <?= $isEnable ? 'box-danger' : 'box-success' ?>">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($model->modeName) ?></h3>
+            <h3 class="box-title"><?= Html::encode($model->modeName) ?> <?= $isEnable ? Yii::t('app', 'up {:date}', [':date' => $model->datetime]) : '' ?></h3>
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
@@ -82,6 +83,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php ActiveForm::end(); ?>
                 </div>
                 <div class="col-md-6">
+
+                    <?php if ($message = Yii::$app->session->getFlash($model::MAINTENANCE_NOTIFY_SENDER_KEY)) { ?>
+                        <p><?= $message ?></p>
+                    <?php } ?>
+
                     <?php if ($followers = $model->followers) { ?>
                         <h3><?= Yii::t('app', 'Followers') ?></h3>
                         <?php foreach ($followers as $follower) {
@@ -94,7 +100,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <br>
         </div>
         <div class="box-footer">
-            <p class="pull-right" style="color: darkgray">Maintenance</p>
+            <div class="pull-left">
+                <?= CountDown::widget([
+                    'status' => $isEnable,
+                    'timestamp' => $model->timestamp,
+                    'message' => Yii::t('app', 'Time is over'),
+                    'countContainerOptions' => [
+                        'style' => 'display:none;'
+                    ],
+                    'noteContainerOptions' => [
+                        'style' => 'text-align: left;',
+                        'class' => 'test'
+                    ]
+                ]) ?>
+            </div>
         </div>
     </div>
 </div>

@@ -1,17 +1,17 @@
 <?php
 
-namespace frontend\widgets\timer;
+namespace common\widgets\timer;
 
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
-use frontend\widgets\timer\assets\CountDownAsset;
+use common\widgets\timer\assets\CountDownAsset;
 
 /**
  * Class CountDown
- * @package frontend\widgets\timer
+ * @package common\widgets\timer
  *
  * @property array $options
  */
@@ -34,6 +34,18 @@ class CountDown extends Widget
      * @var string
      */
     public $message = '';
+
+    /**
+     * Tag options count container
+     * @var array
+     */
+    public $countContainerOptions = [];
+
+    /**
+     * Tag options note container
+     * @var array
+     */
+    public $noteContainerOptions = [];
 
     /**
      * Plugin options
@@ -59,6 +71,11 @@ class CountDown extends Widget
         }
         $this->timestamp *= 1000;
         $this->locale = $this->locale ?: Yii::$app->language;
+        $this->countContainerOptions = ArrayHelper::merge($this->countContainerOptions, ['id' => 'countdown_' . $this->id]);
+
+        $cssClass = ArrayHelper::remove($this->noteContainerOptions, 'class');
+        $cssClass = $cssClass ? 'note ' . $cssClass : 'note';
+        $this->noteContainerOptions = ArrayHelper::merge($this->noteContainerOptions, ['id' => 'note_' . $this->id, 'class' => $cssClass]);
     }
 
     /**
@@ -69,8 +86,8 @@ class CountDown extends Widget
     {
         if ($this->status === true) {
             $this->registerResource();
-            echo Html::tag('div', '', ['id' => 'countdown_' . $this->id]) . PHP_EOL;
-            echo Html::tag('div', '', ['id' => 'note_' . $this->id, 'class' => 'note']) . PHP_EOL;
+            echo Html::tag('div', '', $this->countContainerOptions) . PHP_EOL;
+            echo Html::tag('div', '', $this->noteContainerOptions) . PHP_EOL;
         }
     }
 

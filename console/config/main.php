@@ -59,7 +59,7 @@ return [
         ],
         'urlManager' => [
             'baseUrl' => '/',
-            'hostInfo' => $params['frontendUrl'],
+            'hostInfo' => $params['frontendUrl'], // set in common/config/params.php
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,

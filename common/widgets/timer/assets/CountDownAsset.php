@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\widgets\timer\assets;
+namespace common\widgets\timer\assets;
 
 use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
@@ -8,7 +8,7 @@ use yii\web\JqueryAsset;
 
 /**
  * Class CountDownAsset
- * @package frontend\widgets\timer\assets
+ * @package common\widgets\timer\assets
  */
 class CountDownAsset extends AssetBundle
 {
