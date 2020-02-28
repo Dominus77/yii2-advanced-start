@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use common\components\maintenance\models\FileStateForm;
-use yii\helpers\VarDumper;
 
 /**
  * @var $this View
@@ -13,6 +12,32 @@ use yii\helpers\VarDumper;
  * @var $model FileStateForm
  * @var $isEnable bool
  */
+
+$modeOn = FileStateForm::MODE_MAINTENANCE_ON;
+$modeOff = FileStateForm::MODE_MAINTENANCE_OFF;
+$script = "
+    let maintenance = $('#filestateform-mode'),
+        settingContainer = $('#maintenance-setting-container'),
+        on = '{$modeOn}',
+        off = '{$modeOff}';
+
+    function toggleContainer(mode)
+    {
+        if(mode === off) {            
+            settingContainer.hide('slow');
+        }        
+        if(mode === on) {            
+            settingContainer.show('slow');
+        }
+    }
+    
+    toggleContainer(maintenance.val());
+    
+    maintenance.on('change', function(){
+        toggleContainer(this.value);
+    });
+";
+$this->registerJs($script);
 
 $this->title = $name;
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,20 +57,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]); ?>
                     <?= $form->field($model, 'mode')->dropDownList($model::getModesArray()) ?>
 
-                    <?= $form->field($model, 'date')->textInput([
-                        'placeholder' => true,
-                    ]) ?>
+                    <div style="display:none" id="maintenance-setting-container">
+                        <?= $form->field($model, 'date')->textInput([
+                            'placeholder' => true,
+                        ]) ?>
 
-                    <?= $form->field($model, 'title')->textInput([
-                        'placeholder' => true,
-                    ]) ?>
+                        <?= $form->field($model, 'title')->textInput([
+                            'placeholder' => true,
+                        ]) ?>
 
-                    <?= $form->field($model, 'text')->textarea([
-                        'rows' => 6,
-                        'class' => 'form-control'
-                    ]) ?>
+                        <?= $form->field($model, 'text')->textarea([
+                            'rows' => 6,
+                            'class' => 'form-control'
+                        ]) ?>
 
-                    <?= $form->field($model, 'subscribe')->checkbox() ?>
+                        <?= $form->field($model, 'subscribe')->checkbox() ?>
+                    </div>
 
                     <?= Html::submitButton(Yii::t('app', 'Save'), [
                         'class' => 'btn btn-primary',
