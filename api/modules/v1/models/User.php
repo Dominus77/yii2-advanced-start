@@ -33,7 +33,7 @@ class User extends BaseUser
      */
     public function fields()
     {
-        return ['id', 'email', 'username', 'first_name', 'last_name'];
+        return ['id', 'email', 'username'];
     }
 
     /**
