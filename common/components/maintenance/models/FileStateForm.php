@@ -233,7 +233,11 @@ class FileStateForm extends Model
      */
     public function getFollowers()
     {
-        return $this->followers;
+        $items = [];
+        foreach ($this->followers as $follower) {
+            $items[]['email'] = $follower;
+        }
+        return $items;
     }
 
     /**

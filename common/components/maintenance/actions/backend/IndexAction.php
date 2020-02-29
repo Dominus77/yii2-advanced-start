@@ -53,7 +53,6 @@ class IndexAction extends Action
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->validate() && $model->save()) {
             return $this->controller->refresh();
         }
-
         return $this->controller->render($this->view ?: $this->id, $this->getViewRenderParams($model));
     }
 
@@ -64,7 +63,7 @@ class IndexAction extends Action
     protected function getViewRenderParams($model)
     {
         $listDataProvider = new ArrayDataProvider([
-            'allModels' => array_flip($model->followers),
+            'allModels' => $model->followers,
             'pagination' => [
                 'pageSize' => 18
             ],

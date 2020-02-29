@@ -133,8 +133,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'list-wrapper',
                             'id' => 'list-followers',
                         ],
-                        'itemView' => function ($model, $key, $index, $widget) {
-                            return Html::a($key, 'mailto:' . $key);
+                        'itemView' => function ($model) {
+                            return Html::a($model['email'], 'mailto:' . $model['email']);
                         }
                     ]) ?>
                 </div>
@@ -148,5 +148,4 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
 </section>
