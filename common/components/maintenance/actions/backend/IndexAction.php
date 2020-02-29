@@ -66,7 +66,7 @@ class IndexAction extends Action
         $listDataProvider = new ArrayDataProvider([
             'allModels' => array_flip($model->followers),
             'pagination' => [
-                'pageSize' => 15
+                'pageSize' => 18
             ],
         ]);
 
