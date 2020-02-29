@@ -20,6 +20,7 @@ Pages (backend AdminLTE template)
 - RBAC
 - Profile
 - Login
+- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
 
 Pages (frontend)
 - Home
