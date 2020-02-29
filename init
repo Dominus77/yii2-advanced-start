@@ -67,7 +67,9 @@ echo "\n  Start initialization ...\n\n";
 $files = getFileList("$root/environments/{$env['path']}");
 if (isset($env['skipFiles'])) {
     $skipFiles = $env['skipFiles'];
-    array_walk($skipFiles, function(&$value) use($env, $root) { $value = "$root/$value"; });
+    array_walk($skipFiles, function (&$value) use ($env, $root) {
+        $value = "$root/$value";
+    });
     $files = array_diff($files, array_intersect_key($env['skipFiles'], array_filter($skipFiles, 'file_exists')));
 }
 $all = false;
@@ -82,6 +84,11 @@ foreach ($callbacks as $callback) {
     if (!empty($env[$callback])) {
         $callback($root, $env[$callback]);
     }
+}
+
+if ($envName === 'Production') {
+    $file = 'requirements.php';
+    deleteFile($root . '/frontend/web/' . $file);
 }
 
 echo "\n  ... initialization completed.\n\n";
@@ -203,7 +210,8 @@ function setCookieValidationKey($root, $paths)
     }
 }
 
-function createSymlink($root, $links) {
+function createSymlink($root, $links)
+{
     foreach ($links as $link => $target) {
         echo "      symlink " . $root . "/" . $target . " " . $root . "/" . $link . "\n";
         //first removing folders to avoid errors if the folder already exists
@@ -213,5 +221,12 @@ function createSymlink($root, $links) {
             @unlink($root . "/" . $link);
         }
         @symlink($root . "/" . $target, $root . "/" . $link);
+    }
+}
+
+function deleteFile($path)
+{
+    if (file_exists($path) && unlink($path)) {
+        echo "\nRemove file $path\n";
     }
 }
