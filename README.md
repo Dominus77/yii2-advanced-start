@@ -38,7 +38,7 @@ Functional
 - Confirmation by email
 - Last visit
 - RBAC Management from the console and web interface
-- Maintenance
+- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/blob/master/common/components/maintenanse/README.md)
 
 System
 - RBAC (DbManager)

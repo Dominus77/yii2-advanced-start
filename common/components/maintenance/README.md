@@ -1,7 +1,11 @@
 # Yii2 Maintenance mode component
 
+Switching the site into maintenance mode with a timer and user subscription form displayed.
+
+## Use
 Add to your config file:
 ```php
+// frontend/config/main.php
 $config = [
     'bootstrap' => [
         //...
@@ -114,7 +118,9 @@ $config = [
 ```
 You can create custom filter:
 ```php
-class MyCustomFilter extends \common\components\maintenance\Filter
+use common\components\maintenance\Filter;
+
+class MyCustomFilter extends Filter
 {
     public $time;
 
