@@ -5,6 +5,7 @@ namespace common\components\maintenance\actions\frontend;
 use Yii;
 use yii\base\Action;
 use yii\web\Response;
+use yii\web\Session;
 use common\components\maintenance\models\SubscribeForm;
 
 /**
@@ -22,10 +23,12 @@ class SubscribeAction extends Action
         $msgSuccess = Yii::t('app', 'We will inform you when everything is ready!');
         $msgInfo = Yii::t('app', 'You have already subscribed to the alert!');
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->validate()) {
+            /** @var Session $session */
+            $session = Yii::$app->session;
             if ($model->subscribe()) {
-                Yii::$app->session->setFlash('SUBSCRIBE_SUCCESS', $msgSuccess);
+                $session->setFlash($model::SUBSCRIBE_SUCCESS, $msgSuccess);
             } else {
-                Yii::$app->session->setFlash('SUBSCRIBE_INFO', $msgInfo);
+                $session->setFlash($model::SUBSCRIBE_INFO, $msgInfo);
             }
         }
         return $this->controller->redirect(Yii::$app->request->referrer);

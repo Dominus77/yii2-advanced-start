@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]) ?>
                     </div>
                     <div class="pull-right">
-                        <?php if ($message = Yii::$app->session->getFlash($model::MAINTENANCE_UPDATE_KEY)) { ?>
+                        <?php if (($message = Yii::$app->session->getFlash($model::MAINTENANCE_UPDATE_KEY)) && $message !== null) { ?>
                             <p class="notify" style="color: green"><?= $message ?></p>
                         <?php } ?>
                     </div>
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="box-footer">
                     <div class="pull-left">
-                        <?php if ($message = Yii::$app->session->getFlash($model::MAINTENANCE_NOTIFY_SENDER_KEY)) { ?>
+                        <?php if (($message = Yii::$app->session->getFlash($model::MAINTENANCE_NOTIFY_SENDER_KEY)) && $message !== null) { ?>
                             <p class="notify" style="color: green"><?= $message ?>.</p>
                         <?php } ?>
                     </div>

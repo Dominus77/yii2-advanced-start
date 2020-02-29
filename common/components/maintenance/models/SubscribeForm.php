@@ -7,7 +7,6 @@ use yii\base\Model;
 use common\components\maintenance\interfaces\StateInterface;
 use yii\helpers\ArrayHelper;
 use Exception;
-use yii\helpers\VarDumper;
 
 /**
  * Class SubscribeForm
@@ -23,6 +22,8 @@ use yii\helpers\VarDumper;
  */
 class SubscribeForm extends Model
 {
+    const SUBSCRIBE_SUCCESS = 'subscribeSuccess';
+    const SUBSCRIBE_INFO = 'subscribeInfo';
     /**
      * @var string
      */

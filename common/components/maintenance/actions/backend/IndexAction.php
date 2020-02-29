@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Action;
 use common\components\maintenance\models\FileStateForm;
 use yii\data\ArrayDataProvider;
+use yii\web\Response;
 
 /**
  * Class IndexAction
@@ -41,8 +42,7 @@ class IndexAction extends Action
     }
 
     /**
-     * @return string
-     * @throws \Exception
+     * @return string|Response
      */
     public function run()
     {

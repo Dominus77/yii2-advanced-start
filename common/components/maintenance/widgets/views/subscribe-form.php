@@ -31,14 +31,14 @@ use common\components\maintenance\models\SubscribeForm;
 ]) ?>
 <?php ActiveForm::end(); ?>
 
-<?php if ($alert = Yii::$app->session->getFlash('SUBSCRIBE_SUCCESS')) { ?>
+<?php if ($alert = Yii::$app->session->getFlash(SubscribeForm::SUBSCRIBE_SUCCESS)) { ?>
     <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
+                    aria-hidden="true">&times;</span></button>
         <?= $alert ?>
     </div>
 <?php } ?>
-<?php if ($alert = Yii::$app->session->getFlash('SUBSCRIBE_INFO')) { ?>
+<?php if ($alert = Yii::$app->session->getFlash(SubscribeForm::SUBSCRIBE_INFO)) { ?>
     <div class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
