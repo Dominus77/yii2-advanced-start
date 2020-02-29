@@ -28,6 +28,7 @@ Pages (frontend)
 - Sign Up
 - Profile
 - Login
+- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
 
 Modules
 - main
