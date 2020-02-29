@@ -187,6 +187,15 @@ cd public_html
 php init
 ```
 
+### Yii Application Requirement Checker 
+
+See `http://sitename.com/requirements.php`
+
+> Note: For production version it is recommended to delete the `frontend\web\requirements.php` file
+
+If everything is in order, move on, otherwise configure the server configuration.
+
+## Continue
 Create a database, default configure yii2_advanced_start in `common\config\main-local.php`
 
 ```
