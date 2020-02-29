@@ -42,7 +42,7 @@ $script = "
     });
     
     setTimeout(function(){
-        $('.alert').fadeOut(2000,'swing');
+        $('.notify').fadeOut(2000,'swing');
     }, 3000);
 ";
 $this->registerJs($script);
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="pull-right">
                         <?php if ($message = Yii::$app->session->getFlash($model::MAINTENANCE_UPDATE_KEY)) { ?>
-                            <p class="alert" style="color: green"><?= $message ?></p>
+                            <p class="notify" style="color: green"><?= $message ?></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="box-footer">
                     <div class="pull-left">
                         <?php if ($message = Yii::$app->session->getFlash($model::MAINTENANCE_NOTIFY_SENDER_KEY)) { ?>
-                            <p class="alert" style="color: green"><?= $message ?>.</p>
+                            <p class="notify" style="color: green"><?= $message ?>.</p>
                         <?php } ?>
                     </div>
                 </div>
