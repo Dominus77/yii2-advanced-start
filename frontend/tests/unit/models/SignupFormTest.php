@@ -1,17 +1,20 @@
 <?php
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use common\fixtures\User as UserFixture;
+use frontend\tests\UnitTester;
 use modules\users\models\SignupForm;
+use modules\users\models\User;
 
 /**
  * Class SignupFormTest
  * @package frontend\tests\unit\models
  */
-class SignupFormTest extends \Codeception\Test\Unit
+class SignupFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
@@ -22,7 +25,7 @@ class SignupFormTest extends \Codeception\Test\Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::className(),
+                'class' => UserFixture::class,
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
         ]);
@@ -41,7 +44,7 @@ class SignupFormTest extends \Codeception\Test\Unit
 
         $user = $model->signup();
 
-        expect($user)->isInstanceOf('modules\users\models\User');
+        expect($user)->isInstanceOf(User::class);
 
         expect($user->username)->equals('some_username');
         expect($user->email)->equals('some_email@example.com');

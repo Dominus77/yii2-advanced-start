@@ -2,13 +2,13 @@
 
 namespace modules\rbac\tests\unit;
 
-use Yii;
+use Codeception\Test\Unit;
 
 /**
  * Class ExampleTest
  * @package modules\rbac\tests\unit
  */
-class ExampleTest extends \Codeception\Test\Unit
+class ExampleTest extends Unit
 {
     /**
      * @inheritdoc

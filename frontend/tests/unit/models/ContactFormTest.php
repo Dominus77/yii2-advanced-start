@@ -2,19 +2,19 @@
 
 namespace frontend\tests\unit\models;
 
-use Yii;
-use Swift_Message;
 use modules\main\models\frontend\ContactForm;
-use PHPUnit\Framework\TestResult;
+use Codeception\Test\Unit;
+use frontend\tests\UnitTester;
+use yii\mail\MessageInterface;
 
 /**
  * Class ContactFormTest
  * @package frontend\tests\unit\models
  */
-class ContactFormTest extends \Codeception\Test\Unit
+class ContactFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
@@ -39,10 +39,10 @@ class ContactFormTest extends \Codeception\Test\Unit
 
         $emailMessage = $this->tester->grabLastSentEmail();
 
-        expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
+        expect('valid email is sent', $emailMessage)->isInstanceOf(MessageInterface::class);
         expect($emailMessage->getTo())->hasKey('admin@example.com');
         expect($emailMessage->getFrom())->hasKey('tester@example.com');
         expect($emailMessage->getSubject())->equals('very important letter subject');
-        expect($emailMessage->toString())->contains('body of current message');
+        expect($emailMessage->toString())->stringContainsString('body of current message');
     }
 }
