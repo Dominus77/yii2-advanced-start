@@ -45,7 +45,7 @@ Functional
 System
 - RBAC (DbManager)
 - Manage users
-- Manage maintenance
+- [Manage maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
 - Console commands
 - i18n
 
@@ -169,21 +169,21 @@ modules/
 
 Create a project:
 ```
-composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start advanced-project
+composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start public_html
 ```
 
 or clone the repository for `pull` command availability:
 
 ```
-git clone https://github.com/Dominus77/yii2-advanced-start.git advanced-project
-cd advanced-project
+git clone https://github.com/Dominus77/yii2-advanced-start.git public_html
+cd public_html
 composer install
 ```
 
 Init an environment:
 
 ```
-cd advanced-project
+cd public_html
 php init
 ```
 
