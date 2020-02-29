@@ -45,6 +45,7 @@ Functional
 System
 - RBAC (DbManager)
 - Manage users
+- Manage maintenance
 - Console commands
 - i18n
 
