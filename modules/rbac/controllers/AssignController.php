@@ -79,7 +79,7 @@ class AssignController extends Controller
                 'attributes' => ['username', 'role']
             ],
             'pagination' => [
-                'pageSize' => 25
+                'defaultPageSize' => 25
             ]
         ]);
         return $this->render('index', [

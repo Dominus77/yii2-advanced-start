@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use modules\rbac\models\Assignment;
 use modules\rbac\Module;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,10 +27,18 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
-            <div class="pull-left"></div>
+            <div class="pull-left">
+                <?= common\widgets\PageSize::widget([
+                    'label' => '',
+                    'defaultPageSize' => 25,
+                    'sizes' => [10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]) ?>
+            </div>
             <div class="pull-right"></div>
-            <?php try {
-                echo GridView::widget([
+            <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'layout' => '{items}',
                     'tableOptions' => [
@@ -99,11 +108,16 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                             ]
                         ]
                     ]
-                ]);
-            } catch (Exception $e) {
-                // Save log
-            } ?>
+                ]) ?>
         </div>
-        <div class="box-footer"></div>
+        <div class="box-footer">
+            <?= LinkPager::widget([
+                'pagination' => $dataProvider->pagination,
+                'registerLinkTags' => true,
+                'options' => [
+                    'class' => 'pagination pagination-sm no-margin pull-right',
+                ]
+            ]) ?>
+        </div>
     </div>
 </div>

@@ -2,7 +2,6 @@
 
 namespace modules\users\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\users\models\User;
@@ -41,9 +40,7 @@ class UserSearch extends User
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        /** @scrutinizer ignore-call */
-        $scenarios = Model::scenarios();
-        return $scenarios;
+        return Model::scenarios();
     }
 
     /**
@@ -65,6 +62,9 @@ class UserSearch extends User
     {
         return new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'defaultPageSize' => 25
+            ],
             'sort' => [
                 'defaultOrder' => ['id' => SORT_ASC],
                 'attributes' => [
@@ -137,8 +137,9 @@ class UserSearch extends User
      */
     protected function setTotalCount($query, $dataProvider)
     {
-        if (is_integer($query->count()))
+        if (is_int($query->count())) {
             $dataProvider->pagination->totalCount = $query->count();
+        }
         return $dataProvider;
     }
 }

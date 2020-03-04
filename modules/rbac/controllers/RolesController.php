@@ -61,7 +61,7 @@ class RolesController extends Controller
                 'attributes' => ['name', 'description', 'ruleName']
             ],
             'pagination' => [
-                'pageSize' => 15
+                'defaultPageSize' => 25
             ]
         ]);
         return $this->render('index', [

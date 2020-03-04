@@ -11,6 +11,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\web\View;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use yii\web\JsExpression;
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 UserAsset::register($this);
 
-$language = substr(\Yii::$app->language, 0, 2);
+$language = substr(Yii::$app->language, 0, 2);
 DatePickerAsset::$language = $language;
 DatePickerAsset::register($this);
 
@@ -46,7 +47,7 @@ $js = new JsExpression("
         });
     }
 ");
-$this->registerJs($js, \yii\web\View::POS_END);
+$this->registerJs($js, View::POS_END);
 
 ?>
 
@@ -71,7 +72,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
                     'options' => [
                         'class' => 'form-control'
                     ]
-                ]); ?>
+                ]) ?>
             </div>
             <div class="pull-right">
                 <p>

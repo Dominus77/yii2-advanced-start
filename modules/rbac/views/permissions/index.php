@@ -2,6 +2,7 @@
 
 use yii\grid\SerialColumn;
 use yii\grid\ActionColumn;
+use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use modules\rbac\Module;
@@ -22,7 +23,16 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
             <div class="box-tools pull-right"></div>
         </div>
         <div class="box-body">
-            <div class="pull-left"></div>
+            <div class="pull-left">
+                <?= common\widgets\PageSize::widget([
+                    'label' => '',
+                    'defaultPageSize' => 25,
+                    'sizes' => [5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]) ?>
+            </div>
             <div class="pull-right">
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
@@ -35,72 +45,77 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                     ]) ?>
                 </p>
             </div>
-            <?php try {
-                echo GridView::widget([
-                    'id' => 'grid-rbac-permissions',
-                    'dataProvider' => $dataProvider,
-                    'layout' => '{items}',
-                    'tableOptions' => [
-                        'class' => 'table table-bordered table-hover'
+            <?= GridView::widget([
+                'id' => 'grid-rbac-permissions',
+                'dataProvider' => $dataProvider,
+                'filterSelector' => 'select[name="per-page"]',
+                'layout' => '{items}',
+                'tableOptions' => [
+                    'class' => 'table table-bordered table-hover'
+                ],
+                'columns' => [
+                    ['class' => SerialColumn::class],
+                    [
+                        'attribute' => 'name',
+                        'label' => Module::t('module', 'Name'),
+                        'format' => 'raw'
                     ],
-                    'columns' => [
-                        ['class' => SerialColumn::class],
-                        [
-                            'attribute' => 'name',
-                            'label' => Module::t('module', 'Name'),
-                            'format' => 'raw'
+                    [
+                        'attribute' => 'description',
+                        'label' => Module::t('module', 'Description'),
+                        'format' => 'raw'
+                    ],
+                    [
+                        'attribute' => 'ruleName',
+                        'label' => Module::t('module', 'Rule Name'),
+                        'format' => 'raw'
+                    ],
+                    [
+                        'class' => ActionColumn::class,
+                        'contentOptions' => [
+                            'class' => 'action-column'
                         ],
-                        [
-                            'attribute' => 'description',
-                            'label' => Module::t('module', 'Description'),
-                            'format' => 'raw'
-                        ],
-                        [
-                            'attribute' => 'ruleName',
-                            'label' => Module::t('module', 'Rule Name'),
-                            'format' => 'raw'
-                        ],
-                        [
-                            'class' => ActionColumn::class,
-                            'contentOptions' => [
-                                'class' => 'action-column'
-                            ],
-                            'template' => '{view} {update} {delete}',
-                            'buttons' => [
-                                'view' => static function ($url) {
-                                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                                        'title' => Module::t('module', 'View'),
-                                        'data' => [
-                                            'toggle' => 'tooltip'
-                                        ]
-                                    ]);
-                                },
-                                'update' => static function ($url) {
-                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                        'title' => Module::t('module', 'Update'),
-                                        'data' => [
-                                            'toggle' => 'tooltip'
-                                        ]
-                                    ]);
-                                },
-                                'delete' => static function ($url) {
-                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                                        'title' => Module::t('module', 'Delete'),
-                                        'data' => [
-                                            'toggle' => 'tooltip',
-                                            'method' => 'post',
-                                            'confirm' => Module::t('module', 'Are you sure you want to delete the entry?')
-                                        ]
-                                    ]);
-                                }
-                            ]
+                        'template' => '{view} {update} {delete}',
+                        'buttons' => [
+                            'view' => static function ($url) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                    'title' => Module::t('module', 'View'),
+                                    'data' => [
+                                        'toggle' => 'tooltip'
+                                    ]
+                                ]);
+                            },
+                            'update' => static function ($url) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                    'title' => Module::t('module', 'Update'),
+                                    'data' => [
+                                        'toggle' => 'tooltip'
+                                    ]
+                                ]);
+                            },
+                            'delete' => static function ($url) {
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                    'title' => Module::t('module', 'Delete'),
+                                    'data' => [
+                                        'toggle' => 'tooltip',
+                                        'method' => 'post',
+                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?')
+                                    ]
+                                ]);
+                            }
                         ]
                     ]
-                ]);
-            } catch (Exception $e) {
-                // Save log
-            } ?>
+                ]
+            ]) ?>
         </div>
-        <div class="box-footer"></div>
+        <div class="box-footer">
+            <?= LinkPager::widget([
+                'pagination' => $dataProvider->pagination,
+                'registerLinkTags' => true,
+                'options' => [
+                    'class' => 'pagination pagination-sm no-margin pull-right',
+                ]
+            ]) ?>
+        </div>
     </div>
 </div>
