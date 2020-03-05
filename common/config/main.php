@@ -3,11 +3,17 @@
 use yii\db\Connection;
 use yii\rbac\DbManager;
 use yii\caching\FileCache;
+use yii\helpers\ArrayHelper;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
 use modules\rbac\Module as RbacModule;
-use common\components\maintenance\interfaces\StateInterface;
-use common\components\maintenance\states\FileState;
+use dominus77\maintenance\interfaces\StateInterface;
+use dominus77\maintenance\states\FileState;
+
+$params = ArrayHelper::merge(
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
+);
 
 return [
     'name' => 'Yii2-advanced-start',

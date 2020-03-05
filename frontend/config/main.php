@@ -1,6 +1,5 @@
 <?php
 
-
 use yii\web\UrlManager;
 use yii\log\FileTarget;
 use yii\bootstrap\BootstrapAsset;
@@ -10,11 +9,12 @@ use modules\users\behavior\LastVisitBehavior;
 use modules\main\Bootstrap as MainBootstrap;
 use modules\users\Bootstrap as UserBootstrap;
 use modules\rbac\Bootstrap as RbacBootstrap;
-use common\components\maintenance\Maintenance;
-use common\components\maintenance\filters\URIFilter;
-use common\components\maintenance\filters\RoleFilter;
-use common\components\maintenance\states\FileState;
-use common\components\maintenance\interfaces\StateInterface;
+use dominus77\maintenance\Maintenance;
+use dominus77\maintenance\filters\URIFilter;
+use dominus77\maintenance\filters\RoleFilter;
+use dominus77\maintenance\states\FileState;
+use dominus77\maintenance\interfaces\StateInterface;
+use dominus77\maintenance\controllers\frontend\MaintenanceController;
 use modules\rbac\models\Permission;
 
 $params = ArrayHelper::merge(
@@ -75,7 +75,6 @@ return [
                         'uri' => [
                             'debug/default/view',
                             'debug/default/toolbar',
-                            'maintenance/subscribe',
                             'users/default/login',
                             'users/default/logout',
                             'users/default/request-password-reset'
@@ -88,14 +87,19 @@ return [
                         ]
                     ]
                 ],
-                'statusCode' => 503,
-                'retryAfter' => 120
             ],
             StateInterface::class => [
                 'class' => FileState::class,
                 'directory' => '@runtime'
             ]
         ]
+    ],
+    'controllerMap' => [
+        'maintenance' => [
+            'class' => MaintenanceController::class,
+            'layout' => '@dominus77/maintenance/views/frontend/layouts/maintenance',
+            'viewPath' => '@dominus77/maintenance/views/frontend/maintenance',
+        ],
     ],
     'components' => [
         'request' => [

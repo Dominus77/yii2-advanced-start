@@ -8,7 +8,10 @@ use modules\main\Bootstrap as MainBootstrap;
 use modules\users\Bootstrap as UserBootstrap;
 use modules\rbac\Bootstrap as RbacBootstrap;
 use modules\users\models\User;
-use common\components\maintenance\commands\MaintenanceController;
+use dominus77\maintenance\states\FileState;
+use dominus77\maintenance\interfaces\StateInterface;
+use dominus77\maintenance\BackendMaintenance;
+use dominus77\maintenance\commands\MaintenanceController;
 
 $params = ArrayHelper::merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -25,7 +28,23 @@ return [
         'log',
         MainBootstrap::class,
         UserBootstrap::class,
-        RbacBootstrap::class
+        RbacBootstrap::class,
+        BackendMaintenance::class
+    ],
+    'container' => [
+        'singletons' => [
+            StateInterface::class => [
+                'class' => FileState::class,
+                // optional: format datetime
+                // 'dateFormat' => 'd-m-Y H:i:s',
+                // optional: use different filename for controlling maintenance state:
+                // 'fileName' => 'myfile.ext',
+                // optional: use a different file name to store subscribers of end-of-service notify
+                // 'fileSubscribe' => 'my_file_subscribe.ext',
+                // optional: use different directory for controlling maintenance state:
+                'directory' => '@frontend/runtime',
+            ]
+        ]
     ],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [

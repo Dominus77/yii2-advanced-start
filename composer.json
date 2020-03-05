@@ -23,7 +23,8 @@
         "guzzlehttp/guzzle": "~6.0",
         "yiisoft/yii2-apidoc": "~2.1.0",
         "bower-asset/html5shiv": "^3.7",
-        "bower-asset/respond": "^1.4"
+        "bower-asset/respond": "^1.4",
+        "dominus77/yii2-maintenance": "dev-master"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

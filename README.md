@@ -20,7 +20,7 @@ Pages (backend AdminLTE template)
 - RBAC
 - Profile
 - Login
-- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
+- [Maintenance](https://github.com/Dominus77/yii2-maintenance)
 
 Pages (frontend)
 - Home
@@ -28,7 +28,7 @@ Pages (frontend)
 - Sign Up
 - Profile
 - Login
-- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
+- [Maintenance](https://github.com/Dominus77/yii2-maintenance)
 
 Modules
 - main
@@ -40,12 +40,12 @@ Functional
 - Confirmation by email
 - Last visit
 - RBAC Management from the console and web interface
-- [Maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
+- [Maintenance](https://github.com/Dominus77/yii2-maintenance)
 
 System
 - RBAC (DbManager)
 - Manage users
-- [Manage maintenance](https://github.com/Dominus77/yii2-advanced-start/tree/master/common/components/maintenance)
+- [Manage maintenance](https://github.com/Dominus77/yii2-maintenance)
 - Console commands
 - i18n
 

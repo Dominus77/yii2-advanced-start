@@ -5,6 +5,8 @@ use yii\bootstrap\BootstrapPluginAsset;
 use yii\log\FileTarget;
 use yii\web\UrlManager;
 use yii\helpers\ArrayHelper;
+use dominus77\maintenance\BackendMaintenance;
+use dominus77\maintenance\controllers\backend\MaintenanceController;
 use modules\rbac\models\Permission;
 use modules\users\models\User;
 use modules\rbac\components\behavior\AccessBehavior;
@@ -32,7 +34,8 @@ return [
         'log',
         MainBootstrap::class,
         UserBootstrap::class,
-        RbacBootstrap::class
+        RbacBootstrap::class,
+        BackendMaintenance::class
     ],
     'modules' => [
         'main' => [
@@ -47,6 +50,13 @@ return [
                 'userClass' => User::class
             ]
         ]
+    ],
+    'controllerMap' => [
+        'maintenance' => [
+            'class' => MaintenanceController::class,
+            'viewPath' => '@dominus77/maintenance/views/backend/maintenance',
+            'roles' => [Permission::PERMISSION_MANAGER_MAINTENANCE]
+        ],
     ],
     'components' => [
         'request' => [
