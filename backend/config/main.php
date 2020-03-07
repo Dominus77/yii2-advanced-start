@@ -54,7 +54,6 @@ return [
     'controllerMap' => [
         'maintenance' => [
             'class' => MaintenanceController::class,
-            'viewPath' => '@dominus77/maintenance/views/backend/maintenance',
             'roles' => [Permission::PERMISSION_MANAGER_MAINTENANCE]
         ],
     ],
@@ -106,9 +105,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            'rules' => [
-                'maintenance' => 'maintenance/index'
-            ]
+            'rules' => []
         ],
         'urlManagerFrontend' => [
             'class' => UrlManager::class,

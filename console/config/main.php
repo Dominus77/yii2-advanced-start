@@ -35,13 +35,6 @@ return [
         'singletons' => [
             StateInterface::class => [
                 'class' => FileState::class,
-                // optional: format datetime
-                // 'dateFormat' => 'd-m-Y H:i:s',
-                // optional: use different filename for controlling maintenance state:
-                // 'fileName' => 'myfile.ext',
-                // optional: use a different file name to store subscribers of end-of-service notify
-                // 'fileSubscribe' => 'my_file_subscribe.ext',
-                // optional: use different directory for controlling maintenance state:
                 'directory' => '@frontend/runtime',
             ]
         ]

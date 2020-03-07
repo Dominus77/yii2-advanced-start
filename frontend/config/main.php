@@ -97,8 +97,6 @@ return [
     'controllerMap' => [
         'maintenance' => [
             'class' => MaintenanceController::class,
-            'layout' => '@dominus77/maintenance/views/frontend/layouts/maintenance',
-            'viewPath' => '@dominus77/maintenance/views/frontend/maintenance',
         ],
     ],
     'components' => [
@@ -143,9 +141,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            'rules' => [
-                'maintenance/subscribe' => 'maintenance/subscribe',
-            ]
+            'rules' => []
         ],
         'urlManagerBackend' => [
             'class' => UrlManager::class,
