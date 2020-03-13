@@ -43,6 +43,8 @@ class Bootstrap
         return [
             'class' => 'yii\web\GroupUrlRule',
             'rules' => [
+                'login' => 'users/default/login',
+                'logout' => 'users/default/logout',
                 'users' => 'users/default/index',
                 'user/<id:\d+>/<_a:[\w\-]+>' => 'users/default/<_a>',
                 'user/<_a:[\w\-]+>' => 'users/default/<_a>',
