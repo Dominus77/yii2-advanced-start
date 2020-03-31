@@ -16,7 +16,7 @@ class Console extends \yii\helpers\Console
      * @param string $to
      * @return array|string
      */
-    public static function convertEncoding($string, $code = 'cp866', $to = 'UTF-8')
+    public static function convertEncoding($string, $code = 'UTF-8', $to = 'auto')
     {
         if (is_array($string)) {
             $strings = [];
