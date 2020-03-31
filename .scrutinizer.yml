@@ -9,6 +9,7 @@ filter:
         - "modules/users/migrations/*"
         - "modules/rbac/tests/*"
         - "modules/rbac/migrations/*"
+        - "common/gii/*"
 checks:
     php:
         code_rating: true
@@ -48,6 +49,7 @@ tools:
             - "backend/runtime"
             - "console/runtime"
             - "frontend/runtime"
+            - "common/gii"
     # disable copy paste detector and similarity analyzer as they have no real value
     # and a huge bunch of false-positives
     php_cpd: false
