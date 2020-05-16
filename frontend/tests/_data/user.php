@@ -22,9 +22,9 @@ return [
     ],
     [
         'username' => 'imtester',
-        'auth_key' => 'iwTNae9t34OmnK6l4vT4IeaTk-YWI2Rv',
+        'auth_key' => 'iwTNae9t34OmnK6l4vT4IeaTk-Y7I2Rv',
         'password_hash' => '$2y$13$CXT0Rkle1EMJ/c1l5bylL.EylfmQ39O5JlHJVFpNn618OUS1HwaIi',
-        'password_reset_token' => 'WweU9NwpuGYSfb7FEZMAxqtuz2PkEvv_' . time(),
+        'password_reset_token' => 'WweU9NwpuGYSfb7FEZMAxqtuz2PkE8v_' . time(),
         'created_at' => '1391885313',
         'updated_at' => '1391885313',
         'email' => 'im.tester@rutherford.com',
