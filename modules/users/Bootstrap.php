@@ -68,6 +68,7 @@ class Bootstrap
                 'profile' => 'users/profile/index',
                 'profile/<_a:[\w\-]+>' => 'users/profile/<_a>',
 
+                'email-confirm' => 'users/default/email-confirm',
                 'user/<_a:[\w\-]+>' => 'users/default/<_a>',
             ],
         ];

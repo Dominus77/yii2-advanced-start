@@ -94,9 +94,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey()
     {
-        /** @var yii\base\Security $security */
-        $security = Yii::$app->security;
-        $this->auth_key = $security->generateRandomString();
+        $this->auth_key = $this->generateUniqueRandomString('auth_key');
     }
 
     /**
@@ -105,9 +103,31 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public function generateEmailConfirmToken()
     {
-        /** @var yii\base\Security $security */
+        $this->email_confirm_token = $this->generateUniqueRandomString('email_confirm_token');
+    }
+
+    /**
+     * Generate Unique Random String
+     * @param string $attribute
+     * @param int $maxIteration
+     * @return string
+     * @throws Exception
+     */
+    public function generateUniqueRandomString($attribute, $maxIteration = 10)
+    {
         $security = Yii::$app->security;
-        $this->email_confirm_token = $security->generateRandomString();
+        if ($attribute && $maxIteration > 0) {
+            $i = 0;
+            while($i <= $maxIteration) {
+                $string = $security->generateRandomString();
+                if (isset($string) && (static::findOne([$attribute => $string])) === null) {
+                    return $string;
+                }
+                $i++;
+            }
+            throw new Exception('Failed to generate unique value, try increasing the number of iterations.');
+        }
+        return $security->generateRandomString();
     }
 
     /**
