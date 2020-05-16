@@ -120,7 +120,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
             $i = 0;
             while($i <= $maxIteration) {
                 $string = $security->generateRandomString();
-                if (isset($string) && (static::findOne([$attribute => $string])) === null) {
+                if ((static::findOne([$attribute => $string])) === null) {
                     return $string;
                 }
                 $i++;
