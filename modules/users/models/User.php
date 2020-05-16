@@ -89,7 +89,7 @@ class User extends BaseUser
             ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
             ['email', 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
-            [['password_reset_token'], 'unique'],
+            [['email_confirm_token', 'password_reset_token', 'auth_key'], 'unique'],
 
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_WAIT],
