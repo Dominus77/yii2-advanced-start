@@ -11,8 +11,6 @@ use yii\web\View;
 use yii\helpers\Html;
 use <?= $ns ?>\<?= $className ?>;
 
-/* @var $this View */
-
 $this->title = <?= $className ?>::t('module', '<?= $moduleName ?>');
 $this->params['breadcrumbs'][] = $this->title;
 <?= '?>' ?>
