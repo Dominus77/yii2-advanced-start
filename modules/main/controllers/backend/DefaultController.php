@@ -51,13 +51,17 @@ class DefaultController extends Controller
             return $this->goHome();
         }
         //Greeting in the admin panel :)
-        /** @var User $identity */
-        $identity = Yii::$app->user->identity;
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
-        $session->setFlash('info', Module::t('module', 'Welcome, {:username}!', [
-            ':username' => $identity->username
-        ]));
+        $key = 'msgHello';
+        if ($session->get($key) !== 1) {
+            /** @var User $identity */
+            $identity = Yii::$app->user->identity;
+            $session->setFlash('info', Module::t('module', 'Welcome, {:username}!', [
+                ':username' => $identity->username
+            ]));
+            $session->set($key, 1);
+        }
         return $this->render('index');
     }
 }
