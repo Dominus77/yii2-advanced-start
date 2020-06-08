@@ -29,6 +29,7 @@ class ProfileController extends \modules\users\controllers\common\ProfileControl
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
+                    'delete' => ['post'],
                     'delete-avatar' => ['post']
                 ]
             ]
