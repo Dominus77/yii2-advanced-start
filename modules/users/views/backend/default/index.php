@@ -1,13 +1,7 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $searchModel modules\users\models\search\UserSearch
- * @var $model modules\users\models\User
- * @var $dataProvider yii\data\ActiveDataProvider
- * @var $assignModel \modules\rbac\models\Assignment
- */
-
+use yii\grid\ActionColumn;
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
@@ -16,8 +10,18 @@ use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 use yii\web\JsExpression;
 use backend\assets\plugins\DatePickerAsset;
+use modules\rbac\models\Assignment;
+use modules\users\models\User;
 use modules\users\assets\UserAsset;
 use modules\users\Module;
+
+/**
+ * @var $this yii\web\View
+ * @var $searchModel modules\users\models\search\UserSearch
+ * @var $model modules\users\models\User
+ * @var $dataProvider yii\data\ActiveDataProvider
+ * @var $assignModel Assignment
+ */
 
 $this->title = Module::t('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
@@ -97,7 +101,7 @@ $this->registerJs($js, View::POS_END);
                     'class' => 'table table-bordered table-hover',
                 ],
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+                    ['class' => SerialColumn::class],
                     [
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
@@ -139,7 +143,7 @@ $this->registerJs($js, View::POS_END);
                         'value' => function ($data) {
                             /** @var object $identity */
                             $identity = Yii::$app->user->identity;
-                            /** @var \modules\users\models\User $data */
+                            /** @var User $data */
                             if ($data->id !== $identity->id && !$data->isSuperAdmin($data->id)) {
                                 return Html::a($data->statusLabelName, Url::to(['set-status', 'id' => $data->id]), [
                                         'id' => $data->id,
@@ -204,7 +208,7 @@ $this->registerJs($js, View::POS_END);
                         ]
                     ],
                     [
-                        'class' => 'yii\grid\ActionColumn',
+                        'class' => ActionColumn::class,
                         'contentOptions' => [
                             'class' => 'action-column'
                         ],
@@ -238,7 +242,7 @@ $this->registerJs($js, View::POS_END);
                                         'confirm' => Module::t('module', 'The user "{:name}" will be marked as deleted!', [':name' => $model->username]),
                                     ]
                                 ];
-                                /* @var $model modules\users\models\User */
+                                /* @var $model User */
                                 if ($model->isDeleted()) {
                                     $linkOptions = [
                                         'title' => Module::t('module', 'Delete'),

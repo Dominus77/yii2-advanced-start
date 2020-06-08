@@ -1,17 +1,18 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $model modules\users\models\User
- * @var $assignModel \modules\rbac\models\Assignment
- */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
+use modules\rbac\models\Assignment;
 use modules\users\widgets\AvatarWidget;
 use modules\users\assets\UserAsset;
 use modules\users\Module;
+
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ * @var $assignModel Assignment
+ */
 
 UserAsset::register($this);
 
@@ -21,6 +22,7 @@ UserAsset::register($this);
     <div class="col-sm-2">
         <?= AvatarWidget::widget([
             'email' => $model->profile->email_gravatar,
+            'user_id' => $model->id,
             'imageOptions' => [
                 'class' => 'profile-user-img img-responsive img-circle',
                 'style' => 'margin-bottom:10px; width:auto',
@@ -51,7 +53,7 @@ UserAsset::register($this);
                     'value' => function ($model) {
                         /** @var object $identity */
                         $identity = Yii::$app->user->identity;
-                        if ($model->id != $identity->id) {
+                        if ($model->id !== $identity->id) {
                             return Html::a($model->statusLabelName, Url::to(['set-status', 'id' => $model->id]), [
                                     'id' => 'status-link-' . $model->id,
                                     'class' => 'link-status',

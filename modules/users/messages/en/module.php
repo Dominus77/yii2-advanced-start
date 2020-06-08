@@ -132,4 +132,17 @@ return [
 
     'Send a link to activate your account.' => 'Send a link to activate your account.',
     'Account activation!' => 'Account activation!',
+
+    'Image' => 'Image',
+    'Crop Width' => 'Crop Width',
+    'Crop Height' => 'Crop Height',
+    'Crop X' => 'X axis start',
+    'Crop Y' => 'Y axis start',
+    'Submit' => 'Submit',
+    'File uploaded successfully.' => 'File uploaded successfully.',
+    'Failed to upload file.' => 'Failed to upload file.',
+    'User avatar successfully save.' => 'User avatar successfully save.',
+    'Are you sure you want to delete the avatar?' => 'Are you sure you want to delete the avatar?',
+    'The following download extensions are allowed: {:ext}' => 'The following download extensions are allowed: {:ext}',
+    'Successfully deleted.' => 'Successfully deleted.',
 ];

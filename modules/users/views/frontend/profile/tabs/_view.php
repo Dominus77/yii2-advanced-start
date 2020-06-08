@@ -1,15 +1,16 @@
 <?php
 
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+use modules\rbac\models\Assignment;
+use modules\users\widgets\AvatarWidget;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
- * @var $assignModel \modules\rbac\models\Assignment
+ * @var $assignModel Assignment
  */
-
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-use modules\users\widgets\AvatarWidget;
-use modules\users\Module;
 
 $this->registerJs(new yii\web\JsExpression("
     $(function () {
@@ -20,7 +21,9 @@ $this->registerJs(new yii\web\JsExpression("
 
 <div class="row">
     <div class="col-sm-2">
-        <?= AvatarWidget::widget() ?>
+        <?= AvatarWidget::widget([
+            'user_id' => $model->id
+        ]) ?>
     </div>
     <div class="col-sm-10">
         <?= DetailView::widget([

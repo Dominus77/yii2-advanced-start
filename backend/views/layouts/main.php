@@ -14,7 +14,6 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
-use yii\base\InvalidConfigException;
 use common\widgets\Alert;
 use modules\users\widgets\AvatarWidget;
 use modules\main\Module as MainModule;
@@ -85,6 +84,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <?= AvatarWidget::widget([
+                                'user_id' => $user->id,
                                 'imageOptions' => [
                                     'class' => 'user-image'
                                 ]
@@ -93,7 +93,9 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <?= AvatarWidget::widget() ?>
+                                <?= AvatarWidget::widget([
+                                    'user_id' => $user->id
+                                ]) ?>
                                 <p>
                                     <?= $fullUserName ?>
                                     <small>
@@ -142,7 +144,9 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
             <div class="user-panel">
                 <div class="pull-left image">
-                    <?= AvatarWidget::widget() ?>
+                    <?= AvatarWidget::widget([
+                        'user_id' => $user->id
+                    ]) ?>
                 </div>
                 <div class="pull-left info">
                     <p><?= $fullUserName ?></p>

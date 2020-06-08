@@ -20,7 +20,9 @@ $this->registerJs(new yii\web\JsExpression("
 
 <div class="row">
     <div class="col-sm-2">
-        <?= AvatarWidget::widget() ?>
+        <?= AvatarWidget::widget([
+            'user_id' => $model->id
+        ]) ?>
     </div>
     <div class="col-sm-10">
         <?= DetailView::widget([

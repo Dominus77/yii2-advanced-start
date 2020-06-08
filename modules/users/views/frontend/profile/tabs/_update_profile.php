@@ -1,15 +1,14 @@
 <?php
 
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
  * @var $form yii\widgets\ActiveForm
  */
-
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use modules\users\Module;
-
 ?>
 
 <div class="row">

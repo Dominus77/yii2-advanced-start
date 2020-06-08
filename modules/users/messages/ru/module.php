@@ -132,4 +132,17 @@ return [
 
     'Send a link to activate your account.' => 'Отправить ссылку для активации аккаунта.',
     'Account activation!' => 'Активация аккаунта!',
+
+    'Image' => 'Изображение',
+    'Crop Width' => 'Ширина',
+    'Crop Height' => 'Высота',
+    'Crop X' => 'Начало по оси X',
+    'Crop Y' => 'Начало по оси Y',
+    'Submit' => 'Отправить',
+    'File uploaded successfully.' => 'Файл успешно загружен.',
+    'Failed to upload file.' => 'Не удалось загрузить файл.',
+    'User avatar successfully save.' => 'Аватар пользователя успешно сохранен.',
+    'Are you sure you want to delete the avatar?' => 'Вы уверены, что хотите удалить аватар?',
+    'The following download extensions are allowed: {:ext}' => 'Разрешены следующие расширения для загрузки: {:ext}',
+    'Successfully deleted.' => 'Успешно удалено.',
 ];

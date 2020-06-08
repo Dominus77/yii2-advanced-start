@@ -6,13 +6,15 @@ use Yii;
 use yii\base\Exception;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\bootstrap\ActiveForm;
+use yii\web\Response;
+use yii\web\UploadedFile;
+use modules\users\models\UploadForm;
 use modules\users\models\User;
 use modules\users\models\UpdatePasswordForm;
 use modules\users\models\UserDeleteForm;
 use modules\rbac\models\Assignment;
-use yii\web\NotFoundHttpException;
-use yii\bootstrap\ActiveForm;
-use yii\web\Response;
 use modules\users\Module;
 
 /**
@@ -45,6 +47,7 @@ class ProfileController extends Controller
     public function actionUpdate()
     {
         $model = $this->findModel();
+        $uploadFormModel = new UploadForm();
         if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
@@ -53,6 +56,7 @@ class ProfileController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
+            'uploadFormModel' => $uploadFormModel,
             'passwordForm' => new UpdatePasswordForm($model)
         ]);
     }
@@ -87,6 +91,80 @@ class ProfileController extends Controller
             return ActiveForm::validate($model->profile);
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Upload file
+     * @return Response
+     * @throws Exception
+     */
+    public function actionUploadImage()
+    {
+        $model = new UploadForm();
+        if (Yii::$app->request->isPost) {
+            $session = Yii::$app->session;
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if (($result = $model->upload()) && !is_string($result)) {
+                if (isset($result['imageFile'][0])) {
+                    $session->setFlash('error', $result['imageFile'][0]);
+                } else {
+                    $session->setFlash('error', Module::t('module', 'Failed to upload file.'));
+                }
+                return $this->redirect(['update', 'tab' => 'avatar']);
+            }
+        }
+        return $this->redirect(['update', 'tab' => 'avatar', 'modal' => 'show']);
+    }
+
+    /**
+     * Crop image
+     * @return Response
+     */
+    public function actionCropAvatar()
+    {
+        $model = new UploadForm();
+        $session = Yii::$app->session;
+        if (($post = Yii::$app->request->post()) && $model->load($post) && $model->crop()) {
+            $session->setFlash('success', Module::t('module', 'User avatar successfully save.'));
+        }
+        return $this->redirect(['update', 'tab' => 'avatar']);
+    }
+
+    /**
+     * Get Avatar
+     * @throws NotFoundHttpException
+     */
+    public function actionAvatar()
+    {
+        if ($file = Yii::$app->request->get('filename')) {
+            $id = Yii::$app->request->get('id') ?: Yii::$app->user->id;
+            $model = new UploadForm();
+            $storagePath = $model->getPath($id);
+            $response = Yii::$app->getResponse();
+            $response->headers->set('Content-Type', 'image/jpg');
+            $response->format = Response::FORMAT_RAW;
+            $response->stream = fopen("$storagePath/$file", 'rb');
+            return $response->send();
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Delete Avatar files
+     * @param int $id
+     * @return Response
+     */
+    public function actionDeleteAvatar($id)
+    {
+        $model = new UploadForm();
+        $fileName = $model->getFileName();
+        $avatar = $model->getPath($id) . DIRECTORY_SEPARATOR . $fileName;
+        $thumb = $model->getPath($id) . DIRECTORY_SEPARATOR . UploadForm::PREFIX_THUMBNAIL . $fileName;
+        $original = $model->getPath($id) . DIRECTORY_SEPARATOR . UploadForm::PREFIX_ORIGINAL . $fileName;
+        $model->delete([$avatar, $thumb, $original]);
+        $session = Yii::$app->session;
+        $session->setFlash('success', Module::t('module', 'Successfully deleted.'));
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

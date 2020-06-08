@@ -1,14 +1,15 @@
 <?php
 
+use yii\bootstrap\Tabs;
+use yii\helpers\Html;
+use modules\rbac\models\Assignment;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
- * @var $assignModel \modules\rbac\models\Assignment
+ * @var $assignModel Assignment
  */
-
-use modules\users\Module;
-use yii\bootstrap\Tabs;
-use yii\helpers\Html;
 
 $this->title = Module::t('module', 'View');
 $this->params['title']['small'] = $model->username;
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'View');
                             'assignModel' => $assignModel,
                         ]),
                         'options' => ['id' => 'profile'],
-                        'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
+                        'active' => !Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') === 'profile'),
                     ],
                 ]
             ]); ?>
