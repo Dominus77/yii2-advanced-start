@@ -3,6 +3,7 @@
 namespace modules\users\controllers\frontend;
 
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 /**
  * Class ProfileController
@@ -25,6 +26,12 @@ class ProfileController extends \modules\users\controllers\common\ProfileControl
                     ],
                 ],
             ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'delete-avatar' => ['post']
+                ]
+            ]
         ];
     }
 }
