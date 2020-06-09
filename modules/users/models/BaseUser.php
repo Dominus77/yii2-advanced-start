@@ -41,22 +41,22 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param string|int $id
-     * @return User|ActiveRecord|IdentityInterface|null
+     * @param int|string $id
+     * @return User|IdentityInterface|null
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return User::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
      * @param mixed $token
      * @param mixed $type
-     * @return User|ActiveRecord|IdentityInterface|null
+     * @return User|IdentityInterface|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        return User::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
