@@ -1,15 +1,14 @@
 <?php
 
-
 namespace modules\users\models;
 
-use modules\users\Module;
 use Yii;
 use yii\base\Exception;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\IdentityInterface;
+use modules\users\Module;
 
 /**
  * Class BaseUser
@@ -43,7 +42,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param string|int $id
-     * @return yii\db\ActiveRecord
+     * @return BaseUser|IdentityInterface|null
      */
     public static function findIdentity($id)
     {
@@ -52,8 +51,8 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param mixed $token
-     * @param mixed $type
-     * @return yii\db\ActiveRecord
+     * @param null $type
+     * @return BaseUser|IdentityInterface|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -61,7 +60,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
      * @return int|string
      */
     public function getId()
@@ -70,7 +68,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
      * @return string
      */
     public function getAuthKey()
@@ -79,7 +76,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
      * @param string $authKey
      * @return bool
      */
@@ -118,7 +114,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
         $security = Yii::$app->security;
         if ($attribute && $maxIteration > 0) {
             $i = 0;
-            while($i <= $maxIteration) {
+            while ($i <= $maxIteration) {
                 $string = $security->generateRandomString();
                 if ((static::findOne([$attribute => $string])) === null) {
                     return $string;
