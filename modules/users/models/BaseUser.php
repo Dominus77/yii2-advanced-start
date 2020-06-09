@@ -31,6 +31,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 2;
     const STATUS_DELETED = 3;
 
+    private static $identity;
     private static $identityByAccessToken;
 
     /**
@@ -48,7 +49,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return User::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        if (self::$identity === null) {
+            self::$identity = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        }
+        return self::$identity;
     }
 
     /**
