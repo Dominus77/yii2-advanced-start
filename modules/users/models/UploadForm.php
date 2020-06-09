@@ -191,7 +191,7 @@ class UploadForm extends Model
     }
 
     /**
-     * @param int $id
+     * @param int|string $id
      * @return bool
      */
     public function isThumbFile($id)

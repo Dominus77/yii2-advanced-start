@@ -14,7 +14,7 @@ use modules\users\models\UploadForm;
  *
  * @property array $imageOptions
  * @property string $email
- * @property int $user_id
+ * @property int|string $user_id
  * @property string|int $size
  */
 class AvatarWidget extends Widget
@@ -102,7 +102,7 @@ class AvatarWidget extends Widget
     }
 
     /**
-     * @return int
+     * @return int|string
      */
     public function getUserId()
     {
