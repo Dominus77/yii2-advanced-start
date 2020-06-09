@@ -2,6 +2,7 @@
 
 namespace modules\users\controllers\common;
 
+use Throwable;
 use Yii;
 use yii\base\Exception;
 use yii\db\StaleObjectException;
@@ -102,6 +103,7 @@ class ProfileController extends Controller
     {
         $model = new UploadForm();
         if (Yii::$app->request->isPost) {
+            /** @var yii\web\Session $session */
             $session = Yii::$app->session;
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if (($result = $model->upload()) && !is_string($result)) {
@@ -123,6 +125,7 @@ class ProfileController extends Controller
     public function actionCropAvatar()
     {
         $model = new UploadForm();
+        /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->crop()) {
             $session->setFlash('success', Module::t('module', 'User avatar successfully save.'));
@@ -143,8 +146,9 @@ class ProfileController extends Controller
             $response = Yii::$app->getResponse();
             $response->headers->set('Content-Type', 'image/jpg');
             $response->format = Response::FORMAT_RAW;
-            $response->stream = fopen("$storagePath/$file", 'rb');
-            return $response->send();
+            if ($response->stream = fopen("$storagePath/$file", 'rb')) {
+                return $response->send();
+            }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
     }
@@ -162,9 +166,10 @@ class ProfileController extends Controller
         $thumb = $model->getPath($id) . DIRECTORY_SEPARATOR . UploadForm::PREFIX_THUMBNAIL . $fileName;
         $original = $model->getPath($id) . DIRECTORY_SEPARATOR . UploadForm::PREFIX_ORIGINAL . $fileName;
         $model->delete([$avatar, $thumb, $original]);
+        /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         $session->setFlash('success', Module::t('module', 'Successfully deleted.'));
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect(['update', 'tab' => 'avatar']);
     }
 
     /**
@@ -246,7 +251,7 @@ class ProfileController extends Controller
     /**
      * @return string|Response
      * @throws NotFoundHttpException
-     * @throws \Throwable
+     * @throws Throwable
      * @throws StaleObjectException
      */
     public function actionDelete()
