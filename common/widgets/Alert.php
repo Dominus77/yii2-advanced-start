@@ -55,6 +55,7 @@ class Alert extends Widget
     public function init()
     {
         parent::init();
+        /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         $flashes = $session->getAllFlashes();
         $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
