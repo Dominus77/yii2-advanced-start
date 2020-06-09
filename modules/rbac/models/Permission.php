@@ -4,7 +4,6 @@ namespace modules\rbac\models;
 
 use Yii;
 use yii\base\Model;
-use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
 
 /**
@@ -13,8 +12,6 @@ use modules\rbac\Module;
  */
 class Permission extends Model
 {
-    use ModuleTrait;
-
     // разрешения
     const PERMISSION_MANAGER_MAINTENANCE = 'managerMaintenance';
     const PERMISSION_MANAGER_MAINTENANCE_DESCRIPTION = 'Access to Maintenance management';
