@@ -80,10 +80,7 @@ if (Yii::$app->request->get('modal') === 'show') {
         </div>
         <?php ActiveForm::end(); ?>
         <hr>
-        <?= UploadAvatarForm::widget([
-            'status' => true,
-            'model' => $uploadFormModel
-        ]) ?>
+        <?= UploadAvatarForm::widget() ?>
     </div>
 </div>
 

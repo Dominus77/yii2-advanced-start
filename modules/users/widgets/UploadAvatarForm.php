@@ -2,9 +2,12 @@
 
 namespace modules\users\widgets;
 
-use modules\users\models\UploadForm;
-use yii\base\InvalidArgumentException;
 use yii\base\Widget;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+use yii\helpers\Html;
+use modules\users\models\UploadForm;
+use modules\users\Module;
 
 /**
  * Class AvatarFormWidget
@@ -28,9 +31,7 @@ class UploadAvatarForm extends Widget
     public function init()
     {
         parent::init();
-        if (($this->status === true) && !($this->model instanceof UploadForm)) {
-            throw new InvalidArgumentException('The model is not an instance of class: ' . UploadForm::class);
-        }
+        $this->model = $this->model ?: new UploadForm();
     }
 
     /**
@@ -39,9 +40,26 @@ class UploadAvatarForm extends Widget
     public function run()
     {
         if ($this->status === true) {
-            echo $this->render('uploadAvatarForm', [
-                'model' => $this->model
-            ]);
+            $this->renderForm();
         }
+    }
+
+    /**
+     * Render upload form
+     */
+    public function renderForm()
+    {
+        $form = ActiveForm::begin([
+            'action' => Url::to(['upload-image']),
+            'options' => [
+                'enctype' => 'multipart/form-data'
+            ]
+        ]);
+        echo $form->field($this->model, 'imageFile')->fileInput();
+        echo Html::submitButton('<span class="fa fa-upload"></span> ' . Module::t('module', 'Submit'), [
+            'class' => 'btn btn-primary',
+            'name' => 'submit-button',
+        ]);
+        ActiveForm::end();
     }
 }

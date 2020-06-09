@@ -224,13 +224,13 @@ class UploadForm extends Model
     }
 
     /**
-     * @param int $id
-     * @return bool|string
+     * @param int|string $id
+     * @return string
      */
     public function getPath($id)
     {
         $this->path = Yii::getAlias($this->directory . '/' . $id);
-        return $this->path;
+        return is_string($this->path) ? $this->path : '';
     }
 
     /**
