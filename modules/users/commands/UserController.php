@@ -2,12 +2,14 @@
 
 namespace modules\users\commands;
 
-use Yii;
+use yii\base\Model;
 use yii\console\Controller;
 use yii\console\Exception;
+use yii\db\StaleObjectException;
 use console\components\helpers\Console;
 use modules\users\models\User;
 use modules\users\Module;
+use Throwable;
 
 /**
  * Console user actions
@@ -23,7 +25,6 @@ class UserController extends Controller
 
     /**
      * Console user actions
-     * @inheritdoc
      */
     public function actionIndex()
     {
@@ -37,7 +38,7 @@ class UserController extends Controller
 
     /**
      * Create new user
-     * @inheritdoc
+     * @throws \yii\base\Exception
      */
     public function actionCreate()
     {
@@ -61,8 +62,8 @@ class UserController extends Controller
     /**
      * Remove user
      * @throws Exception
-     * @throws \Exception
-     * @throws \Throwable
+     * @throws Throwable
+     * @throws StaleObjectException
      */
     public function actionRemove()
     {
@@ -133,8 +134,8 @@ class UserController extends Controller
     /**
      * Find model user
      * @param string $username
-     * @throws \yii\console\Exception
-     * @return User the loaded model
+     * @return User
+     * @throws Exception
      */
     private function findModel($username)
     {
@@ -147,7 +148,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param \yii\base\Model $model
+     * @param Model|null $model
      * @param string $attribute
      */
     private function readValue($model = null, $attribute = '')
@@ -156,13 +157,12 @@ class UserController extends Controller
             'validator' => function ($input, &$error) use ($model, $attribute) {
                 /** @var string $input */
                 $model->$attribute = $input;
-                /** @var \yii\base\Model $model */
+                /** @var Model $model */
                 if ($model->validate([$attribute])) {
                     return true;
-                } else {
-                    $error = implode(',', $model->getErrors($attribute));
-                    return false;
                 }
+                $error = implode(',', $model->getErrors($attribute));
+                return false;
             },
         ]);
     }

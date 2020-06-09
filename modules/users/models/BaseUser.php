@@ -15,10 +15,10 @@ use yii\web\IdentityInterface;
  * Class BaseUser
  * @package modules\users\models
  *
- * @property int $id ID
+ * @property int|string $id ID
  * @property string $auth_key Authorization Key
  * @property string $email_confirm_token Email Confirm Token
- * @property int $status
+ * @property int|string $status
  * @property string $statusLabelName
  * @property string $statusName
  * @property array $statusesArray

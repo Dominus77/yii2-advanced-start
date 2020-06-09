@@ -14,11 +14,12 @@ use modules\rbac\models\Role;
 use modules\users\models\query\UserQuery;
 use modules\users\traits\ModuleTrait;
 use modules\users\Module;
+use Throwable;
 
 /**
  * This is the model class for table "{{%user}}".
  *
- * @property int $id ID
+ * @property int|string $id ID
  * @property string $username Username
  * @property string $email Email
  * @property string $auth_key Authorization Key
@@ -27,7 +28,7 @@ use modules\users\Module;
  * @property string $email_confirm_token Email Confirm Token
  * @property int $created_at Created
  * @property int $updated_at Updated
- * @property int $status Status
+ * @property int|string $status Status
  *
  * @property UserProfile $profile
  * @property string $statusLabelName
@@ -285,7 +286,7 @@ class User extends BaseUser
     }
 
     /**
-     * @param integer|string $id
+     * @param int|string $id
      * @return bool
      */
     public function isSuperAdmin($id = '')
@@ -346,7 +347,7 @@ class User extends BaseUser
 
     /**
      * @return bool
-     * @throws \Throwable
+     * @throws Throwable
      * @throws StaleObjectException
      */
     public function beforeDelete()
