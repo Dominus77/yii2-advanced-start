@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use modules\users\Module;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * Class LoginForm
@@ -65,7 +66,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
+            if (!$user->validatePassword($this->password)) {
                 $this->addError($attribute, Module::t('module', 'Invalid email or password.'));
             }
         }
@@ -83,7 +84,6 @@ class LoginForm extends Model
             $user = Yii::$app->user;
             return $user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-
         return false;
     }
 
@@ -101,7 +101,7 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return array|User|ActiveRecord|null
+     * @return array|User|IdentityInterface|ActiveRecord|null
      */
     protected function getUser()
     {
