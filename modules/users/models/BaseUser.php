@@ -51,7 +51,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param mixed $token
-     * @param null $type
+     * @param mixed $type
      * @return BaseUser|IdentityInterface|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
