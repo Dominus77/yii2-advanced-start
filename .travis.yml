@@ -40,4 +40,6 @@ script:
   - mysql -e 'CREATE DATABASE yii2_advanced_start_test;'
   - php yii_test migrate --interactive=0
   - vendor/bin/codecept build
-  - vendor/bin/codecept run
+  - vendor/bin/codecept run --coverage-clover=coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --access-token="95c39096fa18133c0161824d29f2f1a7356ece6695f4aabb33d46ee3898a088a" --format=php-clover coverage.clover
