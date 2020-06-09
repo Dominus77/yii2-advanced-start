@@ -150,7 +150,9 @@ class ProfileController extends Controller
                 $response->headers->set('Content-Type', 'image/jpg');
                 $response->format = Response::FORMAT_RAW;
                 $response->stream = $steam;
-                return $response->send();
+                if (($send = $response->send()) !== null) {
+                    return $send;
+                }
             }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
