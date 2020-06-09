@@ -2,7 +2,6 @@
 
 use yii\helpers\ArrayHelper;
 use yii\web\Application;
-use yii\base\InvalidConfigException;
 
 defined('YII_APP_BASE_PATH') || define('YII_APP_BASE_PATH', dirname(dirname(__DIR__)) . '/');
 
@@ -16,11 +15,5 @@ $config = ArrayHelper::merge(
     require YII_APP_BASE_PATH . 'api/config/main-local.php'
 );
 
-try {
-    $application = new Application($config);
-} catch (InvalidConfigException $e) {
-    // Exception
-    return $e;
-}
-
+$application = new Application($config);
 $application->run();
