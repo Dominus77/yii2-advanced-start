@@ -25,7 +25,7 @@ use modules\rbac\Module;
  */
 class AssignController extends Controller
 {
-    /** @var $user User */
+    /** @var User */
     private $_user;
 
     /**
