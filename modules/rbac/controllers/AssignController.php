@@ -3,19 +3,21 @@
 namespace modules\rbac\controllers;
 
 use Yii;
-use modules\rbac\models\Assignment;
+use yii\base\InvalidArgumentException;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\base\InvalidConfigException;
+use yii\web\IdentityInterface;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
 use yii\base\Action;
 use yii\web\Response;
 use Exception;
-use modules\rbac\Module;
+use modules\rbac\models\Assignment;
 use modules\users\models\User;
+use modules\rbac\Module;
 
 /**
  * Class AssignController
@@ -23,7 +25,7 @@ use modules\users\models\User;
  */
 class AssignController extends Controller
 {
-    /** @var $user object */
+    /** @var $user User */
     private $_user;
 
     /**
@@ -38,6 +40,11 @@ class AssignController extends Controller
             throw new InvalidConfigException(Module::t('module', 'You must specify the User class in the module settings.'));
         }
         $this->_user = new Yii::$app->controller->module->params['userClass']();
+        if (!($this->_user instanceof IdentityInterface)) {
+            throw new InvalidArgumentException(Module::t('module', 'Class {:userClassName} does not implement interface yii\web\IdentityInterface.', [
+                ':userClassName' => get_class($this->_user)
+            ]));
+        }
         return parent::beforeAction($action);
     }
 
@@ -72,7 +79,8 @@ class AssignController extends Controller
     public function actionIndex()
     {
         $assignModel = new Assignment();
-        $users = $this->_user->find()->all();
+        $userModel = $this->_user;
+        $users = $userModel::find()->all();
         $dataProvider = new ArrayDataProvider([
             'allModels' => $users,
             'sort' => [
@@ -138,7 +146,6 @@ class AssignController extends Controller
      */
     public function actionRevoke($id)
     {
-        /** @var User $model */
         $model = $this->findModel($id);
         $auth = Yii::$app->authManager;
         /** @var yii\web\Session $session */
@@ -165,7 +172,7 @@ class AssignController extends Controller
     protected function findModel($id)
     {
         $userModel = $this->_user;
-        if (($model = $userModel->findOne($id)) !== null) {
+        if (($model = $userModel::findOne(['id' => $id])) !== null) {
             return $model;
         }
         throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));

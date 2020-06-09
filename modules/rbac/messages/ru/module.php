@@ -104,4 +104,6 @@ return [
 
     'Access to Maintenance management' => 'Доступ к управлению режимом обслуживания',
     'View a site in maintenance mode' => 'Просмотр сайта в режиме обслуживания',
+
+    'Class {:userClassName} does not implement interface yii\web\IdentityInterface.' => 'Класс {:userClassName} не реализует интерфейс yii\web\IdentityInterface.',
 ];

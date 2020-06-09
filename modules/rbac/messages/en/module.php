@@ -104,4 +104,6 @@ return [
 
     'Access to Maintenance management' => 'Access to Maintenance management',
     'View a site in maintenance mode' => 'View a site in maintenance mode',
+
+    'Class {:userClassName} does not implement interface yii\web\IdentityInterface.' => 'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
 ];
