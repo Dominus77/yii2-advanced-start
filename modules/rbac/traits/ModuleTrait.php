@@ -31,7 +31,6 @@ trait ModuleTrait
      */
     public static function addChild($permissions, $role)
     {
-        /** @var  $auth */
         $auth = Yii::$app->authManager;
         foreach ($permissions as $value) {
             /** @var Permission|Role $add */

@@ -5,7 +5,6 @@ namespace modules\rbac\models;
 use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
-use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
 
 /**
@@ -20,8 +19,6 @@ use modules\rbac\Module;
  */
 class Assignment extends Model
 {
-    use ModuleTrait;
-
     public $user;
     public $id;
     public $username;
@@ -76,40 +73,39 @@ class Assignment extends Model
     }
 
     /**
+     * Получаем описание ролей пользователя
      * @param string|int $id
-     * @return mixed|null
-     * TODO: Refactoring
+     * @return string|null
      */
     public function getUserRoleName($id)
     {
         $id = $id ?: $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
-            return ArrayHelper::getValue($role, static function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->description;
-                }
-                return null;
-            });
+        $auth = Yii::$app->authManager;
+        if ($roles = $auth->getRolesByUser($id)) {
+            $description = [];
+            foreach ($roles as $key => $value) {
+                $description[] = $value->description;
+            }
+            return implode($description);
         }
         return null;
     }
 
     /**
-     * Получаем роль пользователя
+     * Получаем названия ролей пользователя
      * @param string|int $id
-     * @return mixed|null
-     * TODO: Refactoring
+     * @return string|null
      */
     public function getRoleUser($id)
     {
         $id = $id ?: $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
-            return ArrayHelper::getValue($role, static function ($role) {
-                foreach ($role as $key => $value) {
-                    return $value->name;
-                }
-                return null;
-            });
+        $auth = Yii::$app->authManager;
+        if ($roles = $auth->getRolesByUser($id)) {
+            $name = [];
+            foreach ($roles as $key => $value) {
+                $name[] = $value->name;
+            }
+            return implode($name);
         }
         return null;
     }
