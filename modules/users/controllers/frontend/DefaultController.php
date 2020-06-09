@@ -74,14 +74,13 @@ class DefaultController extends Controller
     /**
      * Logs out the current user.
      *
-     * @return Response
+     * @return bool
      */
     public function actionLogout()
     {
-        if (Yii::$app->user->logout()) {
-            return $this->processGoHome();
-        }
-        return $this->redirect(Yii::$app->request->referrer);
+        /** @var yii\web\User $user */
+        $user = Yii::$app->user;
+        return $user->logout();
     }
 
     /**
