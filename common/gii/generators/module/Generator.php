@@ -167,8 +167,8 @@ class Generator extends BaseGenerator
     public function hints()
     {
         return [
-            'moduleID' => 'This refers to the ID of the module, e.g., <code>blog</code>.',
-            'moduleClass' => 'This is the fully qualified class name of the module, e.g., <code>modules\blog\Module</code>.',
+            'moduleID' => 'This refers to the ID of the module, e.g., <code>admin</code>.',
+            'moduleClass' => 'This is the fully qualified class name of the module, e.g., <code>modules\admin\Module</code>.',
         ];
     }
 
@@ -218,6 +218,7 @@ EOD;
     ],   
     ......
 EOD;
+
         return $output . $appCommon . '<pre>' . highlight_string($codeCommon, true) . '</pre>' .
             $appBackend . '<pre>' . highlight_string($codeBackend, true) . '</pre>';
     }

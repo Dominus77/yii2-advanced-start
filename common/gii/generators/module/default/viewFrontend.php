@@ -7,11 +7,10 @@ require __DIR__ . '/base.php';
 echo "<?php\n";
 ?>
 
-use yii\web\View;
 use yii\helpers\Html;
 use <?= $ns ?>\<?= $className ?>;
 
-$this->title = <?= $className ?>::t('module', '<?= $moduleName ?>');
+$this->title = <?= $className ?>::t('module', '<?= ucfirst($moduleName) ?>');
 $this->params['breadcrumbs'][] = $this->title;
 <?= '?>' ?>
 
