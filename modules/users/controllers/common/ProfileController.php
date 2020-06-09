@@ -160,7 +160,7 @@ class ProfileController extends Controller
 
     /**
      * Delete Avatar files
-     * @param int $id
+     * @param int|string $id
      * @return Response
      */
     public function actionDeleteAvatar($id)
