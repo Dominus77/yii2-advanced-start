@@ -139,17 +139,14 @@ class ProfileController extends Controller
      */
     public function actionAvatar()
     {
-        if ($file = Yii::$app->request->get('filename')) {
-            $id = Yii::$app->request->get('id') ?: Yii::$app->user->id;
-            if (!is_array($id)) {
-                $model = new UploadForm();
-                $storagePath = $model->getPath($id);
-                $response = Yii::$app->getResponse();
-                $response->headers->set('Content-Type', 'image/jpg');
-                $response->format = Response::FORMAT_RAW;
-                if ($response->stream = fopen("$storagePath/$file", 'rb')) {
-                    return $response->send();
-                }
+        if (($file = Yii::$app->request->get('filename')) && $id = Yii::$app->request->get('id') ?: Yii::$app->user->id) {
+            $model = new UploadForm();
+            $storagePath = $model->getPath($id);
+            $response = Yii::$app->getResponse();
+            $response->headers->set('Content-Type', 'image/jpg');
+            $response->format = Response::FORMAT_RAW;
+            if ($response->stream = fopen("$storagePath/$file", 'rb')) {
+                return $response->send();
             }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
