@@ -5,6 +5,7 @@ namespace modules\users\models;
 use Yii;
 use yii\base\Model;
 use modules\users\Module;
+use yii\db\ActiveRecord;
 
 /**
  * Class LoginForm
@@ -20,6 +21,7 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = false;
 
+    /** @var User */
     private $_user;
 
     /**
@@ -77,10 +79,12 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-        } else {
-            return false;
+            /** @var yii\web\User $user */
+            $user = Yii::$app->user;
+            return $user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
+
+        return false;
     }
 
     /**
@@ -95,7 +99,7 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return array|null|User
+     * @return array|User|ActiveRecord|null
      */
     protected function getUser()
     {
