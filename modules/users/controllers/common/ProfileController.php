@@ -139,7 +139,9 @@ class ProfileController extends Controller
      */
     public function actionAvatar()
     {
-        if (($file = Yii::$app->request->get('filename')) && $id = Yii::$app->request->get('id') ?: Yii::$app->user->id) {
+        if ($file = Yii::$app->request->get('filename')) {
+            /** @var int|string $id */
+            $id = Yii::$app->request->get('id') ?: Yii::$app->user->id;
             $model = new UploadForm();
             $storagePath = $model->getPath($id);
             $response = Yii::$app->getResponse();
