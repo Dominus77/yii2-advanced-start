@@ -88,7 +88,7 @@ class UploadForm extends Model
 
     /**
      * Upload path
-     * @var string
+     * @var string|bool
      */
     private $path = '';
 
@@ -230,7 +230,7 @@ class UploadForm extends Model
     public function getPath($id)
     {
         $this->path = Yii::getAlias($this->directory . '/' . $id);
-        return is_string($this->path) ? $this->path : '';
+        return (string)$this->path;
     }
 
     /**
