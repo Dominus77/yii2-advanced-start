@@ -66,7 +66,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user->validatePassword($this->password)) {
+            if ($user === null || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, Module::t('module', 'Invalid email or password.'));
             }
         }
