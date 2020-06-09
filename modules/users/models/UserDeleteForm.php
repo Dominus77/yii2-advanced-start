@@ -4,7 +4,10 @@ namespace modules\users\models;
 
 use yii\base\Model;
 use yii\base\InvalidArgumentException;
+use yii\db\StaleObjectException;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use modules\users\Module;
+use Throwable;
 
 /**
  * Class UpdatePasswordForm
@@ -16,7 +19,7 @@ class UserDeleteForm extends Model
     public $currentPassword;
 
     /**
-     * @var \modules\users\models\User
+     * @var User
      */
     private $_user;
 
@@ -91,14 +94,14 @@ class UserDeleteForm extends Model
     }
 
     /**
-     * @return false|int
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @return bool|false|int
+     * @throws StaleObjectException
+     * @throws Throwable
      */
     public function userDelete()
     {
         $user = $this->_user;
-        /** @var $user \yii2tech\ar\softdelete\SoftDeleteBehavior */
+        /** @var $user SoftDeleteBehavior */
         return $user->softDelete();
     }
 }

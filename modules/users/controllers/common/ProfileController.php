@@ -2,7 +2,6 @@
 
 namespace modules\users\controllers\common;
 
-use Throwable;
 use Yii;
 use yii\base\Exception;
 use yii\db\StaleObjectException;
@@ -17,6 +16,7 @@ use modules\users\models\UpdatePasswordForm;
 use modules\users\models\UserDeleteForm;
 use modules\rbac\models\Assignment;
 use modules\users\Module;
+use Throwable;
 
 /**
  * Class ProfileController
@@ -42,14 +42,15 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return string
+     * @return string|Response
      * @throws NotFoundHttpException
      */
     public function actionUpdate()
     {
         $model = $this->findModel();
         $uploadFormModel = new UploadForm();
-        if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
+        $load = $model->profile->load(Yii::$app->request->post());
+        if ($load && $model->profile->save()) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
             $session->setFlash('success', Module::t('module', 'Profile successfully save.'));
@@ -65,14 +66,14 @@ class ProfileController extends Controller
     /**
      * @return Response
      * @throws NotFoundHttpException
-     * @throws Exception
      */
     public function actionUpdateAvatar()
     {
         $model = $this->findModel();
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
-        if ($model->profile->load(Yii::$app->request->post()) && $model->profile->save()) {
+        $load = $model->profile->load(Yii::$app->request->post());
+        if ($load && $model->profile->save()) {
             $session->setFlash('success', Module::t('module', 'Form successfully saved.'));
         } else {
             $session->setFlash('error', Module::t('module', 'Error! Failed to save the form.'));
@@ -145,9 +146,10 @@ class ProfileController extends Controller
             $model = new UploadForm();
             $storagePath = $model->getPath($id);
             $response = Yii::$app->getResponse();
-            $response->headers->set('Content-Type', 'image/jpg');
-            $response->format = Response::FORMAT_RAW;
-            if ($response->stream = fopen("$storagePath/$file", 'rb')) {
+            if (($steam = fopen("$storagePath/$file", 'rb')) !== false) {
+                $response->headers->set('Content-Type', 'image/jpg');
+                $response->format = Response::FORMAT_RAW;
+                $response->stream = $steam;
                 return $response->send();
             }
         }
@@ -183,7 +185,8 @@ class ProfileController extends Controller
         $model = new UpdatePasswordForm($this->findModel());
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
-        if ($model->load(Yii::$app->request->post()) && $model->resetPassword()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->resetPassword()) {
             $session->setFlash('success', Module::t('module', 'Password changed successfully.'));
         } else {
             $session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
@@ -258,7 +261,8 @@ class ProfileController extends Controller
     public function actionDelete()
     {
         $model = new UserDeleteForm($this->findModel());
-        if ($model->load(Yii::$app->request->post()) && $model->userDelete()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->userDelete() !== false) {
             /** @var \yii\web\User $user */
             $user = Yii::$app->user;
             $user->logout();
