@@ -44,7 +44,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * @param int|string $id
-     * @return User|static|null
+     * @return $this|null
      */
     public static function findIdentity($id)
     {
