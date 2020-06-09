@@ -136,6 +136,7 @@ class ProfileController extends Controller
 
     /**
      * Get Avatar
+     * @return bool
      * @throws NotFoundHttpException
      */
     public function actionAvatar()
@@ -150,9 +151,8 @@ class ProfileController extends Controller
                 $response->headers->set('Content-Type', 'image/jpg');
                 $response->format = Response::FORMAT_RAW;
                 $response->stream = $steam;
-                if (($send = $response->send()) !== null) {
-                    return $send;
-                }
+                $response->send();
+                return true;
             }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
