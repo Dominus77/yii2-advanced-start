@@ -56,14 +56,6 @@ tools:
     php_sim: false
 build:
     nodes:
-        coverage:
-            tests:
-                override:
-                    - command: ./vendor/bin/codecept build
-                    - command: ./vendor/bin/codecept run --coverage-xml
-                    coverage:
-                        file: ./coverage.xml
-                        format: clover
         analysis:
             project_setup:
                 override: true
