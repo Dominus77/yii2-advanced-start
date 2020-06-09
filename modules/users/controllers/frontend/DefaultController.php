@@ -62,7 +62,8 @@ class DefaultController extends Controller
     public function actionLogin()
     {
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->login()) {
             return $this->goBack();
         }
         return $this->render('login', [
@@ -77,8 +78,10 @@ class DefaultController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-        return $this->processGoHome();
+        if (Yii::$app->user->logout()) {
+            return $this->processGoHome();
+        }
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -88,7 +91,8 @@ class DefaultController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->signup()) {
             return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
         }
         return $this->render('signup', [
@@ -124,7 +128,8 @@ class DefaultController extends Controller
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->validate()) {
             if ($model->sendEmail()) {
                 return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
             }
@@ -150,8 +155,8 @@ class DefaultController extends Controller
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
-
-        if ($model->load(Yii::$app->request->post()) && $this->processResetPassword($model)) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $this->processResetPassword($model)) {
             return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
         }
 
