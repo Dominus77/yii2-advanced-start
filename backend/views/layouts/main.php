@@ -14,7 +14,7 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use dominus77\noty\NotyWidget;
 use modules\users\widgets\AvatarWidget;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
@@ -25,6 +25,23 @@ use modules\rbac\Module as RbacModule;
 
 iCheckAsset::register($this);
 AppAsset::register($this);
+
+NotyWidget::widget([
+    'typeOptions' => [
+        NotyWidget::TYPE_SUCCESS => ['timeout' => 3000],
+        NotyWidget::TYPE_INFO => ['timeout' => 3000],
+        NotyWidget::TYPE_ALERT => ['timeout' => 3000],
+        NotyWidget::TYPE_ERROR => ['timeout' => 5000],
+        NotyWidget::TYPE_WARNING => ['timeout' => 3000]
+    ],
+    'options' => [
+        'progressBar' => true,
+        'timeout' => false,
+        'layout' => NotyWidget::LAYOUT_TOP_CENTER,
+        'dismissQueue' => true,
+        'theme' => NotyWidget::THEME_SUNSET
+    ],
+]);
 
 /** @var yii\web\User $user */
 $user = Yii::$app->user;
@@ -247,7 +264,6 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false
             ]) ?>
-            <?= Alert::widget() ?>
         </section>
         <section class="content">
             <?= $content ?>
