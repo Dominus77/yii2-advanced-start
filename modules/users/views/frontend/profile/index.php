@@ -1,17 +1,30 @@
 <?php
 
+use yii\helpers\Html;
+use yii\bootstrap\Tabs;
+use modules\rbac\models\Assignment;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
- * @var $assignModel \modules\rbac\models\Assignment
+ * @var $assignModel Assignment
  */
-
-use yii\helpers\Html;
-use modules\users\Module;
-use yii\bootstrap\Tabs;
 
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
+
+$items = [
+    [
+        'label' => Html::encode($this->title),
+        'content' => $this->render('tabs/_view', [
+            'model' => $model,
+            'assignModel' => $assignModel
+        ]),
+        'options' => ['id' => 'profile', 'role' => 'tabpanel'],
+        'active' => !Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') === 'profile')
+    ]
+];
 ?>
 
 <div class="users-frontend-profile-index">
@@ -20,17 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="nav-tabs">
         <?= Tabs::widget([
             'options' => ['role' => 'tablist'],
-            'items' => [
-                [
-                    'label' => Html::encode($this->title),
-                    'content' => $this->render('tabs/_view', [
-                        'model' => $model,
-                        'assignModel' => $assignModel,
-                    ]),
-                    'options' => ['id' => 'profile', 'role' => 'tabpanel'],
-                    'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
-                ],
-            ]
-        ]); ?>
+            'items' => $items
+        ]) ?>
     </div>
 </div>

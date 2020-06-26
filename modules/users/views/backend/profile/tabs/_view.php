@@ -1,15 +1,16 @@
 <?php
 
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+use modules\rbac\models\Assignment;
+use modules\users\widgets\AvatarWidget;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
- * @var $assignModel \modules\rbac\models\Assignment
+ * @var $assignModel Assignment
  */
-
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-use modules\users\widgets\AvatarWidget;
-use modules\users\Module;
 
 $this->registerJs(new yii\web\JsExpression("
     $(function () {
@@ -46,30 +47,9 @@ $this->registerJs(new yii\web\JsExpression("
                 [
                     'attribute' => 'auth_key',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-                        $link = Html::a(Module::t('module', 'Generate'), ['/profile/generate-auth-key'], [
-                            'class' => 'btn btn-sm btn-default',
-                            'title' => Module::t('module', 'Generate new key'),
-                            'data' => [
-                                'toggle' => 'tooltip',
-                            ],
-                            'onclick' => "                                
-                                $.ajax({
-                                    type: 'POST',
-                                    cache: false,
-                                    url: this.href,
-                                    success: function(response) {                                       
-                                        if(response.success) {
-                                            $('#authKey').html(response.success);
-                                        }
-                                    }
-                                });
-                                return false;
-                            ",
-                        ]);
-                        return $key . ' ' . $link;
-                    }
+                    'value' => $this->renderFile(Yii::getAlias('@modules/users/views/common/profile/_authKey.php'), [
+                        'model' => $model
+                    ])
                 ],
                 'created_at:datetime',
                 'updated_at:datetime',
