@@ -3129,6 +3129,7 @@ trait FunctionalTesterActions
      * ```php
      * $I->setServerParameters([]);
      * ```
+     * @param array $params
      * @see \Codeception\Lib\InnerBrowser::setServerParameters()
      */
     public function setServerParameters($params) {
@@ -3144,6 +3145,8 @@ trait FunctionalTesterActions
      * ```php
      * $I->haveServerParameter('name', 'value');
      * ```
+     * @param $name
+     * @param $value
      * @see \Codeception\Lib\InnerBrowser::haveServerParameter()
      */
     public function haveServerParameter($name, $value) {

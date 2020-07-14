@@ -32,3 +32,6 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# module RBAC
+/modules/rbac/tests/_support/_generated/
