@@ -9,6 +9,7 @@ return [
     'Users' => 'Users',
     'Guest' => 'Guest',
 
+    'ID' => 'ID',
     'Created' => 'Created',
     'Updated' => 'Updated',
     'Last Visit' => 'Last Visit',

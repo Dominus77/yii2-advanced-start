@@ -2,7 +2,8 @@
 
 namespace modules\users\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use modules\users\traits\ModuleTrait;
 use modules\users\Module;
@@ -21,9 +22,9 @@ use modules\users\Module;
  *
  * @property User $user
  *
- * @method touch(string) TimestampBehavior
+ * @method touch(string $attribute)
  */
-class UserProfile extends \yii\db\ActiveRecord
+class UserProfile extends ActiveRecord
 {
     use ModuleTrait;
 
@@ -77,7 +78,7 @@ class UserProfile extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getUser()
     {

@@ -4,7 +4,9 @@ namespace modules\users\behavior;
 
 use Yii;
 use yii\base\Behavior;
+use yii\behaviors\TimestampBehavior;
 use yii\web\Controller;
+use yii\web\IdentityInterface;
 use modules\users\models\User;
 
 /**
@@ -29,9 +31,9 @@ class LastVisitBehavior extends Behavior
     public function afterAction()
     {
         if (!Yii::$app->user->isGuest) {
-            /** @var \yii\web\IdentityInterface $model */
+            /** @var IdentityInterface $model */
             $model = Yii::$app->user->identity;
-            /** @var \yii\behaviors\TimestampBehavior|User $model Updates a timestamp attribute to the current timestamp. */
+            /** @var TimestampBehavior|User $model Updates a timestamp attribute to the current timestamp. */
             if($model->profile !== null) {
                 $model->profile->touch('last_visit');
             }
