@@ -48,7 +48,7 @@ return [
         'db' => [
             'class' => Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
-            'username' => 'root',
+            'username' => '',
             'password' => '',
             'charset' => 'utf8',
             'tablePrefix' => 'tbl_',
