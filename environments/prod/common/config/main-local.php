@@ -8,7 +8,7 @@ return [
         'db' => [
             'class' => Connection::class,
             'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_advanced_start',
-            'username' => '',
+            'username' => 'root',
             'password' => ''
         ],
         'mailer' => [
