@@ -14,6 +14,7 @@ namespace <?= $ns ?>;
 
 use Yii;
 use yii\i18n\PhpMessageSource;
+use yii\web\GroupUrlRule;
 
 /**
  * Class Bootstrap
@@ -36,12 +37,23 @@ class Bootstrap
         ];
 
         $urlManager = Yii::$app->urlManager;
-        $urlManager->addRules(
-            [
-                '<?= $moduleName ?>' => '<?= $moduleName ?>/default/index',
-                '<?= $moduleName ?>/<id:\d+>/<_a:[\w\-]+>' => '<?= $moduleName ?>/default/<_a>',
-                '<?= $moduleName ?>/<_a:[\w\-]+>' => '<?= $moduleName ?>/default/<_a>'
-            ]
-        );
+        $urlManager->addRules($this->getRules());
+    }
+
+    /**
+     * @return GroupUrlRule[]
+     */
+    public function getRules()
+    {
+        return [
+            new GroupUrlRule([
+                'prefix' => '<?= $moduleName ?>',
+                'rules' => [
+                    '' => 'default/index',
+                    '<id:\d+>/<_a:[\w\-]+>' => 'default/<_a>',
+                    '<_a:[\w\-]+>' => 'default/<_a>'
+                ]
+            ])
+        ];
     }
 }
