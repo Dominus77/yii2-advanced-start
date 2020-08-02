@@ -35,6 +35,7 @@ use Throwable;
  * @property string $statusName
  * @property array $statusesArray
  * @property string $labelMailConfirm
+ * @property-read string $userFullName
  * @property string $newPassword
  *
  * @method touch() TimestampBehavior

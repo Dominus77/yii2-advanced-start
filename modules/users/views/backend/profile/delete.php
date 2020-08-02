@@ -1,13 +1,13 @@
 <?php
 
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\UserDeleteForm
  */
-
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use modules\users\Module;
 
 $this->title = Module::t('module', 'Confirm deleting profile');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];

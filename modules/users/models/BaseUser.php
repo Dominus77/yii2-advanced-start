@@ -21,6 +21,7 @@ use modules\users\Module;
  * @property string $statusLabelName
  * @property string $statusName
  * @property array $statusesArray
+ * @property-read string $authKey
  * @property array $labelsArray
  */
 class BaseUser extends ActiveRecord implements IdentityInterface
@@ -196,7 +197,8 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return mixed
+     * @return mixed|null
+     * @throws \Exception
      */
     public function getStatusName()
     {
@@ -205,7 +207,9 @@ class BaseUser extends ActiveRecord implements IdentityInterface
 
     /**
      * Return <span class="label label-success">Active</span>
+     *
      * @return string
+     * @throws \Exception
      */
     public function getStatusLabelName()
     {

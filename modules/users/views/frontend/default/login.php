@@ -1,14 +1,15 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $form yii\bootstrap\ActiveForm
- * @var $model \modules\users\models\LoginForm
- */
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
+use modules\users\models\LoginForm;
+
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model LoginForm
+ */
 
 $this->title = Module::t('module', 'Login');
 $this->params['breadcrumbs'][] = $this->title;

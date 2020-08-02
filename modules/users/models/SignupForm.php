@@ -3,6 +3,7 @@
 namespace modules\users\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\base\Model;
 use modules\users\Module;
 
@@ -30,14 +31,14 @@ class SignupForm extends Model
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t('module', 'This username already exists.')],
+            ['username', 'unique', 'targetClass' => User::class, 'message' => Module::t('module', 'This username already exists.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t('module', 'This email already exists.')],
+            ['email', 'unique', 'targetClass' => User::class, 'message' => Module::t('module', 'This email already exists.')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
@@ -61,7 +62,7 @@ class SignupForm extends Model
      * Signs user up.
      *
      * @return User|null the saved model or null if saving fails
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function signup()
     {

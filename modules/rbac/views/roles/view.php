@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
@@ -27,45 +26,7 @@ $this->params['breadcrumbs'][] = $model->name;
 
             <div class="row">
                 <div class="col-md-6">
-                    <?php try {
-                        echo DetailView::widget([
-                            'model' => $role,
-                            'attributes' => [
-                                [
-                                    'attribute' => 'name',
-                                    'label' => Module::t('module', 'Name'),
-                                    'format' => 'raw'
-                                ],
-                                [
-                                    'attribute' => 'description',
-                                    'label' => Module::t('module', 'Description'),
-                                    'format' => 'raw'
-                                ],
-                                [
-                                    'attribute' => 'ruleName',
-                                    'label' => Module::t('module', 'Rule Name'),
-                                    'format' => 'raw'
-                                ],
-                                [
-                                    'attribute' => 'data',
-                                    'label' => Module::t('module', 'Data'),
-                                    'format' => 'raw'
-                                ],
-                                [
-                                    'attribute' => 'createdAt',
-                                    'label' => Module::t('module', 'Created'),
-                                    'format' => 'datetime'
-                                ],
-                                [
-                                    'attribute' => 'updatedAt',
-                                    'label' => Module::t('module', 'Updated'),
-                                    'format' => 'datetime'
-                                ]
-                            ]
-                        ]);
-                    } catch (Exception $e) {
-                        // Save log
-                    } ?>
+                    <?= $this->renderFile('@modules/rbac/views/common/_detailView.php', ['model' => $role]) ?>
                 </div>
                 <div class="col-md-6">
                     <?php if ($roles = $model->getRolesByRole()) : ?>

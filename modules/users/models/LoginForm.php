@@ -4,9 +4,9 @@ namespace modules\users\models;
 
 use Yii;
 use yii\base\Model;
-use modules\users\Module;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use modules\users\Module;
 
 /**
  * Class LoginForm
@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  *
  * @property string $email Email
  * @property string $password Password
+ * @property-read IdentityInterface|ActiveRecord|null|array|User $user
  * @property bool $rememberMe Remember Me
  */
 class LoginForm extends Model

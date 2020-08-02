@@ -1,14 +1,15 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $form yii\bootstrap\ActiveForm
- * @var $model \modules\users\models\PasswordResetRequestForm
- */
-
+use modules\users\models\PasswordResetRequestForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
+
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model PasswordResetRequestForm
+ */
 
 $this->title = Module::t('module', 'Password Reset Form');
 $this->params['breadcrumbs'][] = $this->title;

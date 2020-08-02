@@ -11,6 +11,12 @@ use modules\rbac\Module;
  * Class Role
  * @package modules\rbac\models
  *
+ * @property-read Role[] $roles
+ * @property-read array $roleItemsArray
+ * @property-read array $rolePermissions
+ * @property-read Item[] $children
+ * @property-read array $roleChildArray
+ * @property-read Role[] $roleChild
  * @property array $rolesArray
  */
 class Role extends Model
@@ -62,7 +68,7 @@ class Role extends Model
             ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
 
             [['description'], 'string'],
-            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE]
+            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'on' => self::SCENARIO_UPDATE]
         ];
     }
 

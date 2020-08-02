@@ -34,9 +34,6 @@ class AccessBehavior extends Behavior
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function accessAction()
     {
         if (($this->checkPermission() === false) && ($this->checkRole() === false)) {

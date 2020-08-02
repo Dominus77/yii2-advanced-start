@@ -15,6 +15,7 @@ use modules\rbac\Module;
  * @property string|int $id Id
  * @property string $username Username
  * @property mixed $role Role
+ * @property-read array $rolesArray
  * @property bool $isNewRecord Is New Record
  */
 class Assignment extends Model

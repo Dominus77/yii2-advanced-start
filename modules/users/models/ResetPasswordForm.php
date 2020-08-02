@@ -2,6 +2,7 @@
 
 namespace modules\users\models;
 
+use yii\base\Exception;
 use yii\base\Model;
 use yii\base\InvalidArgumentException;
 use modules\users\Module;
@@ -17,7 +18,7 @@ class ResetPasswordForm extends Model
     public $password;
 
     /**
-     * @var \modules\users\models\User
+     * @var User
      */
     private $_user;
 
@@ -26,7 +27,7 @@ class ResetPasswordForm extends Model
      *
      * @param mixed $token
      * @param array $config name-value pairs that will be used to initialize the object properties
-     * @throws \yii\base\InvalidParamException if token is empty or not valid
+     * @throws InvalidArgumentException if token is empty or not valid
      */
     public function __construct($token = '', $config = [])
     {
@@ -67,7 +68,7 @@ class ResetPasswordForm extends Model
      * Resets password.
      *
      * @return bool if password was reset.
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function resetPassword()
     {

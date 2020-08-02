@@ -10,12 +10,16 @@ use console\components\helpers\Console;
 use modules\rbac\models\Role;
 use modules\rbac\models\Permission;
 use modules\rbac\Module;
+use Exception;
 
 /**
  * Class RbacController
  * Инициализатор RBAC выполняется в консоли php yii rbac/init
  *
  * @package console\controllers
+ *
+ * @property-read array $permissions
+ * @property-read array $roles
  */
 class InitController extends Controller
 {
@@ -43,6 +47,7 @@ class InitController extends Controller
 
     /**
      * @return bool
+     * @throws Exception
      */
     public function processInit()
     {
@@ -101,6 +106,7 @@ class InitController extends Controller
      * @param object $auth
      * @param array $roles
      * @param array $permissions
+     * @throws Exception
      */
     protected function processAddPermissionToRoles($auth, $roles = [], $permissions = [])
     {
@@ -117,6 +123,7 @@ class InitController extends Controller
      *
      * @param object $auth
      * @param array $roles
+     * @throws Exception
      */
     protected function processAddChildRoles($auth, $roles = [])
     {

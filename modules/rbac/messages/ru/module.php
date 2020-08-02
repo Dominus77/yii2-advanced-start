@@ -106,4 +106,5 @@ return [
     'View a site in maintenance mode' => 'Просмотр сайта в режиме обслуживания',
 
     'Class {:userClassName} does not implement interface yii\web\IdentityInterface.' => 'Класс {:userClassName} не реализует интерфейс yii\web\IdentityInterface.',
+    'Roles with permissions' => 'Роли с разрешениями',
 ];

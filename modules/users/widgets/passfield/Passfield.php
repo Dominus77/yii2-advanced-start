@@ -2,8 +2,10 @@
 
 namespace modules\users\widgets\passfield;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\InputWidget;
 use modules\users\widgets\passfield\assets\PassfieldAsset;
 
@@ -14,7 +16,7 @@ use modules\users\widgets\passfield\assets\PassfieldAsset;
 class Passfield extends InputWidget
 {
     /**
-     * @var \yii\widgets\ActiveForm
+     * @var ActiveForm
      */
     public $form;
     /**
@@ -53,7 +55,7 @@ class Passfield extends InputWidget
     public function registerAssets()
     {
         PassfieldAsset::register($this->view);
-        $config = empty($this->config) ? json_encode(['locale' => \Yii::$app->language]) : json_encode($this->config);
+        $config = empty($this->config) ? json_encode(['locale' => Yii::$app->language]) : json_encode($this->config);
         $this->view->registerJs(sprintf('$("#%s").passField(%s)', $this->options['id'], $config));
     }
 }

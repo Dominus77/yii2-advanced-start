@@ -1,10 +1,10 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\rbac\Module;
+
+/* @var $this yii\web\View */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');

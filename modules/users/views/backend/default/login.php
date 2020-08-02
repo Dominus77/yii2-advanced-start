@@ -1,8 +1,8 @@
 <?php
 
-use modules\users\models\LoginForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use modules\users\models\LoginForm;
 use modules\users\Module;
 
 /**

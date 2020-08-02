@@ -15,6 +15,8 @@ use modules\users\models\UploadForm;
  * @property array $imageOptions
  * @property string $email
  * @property int|string $user_id
+ * @property-read string|int $userId
+ * @property-read string $gravatarEmail
  * @property string|int $size
  */
 class AvatarWidget extends Widget

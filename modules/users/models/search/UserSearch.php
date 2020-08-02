@@ -16,6 +16,7 @@ use modules\users\models\User;
  * @property string $userRoleName User Role Name
  * @property string $date_from Date From
  * @property string $date_to Date To
+ * @property-read UserQuery $query
  * @property integer $pageSize Page Size
  */
 class UserSearch extends User

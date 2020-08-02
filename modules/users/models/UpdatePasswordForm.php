@@ -2,6 +2,7 @@
 
 namespace modules\users\models;
 
+use yii\base\Exception;
 use yii\base\Model;
 use yii\base\InvalidArgumentException;
 use modules\users\Module;
@@ -17,7 +18,7 @@ class UpdatePasswordForm extends Model
     public $currentPassword;
 
     /**
-     * @var \modules\users\models\User
+     * @var User
      */
     private $_user;
 
@@ -92,7 +93,7 @@ class UpdatePasswordForm extends Model
      * Resets password.
      *
      * @return bool if password was reset.
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function resetPassword()
     {

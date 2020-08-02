@@ -14,7 +14,7 @@ use modules\users\Module;
 class CronController extends Controller
 {
     /**
-     * @var \modules\users\Module
+     * @var Module
      */
     public $module;
 
