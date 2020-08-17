@@ -27,10 +27,6 @@ $config = ArrayHelper::merge(
     require YII_APP_BASE_PATH . '/console/config/main-local.php'
 );
 
-try {
-    $application = new Application($config);
-} catch (InvalidConfigException $e) {
-}
-
+$application = new Application($config);
 $exitCode = $application->run();
 exit($exitCode);
