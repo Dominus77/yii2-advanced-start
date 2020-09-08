@@ -26,7 +26,7 @@ use modules\rbac\Module;
 class AssignController extends Controller
 {
     /** @var User */
-    private $_user;
+    private $user;
 
     /**
      * @param Action $action
@@ -37,13 +37,24 @@ class AssignController extends Controller
     public function beforeAction($action)
     {
         if (empty(Yii::$app->controller->module->params['userClass'])) {
-            throw new InvalidConfigException(Module::t('module', 'You must specify the User class in the module settings.'));
+            throw new InvalidConfigException(
+                Module::t(
+                    'module',
+                    'You must specify the User class in the module settings.'
+                )
+            );
         }
         $this->_user = new Yii::$app->controller->module->params['userClass']();
-        if (!($this->_user instanceof IdentityInterface)) {
-            throw new InvalidArgumentException(Module::t('module', 'Class {:userClassName} does not implement interface yii\web\IdentityInterface.', [
-                ':userClassName' => get_class($this->_user)
-            ]));
+        if (!($this->user instanceof IdentityInterface)) {
+            throw new InvalidArgumentException(
+                Module::t(
+                    'module',
+                    'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
+                    [
+                        ':userClassName' => get_class($this->_user)
+                    ]
+                )
+            );
         }
         return parent::beforeAction($action);
     }
@@ -152,12 +163,36 @@ class AssignController extends Controller
         $session = Yii::$app->session;
         if ($auth->getRolesByUser($model->id)) {
             if ($auth->revokeAll($model->id)) {
-                $session->setFlash('success', Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]));
+                $session->setFlash(
+                    'success',
+                    Module::t(
+                        'module',
+                        'User "{:username}" successfully unassigned.',
+                        [
+                            ':username' => $model->username
+                        ]
+                    )
+                );
             } else {
-                $session->setFlash('error', Module::t('module', 'Error!'));
+                $session->setFlash(
+                    'error',
+                    Module::t(
+                        'module',
+                        'Error!'
+                    )
+                );
             }
         } else {
-            $session->setFlash('warning', Module::t('module', 'User "{:username}" is not attached to any role!', [':username' => $model->username]));
+            $session->setFlash(
+                'warning',
+                Module::t(
+                    'module',
+                    'User "{:username}" is not attached to any role!',
+                    [
+                        ':username' => $model->username
+                    ]
+                )
+            );
         }
         return $this->redirect(['index']);
     }
@@ -175,6 +210,11 @@ class AssignController extends Controller
         if (($model = $userModel::findOne(['id' => $id])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(
+            Module::t(
+                'module',
+                'The requested page does not exist.'
+            )
+        );
     }
 }

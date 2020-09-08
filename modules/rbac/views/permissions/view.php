@@ -25,7 +25,9 @@ $this->params['breadcrumbs'][] = $model->name;
             <div class="pull-right"></div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= $this->renderFile('@modules/rbac/views/common/_detailView.php', ['model' => $permission]) ?>
+                    <?= $this->renderFile('@modules/rbac/views/common/_detailView.php', [
+                        'model' => $permission
+                    ]) ?>
                 </div>
                 <div class="col-md-6">
                     <?php if ($permissions = $model->getPermissionChildren()) : ?>
@@ -41,14 +43,36 @@ $this->params['breadcrumbs'][] = $model->name;
         </div>
         <div class="box-footer">
             <p>
-                <?= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t('module', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ' . Module::t('module', 'Delete'), ['delete', 'id' => $model->name], [
+                <?= Html::a(
+                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t(
+                        'module',
+                        'Update'
+                    ),
+                    [
+                    'update',
+                    'id' => $model->name
+                    ],
+                    [
+                        'class' => 'btn btn-primary'
+                    ]
+                ) ?>
+                <?= Html::a(
+                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ' . Module::t(
+                        'module',
+                        'Delete'
+                    ),
+                    [
+                    'delete',
+                    'id' => $model->name
+                    ],
+                    [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
                         'method' => 'post'
                     ]
-                ]) ?>
+                    ]
+                ) ?>
             </p>
         </div>
     </div>

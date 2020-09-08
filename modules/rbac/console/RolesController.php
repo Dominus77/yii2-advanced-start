@@ -44,10 +44,18 @@ class RolesController extends Controller
         $userRoles = $this->getUserRoleValue($user->id);
         if ($userRoles === null) {
             $authManager->assign($role, $user->id);
-            $this->stdout(Module::t('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(
+                Module::t('module', 'Success!'),
+                Console::FG_GREEN,
+                Console::BOLD
+            );
             $this->stdout(PHP_EOL);
         } else {
-            $this->stdout(Module::t('module', 'The user already has a role.'), Console::FG_RED, Console::BOLD);
+            $this->stdout(
+                Module::t('module', 'The user already has a role.'),
+                Console::FG_RED,
+                Console::BOLD
+            );
             $this->stdout(PHP_EOL);
         }
     }
@@ -62,10 +70,11 @@ class RolesController extends Controller
         $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
         $user = $this->findModel($username);
         $roleName = $this->select(
-            Module::t('module', 'Role:'), ArrayHelper::merge(
-            ['all' => Module::t('module', 'All Roles')],
-            ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
-        )
+            Module::t('module', 'Role:'),
+            ArrayHelper::merge(
+                ['all' => Module::t('module', 'All Roles')],
+                ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
+            )
         );
         if ($roleName === 'all') {
             $authManager->revokeAll($user->id);

@@ -37,7 +37,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
                         'toggle' => 'tooltip',
                         'original-title' => Module::t('module', 'Reset rbac'),
                         'method' => 'post',
-                        'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?')
+                        'confirm' => Module::t(
+                            'module',
+                                'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' // phpcs:ignore
+                        )
                     ]
                 ]) ?>
             </div>

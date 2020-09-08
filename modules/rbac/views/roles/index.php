@@ -42,7 +42,13 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                     ]) ?>
                 </p>
             </div>
-            <?= $this->renderFile('@modules/rbac/views/common/_gridView.php', ['id' => 'grid-rbac-roles', 'dataProvider' => $dataProvider]) ?>
+            <?= $this->renderFile(
+                '@modules/rbac/views/common/_gridView.php',
+                [
+                    'id' => 'grid-rbac-roles',
+                    'dataProvider' => $dataProvider
+                ]
+            ) ?>
         </div>
         <div class="box-footer">
             <?= LinkPager::widget([

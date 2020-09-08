@@ -98,7 +98,8 @@ class RolesController extends Controller
         $model = new Role(['scenario' => Role::SCENARIO_CREATE]);
         $model->isNewRecord = true;
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $load = $model->load(Yii::$app->request->post());
+        if ($load && $model->validate()) {
             $auth = Yii::$app->authManager;
             $role = $auth->createRole($model->name);
             $role->description = $model->description;
@@ -178,7 +179,17 @@ class RolesController extends Controller
                 } else {
                     /** @var yii\web\Session $session */
                     $session = Yii::$app->session;
-                    $session->setFlash('error', Module::t('module', 'The role of the "{:parent}" is the parent of the "{:role}"!', [':parent' => $add->name, ':role' => $role->name]));
+                    $session->setFlash(
+                        'error',
+                        Module::t(
+                            'module',
+                            'The role of the "{:parent}" is the parent of the "{:role}"!',
+                            [
+                            ':parent' => $add->name,
+                            ':role' => $role->name
+                            ]
+                        )
+                    );
                 }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
@@ -265,7 +276,16 @@ class RolesController extends Controller
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         if ($auth->remove($role)) {
-            $session->setFlash('success', Module::t('module', 'The role "{:name}" have been successfully deleted.', [':name' => $role->name]));
+            $session->setFlash(
+                'success',
+                Module::t(
+                    'module',
+                    'The role "{:name}" have been successfully deleted.',
+                    [
+                        ':name' => $role->name
+                    ]
+                )
+            );
         } else {
             $session->setFlash('error', Module::t('module', 'Error!'));
         }

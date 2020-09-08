@@ -210,7 +210,16 @@ class PermissionsController extends Controller
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         if ($auth->remove($perm)) {
-            $session->setFlash('success', Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]));
+            $session->setFlash(
+                'success',
+                Module::t(
+                    'module',
+                    'The permission "{:name}" have been successfully deleted.',
+                    [
+                        ':name' => $perm->name
+                    ]
+                )
+            );
         } else {
             $session->setFlash('error', Module::t('module', 'Error!'));
         }

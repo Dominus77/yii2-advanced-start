@@ -38,10 +38,18 @@ class InitController extends Controller
     public function actionIndex()
     {
         if ($this->processInit()) {
-            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(
+                Console::convertEncoding(Module::t('module', 'Success!')),
+                Console::FG_GREEN,
+                Console::BOLD
+            );
             $this->stdout(PHP_EOL);
         } else {
-            $this->stderr(Console::convertEncoding(Module::t('module', 'Fail!')), Console::FG_RED, Console::BOLD);
+            $this->stderr(
+                Console::convertEncoding(Module::t('module', 'Fail!')),
+                Console::FG_RED,
+                Console::BOLD
+            );
         }
     }
 
@@ -56,7 +64,7 @@ class InitController extends Controller
         $roles = $this->processCreate($auth, $this->getRoles());
         $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
-        //$this->processAddChildRoles($auth, $roles); // Inheritance of roles - If you uncomment, the roles are inherited
+        //$this->processAddChildRoles($auth, $roles); //Inheritance of roles - If you uncomment, the roles are inherited
 
         // Assign a super administrator role to the user from id 1
         $role = ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN);
@@ -112,8 +120,10 @@ class InitController extends Controller
     {
         foreach (Permission::getGroups() as $role => $group) {
             foreach ($group as $permission) {
-                $auth->addChild(ArrayHelper::getValue($roles, $role),
-                    ArrayHelper::getValue($permissions, $permission));
+                $auth->addChild(
+                    ArrayHelper::getValue($roles, $role),
+                    ArrayHelper::getValue($permissions, $permission)
+                );
             }
         }
     }
@@ -128,8 +138,10 @@ class InitController extends Controller
     protected function processAddChildRoles($auth, $roles = [])
     {
         foreach (Role::tree() as $role => $child) {
-            $auth->addChild(ArrayHelper::getValue($roles, $role),
-                ArrayHelper::getValue($roles, $child));
+            $auth->addChild(
+                ArrayHelper::getValue($roles, $role),
+                ArrayHelper::getValue($roles, $child)
+            );
         }
     }
 

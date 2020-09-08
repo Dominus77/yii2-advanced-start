@@ -24,9 +24,15 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t('module', 'Create'), [
-                    'class' => 'btn btn-success', 'form' => 'form-role'
-                ]) ?>
+                <?= Html::submitButton(
+                    '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t(
+                        'module',
+                        'Create'
+                    ),
+                    [
+                        'class' => 'btn btn-success', 'form' => 'form-role'
+                    ]
+                ) ?>
             </div>
         </div>
     </div>

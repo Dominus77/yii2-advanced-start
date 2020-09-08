@@ -42,7 +42,17 @@ trait ModuleTrait
             } else {
                 /** @var yii\web\Session $session */
                 $session = Yii::$app->session;
-                $session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $role->name]));
+                $session->setFlash(
+                    'error',
+                    Module::t(
+                        'module',
+                        'The permission of the "{:parent}" is the parent of the "{:permission}"!',
+                        [
+                            ':parent' => $add->name,
+                            ':permission' => $role->name
+                        ]
+                    )
+                );
             }
         }
     }

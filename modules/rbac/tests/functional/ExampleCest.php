@@ -2,7 +2,6 @@
 
 namespace modules\rbac\tests\functional;
 
-use Yii;
 use modules\rbac\tests\FunctionalTester;
 
 /**
@@ -16,6 +15,5 @@ class ExampleCest
      */
     public function checkTest(FunctionalTester $I)
     {
-
     }
 }

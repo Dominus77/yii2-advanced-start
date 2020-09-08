@@ -64,11 +64,30 @@ class Role extends Model
         return [
             ['name', 'required', 'on' => self::SCENARIO_CREATE],
             ['name', 'string', 'max' => 64, 'on' => self::SCENARIO_CREATE],
-            ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t('module', 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'), 'on' => self::SCENARIO_CREATE],
-            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
+            [
+                'name',
+                'match',
+                'pattern' => '#^[\w_-]+$#i',
+                'message' => Module::t(
+                    'module',
+                    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'
+                ),
+                'on' => self::SCENARIO_CREATE
+            ],
+            [
+                'name',
+                'validateUniqueName',
+                'skipOnEmpty' => false,
+                'skipOnError' => false,
+                'on' => self::SCENARIO_CREATE
+            ],
 
             [['description'], 'string'],
-            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'on' => self::SCENARIO_UPDATE]
+            [
+                ['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'],
+                'required',
+                'on' => self::SCENARIO_UPDATE
+            ]
         ];
     }
 
@@ -121,7 +140,9 @@ class Role extends Model
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_CREATE] = ['name', 'description'];
-        $scenarios[self::SCENARIO_UPDATE] = ['name', 'description', 'rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'];
+        $scenarios[self::SCENARIO_UPDATE] = [
+            'name', 'description', 'rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'
+        ];
         return $scenarios;
     }
 

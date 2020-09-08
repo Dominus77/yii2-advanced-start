@@ -48,8 +48,8 @@
     "scripts": {
         "build": "codecept build",
         "test": "codecept run",
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules/main/ --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules/main/ --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php"
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules/main/ modules/rbac/ --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules/main/ modules/rbac/ --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*"
     },
     "config": {
         "sort-packages": true,

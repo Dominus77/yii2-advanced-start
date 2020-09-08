@@ -21,9 +21,19 @@ use modules\rbac\Module;
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t('module', 'Create') : '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Module::t('module', 'Save'), [
-            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'
-        ]) ?>
+        <?= Html::submitButton(
+            $model->isNewRecord ?
+            '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t(
+                'module',
+                'Create'
+            ) : '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Module::t(
+                'module',
+                'Save'
+            ),
+            [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'
+            ]
+        ) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

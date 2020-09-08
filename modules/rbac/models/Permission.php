@@ -157,8 +157,24 @@ class Permission extends Model
         return [
             ['name', 'required', 'on' => self::SCENARIO_CREATE],
             ['name', 'string', 'max' => 64, 'on' => self::SCENARIO_CREATE],
-            ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t('module', 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'), 'on' => self::SCENARIO_CREATE],
-            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
+            [
+                'name',
+                'match',
+                'pattern' => '#^[\w_-]+$#i',
+                'message' => Module::t(
+                    'module',
+                    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'
+                ),
+                'on' => self::SCENARIO_CREATE
+            ],
+            [
+                'name',
+                'validateUniqueName',
+                'skipOnEmpty' => false,
+                'skipOnError' => false,
+                'on' => [self::SCENARIO_CREATE
+                ]
+            ],
 
             [['description'], 'string'],
             [['permissionItems', 'permissions'], 'required', 'on' => self::SCENARIO_UPDATE]

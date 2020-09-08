@@ -2,7 +2,6 @@
 
 namespace modules\rbac\tests\acceptance;
 
-use Yii;
 use modules\rbac\tests\AcceptanceTester;
 
 /**
@@ -16,6 +15,5 @@ class ExampleCest
      */
     public function checkTest(AcceptanceTester $I)
     {
-
     }
 }

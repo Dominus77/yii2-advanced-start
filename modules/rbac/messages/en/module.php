@@ -63,27 +63,34 @@ return [
     'Enter name permission.' => 'Enter name permission.',
     'Enter name role.' => 'Enter name role.',
 
-    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)',
+    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' =>
+        'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)',
 
     'Not a valid request to the method!' => 'Not a valid request to the method!',
     'The data being processed is not an array!' => 'The data being processed is not an array!',
     'There is no data in the POST method!' => 'There is no data in the POST method!',
 
-    'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?',
+    'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => // phpcs:ignore
+        'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?', // phpcs:ignore
     'The operation was successful!' => 'The operation was successful!',
     'Do you really want to untie all roles?' => 'Do you really want to untie all roles?',
     'You must select in the field «{attribute}».' => 'You must select in the field «{attribute}».',
-    'You must specify the User class in the module settings.' => 'You must specify the User class in the module settings.',
+    'You must specify the User class in the module settings.' =>
+        'You must specify the User class in the module settings.',
     'Are you sure you want to delete the entry?' => 'Are you sure you want to delete the entry?',
     'Do you really want to untie the user from the role?' => 'Do you really want to untie the user from the role?',
 
-    'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'The permission of the "{:parent}" is the parent of the "{:permission}"!',
-    'The role of the "{:parent}" is the parent of the "{:role}"!' => 'The role of the "{:parent}" is the parent of the "{:role}"!',
+    'The permission of the "{:parent}" is the parent of the "{:permission}"!' =>
+        'The permission of the "{:parent}" is the parent of the "{:permission}"!',
+    'The role of the "{:parent}" is the parent of the "{:role}"!' =>
+        'The role of the "{:parent}" is the parent of the "{:role}"!',
 
-    'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?',
+    'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' =>
+        'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?',
 
     'The role "{:name}" have been successfully deleted.' => 'The role "{:name}" have been successfully deleted.',
-    'The permission "{:name}" have been successfully deleted.' => 'The permission "{:name}" have been successfully deleted.',
+    'The permission "{:name}" have been successfully deleted.' =>
+        'The permission "{:name}" have been successfully deleted.',
     'User "{:username}" successfully unassigned.' => 'User "{:username}" successfully unassigned.',
     'User "{:username}" is not attached to any role!' => 'User "{:username}" is not attached to any role!',
     'Error!' => 'Error!',
@@ -105,6 +112,7 @@ return [
     'Access to Maintenance management' => 'Access to Maintenance management',
     'View a site in maintenance mode' => 'View a site in maintenance mode',
 
-    'Class {:userClassName} does not implement interface yii\web\IdentityInterface.' => 'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
+    'Class {:userClassName} does not implement interface yii\web\IdentityInterface.' =>
+        'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
     'Roles with permissions' => 'Roles with permissions',
 ];

@@ -42,7 +42,13 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                     ]) ?>
                 </p>
             </div>
-            <?= $this->renderFile('@modules/rbac/views/common/_gridView.php', ['id' => 'grid-rbac-permissions', 'dataProvider' => $dataProvider]) ?>
+            <?= $this->renderFile(
+                '@modules/rbac/views/common/_gridView.php',
+                [
+                    'id' => 'grid-rbac-permissions',
+                    'dataProvider' => $dataProvider
+                ]
+            ) ?>
         </div>
         <div class="box-footer">
             <?= LinkPager::widget([

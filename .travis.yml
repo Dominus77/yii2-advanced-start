@@ -37,7 +37,7 @@ services:
 
 script:
   - php init --env=Development --overwrite=n
-  - vendor/bin/phpcs --standard=psr2 api common backend frontend console --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php
+  - vendor/bin/phpcs --standard=psr2 api common backend frontend console modules/main/ modules/rbac/ --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*
   - mysql -e 'CREATE DATABASE yii2_advanced_start_test;'
   - php yii_test migrate --interactive=0
   - vendor/bin/codecept build
