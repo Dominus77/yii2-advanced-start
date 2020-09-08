@@ -44,14 +44,14 @@ class AssignController extends Controller
                 )
             );
         }
-        $this->_user = new Yii::$app->controller->module->params['userClass']();
+        $this->user = new Yii::$app->controller->module->params['userClass']();
         if (!($this->user instanceof IdentityInterface)) {
             throw new InvalidArgumentException(
                 Module::t(
                     'module',
                     'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
                     [
-                        ':userClassName' => get_class($this->_user)
+                        ':userClassName' => get_class($this->user)
                     ]
                 )
             );
@@ -90,7 +90,7 @@ class AssignController extends Controller
     public function actionIndex()
     {
         $assignModel = new Assignment();
-        $userModel = $this->_user;
+        $userModel = $this->user;
         $users = $userModel::find()->all();
         $dataProvider = new ArrayDataProvider([
             'allModels' => $users,
@@ -206,7 +206,7 @@ class AssignController extends Controller
      */
     protected function findModel($id)
     {
-        $userModel = $this->_user;
+        $userModel = $this->user;
         if (($model = $userModel::findOne(['id' => $id])) !== null) {
             return $model;
         }

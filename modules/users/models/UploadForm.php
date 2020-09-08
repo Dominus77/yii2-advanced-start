@@ -187,7 +187,11 @@ class UploadForm extends Model
         $path = $this->path . DIRECTORY_SEPARATOR . $fileName;
         Image::crop($thumbPath, $this->cropWidth, $this->cropHeight, [$this->cropX, $this->cropY])
             ->save($path, ['quality' => $this->cropQuality]);
-        return Image::thumbnail($path, $this->avatarWidth, $this->avatarHeight)->save($path, ['quality' => $this->avatarQuality]);
+        return Image::thumbnail(
+            $path,
+            $this->avatarWidth,
+            $this->avatarHeight
+        )->save($path, ['quality' => $this->avatarQuality]);
     }
 
     /**
@@ -217,7 +221,7 @@ class UploadForm extends Model
                     FileHelper::unlink($item);
                 }
             }
-        } else if (file_exists($path)) {
+        } elseif (file_exists($path)) {
             FileHelper::unlink($path);
         }
         return true;

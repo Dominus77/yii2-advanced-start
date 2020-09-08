@@ -31,10 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-footer">
 
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), [
-                    'class' => 'btn btn-danger',
-                    'name' => 'submit-button',
-                ]) ?>
+                <?= Html::submitButton(
+                    '<span class="glyphicon glyphicon-trash"></span> '
+                    . Module::t('module', 'Delete'),
+                    [
+                        'class' => 'btn btn-danger',
+                        'name' => 'submit-button',
+                    ]
+                ) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

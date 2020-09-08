@@ -3,6 +3,7 @@
 namespace modules\users\assets;
 
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
 
 /**
  * Class UserAsset
@@ -46,6 +47,6 @@ class UserAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset',
+        JqueryAsset::class,
     ];
 }

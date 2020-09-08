@@ -20,7 +20,7 @@ class UpdatePasswordForm extends Model
     /**
      * @var User
      */
-    private $_user;
+    private $user;
 
     /**
      * UpdatePasswordForm constructor.
@@ -29,8 +29,8 @@ class UpdatePasswordForm extends Model
      */
     public function __construct(User $user, $config = [])
     {
-        $this->_user = $user;
-        if (!$this->_user) {
+        $this->user = $user;
+        if (!$this->user) {
             throw new InvalidArgumentException(Module::t('module', 'User not found.'));
         }
         parent::__construct($config);
@@ -44,7 +44,12 @@ class UpdatePasswordForm extends Model
     {
         return [
             [['newPassword', 'newPasswordRepeat', 'currentPassword'], 'required'],
-            ['newPassword', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
+            [
+                'newPassword',
+                'string',
+                'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                'max' => User::LENGTH_STRING_PASSWORD_MAX
+            ],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
             ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false],
         ];
@@ -68,7 +73,7 @@ class UpdatePasswordForm extends Model
     protected function processValidatePassword($attribute)
     {
         if ($attribute) {
-            if (!$this->_user->validatePassword($this->$attribute)) {
+            if (!$this->user->validatePassword($this->$attribute)) {
                 $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
             }
         } else {
@@ -97,7 +102,7 @@ class UpdatePasswordForm extends Model
      */
     public function resetPassword()
     {
-        $user = $this->_user;
+        $user = $this->user;
         $user->setPassword($this->newPassword);
         return $user->save();
     }

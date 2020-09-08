@@ -132,15 +132,20 @@ $this->registerJs($js, View::POS_END);
                     ],
                     [
                         'attribute' => 'status',
-                        'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray, [
-                            'class' => 'form-control',
-                            'prompt' => Module::t('module', '- all -'),
-                            'data' => [
-                                'pjax' => true,
-                            ],
-                        ]),
+                        'filter' => Html::activeDropDownList(
+                            $searchModel,
+                            'status',
+                            $searchModel->statusesArray,
+                            [
+                                'class' => 'form-control',
+                                'prompt' => Module::t('module', '- all -'),
+                                'data' => [
+                                    'pjax' => true,
+                                ],
+                            ]
+                        ),
                         'format' => 'raw',
-                        'value' => function ($data) {
+                        'value' => static function ($data) {
                             /** @var object $identity */
                             $identity = Yii::$app->user->identity;
                             /** @var User $data */
@@ -155,14 +160,26 @@ $this->registerJs($js, View::POS_END);
                                             'id' => $data->id,
                                         ],
                                     ]) . ' ' .
-                                    Html::a($data->labelMailConfirm, Url::to(['send-confirm-email', 'id' => $data->id]), [
-                                        'id' => 'email-link-' . $data->id,
-                                        'class' => 'link-email',
-                                        'title' => Module::t('module', 'Send a link to activate your account.'),
-                                        'data' => [
-                                            'toggle' => 'tooltip',
-                                        ],
-                                    ]);
+                                    Html::a(
+                                        $data->labelMailConfirm,
+                                        Url::to(
+                                            [
+                                                'send-confirm-email',
+                                                'id' => $data->id
+                                            ]
+                                        ),
+                                        [
+                                            'id' => 'email-link-' . $data->id,
+                                            'class' => 'link-email',
+                                            'title' => Module::t(
+                                                'module',
+                                                'Send a link to activate your account.'
+                                            ),
+                                            'data' => [
+                                                'toggle' => 'tooltip',
+                                            ],
+                                        ]
+                                    );
                             }
                             return $data->statusLabelName;
                         },
@@ -176,13 +193,18 @@ $this->registerJs($js, View::POS_END);
                     ],
                     [
                         'attribute' => 'userRoleName',
-                        'filter' => Html::activeDropDownList($searchModel, 'userRoleName', $assignModel->getRolesArray(), [
-                            'class' => 'form-control',
-                            'prompt' => Module::t('module', '- all -'),
-                            'data' => [
-                                'pjax' => true,
-                            ],
-                        ]),
+                        'filter' => Html::activeDropDownList(
+                            $searchModel,
+                            'userRoleName',
+                            $assignModel->getRolesArray(),
+                            [
+                                'class' => 'form-control',
+                                'prompt' => Module::t('module', '- all -'),
+                                'data' => [
+                                    'pjax' => true,
+                                ],
+                            ]
+                        ),
                         'format' => 'raw',
                         'value' => function ($data) use ($assignModel) {
                             return $assignModel->getUserRoleName($data->id);
@@ -193,7 +215,7 @@ $this->registerJs($js, View::POS_END);
                     ],
                     [
                         'attribute' => 'profile.last_visit',
-                        'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div>'
+                        'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div>' // phpcs:ignore
                             . Html::activeInput('text', $searchModel, 'date_from', [
                                 'id' => 'datepicker',
                                 'class' => 'form-control',
@@ -215,13 +237,17 @@ $this->registerJs($js, View::POS_END);
                         'template' => '{view} {update} {delete}',
                         'buttons' => [
                             'view' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                                    'title' => Module::t('module', 'View'),
-                                    'data' => [
-                                        'toggle' => 'tooltip',
-                                        'pjax' => 0,
+                                return Html::a(
+                                    '<span class="glyphicon glyphicon-eye-open"></span>',
+                                    $url,
+                                    [
+                                        'title' => Module::t('module', 'View'),
+                                        'data' => [
+                                            'toggle' => 'tooltip',
+                                            'pjax' => 0,
+                                        ]
                                     ]
-                                ]);
+                                );
                             },
                             'update' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
@@ -239,7 +265,13 @@ $this->registerJs($js, View::POS_END);
                                         'toggle' => 'tooltip',
                                         'method' => 'post',
                                         'pjax' => 0,
-                                        'confirm' => Module::t('module', 'The user "{:name}" will be marked as deleted!', [':name' => $model->username]),
+                                        'confirm' => Module::t(
+                                            'module',
+                                            'The user "{:name}" will be marked as deleted!',
+                                            [
+                                                ':name' => $model->username
+                                            ]
+                                        ),
                                     ]
                                 ];
                                 /* @var $model User */
@@ -250,11 +282,18 @@ $this->registerJs($js, View::POS_END);
                                             'toggle' => 'tooltip',
                                             'method' => 'post',
                                             'pjax' => 0,
-                                            'confirm' => Module::t('module', 'You won\'t be able to revert this!'),
+                                            'confirm' => Module::t(
+                                                'module',
+                                                'You won\'t be able to revert this!'
+                                            ),
                                         ],
                                     ];
                                 }
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, $linkOptions);
+                                return Html::a(
+                                    '<span class="glyphicon glyphicon-trash"></span>',
+                                    $url,
+                                    $linkOptions
+                                );
                             },
                         ]
                     ],

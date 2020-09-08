@@ -63,10 +63,18 @@ UserAsset::register($this);
                                         'id' => $model->id,
                                     ],
                                 ]) . ' '
-                                . Html::a($model->labelMailConfirm, Url::to(['send-confirm-email', 'id' => $model->id]), [
+                                . Html::a($model->labelMailConfirm, Url::to(
+                                    [
+                                        'send-confirm-email',
+                                        'id' => $model->id
+                                    ]
+                                ), [
                                     'id' => 'email-link-' . $model->id,
                                     'class' => 'link-email',
-                                    'title' => Module::t('module', 'Send a link to activate your account.'),
+                                    'title' => Module::t(
+                                        'module',
+                                        'Send a link to activate your account.'
+                                    ),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                     ],
@@ -83,13 +91,19 @@ UserAsset::register($this);
                     'format' => 'raw',
                     'value' => function ($model) {
                         $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-                        $link = Html::a(Module::t('module', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
-                            'class' => 'btn btn-sm btn-default',
-                            'title' => Module::t('module', 'Generate new key'),
-                            'data' => [
-                                'toggle' => 'tooltip',
+                        $link = Html::a(
+                            Module::t('module', 'Generate'),
+                            [
+                                'generate-auth-key',
+                                'id' => $model->id
                             ],
-                            'onclick' => "                                
+                            [
+                                'class' => 'btn btn-sm btn-default',
+                                'title' => Module::t('module', 'Generate new key'),
+                                'data' => [
+                                    'toggle' => 'tooltip',
+                                ],
+                                'onclick' => "                                
                                 $.ajax({
                                     type: 'POST',
                                     cache: false,
@@ -102,7 +116,8 @@ UserAsset::register($this);
                                 });
                                 return false;
                             ",
-                        ]);
+                            ]
+                        );
                         return $key . ' ' . $link;
                     }
                 ],
@@ -119,25 +134,36 @@ UserAsset::register($this);
                 [
                     'attribute' => 'profile.last_visit',
                     'format' => 'raw',
-                    'value' => Yii::$app->formatter->asDatetime($model->profile->last_visit, 'd LLL yyyy, H:mm:ss'),
+                    'value' => Yii::$app->formatter->asDatetime(
+                        $model->profile->last_visit,
+                        'd LLL yyyy, H:mm:ss'
+                    ),
                 ],
             ],
         ]) ?>
     </div>
 
     <div class="col-sm-offset-2 col-sm-10">
+        <?= Html::a(
+            '<span class="glyphicon glyphicon-pencil"></span> '
+            . Module::t('module', 'Update'),
+            ['update', 'id' => $model->id],
+            [
+                'class' => 'btn btn-primary',
+            ]
+        ) ?>
 
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('module', 'Update'), ['update', 'id' => $model->id], [
-            'class' => 'btn btn-primary',
-        ]) ?>
-
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-
+        <?= Html::a(
+            '<span class="glyphicon glyphicon-trash"></span> '
+            . Module::t('module', 'Delete'),
+            ['delete', 'id' => $model->id],
+            [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
+                    'method' => 'post',
+                ],
+            ]
+        ) ?>
     </div>
 </div>

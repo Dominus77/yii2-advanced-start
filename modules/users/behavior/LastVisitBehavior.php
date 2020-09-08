@@ -34,7 +34,7 @@ class LastVisitBehavior extends Behavior
             /** @var IdentityInterface $model */
             $model = Yii::$app->user->identity;
             /** @var TimestampBehavior|User $model Updates a timestamp attribute to the current timestamp. */
-            if($model->profile !== null) {
+            if ($model->profile !== null) {
                 $model->profile->touch('last_visit');
             }
         }

@@ -53,8 +53,10 @@ return [
     '- all -' => '- all -',
     '- select -' => '- select -',
 
-    'It remains to activate the account.' => nl2br("A letter with a link to activate, we sent you an indication of the registration e-mail address.\n Please check your mail."),
-    'Thank you for registering!' => nl2br("Thank you for registering, your account has successfully been activated.\n You can now sign in using your login details."),
+    'It remains to activate the account.' =>
+        nl2br("A letter with a link to activate, we sent you an indication of the registration e-mail address.\n Please check your mail."), // phpcs:ignore
+    'Thank you for registering!' =>
+        nl2br("Thank you for registering, your account has successfully been activated.\n You can now sign in using your login details."), // phpcs:ignore
     'Error sending message!' => 'Error sending message!',
     'Check your email for further instructions.' => 'Check your email for further instructions.',
     'Sorry, we are unable to reset password.' => 'Sorry, we are unable to reset password.',

@@ -56,7 +56,13 @@ class UserProfile extends ActiveRecord
             [['first_name', 'last_name'], 'string', 'max' => 255],
             [['email_gravatar'], 'email'],
             [['email_gravatar'], 'unique'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [
+                'user_id',
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => User::class,
+                'targetAttribute' => ['user_id' => 'id']
+            ],
         ];
     }
 

@@ -21,7 +21,7 @@ class UserDeleteForm extends Model
     /**
      * @var User
      */
-    private $_user;
+    private $iuser;
 
     /**
      * UpdatePasswordForm constructor.
@@ -30,8 +30,8 @@ class UserDeleteForm extends Model
      */
     public function __construct(User $user, $config = [])
     {
-        $this->_user = $user;
-        if (!$this->_user) {
+        $this->iuser = $user;
+        if (!$this->iuser) {
             throw new InvalidArgumentException(Module::t('module', 'User not found.'));
         }
         parent::__construct($config);
@@ -42,7 +42,7 @@ class UserDeleteForm extends Model
      */
     public function getUser()
     {
-        return $this->_user;
+        return $this->iuser;
     }
 
     /**
@@ -75,8 +75,9 @@ class UserDeleteForm extends Model
     protected function processValidatePassword($attribute)
     {
         if ($attribute) {
-            if (!$this->_user->validatePassword($this->$attribute))
+            if (!$this->iuser->validatePassword($this->$attribute)) {
                 $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+            }
         } else {
             $this->addError($attribute, Module::t('module', 'Enter your current password.'));
         }
@@ -100,7 +101,7 @@ class UserDeleteForm extends Model
      */
     public function userDelete()
     {
-        $user = $this->_user;
+        $user = $this->iuser;
         /** @var $user SoftDeleteBehavior */
         return $user->softDelete();
     }

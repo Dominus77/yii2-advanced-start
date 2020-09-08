@@ -38,22 +38,36 @@ if (Yii::$app->request->get('modal') === 'show') {
         </div>
         <?php if ($uploadFormModel->isThumbFile($model->id)) { ?>
             <div class="form-group">
-                <?= Html::button('<span class="fa fa-pencil"></span> ' . Module::t('module', 'Update'), [
-                    'class' => 'btn btn-sm btn-default',
-                    'title' => Module::t('module', 'Update'),
-                    'data' => [
-                        'toggle' => 'modal',
-                        'target' => '#modal-image'
+                <?= Html::button(
+                    '<span class="fa fa-pencil"></span> '
+                    . Module::t('module', 'Update'),
+                    [
+                        'class' => 'btn btn-sm btn-default',
+                        'title' => Module::t('module', 'Update'),
+                        'data' => [
+                            'toggle' => 'modal',
+                            'target' => '#modal-image'
+                        ]
                     ]
-                ]) ?>
-                <?= Html::a('<span class="fa fa-trash"></span> ', ['delete-avatar', 'id' => $model->id], [
-                    'class' => 'btn btn-sm btn-danger',
-                    'title' => Module::t('module', 'Delete'),
-                    'data' => [
-                        'method' => 'post',
-                        'confirm' => Module::t('module', 'Are you sure you want to delete the avatar?')
+                ) ?>
+                <?= Html::a(
+                    '<span class="fa fa-trash"></span> ',
+                    [
+                        'delete-avatar',
+                        'id' => $model->id
+                    ],
+                    [
+                        'class' => 'btn btn-sm btn-danger',
+                        'title' => Module::t('module', 'Delete'),
+                        'data' => [
+                            'method' => 'post',
+                            'confirm' => Module::t(
+                                'module',
+                                'Are you sure you want to delete the avatar?'
+                            )
+                        ]
                     ]
-                ]) ?>
+                ) ?>
             </div>
         <?php } ?>
     </div>
@@ -73,10 +87,13 @@ if (Yii::$app->request->get('modal') === 'show') {
         ])) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
-                'class' => 'btn btn-primary',
-                'name' => 'submit-button',
-            ]) ?>
+            <?= Html::submitButton(
+                '<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'),
+                [
+                    'class' => 'btn btn-primary',
+                    'name' => 'submit-button',
+                ]
+            ) ?>
         </div>
         <?php ActiveForm::end(); ?>
         <hr>
@@ -85,15 +102,29 @@ if (Yii::$app->request->get('modal') === 'show') {
 </div>
 
 <?php
-Modal::begin([
-    'id' => 'modal-image',
-    'header' => Html::tag('span', '', ['class' => 'fa fa-pencil']) . ' ' . Module::t('module', 'Update'),
-    'footer' => Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
-        'form' => 'crop-avatar-form',
-        'class' => 'btn btn-primary',
-        'name' => 'submit-button',
-    ])
-]); ?>
+Modal::begin(
+    [
+        'id' => 'modal-image',
+        'header' => Html::tag(
+            'span',
+            '',
+            [
+                    'class' => 'fa fa-pencil'
+                ]
+        ) . ' ' . Module::t('module', 'Update'),
+        'footer' => Html::submitButton(
+            '<span class="fa fa-floppy-o"></span> ' . Module::t(
+                'module',
+                'Save'
+            ),
+            [
+                'form' => 'crop-avatar-form',
+                'class' => 'btn btn-primary',
+                'name' => 'submit-button',
+            ]
+        )
+    ]
+); ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-5">
@@ -103,7 +134,12 @@ Modal::begin([
             ]) ?>
             <div class="form-group">
                 <?= JCrop::widget([
-                    'image' => Url::to(['/users/profile/avatar', 'filename' => $uploadFormModel::PREFIX_THUMBNAIL . $uploadFormModel->getFileName()]),
+                    'image' => Url::to(
+                        [
+                            '/users/profile/avatar',
+                            'filename' => $uploadFormModel::PREFIX_THUMBNAIL . $uploadFormModel->getFileName()
+                        ]
+                    ),
                     'pluginOptions' => [
                         'minSize' => [150, 150],
                         'maxSize' => [540, 540],

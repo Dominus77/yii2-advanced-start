@@ -53,10 +53,13 @@ return [
     '- all -' => '- все -',
     '- select -' => '- выбрать -',
 
-    'It remains to activate the account.' => nl2br("Письмо с ссылкой на активацию мы отправили Вам по указаному при регистрации адресу электронной почты.\nПожалуйста проверьте Вашу почту."),
-    'Thank you for registering!' => nl2br("Спасибо за регистрацию,\nВаша учётная запись успешно активирована.\n Теперь Вы можете войти на сайт используя Ваши регистрационные данные."),
+    'It remains to activate the account.' =>
+        nl2br("Письмо с ссылкой на активацию мы отправили Вам по указаному при регистрации адресу электронной почты.\nПожалуйста проверьте Вашу почту."), // phpcs:ignore
+    'Thank you for registering!' =>
+        nl2br("Спасибо за регистрацию,\nВаша учётная запись успешно активирована.\n Теперь Вы можете войти на сайт используя Ваши регистрационные данные."), // phpcs:ignore
     'Error sending message!' => 'Ошибка отправки сообщения!',
-    'Check your email for further instructions.' => 'Проверьте свою электронную почту для получения дальнейших инструкций.',
+    'Check your email for further instructions.' =>
+        'Проверьте свою электронную почту для получения дальнейших инструкций.',
     'Sorry, we are unable to reset password.' => 'Извините, мы не можем сбросить пароль.',
 
     'Incorrect current password.' => 'Текущий пароль указан не верно.',
@@ -112,14 +115,16 @@ return [
     'This username is already taken.' => 'Это имя пользователя занято.',
     'This email is already taken.' => 'Этот email занят.',
 
-    'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватарку, пожалуйста воспользуйтесь сервисом {:link}.',
+    'To change the avatar, please use the {:link} service.' =>
+        'Чтобы изменить аватарку, пожалуйста воспользуйтесь сервисом {:link}.',
 
     'Password:' => 'Пароль:',
     'More than 6 symbols' => 'Более 6 символов',
     'Status:' => 'Статус:',
     'New password:' => 'Новый пароль:',
     'Remove expired user {:Username}' => 'Удален пользователь {:Username} не подтвердивший свою регистрацию',
-    'Cannot remove expired user {:Username}' => 'Не удалось удалить пользователя {:Username} не подтвердившего свою регистрацию',
+    'Cannot remove expired user {:Username}' =>
+        'Не удалось удалить пользователя {:Username} не подтвердившего свою регистрацию',
     'Done!' => 'Готово!',
     'Success!' => 'Успешно!',
     'User "{:Username}" not found' => 'Пользователь "{:Username}" не найден.',

@@ -24,7 +24,7 @@ class LoginForm extends Model
     public $rememberMe = false;
 
     /** @var User */
-    private $_user;
+    private $iuser;
 
     /**
      * @inheritdoc
@@ -109,9 +109,9 @@ class LoginForm extends Model
      */
     protected function getUser()
     {
-        if ($this->_user === null) {
-            $this->_user = User::findByUsernameEmail($this->email);
+        if ($this->iuser === null) {
+            $this->iuser = User::findByUsernameEmail($this->email);
         }
-        return $this->_user;
+        return $this->iuser;
     }
 }

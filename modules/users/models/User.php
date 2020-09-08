@@ -83,12 +83,22 @@ class User extends BaseUser
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
+            [
+                'username',
+                'unique',
+                'targetClass' => self::class,
+                'message' => Module::t('module', 'This username is already taken.')
+            ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
+            [
+                'email',
+                'unique',
+                'targetClass' => self::class,
+                'message' => Module::t('module', 'This email is already taken.')
+            ],
             ['email', 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email_confirm_token', 'password_reset_token', 'auth_key'], 'unique'],
@@ -98,7 +108,12 @@ class User extends BaseUser
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
             [['password'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
-            [['password'], 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX]
+            [
+                'password',
+                'string',
+                'min' => self::LENGTH_STRING_PASSWORD_MIN,
+                'max' => self::LENGTH_STRING_PASSWORD_MAX
+            ]
         ];
     }
 

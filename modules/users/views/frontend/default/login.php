@@ -44,10 +44,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) . '.'; ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-log-in"></span> ' . Module::t('module', 'Sign In'), [
-                    'class' => 'btn btn-primary',
-                    'name' => 'login-button'
-                ]) ?>
+                <?= Html::submitButton(
+                    '<span class="glyphicon glyphicon-log-in"></span> ' . Module::t(
+                        'module',
+                        'Sign In'
+                    ),
+                    [
+                        'class' => 'btn btn-primary',
+                        'name' => 'login-button'
+                    ]
+                ) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

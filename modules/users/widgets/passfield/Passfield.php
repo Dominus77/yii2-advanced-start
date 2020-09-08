@@ -38,15 +38,18 @@ class Passfield extends InputWidget
     {
         $this->registerAssets();
         if ($this->hasModel()) {
-            if ($this->form == null) {
+            if ($this->form === null) {
                 throw new InvalidConfigException(__CLASS__ . '.form property must be specified');
             }
-            if (empty($this->label))
+            if (empty($this->label)) {
                 return $this->form->field($this->model, $this->attribute)->passwordInput($this->options);
-            return $this->form->field($this->model, $this->attribute)->passwordInput($this->options)->label($this->label);
-        } else {
-            return Html::passwordInput($this->name, $this->value, $this->options);
+            }
+            return $this->form->field(
+                $this->model,
+                $this->attribute
+            )->passwordInput($this->options)->label($this->label);
         }
+        return Html::passwordInput($this->name, $this->value, $this->options);
     }
 
     /**

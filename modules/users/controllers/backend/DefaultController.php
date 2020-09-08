@@ -115,7 +115,13 @@ class DefaultController extends Controller
             $user->logout();
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('error', Module::t('module', 'You do not have rights, access is denied.'));
+            $session->setFlash(
+                'error',
+                Module::t(
+                    'module',
+                    'You do not have rights, access is denied.'
+                )
+            );
             return $this->goHome();
         }
         return $this->goBack();
@@ -334,11 +340,29 @@ class DefaultController extends Controller
             $session = Yii::$app->session;
             if ($model->isDeleted()) {
                 $model->delete();
-                $session->setFlash('success', Module::t('module', 'The user "{:name}" have been successfully deleted.', [':name' => $model->username]));
+                $session->setFlash(
+                    'success',
+                    Module::t(
+                        'module',
+                        'The user "{:name}" have been successfully deleted.',
+                        [
+                            ':name' => $model->username
+                        ]
+                    )
+                );
             } else {
                 /** @var $model SoftDeleteBehavior */
                 $model->softDelete();
-                $session->setFlash('success', Module::t('module', 'The user "{:name}" are marked as deleted.', [':name' => $model->username]));
+                $session->setFlash(
+                    'success',
+                    Module::t(
+                        'module',
+                        'The user "{:name}" are marked as deleted.',
+                        [
+                            ':name' => $model->username
+                        ]
+                    )
+                );
             }
         }
         return $this->redirect(['index']);

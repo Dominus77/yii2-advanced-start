@@ -15,7 +15,8 @@ $(function () {
 });
 
 // Ajax link Status
-function ajaxLink(e) {
+function ajaxLink(e)
+{
     let link = e.currentTarget,
         url = link.href,
         body = $('#' + link.id),

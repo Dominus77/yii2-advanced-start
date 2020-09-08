@@ -153,18 +153,24 @@ class UserController extends Controller
      */
     private function readValue($model = null, $attribute = '')
     {
-        $model->$attribute = $this->prompt(Module::t('module', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8')) . ':', [
-            'validator' => function ($input, &$error) use ($model, $attribute) {
-                /** @var string $input */
-                $model->$attribute = $input;
-                /** @var Model $model */
-                if ($model->validate([$attribute])) {
-                    return true;
-                }
-                $error = implode(',', $model->getErrors($attribute));
-                return false;
-            },
-        ]);
+        $model->$attribute = $this->prompt(
+            Module::t(
+                'module',
+                mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8')
+            ) . ':',
+            [
+                'validator' => static function ($input, &$error) use ($model, $attribute) {
+                    /** @var string $input */
+                    $model->$attribute = $input;
+                    /** @var Model $model */
+                    if ($model->validate([$attribute])) {
+                        return true;
+                    }
+                    $error = implode(',', $model->getErrors($attribute));
+                    return false;
+                },
+            ]
+        );
     }
 
     /**

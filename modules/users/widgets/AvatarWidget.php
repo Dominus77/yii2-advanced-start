@@ -47,7 +47,14 @@ class AvatarWidget extends Widget
         $fileName = $model->getFileName();
         $avatar = $model->getPath($this->user_id) . DIRECTORY_SEPARATOR . $fileName;
         if (file_exists($avatar)) {
-            echo Html::img(['/users/profile/avatar', 'filename' => 'avatar.jpg', 'id' => $this->user_id], $this->imageOptions);
+            echo Html::img(
+                [
+                    '/users/profile/avatar',
+                    'filename' => 'avatar.jpg',
+                    'id' => $this->user_id
+                ],
+                $this->imageOptions
+            );
         } else {
             echo $this->getGravatar($this->email, $this->size, 'mm', 'g', true, $this->imageOptions);
         }

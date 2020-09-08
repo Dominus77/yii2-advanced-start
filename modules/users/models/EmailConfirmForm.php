@@ -19,7 +19,7 @@ class EmailConfirmForm extends Model
     /**
      * @var User|bool
      */
-    private $_user;
+    private $user;
 
     /**
      * Creates a form model given a token.
@@ -31,10 +31,15 @@ class EmailConfirmForm extends Model
     public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException(Module::t('module', 'Email confirm token cannot be blank.'));
+            throw new InvalidArgumentException(
+                Module::t(
+                    'module',
+                    'Email confirm token cannot be blank.'
+                )
+            );
         }
-        $this->_user = User::findByEmailConfirmToken($token);
-        if (!$this->_user) {
+        $this->user = User::findByEmailConfirmToken($token);
+        if (!$this->user) {
             throw new InvalidArgumentException(Module::t('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
@@ -48,7 +53,7 @@ class EmailConfirmForm extends Model
      */
     public function confirmEmail()
     {
-        $user = $this->_user;
+        $user = $this->user;
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
         if ($user->save(false)) {

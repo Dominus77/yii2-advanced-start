@@ -27,10 +27,26 @@ class CronController extends Controller
             /** @var User $user */
             $this->stdout($user->username);
             if ($user->delete() !== false) {
-                Yii::info(Module::t('module', 'Remove expired user {:Username}', [':Username' => $user->username]));
+                Yii::info(
+                    Module::t(
+                        'module',
+                        'Remove expired user {:Username}',
+                        [
+                            ':Username' => $user->username
+                        ]
+                    )
+                );
                 $this->stdout(' OK', Console::FG_GREEN, Console::BOLD);
             } else {
-                Yii::warning(Module::t('module', 'Cannot remove expired user {:Username}', [':Username' => $user->username]));
+                Yii::warning(
+                    Module::t(
+                        'module',
+                        'Cannot remove expired user {:Username}',
+                        [
+                            ':Username' => $user->username
+                        ]
+                    )
+                );
                 $this->stderr(' FAIL', Console::FG_RED, Console::BOLD);
             }
             $this->stdout(PHP_EOL);
