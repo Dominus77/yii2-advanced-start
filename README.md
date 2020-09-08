@@ -60,7 +60,7 @@ Switching the theme occurs in the `/frontend/config/main.php`
 
 The minimum requirement by this project template that your Web server supports PHP 5.6.0.
 
-## DIRECTORY STRUCTURE
+## Directory Structure
 
 ```
 api
@@ -165,7 +165,7 @@ modules/
         Module.php      General Module class
 ```
 
-## INSTALLATION
+## Installation
 
 The preferred way to install this project is through [composer](http://getcomposer.org/download/).
 
@@ -323,7 +323,7 @@ Now frontend is available at `http://sitename.com`, and backend at `http://siten
 composer check-style
 ```
 
-## TESTING
+## Testing
 
 Create a database, default configure yii2_advanced_start_test in `common\config\test-local.php`
 
@@ -349,3 +349,7 @@ php yii_test migrate/up
 composer build
 composer test
 ```
+
+## License
+
+The BSD License (BSD). Please see [License File](https://github.com/Dominus77/yii2-advanced-start/blob/master/LICENSE.md) for more information.
