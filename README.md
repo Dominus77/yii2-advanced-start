@@ -318,13 +318,9 @@ RewriteRule . index.php
 Now frontend is available at `http://sitename.com`, and backend at `http://sitename.com/admin`, and api `http://sitename.com/api/v1/users`
 
 ## Code Sniffer
-Check Style
+
 ```
 composer check-style
-```
-Fix Style
-```
-composer fix-style
 ```
 
 ## TESTING
@@ -348,19 +344,8 @@ php yii_test migrate/up
 ```
 
 #### Run in console
+
 ```
 composer build
 composer test
-```
-or
-
-Windows:
-```
-vendor\bin\codecept build
-vendor\bin\codecept run
-```
-Other:
-```
-vendor/bin/codecept build
-vendor/bin/codecept run
 ```
