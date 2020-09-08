@@ -167,6 +167,8 @@ modules/
 
 ## INSTALLATION
 
+The preferred way to install this project is through [composer](http://getcomposer.org/download/).
+
 Create a project:
 ```
 composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start public_html
