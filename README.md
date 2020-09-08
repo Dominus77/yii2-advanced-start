@@ -317,6 +317,16 @@ RewriteRule . index.php
 
 Now frontend is available at `http://sitename.com`, and backend at `http://sitename.com/admin`, and api `http://sitename.com/api/v1/users`
 
+## Code Sniffer
+Check Style
+```
+composer check-style
+```
+Fix Style
+```
+composer fix-style
+```
+
 ## TESTING
 
 Create a database, default configure yii2_advanced_start_test in `common\config\test-local.php`

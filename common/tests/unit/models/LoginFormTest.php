@@ -14,6 +14,7 @@ use common\fixtures\User as UserFixture;
  */
 class LoginFormTest extends Unit
 {
+
     /**
      * @var UnitTester
      */
@@ -22,7 +23,7 @@ class LoginFormTest extends Unit
     /**
      * @inheritdoc
      */
-    public function _before()
+    public function _before() // phpcs:ignore
     {
         $this->tester->haveFixtures([
             'user' => [

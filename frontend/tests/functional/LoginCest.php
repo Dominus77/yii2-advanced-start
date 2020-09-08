@@ -15,7 +15,7 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
-    public function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I) // phpcs:ignore
     {
         $I->haveFixtures([
             'user' => [

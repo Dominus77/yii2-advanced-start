@@ -23,7 +23,7 @@ class PasswordResetRequestFormTest extends Unit
     /**
      * @inheritdoc
      */
-    public function _before()
+    public function _before() // phpcs:ignore
     {
         $this->tester->haveFixtures([
             'user' => [

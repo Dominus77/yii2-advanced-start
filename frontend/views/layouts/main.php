@@ -31,28 +31,75 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/logo.png', ['alt' => Yii::$app->name, 'class' => 'yii-logo']) . Yii::$app->name,
+        'brandLabel' => Html::img('@web/images/logo.png', [
+                'alt' => Yii::$app->name, 'class' => 'yii-logo'
+            ]) . Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top'
         ]
     ]);
     $menuItems = [
-        ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
-        ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
-        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']]
+        [
+            'label' => MainModule::t('module', 'Home'),
+            'url' => [
+                '/main/default/index'
+            ]
+        ],
+        [
+            'label' => MainModule::t('module', 'About'),
+            'url' => [
+                '/main/default/about'
+            ]
+        ],
+        [
+            'label' => MainModule::t('module', 'Contact'),
+            'url' => [
+                '/main/default/contact'
+            ]
+        ]
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => UserModule::t('module', 'Sign Up'), 'url' => ['/users/default/signup']];
-        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/default/login']];
+        $menuItems[] = [
+            'label' => UserModule::t('module', 'Sign Up'),
+            'url' => [
+                '/users/default/signup'
+            ]
+        ];
+        $menuItems[] = [
+            'label' => UserModule::t('module', 'Login'),
+            'url' => [
+                '/users/default/login'
+            ]
+        ];
     } else {
         /** @var modules\users\models\User $identity */
         $identity = Yii::$app->user->identity;
         $menuItems[] = [
             'label' => Yii::t('app', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']]
+                [
+                    'label' => $this->render('_label', [
+                        'icon' => 'glyphicon glyphicon-user',
+                        'title' => UserModule::t('module', 'Profile') .
+                            ' (' . $identity->username . ')'
+                    ]),
+                    'url' => [
+                        '/users/profile/index'
+                    ]
+                ],
+                [
+                    'label' => $this->render('_label', [
+                        'icon' => 'glyphicon glyphicon-log-out',
+                        'title' => UserModule::t('module', 'Sign Out')
+                    ]),
+                    'url' => [
+                        '/users/default/logout'
+                    ],
+                    'linkOptions' => [
+                        'data-method' => 'post'
+                    ]
+                ]
             ]
         ];
     }

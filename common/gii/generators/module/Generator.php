@@ -11,10 +11,16 @@ use yii\helpers\StringHelper;
 /**
  * Class Generator
  * @package common\gii\generators\module
+ *
+ * @property-read string $traitNameSpace
+ * @property-read mixed $frontendControllerNamespace
+ * @property-read mixed $backendControllerNamespace
+ * @property-read string $name
+ * @property-read mixed $consoleControllerNamespace
  */
 class Generator extends BaseGenerator
 {
-    private $_controllerNameSpace;
+    private $controllerNameSpace;
 
     /**
      * {@inheritdoc}
@@ -58,9 +64,9 @@ class Generator extends BaseGenerator
     {
         $str = substr($this->moduleClass, 0, strrpos($this->moduleClass, '\\'));
         if ($string === 'commands') {
-            $this->_controllerNameSpace = $str . '\commands';
+            $this->controllerNameSpace = $str . '\commands';
         } else {
-            $this->_controllerNameSpace = $str . '\controllers' . ($string ? '\\' . $string : '');
+            $this->controllerNameSpace = $str . '\controllers' . ($string ? '\\' . $string : '');
         }
     }
 
@@ -69,7 +75,7 @@ class Generator extends BaseGenerator
      */
     public function getControllerNamespace()
     {
-        return $this->_controllerNameSpace;
+        return $this->controllerNameSpace;
     }
 
     /**
@@ -78,7 +84,7 @@ class Generator extends BaseGenerator
     public function getFrontendControllerNamespace()
     {
         $this->setControllerNamespace('frontend');
-        return $this->_controllerNameSpace;
+        return $this->controllerNameSpace;
     }
 
     /**
@@ -87,7 +93,7 @@ class Generator extends BaseGenerator
     public function getBackendControllerNamespace()
     {
         $this->setControllerNamespace('backend');
-        return $this->_controllerNameSpace;
+        return $this->controllerNameSpace;
     }
 
     /**
@@ -96,7 +102,7 @@ class Generator extends BaseGenerator
     public function getConsoleControllerNamespace()
     {
         $this->setControllerNamespace('commands');
-        return $this->_controllerNameSpace;
+        return $this->controllerNameSpace;
     }
 
     /**
@@ -166,9 +172,11 @@ class Generator extends BaseGenerator
      */
     public function hints()
     {
+        $moduleID = 'This refers to the ID of the module, e.g., <code>admin</code>.';
+        $moduleClass = 'This is the fully qualified class name of the module, e.g., <code>modules\admin\Module</code>.';
         return [
-            'moduleID' => 'This refers to the ID of the module, e.g., <code>admin</code>.',
-            'moduleClass' => 'This is the fully qualified class name of the module, e.g., <code>modules\admin\Module</code>.',
+            'moduleID' => $moduleID,
+            'moduleClass' => $moduleClass,
         ];
     }
 
@@ -178,7 +186,9 @@ class Generator extends BaseGenerator
     public function successMessage()
     {
         if (Yii::$app->hasModule($this->moduleID)) {
-            $link = Html::a('try it now', Yii::$app->getUrlManager()->createUrl($this->moduleID), ['target' => '_blank']);
+            $link = Html::a('try it now', Yii::$app->getUrlManager()->createUrl($this->moduleID), [
+                'target' => '_blank'
+            ]);
 
             return "The module has been generated successfully. You may $link.";
         }

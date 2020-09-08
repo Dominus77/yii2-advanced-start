@@ -22,7 +22,7 @@ class ContactCest
     /**
      * @param FunctionalTester $I
      */
-    public function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I) // phpcs:ignore
     {
         $I->amOnPage(Url::to(['/main/default/contact']));
     }

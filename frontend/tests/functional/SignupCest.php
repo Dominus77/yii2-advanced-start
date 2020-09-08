@@ -19,7 +19,7 @@ class SignupCest
     /**
      * @param FunctionalTester $I
      */
-    public function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I) // phpcs:ignore
     {
         $I->amOnRoute(Url::to(['/users/default/signup']));
     }
@@ -35,7 +35,6 @@ class SignupCest
         $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Email cannot be blank.');
         $I->seeValidationError('Password cannot be blank.');
-
     }
 
     /**
@@ -44,7 +43,8 @@ class SignupCest
     public function signupWithWrongEmail(FunctionalTester $I)
     {
         $I->submitForm(
-            $this->formId, [
+            $this->formId,
+            [
                 'SignupForm[username]' => 'tester',
                 'SignupForm[email]' => 'ttttt',
                 'SignupForm[password]' => 'tester_password'

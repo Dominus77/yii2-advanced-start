@@ -3,16 +3,14 @@
 use yii\helpers\ArrayHelper;
 use yii\web\Application;
 
-$basePath = dirname(dirname(__DIR__));
-
-require $basePath . '/common/web/index.php';
-require $basePath . '/backend/config/bootstrap.php';
+require dirname(dirname(__DIR__)) . '/common/web/index.php';
+require YII_APP_BASE_PATH . '/backend/config/bootstrap.php';
 
 $config = ArrayHelper::merge(
-    require $basePath . '/common/config/main.php',
-    require $basePath . '/common/config/main-local.php',
-    require $basePath . '/backend/config/main.php',
-    require $basePath . '/backend/config/main-local.php'
+    require YII_APP_BASE_PATH . '/common/config/main.php',
+    require YII_APP_BASE_PATH . '/common/config/main-local.php',
+    require YII_APP_BASE_PATH . '/backend/config/main.php',
+    require YII_APP_BASE_PATH . '/backend/config/main-local.php'
 );
 
 $application = new Application($config);

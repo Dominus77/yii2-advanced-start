@@ -17,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= $moduleName ?>-frontend-default-index">
     <h1><?='<?= Html::decode($this->title) ?>' ?></h1>
 
-    <p>This is the module <?= $moduleName ?> frontend page. You may modify the following file to customize its content:</p>
+    <p>
+        This is the module <?= $moduleName ?> frontend page.
+        You may modify the following file to customize its content:
+    </p>
 
     <code><?= '<?= __FILE__ ?>' ?></code>
 </div>

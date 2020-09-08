@@ -24,7 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
             <div class="pull-left"></div>
             <div class="pull-right"></div>
-            <p>This is the module <?= $moduleName ?> backend page. You may modify the following file to customize its content:</p>
+            <p>
+                This is the module <?= $moduleName ?> backend page.
+                You may modify the following file to customize its content:
+            </p>
             <code><?= '<?= __FILE__ ?>' ?></code>
         </div>
         <div class="box-footer"></div>

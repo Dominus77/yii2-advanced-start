@@ -2,12 +2,10 @@
 
 use yii\web\Application;
 
-$basePath = dirname(dirname(__DIR__));
+require dirname(dirname(__DIR__)) . '/common/web/index-test.php';
+require YII_APP_BASE_PATH . '/backend/config/bootstrap.php';
 
-require $basePath . '/common/web/index-test.php';
-require $basePath . '/backend/config/bootstrap.php';
-
-$config = require $basePath . '/backend/config/test-local.php';
+$config = require YII_APP_BASE_PATH . '/backend/config/test-local.php';
 
 $application = new Application($config);
 $application->run();
