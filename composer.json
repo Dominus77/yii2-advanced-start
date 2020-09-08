@@ -42,9 +42,17 @@
         "symfony/browser-kit": ">=2.7 <=4.2.4",
         "codeception/module-rest": "^1.2",
         "codeception/module-phpbrowser": "^1.0",
-        "flow/jsonpath": "^0.5.0"
+        "flow/jsonpath": "^0.5.0",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "scripts": {
+        "build": "codecept build",
+        "test": "codecept run",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api"
     },
     "config": {
+        "sort-packages": true,
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false

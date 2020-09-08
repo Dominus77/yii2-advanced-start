@@ -2,7 +2,6 @@
 
 namespace api\tests\functional;
 
-use Yii;
 use api\tests\FunctionalTester;
 
 /**

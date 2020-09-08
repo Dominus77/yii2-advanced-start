@@ -336,6 +336,12 @@ php yii_test migrate/up
 ```
 
 #### Run in console
+```
+composer build
+composer test
+```
+or
+
 Windows:
 ```
 vendor\bin\codecept build
