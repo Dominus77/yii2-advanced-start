@@ -9,10 +9,10 @@ use yii\web\JqueryAsset;
 use backend\assets\BootstrapAsset;
 
 /**
- * Class iCheckAsset
+ * Class ICheckAsset
  * @package backend\assets\plugins
  */
-class iCheckAsset extends AssetBundle
+class ICheckAsset extends AssetBundle
 {
     /**
      * @var string

@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
@@ -13,7 +14,7 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
-    function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I) // phpcs:ignore
     {
         $I->haveFixtures([
             'user' => [

@@ -1,6 +1,7 @@
 <?php
 
 /** @var $exception object */
+/** @var $name string */
 
 use yii\helpers\Html;
 
@@ -14,7 +15,8 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
         <div class="error-content">
             <h3>
-                <i class="fa fa-warning text-yellow"></i> <?= Yii::t('app', 'Oops!') ?> <?= nl2br(Html::encode($exception->getMessage())) ?>
+                <i class="fa fa-warning text-yellow"></i> <?= Yii::t('app', 'Oops!') ?>
+                <?= nl2br(Html::encode($exception->getMessage())) ?>
             </h3>
 
             <p>

@@ -116,7 +116,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 <p>
                                     <?= $fullUserName ?>
                                     <small>
-                                        <?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') ?>
+                                        <?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') // phpcs:ignore                ?>
                                     </small>
                                 </p>
                             </li>
@@ -137,12 +137,15 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="<?= Url::to(['/users/profile/index']) ?>"
-                                       class="btn btn-default btn-flat"><?= UserModule::t('module', 'Profile') ?></a>
+                                       class="btn btn-default btn-flat">
+                                        <?= UserModule::t('module', 'Profile') ?>
+                                    </a>
                                 </div>
                                 <div class="pull-right">
                                     <?= Html::beginForm(['/users/default/logout'])
-                                    . Html::submitButton(UserModule::t('module', 'Sign Out'), ['class' => 'btn btn-default btn-flat logout'])
-                                    . Html::endForm() ?>
+                                    . Html::submitButton(UserModule::t('module', 'Sign Out'), [
+                                        'class' => 'btn btn-default btn-flat logout'
+                                    ]) . Html::endForm() ?>
                                 </div>
                             </li>
                         </ul>
@@ -167,7 +170,9 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 </div>
                 <div class="pull-left info">
                     <p><?= $fullUserName ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online') ?></a>
+                    <a href="#">
+                        <i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online') ?>
+                    </a>
                 </div>
             </div>
 
@@ -180,55 +185,89 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'options' => ['class' => 'header']
                 ],
                 [
-                    'label' => '<i class="fa fa-dashboard"></i> <span>' . MainModule::t('module', 'Home') . '</span>',
+                    'label' => $this->render('_label', [
+                        'icon' => 'fa fa-dashboard',
+                        'title' => MainModule::t('module', 'Home')
+                    ]),
                     'url' => ['/main/default/index']
                 ],
                 [
-                    'label' => '<i class="fa fa-users"></i> <span>' . UserModule::t('module', 'Users') . '</span>',
+                    'label' => $this->render('_label', [
+                        'icon' => 'fa fa-users',
+                        'title' => UserModule::t('module', 'Users')
+                    ]),
                     'url' => ['/users/default/index'],
                     'visible' => $user->can(Permission::PERMISSION_MANAGER_USERS)
                 ],
                 [
-                    'label' => '<i class="fa fa-unlock"></i> <span>' . RbacModule::t('module', 'RBAC') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
+                    'label' => $this->render('_label', [
+                        'isRoot' => true,
+                        'icon' => 'fa fa-unlock',
+                        'title' => RbacModule::t('module', 'RBAC')
+                    ]),
                     'url' => ['/rbac/default/index'],
                     'options' => ['class' => 'treeview'],
                     'visible' => $user->can(Permission::PERMISSION_MANAGER_RBAC),
                     'items' => [
                         [
-                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Permissions') . '</span>',
+                            'label' => $this->render('_label', [
+                                'icon' => 'fa fa-circle-o',
+                                'title' => RbacModule::t('module', 'Permissions')
+                            ]),
                             'url' => ['/rbac/permissions/index']
                         ],
                         [
-                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Roles') . '</span>',
+                            'label' => $this->render('_label', [
+                                'icon' => 'fa fa-circle-o',
+                                'title' => RbacModule::t('module', 'Roles')
+                            ]),
                             'url' => ['/rbac/roles/index']
                         ],
                         [
-                            'label' => '<i class="fa fa-circle-o"> </i><span>' . RbacModule::t('module', 'Assign') . '</span>',
+                            'label' => $this->render('_label', [
+                                'icon' => 'fa fa-circle-o',
+                                'title' => RbacModule::t('module', 'Assign')
+                            ]),
                             'url' => ['/rbac/assign/index']
                         ]
                     ]
                 ],
                 [
-                    'label' => '<i class="fa fa-wrench"></i> <span>' . Yii::t('app', 'Mode site') . '</span>',
+                    'label' => $this->render('_label', [
+                        'icon' => 'fa fa-wrench',
+                        'title' => Yii::t('app', 'Mode site')
+                    ]),
                     'url' => ['/maintenance/index'],
                     'visible' => $user->can(Permission::PERMISSION_MANAGER_MAINTENANCE)
                 ],
                 [
-                    'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Another Link') . '</span>',
+                    'label' => $this->render('_label', [
+                        'title' => Yii::t('app', 'Another Link')
+                    ]),
                     'url' => ['#']
                 ],
                 [
-                    'label' => '<i class="fa fa-link"></i> <span>' . Yii::t('app', 'Multilevel') . '</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
+                    'label' => $this->render('_label', [
+                        'isRoot' => true,
+                        'title' => Yii::t('app', 'Multilevel')
+                    ]),
                     'url' => ['#'],
                     'options' => ['class' => 'treeview'],
                     'visible' => !Yii::$app->user->isGuest,
                     'items' => [
                         [
-                            'label' => '<i class="fa fa-circle-o"> </i><span>' . Yii::t('app', 'Link in level 2') . '</span>',
+                            'label' => $this->render('_label', [
+                                'icon' => 'fa fa-circle-o',
+                                'title' => Yii::t('app', 'Link in level 2')
+                            ]),
                             'url' => ['#']
                         ],
                         [
-                            'label' => '<i class="fa fa-circle-o"> </i><span>' . Yii::t('app', 'Link in level 2') . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>',
+                            'label' => $this->render('_label', [
+                                'isRoot' => true,
+                                'icon' => 'fa fa-circle-o',
+                                'title' => Yii::t('app', 'Link in level 2')
+                            ]),
                             'url' => ['#'],
                             'options' => ['class' => 'treeview'],
                             'items' => [
@@ -256,11 +295,14 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
         <section class="content-header">
             <h1>
                 <?php
-                $small = isset($this->params['title']['small']) ? ' ' . Html::tag('small', Html::encode($this->params['title']['small'])) : '';
+                $small = isset($this->params['title']['small']) ?
+                    ' ' . Html::tag('small', Html::encode($this->params['title']['small'])) : '';
                 echo Html::encode($this->title) . $small ?>
             </h1>
             <?= Breadcrumbs::widget([
-                'homeLink' => ['label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'), 'url' => Url::to(['/main/default/index'])],
+                'homeLink' => [
+                    'label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'),
+                    'url' => Url::to(['/main/default/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false
             ]) ?>
@@ -277,7 +319,8 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
 
         </div>
         <strong>&copy; <?= date('Y') ?> <a
-                    href="#"><?= Yii::$app->name ?></a>.</strong> <?= Yii::t('app', 'All rights reserved.') ?>
+                    href="#"><?= Yii::$app->name ?></a>.</strong>
+        <?= Yii::t('app', 'All rights reserved.') ?>
     </footer>
 
     <?= ControlSidebar::widget([

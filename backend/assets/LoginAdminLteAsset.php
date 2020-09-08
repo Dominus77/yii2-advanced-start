@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 use yii\web\YiiAsset;
 use common\assets\FontAwesomeAsset;
 use common\assets\IonIconsAsset;
-use backend\assets\plugins\iCheckAsset;
+use backend\assets\plugins\ICheckAsset;
 use common\assets\Html5ShivAsset;
 use common\assets\RespondAsset;
 
@@ -39,7 +39,7 @@ class LoginAdminLteAsset extends AssetBundle
         BootstrapAsset::class,
         FontAwesomeAsset::class,
         IonIconsAsset::class,
-        iCheckAsset::class,
+        ICheckAsset::class,
         Html5ShivAsset::class,
         RespondAsset::class
     ];

@@ -2,7 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 
-$messages = require __DIR__ . '/../../../common/messages/en/app.php';
+$messages = require dirname(dirname(dirname(__DIR__))) . '/common/messages/en/app.php';
 
 return ArrayHelper::merge($messages, [
     'Online' => 'Online',
@@ -16,5 +16,6 @@ return ArrayHelper::merge($messages, [
     'All rights reserved.' => 'All rights reserved.',
 
     'return to dashboard' => 'return to dashboard',
-    'Meanwhile, you may {:Link} or try using the search form.' => 'Meanwhile, you may {:Link} or try using the search form.'
+    'Meanwhile, you may {:Link} or try using the search form.' =>
+        'Meanwhile, you may {:Link} or try using the search form.'
 ]);
