@@ -10,13 +10,13 @@ use modules\users\Module;
  * @var $passwordForm modules\users\models\UpdatePasswordForm
  */
 
-$this->title = Module::t('module', 'Update');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
+$this->title = Module::translate('module', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $items = [
     [
-        'label' => Module::t('module', 'Profile'),
+        'label' => Module::translate('module', 'Profile'),
         'content' => $this->render('tabs/_update_profile', [
             'model' => $model->profile
         ]),
@@ -24,7 +24,7 @@ $items = [
         'active' => !Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') === 'profile')
     ],
     [
-        'label' => Module::t('module', 'Password'),
+        'label' => Module::translate('module', 'Password'),
         'content' => $this->render('tabs/_update_password', [
             'model' => $passwordForm
         ]),
@@ -32,7 +32,7 @@ $items = [
         'active' => Yii::$app->request->get('tab') === 'password'
     ],
     [
-        'label' => Module::t('module', 'Avatar'),
+        'label' => Module::translate('module', 'Avatar'),
         'content' => $this->renderFile(Yii::getAlias('@modules/users/views/common/profile/tabs/_update_avatar.php'), [
             'model' => $model,
             'uploadFormModel' => $uploadFormModel

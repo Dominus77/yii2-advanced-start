@@ -47,7 +47,7 @@ class DefaultController extends Controller
         if (!$user->can(Permission::PERMISSION_VIEW_ADMIN_PAGE)) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('error', Module::t('module', 'You are not allowed access!'));
+            $session->setFlash('error', Module::translate('module', 'You are not allowed access!'));
             return $this->goHome();
         }
         //Greeting in the admin panel :)
@@ -57,7 +57,7 @@ class DefaultController extends Controller
         if ($session->get($key) !== 1) {
             /** @var User $identity */
             $identity = Yii::$app->user->identity;
-            $session->setFlash('info', Module::t('module', 'Welcome, {:username}!', [
+            $session->setFlash('info', Module::translate('module', 'Welcome, {:username}!', [
                 ':username' => $identity->username
             ]));
             $session->set($key, 1);

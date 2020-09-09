@@ -13,14 +13,14 @@ use modules\users\models\ResetPasswordForm;
  * @var $model ResetPasswordForm
  */
 
-$this->title = Module::t('module', 'Reset Password');
+$this->title = Module::translate('module', 'Reset Password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="users-frontend-default-reset-password">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('module', 'Create a new password') ?></p>
+    <p><?= Module::translate('module', 'Create a new password') ?></p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="form-group">
                 <?= Html::submitButton(
-                    '<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t(
+                    '<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::translate(
                         'module',
                         'Save'
                     ),

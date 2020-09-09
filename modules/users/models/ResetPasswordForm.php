@@ -32,11 +32,11 @@ class ResetPasswordForm extends Model
     public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException(Module::t('module', 'Password reset token cannot be blank.'));
+            throw new InvalidArgumentException(Module::translate('module', 'Password reset token cannot be blank.'));
         }
         $this->user = User::findByPasswordResetToken($token);
         if (!$this->user) {
-            throw new InvalidArgumentException(Module::t('module', 'Wrong password reset token.'));
+            throw new InvalidArgumentException(Module::translate('module', 'Wrong password reset token.'));
         }
         parent::__construct($config);
     }
@@ -65,7 +65,7 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => Module::t('module', 'New Password'),
+            'password' => Module::translate('module', 'New Password'),
         ];
     }
 

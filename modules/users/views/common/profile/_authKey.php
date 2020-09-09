@@ -8,9 +8,9 @@ use modules\users\Module;
  */
 
 $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-$link = Html::a(Module::t('module', 'Generate'), ['/profile/generate-auth-key'], [
+$link = Html::a(Module::translate('module', 'Generate'), ['/profile/generate-auth-key'], [
     'class' => 'btn btn-sm btn-default',
-    'title' => Module::t('module', 'Generate new key'),
+    'title' => Module::translate('module', 'Generate new key'),
     'data' => [
         'toggle' => 'tooltip',
     ],

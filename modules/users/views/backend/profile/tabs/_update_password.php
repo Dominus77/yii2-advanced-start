@@ -39,7 +39,7 @@ use modules\users\Module;
         ]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::translate('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

@@ -35,7 +35,7 @@ class SignupForm extends Model
                 'username',
                 'unique',
                 'targetClass' => User::class,
-                'message' => Module::t('module', 'This username already exists.')
+                'message' => Module::translate('module', 'This username already exists.')
             ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -47,7 +47,7 @@ class SignupForm extends Model
                 'email',
                 'unique',
                 'targetClass' => User::class,
-                'message' => Module::t('module', 'This email already exists.')
+                'message' => Module::translate('module', 'This email already exists.')
             ],
 
             ['password', 'required'],
@@ -67,9 +67,9 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Module::t('module', 'Username'),
-            'email' => Module::t('module', 'Email'),
-            'password' => Module::t('module', 'Password'),
+            'username' => Module::translate('module', 'Username'),
+            'email' => Module::translate('module', 'Email'),
+            'password' => Module::translate('module', 'Password'),
         ];
     }
 
@@ -98,7 +98,7 @@ class SignupForm extends Model
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo($this->email)
                     ->setSubject(
-                        Module::t(
+                        Module::translate(
                             'module',
                             'Account activation!'
                         ) . ' ' . Yii::$app->name

@@ -8,8 +8,8 @@ use modules\main\Module;
 
 /* @var $this yii\web\View */
 
-$this->title = Module::t('module', 'Home');
-$this->params['title']['small'] = Module::t('module', 'Dashboard');
+$this->title = Module::translate('module', 'Home');
+$this->params['title']['small'] = Module::translate('module', 'Dashboard');
 /** @var yii\web\User $user */
 $user = Yii::$app->user;
 ?>
@@ -20,24 +20,24 @@ $user = Yii::$app->user;
             <div class="col-md-4">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><?= UserModule::t('module', 'Users') ?></h3>
+                        <h3 class="box-title"><?= UserModule::translate('module', 'Users') ?></h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                    title="<?= Module::t('module', 'Collapse') ?>">
+                                    title="<?= Module::translate('module', 'Collapse') ?>">
                                 <i class="fa fa-minus"></i></button>
                             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                                    title="<?= Module::t('module', 'Remove') ?>">
+                                    title="<?= Module::translate('module', 'Remove') ?>">
                                 <i class="fa fa-times"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
                         <a class="btn btn-app" href="<?= Url::to(['/users/default/index']) ?>">
-                            <i class="fa fa-users"></i> <?= UserModule::t('module', 'Users') ?>
+                            <i class="fa fa-users"></i> <?= UserModule::translate('module', 'Users') ?>
                         </a>
                         <?php if ($user->can(Permission::PERMISSION_MANAGER_RBAC)) : ?>
                             <a class="btn btn-app" href="<?= Url::to(['/rbac/default/index']) ?>">
-                                <i class="fa fa-unlock"></i> <?= RbacModule::t('module', 'RBAC') ?>
+                                <i class="fa fa-unlock"></i> <?= RbacModule::translate('module', 'RBAC') ?>
                             </a>
                         <?php endif; ?>
                     </div>

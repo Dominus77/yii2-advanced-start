@@ -13,14 +13,14 @@ use modules\users\Module;
  * @var $model SignupForm
  */
 
-$this->title = Module::t('module', 'Sign Up');
+$this->title = Module::translate('module', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="users-frontend-default-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('module', 'Please fill in the following fields to sign up'); ?>:</p>
+    <p><?= Module::translate('module', 'Please fill in the following fields to sign up') ?>:</p>
 
     <div class="row">
         <div class="col-md-5">
@@ -56,7 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('module', 'Send'), [
+                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::translate(
+                    'module',
+                    'Send'
+                ), [
                     'class' => 'btn btn-primary',
                     'name' => 'signup-button'
                 ]) ?>

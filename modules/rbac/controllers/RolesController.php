@@ -181,7 +181,7 @@ class RolesController extends Controller
                     $session = Yii::$app->session;
                     $session->setFlash(
                         'error',
-                        Module::t(
+                        Module::translate(
                             'module',
                             'The role of the "{:parent}" is the parent of the "{:role}"!',
                             [
@@ -194,7 +194,7 @@ class RolesController extends Controller
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -216,7 +216,7 @@ class RolesController extends Controller
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -237,7 +237,7 @@ class RolesController extends Controller
             self::addChild($model->itemsPermissions, $role);
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -259,7 +259,7 @@ class RolesController extends Controller
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -278,7 +278,7 @@ class RolesController extends Controller
         if ($auth->remove($role)) {
             $session->setFlash(
                 'success',
-                Module::t(
+                Module::translate(
                     'module',
                     'The role "{:name}" have been successfully deleted.',
                     [
@@ -287,7 +287,7 @@ class RolesController extends Controller
                 )
             );
         } else {
-            $session->setFlash('error', Module::t('module', 'Error!'));
+            $session->setFlash('error', Module::translate('module', 'Error!'));
         }
         return $this->redirect(['index']);
     }

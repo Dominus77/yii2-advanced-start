@@ -57,7 +57,7 @@ UserAsset::register($this);
                             return Html::a($model->statusLabelName, Url::to(['set-status', 'id' => $model->id]), [
                                     'id' => 'status-link-' . $model->id,
                                     'class' => 'link-status',
-                                    'title' => Module::t('module', 'Click to change the status'),
+                                    'title' => Module::translate('module', 'Click to change the status'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'id' => $model->id,
@@ -71,7 +71,7 @@ UserAsset::register($this);
                                 ), [
                                     'id' => 'email-link-' . $model->id,
                                     'class' => 'link-email',
-                                    'title' => Module::t(
+                                    'title' => Module::translate(
                                         'module',
                                         'Send a link to activate your account.'
                                     ),
@@ -92,14 +92,14 @@ UserAsset::register($this);
                     'value' => function ($model) {
                         $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
                         $link = Html::a(
-                            Module::t('module', 'Generate'),
+                            Module::translate('module', 'Generate'),
                             [
                                 'generate-auth-key',
                                 'id' => $model->id
                             ],
                             [
                                 'class' => 'btn btn-sm btn-default',
-                                'title' => Module::t('module', 'Generate new key'),
+                                'title' => Module::translate('module', 'Generate new key'),
                                 'data' => [
                                     'toggle' => 'tooltip',
                                 ],
@@ -146,7 +146,7 @@ UserAsset::register($this);
     <div class="col-sm-offset-2 col-sm-10">
         <?= Html::a(
             '<span class="glyphicon glyphicon-pencil"></span> '
-            . Module::t('module', 'Update'),
+            . Module::translate('module', 'Update'),
             ['update', 'id' => $model->id],
             [
                 'class' => 'btn btn-primary',
@@ -155,12 +155,12 @@ UserAsset::register($this);
 
         <?= Html::a(
             '<span class="glyphicon glyphicon-trash"></span> '
-            . Module::t('module', 'Delete'),
+            . Module::translate('module', 'Delete'),
             ['delete', 'id' => $model->id],
             [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
+                    'confirm' => Module::translate('module', 'Are you sure you want to delete the record?'),
                     'method' => 'post',
                 ],
             ]

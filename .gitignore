@@ -31,3 +31,6 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# PHP CS
+.php_cs.cache

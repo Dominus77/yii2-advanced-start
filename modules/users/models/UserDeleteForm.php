@@ -32,7 +32,7 @@ class UserDeleteForm extends Model
     {
         $this->iuser = $user;
         if (!$this->iuser) {
-            throw new InvalidArgumentException(Module::t('module', 'User not found.'));
+            throw new InvalidArgumentException(Module::translate('module', 'User not found.'));
         }
         parent::__construct($config);
     }
@@ -65,7 +65,7 @@ class UserDeleteForm extends Model
         if (!empty($this->currentPassword) && !$this->hasErrors()) {
             $this->processValidatePassword($attribute);
         } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+            $this->addError($attribute, Module::translate('module', 'Not all fields are filled in correctly.'));
         }
     }
 
@@ -76,10 +76,10 @@ class UserDeleteForm extends Model
     {
         if ($attribute) {
             if (!$this->iuser->validatePassword($this->$attribute)) {
-                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+                $this->addError($attribute, Module::translate('module', 'Incorrect current password.'));
             }
         } else {
-            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
+            $this->addError($attribute, Module::translate('module', 'Enter your current password.'));
         }
     }
 
@@ -90,7 +90,7 @@ class UserDeleteForm extends Model
     public function attributeLabels()
     {
         return [
-            'currentPassword' => Module::t('module', 'Current Password'),
+            'currentPassword' => Module::translate('module', 'Current Password'),
         ];
     }
 

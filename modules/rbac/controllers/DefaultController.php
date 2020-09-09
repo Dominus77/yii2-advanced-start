@@ -58,7 +58,7 @@ class DefaultController extends InitController
         if ($this->processInit()) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('success', Module::t('module', 'The operation was successful!'));
+            $session->setFlash('success', Module::translate('module', 'The operation was successful!'));
         }
         Yii::$app->getResponse()->redirect(Url::to(['index']));
     }

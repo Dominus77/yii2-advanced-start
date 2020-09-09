@@ -11,7 +11,7 @@ use modules\main\models\frontend\ContactForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model ContactForm */
 
-$this->title = Module::t('module', 'Contact');
+$this->title = Module::translate('module', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Module::t('module', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') // phpcs:ignore ?>
+        <?= Module::translate('module', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') // phpcs:ignore ?>
     </p>
 
     <div class="row">
@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'captchaAction' => Url::to('/main/default/captcha'),
                         'imageOptions' => [
                             'style' => 'display:block; border:none; cursor: pointer',
-                            'alt' => Module::t('module', 'Code'),
-                            'title' => Module::t('module', 'Click on the picture to change the code.')
+                            'alt' => Module::translate('module', 'Code'),
+                            'title' => Module::translate('module', 'Click on the picture to change the code.')
                         ],
                         'class' => 'form-control'
                     ]) ?>
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php endif; ?>
             <div class="form-group">
                 <?= Html::submitButton('<span class="glyphicon glyphicon-send"></span> ' .
-                    Module::t('module', 'Submit'), [
+                    Module::translate('module', 'Submit'), [
                     'class' => 'btn btn-primary',
                     'name' => 'contact-button'
                 ]) ?>

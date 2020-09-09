@@ -87,7 +87,7 @@ class User extends BaseUser
                 'username',
                 'unique',
                 'targetClass' => self::class,
-                'message' => Module::t('module', 'This username is already taken.')
+                'message' => Module::translate('module', 'This username is already taken.')
             ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -97,7 +97,7 @@ class User extends BaseUser
                 'email',
                 'unique',
                 'targetClass' => self::class,
-                'message' => Module::t('module', 'This email is already taken.')
+                'message' => Module::translate('module', 'This email is already taken.')
             ],
             ['email', 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -124,18 +124,18 @@ class User extends BaseUser
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'username' => Module::t('module', 'Username'),
-            'email' => Module::t('module', 'Email'),
-            'auth_key' => Module::t('module', 'Auth Key'),
-            'password_hash' => Module::t('module', 'Hash Password'),
-            'password_reset_token' => Module::t('module', 'Password Token'),
-            'email_confirm_token' => Module::t('module', 'Email Confirm Token'),
-            'created_at' => Module::t('module', 'Created'),
-            'updated_at' => Module::t('module', 'Updated'),
-            'status' => Module::t('module', 'Status'),
-            'userRoleName' => Module::t('module', 'User Role Name'),
-            'password' => Module::t('module', 'Password')
+            'id' => Module::translate('module', 'ID'),
+            'username' => Module::translate('module', 'Username'),
+            'email' => Module::translate('module', 'Email'),
+            'auth_key' => Module::translate('module', 'Auth Key'),
+            'password_hash' => Module::translate('module', 'Hash Password'),
+            'password_reset_token' => Module::translate('module', 'Password Token'),
+            'email_confirm_token' => Module::translate('module', 'Email Confirm Token'),
+            'created_at' => Module::translate('module', 'Created'),
+            'updated_at' => Module::translate('module', 'Updated'),
+            'status' => Module::translate('module', 'Status'),
+            'userRoleName' => Module::translate('module', 'User Role Name'),
+            'password' => Module::translate('module', 'Password')
         ];
     }
 
@@ -265,7 +265,7 @@ class User extends BaseUser
         ], ['user' => $this])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
             ->setTo($this->email)
-            ->setSubject(Module::t('module', 'Account activation!') . ' ' . Yii::$app->name)
+            ->setSubject(Module::translate('module', 'Account activation!') . ' ' . Yii::$app->name)
             ->send();
     }
 
@@ -293,7 +293,7 @@ class User extends BaseUser
      */
     public function getUserFullName()
     {
-        $fullName = Module::t('module', 'Guest');
+        $fullName = Module::translate('module', 'Guest');
         if (!Yii::$app->user->isGuest) {
             $fullName = $this->profile->first_name . ' ' . $this->profile->last_name;
             $fullName = ($fullName !== ' ') ? $fullName : $this->username;

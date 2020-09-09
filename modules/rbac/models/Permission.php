@@ -161,7 +161,7 @@ class Permission extends Model
                 'name',
                 'match',
                 'pattern' => '#^[\w_-]+$#i',
-                'message' => Module::t(
+                'message' => Module::translate(
                     'module',
                     'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'
                 ),
@@ -187,7 +187,7 @@ class Permission extends Model
     public function validateUniqueName($attribute)
     {
         if (!$attribute) {
-            $this->addError($attribute, Module::t('module', 'Enter name permission.'));
+            $this->addError($attribute, Module::translate('module', 'Enter name permission.'));
         }
 
         if (!$this->hasErrors()) {
@@ -204,7 +204,7 @@ class Permission extends Model
         if (!empty($this->name)) {
             $auth = Yii::$app->authManager;
             if ($auth->getPermission($this->name)) {
-                $this->addError($attribute, Module::t('module', 'This name is already taken.'));
+                $this->addError($attribute, Module::translate('module', 'This name is already taken.'));
             }
         }
         return $attribute;
@@ -227,12 +227,12 @@ class Permission extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Module::t('module', 'Name'),
-            'description' => Module::t('module', 'Description'),
-            'rolesByPermission' => Module::t('module', 'Roles with permissions'),
-            'itemsRoles' => Module::t('module', 'Items roles'),
-            'permissions' => Module::t('module', 'Permissions by role'),
-            'permissionItems' => Module::t('module', 'Items permissions')
+            'name' => Module::translate('module', 'Name'),
+            'description' => Module::translate('module', 'Description'),
+            'rolesByPermission' => Module::translate('module', 'Roles with permissions'),
+            'itemsRoles' => Module::translate('module', 'Items roles'),
+            'permissions' => Module::translate('module', 'Permissions by role'),
+            'permissionItems' => Module::translate('module', 'Items permissions')
         ];
     }
 

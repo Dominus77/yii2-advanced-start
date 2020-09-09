@@ -23,10 +23,10 @@ use modules\rbac\Module;
     <div class="form-group">
         <?= Html::submitButton(
             $model->isNewRecord ?
-            '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t(
+            '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::translate(
                 'module',
                 'Create'
-            ) : '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Module::t(
+            ) : '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Module::translate(
                 'module',
                 'Save'
             ),

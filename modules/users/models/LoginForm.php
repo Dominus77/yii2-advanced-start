@@ -50,10 +50,10 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Module::t('module', 'Username'),
-            'email' => Module::t('module', 'Email'),
-            'password' => Module::t('module', 'Password'),
-            'rememberMe' => Module::t('module', 'Remember Me'),
+            'username' => Module::translate('module', 'Username'),
+            'email' => Module::translate('module', 'Email'),
+            'password' => Module::translate('module', 'Password'),
+            'rememberMe' => Module::translate('module', 'Remember Me'),
         ];
     }
 
@@ -68,7 +68,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if ($user === null || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, Module::t('module', 'Invalid email or password.'));
+                $this->addError($attribute, Module::translate('module', 'Invalid email or password.'));
             }
         }
     }

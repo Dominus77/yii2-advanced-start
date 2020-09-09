@@ -22,17 +22,17 @@ echo GridView::widget([
         ['class' => SerialColumn::class],
         [
             'attribute' => 'name',
-            'label' => Module::t('module', 'Name'),
+            'label' => Module::translate('module', 'Name'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'description',
-            'label' => Module::t('module', 'Description'),
+            'label' => Module::translate('module', 'Description'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'ruleName',
-            'label' => Module::t('module', 'Rule Name'),
+            'label' => Module::translate('module', 'Rule Name'),
             'format' => 'raw'
         ],
         [
@@ -44,7 +44,7 @@ echo GridView::widget([
             'buttons' => [
                 'view' => static function ($url) {
                     return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                        'title' => Module::t('module', 'View'),
+                        'title' => Module::translate('module', 'View'),
                         'data' => [
                             'toggle' => 'tooltip'
                         ]
@@ -52,7 +52,7 @@ echo GridView::widget([
                 },
                 'update' => static function ($url) {
                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                        'title' => Module::t('module', 'Update'),
+                        'title' => Module::translate('module', 'Update'),
                         'data' => [
                             'toggle' => 'tooltip'
                         ]
@@ -60,11 +60,11 @@ echo GridView::widget([
                 },
                 'delete' => static function ($url) {
                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                        'title' => Module::t('module', 'Delete'),
+                        'title' => Module::translate('module', 'Delete'),
                         'data' => [
                             'toggle' => 'tooltip',
                             'method' => 'post',
-                            'confirm' => Module::t('module', 'Are you sure you want to delete the entry?')
+                            'confirm' => Module::translate('module', 'Are you sure you want to delete the entry?')
                         ]
                     ]);
                 }

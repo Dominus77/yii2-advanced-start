@@ -9,12 +9,12 @@ use modules\users\Module;
  * @var $model modules\users\models\User
  */
 
-$this->title = Module::t('module', 'Update');
+$this->title = Module::translate('module', 'Update');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('module', 'Update');
+$this->params['breadcrumbs'][] = Module::translate('module', 'Update');
 ?>
 
 <div class="users-backend-default-update">
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Update');
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::translate('module', 'Save'), [
                     'class' => 'btn btn-primary',
                     'name' => 'submit-button',
                 ]) ?>

@@ -44,7 +44,7 @@ trait ModuleTrait
                 $session = Yii::$app->session;
                 $session->setFlash(
                     'error',
-                    Module::t(
+                    Module::translate(
                         'module',
                         'The permission of the "{:parent}" is the parent of the "{:permission}"!',
                         [

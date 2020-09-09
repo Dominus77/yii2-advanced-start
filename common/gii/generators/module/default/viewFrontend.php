@@ -10,7 +10,7 @@ echo "<?php\n";
 use yii\helpers\Html;
 use <?= $ns ?>\<?= $className ?>;
 
-$this->title = <?= $className ?>::t('module', '<?= ucfirst($moduleName) ?>');
+$this->title = <?= $className ?>::translate('module', '<?= ucfirst($moduleName) ?>');
 $this->params['breadcrumbs'][] = $this->title;
 <?= '?>' ?>
 

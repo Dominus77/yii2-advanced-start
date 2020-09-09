@@ -31,7 +31,7 @@ class UpdatePasswordForm extends Model
     {
         $this->user = $user;
         if (!$this->user) {
-            throw new InvalidArgumentException(Module::t('module', 'User not found.'));
+            throw new InvalidArgumentException(Module::translate('module', 'User not found.'));
         }
         parent::__construct($config);
     }
@@ -63,7 +63,7 @@ class UpdatePasswordForm extends Model
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
             $this->processValidatePassword($attribute);
         } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+            $this->addError($attribute, Module::translate('module', 'Not all fields are filled in correctly.'));
         }
     }
 
@@ -74,10 +74,10 @@ class UpdatePasswordForm extends Model
     {
         if ($attribute) {
             if (!$this->user->validatePassword($this->$attribute)) {
-                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+                $this->addError($attribute, Module::translate('module', 'Incorrect current password.'));
             }
         } else {
-            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
+            $this->addError($attribute, Module::translate('module', 'Enter your current password.'));
         }
     }
 
@@ -88,9 +88,9 @@ class UpdatePasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'newPassword' => Module::t('module', 'New Password'),
-            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
-            'currentPassword' => Module::t('module', 'Current Password'),
+            'newPassword' => Module::translate('module', 'New Password'),
+            'newPasswordRepeat' => Module::translate('module', 'Repeat Password'),
+            'currentPassword' => Module::translate('module', 'Current Password'),
         ];
     }
 

@@ -39,14 +39,14 @@ class InitController extends Controller
     {
         if ($this->processInit()) {
             $this->stdout(
-                Console::convertEncoding(Module::t('module', 'Success!')),
+                Console::convertEncoding(Module::translate('module', 'Success!')),
                 Console::FG_GREEN,
                 Console::BOLD
             );
             $this->stdout(PHP_EOL);
         } else {
             $this->stderr(
-                Console::convertEncoding(Module::t('module', 'Fail!')),
+                Console::convertEncoding(Module::translate('module', 'Fail!')),
                 Console::FG_RED,
                 Console::BOLD
             );
@@ -96,7 +96,7 @@ class InitController extends Controller
         $result = [];
         foreach ($array as $key => $value) {
             $result[$key] = ($type === self::TYPE_ROLE) ? $auth->createRole($key) : $auth->createPermission($key);
-            $result[$key]->description = Module::t('module', $value);
+            $result[$key]->description = Module::translate('module', $value);
             // Add rules
             if ($key === Permission::PERMISSION_UPDATE_OWN_POST) {
                 $authorRule = new AuthorRule;

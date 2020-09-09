@@ -56,7 +56,7 @@ class UploadAvatarForm extends Widget
             ]
         ]);
         echo $form->field($this->model, 'imageFile')->fileInput();
-        echo Html::submitButton('<span class="fa fa-upload"></span> ' . Module::t('module', 'Submit'), [
+        echo Html::submitButton('<span class="fa fa-upload"></span> ' . Module::translate('module', 'Submit'), [
             'class' => 'btn btn-primary',
             'name' => 'submit-button',
         ]);

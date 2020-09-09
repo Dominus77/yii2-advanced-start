@@ -121,11 +121,11 @@ class UploadForm extends Model
     public function attributeLabels()
     {
         return [
-            'imageFile' => Module::t('module', 'Image'),
-            'cropWidth' => Module::t('module', 'Crop Width'),
-            'cropHeight' => Module::t('module', 'Crop Height'),
-            'cropX' => Module::t('module', 'Crop X'),
-            'cropY' => Module::t('module', 'Crop Y'),
+            'imageFile' => Module::translate('module', 'Image'),
+            'cropWidth' => Module::translate('module', 'Crop Width'),
+            'cropHeight' => Module::translate('module', 'Crop Height'),
+            'cropX' => Module::translate('module', 'Crop X'),
+            'cropY' => Module::translate('module', 'Crop Y'),
         ];
     }
 

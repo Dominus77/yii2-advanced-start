@@ -7,15 +7,15 @@ use modules\rbac\Module;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('module', 'Role Based Access Control');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
+$this->title = Module::translate('module', 'Role Based Access Control');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'RBAC'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = Module::translate('module', 'Permissions');
 ?>
 
 <div class="rbac-permissions-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Permissions') ?></h3>
+            <h3 class="box-title"><?= Module::translate('module', 'Permissions') ?></h3>
 
             <div class="box-tools pull-right"></div>
         </div>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
                         'class' => 'btn btn-block btn-success',
-                        'title' => Module::t('module', 'Create Permission'),
+                        'title' => Module::translate('module', 'Create Permission'),
                         'data' => [
                             'toggle' => 'tooltip',
                             'placement' => 'left'

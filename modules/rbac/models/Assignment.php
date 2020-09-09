@@ -44,7 +44,7 @@ class Assignment extends Model
     public function attributeLabels()
     {
         return [
-            'role' => Module::t('module', 'Role')
+            'role' => Module::translate('module', 'Role')
         ];
     }
 

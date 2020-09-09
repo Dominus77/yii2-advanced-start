@@ -41,7 +41,7 @@ class Module extends \yii\base\Module
      * @param string|null $language
      * @return string
      */
-    public static function t($category, $message, $params = [], $language = null)
+    public static function translate($category, $message, $params = [], $language = null)
     {
         return Yii::t('modules/rbac/' . $category, $message, $params, $language);
     }

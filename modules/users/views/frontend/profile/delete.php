@@ -9,8 +9,8 @@ use modules\users\Module;
  * @var $model modules\users\models\UserDeleteForm
  */
 
-$this->title = Module::t('module', 'Confirm deleting profile');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
+$this->title = Module::translate('module', 'Confirm deleting profile');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-frontend-profile-delete">
@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), [
+        <?= Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Module::translate(
+            'module',
+            'Delete'
+        ), [
             'class' => 'btn btn-danger',
             'name' => 'submit-button',
         ]) ?>

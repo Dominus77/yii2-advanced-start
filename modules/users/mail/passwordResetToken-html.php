@@ -17,7 +17,7 @@ $resetLink = Yii::$app->urlManager->createAbsoluteUrl(
 ?>
 
 <div class="password-reset">
-    <p><?= Module::t('mail', 'HELLO {username}', ['username' => $user->username]) ?>,</p>
-    <p><?= Module::t('mail', 'FOLLOW_TO_RESET_PASSWORD') ?>:</p>
+    <p><?= Module::translate('mail', 'HELLO {username}', ['username' => $user->username]) ?>,</p>
+    <p><?= Module::translate('mail', 'FOLLOW_TO_RESET_PASSWORD') ?>:</p>
     <p><?= Html::a(Html::encode($resetLink), $resetLink) ?></p>
 </div>

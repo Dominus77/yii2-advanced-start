@@ -9,17 +9,17 @@ use modules\users\Module;
  * @var $model modules\users\models\User
  */
 
-$this->title = Module::t('module', 'Users');
-$this->params['title']['small'] = Module::t('module', 'Create');
+$this->title = Module::translate('module', 'Users');
+$this->params['title']['small'] = Module::translate('module', 'Create');
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'Create');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Module::translate('module', 'Create');
 ?>
 
 <div class="users-backend-default-create">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Create'); ?></h3>
+            <h3 class="box-title"><?= Module::translate('module', 'Create'); ?></h3>
         </div>
         <?php $form = ActiveForm::begin(); ?>
         <div class="box-body">
@@ -45,7 +45,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Create'), [
+                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::translate(
+                    'module',
+                    'Create'
+                ), [
                     'class' => 'btn btn-success',
                     'name' => 'submit-button',
                 ]) ?>

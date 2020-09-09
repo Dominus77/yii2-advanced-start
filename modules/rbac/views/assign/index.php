@@ -14,15 +14,15 @@ use yii\widgets\LinkPager;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $assignModel Assignment */
 
-$this->title = Module::t('module', 'Role Based Access Control');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'Assign');
+$this->title = Module::translate('module', 'Role Based Access Control');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'RBAC'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = Module::translate('module', 'Assign');
 ?>
 
 <div class="rbac-assign-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Assign') ?></h3>
+            <h3 class="box-title"><?= Module::translate('module', 'Assign') ?></h3>
 
             <div class="box-tools pull-right"></div>
         </div>
@@ -48,12 +48,12 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                     ['class' => SerialColumn::class],
                     [
                         'attribute' => 'username',
-                        'label' => Module::t('module', 'User'),
+                        'label' => Module::translate('module', 'User'),
                         'format' => 'raw'
                     ],
                     [
                         'attribute' => 'role',
-                        'label' => Module::t('module', 'Role'),
+                        'label' => Module::translate('module', 'Role'),
                         'format' => 'raw',
                         'value' => static function ($data) use ($assignModel) {
                             return $assignModel->getRoleName($data->id);
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                         'buttons' => [
                             'view' => static function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                                    'title' => Module::t('module', 'View'),
+                                    'title' => Module::translate('module', 'View'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'pjax' => 0
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                             },
                             'update' => static function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                    'title' => Module::t('module', 'Update'),
+                                    'title' => Module::translate('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'pjax' => 0
@@ -101,11 +101,11 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                                     $url,
                                     ArrayHelper::merge(
                                         [
-                                        'title' => Module::t('module', 'Revoke'),
+                                        'title' => Module::translate('module', 'Revoke'),
                                         'data' => [
                                             'toggle' => 'tooltip',
                                             'method' => 'post',
-                                            'confirm' => Module::t(
+                                            'confirm' => Module::translate(
                                                 'module',
                                                 'Do you really want to untie the user from the role?'
                                             )

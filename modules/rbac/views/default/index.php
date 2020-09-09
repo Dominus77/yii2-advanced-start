@@ -6,14 +6,14 @@ use modules\rbac\Module;
 
 /* @var $this yii\web\View */
 
-$this->title = Module::t('module', 'Role Based Access Control');
-$this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
+$this->title = Module::translate('module', 'Role Based Access Control');
+$this->params['breadcrumbs'][] = Module::translate('module', 'RBAC');
 ?>
 
 <div class="rbac-default-index">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'RBAC') ?></h3>
+            <h3 class="box-title"><?= Module::translate('module', 'RBAC') ?></h3>
 
             <div class="box-tools pull-right">
 
@@ -22,10 +22,22 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
         <div class="box-body">
             <ul>
                 <li>
-                    <a href="<?= Url::to(['permissions/index']) ?>"><?= Module::t('module', 'Permissions') ?></a>
+                    <a href="<?= Url::to(['permissions/index']) ?>">
+                        <?= Module::translate('module', 'Permissions') ?>
+                    </a>
                 </li>
-                <li><a href="<?= Url::to(['roles/index']) ?>"><?= Module::t('module', 'Roles') ?></a></li>
-                <li><a href="<?= Url::to(['assign/index']) ?>"><?= Module::t('module', 'Assign rights') ?></a>
+                <li>
+                    <a href="<?= Url::to(['roles/index']) ?>">
+                        <?= Module::translate('module', 'Roles') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Url::to(['assign/index']) ?>">
+                        <?= Module::translate(
+                            'module',
+                            'Assign rights'
+                        ) ?>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -35,11 +47,14 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
                     'class' => 'text-yellow',
                     'data' => [
                         'toggle' => 'tooltip',
-                        'original-title' => Module::t('module', 'Reset rbac'),
-                        'method' => 'post',
-                        'confirm' => Module::t(
+                        'original-title' => Module::translate(
                             'module',
-                                'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' // phpcs:ignore
+                            'Reset rbac'
+                        ),
+                        'method' => 'post',
+                        'confirm' => Module::translate(
+                            'module',
+                            'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' // phpcs:ignore
                         )
                     ]
                 ]) ?>

@@ -171,7 +171,7 @@ class PermissionsController extends Controller
             self::addChild($model->permissionItems, $permission);
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -193,7 +193,7 @@ class PermissionsController extends Controller
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
         }
-        throw new BadRequestHttpException(Module::t('module', 'Not a valid request to the method!'));
+        throw new BadRequestHttpException(Module::translate('module', 'Not a valid request to the method!'));
     }
 
     /**
@@ -212,7 +212,7 @@ class PermissionsController extends Controller
         if ($auth->remove($perm)) {
             $session->setFlash(
                 'success',
-                Module::t(
+                Module::translate(
                     'module',
                     'The permission "{:name}" have been successfully deleted.',
                     [
@@ -221,7 +221,7 @@ class PermissionsController extends Controller
                 )
             );
         } else {
-            $session->setFlash('error', Module::t('module', 'Error!'));
+            $session->setFlash('error', Module::translate('module', 'Error!'));
         }
         return $this->redirect(['index']);
     }

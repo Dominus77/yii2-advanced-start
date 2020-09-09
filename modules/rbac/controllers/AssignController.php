@@ -38,7 +38,7 @@ class AssignController extends Controller
     {
         if (empty(Yii::$app->controller->module->params['userClass'])) {
             throw new InvalidConfigException(
-                Module::t(
+                Module::translate(
                     'module',
                     'You must specify the User class in the module settings.'
                 )
@@ -47,7 +47,7 @@ class AssignController extends Controller
         $this->user = new Yii::$app->controller->module->params['userClass']();
         if (!($this->user instanceof IdentityInterface)) {
             throw new InvalidArgumentException(
-                Module::t(
+                Module::translate(
                     'module',
                     'Class {:userClassName} does not implement interface yii\web\IdentityInterface.',
                     [
@@ -165,7 +165,7 @@ class AssignController extends Controller
             if ($auth->revokeAll($model->id)) {
                 $session->setFlash(
                     'success',
-                    Module::t(
+                    Module::translate(
                         'module',
                         'User "{:username}" successfully unassigned.',
                         [
@@ -176,7 +176,7 @@ class AssignController extends Controller
             } else {
                 $session->setFlash(
                     'error',
-                    Module::t(
+                    Module::translate(
                         'module',
                         'Error!'
                     )
@@ -185,7 +185,7 @@ class AssignController extends Controller
         } else {
             $session->setFlash(
                 'warning',
-                Module::t(
+                Module::translate(
                     'module',
                     'User "{:username}" is not attached to any role!',
                     [
@@ -211,7 +211,7 @@ class AssignController extends Controller
             return $model;
         }
         throw new NotFoundHttpException(
-            Module::t(
+            Module::translate(
                 'module',
                 'The requested page does not exist.'
             )

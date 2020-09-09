@@ -5,7 +5,7 @@ use modules\main\Module;
 
 /* @var $this yii\web\View */
 
-$this->title = Module::t('module', 'About');
+$this->title = Module::translate('module', 'About');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-frontend-default-about">

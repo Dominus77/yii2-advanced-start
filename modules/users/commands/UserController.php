@@ -45,14 +45,14 @@ class UserController extends Controller
         $model = new User();
         $this->readValue($model, 'username');
         $this->readValue($model, 'email');
-        $model->setPassword($this->prompt(Module::t('module', 'Password:'), [
+        $model->setPassword($this->prompt(Module::translate('module', 'Password:'), [
             'required' => true,
             'pattern' => '#^.{6,255}$#i',
-            'error' => Module::t('module', 'More than 6 symbols'),
+            'error' => Module::translate('module', 'More than 6 symbols'),
         ]));
         $model->generateAuthKey();
         if (($select = User::getStatusesArray()) && is_array($select)) {
-            $model->status = $this->select(Module::t('module', 'Status:'), $select);
+            $model->status = $this->select(Module::translate('module', 'Status:'), $select);
             $this->log($model->save());
         } else {
             $this->log();
@@ -67,7 +67,7 @@ class UserController extends Controller
      */
     public function actionRemove()
     {
-        $username = $this->prompt(Module::t('module', 'Username') . ':', ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username') . ':', ['required' => true]);
         $model = $this->findModel($username);
         if ($model->delete() !== false) {
             $this->log(true);
@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function actionActivate()
     {
-        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username:'), ['required' => true]);
         $model = $this->findModel($username);
         $model->status = User::STATUS_ACTIVE;
         $model->removeEmailConfirmToken();
@@ -95,7 +95,7 @@ class UserController extends Controller
      */
     public function actionGetStatus()
     {
-        $username = $this->prompt(Module::t('module', 'Username') . ':', ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username') . ':', ['required' => true]);
         $model = $this->findModel($username);
         $this->stdout($model->statusName, Console::FG_GREEN, Console::BOLD);
     }
@@ -106,10 +106,10 @@ class UserController extends Controller
      */
     public function actionSetStatus()
     {
-        $username = $this->prompt(Module::t('module', 'Username') . ':', ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username') . ':', ['required' => true]);
         $model = $this->findModel($username);
         if (($select = User::getStatusesArray()) && is_array($select)) {
-            $model->status = $this->select(Module::t('module', 'Status') . ':', $select);
+            $model->status = $this->select(Module::translate('module', 'Status') . ':', $select);
             $this->log($model->save());
         }
     }
@@ -121,12 +121,12 @@ class UserController extends Controller
      */
     public function actionChangePassword()
     {
-        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username:'), ['required' => true]);
         $model = $this->findModel($username);
-        $model->setPassword($this->prompt(Module::t('module', 'New password:'), [
+        $model->setPassword($this->prompt(Module::translate('module', 'New password:'), [
             'required' => true,
             'pattern' => '#^.{6,255}$#i',
-            'error' => Module::t('module', 'More than 6 symbols'),
+            'error' => Module::translate('module', 'More than 6 symbols'),
         ]));
         $this->log($model->save());
     }
@@ -141,7 +141,7 @@ class UserController extends Controller
     {
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
-                Module::t('module', 'User "{:Username}" not found', [':Username' => $username])
+                Module::translate('module', 'User "{:Username}" not found', [':Username' => $username])
             );
         }
         return $model;
@@ -154,7 +154,7 @@ class UserController extends Controller
     private function readValue($model = null, $attribute = '')
     {
         $model->$attribute = $this->prompt(
-            Module::t(
+            Module::translate(
                 'module',
                 mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8')
             ) . ':',
@@ -179,9 +179,9 @@ class UserController extends Controller
     private function log($success = false)
     {
         if ($success === true || $success !== 0) {
-            $this->stdout(Module::t('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Module::translate('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
         } else {
-            $this->stderr(Module::t('module', 'Error!'), Console::FG_RED, Console::BOLD);
+            $this->stderr(Module::translate('module', 'Error!'), Console::FG_RED, Console::BOLD);
         }
         echo PHP_EOL;
     }

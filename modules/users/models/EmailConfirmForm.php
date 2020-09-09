@@ -32,7 +32,7 @@ class EmailConfirmForm extends Model
     {
         if (empty($token) || !is_string($token)) {
             throw new InvalidArgumentException(
-                Module::t(
+                Module::translate(
                     'module',
                     'Email confirm token cannot be blank.'
                 )
@@ -40,7 +40,7 @@ class EmailConfirmForm extends Model
         }
         $this->user = User::findByEmailConfirmToken($token);
         if (!$this->user) {
-            throw new InvalidArgumentException(Module::t('module', 'Wrong Email confirm token.'));
+            throw new InvalidArgumentException(Module::translate('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
     }

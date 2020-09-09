@@ -40,10 +40,10 @@ if (Yii::$app->request->get('modal') === 'show') {
             <div class="form-group">
                 <?= Html::button(
                     '<span class="fa fa-pencil"></span> '
-                    . Module::t('module', 'Update'),
+                    . Module::translate('module', 'Update'),
                     [
                         'class' => 'btn btn-sm btn-default',
-                        'title' => Module::t('module', 'Update'),
+                        'title' => Module::translate('module', 'Update'),
                         'data' => [
                             'toggle' => 'modal',
                             'target' => '#modal-image'
@@ -58,10 +58,10 @@ if (Yii::$app->request->get('modal') === 'show') {
                     ],
                     [
                         'class' => 'btn btn-sm btn-danger',
-                        'title' => Module::t('module', 'Delete'),
+                        'title' => Module::translate('module', 'Delete'),
                         'data' => [
                             'method' => 'post',
-                            'confirm' => Module::t(
+                            'confirm' => Module::translate(
                                 'module',
                                 'Are you sure you want to delete the avatar?'
                             )
@@ -80,7 +80,7 @@ if (Yii::$app->request->get('modal') === 'show') {
         <?= $form->field($model->profile, 'email_gravatar', ['enableAjaxValidation' => true])->textInput([
             'maxlength' => true,
             'placeholder' => true,
-        ])->hint(Module::t('module', 'To change the avatar, please use the {:link} service.', [
+        ])->hint(Module::translate('module', 'To change the avatar, please use the {:link} service.', [
             ':link' => Html::a('Gravatar', 'http://www.gravatar.com', [
                 'target' => '_blank'
             ])
@@ -88,7 +88,7 @@ if (Yii::$app->request->get('modal') === 'show') {
 
         <div class="form-group">
             <?= Html::submitButton(
-                '<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'),
+                '<span class="fa fa-floppy-o"></span> ' . Module::translate('module', 'Save'),
                 [
                     'class' => 'btn btn-primary',
                     'name' => 'submit-button',
@@ -111,9 +111,9 @@ Modal::begin(
             [
                     'class' => 'fa fa-pencil'
                 ]
-        ) . ' ' . Module::t('module', 'Update'),
+        ) . ' ' . Module::translate('module', 'Update'),
         'footer' => Html::submitButton(
-            '<span class="fa fa-floppy-o"></span> ' . Module::t(
+            '<span class="fa fa-floppy-o"></span> ' . Module::translate(
                 'module',
                 'Save'
             ),

@@ -95,7 +95,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         $load = $model->load(Yii::$app->request->post());
         if ($load && $model->signup()) {
-            return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
+            return $this->processGoHome(Module::translate('module', 'It remains to activate the account.'));
         }
         return $this->render('signup', [
             'model' => $model
@@ -117,9 +117,9 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            return $this->processGoHome(Module::t('module', 'Thank you for registering!'));
+            return $this->processGoHome(Module::translate('module', 'Thank you for registering!'));
         }
-        return $this->processGoHome(Module::t('module', 'Error sending message!'), 'error');
+        return $this->processGoHome(Module::translate('module', 'Error sending message!'), 'error');
     }
 
     /**
@@ -133,11 +133,11 @@ class DefaultController extends Controller
         $load = $model->load(Yii::$app->request->post());
         if ($load && $model->validate()) {
             if ($model->sendEmail()) {
-                return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
+                return $this->processGoHome(Module::translate('module', 'Check your email for further instructions.'));
             }
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
+            $session->setFlash('error', Module::translate('module', 'Sorry, we are unable to reset password.'));
         }
         return $this->render('requestPasswordResetToken', [
             'model' => $model
@@ -159,7 +159,7 @@ class DefaultController extends Controller
         }
         $load = $model->load(Yii::$app->request->post());
         if ($load && $this->processResetPassword($model)) {
-            return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
+            return $this->processGoHome(Module::translate('module', 'Password changed successfully.'));
         }
 
         return $this->render('resetPassword', [

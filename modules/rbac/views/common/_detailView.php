@@ -10,32 +10,32 @@ echo DetailView::widget([
     'attributes' => [
         [
             'attribute' => 'name',
-            'label' => Module::t('module', 'Name'),
+            'label' => Module::translate('module', 'Name'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'description',
-            'label' => Module::t('module', 'Description'),
+            'label' => Module::translate('module', 'Description'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'ruleName',
-            'label' => Module::t('module', 'Rule Name'),
+            'label' => Module::translate('module', 'Rule Name'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'data',
-            'label' => Module::t('module', 'Data'),
+            'label' => Module::translate('module', 'Data'),
             'format' => 'raw'
         ],
         [
             'attribute' => 'createdAt',
-            'label' => Module::t('module', 'Created'),
+            'label' => Module::translate('module', 'Created'),
             'format' => 'datetime'
         ],
         [
             'attribute' => 'updatedAt',
-            'label' => Module::t('module', 'Updated'),
+            'label' => Module::translate('module', 'Updated'),
             'format' => 'datetime'
         ]
     ]

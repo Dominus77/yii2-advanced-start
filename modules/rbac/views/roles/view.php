@@ -7,16 +7,16 @@ use modules\rbac\Module;
 /* @var $model modules\rbac\models\Role */
 /* @var $role yii\rbac\Role[] */
 
-$this->title = Module::t('module', 'Role Based Access Control');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Roles'), 'url' => ['index']];
+$this->title = Module::translate('module', 'Role Based Access Control');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'RBAC'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->name;
 ?>
 
 <div class="rbac-roles-view">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'View Role') ?>
+            <h3 class="box-title"><?= Module::translate('module', 'View Role') ?>
                 <small><?= Html::encode($model->name) ?></small>
             </h3>
         </div>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $model->name;
                 </div>
                 <div class="col-md-6">
                     <?php if ($roles = $model->getRolesByRole()) : ?>
-                        <strong><?= Module::t('module', 'Roles by role') ?></strong>
+                        <strong><?= Module::translate('module', 'Roles by role') ?></strong>
                         <ul>
                             <?php foreach ($roles as $key => $value) {
                                 echo Html::tag('li', $value) . PHP_EOL;
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $model->name;
                         </ul>
                     <?php endif; ?>
                     <?php if ($permissions = $model->getPermissionsByRole()) : ?>
-                        <strong><?= Module::t('module', 'Permissions by role') ?></strong>
+                        <strong><?= Module::translate('module', 'Permissions by role') ?></strong>
                         <ul>
                             <?php foreach ($permissions as $key => $value) {
                                 echo Html::tag('li', $value) . PHP_EOL;
@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $model->name;
         <div class="box-footer">
             <p>
                 <?= Html::a(
-                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t(
+                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::translate(
                         'module',
                         'Update'
                     ),
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $model->name;
                     ]
                 ) ?>
                 <?= Html::a(
-                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ' . Module::t(
+                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ' . Module::translate(
                         'module',
                         'Delete'
                     ),
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $model->name;
                     [
                         'class' => 'btn btn-danger',
                         'data' => [
-                            'confirm' => Module::t(
+                            'confirm' => Module::translate(
                                 'module',
                                 'Are you sure you want to delete the entry?'
                             ),

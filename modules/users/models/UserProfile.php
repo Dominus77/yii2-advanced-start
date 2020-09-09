@@ -72,14 +72,14 @@ class UserProfile extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('module', 'ID'),
-            'user_id' => Module::t('module', 'User'),
-            'first_name' => Module::t('module', 'First Name'),
-            'last_name' => Module::t('module', 'Last Name'),
-            'email_gravatar' => Module::t('module', 'Email Gravatar'),
-            'last_visit' => Module::t('module', 'Last Visit'),
-            'created_at' => Module::t('module', 'Created'),
-            'updated_at' => Module::t('module', 'Updated'),
+            'id' => Module::translate('module', 'ID'),
+            'user_id' => Module::translate('module', 'User'),
+            'first_name' => Module::translate('module', 'First Name'),
+            'last_name' => Module::translate('module', 'Last Name'),
+            'email_gravatar' => Module::translate('module', 'Email Gravatar'),
+            'last_visit' => Module::translate('module', 'Last Visit'),
+            'created_at' => Module::translate('module', 'Created'),
+            'updated_at' => Module::translate('module', 'Updated'),
         ];
     }
 

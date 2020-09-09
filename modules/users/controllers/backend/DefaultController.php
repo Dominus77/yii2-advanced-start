@@ -117,7 +117,7 @@ class DefaultController extends Controller
             $session = Yii::$app->session;
             $session->setFlash(
                 'error',
-                Module::t(
+                Module::translate(
                     'module',
                     'You do not have rights, access is denied.'
                 )
@@ -342,7 +342,7 @@ class DefaultController extends Controller
                 $model->delete();
                 $session->setFlash(
                     'success',
-                    Module::t(
+                    Module::translate(
                         'module',
                         'The user "{:name}" have been successfully deleted.',
                         [
@@ -355,7 +355,7 @@ class DefaultController extends Controller
                 $model->softDelete();
                 $session->setFlash(
                     'success',
-                    Module::t(
+                    Module::translate(
                         'module',
                         'The user "{:name}" are marked as deleted.',
                         [
@@ -380,6 +380,6 @@ class DefaultController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Module::translate('module', 'The requested page does not exist.'));
     }
 }

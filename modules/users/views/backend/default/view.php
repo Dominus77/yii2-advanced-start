@@ -11,11 +11,11 @@ use modules\users\Module;
  * @var $assignModel Assignment
  */
 
-$this->title = Module::t('module', 'View');
+$this->title = Module::translate('module', 'View');
 $this->params['title']['small'] = $model->username;
 
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Users'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Module::t('module', 'View');
+$this->params['breadcrumbs'][] = ['label' => Module::translate('module', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Module::translate('module', 'View');
 
 ?>
 
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'View');
             <?= Tabs::widget([
                 'items' => [
                     [
-                        'label' => Module::t('module', 'Profile'),
+                        'label' => Module::translate('module', 'Profile'),
                         'content' => $this->render('tabs/_view_profile', [
                             'model' => $model,
                             'assignModel' => $assignModel,

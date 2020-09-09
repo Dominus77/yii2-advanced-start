@@ -53,7 +53,7 @@ class ProfileController extends Controller
         if ($load && $model->profile->save()) {
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('success', Module::t('module', 'Profile successfully save.'));
+            $session->setFlash('success', Module::translate('module', 'Profile successfully save.'));
             return $this->redirect(['update', 'tab' => 'profile']);
         }
         return $this->render('update', [
@@ -74,9 +74,9 @@ class ProfileController extends Controller
         $session = Yii::$app->session;
         $load = $model->profile->load(Yii::$app->request->post());
         if ($load && $model->profile->save()) {
-            $session->setFlash('success', Module::t('module', 'Form successfully saved.'));
+            $session->setFlash('success', Module::translate('module', 'Form successfully saved.'));
         } else {
-            $session->setFlash('error', Module::t('module', 'Error! Failed to save the form.'));
+            $session->setFlash('error', Module::translate('module', 'Error! Failed to save the form.'));
         }
         return $this->redirect(['update', 'tab' => 'avatar']);
     }
@@ -111,7 +111,7 @@ class ProfileController extends Controller
                 if (isset($result['imageFile'][0])) {
                     $session->setFlash('error', $result['imageFile'][0]);
                 } else {
-                    $session->setFlash('error', Module::t('module', 'Failed to upload file.'));
+                    $session->setFlash('error', Module::translate('module', 'Failed to upload file.'));
                 }
                 return $this->redirect(['update', 'tab' => 'avatar']);
             }
@@ -129,7 +129,7 @@ class ProfileController extends Controller
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
         if (($post = Yii::$app->request->post()) && $model->load($post) && $model->crop()) {
-            $session->setFlash('success', Module::t('module', 'User avatar successfully save.'));
+            $session->setFlash('success', Module::translate('module', 'User avatar successfully save.'));
         }
         return $this->redirect(['update', 'tab' => 'avatar']);
     }
@@ -173,7 +173,7 @@ class ProfileController extends Controller
         $model->delete([$avatar, $thumb, $original]);
         /** @var yii\web\Session $session */
         $session = Yii::$app->session;
-        $session->setFlash('success', Module::t('module', 'Successfully deleted.'));
+        $session->setFlash('success', Module::translate('module', 'Successfully deleted.'));
         return $this->redirect(['update', 'tab' => 'avatar']);
     }
 
@@ -189,9 +189,9 @@ class ProfileController extends Controller
         $session = Yii::$app->session;
         $load = $model->load(Yii::$app->request->post());
         if ($load && $model->resetPassword()) {
-            $session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            $session->setFlash('success', Module::translate('module', 'Password changed successfully.'));
         } else {
-            $session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
+            $session->setFlash('error', Module::translate('module', 'Error! Password changed not successfully.'));
         }
         return $this->redirect(['update', 'tab' => 'password']);
     }
@@ -270,7 +270,7 @@ class ProfileController extends Controller
             $user->logout();
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('success', Module::t('module', 'Your profile has been successfully deleted!'));
+            $session->setFlash('success', Module::translate('module', 'Your profile has been successfully deleted!'));
             return $this->goHome();
         }
         return $this->render('delete', [
@@ -293,6 +293,6 @@ class ProfileController extends Controller
                 return $model;
             }
         }
-        throw new NotFoundHttpException(Module::t('module', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Module::translate('module', 'The requested page does not exist.'));
     }
 }

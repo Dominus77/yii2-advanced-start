@@ -41,19 +41,19 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         [
-            'label' => MainModule::t('module', 'Home'),
+            'label' => MainModule::translate('module', 'Home'),
             'url' => [
                 '/main/default/index'
             ]
         ],
         [
-            'label' => MainModule::t('module', 'About'),
+            'label' => MainModule::translate('module', 'About'),
             'url' => [
                 '/main/default/about'
             ]
         ],
         [
-            'label' => MainModule::t('module', 'Contact'),
+            'label' => MainModule::translate('module', 'Contact'),
             'url' => [
                 '/main/default/contact'
             ]
@@ -61,13 +61,13 @@ AppAsset::register($this);
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = [
-            'label' => UserModule::t('module', 'Sign Up'),
+            'label' => UserModule::translate('module', 'Sign Up'),
             'url' => [
                 '/users/default/signup'
             ]
         ];
         $menuItems[] = [
-            'label' => UserModule::t('module', 'Login'),
+            'label' => UserModule::translate('module', 'Login'),
             'url' => [
                 '/users/default/login'
             ]
@@ -81,7 +81,7 @@ AppAsset::register($this);
                 [
                     'label' => $this->render('_label', [
                         'icon' => 'glyphicon glyphicon-user',
-                        'title' => UserModule::t('module', 'Profile') .
+                        'title' => UserModule::translate('module', 'Profile') .
                             ' (' . $identity->username . ')'
                     ]),
                     'url' => [
@@ -91,7 +91,7 @@ AppAsset::register($this);
                 [
                     'label' => $this->render('_label', [
                         'icon' => 'glyphicon glyphicon-log-out',
-                        'title' => UserModule::t('module', 'Sign Out')
+                        'title' => UserModule::translate('module', 'Sign Out')
                     ]),
                     'url' => [
                         '/users/default/logout'

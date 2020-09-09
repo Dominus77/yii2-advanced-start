@@ -21,7 +21,7 @@ use modules\rbac\Module;
     <?= $form->field($model, 'name')->textInput([
         'maxlength' => true,
         'disabled' => $model->scenario === $model::SCENARIO_UPDATE
-    ])->hint(Module::t('module', 'Example: updatePost')) ?>
+    ])->hint(Module::translate('module', 'Example: updatePost')) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
@@ -39,7 +39,7 @@ use modules\rbac\Module;
                     <?= $form->field($model, 'permissions')->listBox($model->getPermissionChildren(), [
                         'multiple' => 'true',
                         'size' => 8
-                    ])->label(Module::t('module', 'Permissions by role')) ?>
+                    ])->label(Module::translate('module', 'Permissions by role')) ?>
 
                     <?= $form->field($model, 'name')->hiddenInput()->label(false) ?>
 

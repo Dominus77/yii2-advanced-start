@@ -84,13 +84,13 @@ class DefaultController extends Controller
         if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
             $session->setFlash(
                 'success',
-                Module::t(
+                Module::translate(
                     'module',
                     'Thank you for contacting us. We will respond to you as soon as possible.'
                 )
             );
         } else {
-            $session->setFlash('error', Module::t('module', 'There was an error sending email.'));
+            $session->setFlash('error', Module::translate('module', 'There was an error sending email.'));
         }
         return $this->refresh();
     }

@@ -30,14 +30,14 @@ class RolesController extends Controller
     public function actionAssign()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username:'), ['required' => true]);
         $user = $this->findModel($username);
 
         $roles = Yii::$app->authManager->getRoles();
         $select = ArrayHelper::map($roles, 'name', 'description');
         /*$encodingArray = Console::convertEncoding($array);
         $select = is_array($encodingArray) ? $encodingArray : $array;*/
-        $roleName = $this->select(Module::t('module', 'Role:'), $select);
+        $roleName = $this->select(Module::translate('module', 'Role:'), $select);
         $role = $authManager->getRole($roleName);
 
         // Проверяем есть ли уже такая роль у пользователя
@@ -45,14 +45,14 @@ class RolesController extends Controller
         if ($userRoles === null) {
             $authManager->assign($role, $user->id);
             $this->stdout(
-                Module::t('module', 'Success!'),
+                Module::translate('module', 'Success!'),
                 Console::FG_GREEN,
                 Console::BOLD
             );
             $this->stdout(PHP_EOL);
         } else {
             $this->stdout(
-                Module::t('module', 'The user already has a role.'),
+                Module::translate('module', 'The user already has a role.'),
                 Console::FG_RED,
                 Console::BOLD
             );
@@ -67,12 +67,12 @@ class RolesController extends Controller
     public function actionRevoke()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Module::t('module', 'Username:'), ['required' => true]);
+        $username = $this->prompt(Module::translate('module', 'Username:'), ['required' => true]);
         $user = $this->findModel($username);
         $roleName = $this->select(
-            Module::t('module', 'Role:'),
+            Module::translate('module', 'Role:'),
             ArrayHelper::merge(
-                ['all' => Module::t('module', 'All Roles')],
+                ['all' => Module::translate('module', 'All Roles')],
                 ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
             )
         );
@@ -82,7 +82,7 @@ class RolesController extends Controller
             $role = $authManager->getRole($roleName);
             $authManager->revoke($role, $user->id);
         }
-        $this->stdout(Module::t('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
+        $this->stdout(Module::translate('module', 'Success!'), Console::FG_GREEN, Console::BOLD);
         $this->stdout(PHP_EOL);
     }
 
@@ -111,7 +111,7 @@ class RolesController extends Controller
     {
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
-                Module::t('module', 'User "{:Username}" not found', [':Username' => $username])
+                Module::translate('module', 'User "{:Username}" not found', [':Username' => $username])
             );
         }
         return $model;

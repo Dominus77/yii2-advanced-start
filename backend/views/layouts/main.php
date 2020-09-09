@@ -116,7 +116,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 <p>
                                     <?= $fullUserName ?>
                                     <small>
-                                        <?= UserModule::t('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') // phpcs:ignore                ?>
+                                        <?= UserModule::translate('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') // phpcs:ignore                ?>
                                     </small>
                                 </p>
                             </li>
@@ -138,12 +138,12 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 <div class="pull-left">
                                     <a href="<?= Url::to(['/users/profile/index']) ?>"
                                        class="btn btn-default btn-flat">
-                                        <?= UserModule::t('module', 'Profile') ?>
+                                        <?= UserModule::translate('module', 'Profile') ?>
                                     </a>
                                 </div>
                                 <div class="pull-right">
                                     <?= Html::beginForm(['/users/default/logout'])
-                                    . Html::submitButton(UserModule::t('module', 'Sign Out'), [
+                                    . Html::submitButton(UserModule::translate('module', 'Sign Out'), [
                                         'class' => 'btn btn-default btn-flat logout'
                                     ]) . Html::endForm() ?>
                                 </div>
@@ -187,14 +187,14 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 [
                     'label' => $this->render('_label', [
                         'icon' => 'fa fa-dashboard',
-                        'title' => MainModule::t('module', 'Home')
+                        'title' => MainModule::translate('module', 'Home')
                     ]),
                     'url' => ['/main/default/index']
                 ],
                 [
                     'label' => $this->render('_label', [
                         'icon' => 'fa fa-users',
-                        'title' => UserModule::t('module', 'Users')
+                        'title' => UserModule::translate('module', 'Users')
                     ]),
                     'url' => ['/users/default/index'],
                     'visible' => $user->can(Permission::PERMISSION_MANAGER_USERS)
@@ -203,7 +203,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'label' => $this->render('_label', [
                         'isRoot' => true,
                         'icon' => 'fa fa-unlock',
-                        'title' => RbacModule::t('module', 'RBAC')
+                        'title' => RbacModule::translate('module', 'RBAC')
                     ]),
                     'url' => ['/rbac/default/index'],
                     'options' => ['class' => 'treeview'],
@@ -212,21 +212,21 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                         [
                             'label' => $this->render('_label', [
                                 'icon' => 'fa fa-circle-o',
-                                'title' => RbacModule::t('module', 'Permissions')
+                                'title' => RbacModule::translate('module', 'Permissions')
                             ]),
                             'url' => ['/rbac/permissions/index']
                         ],
                         [
                             'label' => $this->render('_label', [
                                 'icon' => 'fa fa-circle-o',
-                                'title' => RbacModule::t('module', 'Roles')
+                                'title' => RbacModule::translate('module', 'Roles')
                             ]),
                             'url' => ['/rbac/roles/index']
                         ],
                         [
                             'label' => $this->render('_label', [
                                 'icon' => 'fa fa-circle-o',
-                                'title' => RbacModule::t('module', 'Assign')
+                                'title' => RbacModule::translate('module', 'Assign')
                             ]),
                             'url' => ['/rbac/assign/index']
                         ]
@@ -301,7 +301,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             </h1>
             <?= Breadcrumbs::widget([
                 'homeLink' => [
-                    'label' => '<i class="fa fa-dashboard"></i> ' . MainModule::t('module', 'Home'),
+                    'label' => '<i class="fa fa-dashboard"></i> ' . MainModule::translate('module', 'Home'),
                     'url' => Url::to(['/main/default/index'])],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 'encodeLabels' => false

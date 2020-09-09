@@ -176,10 +176,10 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     public static function getStatusesArray()
     {
         return [
-            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
-            self::STATUS_ACTIVE => Module::t('module', 'Active'),
-            self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted')
+            self::STATUS_BLOCKED => Module::translate('module', 'Blocked'),
+            self::STATUS_ACTIVE => Module::translate('module', 'Active'),
+            self::STATUS_WAIT => Module::translate('module', 'Wait'),
+            self::STATUS_DELETED => Module::translate('module', 'Deleted')
         ];
     }
 

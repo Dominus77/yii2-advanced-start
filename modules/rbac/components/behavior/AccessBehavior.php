@@ -72,7 +72,7 @@ class AccessBehavior extends Behavior
             $user->logout();
             /** @var yii\web\Session $session */
             $session = Yii::$app->session;
-            $session->setFlash('error', Module::t('module', 'You are not allowed access!'));
+            $session->setFlash('error', Module::translate('module', 'You are not allowed access!'));
         }
     }
 }

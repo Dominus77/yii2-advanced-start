@@ -11,7 +11,7 @@ use modules\users\Module;
  * @var $assignModel Assignment
  */
 
-$this->title = Module::t('module', 'Profile');
+$this->title = Module::translate('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
 
 $items = [

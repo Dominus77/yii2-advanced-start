@@ -4,7 +4,7 @@ use modules\main\Module;
 
 /* @var $this yii\web\View */
 
-$this->title = Module::t('module', 'Home');
+$this->title = Module::translate('module', 'Home');
 ?>
 
 <div class="main-frontend-default-index">

@@ -23,7 +23,7 @@ use modules\users\Module;
  * @var $assignModel Assignment
  */
 
-$this->title = Module::t('module', 'Users');
+$this->title = Module::translate('module', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 
 UserAsset::register($this);
@@ -82,7 +82,7 @@ $this->registerJs($js, View::POS_END);
                 <p>
                     <?= Html::a('<span class="fa fa-plus"></span> ', ['create'], [
                         'class' => 'btn btn-block btn-success',
-                        'title' => Module::t('module', 'Create'),
+                        'title' => Module::translate('module', 'Create'),
                         'data' => [
                             'toggle' => 'tooltip',
                             'placement' => 'left',
@@ -106,12 +106,12 @@ $this->registerJs($js, View::POS_END);
                         'attribute' => 'username',
                         'filter' => Html::activeInput('text', $searchModel, 'username', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('module', '- text -'),
+                            'placeholder' => Module::translate('module', '- text -'),
                             'data' => [
                                 'pjax' => true,
                             ],
                         ]),
-                        'label' => Module::t('module', 'Users'),
+                        'label' => Module::translate('module', 'Users'),
                         'format' => 'raw',
                         'value' => function ($data) {
                             $view = Yii::$app->controller->view;
@@ -123,7 +123,7 @@ $this->registerJs($js, View::POS_END);
                         'attribute' => 'email',
                         'filter' => Html::activeInput('text', $searchModel, 'email', [
                             'class' => 'form-control',
-                            'placeholder' => Module::t('module', '- text -'),
+                            'placeholder' => Module::translate('module', '- text -'),
                             'data' => [
                                 'pjax' => true,
                             ],
@@ -138,7 +138,7 @@ $this->registerJs($js, View::POS_END);
                             $searchModel->statusesArray,
                             [
                                 'class' => 'form-control',
-                                'prompt' => Module::t('module', '- all -'),
+                                'prompt' => Module::translate('module', '- all -'),
                                 'data' => [
                                     'pjax' => true,
                                 ],
@@ -153,7 +153,7 @@ $this->registerJs($js, View::POS_END);
                                 return Html::a($data->statusLabelName, Url::to(['set-status', 'id' => $data->id]), [
                                         'id' => $data->id,
                                         'class' => 'link-status',
-                                        'title' => Module::t('module', 'Click to change the status'),
+                                        'title' => Module::translate('module', 'Click to change the status'),
                                         'data' => [
                                             'toggle' => 'tooltip',
                                             'pjax' => 0,
@@ -171,7 +171,7 @@ $this->registerJs($js, View::POS_END);
                                         [
                                             'id' => 'email-link-' . $data->id,
                                             'class' => 'link-email',
-                                            'title' => Module::t(
+                                            'title' => Module::translate(
                                                 'module',
                                                 'Send a link to activate your account.'
                                             ),
@@ -199,7 +199,7 @@ $this->registerJs($js, View::POS_END);
                             $assignModel->getRolesArray(),
                             [
                                 'class' => 'form-control',
-                                'prompt' => Module::t('module', '- all -'),
+                                'prompt' => Module::translate('module', '- all -'),
                                 'data' => [
                                     'pjax' => true,
                                 ],
@@ -219,7 +219,7 @@ $this->registerJs($js, View::POS_END);
                             . Html::activeInput('text', $searchModel, 'date_from', [
                                 'id' => 'datepicker',
                                 'class' => 'form-control',
-                                'placeholder' => Module::t('module', '- select -'),
+                                'placeholder' => Module::translate('module', '- select -'),
                                 'data' => [
                                     'pjax' => true,
                                 ],
@@ -241,7 +241,7 @@ $this->registerJs($js, View::POS_END);
                                     '<span class="glyphicon glyphicon-eye-open"></span>',
                                     $url,
                                     [
-                                        'title' => Module::t('module', 'View'),
+                                        'title' => Module::translate('module', 'View'),
                                         'data' => [
                                             'toggle' => 'tooltip',
                                             'pjax' => 0,
@@ -251,7 +251,7 @@ $this->registerJs($js, View::POS_END);
                             },
                             'update' => function ($url) {
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                    'title' => Module::t('module', 'Update'),
+                                    'title' => Module::translate('module', 'Update'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'pjax' => 0,
@@ -260,12 +260,12 @@ $this->registerJs($js, View::POS_END);
                             },
                             'delete' => function ($url, $model) {
                                 $linkOptions = [
-                                    'title' => Module::t('module', 'Delete'),
+                                    'title' => Module::translate('module', 'Delete'),
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'method' => 'post',
                                         'pjax' => 0,
-                                        'confirm' => Module::t(
+                                        'confirm' => Module::translate(
                                             'module',
                                             'The user "{:name}" will be marked as deleted!',
                                             [
@@ -277,12 +277,12 @@ $this->registerJs($js, View::POS_END);
                                 /* @var $model User */
                                 if ($model->isDeleted()) {
                                     $linkOptions = [
-                                        'title' => Module::t('module', 'Delete'),
+                                        'title' => Module::translate('module', 'Delete'),
                                         'data' => [
                                             'toggle' => 'tooltip',
                                             'method' => 'post',
                                             'pjax' => 0,
-                                            'confirm' => Module::t(
+                                            'confirm' => Module::translate(
                                                 'module',
                                                 'You won\'t be able to revert this!'
                                             ),
