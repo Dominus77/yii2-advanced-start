@@ -62,7 +62,7 @@ The minimum requirement by this project template that your Web server supports P
 
 ## Directory Structure
 
-```
+```textmate
 api
     components/          contains components api application
     config/              contains api application configurations
@@ -170,13 +170,13 @@ modules/
 The preferred way to install this project is through [composer](http://getcomposer.org/download/).
 
 Create a project:
-```
+```bash
 composer create-project --prefer-dist --stability=dev dominus77/yii2-advanced-start public_html
 ```
 
 or clone the repository for `pull` command availability:
 
-```
+```bash
 git clone https://github.com/Dominus77/yii2-advanced-start.git public_html
 cd public_html
 composer install
@@ -184,7 +184,7 @@ composer install
 
 Init an environment:
 
-```
+```bash
 cd public_html
 php init
 ```
@@ -200,7 +200,7 @@ If everything is in order, move on, otherwise configure the server configuration
 ## Continue
 Create a database, default configure yii2_advanced_start in `common\config\main-local.php`
 
-```
+```php
 //...
 'components' => [
     'db' => [
@@ -214,25 +214,25 @@ Create a database, default configure yii2_advanced_start in `common\config\main-
 
 Apply migration:
 
-```
+```bash
 php yii migrate
 ```
 
 See all available commands:
 
-```
+```bash
 php yii
 ```
 
 Initialization RBAC:
 
-```
+```bash
 php yii rbac/init
 ```
 
 Create user, enter the command and follow the instructions:
 
-```
+```bash
 php yii users/user/create
 ```
 
@@ -243,7 +243,7 @@ php yii users/user/create
 
 Assign role admin:
 
-```
+```bash
 php yii rbac/roles/assign
 ```
 
@@ -254,7 +254,7 @@ php yii rbac/roles/assign
 If you are installing the server into the public_html folder on the server with Apache, you must configure redirection.
 At the root folder, create a public_html .hitaccess with the following content:
 
-```
+```apache
 Options FollowSymLinks
 AddDefaultCharset utf-8
 
@@ -308,7 +308,7 @@ AddDefaultCharset utf-8
 
 The web folder, the backend, frontend and api parts also add .hitaccess:
 
-```
+```apache
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -319,7 +319,7 @@ Now frontend is available at `http://sitename.com`, and backend at `http://siten
 
 ## Code Sniffer
 
-```
+```bash
 composer check-style
 ```
 
@@ -327,7 +327,7 @@ composer check-style
 
 Create a database, default configure yii2_advanced_start_test in `common\config\test-local.php`
 
-```
+```php
 //...
 'components' => [
     'db' => [
@@ -339,13 +339,13 @@ Create a database, default configure yii2_advanced_start_test in `common\config\
 
 Apply migration:
 
-```
+```bash
 php yii_test migrate/up
 ```
 
 #### Run in console
 
-```
+```bash
 composer build
 composer test
 ```
