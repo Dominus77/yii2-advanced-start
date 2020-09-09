@@ -201,15 +201,17 @@ If everything is in order, move on, otherwise configure the server configuration
 Create a database, default configure yii2_advanced_start in `common\config\main-local.php`
 
 ```php
-//...
-'components' => [
-    'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
+$config = [
+    //...
+    'components' => [
+        'db' => [
+            'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start',
+            //...
+        ],
         //...
     ],
     //...
-],
-//...
+];
 ```
 
 Apply migration:
@@ -328,13 +330,17 @@ composer check-style
 Create a database, default configure yii2_advanced_start_test in `common\config\test-local.php`
 
 ```php
-//...
-'components' => [
-    'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test',
+$config = [
+    //...
+    'components' => [
+        'db' => [
+            'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test',
+            //...
+        ],
+        //...
     ],
-]
-//...
+    //...
+];
 ```
 
 Apply migration:
