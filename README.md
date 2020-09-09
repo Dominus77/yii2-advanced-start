@@ -62,7 +62,7 @@ The minimum requirement by this project template that your Web server supports P
 
 ## Directory Structure
 
-```textmate
+```plaintext
 api
     components/          contains components api application
     config/              contains api application configurations
