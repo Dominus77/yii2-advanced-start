@@ -9,7 +9,7 @@
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-advanced-start/downloads)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 
 The application is built using advanced pattern and has a modular structure.
-Backend part uses [AdminLTE](https://almsaeedstudio.com) template
+Backend part uses [AdminLTE](https://adminlte.io/) template
 Available console user management commands and RBAC system.
 
 ## Base components
