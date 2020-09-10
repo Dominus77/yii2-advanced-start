@@ -27,6 +27,16 @@ class Bootstrap
      */
     public function __construct()
     {
+        $this->registerTranslations();
+        $urlManager = Yii::$app->urlManager;
+        $urlManager->addRules($this->getRules());
+    }
+
+    /**
+     * Register Translations
+     */
+    public function registerTranslations()
+    {
         $i18n = Yii::$app->i18n;
         $i18n->translations['<?= $path ?>/*'] = [
             'class' => PhpMessageSource::class,
@@ -35,9 +45,6 @@ class Bootstrap
                 '<?= $path ?>/module' => 'module.php'
             ]
         ];
-
-        $urlManager = Yii::$app->urlManager;
-        $urlManager->addRules($this->getRules());
     }
 
     /**
