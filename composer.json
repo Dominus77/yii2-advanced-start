@@ -62,10 +62,7 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
-        },
-        "github-protocols": [
-            "https,ssh"
-        ]
+        }
     },
     "repositories": {
         "packagist.org": {
