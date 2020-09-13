@@ -19,8 +19,8 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  # - travis_retry composer self-update && composer --version
-  - travis_retry composer self-update --snapshot && composer --version
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer diagnose
   - travis_retry composer update --prefer-dist --no-interaction
   # install php extensions
   - |

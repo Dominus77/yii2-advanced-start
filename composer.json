@@ -47,11 +47,6 @@
         "yiisoft/yii2-gii": "~2.0.0"
     },
     "scripts": {
-        "migrate-up": "php yii migrate/up",
-        "migrate-down": "php yii migrate/down",
-        "migrate-test-up": "php yii_test migrate/up",
-        "migrate-test-down": "php yii_test migrate/down",
-        "rbac-init": "php yii rbac/init",
         "build": "codecept build",
         "test": "codecept run",
         "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*",
