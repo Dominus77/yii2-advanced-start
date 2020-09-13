@@ -186,7 +186,7 @@ Init an environment:
 
 ```bash
 cd public_html
-composer app-init
+php init
 ```
 
 ### Yii Application Requirement Checker 
@@ -229,7 +229,7 @@ composer rbac-init
 Create user, enter the command and follow the instructions:
 
 ```bash
-composer user-create
+php yii users/user/create
 ```
 
 - Username: set username (admin);
@@ -240,7 +240,7 @@ composer user-create
 Assign role admin:
 
 ```bash
-composer rbac-assign
+php yii rbac/roles/assign
 ```
 
 - Username: set username (admin);
