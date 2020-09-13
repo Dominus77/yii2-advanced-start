@@ -21,7 +21,7 @@ cache:
 install:
   - travis_retry composer self-update && composer --version
   # - travis_retry composer diagnose
-  - travis_retry composer update --prefer-dist --no-interaction
+  - travis_retry composer update --dev --prefer-dist --no-interaction
   # install php extensions
   - |
     if (php --version | grep -i HipHop > /dev/null); then
