@@ -67,7 +67,7 @@
     "repositories": {
         "packagist.org": {
             "type": "composer",
-            "url": "https://packagist.org"
+            "url": "https://asset-packagist.org"
         }
     }
 }
