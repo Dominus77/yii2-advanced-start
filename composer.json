@@ -64,10 +64,10 @@
             "enabled": false
         }
     },
-    "repositories": {
-        "packagist.org": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    }
+    ]
 }
