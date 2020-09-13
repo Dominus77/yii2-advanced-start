@@ -186,7 +186,7 @@ Init an environment:
 
 ```bash
 cd public_html
-php init
+composer app-init
 ```
 
 ### Yii Application Requirement Checker 
@@ -217,25 +217,19 @@ $config = [
 Apply migration:
 
 ```bash
-php yii migrate
-```
-
-See all available commands:
-
-```bash
-php yii
+composer migrate-up
 ```
 
 Initialization RBAC:
 
 ```bash
-php yii rbac/init
+composer rbac-init
 ```
 
 Create user, enter the command and follow the instructions:
 
 ```bash
-php yii users/user/create
+composer user-create
 ```
 
 - Username: set username (admin);
@@ -246,7 +240,7 @@ php yii users/user/create
 Assign role admin:
 
 ```bash
-php yii rbac/roles/assign
+composer rbac-assign
 ```
 
 - Username: set username (admin);
@@ -346,7 +340,7 @@ $config = [
 Apply migration:
 
 ```bash
-php yii_test migrate/up
+composer migrate-test-up
 ```
 
 #### Run in console
