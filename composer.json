@@ -14,7 +14,6 @@
         "ext-json": "*",
         "almasaeed2010/adminlte": "^2.4",
         "bower-asset/html5shiv": "^3.7",
-        "bower-asset/raphael": "^2.3",
         "bower-asset/respond": "^1.4",
         "dominus77/yii2-jcrop-widget": "^2.1",
         "dominus77/yii2-maintenance": "^1.0",

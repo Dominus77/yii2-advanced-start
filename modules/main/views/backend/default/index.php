@@ -74,7 +74,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                             'clientOptions' => [
                                 'xkey' => 'y',
                                 'ykeys' => ['item1', 'item2'],
-                                'labels' => ['Item 1', 'Item 2'],
+                                'labels' => ['Value 1', 'Value 2'],
                                 'lineColors' => ['#a0d0e0', '#3c8dbc'],
                                 'data' => [
                                     ['y' => '2018 Q1', 'item1' => 2666, 'item2' => 2666],
@@ -99,7 +99,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                                 'data' => [
                                     ['label' => 'Download Sales', 'value' => 12],
                                     ['label' => 'In-Store Sales', 'value' => 30],
-                                    ['label' => 'Mail-Order Sales', 'value' => 20]
+                                    ['label' => 'Mail-Order Sales', 'value' => 20],
                                 ],
                             ]
                         ]) ?>

@@ -4,7 +4,7 @@ namespace backend\widgets\chart\morris\assets;
 
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
-use common\assets\RaphaelAsset;
+use backend\assets\RaphaelAsset;
 
 /**
  * Class MorrisAsset
