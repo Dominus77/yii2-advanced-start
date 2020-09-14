@@ -29,18 +29,37 @@ class SmallBox extends Widget
     const BG_INFO = 'bg-info';
     const BG_DANGER = 'bg-danger';
 
+    /**
+     * @var bool
+     */
     public $status = true;
+    /**
+     * @var string
+     */
     public $header;
     /**
      * @var string icon name
      * @see: http://ionicons.com
      */
     public $icon;
+    /**
+     * @var string
+     */
     public $content;
-    public $link = ['label' => '', 'url' => []];
+    /**
+     * @var array
+     *
+     * ['label' => '', 'url' => ['#']];
+     */
+    public $link;
+    /**
+     * @var string
+     */
     public $style;
 
     /**
+     * Run
+     *
      * @return string
      */
     public function run()
@@ -53,6 +72,8 @@ class SmallBox extends Widget
     }
 
     /**
+     * Render Content
+     *
      * @return string
      */
     public function renderContent()
