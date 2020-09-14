@@ -184,8 +184,18 @@ composer install
 
 Init an environment:
 
-```bash
-cd public_html
+Run command in the root directory `public_html` of the project
+
+if Development environment
+```
+composer app-init-dev
+```
+if Production environment
+```
+composer app-init-prod
+```
+otherwise choose Wednesday
+```
 php init
 ```
 

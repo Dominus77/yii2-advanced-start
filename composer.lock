@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02da9f5884bed5de1a725d1db3a60606",
+    "content-hash": "4957d21ddb23c86af705a5fc3aed181a",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -54,7 +54,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {

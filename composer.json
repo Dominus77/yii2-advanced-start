@@ -47,10 +47,12 @@
         "yiisoft/yii2-gii": "~2.0.0"
     },
     "scripts": {
-        "migrate-up": "php yii migrate/up",
-        "migrate-down": "php yii migrate/down",
-        "migrate-test-up": "php yii_test migrate/up",
-        "migrate-test-down": "php yii_test migrate/down",
+        "app-init-dev": "php init --env=Development --overwrite=n",
+        "app-init-prod": "php init --env=Production --overwrite=n",
+        "migrate-up": "php yii migrate/up --interactive=0",
+        "migrate-down": "php yii migrate/down --interactive=0",
+        "migrate-test-up": "php yii_test migrate/up --interactive=0",
+        "migrate-test-down": "php yii_test migrate/down --interactive=0",
         "rbac-init": "php yii rbac/init",
         "build": "codecept build",
         "test": "codecept run",
@@ -64,10 +66,10 @@
             "enabled": false
         }
     },
-    "repositories": [
-        {
+    "repositories": {
+        "asset-packagist.org": {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    }
 }
