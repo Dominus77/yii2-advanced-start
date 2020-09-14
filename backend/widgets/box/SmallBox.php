@@ -47,7 +47,7 @@ class SmallBox extends Widget
      */
     public $content;
     /**
-     * @var array
+     * @var array|string|null
      *
      * ['label' => '', 'url' => ['#']];
      */
@@ -92,9 +92,9 @@ class SmallBox extends Widget
                 $str .= Html::a($this->link['label'], $this->link['url'], [
                         'class' => 'small-box-footer'
                     ]) . PHP_EOL;
-            } elseif (!empty($this->link['label'])) {
-                $str .= Html::tag('p', $this->link['label'], ['class' => 'small-box-footer']);
             }
+        } elseif (!is_null($this->link)) {
+            $str .= Html::tag('div', $this->link, ['class' => 'small-box-footer']);
         }
         $str .= Html::endTag('div') . PHP_EOL;
         return $str;
