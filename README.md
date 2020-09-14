@@ -203,7 +203,7 @@ php init
 
 See `http://sitename.com/requirements.php`
 
-> Note: For production version it is recommended to delete the `frontend\web\requirements.php` file
+> Note: For production environment it is recommended to delete the `frontend\web\requirements.php` file
 
 If everything is in order, move on, otherwise configure the server configuration.
 
