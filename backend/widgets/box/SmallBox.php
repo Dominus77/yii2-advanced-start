@@ -2,7 +2,7 @@
 
 namespace backend\widgets\box;
 
-use yii\bootstrap\Widget;
+use yii\base\Widget;
 use yii\helpers\Html;
 use common\assets\IonIconsAsset;
 
