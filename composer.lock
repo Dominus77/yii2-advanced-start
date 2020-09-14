@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4957d21ddb23c86af705a5fc3aed181a",
+    "content-hash": "30d8c6c3125012287c5affac82fb3017",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -71,6 +71,24 @@
             ]
         },
         {
+            "name": "bower-asset/eve-raphael",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tomasAlabes/eve.git",
+                "reference": "93132d5d47a0ce31dbd1b75208b1d4c0e2ad81e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomasAlabes/eve/zipball/93132d5d47a0ce31dbd1b75208b1d4c0e2ad81e8",
+                "reference": "93132d5d47a0ce31dbd1b75208b1d4c0e2ad81e8"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/html5shiv",
             "version": "3.7.3",
             "source": {
@@ -90,7 +108,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -129,7 +147,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -156,6 +174,27 @@
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/raphael",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:DmitryBaranovskiy/raphael.git",
+                "reference": "d8fbe4be81d362837f95e33886b80fb41de443b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DmitryBaranovskiy/raphael/zipball/d8fbe4be81d362837f95e33886b80fb41de443b4",
+                "reference": "d8fbe4be81d362837f95e33886b80fb41de443b4"
+            },
+            "require": {
+                "bower-asset/eve-raphael": "0.5.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/respond",
