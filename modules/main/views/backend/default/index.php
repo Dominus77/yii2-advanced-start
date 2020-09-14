@@ -1,49 +1,55 @@
 <?php
 
-use yii\helpers\Url;
-use modules\users\Module as UserModule;
-use modules\rbac\Module as RbacModule;
-use modules\rbac\models\Permission;
 use modules\main\Module;
+use backend\widgets\box\SmallBox;
 
 /* @var $this yii\web\View */
 
 $this->title = Module::translate('module', 'Home');
 $this->params['title']['small'] = Module::translate('module', 'Dashboard');
-/** @var yii\web\User $user */
-$user = Yii::$app->user;
 ?>
 
-<section class="content main-backend-default-index">
+<section class="main-backend-default-index">
     <div class="row">
-        <?php if ($user->can(Permission::PERMISSION_MANAGER_USERS)) : ?>
-            <div class="col-md-4">
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"><?= UserModule::translate('module', 'Users') ?></h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                    title="<?= Module::translate('module', 'Collapse') ?>">
-                                <i class="fa fa-minus"></i></button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                                    title="<?= Module::translate('module', 'Remove') ?>">
-                                <i class="fa fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <a class="btn btn-app" href="<?= Url::to(['/users/default/index']) ?>">
-                            <i class="fa fa-users"></i> <?= UserModule::translate('module', 'Users') ?>
-                        </a>
-                        <?php if ($user->can(Permission::PERMISSION_MANAGER_RBAC)) : ?>
-                            <a class="btn btn-app" href="<?= Url::to(['/rbac/default/index']) ?>">
-                                <i class="fa fa-unlock"></i> <?= RbacModule::translate('module', 'RBAC') ?>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
-
+        <div class="col-lg-3 col-xs-6">
+            <?= SmallBox::widget([
+                'status' => true,
+                'style' => SmallBox::BG_AQUA,
+                'icon' => 'ion-bag',
+                'header' => 150,
+                'content' => 'New Orders',
+                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+            ]) ?>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <?= SmallBox::widget([
+                'status' => true,
+                'style' => SmallBox::BG_GREEN,
+                'icon' => 'ion-stats-bars',
+                'header' => '53<sup style="font-size: 20px">%</sup>',
+                'content' => 'Bounce Rate',
+                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+            ]) ?>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <?= SmallBox::widget([
+                'status' => true,
+                'style' => SmallBox::BG_YELLOW,
+                'icon' => 'ion-person-add',
+                'header' => 44,
+                'content' => 'User Registrations',
+                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+            ]) ?>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <?= SmallBox::widget([
+                'status' => true,
+                'style' => SmallBox::BG_RED,
+                'icon' => 'ion-pie-graph',
+                'header' => 65,
+                'content' => 'Unique Visitors',
+                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+            ]) ?>
+        </div>
     </div>
 </section>
