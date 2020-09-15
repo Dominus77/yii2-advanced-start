@@ -11,7 +11,7 @@ $(function () {
         forcePlaceholderSize: true,
         zIndex              : 999999
     });
-    $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
+    $('.connectedSortable .box-header, .connectedSortable .nav-tabs').css('cursor', 'move');
 
     $(document).ready(function () {
         $('.sidebar-menu').tree()
