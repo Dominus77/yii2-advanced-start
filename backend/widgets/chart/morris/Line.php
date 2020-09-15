@@ -39,7 +39,7 @@ class Line extends Base
         $script = "
             let morris_line_{$this->id} = new Morris.Line({$clientOptions});
             // Fix for charts under tabs
-            $('ul.nav a').on('shown.bs.tab', function () {
+            $('a[data-toggle=tab').on('shown.bs.tab', function () {
                 morris_line_{$this->id}.redraw();
             });
          ";

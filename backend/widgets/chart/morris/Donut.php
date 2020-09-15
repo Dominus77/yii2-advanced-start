@@ -36,7 +36,7 @@ class Donut extends Base
         $script = "
             let morris_donut_{$this->id} = new Morris.Donut({$clientOptions});
             // Fix for charts under tabs
-            $('ul.nav a').on('shown.bs.tab', function () {
+            $('a[data-toggle=tab').on('shown.bs.tab', function () {
                 morris_donut_{$this->id}.redraw();
             });
          ";

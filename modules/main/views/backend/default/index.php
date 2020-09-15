@@ -2,7 +2,7 @@
 
 use modules\main\Module;
 use backend\widgets\box\SmallBox;
-use backend\widgets\chart\chartjs\Area as ChartArea;
+use backend\widgets\chart\chartjs\Chart;
 
 /* @var $this yii\web\View */
 
@@ -57,78 +57,330 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
         <section class="col-lg-7 connectedSortable">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                    <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                    <li class="active"><a href="#area-chart" data-toggle="tab">Area</a></li>
+                    <li><a href="#doughnut-chart" data-toggle="tab">Doughnut</a></li>
+                    <li><a href="#pie-chart" data-toggle="tab">Pie</a></li>
                     <li><a href="#line-chart" data-toggle="tab">Line</a></li>
                     <li><a href="#bar-chart" data-toggle="tab">Bar</a></li>
-                    <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+                    <li><a href="#radar-chart" data-toggle="tab">Radar</a></li>
+                    <li><a href="#bubble-chart" data-toggle="tab">Bubble</a></li>
+                    <li class="pull-left header"><i class="fa fa-bar-chart"></i> Charts</li>
                 </ul>
 
                 <div class="tab-content no-padding">
-                    <div id="revenue-chart" class="chart tab-pane active">
-                        <?= ChartArea::widget([
+                    <div id="area-chart" class="chart tab-pane active">
+                        <?= Chart::widget([
                             'status' => true,
-                            'containerOptions' => [
-                                'style' => 'height:300px;',
-                            ],
+                            'type' => Chart::TYPE_LINE,
                             'clientOptions' => [
-                                'showScale' => true,
-                                'scaleShowGridLines' => false,
-                                'scaleGridLineColor' => 'rgba(0,0,0,.05)',
-                                'scaleGridLineWidth' => 1,
-                                'scaleShowHorizontalLines' => true,
-                                'scaleShowVerticalLines' => true,
-                                'bezierCurve' => true,
-                                'bezierCurveTension' => 0.3,
-                                'pointDot' => false,
-                                'pointDotRadius' => 4,
-                                'pointDotStrokeWidth' => 1,
-                                'pointHitDetectionRadius' => 20,
-                                'datasetStroke' => true,
-                                'datasetStrokeWidth' => 2,
-                                'datasetFill' => true,
-                                'legendTemplate' => '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', // phpcs:ignore
-                                'maintainAspectRatio' => true,
                                 'responsive' => true,
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Area Chart'
+                                ],
+                                'scales' => [
+                                    'xAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Month'
+                                            ]
+                                        ]
+                                    ],
+                                    'yAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Value'
+                                            ]
+                                        ]
+                                    ],
+                                ],
                             ],
                             'clientData' => [
                                 'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                                 'datasets' => [
                                     [
                                         'label' => 'Electronics',
-                                        'fillColor' => 'rgba(210, 214, 222, 1)',
-                                        'strokeColor' => 'rgba(210, 214, 222, 1)',
-                                        'pointColor' => 'rgba(210, 214, 222, 1)',
-                                        'pointStrokeColor' => '#c1c7d1',
-                                        'pointHighlightFill' => '#fff',
-                                        'pointHighlightStroke' => 'rgba(220,220,220,1)',
+                                        'hidden' => false,
+                                        'backgroundColor' => 'rgb(160, 208, 224, 0.5)',
+                                        'borderColor' => 'rgb(160, 208, 224, 0.7)',
                                         'data' => [65, 59, 80, 81, 56, 55, 40]
                                     ],
                                     [
                                         'label' => 'Digital Goods',
-                                        'fillColor' => 'rgba(60,141,188,0.9)',
-                                        'strokeColor' => 'rgba(60,141,188,0.8)',
-                                        'pointColor' => '#3b8bba',
-                                        'pointStrokeColor' => 'rgba(60,141,188,1)',
-                                        'pointHighlightFill' => '#fff',
-                                        'pointHighlightStroke' => 'rgba(60,141,188,1)',
+                                        'hidden' => false,
+                                        'backgroundColor' => 'rgb(60, 141, 188, 0.5)',
+                                        'borderColor' => 'rgb(60, 141, 188, 0.7)',
                                         'data' => [28, 48, 40, 19, 86, 27, 90]
                                     ]
                                 ],
                             ]
                         ]) ?>
                     </div>
-                    <div id="sales-chart" class="chart tab-pane">
-
+                    <div id="doughnut-chart" class="chart tab-pane">
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_DOUGHNUT,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'legend' => [
+                                    'position' => 'top'
+                                ],
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Doughnut Chart',
+                                ],
+                                'animation' => [
+                                    'animateScale' => true,
+                                    'animateRotate' => true,
+                                ],
+                            ],
+                            'clientData' => [
+                                'labels' => ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'backgroundColor' => [
+                                            '#3c8dbc',
+                                            '#f56954',
+                                            '#00a65a',
+                                        ],
+                                        'data' => [12, 30, 20]
+                                    ],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'backgroundColor' => [
+                                            '#3c8dbc',
+                                            '#f56954',
+                                            '#00a65a',
+                                        ],
+                                        'data' => [20, 18, 50]
+                                    ],
+                                ],
+                            ]
+                        ]) ?>
+                    </div>
+                    <div id="pie-chart" class="chart tab-pane">
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_PIE,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'legend' => [
+                                    'position' => 'top'
+                                ],
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Doughnut Chart',
+                                ],
+                                'animation' => [
+                                    'animateScale' => true,
+                                    'animateRotate' => true,
+                                ],
+                            ],
+                            'clientData' => [
+                                'labels' => ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'backgroundColor' => [
+                                            '#3c8dbc',
+                                            '#f56954',
+                                            '#00a65a',
+                                        ],
+                                        'data' => [12, 30, 20]
+                                    ],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'backgroundColor' => [
+                                            '#3c8dbc',
+                                            '#f56954',
+                                            '#00a65a',
+                                        ],
+                                        'data' => [20, 18, 50]
+                                    ],
+                                ],
+                            ]
+                        ]) ?>
                     </div>
                     <div id="line-chart" class="chart tab-pane">
-
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_LINE,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Line Chart'
+                                ],
+                                'scales' => [
+                                    'xAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Month'
+                                            ]
+                                        ]
+                                    ],
+                                    'yAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Value'
+                                            ]
+                                        ]
+                                    ],
+                                ],
+                            ],
+                            'clientData' => [
+                                'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'hidden' => false,
+                                        'fill' => false,
+                                        'backgroundColor' => 'rgb(160, 208, 224, 0.5)',
+                                        'borderColor' => 'rgb(160, 208, 224, 0.8)',
+                                        'data' => [65, 59, 80, 81, 56, 55, 40]],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'hidden' => false,
+                                        'fill' => false,
+                                        'backgroundColor' => 'rgb(60, 141, 188, 0.9)',
+                                        'borderColor' => 'rgb(60, 141, 188, 0.8)',
+                                        'data' => [28, 48, 40, 19, 86, 27, 90]
+                                    ]
+                                ],
+                            ]
+                        ]) ?>
                     </div>
                     <div id="bar-chart" class="chart tab-pane">
-
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_BAR,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Bar Chart'
+                                ],
+                                'scales' => [
+                                    'xAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Month'
+                                            ]
+                                        ]
+                                    ],
+                                    'yAxes' => [
+                                        [
+                                            'display' => true,
+                                            'scaleLabel' => [
+                                                'display' => true,
+                                                'labelString' => 'Value'
+                                            ]
+                                        ]
+                                    ],
+                                ],
+                            ],
+                            'clientData' => [
+                                'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'backgroundColor' => 'rgb(160, 208, 224, 0.5)',
+                                        'data' => [65, 59, 80, 81, 56, 55, 40]],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'backgroundColor' => 'rgb(60, 141, 188, 0.9)',
+                                        'data' => [28, 48, 40, 19, 86, 27, 90]
+                                    ]
+                                ],
+                            ]
+                        ]) ?>
+                    </div>
+                    <div id="radar-chart" class="chart tab-pane">
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_RADAR,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Radar Chart'
+                                ]
+                            ],
+                            'clientData' => [
+                                'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'backgroundColor' => 'rgb(160, 208, 224, 0.5)',
+                                        'data' => [65, 59, 80, 81, 56, 55, 40]],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'backgroundColor' => 'rgb(60, 141, 188, 0.9)',
+                                        'data' => [28, 48, 40, 19, 86, 27, 90]
+                                    ]
+                                ],
+                            ]
+                        ]) ?>
+                    </div>
+                    <div id="bubble-chart" class="chart tab-pane">
+                        <?= Chart::widget([
+                            'status' => true,
+                            'type' => Chart::TYPE_BUBBLE,
+                            'clientOptions' => [
+                                'responsive' => true,
+                                'title' => [
+                                    'display' => true,
+                                    'text' => 'Chart.js Bubble Chart',
+                                ],
+                                'tooltips' => [
+                                    'mode' => 'point',
+                                ],
+                            ],
+                            'clientData' => [
+                                'animation' => [
+                                    'duration' => 10000
+                                ],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'backgroundColor' => 'rgb(255, 0, 0, 0.5)',
+                                        'borderColor' => 'rgb(255, 0, 0, 0.9)',
+                                        'borderWidth' => 1,
+                                        'data' => [
+                                            ['x' => 30, 'y' => 40, 'r' => 20],
+                                            ['x' => 18, 'y' => 12, 'r' => 10],
+                                            ['x' => 60, 'y' => -35, 'r' => 5],
+                                            ['x' => 48, 'y' => 40, 'r' => 10]
+                                        ]
+                                    ],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'backgroundColor' => 'rgb(0, 255, 0, 0.5)',
+                                        'borderColor' => 'rgb(0, 255, 0, 0.9)',
+                                        'borderWidth' => 1,
+                                        'data' => [
+                                            ['x' => 10, 'y' => 25, 'r' => 17],
+                                            ['x' => 25, 'y' => -10, 'r' => 25],
+                                            ['x' => 40, 'y' => 55, 'r' => 30],
+                                            ['x' => 35, 'y' => 20, 'r' => 16],
+                                        ]
+                                    ],
+                                ],
+                            ]
+                        ]) ?>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 </section>

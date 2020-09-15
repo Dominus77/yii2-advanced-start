@@ -31,9 +31,7 @@ abstract class Base extends Widget
             $this->registerAsset();
         }
         $this->id = $this->id ?: $this->getId();
-        $containerOptions = [];
-        ArrayHelper::setValue($containerOptions, 'id', $this->id);
-        $this->containerOptions = ArrayHelper::merge($containerOptions, $this->containerOptions);
+        ArrayHelper::setValue($this->containerOptions, 'id', $this->id);
     }
 
     /**

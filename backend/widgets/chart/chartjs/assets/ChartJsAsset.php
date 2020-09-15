@@ -4,7 +4,6 @@ namespace backend\widgets\chart\chartjs\assets;
 
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
-use backend\assets\BootstrapAsset;
 
 /**
  * Class ChartJsAsset
@@ -14,7 +13,7 @@ use backend\assets\BootstrapAsset;
 class ChartJsAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = '@vendor/almasaeed2010/adminlte/bower_components/chart.js';
+    public $sourcePath = '@bower/chart.js/dist';
 
     /**
      * @inheritDoc
@@ -22,8 +21,12 @@ class ChartJsAsset extends AssetBundle
     public function init()
     {
         parent::init();
+        $min = YII_ENV_DEV ? '' : '.min';
+        $this->css = [
+            'Chart' . $min . '.css'
+        ];
         $this->js = [
-            'Chart.js'
+            'Chart' . $min . '.js'
         ];
     }
 
@@ -32,6 +35,5 @@ class ChartJsAsset extends AssetBundle
      */
     public $depends = [
         JqueryAsset::class,
-        BootstrapAsset::class
     ];
 }

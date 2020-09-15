@@ -10,7 +10,7 @@ use backend\widgets\chart\morris\Donut;
 use backend\widgets\chart\morris\Line;
 use backend\widgets\chart\morris\Bar;
 
-// Area
+// Chart
 echo Area::widget([
     'status' => true,
     'containerOptions' => [
