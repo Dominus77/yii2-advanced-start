@@ -4,6 +4,7 @@ namespace backend\assets;
 
 use yii\web\AssetBundle;
 use yii\web\YiiAsset;
+use yii\jui\JuiAsset;
 use common\assets\Html5ShivAsset;
 use common\assets\RespondAsset;
 use common\assets\FontAwesomeAsset;
@@ -42,6 +43,7 @@ class AppAsset extends AssetBundle
      */
     public $depends = [
         YiiAsset::class,
+        JuiAsset::class,
         BootstrapAsset::class,
         Html5ShivAsset::class,
         RespondAsset::class,
