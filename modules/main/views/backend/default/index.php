@@ -381,6 +381,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                         ]) ?>
                     </div>
                 </div>
+            </div>
         </section>
     </div>
 </section>
