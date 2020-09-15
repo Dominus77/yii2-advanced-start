@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\widgets\chart\morris;
+namespace backend\widgets\chart\chartjs;
 
-use backend\widgets\chart\morris\assets\MorrisAsset;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use backend\widgets\chart\chartjs\assets\ChartJsAsset;
 
 /**
  * Class Base
  *
- * @package backend\widgets\chart\morris
+ * @package backend\widgets\chart\chartjs
  */
 abstract class Base extends Widget
 {
@@ -20,6 +20,8 @@ abstract class Base extends Widget
     public $containerOptions = [];
     /** @var array */
     public $clientOptions = [];
+    /** @var array */
+    public $clientData = [];
 
     /**
      * @inheritDoc
@@ -43,7 +45,7 @@ abstract class Base extends Widget
      */
     public function run()
     {
-        return Html::tag('div', '', $this->containerOptions);
+        return Html::tag('canvas', '', $this->containerOptions);
     }
 
     /**
@@ -53,12 +55,17 @@ abstract class Base extends Widget
      */
     public function getClientOptions()
     {
-        return [
-            'element' => $this->id,
-            'resize' => true,
-            'hideHover' => 'auto',
-            'data' => [],
-        ];
+        return [];
+    }
+
+    /**
+     * Client Data
+     *
+     * @return array
+     */
+    public function getClientData()
+    {
+        return [];
     }
 
     /**
@@ -67,6 +74,6 @@ abstract class Base extends Widget
     public function registerAsset()
     {
         $view = $this->getView();
-        MorrisAsset::register($view);
+        ChartJsAsset::register($view);
     }
 }

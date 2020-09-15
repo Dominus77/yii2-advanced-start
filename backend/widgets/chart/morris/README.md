@@ -13,6 +13,9 @@ use backend\widgets\chart\morris\Bar;
 // Area
 echo Area::widget([
     'status' => true,
+    'containerOptions' => [
+        'style' => 'position:relative; height:300px; width:auto;'
+    ],
     'clientOptions' => [
         'xkey' => 'y',
         'ykeys' => ['item1', 'item2'],
@@ -36,6 +39,9 @@ echo Area::widget([
 // Donut
 echo Donut::widget([
     'status' => true,
+    'containerOptions' => [
+        'style' => 'position:relative; height:300px; width:auto;'
+    ],
     'clientOptions' => [
         'colors' => ['#3c8dbc', '#f56954', '#00a65a'],
         'data' => [
@@ -49,6 +55,9 @@ echo Donut::widget([
 // Donut
 echo Line::widget([
     'status' => true,
+    'containerOptions' => [
+        'style' => 'position:relative; height:300px; width:auto;'
+    ],
     'clientOptions' => [
         'xkey' => 'y',
         'ykeys' => ['item1'],
@@ -72,6 +81,9 @@ echo Line::widget([
 // Bar
 echo Bar::widget([
     'status' => true,
+    'containerOptions' => [
+        'style' => 'position:relative; height:300px; width:auto;'
+    ],
     'clientOptions' => [
         'xkey' => 'y',
         'ykeys' => ['a', 'b'],

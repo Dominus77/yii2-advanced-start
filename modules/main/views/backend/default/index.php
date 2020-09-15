@@ -2,10 +2,7 @@
 
 use modules\main\Module;
 use backend\widgets\box\SmallBox;
-use backend\widgets\chart\morris\Area as MorrisArea;
-use backend\widgets\chart\morris\Donut as MorrisDonut;
-use backend\widgets\chart\morris\Line as MorrisLine;
-use backend\widgets\chart\morris\Bar as MorrisBar;
+use backend\widgets\chart\chartjs\Area as ChartArea;
 
 /* @var $this yii\web\View */
 
@@ -69,83 +66,66 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
 
                 <div class="tab-content no-padding">
                     <div id="revenue-chart" class="chart tab-pane active">
-                        <?= MorrisArea::widget([
+                        <?= ChartArea::widget([
                             'status' => true,
+                            'containerOptions' => [
+                                'style' => 'height:300px;',
+                            ],
                             'clientOptions' => [
-                                'xkey' => 'y',
-                                'ykeys' => ['item1', 'item2'],
-                                'labels' => ['Value 1', 'Value 2'],
-                                'lineColors' => ['#a0d0e0', '#3c8dbc'],
-                                'data' => [
-                                    ['y' => '2018 Q1', 'item1' => 2666, 'item2' => 2666],
-                                    ['y' => '2018 Q2', 'item1' => 2778, 'item2' => 2294],
-                                    ['y' => '2018 Q3', 'item1' => 4912, 'item2' => 1969],
-                                    ['y' => '2018 Q4', 'item1' => 3767, 'item2' => 3597],
-                                    ['y' => '2019 Q1', 'item1' => 6810, 'item2' => 1914],
-                                    ['y' => '2019 Q2', 'item1' => 5670, 'item2' => 4293],
-                                    ['y' => '2019 Q3', 'item1' => 4820, 'item2' => 3795],
-                                    ['y' => '2019 Q4', 'item1' => 15073, 'item2' => 5967],
-                                    ['y' => '2020 Q1', 'item1' => 10687, 'item2' => 4460],
-                                    ['y' => '2020 Q2', 'item1' => 8432, 'item2' => 5713],
-                                ]
-                            ]
-                        ]) ?>
-                    </div>
-                    <div id="sales-chart" class="chart tab-pane">
-                        <?= MorrisDonut::widget([
-                            'status' => true,
-                            'clientOptions' => [
-                                'colors' => ['#3c8dbc', '#f56954', '#00a65a'],
-                                'data' => [
-                                    ['label' => 'Download Sales', 'value' => 12],
-                                    ['label' => 'In-Store Sales', 'value' => 30],
-                                    ['label' => 'Mail-Order Sales', 'value' => 20],
+                                'showScale' => true,
+                                'scaleShowGridLines' => false,
+                                'scaleGridLineColor' => 'rgba(0,0,0,.05)',
+                                'scaleGridLineWidth' => 1,
+                                'scaleShowHorizontalLines' => true,
+                                'scaleShowVerticalLines' => true,
+                                'bezierCurve' => true,
+                                'bezierCurveTension' => 0.3,
+                                'pointDot' => false,
+                                'pointDotRadius' => 4,
+                                'pointDotStrokeWidth' => 1,
+                                'pointHitDetectionRadius' => 20,
+                                'datasetStroke' => true,
+                                'datasetStrokeWidth' => 2,
+                                'datasetFill' => true,
+                                'legendTemplate' => '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', // phpcs:ignore
+                                'maintainAspectRatio' => true,
+                                'responsive' => true,
+                            ],
+                            'clientData' => [
+                                'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                'datasets' => [
+                                    [
+                                        'label' => 'Electronics',
+                                        'fillColor' => 'rgba(210, 214, 222, 1)',
+                                        'strokeColor' => 'rgba(210, 214, 222, 1)',
+                                        'pointColor' => 'rgba(210, 214, 222, 1)',
+                                        'pointStrokeColor' => '#c1c7d1',
+                                        'pointHighlightFill' => '#fff',
+                                        'pointHighlightStroke' => 'rgba(220,220,220,1)',
+                                        'data' => [65, 59, 80, 81, 56, 55, 40]
+                                    ],
+                                    [
+                                        'label' => 'Digital Goods',
+                                        'fillColor' => 'rgba(60,141,188,0.9)',
+                                        'strokeColor' => 'rgba(60,141,188,0.8)',
+                                        'pointColor' => '#3b8bba',
+                                        'pointStrokeColor' => 'rgba(60,141,188,1)',
+                                        'pointHighlightFill' => '#fff',
+                                        'pointHighlightStroke' => 'rgba(60,141,188,1)',
+                                        'data' => [28, 48, 40, 19, 86, 27, 90]
+                                    ]
                                 ],
                             ]
                         ]) ?>
                     </div>
+                    <div id="sales-chart" class="chart tab-pane">
+
+                    </div>
                     <div id="line-chart" class="chart tab-pane">
-                        <?= MorrisLine::widget([
-                            'status' => true,
-                            'clientOptions' => [
-                                'xkey' => 'y',
-                                'ykeys' => ['item1'],
-                                'labels' => ['Item 1'],
-                                'lineColors' => ['#3c8dbc'],
-                                'data' => [
-                                    ['y' => '2018 Q1', 'item1' => 2666],
-                                    ['y' => '2018 Q2', 'item1' => 2778],
-                                    ['y' => '2018 Q3', 'item1' => 4912],
-                                    ['y' => '2018 Q4', 'item1' => 3767],
-                                    ['y' => '2019 Q1', 'item1' => 6810],
-                                    ['y' => '2019 Q2', 'item1' => 5670],
-                                    ['y' => '2019 Q3', 'item1' => 4820],
-                                    ['y' => '2019 Q4', 'item1' => 15073],
-                                    ['y' => '2020 Q1', 'item1' => 10687],
-                                    ['y' => '2020 Q2', 'item1' => 8432],
-                                ]
-                            ]
-                        ]) ?>
+
                     </div>
                     <div id="bar-chart" class="chart tab-pane">
-                        <?= MorrisBar::widget([
-                            'status' => true,
-                            'clientOptions' => [
-                                'xkey' => 'y',
-                                'ykeys' => ['a', 'b'],
-                                'labels' => ['CPU', 'DISK'],
-                                'barColors' => ['#00a65a', '#f56954'],
-                                'data' => [
-                                    ['y' => '2014', 'a' => 100, 'b' => 90],
-                                    ['y' => '2015', 'a' => 75, 'b' => 65],
-                                    ['y' => '2016', 'a' => 50, 'b' => 40],
-                                    ['y' => '2017', 'a' => 75, 'b' => 65],
-                                    ['y' => '2018', 'a' => 50, 'b' => 40],
-                                    ['y' => '2019', 'a' => 75, 'b' => 65],
-                                    ['y' => '2020', 'a' => 100, 'b' => 90],
-                                ]
-                            ]
-                        ]) ?>
+
                     </div>
                 </div>
             </div>
