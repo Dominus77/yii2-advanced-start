@@ -3,8 +3,10 @@
 use modules\main\Module;
 use backend\widgets\box\SmallBox;
 use backend\widgets\chart\chartjs\Chart;
+use backend\widgets\chart\flot\Chart as FlotChart;
 
 /* @var $this yii\web\View */
+/** @var $model modules\main\models\backend\Demo */
 
 $this->title = Module::translate('module', 'Home');
 $this->params['title']['small'] = Module::translate('module', 'Dashboard');
@@ -378,6 +380,33 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                                     ],
                                 ],
                             ]
+                        ]) ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-lg-7 connectedSortable">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#flot-chart" data-toggle="tab">Flot</a></li>
+                    <li class="pull-left header"><i class="fa fa-bar-chart"></i> Flot</li>
+                </ul>
+
+                <div class="tab-content no-padding">
+                    <div id="flot-chart" class="chart tab-pane active">
+                        <?php
+                        $data1 = $model->getRandomData(5);
+                        $data2 = $model->getRandomData(5, $data1);
+                        $data3 = $model->getRandomData(5, $data2);
+                        //\yii\helpers\VarDumper::dump($data1, 10, 1);
+                        ?>
+                        <?php echo FlotChart::widget([
+                            'status' => true,
+                            'containerOptions' => [
+                                'style' => 'height:300px;'
+                            ],
+                            'clientData' => [$model->getRandomData(100)],
                         ]) ?>
                     </div>
                 </div>

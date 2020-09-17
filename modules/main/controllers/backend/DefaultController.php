@@ -3,12 +3,15 @@
 namespace modules\main\controllers\backend;
 
 use Yii;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use modules\users\models\User;
 use modules\rbac\models\Permission;
 use modules\main\Module;
+use modules\main\models\backend\Demo;
 
 /**
  * Class DefaultController
@@ -20,7 +23,7 @@ class DefaultController extends Controller
      * @inheritdoc
      * @return array
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'access' => [
@@ -34,7 +37,7 @@ class DefaultController extends Controller
                 ]
             ]
         ];
-    }
+    }*/
 
     /**
      * Displays homepage.
@@ -62,6 +65,28 @@ class DefaultController extends Controller
             ]));
             $session->set($key, 1);
         }
-        return $this->render('index');
+
+        $model = new Demo();
+        return $this->render('index', ['model' => $model]);
+    }
+
+    /**
+     * Get Demo Data
+     *
+     * @return array
+     * @throws NotFoundHttpException
+     */
+    public function actionGetDemoData()
+    {
+        //if (Yii::$app->request->isAjax) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $data = Yii::$app->request->post('data');
+        $model = new Demo();
+        return [
+            'result' => $model->getRandomData($data, 100),
+            'data' => $data,
+        ];
+        //}
+        //throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
