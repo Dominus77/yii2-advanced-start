@@ -12,7 +12,7 @@ class Demo
     /**
      * Demo Random Data
      *
-     * @param array $data
+     * @param array|null $data
      * @param int $totalPoints
      * @return array
      */
@@ -24,7 +24,7 @@ class Demo
         if (count($data) > 0) {
             $data = array_slice($data, 1);
         }
-        $randomWalk = self::randomWalk($totalPoints, $data);
+        $randomWalk = self::randomWalk($data, $totalPoints);
         // Zip the generated y values with the x values
         $res = [];
         foreach ($randomWalk as $key => $items) {
@@ -41,7 +41,7 @@ class Demo
      * @param int $totalPoints
      * @return array
      */
-    public static function randomWalk($totalPoints = 100, $data = [])
+    public static function randomWalk($data = [], $totalPoints = 100)
     {
         $count = count($data);
         while ($count < $totalPoints) {
