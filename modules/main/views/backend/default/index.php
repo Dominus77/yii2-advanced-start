@@ -8,6 +8,7 @@ use backend\widgets\chart\flot\data\Demo;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
+/** @var $usersCount int */
 
 $this->title = Module::translate('module', 'Home');
 $this->params['title']['small'] = Module::translate('module', 'Dashboard');
@@ -22,7 +23,13 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'icon' => 'ion-bag',
                 'header' => 150,
                 'content' => 'New Orders',
-                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+                'link' => [
+                    'label' => Yii::t(
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                    'url' => ['#']
+                ]
             ]) ?>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -32,7 +39,13 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'icon' => 'ion-stats-bars',
                 'header' => '53<sup style="font-size: 20px">%</sup>',
                 'content' => 'Bounce Rate',
-                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+                'link' => [
+                    'label' => Yii::t(
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                    'url' => ['#']
+                ]
             ]) ?>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -40,9 +53,15 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'status' => true,
                 'style' => SmallBox::BG_YELLOW,
                 'icon' => 'ion-person-add',
-                'header' => 44,
-                'content' => 'User Registrations',
-                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+                'header' => $usersCount,
+                'content' => Yii::t('app', 'User Registrations'),
+                'link' => [
+                    'label' => Yii::t(
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                    'url' => ['/users/default/index']
+                ]
             ]) ?>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -52,7 +71,13 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'icon' => 'ion-pie-graph',
                 'header' => 65,
                 'content' => 'Unique Visitors',
-                'link' => ['label' => 'More info <i class="fa fa-arrow-circle-right"></i>', 'url' => ['#']]
+                'link' => [
+                    'label' => Yii::t(
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                    'url' => ['#']
+                ]
             ]) ?>
         </div>
     </div>

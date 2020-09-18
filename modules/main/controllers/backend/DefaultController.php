@@ -64,7 +64,9 @@ class DefaultController extends Controller
             ]));
             $session->set($key, 1);
         }
-        return $this->render('index');
+        return $this->render('index', [
+                'usersCount' => User::find()->count()
+            ]);
     }
 
     /**

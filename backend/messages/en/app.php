@@ -17,5 +17,7 @@ return ArrayHelper::merge($messages, [
 
     'return to dashboard' => 'return to dashboard',
     'Meanwhile, you may {:Link} or try using the search form.' =>
-        'Meanwhile, you may {:Link} or try using the search form.'
+        'Meanwhile, you may {:Link} or try using the search form.',
+    'More info' => 'More info',
+    'User Registrations' => 'User Registrations',
 ]);

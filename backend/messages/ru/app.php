@@ -18,4 +18,6 @@ return ArrayHelper::merge($messages, [
     'return to dashboard' => 'вернуться на главную страницу',
     'Meanwhile, you may {:Link} or try using the search form.' =>
         'Между тем, вы можете {:Link} или попробовать использовать форму поиска.',
+    'More info' => 'Подробнее',
+    'User Registrations' => 'Регистрации пользователей',
 ]);
