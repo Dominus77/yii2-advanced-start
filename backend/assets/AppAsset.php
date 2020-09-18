@@ -43,7 +43,7 @@ class AppAsset extends AssetBundle
      */
     public $depends = [
         YiiAsset::class,
-        JuiAsset::class,
+        //JuiAsset::class,
         BootstrapAsset::class,
         Html5ShivAsset::class,
         RespondAsset::class,
