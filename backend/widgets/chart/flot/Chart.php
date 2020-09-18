@@ -79,11 +79,11 @@ class Chart extends Widget
         FlotAsset::register($view);
         $clientData = Json::encode($this->getClientData());
         $clientOptions = Json::encode($this->getClientOptions());
-        $demoDataUrl = Url::to(['/main/default/get-demo-data']);
+        $dataUrl = Url::to(['/main/default/get-demo-data']);
         $script = "
             let plot_{$this->id} = $.plot('#{$this->id}', {$clientData}, {$clientOptions});
             
-            let url = '$demoDataUrl',
+            let url = '$dataUrl',
                 data = plot_{$this->id}.getData()[0].data;
             
             function getRandomData() {
@@ -92,8 +92,7 @@ class Chart extends Widget
                     dataType: 'json',
                     type: 'post',
                     data: {data: data},
-                }).done(function (response) {
-                    console.log(response.result);
+                }).done(function (response) {                    
                     data = response.result;
                 }).fail(function (response) {
                     console.log(response.result);

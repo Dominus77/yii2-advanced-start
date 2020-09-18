@@ -389,7 +389,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
         <section class="col-lg-7 connectedSortable">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#flot-realtime-chart" data-toggle="tab">Flot</a></li>
+                    <li class="active"><a href="#flot-realtime-chart" data-toggle="tab">Realtime</a></li>
                     <li class="pull-left header"><i class="fa fa-bar-chart"></i> Flot</li>
                 </ul>
 
