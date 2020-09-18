@@ -16,7 +16,7 @@ class Demo
      * @param int $totalPoints
      * @return array
      */
-    public static function getRandomData($totalPoints = 100, $data = [])
+    public static function getRandomData($data = [], $totalPoints = 100)
     {
         if (is_null($data)) {
             $data = [];

@@ -5,6 +5,7 @@ use backend\widgets\box\SmallBox;
 use backend\widgets\chart\chartjs\Chart;
 use backend\widgets\chart\flot\Chart as FlotChart;
 use backend\widgets\chart\flot\data\Demo;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
@@ -12,7 +13,7 @@ $this->title = Module::translate('module', 'Home');
 $this->params['title']['small'] = Module::translate('module', 'Dashboard');
 ?>
 
-<section class="main-backend-default-index">
+<section class="content main-backend-default-index">
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <?= SmallBox::widget([
@@ -386,52 +387,59 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
             </div>
         </section>
 
-        <section class="col-lg-7 connectedSortable">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#flot-realtime-chart" data-toggle="tab">Realtime</a></li>
-                    <li class="pull-left header"><i class="fa fa-bar-chart"></i> Flot</li>
-                </ul>
-
-                <div class="tab-content no-padding">
-                    <div id="flot-realtime-chart" class="chart tab-pane active">
+        <section class="col-lg-5 connectedSortable">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">Interactive Area Ajax Chart</h3>
+                    <div class="box-tools pull-right">
+                        Real time
                         <div class="btn-group" id="realtime" data-toggle="btn-toggle">
                             <button type="button" class="btn btn-default btn-xs" data-toggle="on">On</button>
-                            <button type="button" class="btn btn-danger btn-xs active" data-toggle="off">Off</button>
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="off">Off</button>
                         </div>
-                        <?= FlotChart::widget([
-                            'status' => true,
-                            'containerOptions' => [
-                                'style' => 'height:300px;'
-                            ],
-                            'clientData' => [
-                                Demo::getRandomData(100)
-                            ],
-                            'clientOptions' => [
-                                'grid' => [
-                                    'borderColor' => '#f3f3f3',
-                                    'borderWidth' => 1,
-                                    'tickColor' => '#f3f3f3'
-                                ],
-                                'series' => [
-                                    'shadowSize' => 0, // Drawing is faster without shadows
-                                    'color' => '#3c8dbc',
-                                ],
-                                'lines' => [
-                                    'fill' => true, //Converts the line chart to area chart
-                                    'color' => '#3c8dbc',
-                                ],
-                                'yaxis' => [
-                                    'min' => 0,
-                                    'max' => 100,
-                                    'show' => true,
-                                ],
-                                'xaxis' => [
-                                    'show' => true,
-                                ]
-                            ],
-                        ]) ?>
                     </div>
+                </div>
+                <div class="box-body">
+                    <?= FlotChart::widget([
+                        'status' => true,
+                        'containerOptions' => [
+                            'style' => 'height:300px;'
+                        ],
+                        'realtime' => [
+                            'on' => true,
+                            'dataUrl' => Url::to(['/main/default/get-demo-data']),
+                            'btnGroupId' => 'realtime',
+                            'btnDefault' => 'off',
+                            'updateInterval' => 1000
+                        ],
+                        'clientData' => [
+                            Demo::getRandomData()
+                        ],
+                        'clientOptions' => [
+                            'grid' => [
+                                'borderColor' => '#f3f3f3',
+                                'borderWidth' => 1,
+                                'tickColor' => '#f3f3f3'
+                            ],
+                            'series' => [
+                                'shadowSize' => 0, // Drawing is faster without shadows
+                                'color' => '#3c8dbc',
+                            ],
+                            'lines' => [
+                                'fill' => false, //Converts the line chart to area chart
+                                'color' => '#3c8dbc',
+                            ],
+                            'yaxis' => [
+                                'min' => 0,
+                                'max' => 100,
+                                'show' => true,
+                            ],
+                            'xaxis' => [
+                                'show' => true,
+                            ]
+                        ],
+                    ]) ?>
                 </div>
             </div>
         </section>

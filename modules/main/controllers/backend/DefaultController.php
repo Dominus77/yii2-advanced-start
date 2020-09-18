@@ -77,9 +77,10 @@ class DefaultController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
-            $data = Yii::$app->request->post('data');
+            $post = Yii::$app->request->post();
+            $data = (!empty($post['data'])) ? $post['data'] : [];
             return [
-                'result' => Demo::getRandomData(100, $data),
+                'result' => Demo::getRandomData($data),
             ];
         }
         throw new NotFoundHttpException('The requested page does not exist.');

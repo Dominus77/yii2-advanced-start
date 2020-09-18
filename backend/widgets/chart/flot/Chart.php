@@ -7,7 +7,6 @@ use backend\widgets\chart\flot\assets\FlotAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 /**
  * Class Chart
@@ -24,6 +23,14 @@ class Chart extends Widget
     public $clientOptions = [];
     /** @var array */
     public $clientData = [];
+    /** @var bool */
+    public $realtime = [
+        'on' => false,
+        'dataUrl' => '#',
+        'btnGroupId' => '',
+        'btnDefault' => 'off',
+        'updateInterval' => 1000,
+    ];
 
     /**
      * @inheritDoc
@@ -79,69 +86,78 @@ class Chart extends Widget
         FlotAsset::register($view);
         $clientData = Json::encode($this->getClientData());
         $clientOptions = Json::encode($this->getClientOptions());
-        $dataUrl = Url::to(['/main/default/get-demo-data']);
         $script = "
             let plot_{$this->id} = $.plot('#{$this->id}', {$clientData}, {$clientOptions});
-            
-            let url = '$dataUrl',
-                data = plot_{$this->id}.getData()[0].data;
-            
-            function getRandomData() {
-                $.ajax({
-                    url: url,
-                    dataType: 'json',
-                    type: 'post',
-                    data: {data: data},
-                }).done(function (response) {                    
-                    data = response.result;
-                }).fail(function (response) {
-                    console.log(response.result);
-                });
-                return data;
-            }
-            
-            let updateInterval = 1000; //Fetch data ever x milliseconds
-            let realtime = 'off'; //If == to on then fetch data every x seconds. else stop fetching
-            
-            function update() {
-                plot_{$this->id}.setData([getRandomData()]);                
-                // Since the axes don't change, we don't need to call plot.setupGrid()
-                plot_{$this->id}.draw();
-                if (realtime === 'on') {
-                    setTimeout(update, updateInterval);
-                }
-            }
-            
-            //INITIALIZE REALTIME DATA FETCHING
-            if (realtime === 'on') {
-                update();
-            }
-            
-            //REALTIME TOGGLE
-            let btnRealtime = $('#realtime .btn');
-            btnRealtime.click(function () {
-                btnRealtime.removeClass('active');
-                btnRealtime.addClass('btn-default');
-                $(this).addClass('active');
-                if ($(this).data('toggle') === 'on') {
-                    if(realtime !== 'on') {
-                        realtime = 'on';
-                        btnRealtime.removeClass('btn-danger');
-                        $(this).removeClass('btn-default');
-                        $(this).addClass('btn-success');
-                        update();
-                    }                                    
-                } else {
-                    if(realtime !== 'off') {
-                        realtime = 'off'; 
-                        btnRealtime.removeClass('btn-success');
-                        $(this).removeClass('btn-default');
-                        $(this).addClass('btn-danger');
-                        update();
-                    }
-                }
-            });
         ";
         $view->registerJs($script);
+
+        // Realtime
+        if ($this->realtime['on'] === true) {
+            $dataUrl = $this->realtime['dataUrl'];
+            $btnGroupId = $this->realtime['btnGroupId'];
+            $btnDefault = $this->realtime['btnDefault'];
+            $updateInterval = $this->realtime['updateInterval'];
+            $script = "                
+                let url_{$this->id} = '$dataUrl',
+                    data_{$this->id} = (plot_{$this->id}.getData().length === 0) ? [plot_{$this->id}.getData()] : 
+                        plot_{$this->id}.getData()[0].data,
+                    updateInterval_{$this->id} = {$updateInterval},
+                    realtime_{$this->id} = '{$btnDefault}',
+                    btnRealtime_{$this->id} = $('#{$btnGroupId} .btn');
+                    
+                // GET DATA AJAX
+                function getDataAjax_{$this->id}() {
+                    $.ajax({
+                        url: url_{$this->id},
+                        dataType: 'json',
+                        type: 'post',
+                        data: {data: data_{$this->id}},
+                    }).done(function (response) {                    
+                        data_{$this->id} = response.result;
+                    }).fail(function (response) {
+                        console.log(response.result);
+                    });
+                    return data_{$this->id};
+                }
+                
+                // UPDATE
+                function update_{$this->id}() {
+                    plot_{$this->id}.setData([getDataAjax_{$this->id}()]);
+                    plot_{$this->id}.setupGrid();
+                    // Since the axes don't change, we don't need to call plot.setupGrid()
+                    plot_{$this->id}.draw();
+                    if (realtime_{$this->id} === 'on') {
+                        setTimeout(update_{$this->id}, updateInterval_{$this->id});
+                    }
+                }
+                
+                // INITIALIZE REALTIME DATA FETCHING
+                if (realtime_{$this->id} === 'on') {
+                    update_{$this->id}();
+                }
+                
+                // REALTIME TOGGLE                
+                btnRealtime_{$this->id}.click(function () {                
+                    btnRealtime_{$this->id}.addClass('btn-default');
+                    $(this).removeClass('btn-default');                
+                    if ($(this).data('toggle') === 'on') {
+                        if(realtime_{$this->id} !== 'on') {
+                            realtime_{$this->id} = 'on';
+                            btnRealtime_{$this->id}.removeClass('btn-danger');                        
+                            $(this).addClass('btn-success');
+                            update_{$this->id}();
+                        }                                    
+                    } else {
+                        if(realtime_{$this->id} !== 'off') {
+                            realtime_{$this->id} = 'off'; 
+                            btnRealtime_{$this->id}.removeClass('btn-success');                        
+                            $(this).addClass('btn-danger');
+                            update_{$this->id}();
+                        }
+                    }
+                });
+            ";
+            $view->registerJs($script);
+        }
     }
 }

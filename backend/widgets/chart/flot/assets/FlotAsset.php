@@ -18,9 +18,9 @@ class FlotAsset extends AssetBundle
     /** @var string[] */
     public $js = [
         'jquery.flot.js',
-        'jquery.flot.resize.js',
         'jquery.flot.pie.js',
-        'jquery.flot.categories.js'
+        'jquery.flot.categories.js',
+        'jquery.flot.resize.js'
     ];
 
     /**
