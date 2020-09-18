@@ -391,7 +391,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
             <div class="box box-primary">
                 <div class="box-header">
                     <i class="fa fa-bar-chart-o"></i>
-                    <h3 class="box-title">Interactive Area Ajax Chart</h3>
+                    <h3 class="box-title">Flot Line Ajax Chart</h3>
                     <div class="box-tools pull-right">
                         Real time
                         <div class="btn-group" id="realtime" data-toggle="btn-toggle">
