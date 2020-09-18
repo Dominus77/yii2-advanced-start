@@ -389,20 +389,23 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
         <section class="col-lg-7 connectedSortable">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#flot-chart" data-toggle="tab">Flot</a></li>
+                    <li class="active"><a href="#flot-realtime-chart" data-toggle="tab">Flot</a></li>
                     <li class="pull-left header"><i class="fa fa-bar-chart"></i> Flot</li>
                 </ul>
 
                 <div class="tab-content no-padding">
-                    <div id="flot-chart" class="chart tab-pane active">
+                    <div id="flot-realtime-chart" class="chart tab-pane active">
                         <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                            <button type="button" class="btn btn-default btn-xs active" data-toggle="on">On</button>
-                            <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+                            <button type="button" class="btn btn-default btn-xs" data-toggle="on">On</button>
+                            <button type="button" class="btn btn-danger btn-xs active" data-toggle="off">Off</button>
                         </div>
                         <?= FlotChart::widget([
                             'status' => true,
                             'containerOptions' => [
                                 'style' => 'height:300px;'
+                            ],
+                            'clientData' => [
+                                Demo::getRandomData(100)
                             ],
                             'clientOptions' => [
                                 'grid' => [
@@ -411,14 +414,12 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                                     'tickColor' => '#f3f3f3'
                                 ],
                                 'series' => [
-                                    'shadowSize' => 0,
-                                    'lines' => [
-                                        'show' => true
-                                    ],
+                                    'shadowSize' => 0, // Drawing is faster without shadows
+                                    'color' => '#3c8dbc',
                                 ],
                                 'lines' => [
-                                    'fill' => false,
-                                    'color' => '#f56954',
+                                    'fill' => true, //Converts the line chart to area chart
+                                    'color' => '#3c8dbc',
                                 ],
                                 'yaxis' => [
                                     'min' => 0,
@@ -429,7 +430,6 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                                     'show' => true,
                                 ]
                             ],
-                            'clientData' => [Demo::getRandomData(100)],
                         ]) ?>
                     </div>
                 </div>

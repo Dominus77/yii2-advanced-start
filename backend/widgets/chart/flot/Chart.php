@@ -101,8 +101,8 @@ class Chart extends Widget
                 return data;
             }
             
-            var updateInterval = 500; //Fetch data ever x milliseconds
-            var realtime = 'on'; //If == to on then fetch data every x seconds. else stop fetching
+            let updateInterval = 1000; //Fetch data ever x milliseconds
+            let realtime = 'off'; //If == to on then fetch data every x seconds. else stop fetching
             
             function update() {
                 plot_{$this->id}.setData([getRandomData()]);                
@@ -119,13 +119,28 @@ class Chart extends Widget
             }
             
             //REALTIME TOGGLE
-            $('#realtime .btn').click(function () {
+            let btnRealtime = $('#realtime .btn');
+            btnRealtime.click(function () {
+                btnRealtime.removeClass('active');
+                btnRealtime.addClass('btn-default');
+                $(this).addClass('active');
                 if ($(this).data('toggle') === 'on') {
-                    realtime = 'on';
+                    if(realtime !== 'on') {
+                        realtime = 'on';
+                        btnRealtime.removeClass('btn-danger');
+                        $(this).removeClass('btn-default');
+                        $(this).addClass('btn-success');
+                        update();
+                    }                                    
                 } else {
-                    realtime = 'off';
+                    if(realtime !== 'off') {
+                        realtime = 'off'; 
+                        btnRealtime.removeClass('btn-success');
+                        $(this).removeClass('btn-default');
+                        $(this).addClass('btn-danger');
+                        update();
+                    }
                 }
-                update();
             });
         ";
         $view->registerJs($script);

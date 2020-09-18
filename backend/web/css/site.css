@@ -44,3 +44,11 @@ div.required label:after {
 .swal2-popup {
     font-size: 1.4rem !important;
 }
+
+button:active, button:focus {
+    outline: none !important;
+}
+
+button::-moz-focus-inner {
+    border: 0 !important;
+}
