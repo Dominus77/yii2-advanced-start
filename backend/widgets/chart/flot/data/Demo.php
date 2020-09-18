@@ -1,27 +1,22 @@
 <?php
 
-namespace modules\main\models\backend;
-
-use yii\base\Model;
-use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
+namespace backend\widgets\chart\flot\data;
 
 /**
  * Class Demo
  *
  * @package modules\main\models\backend
  */
-class Demo extends Model
+class Demo
 {
-    /** @var array */
-    private $data = [];
-
     /**
+     * Demo Random Data
+     *
      * @param array $data
      * @param int $totalPoints
      * @return array
      */
-    public function getRandomData($totalPoints = 100, $data = [])
+    public static function getRandomData($totalPoints = 100, $data = [])
     {
         if (is_null($data)) {
             $data = [];
@@ -29,10 +24,12 @@ class Demo extends Model
         if (count($data) > 0) {
             $data = array_slice($data, 1);
         }
-        $randomWalk = $this->randomWalk($totalPoints, $data);
+        $randomWalk = self::randomWalk($totalPoints, $data);
+        // Zip the generated y values with the x values
         $res = [];
-        foreach ($randomWalk as $key => $item) {
-            $res[] = [$key, $item];
+        foreach ($randomWalk as $key => $items) {
+            $items[0] = $key;
+            $res[] = $items;
         }
         return $res;
     }
@@ -44,25 +41,25 @@ class Demo extends Model
      * @param int $totalPoints
      * @return array
      */
-    private function randomWalk($totalPoints = 100, $data = [])
+    public static function randomWalk($totalPoints = 100, $data = [])
     {
         $count = count($data);
         while ($count < $totalPoints) {
-            $prev = $count > 0 ? (int)$data[$count - 1] : 50;
-            $val = $prev + self::randomFloat() * 10 - 5;
+            $prev = $count > 0 ? (int)$data[$count - 1] : $totalPoints / 2;
+            $val = $prev + self::randomFloat(0, $totalPoints);
             if ($val < 0) {
                 $val = 0;
             } elseif ($val > $totalPoints) {
                 $val = $totalPoints;
             }
-            $data[] = $val;
+            $data[] = [$count, $val];
             $count++;
         }
         return $data;
     }
 
     /**
-     * Вычисление случайного числа с плавающей точкой
+     * Calculating a random floating point number
      *
      * @param int $min
      * @param int $max

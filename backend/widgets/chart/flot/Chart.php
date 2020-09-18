@@ -8,7 +8,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use yii\web\JsExpression;
 
 /**
  * Class Chart
@@ -56,31 +55,7 @@ class Chart extends Widget
      */
     public function getClientOptions()
     {
-        $clientOptions = [
-            'grid' => [
-                'borderColor' => '#f3f3f3',
-                'borderWidth' => 1,
-                'tickColor' => '#f3f3f3'
-            ],
-            'series' => [
-                'shadowSize' => 0,
-                'lines' => [
-                    'show' => true
-                ],
-            ],
-            'lines' => [
-                'fill' => false,
-                'color' => '#f56954',
-            ],
-            'yaxis' => [
-                'min' => 0,
-                'max' => 100,
-                'show' => true,
-            ],
-            'xaxis' => [
-                'show' => true,
-            ]
-        ];
+        $clientOptions = [];
         return ArrayHelper::merge($clientOptions, $this->clientOptions);
     }
 
@@ -105,25 +80,53 @@ class Chart extends Widget
         $clientData = Json::encode($this->getClientData());
         $clientOptions = Json::encode($this->getClientOptions());
         $demoDataUrl = Url::to(['/main/default/get-demo-data']);
-        /*$script = "
-            let url = '$demoDataUrl';
+        $script = "
+            let plot_{$this->id} = $.plot('#{$this->id}', {$clientData}, {$clientOptions});
+            
+            let url = '$demoDataUrl',
+                data = plot_{$this->id}.getData()[0].data;
+            
             function getRandomData() {
                 $.ajax({
                     url: url,
                     dataType: 'json',
                     type: 'post',
+                    data: {data: data},
                 }).done(function (response) {
                     console.log(response.result);
+                    data = response.result;
                 }).fail(function (response) {
                     console.log(response.result);
                 });
+                return data;
             }
-        ";*/
-        //$view->registerJs($script);
-
-        $script = "
-            let plot_{$this->id} = $.plot('#{$this->id}', {$clientData}, {$clientOptions});
-            console.log(plot_{$this->id}.getData()[0].data);
+            
+            var updateInterval = 500; //Fetch data ever x milliseconds
+            var realtime = 'on'; //If == to on then fetch data every x seconds. else stop fetching
+            
+            function update() {
+                plot_{$this->id}.setData([getRandomData()]);                
+                // Since the axes don't change, we don't need to call plot.setupGrid()
+                plot_{$this->id}.draw();
+                if (realtime === 'on') {
+                    setTimeout(update, updateInterval);
+                }
+            }
+            
+            //INITIALIZE REALTIME DATA FETCHING
+            if (realtime === 'on') {
+                update();
+            }
+            
+            //REALTIME TOGGLE
+            $('#realtime .btn').click(function () {
+                if ($(this).data('toggle') === 'on') {
+                    realtime = 'on';
+                } else {
+                    realtime = 'off';
+                }
+                update();
+            });
         ";
         $view->registerJs($script);
     }

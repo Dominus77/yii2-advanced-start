@@ -4,9 +4,9 @@ use modules\main\Module;
 use backend\widgets\box\SmallBox;
 use backend\widgets\chart\chartjs\Chart;
 use backend\widgets\chart\flot\Chart as FlotChart;
+use backend\widgets\chart\flot\data\Demo;
 
 /* @var $this yii\web\View */
-/** @var $model modules\main\models\backend\Demo */
 
 $this->title = Module::translate('module', 'Home');
 $this->params['title']['small'] = Module::translate('module', 'Dashboard');
@@ -395,18 +395,41 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
 
                 <div class="tab-content no-padding">
                     <div id="flot-chart" class="chart tab-pane active">
-                        <?php
-                        $data1 = $model->getRandomData(5);
-                        $data2 = $model->getRandomData(5, $data1);
-                        $data3 = $model->getRandomData(5, $data2);
-                        //\yii\helpers\VarDumper::dump($data1, 10, 1);
-                        ?>
-                        <?php echo FlotChart::widget([
+                        <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                            <button type="button" class="btn btn-default btn-xs active" data-toggle="on">On</button>
+                            <button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
+                        </div>
+                        <?= FlotChart::widget([
                             'status' => true,
                             'containerOptions' => [
                                 'style' => 'height:300px;'
                             ],
-                            'clientData' => [$model->getRandomData(100)],
+                            'clientOptions' => [
+                                'grid' => [
+                                    'borderColor' => '#f3f3f3',
+                                    'borderWidth' => 1,
+                                    'tickColor' => '#f3f3f3'
+                                ],
+                                'series' => [
+                                    'shadowSize' => 0,
+                                    'lines' => [
+                                        'show' => true
+                                    ],
+                                ],
+                                'lines' => [
+                                    'fill' => false,
+                                    'color' => '#f56954',
+                                ],
+                                'yaxis' => [
+                                    'min' => 0,
+                                    'max' => 100,
+                                    'show' => true,
+                                ],
+                                'xaxis' => [
+                                    'show' => true,
+                                ]
+                            ],
+                            'clientData' => [Demo::getRandomData(100)],
                         ]) ?>
                     </div>
                 </div>
