@@ -41,7 +41,7 @@ $js = new JsExpression("
     function initDatePicker()
     {
         /** @see http://bootstrap-datepicker.readthedocs.io/en/latest/index.html */
-        $('#datepicker').datepicker({
+        $('#datepicker').bootstrapDP({
             language: '{$language}',
             autoclose: true,
             format: 'dd.mm.yyyy',

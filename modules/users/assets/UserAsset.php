@@ -40,7 +40,7 @@ class UserAsset extends AssetBundle
      * @var array
      */
     public $publishOptions = [
-        'forceCopy' => false
+        'forceCopy' => YII_ENV_DEV
     ];
 
     /**
