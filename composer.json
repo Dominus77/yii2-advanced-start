@@ -39,8 +39,6 @@
         "codeception/module-yii2": "^1.0",
         "codeception/verify": "~0.5.0 || ~1.1.0",
         "flow/jsonpath": "^0.5.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "phpmd/phpmd": "^2.9",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": ">=2.7 <=4.2.4",
@@ -58,8 +56,8 @@
         "rbac-init": "php yii rbac/init",
         "build": "codecept build",
         "test": "codecept run",
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules --ignore=common/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*,*/passfield/assets/src/*"
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules --ignore=*/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 api common backend frontend console modules --ignore=*/assets/src,*/runtime/*,*/web/assets/*,frontend/assets/bootstrap/*,requirements.php,*/migrations/*"
     },
     "config": {
         "sort-packages": true,

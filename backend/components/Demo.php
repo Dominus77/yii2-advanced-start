@@ -2,7 +2,6 @@
 
 namespace backend\components;
 
-
 /**
  * Class Demo
  *

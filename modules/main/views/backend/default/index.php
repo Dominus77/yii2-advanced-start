@@ -29,9 +29,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'New Orders',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -45,9 +45,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Bounce Rate',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -61,9 +61,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => Yii::t('app', 'User Registrations'),
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['/users/default/index']
                 ]
             ]) ?>
@@ -77,9 +77,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Unique Visitors',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -477,12 +477,15 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
             <div class="box box-solid bg-light-blue-gradient">
                 <div class="box-header">
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
+                        <!--<button type="button"
+                         class="btn btn-primary btn-sm daterange pull-right"
+                         data-toggle="tooltip"
                                 title="Date range">
-                            <i class="fa fa-calendar"></i></button>
+                            <i class="fa fa-calendar"></i></button>-->
                         <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
                                 data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-                            <i class="fa fa-minus"></i></button>
+                            <i class="fa fa-minus"></i>
+                        </button>
                     </div>
                     <i class="fa fa-map-marker"></i>
                     <h3 class="box-title">Visitors</h3>
