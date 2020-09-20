@@ -69,4 +69,49 @@ class Demo
     {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
+
+    /**
+     * Get Sin Demo Data
+     *
+     * @param float $limit
+     * @return array
+     */
+    public static function getSin($limit = 0.25)
+    {
+        $data = [];
+        for ($i = 0; $i < M_PI * 2; $i += $limit) {
+            $data[] = [$i, sin($i)];
+        }
+        return $data;
+    }
+
+    /**
+     *  Get Cos Demo Data
+     *
+     * @param float $limit
+     * @return array
+     */
+    public static function getCos($limit = 0.25)
+    {
+        $data = [];
+        for ($i = 0; $i < M_PI * 2; $i += $limit) {
+            $data[] = [$i, cos($i)];
+        }
+        return $data;
+    }
+
+    /**
+     * Get Tan Demo Data
+     *
+     * @param float $limit
+     * @return array
+     */
+    public static function getTan($limit = 0.1)
+    {
+        $data = [];
+        for ($i = 0; $i < M_PI * 2; $i += $limit) {
+            $data[] = [$i, tan($i)];
+        }
+        return $data;
+    }
 }
