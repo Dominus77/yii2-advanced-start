@@ -4,8 +4,12 @@ use modules\main\Module;
 use backend\widgets\box\SmallBox;
 use backend\widgets\chart\chartjs\Chart;
 use backend\widgets\chart\flot\Chart as FlotChart;
-use backend\widgets\chart\flot\data\Demo;
+use backend\components\Demo;
+use backend\widgets\map\jvector\Map;
+use backend\widgets\chart\sparkline\Chart as SparklineChart;
+use yii\helpers\Json;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /** @var $usersCount int */
@@ -25,9 +29,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'New Orders',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -41,9 +45,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Bounce Rate',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -57,9 +61,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => Yii::t('app', 'User Registrations'),
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['/users/default/index']
                 ]
             ]) ?>
@@ -73,9 +77,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Unique Visitors',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -465,6 +469,109 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                             ]
                         ],
                     ]) ?>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-lg-5 connectedSortable">
+            <div class="box box-solid bg-light-blue-gradient">
+                <div class="box-header">
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
+                                title="Date range">
+                            <i class="fa fa-calendar"></i></button>
+                        <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                                data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                    <i class="fa fa-map-marker"></i>
+                    <h3 class="box-title">Visitors</h3>
+                </div>
+                <div class="box-body">
+                    <?php
+                    $clientData = Json::encode(Demo::getVisitorsData());
+                    ?>
+                    <?= Map::widget([
+                        'status' => true,
+                        'containerOptions' => [
+                            'style' => 'height: 250px; width:100%;'
+                        ],
+                        'clientOptions' => [
+                            'backgroundColor' => 'transparent',
+                            'regionStyle' => [
+                                'initial' => [
+                                    'fill' => '#e4e4e4',
+                                    'fill-opacity' => 1,
+                                    'stroke' => 'none',
+                                    'stroke-width' => 0,
+                                    'stroke-opacity' => 1
+                                ]
+                            ],
+                            'series' => [
+                                'regions' => [
+                                    [
+                                        'values' => Json::decode($clientData),
+                                        'scale' => ['#92c1dc', '#ebf4f9'],
+                                        'normalizeFunction' => 'polynomial',
+                                    ]
+                                ]
+                            ],
+                            'onRegionTipShow' => new JsExpression("                
+                                function (e, el, code) {
+                                    let visitorsData = {$clientData};
+                                    if (typeof visitorsData[code] !== 'undefined') {
+                                        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
+                                    }
+                                }
+                            ")
+                        ]
+                    ]) ?>
+                </div>
+                <div class="box-footer no-border">
+                    <div class="row">
+                        <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                            <?= SparklineChart::widget([
+                                'status' => true,
+                                'clientData' => [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021],
+                                'clientOptions' => [
+                                    'type' => 'line',
+                                    'lineColor' => '#92c1dc',
+                                    'fillColor' => '#ebf4f9',
+                                    'height' => '50',
+                                    'width' => '80'
+                                ],
+                            ]) ?>
+                            <div class="knob-label">Visitors</div>
+                        </div>
+                        <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                            <?= SparklineChart::widget([
+                                'status' => true,
+                                'clientData' => [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921],
+                                'clientOptions' => [
+                                    'type' => 'line',
+                                    'lineColor' => '#92c1dc',
+                                    'fillColor' => '#ebf4f9',
+                                    'height' => '50',
+                                    'width' => '80'
+                                ],
+                            ]) ?>
+                            <div class="knob-label">Online</div>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <?= SparklineChart::widget([
+                                'status' => true,
+                                'clientData' => [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21],
+                                'clientOptions' => [
+                                    'type' => 'line',
+                                    'lineColor' => '#92c1dc',
+                                    'fillColor' => '#ebf4f9',
+                                    'height' => '50',
+                                    'width' => '80'
+                                ],
+                            ]) ?>
+                            <div class="knob-label">Exists</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

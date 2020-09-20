@@ -1,11 +1,12 @@
 <?php
 
-namespace backend\widgets\chart\flot\data;
+namespace backend\components;
+
 
 /**
  * Class Demo
  *
- * @package modules\main\models\backend
+ * @package backend\components
  */
 class Demo
 {
@@ -113,5 +114,27 @@ class Demo
             $data[] = [$i, tan($i)];
         }
         return $data;
+    }
+
+    /**
+     * Visitors Demo Data
+     *
+     * @return int[]
+     */
+    public static function getVisitorsData()
+    {
+        return [
+            'US' => 398, // USA
+            'SA' => 400, // Saudi Arabia
+            'CA' => 1000, // Canada
+            'DE' => 500, // Germany
+            'FR' => 760, // France
+            'CN' => 300, // China
+            'AU' => 700, // Australia
+            'BR' => 600, // Brazil
+            'IN' => 800, // India
+            'GB' => 320, // Great Britain
+            'RU' => 3000 // Russia
+        ];
     }
 }

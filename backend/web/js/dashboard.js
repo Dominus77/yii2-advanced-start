@@ -11,6 +11,9 @@ $(function () {
 
     "use strict";
 
+    /* jQueryKnob */
+    $('.knob').knob();
+
     // Make the dashboard widgets sortable Using jquery UI
     $('.connectedSortable').sortable({
         containment: $('section.content'),

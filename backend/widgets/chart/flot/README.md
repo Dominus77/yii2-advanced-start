@@ -1,4 +1,4 @@
-# Flot Charts Widgets
+# Flot Charts Widget
 
 [flotcharts.org](https://www.flotcharts.org/)
 
@@ -14,15 +14,15 @@ echo \backend\widgets\chart\flot\Chart::widget([
     'clientData' => [
         [
             'label' => 'sin(x)',
-            'data' => \backend\widgets\chart\flot\data\Demo::getSin()
+            'data' => \backend\components\Demo::getSin()
         ],
         [
             'label' => 'cos(x)',
-            'data' => \backend\widgets\chart\flot\data\Demo::getCos()
+            'data' => \backend\components\Demo::getCos()
         ],
         [
             'label' => 'tan(x)',
-            'data' => \backend\widgets\chart\flot\data\Demo::getTan()
+            'data' => \backend\components\Demo::getTan()
         ],
     ],
     'clientOptions' => [
@@ -108,7 +108,7 @@ public function actionGetDemoData()
         $post = Yii::$app->request->post();
         $data = (!empty($post['data'])) ? $post['data'] : [];
         return [
-            'result' => \backend\widgets\chart\flot\data\Demo::getRandomData($data),
+            'result' => \backend\components\Demo::getRandomData($data),
         ];
     }
     throw new \yii\web\NotFoundHttpException('The requested page does not exist.');
@@ -139,7 +139,7 @@ echo \backend\widgets\chart\flot\Chart::widget([
     ],
     'clientData' => [
         // Demo random data
-        \backend\widgets\chart\flot\data\Demo::getRandomData()
+        \backend\components\Demo::getRandomData()
     ],
     'clientOptions' => [
         'grid' => [

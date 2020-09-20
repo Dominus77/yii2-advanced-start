@@ -10,7 +10,7 @@ use yii\web\Response;
 use modules\users\models\User;
 use modules\rbac\models\Permission;
 use modules\main\Module;
-use backend\widgets\chart\flot\data\Demo;
+use backend\components\Demo;
 
 /**
  * Class DefaultController

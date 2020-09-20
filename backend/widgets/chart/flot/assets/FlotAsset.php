@@ -31,7 +31,6 @@ class FlotAsset extends AssetBundle
         ];
     }
 
-
     /**
      * @var string[]
      */

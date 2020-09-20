@@ -1,4 +1,4 @@
-# ChartJs Widgets
+# ChartJs Widget
 
 [www.chartjs.org](https://www.chartjs.org/docs/latest/)
 

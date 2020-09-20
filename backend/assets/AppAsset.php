@@ -11,6 +11,7 @@ use common\assets\FontAwesomeAsset;
 use common\assets\IonIconsAsset;
 use backend\assets\plugins\SlimScrollAsset;
 use backend\assets\plugins\FastClickAsset;
+use backend\assets\plugins\KnobAsset;
 
 /**
  * Class AppAsset
@@ -51,6 +52,7 @@ class AppAsset extends AssetBundle
         IonIconsAsset::class,
         SlimScrollAsset::class,
         FastClickAsset::class,
+        KnobAsset::class,
         AdminLteAsset::class
     ];
 }
