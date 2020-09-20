@@ -435,7 +435,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                             'on' => true,
                             'dataUrl' => Url::to(['/main/default/get-demo-data']),
                             'btnGroupId' => 'realtime',
-                            'btnDefault' => 'off',
+                            'btnDefault' => FlotChart::REALTIME_OFF,
                             'updateInterval' => 1000
                         ],
                         'clientData' => [

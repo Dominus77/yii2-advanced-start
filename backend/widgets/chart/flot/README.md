@@ -134,7 +134,7 @@ echo \backend\widgets\chart\flot\Chart::widget([
         'on' => true,        
         'dataUrl' => \yii\helpers\Url::to(['/main/default/get-demo-data']),
         'btnGroupId' => 'realtime',
-        'btnDefault' => 'off',
+        'btnDefault' => \backend\widgets\chart\flot\Chart::REALTIME_OFF,
         'updateInterval' => 1000
     ],
     'clientData' => [

@@ -15,6 +15,9 @@ use yii\helpers\Json;
  */
 class Chart extends Widget
 {
+    const REALTIME_ON = 'on';
+    const REALTIME_OFF = 'off';
+
     /** @var bool */
     public $status = true;
     /** @var array */
@@ -28,7 +31,7 @@ class Chart extends Widget
         'on' => false,
         'dataUrl' => '#',
         'btnGroupId' => '',
-        'btnDefault' => 'off',
+        'btnDefault' => '',
         'updateInterval' => 1000,
     ];
 
@@ -43,6 +46,8 @@ class Chart extends Widget
         }
         $this->id = $this->id ?: $this->getId();
         ArrayHelper::setValue($this->containerOptions, 'id', $this->id);
+        $this->realtime['btnDefault'] = empty($this->realtime['btnDefault']) ?
+            self::REALTIME_OFF : $this->realtime['btnDefault'];
     }
 
     /**
@@ -97,6 +102,8 @@ class Chart extends Widget
             $btnGroupId = $this->realtime['btnGroupId'];
             $btnDefault = $this->realtime['btnDefault'];
             $updateInterval = $this->realtime['updateInterval'];
+            $on = self::REALTIME_ON;
+            $off = self::REALTIME_OFF;
             $script = "                
                 let url_{$this->id} = '$dataUrl',
                     data_{$this->id} = (plot_{$this->id}.getData().length === 0) ? [plot_{$this->id}.getData()] : 
@@ -126,13 +133,13 @@ class Chart extends Widget
                     plot_{$this->id}.setupGrid();
                     // Since the axes don't change, we don't need to call plot.setupGrid()
                     plot_{$this->id}.draw();
-                    if (realtime_{$this->id} === 'on') {
+                    if (realtime_{$this->id} === '{$on}') {
                         setTimeout(update_{$this->id}, updateInterval_{$this->id});
                     }
                 }
                 
                 // INITIALIZE REALTIME DATA FETCHING
-                if (realtime_{$this->id} === 'on') {
+                if (realtime_{$this->id} === '{$on}') {
                     update_{$this->id}();
                 }
                 
@@ -140,16 +147,16 @@ class Chart extends Widget
                 btnRealtime_{$this->id}.click(function () {                
                     btnRealtime_{$this->id}.addClass('btn-default');
                     $(this).removeClass('btn-default');                
-                    if ($(this).data('toggle') === 'on') {
-                        if(realtime_{$this->id} !== 'on') {
-                            realtime_{$this->id} = 'on';
+                    if ($(this).data('toggle') === '{$on}') {
+                        if(realtime_{$this->id} !== '{$on}') {
+                            realtime_{$this->id} = '{$on}';
                             btnRealtime_{$this->id}.removeClass('btn-danger');                        
                             $(this).addClass('btn-success');
                             update_{$this->id}();
                         }                                    
                     } else {
-                        if(realtime_{$this->id} !== 'off') {
-                            realtime_{$this->id} = 'off'; 
+                        if(realtime_{$this->id} !== '{$off}') {
+                            realtime_{$this->id} = '{$off}'; 
                             btnRealtime_{$this->id}.removeClass('btn-success');                        
                             $(this).addClass('btn-danger');
                             update_{$this->id}();
