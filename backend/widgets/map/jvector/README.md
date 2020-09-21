@@ -10,7 +10,13 @@ echo backend\widgets\map\jvector\Map::widget([
     'containerOptions' => [
         'style' => 'height: 250px; width:100%;'
     ],
+    // Set maps
+    /*'maps' => [
+        'world_mill_en' => 'world-mill-en',
+        'default' => 'world-mill-en',
+    ],*/
     'clientOptions' => [
+        //'map' => 'world_mill_en', // or default if set maps
         'backgroundColor' => 'transparent',
         'regionStyle' => [
             'initial' => [
