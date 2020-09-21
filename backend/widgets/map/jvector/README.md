@@ -5,7 +5,6 @@
 ## Usage
 
 ```php
-$clientData = \yii\helpers\Json::encode(\backend\components\Demo::getVisitorsData());
 echo backend\widgets\map\jvector\Map::widget([
     'status' => true,
     'containerOptions' => [
@@ -25,18 +24,17 @@ echo backend\widgets\map\jvector\Map::widget([
         'series' => [
             'regions' => [
                 [
-                    'values' => \yii\helpers\Json::decode($clientData),
+                    'values' => backend\components\Demo::getVisitorsData(),
                     'scale' => ['#92c1dc', '#ebf4f9'],
                     'normalizeFunction' => 'polynomial',
                 ]
             ]
         ],
-        'onRegionTipShow' => new \yii\web\JsExpression("                
-            function (e, el, code) {
-                let visitorsData = {$clientData};
-                if (typeof visitorsData[code] !== 'undefined') {
-                    el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
-                }
+        'onRegionTipShow' => new yii\web\JsExpression("
+            let regions = $(this).data().mapObject.params.series.regions,
+                visitorsData = regions[0].values;
+            if (typeof visitorsData[code] !== 'undefined') {
+                el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
             }
         ")
     ]

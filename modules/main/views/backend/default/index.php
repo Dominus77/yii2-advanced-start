@@ -4,12 +4,9 @@ use modules\main\Module;
 use backend\widgets\box\SmallBox;
 use backend\widgets\chart\chartjs\Chart;
 use backend\widgets\chart\flot\Chart as FlotChart;
-use backend\components\Demo;
 use backend\widgets\map\jvector\Map;
 use backend\widgets\chart\sparkline\Chart as SparklineChart;
-use yii\helpers\Json;
 use yii\helpers\Url;
-use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /** @var $usersCount int */
@@ -29,9 +26,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'New Orders',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -45,9 +42,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Bounce Rate',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -61,9 +58,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => Yii::t('app', 'User Registrations'),
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['/users/default/index']
                 ]
             ]) ?>
@@ -77,9 +74,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Unique Visitors',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -443,7 +440,7 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                             'updateInterval' => 1000
                         ],
                         'clientData' => [
-                            Demo::getRandomData()
+                            backend\components\Demo::getRandomData()
                         ],
                         'clientOptions' => [
                             'grid' => [
@@ -491,9 +488,6 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                     <h3 class="box-title">Visitors</h3>
                 </div>
                 <div class="box-body">
-                    <?php
-                    $clientData = Json::encode(Demo::getVisitorsData());
-                    ?>
                     <?= Map::widget([
                         'status' => true,
                         'containerOptions' => [
@@ -513,15 +507,16 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                             'series' => [
                                 'regions' => [
                                     [
-                                        'values' => Json::decode($clientData),
+                                        'values' => backend\components\Demo::getVisitorsData(),
                                         'scale' => ['#92c1dc', '#ebf4f9'],
                                         'normalizeFunction' => 'polynomial',
                                     ]
                                 ]
                             ],
-                            'onRegionTipShow' => new JsExpression("                
+                            'onRegionTipShow' => new yii\web\JsExpression("
                                 function (e, el, code) {
-                                    let visitorsData = {$clientData};
+                                    let regions = $(this).data().mapObject.params.series.regions,
+                                        visitorsData = regions[0].values;
                                     if (typeof visitorsData[code] !== 'undefined') {
                                         el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
                                     }

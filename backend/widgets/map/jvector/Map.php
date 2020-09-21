@@ -63,12 +63,15 @@ class Map extends Widget
      */
     public function registerAsset()
     {
-        $view = $this->getView();
-        MapAsset::register($view);
         $id = $this->id;
-        $clientOptions = Json::encode($this->getClientOptions());
+        $view = $this->getView();
+        $clientOptions = $this->getClientOptions();
+        MapAsset::$mapName = $clientOptions['map'];
+        MapAsset::register($view);
+
+        $clientOptionsJson = Json::encode($clientOptions);
         $script = "
-            let map_{$id} = $('#{$id}').vectorMap({$clientOptions});
+            let map_{$id} = $('#{$id}').vectorMap({$clientOptionsJson});
         ";
         $view->registerJs($script);
     }
