@@ -2,6 +2,7 @@
 
 namespace backend\widgets\map\jvector;
 
+use yii\base\InvalidArgumentException;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
@@ -21,6 +22,8 @@ class Map extends Widget
     public $containerOptions = [];
     /** @var array */
     public $clientOptions = [];
+    /** @var array */
+    public $maps = [];
 
     /**
      * @inheritDoc
@@ -52,10 +55,32 @@ class Map extends Widget
      */
     public function getClientOptions()
     {
-        $clientOptions = [
-            'map' => 'world_mill_en',
-        ];
-        return ArrayHelper::merge($clientOptions, $this->clientOptions);
+        $mapsArray = $this->getMapsArray();
+        $value = str_replace('-', '_', $mapsArray[key($mapsArray)]);
+        $clientOptions = ['map' => $value,];
+        $clientOptions = ArrayHelper::merge($clientOptions, $this->clientOptions);
+        if (!empty($mapsArray[$clientOptions['map']])) {
+            ArrayHelper::setValue(
+                $clientOptions,
+                'map',
+                str_replace('-', '_', $mapsArray[$clientOptions['map']])
+            );
+            return $clientOptions;
+        }
+        throw new InvalidArgumentException(
+            'Map "' . $clientOptions['map'] .
+            '" is missing from the array: \'maps\' => [\'' . $clientOptions['map'] . '\' => \'' .
+            str_replace('_', '-', $clientOptions['map']) . '\']'
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getMapsArray()
+    {
+        $maps = ['world_mill_en' => 'world-mill-en'];
+        return ArrayHelper::merge($maps, $this->maps);
     }
 
     /**
@@ -66,6 +91,7 @@ class Map extends Widget
         $id = $this->id;
         $view = $this->getView();
         $clientOptions = $this->getClientOptions();
+        MapAsset::$maps = $this->getMapsArray();
         MapAsset::$mapName = $clientOptions['map'];
         MapAsset::register($view);
 

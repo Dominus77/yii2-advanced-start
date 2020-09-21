@@ -26,9 +26,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'New Orders',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -42,9 +42,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Bounce Rate',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -58,9 +58,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => Yii::t('app', 'User Registrations'),
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['/users/default/index']
                 ]
             ]) ?>
@@ -74,9 +74,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Unique Visitors',
                 'link' => [
                     'label' => Yii::t(
-                            'app',
-                            'More info'
-                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                        'app',
+                        'More info'
+                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
