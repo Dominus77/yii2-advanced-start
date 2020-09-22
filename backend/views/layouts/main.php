@@ -1,7 +1,7 @@
 <?php
 
 use backend\assets\AppAsset;
-use backend\assets\plugins\iCheckAsset;
+use backend\assets\plugins\ICheckAsset;
 use backend\widgets\control\ControlSidebar;
 use backend\widgets\navbar\MessagesWidget;
 use backend\widgets\navbar\NotificationsWidget;
@@ -23,7 +23,7 @@ use modules\rbac\Module as RbacModule;
 /* @var $this View */
 /* @var $content string */
 
-iCheckAsset::register($this);
+ICheckAsset::register($this);
 AppAsset::register($this);
 
 NotyWidget::widget([
