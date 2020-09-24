@@ -26,9 +26,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'New Orders',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -42,9 +42,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Bounce Rate',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -58,9 +58,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => Yii::t('app', 'User Registrations'),
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['/users/default/index']
                 ]
             ]) ?>
@@ -74,9 +74,9 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                 'content' => 'Unique Visitors',
                 'link' => [
                     'label' => Yii::t(
-                        'app',
-                        'More info'
-                    ) . ' <i class="fa fa-arrow-circle-right"></i>',
+                            'app',
+                            'More info'
+                        ) . ' <i class="fa fa-arrow-circle-right"></i>',
                     'url' => ['#']
                 ]
             ]) ?>
@@ -493,7 +493,12 @@ $this->params['title']['small'] = Module::translate('module', 'Dashboard');
                         'containerOptions' => [
                             'style' => 'height: 250px; width:100%;'
                         ],
+                        'maps' => [
+                            'world_mill_en' => 'world-mill-en',
+                            'world_mill' => 'world-mill'
+                        ],
                         'clientOptions' => [
+                            'map' => 'world_mill_en',
                             'backgroundColor' => 'transparent',
                             'regionStyle' => [
                                 'initial' => [
