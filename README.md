@@ -13,7 +13,6 @@ Backend part uses [AdminLTE](https://adminlte.io/) template
 Available console user management commands and RBAC system.
 
 ## Base components
-
 Pages (backend AdminLTE template)
 - Home
 - Users
