@@ -8,7 +8,7 @@ use yii\web\View;
 ?>
 <li class="dropdown notifications-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-bell-o"></i>
+        <i class="far fa-bell"></i>
         <span class="label label-warning">10</span>
     </a>
     <ul class="dropdown-menu">

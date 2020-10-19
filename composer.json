@@ -20,7 +20,7 @@
         "dominus77/yii2-maintenance": "^1.0",
         "dominus77/yii2-noty": "^1.0",
         "driftyco/ionicons": "^2.0",
-        "fortawesome/font-awesome": "^4.6",
+        "fortawesome/font-awesome": "^5.15",
         "guzzlehttp/guzzle": "~6.0",
         "yii2tech/ar-softdelete": "~1.0",
         "yiisoft/yii2": "~2.0.14",

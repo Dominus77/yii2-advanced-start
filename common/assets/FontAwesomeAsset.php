@@ -20,10 +20,11 @@ class FontAwesomeAsset extends AssetBundle
      */
     public function init()
     {
+        set_time_limit(0);
         parent::init();
         $min = YII_ENV_DEV ? '' : '.min';
         $this->css = [
-            'css/font-awesome' . $min . '.css'
+            'css/all' . $min . '.css'
         ];
     }
 }

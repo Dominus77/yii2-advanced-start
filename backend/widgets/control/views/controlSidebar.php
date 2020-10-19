@@ -3,11 +3,11 @@
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
         <li class="active">
             <a href="#control-sidebar-home-tab" data-toggle="tab">
-                <i class="fa fa-home"></i></a>
+                <i class="fas fa-home"></i></a>
         </li>
         <li>
             <a href="#control-sidebar-settings-tab" data-toggle="tab">
-                <i class="fa fa-gears"></i></a>
+                <i class="fas fa-cogs"></i></a>
         </li>
     </ul>
 
@@ -18,7 +18,7 @@
             <ul class="control-sidebar-menu">
                 <li>
                     <a href="javascript::">
-                        <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                        <i class="menu-icon fas fa-birthday-cake bg-red"></i>
 
                         <div class="menu-info">
                             <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>

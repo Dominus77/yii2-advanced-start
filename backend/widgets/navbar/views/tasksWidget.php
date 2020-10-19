@@ -8,7 +8,7 @@ use yii\web\View;
 ?>
 <li class="dropdown tasks-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-flag-o"></i>
+        <i class="far fa-flag"></i>
         <span class="label label-danger">9</span>
     </a>
     <ul class="dropdown-menu">

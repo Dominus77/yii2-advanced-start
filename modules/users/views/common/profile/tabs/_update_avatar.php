@@ -88,7 +88,7 @@ if (Yii::$app->request->get('modal') === 'show') {
 
         <div class="form-group">
             <?= Html::submitButton(
-                '<span class="fa fa-floppy-o"></span> ' . Module::translate('module', 'Save'),
+                '<span class="fas fa-save"></span> ' . Module::translate('module', 'Save'),
                 [
                     'class' => 'btn btn-primary',
                     'name' => 'submit-button',
@@ -113,7 +113,7 @@ Modal::begin(
                 ]
         ) . ' ' . Module::translate('module', 'Update'),
         'footer' => Html::submitButton(
-            '<span class="fa fa-floppy-o"></span> ' . Module::translate(
+            '<span class="fas fa-save"></span> ' . Module::translate(
                 'module',
                 'Save'
             ),

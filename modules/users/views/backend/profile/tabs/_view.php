@@ -72,6 +72,9 @@ $this->registerJs(new yii\web\JsExpression("
             'Delete'
         ), ['delete'], [
             'class' => 'btn btn-danger',
+            'data' => [
+                'method' => 'post'
+            ]
         ]) ?>
     </div>
 </div>

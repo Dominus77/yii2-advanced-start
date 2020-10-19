@@ -1,5 +1,11 @@
 <?php
 
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\View;
+use yii\widgets\Menu;
+use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
 use backend\assets\plugins\ICheckAsset;
 use backend\widgets\control\ControlSidebar;
@@ -9,11 +15,6 @@ use backend\widgets\navbar\TasksWidget;
 use backend\widgets\search\SearchSidebar;
 use modules\rbac\models\Permission;
 use modules\users\models\User;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\web\View;
-use yii\widgets\Menu;
-use yii\widgets\Breadcrumbs;
 use dominus77\noty\NotyWidget;
 use modules\users\widgets\AvatarWidget;
 use modules\main\Module as MainModule;
@@ -79,9 +80,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="fas fa-bars"></span>
             </a>
 
             <div class="navbar-custom-menu">
@@ -116,7 +115,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                                 <p>
                                     <?= $fullUserName ?>
                                     <small>
-                                        <?= UserModule::translate('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') // phpcs:ignore                ?>
+                                        <?= UserModule::translate('module', 'Member since') . ' ' . $formatter->asDatetime($identity->created_at, 'LLL yyyy') // phpcs:ignore                 ?>
                                     </small>
                                 </p>
                             </li>
@@ -151,7 +150,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                         </ul>
                     </li>
                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        <a href="#" data-toggle="control-sidebar"><i class="fas fa-cogs"></i></a>
                     </li>
                 </ul>
             </div>
@@ -171,7 +170,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 <div class="pull-left info">
                     <p><?= $fullUserName ?></p>
                     <a href="#">
-                        <i class="fa fa-circle text-success"></i> <?= Yii::t('app', 'Online') ?>
+                        <i class="fas fa-circle text-success"></i> <?= Yii::t('app', 'Online') ?>
                     </a>
                 </div>
             </div>
@@ -186,7 +185,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                 ],
                 [
                     'label' => $this->render('_label', [
-                        'icon' => 'fa fa-dashboard',
+                        'icon' => 'fas fa-tachometer-alt',
                         'title' => MainModule::translate('module', 'Home')
                     ]),
                     'url' => ['/main/default/index']
@@ -211,21 +210,21 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'items' => [
                         [
                             'label' => $this->render('_label', [
-                                'icon' => 'fa fa-circle-o',
+                                'icon' => 'far fa-circle',
                                 'title' => RbacModule::translate('module', 'Permissions')
                             ]),
                             'url' => ['/rbac/permissions/index']
                         ],
                         [
                             'label' => $this->render('_label', [
-                                'icon' => 'fa fa-circle-o',
+                                'icon' => 'far fa-circle',
                                 'title' => RbacModule::translate('module', 'Roles')
                             ]),
                             'url' => ['/rbac/roles/index']
                         ],
                         [
                             'label' => $this->render('_label', [
-                                'icon' => 'fa fa-circle-o',
+                                'icon' => 'far fa-circle',
                                 'title' => RbacModule::translate('module', 'Assign')
                             ]),
                             'url' => ['/rbac/assign/index']
@@ -257,7 +256,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                     'items' => [
                         [
                             'label' => $this->render('_label', [
-                                'icon' => 'fa fa-circle-o',
+                                'icon' => 'far fa-circle',
                                 'title' => Yii::t('app', 'Link in level 2')
                             ]),
                             'url' => ['#']
@@ -265,7 +264,7 @@ $homeUrl = is_string(Yii::$app->homeUrl) ? Yii::$app->homeUrl : '/';
                         [
                             'label' => $this->render('_label', [
                                 'isRoot' => true,
-                                'icon' => 'fa fa-circle-o',
+                                'icon' => 'far fa-circle',
                                 'title' => Yii::t('app', 'Link in level 2')
                             ]),
                             'url' => ['#'],

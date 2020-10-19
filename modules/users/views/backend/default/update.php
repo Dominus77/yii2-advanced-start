@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = Module::translate('module', 'Update');
         </div>
         <div class="box-footer">
             <div class="form-group">
-                <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::translate('module', 'Save'), [
+                <?= Html::submitButton('<span class="fas fa-save"></span> ' . Module::translate('module', 'Save'), [
                     'class' => 'btn btn-primary',
                     'name' => 'submit-button',
                 ]) ?>
