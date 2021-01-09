@@ -35,7 +35,7 @@ jobs:
         image: mysql:${{ matrix.mysql }}
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: yii2advanced_test
+          MYSQL_DATABASE: yii2_advanced_start_test
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -84,7 +84,7 @@ jobs:
       - name: Setup app advanced
         run: |
           ./init --env=Development
-          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2advanced_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2advanced_test'/" common/config/test-local.php
+          sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_advanced_start_test'/" common/config/test-local.php
           sed -i "/'db'/a 'username' => 'root'," common/config/test-local.php
           sed -i "/'db'/a 'password' => 'root'," common/config/test-local.php
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontend/config/main.php
