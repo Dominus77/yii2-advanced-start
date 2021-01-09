@@ -90,6 +90,7 @@ foreach(array_column($envs, 'path') as $envPath) {
             array_diff(getFileList("$root/environments/{$envPath}"), $files, $filesToRemove, $skipFiles)
         );
 }
+
 $filesToRemove = array_filter($filesToRemove, 'file_exists');
 if ($filesToRemove) {
     echo "\n  Remove files from other environments ...\n\n";
