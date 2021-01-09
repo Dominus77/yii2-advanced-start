@@ -90,6 +90,10 @@ jobs:
           sed -i "/'db'/a 'password' => 'root'," common/config/test-local.php
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontend/config/main.php
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backend/config/main.php
+
+      - name: Check Style
+        run: composer check-style
+
       - name: Apply migration
         run: php yii_test migrate --interactive=0
 
