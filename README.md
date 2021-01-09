@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-advanced-start/v/stable)](https://packagist.org/packages/dominus77/yii2-advanced-start)
 [![License](https://poser.pugx.org/dominus77/yii2-advanced-start/license)](https://github.com/Dominus77/yii2-advanced-start/blob/master/LICENSE.md)
-[![Build Status](https://travis-ci.org/Dominus77/yii2-advanced-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-advanced-start)
+![build](https://github.com/Dominus77/yii2-advanced-start/workflows/build/badge.svg)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/Dominus77/yii2-advanced-start/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-advanced-start/downloads)](https://packagist.org/packages/dominus77/yii2-advanced-start)
