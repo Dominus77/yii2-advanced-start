@@ -83,7 +83,8 @@ jobs:
 
       - name: Setup app advanced
         run: |
-          ./init --env=Development
+          #./init --env=Development
+          composer app-init-dev
           sed -i "s/'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_start_test'/'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_advanced_start_test'/" common/config/test-local.php
           sed -i "/'db'/a 'username' => 'root'," common/config/test-local.php
           sed -i "/'db'/a 'password' => 'root'," common/config/test-local.php
