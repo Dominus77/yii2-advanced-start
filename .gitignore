@@ -1,11 +1,11 @@
 # phpstorm project files
 .idea
 # project
-api
-backend
-common
-console
-frontend
-yii*
+/api
+/backend
+/common
+/console
+/frontend
+/yii*
 # library
-vendor
+/vendor
