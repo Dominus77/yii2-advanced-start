@@ -138,8 +138,8 @@ class InitController extends Controller
      */
     protected function processAddChildRoles($auth, $roles = [])
     {
-        $arrayChild = $this->buildArrayChild(Role::tree());
-        foreach ($arrayChild as $item) {
+        $array = $this->prepareArrayTree(Role::tree());
+        foreach ($array as $item) {
             foreach ($item as $role => $child) {
                 $auth->addChild(
                     ArrayHelper::getValue($roles, $role),
@@ -153,7 +153,7 @@ class InitController extends Controller
      * @param array $array
      * @return array
      */
-    protected function buildArrayChild($array)
+    protected function prepareArrayTree($array)
     {
         $result = [];
         foreach ($array as $key => $item) {
@@ -166,7 +166,7 @@ class InitController extends Controller
                         $result[][$key] = $v;
                     }
                     if (is_array($v)) {
-                        $child = $this->buildArrayChild([$k => $item[$k]]);
+                        $child = $this->prepareArrayTree([$k => $item[$k]]);
                         $result = array_merge($result, $child);
                     }
                 }
