@@ -64,6 +64,7 @@ class InitController extends Controller
         $roles = $this->processCreate($auth, $this->getRoles());
         $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
+
         //$this->processAddChildRoles($auth, $roles); //Inheritance of roles - If you uncomment, the roles are inherited
 
         // Assign a super administrator role to the user from id 1
@@ -137,12 +138,43 @@ class InitController extends Controller
      */
     protected function processAddChildRoles($auth, $roles = [])
     {
-        foreach (Role::tree() as $role => $child) {
-            $auth->addChild(
-                ArrayHelper::getValue($roles, $role),
-                ArrayHelper::getValue($roles, $child)
-            );
+        $arrayChild = $this->buildArrayChild(Role::tree());
+        foreach ($arrayChild as $item) {
+            foreach ($item as $role => $child) {
+                $auth->addChild(
+                    ArrayHelper::getValue($roles, $role),
+                    ArrayHelper::getValue($roles, $child)
+                );
+            }
         }
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    protected function buildArrayChild($array)
+    {
+        $result = [];
+        foreach ($array as $key => $item) {
+            if (is_array($item)) {
+                foreach ($item as $k => $v) {
+                    if (is_string($k)) {
+                        $result[][$key] = $k;
+                    }
+                    if (is_string($v)) {
+                        $result[][$key] = $v;
+                    }
+                    if (is_array($v)) {
+                        $child = $this->buildArrayChild([$k => $item[$k]]);
+                        $result = array_merge($result, $child);
+                    }
+                }
+            } else {
+                $result[] = $item;
+            }
+        }
+        return $result;
     }
 
     /**

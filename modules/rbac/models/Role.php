@@ -111,10 +111,15 @@ class Role extends Model
     public static function tree()
     {
         return [
-            self::ROLE_SUPER_ADMIN => self::ROLE_ADMIN,
-            self::ROLE_ADMIN => self::ROLE_MANAGER,
-            self::ROLE_MANAGER => self::ROLE_EDITOR,
-            self::ROLE_EDITOR => self::ROLE_DEFAULT
+            self::ROLE_SUPER_ADMIN => [
+                self::ROLE_ADMIN => [
+                    self::ROLE_MANAGER => [
+                        self::ROLE_EDITOR => [
+                            self::ROLE_DEFAULT
+                        ]
+                    ]
+                ]
+            ]
         ];
     }
 
