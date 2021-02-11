@@ -158,8 +158,7 @@ class InitController extends Controller
                 foreach ($item as $k => $v) {
                     if (is_string($k)) {
                         $result[][$key] = $k;
-                    }
-                    if (is_string($v)) {
+                    } elseif (is_string($v)) {
                         $result[][$key] = $v;
                     }
                     if (is_array($v)) {
