@@ -4,7 +4,7 @@
     "keywords": ["Dominus77", "yii2", "framework", "advanced", "project template"],
     "homepage": "http://dominus77.github.io/yii2-advanced-start",
     "type": "project",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "support": {
         "source": "https://github.com/Dominus77/yii2-advanced-start"
     },
