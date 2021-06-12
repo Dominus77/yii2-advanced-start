@@ -17,7 +17,6 @@ use modules\rbac\Module;
  * @property-read Item[] $children
  * @property-read array $roleChildArray
  * @property-read Role[] $roleChild
- * @property array $rolesArray
  */
 class Role extends Model
 {
@@ -111,10 +110,15 @@ class Role extends Model
     public static function tree()
     {
         return [
-            self::ROLE_SUPER_ADMIN => self::ROLE_ADMIN,
-            self::ROLE_ADMIN => self::ROLE_MANAGER,
-            self::ROLE_MANAGER => self::ROLE_EDITOR,
-            self::ROLE_EDITOR => self::ROLE_DEFAULT
+            self::ROLE_SUPER_ADMIN => [
+                self::ROLE_ADMIN => [
+                    self::ROLE_MANAGER => [
+                        self::ROLE_EDITOR => [
+                            self::ROLE_DEFAULT
+                        ]
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -165,7 +169,7 @@ class Role extends Model
     /**
      * @return array
      */
-    public function getRolesArray()
+    public static function rolesArray()
     {
         return [
             self::ROLE_SUPER_ADMIN => self::ROLE_SUPER_ADMIN_DESCRIPTION,

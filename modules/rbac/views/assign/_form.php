@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use modules\rbac\models\Role;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\rbac\models\Role */
+/* @var $model Role */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -15,7 +16,7 @@ use modules\rbac\Module;
 
     <div class="row">
         <div class="col-md-5">
-            <?= $form->field($model, 'role')->listBox($model->rolesArray, [
+            <?= $form->field($model, 'role')->listBox(Role::rolesArray(), [
                 'size' => 8
             ]) ?>
         </div>

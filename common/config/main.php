@@ -55,7 +55,8 @@ return [
             'enableSchemaCache' => true
         ],
         'authManager' => [
-            'class' => DbManager::class
+            'class' => DbManager::class,
+            'cache' => 'cache'
         ],
         'cache' => [
             'class' => FileCache::class,

@@ -17,9 +17,6 @@ use Exception;
  * Инициализатор RBAC выполняется в консоли php yii rbac/init
  *
  * @package console\controllers
- *
- * @property-read array $permissions
- * @property-read array $roles
  */
 class InitController extends Controller
 {
@@ -61,10 +58,11 @@ class InitController extends Controller
     {
         $auth = Yii::$app->authManager;
         $this->processClear($auth);
-        $roles = $this->processCreate($auth, $this->getRoles());
-        $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
+        $roles = $this->processCreate($auth, Role::rolesArray());
+        $permissions = $this->processCreate($auth, Permission::permissionsArray(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
-        //$this->processAddChildRoles($auth, $roles); //Inheritance of roles - If you uncomment, the roles are inherited
+
+        $this->processAddChildRoles($auth, $roles); //Inheritance of roles - If you uncomment, the roles are inherited
 
         // Assign a super administrator role to the user from id 1
         $role = ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN);
@@ -137,12 +135,42 @@ class InitController extends Controller
      */
     protected function processAddChildRoles($auth, $roles = [])
     {
-        foreach (Role::tree() as $role => $child) {
-            $auth->addChild(
-                ArrayHelper::getValue($roles, $role),
-                ArrayHelper::getValue($roles, $child)
-            );
+        $array = $this->prepareArrayTree(Role::tree());
+        foreach ($array as $item) {
+            foreach ($item as $role => $child) {
+                $auth->addChild(
+                    ArrayHelper::getValue($roles, $role),
+                    ArrayHelper::getValue($roles, $child)
+                );
+            }
         }
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    protected function prepareArrayTree($array)
+    {
+        $result = [];
+        foreach ($array as $key => $item) {
+            if (is_array($item)) {
+                foreach ($item as $k => $v) {
+                    if (is_string($k)) {
+                        $result[][$key] = $k;
+                    } elseif (is_string($v)) {
+                        $result[][$key] = $v;
+                    }
+                    if (is_array($v)) {
+                        $child = $this->prepareArrayTree([$k => $item[$k]]);
+                        $result = array_merge($result, $child);
+                    }
+                }
+            } else {
+                $result[] = $item;
+            }
+        }
+        return $result;
     }
 
     /**
@@ -156,27 +184,5 @@ class InitController extends Controller
     {
         $auth->assign($role, $userId);
         return true;
-    }
-
-    /**
-     * Roles
-     *
-     * @return array
-     */
-    protected function getRoles()
-    {
-        $role = new Role();
-        return $role->getRolesArray();
-    }
-
-    /**
-     * Permissions
-     *
-     * @return array
-     */
-    protected function getPermissions()
-    {
-        $permission = new Permission();
-        return $permission->getPermissionsArray();
     }
 }

@@ -12,7 +12,6 @@ use modules\rbac\Module;
  *
  * @property-read array $itemsPermissions
  * @property-read array $permissionChildren
- * @property-read array|string[] $permissionsArray
  */
 class Permission extends Model
 {
@@ -58,10 +57,11 @@ class Permission extends Model
     /** @var array $permissionItems Разрешения */
     public $permissionItems;
 
+
     /**
-     * @return array
+     * @return string[]
      */
-    public function getPermissionsArray()
+    public static function permissionsArray()
     {
         return [
             self::PERMISSION_MANAGER_MAINTENANCE => self::PERMISSION_MANAGER_MAINTENANCE_DESCRIPTION,
